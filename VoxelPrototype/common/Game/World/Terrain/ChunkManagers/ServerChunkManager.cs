@@ -37,8 +37,8 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
             int LocalChunkX = Math.Abs(Chunk.X % RegionFile.Size);
             int LocalChunkZ = Math.Abs(Chunk.Z % RegionFile.Size);
             byte[] SerializedChunk = Chunk.Serialize();
-            byte[] CompressedChunk = Deflate.Compress(SerializedChunk);
-            Region.WriteChunk(LocalChunkX, LocalChunkZ,CompressedChunk ,CompressionType.Deflate);
+            byte[] CompressedChunk = LZ4Pickler.Pickle(SerializedChunk,LZ4Level.L11_OPT);
+            Region.WriteChunk(LocalChunkX, LocalChunkZ,CompressedChunk ,CompressionType.LZ4);
             Region.Close();
         }
         internal Chunk LoadChunk(int X,int Z)

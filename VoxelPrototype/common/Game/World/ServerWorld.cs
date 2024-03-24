@@ -1,0 +1,88 @@
+﻿using OpenTK.Mathematics;
+using VoxelPrototype.common.API.Blocks;
+using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.WorldGenerator;
+using VoxelPrototype.common.Game.Entities.Player.PlayerManager;
+using VoxelPrototype.common.Game.World.Terrain;
+using VoxelPrototype.common.Game.World.Terrain.ChunkManagers;
+namespace VoxelPrototype.common.Game.World
+{
+    public class ServerWorld : World
+    {
+        string Path;
+        //Voxel
+        internal WorldGenerator WorldGenerator;
+        public ServerChunkManager ChunkManager;
+        //Players
+        public ServerPlayerFactory PlayerFactory;
+
+        public ServerWorld(WorldSettings Settings, string Path)
+        {
+            this.Path = Path;
+            if (!Directory.Exists(Path))
+            {
+                Directory.CreateDirectory("worlds/" + Settings.GetName());
+                Directory.CreateDirectory("worlds/" + Settings.GetName() + "/terrain");
+                Directory.CreateDirectory("worlds/" + Settings.GetName() + "/terrain/dim0");
+                WorldInfo = new WorldInfo();
+                WorldInfo.Path = Path;
+                WorldInfo.SetSeed(Settings.GetSeed());
+                WorldInfo.SetWorldGenerator(Settings.GetGenerator());
+                using var fs = new FileStream(Path + "world.vpw", FileMode.OpenOrCreate, FileAccess.Write);
+                fs.Write(WorldInfo.Serialize());
+                fs.Close();
+            }
+            else
+            {
+                WorldInfo = new WorldInfo().Deserialize(File.ReadAllBytes(Path + "world.vpw"));
+                WorldInfo.Path = Path;
+            }
+            WorldGenerator = WorldGeneratorRegistry.CreateWorldGenerator(WorldInfo.GetWorldGenerator());
+            WorldGenerator.SetData(WorldInfo.GetSeed());
+            ChunkManager = new ServerChunkManager();
+            PlayerFactory = new ServerPlayerFactory();
+
+        }
+        public override void Dispose()
+        {
+            ChunkManager.Dispose();
+            PlayerFactory.Dispose();
+            using var fs = new FileStream(Path + "world.vpw", FileMode.OpenOrCreate, FileAccess.Write);
+            fs.Write(WorldInfo.Serialize());
+        }
+        public override void Tick()
+        {
+            base.Tick();
+            ChunkManager.Update();
+            PlayerFactory.Update();
+            PlayerFactory.SendData();
+            if (CurrentTick % 600 == 0)
+            {
+                foreach (Chunk chunk in ChunkManager.LoadedChunks.Values)
+                {
+                    ChunkManager.SaveChunk(chunk);
+                }
+            }
+        }
+        public override BlockState GetBlock(int x, int y, int z)
+        {
+            return ChunkManager.GetBlock(x, y, z);
+        }
+        public override bool IsAir(int x, int y, int z)
+        {
+            return ChunkManager.GetBlock(x, y, z) == BlockRegister.Air;
+        }
+        public override bool IsTransparent(int x, int y, int z)
+        {
+            return ChunkManager.GetBlock(x, y, z).GetBlock().Transparency;
+        }
+        public override bool IsChunkExist(int x, int z)
+        {
+            return ChunkManager.GetChunk(new Vector2i(x, z)) != null;
+        }
+        public override Chunk GetChunk(int x, int z)
+        {
+            return ChunkManager.GetChunk(new Vector2i(x, z));
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "VoxelPrototypeClient": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

@@ -1,0 +1,1 @@
+to remove all blank lines : ^\s*$\n

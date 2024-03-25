@@ -5,6 +5,8 @@ using VoxelPrototype.common.Game.Entities;
 using VoxelPrototype.common.Game.World;
 using VoxelPrototype.common.Game.World.Terrain;
 using VoxelPrototype.common.Network.client;
+using VoxelPrototype.common.Network.server;
+using VoxelPrototype.server;
 namespace VoxelPrototype.client.GUI
 {
     internal static class DebugGUI
@@ -24,10 +26,19 @@ namespace VoxelPrototype.client.GUI
             System.Numerics.Vector4 Black = new System.Numerics.Vector4(0, 0f,0f,1);
             ImGui.TextColored(Black,"Profiling:");
             ImGui.TextColored(Black, $"VoxPopuli average {1000.0f / ImGui.GetIO().Framerate:0.##} ms/frame ({ImGui.GetIO().Framerate:0.#} FPS)");
+            ImGui.SeparatorText("Client");
+            ImGui.TextColored(Black, "Player position" + Client.TheClient.World.PlayerFactory.LocalPlayer.Position);
             ImGui.TextColored(Black, $"Number of client loaded chunks: {Client.TheClient.World.GetChunkCount()}");
             ImGui.TextColored(Black, $"Number of renderable chunks: {Client.TheClient.World.WorldRenderer.RenderableChunkCount}");
             ImGui.TextColored(Black, $"Number of rendered chunks: {Client.TheClient.World.WorldRenderer.RenderedChunksCount}");
-            ImGui.TextColored(Black, "Player position" + Client.TheClient.World.PlayerFactory.LocalPlayer.Position);
+            if (Client.TheClient.EmbedderServer != null && Client.TheClient.EmbedderServer.IsRunning())
+            {
+                ImGui.SeparatorText("Embedded Server");
+                ImGui.TextColored(Black, $"Number of server loaded chunks: {EmbeddedServer.TheServer.World.ChunkManager.LoadedChunkCount}");
+                ImGui.TextColored(Black, $"Number of chunks to be send: {EmbeddedServer.TheServer.World.ChunkManager.ChunkToBeSend.Count}");
+                ImGui.TextColored(Black, $"Number of sended packet: {ServerNetwork.NumberOfSendedPacket}");
+
+            }
             ImGui.TextColored(Black, "Game Version:");
             ImGui.TextColored(Black, "Client engine version: " + Version.EngineVersion);
             ImGui.TextColored(Black, "Client api version: " + Version.APIVersion);

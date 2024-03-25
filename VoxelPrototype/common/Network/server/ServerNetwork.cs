@@ -15,6 +15,7 @@ namespace VoxelPrototype.common.Network.server
         internal static NetDataWriter message;
         internal static NetManager server;
         internal static NetPacketProcessor PacketProcessor;
+        internal static int NumberOfSendedPacket = 0;
         internal static void StartServer(int Port)
         {
             message = new NetDataWriter();
@@ -95,6 +96,7 @@ namespace VoxelPrototype.common.Network.server
                 message.Reset();
                 PacketProcessor.WriteNetSerializable(message, ref packet);
                 peer.Send(message, deliveryMethod);
+                NumberOfSendedPacket++;
             }
         }
         /// <summary>
@@ -108,6 +110,7 @@ namespace VoxelPrototype.common.Network.server
             message.Reset();
             PacketProcessor.WriteNetSerializable(message, ref packet);
             server.SendToAll(message, deliveryMethod);
+            NumberOfSendedPacket++;
         }
         /// <summary>
         /// Send a packet to all client exclude one
@@ -121,6 +124,7 @@ namespace VoxelPrototype.common.Network.server
             message.Reset();
             PacketProcessor.WriteNetSerializable(message, ref packet);
             server.SendToAll(message, deliveryMethod, peer);
+            NumberOfSendedPacket++;
         }
         internal static void ClientInitialPacket(ClientInitialPacket data, NetPeer peer)
         {
@@ -131,6 +135,7 @@ namespace VoxelPrototype.common.Network.server
         }
         internal static void Update()
         {
+            NumberOfSendedPacket = 0;
             server.PollEvents();
         }
     }

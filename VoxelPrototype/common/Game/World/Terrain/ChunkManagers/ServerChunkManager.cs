@@ -19,38 +19,64 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         internal Dictionary<Vector2i, Chunk> LoadedChunks = new();
+        internal int LoadedChunkCount { get { return LoadedChunks.Count; } }
+        internal Dictionary<Vector2i, RegionFile> TempRegions = new();
         internal List<ChunkData> ChunkToBeSend = new();
         internal void Dispose()
         {
             foreach (Chunk chunk in LoadedChunks.Values)
             {
-                SaveChunk(chunk);
+                if(chunk.ServerState == ServerChunkSate.Dirty)
+                {
+                    SaveChunk(chunk);
+                }
                 LoadedChunks.Remove(chunk.Position);
             }
+            foreach(RegionFile region in  TempRegions.Values)
+            {
+                region.Close();
+            }
+            TempRegions.Clear();
         }
         internal void SaveChunk(Chunk Chunk)
         {
+            Chunk.ServerState = ServerChunkSate.None;
             int RegionX = Chunk.X >> 5;
             int RehionZ = Chunk.Z >> 5;
-            string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
-            RegionFile Region = new(path);
+            RegionFile Region;
+            if(TempRegions.ContainsKey(new Vector2i(RegionX,RehionZ)))
+            {
+                Region = TempRegions[new Vector2i(RegionX, RehionZ)];
+            }else
+            {
+                string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
+                Region = new(path);
+                TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
+            }
             int LocalChunkX = Math.Abs(Chunk.X % RegionFile.Size);
             int LocalChunkZ = Math.Abs(Chunk.Z % RegionFile.Size);
             byte[] SerializedChunk = Chunk.Serialize();
             byte[] CompressedChunk = LZ4Pickler.Pickle(SerializedChunk,LZ4Level.L11_OPT);
             Region.WriteChunk(LocalChunkX, LocalChunkZ,CompressedChunk ,CompressionType.LZ4);
-            Region.Close();
         }
         internal Chunk LoadChunk(int X,int Z)
         {
             int RegionX = X >> 5;
             int RehionZ = Z >> 5;
-            string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
-            RegionFile Region = new(path);
+            RegionFile Region;
+            if (TempRegions.ContainsKey(new Vector2i(RegionX, RehionZ)))
+            {
+                Region = TempRegions[new Vector2i(RegionX, RehionZ)];
+            }
+            else
+            {
+                string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
+                Region = new(path);
+                TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
+            }
             int LocalChunkX = Math.Abs(X % RegionFile.Size);
             int LocalChunkZ = Math.Abs(Z % RegionFile.Size);
             (byte[] CompressedData,CompressionType CompressionType) =  Region.ReadChunk(LocalChunkX, LocalChunkZ);
-            Region.Close();
             if (CompressedData.Length != 0)
             {
                 byte[] ChunkData;
@@ -76,12 +102,20 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
         {
             int RegionX = Position.X >> 5;
             int RehionZ = Position.Y >> 5;
-            string path  = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" +RegionX + "." + RehionZ + ".vpr";
-            RegionFile Region = new(path);
+            RegionFile Region;
+            if (TempRegions.ContainsKey(new Vector2i(RegionX, RehionZ)))
+            {
+                Region = TempRegions[new Vector2i(RegionX, RehionZ)];
+            }
+            else
+            {
+                string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
+                Region = new(path);
+                TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
+            }
             int LocalChunkX = Math.Abs(Position.X % RegionFile.Size);
             int LocalChunkZ = Math.Abs(Position.Y % RegionFile.Size );
             (byte[] CompressedData, CompressionType CompressionType) = Region.ReadChunk(LocalChunkX, LocalChunkZ);
-            Region.Close();
             if(CompressedData.Length != 0)
             {
                 byte[] ChunkData;
@@ -209,7 +243,23 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
         //[Time]
         internal void Update()
         {
-            foreach (Player play in server.Server.TheServer.World.PlayerFactory.List.Values)
+            foreach(RegionFile Region in TempRegions.Values)
+            {
+                Region.Close();
+            }
+            TempRegions.Clear();
+            foreach(Chunk chunk in LoadedChunks.Values)
+            { 
+                if(chunk.PlayerInChunk.Count == 0)
+                {
+                    if(chunk.ServerState== ServerChunkSate.Dirty)
+                    {
+                        SaveChunk(chunk);
+                    }
+                    LoadedChunks.Remove(chunk.Position);
+                }
+            }
+            foreach (Player play in Server.TheServer.World.PlayerFactory.List.Values)
             {
                 PlayerChunk(play);
             }

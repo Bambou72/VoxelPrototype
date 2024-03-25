@@ -60,7 +60,10 @@ namespace VoxelPrototype.common.Game.World
             {
                 foreach (Chunk chunk in ChunkManager.LoadedChunks.Values)
                 {
-                    ChunkManager.SaveChunk(chunk);
+                    if(chunk.ServerState == ServerChunkSate.Dirty)
+                    {
+                        ChunkManager.SaveChunk(chunk);
+                    }
                 }
             }
         }

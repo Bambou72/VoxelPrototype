@@ -17,9 +17,10 @@ namespace VoxelPrototype.common.Game.World.Terrain
     {
         //Chunk state for meshing
         internal ChunkSate State = ChunkSate.Changed;
+        internal ServerChunkSate ServerState = ServerChunkSate.None;
         public const int Height = 32;
         public const int Size = 16;
-        internal List<int> PlayerInChunk;
+        internal List<int> PlayerInChunk { get; set; }
         Section[] Sections;
         //Chunk coordinates
         public int X { get; set; }
@@ -97,6 +98,7 @@ namespace VoxelPrototype.common.Game.World.Terrain
             var section = Sections[YValue];
             int y = pos.Y - (YValue * 16);
             section.SetBlock(new Vector3i(pos.X, y, pos.Z), id);
+            ServerState = ServerChunkSate.Dirty;
         }
     }
 }

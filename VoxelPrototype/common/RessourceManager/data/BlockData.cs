@@ -1,6 +1,6 @@
 ﻿namespace VoxelPrototype.common.RessourceManager.data
 {
-    internal struct BlockData
+    public struct BlockData
     {
         public string Name { get; set; }
         public TextureData Textures { get; set; }

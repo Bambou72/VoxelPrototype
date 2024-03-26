@@ -9,7 +9,7 @@ using VoxelPrototype.common.Physics;
 using VoxelPrototype.common.RessourceManager.data;
 namespace VoxelPrototype.common.RessourceManager
 {
-    internal class RessourcePackManager
+    public class RessourcePackManager
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private static string TempPath = "temp/ressourcespacks";
@@ -19,18 +19,18 @@ namespace VoxelPrototype.common.RessourceManager
         internal Dictionary<string, RessourcesPack> RessourcePacks = new();
         internal Dictionary<string, int> RessourcePacksLevel = new();
         int CurrentPos = 0;
-        internal void Initialize()
+        public void Initialize()
         {
             CleanTempFolder();
             LoadRessourcesPacks();
         }
-        internal void InitializeServer()
+        public void InitializeServer()
         {
             RessourcePacks.Clear();
             CleanTempFolder();
             LoadRessourcesPacksServer();
         }
-        internal void LoadRessourcesPacksServer()
+        public void LoadRessourcesPacksServer()
         {
             string[] LoadedRessourcesPacks = Directory.GetFiles("ressourcespacks", "*.zip");
             foreach (string filePath in LoadedRessourcesPacks)
@@ -57,7 +57,7 @@ namespace VoxelPrototype.common.RessourceManager
                 }
             }
         }
-        internal void LoadRessourcesPacks()
+        public void LoadRessourcesPacks()
         {
             loadedTextures.Clear();
             string[] LoadedRessourcesPacks = Directory.GetFiles("ressourcespacks", "*.zip");
@@ -124,7 +124,7 @@ namespace VoxelPrototype.common.RessourceManager
                 }
             }
         }
-        internal void CleanTempFolder()
+        public void CleanTempFolder()
         {
             if (!Path.Exists(TempPath))
             {
@@ -136,7 +136,7 @@ namespace VoxelPrototype.common.RessourceManager
                 Directory.CreateDirectory(TempPath + "/");
             }
         }
-        internal static void RecursiveDelete(DirectoryInfo baseDir, bool isRootDir)
+        public static void RecursiveDelete(DirectoryInfo baseDir, bool isRootDir)
         {
             if (!baseDir.Exists)
                 return;
@@ -148,7 +148,7 @@ namespace VoxelPrototype.common.RessourceManager
             }
             if (!isRootDir) baseDir.Delete();
         }
-        internal void ReloadVoxelAtlas()
+        public void ReloadVoxelAtlas()
         {
             loadedTextures.Clear();
             BlockAtlasTexture.Clear();
@@ -162,7 +162,7 @@ namespace VoxelPrototype.common.RessourceManager
             }
             BuildAtlas();
         }
-        internal void BuildAtlas()
+        public void BuildAtlas()
         {
             int numTextures = loadedTextures.Count;
             int maxTextureWidth = loadedTextures.Values.Max(t => t.Width);
@@ -211,11 +211,11 @@ namespace VoxelPrototype.common.RessourceManager
             atlasImage.Save("debug/atlas/block.png");
             VoxelAtlas = Texture.LoadFromData(atlasImage);
         }
-        internal Texture GetAtlas()
+        public Texture GetAtlas()
         {
             return VoxelAtlas;
         }
-        internal void RemoveTexturePack(string Name)
+        public void RemoveTexturePack(string Name)
         {
             if (RessourcePacksLevel.Count > 1)
             {
@@ -232,14 +232,14 @@ namespace VoxelPrototype.common.RessourceManager
             }
             ReloadVoxelAtlas();
         }
-        internal void ReloadTexturePacks()
+        public void ReloadTexturePacks()
         {
             RessourcePacks.Clear();
             CleanTempFolder();
             LoadRessourcesPacks();
             ReloadVoxelAtlas();
         }
-        internal static string GetAssetId(string ModName, string AssetType, string Name, string SubAssetType = "")
+        public static string GetAssetId(string ModName, string AssetType, string Name, string SubAssetType = "")
         {
             if (SubAssetType == "")
             {

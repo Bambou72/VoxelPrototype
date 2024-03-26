@@ -132,11 +132,11 @@ namespace VBF
                 Tags[Name] = value;
             }
         }
-        public T Get<T>(string Name) where T :VBFTag
+        public T Get<T>(string Name) where T : VBFTag
         {
             return (T)Tags[Name];
         }
-        public void Add(string Name,VBFTag tag)
+        public void Add(string Name, VBFTag tag)
         {
             Tags.Add(Name, tag);
         }
@@ -144,7 +144,7 @@ namespace VBF
         {
             Add(Name, new VBFBool(Value));
         }
-        public void AddInt(string Name , int Value)
+        public void AddInt(string Name, int Value)
         {
             Add(Name, new VBFInt(Value));
         }
@@ -152,11 +152,11 @@ namespace VBF
         {
             Add(Name, new VBFLong(Value));
         }
-        public void AddByte(string Name , byte Value)
+        public void AddByte(string Name, byte Value)
         {
             Add(Name, new VBFByte(Value));
         }
-        public void AddFloat(string Name , float Value)
+        public void AddFloat(string Name, float Value)
         {
             Add(Name, new VBFFloat(Value));
         }
@@ -270,7 +270,7 @@ namespace VBF
                     SerializeByteArray((VBFByteArray)tag, writer);
                     break;
                 case VBFTag.DataType.IntArray:
-                    SerializeIntArray((VBFIntArray)tag,writer);
+                    SerializeIntArray((VBFIntArray)tag, writer);
                     break;
                 default:
                     throw new Exception("Unknown VBF tag type.");
@@ -288,7 +288,7 @@ namespace VBF
             writer.Write(byteArray.Length); // Array length
             writer.Write(byteArray); // Array data
         }
-        private static void SerializeCompound(VBFCompound Tag,BinaryWriter writer)
+        private static void SerializeCompound(VBFCompound Tag, BinaryWriter writer)
         {
             foreach (var kvp in Tag.Tags)
             {

@@ -1,4 +1,4 @@
-﻿using VoxelPrototype.common.Game.World.Terrain;
+﻿using VoxelPrototype.common.Game.World;
 
 namespace VoxelPrototype.common.Game
 {

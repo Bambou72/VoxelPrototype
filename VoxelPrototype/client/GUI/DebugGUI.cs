@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.Debug;
 using VoxelPrototype.common.Game.Entities;
 using VoxelPrototype.common.Game.World;
-using VoxelPrototype.common.Game.World.Terrain;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.server;
 using VoxelPrototype.server;

@@ -4,7 +4,6 @@ using OpenTK.Mathematics;
 using VoxelPrototype.common.API.Blocks;
 using VoxelPrototype.common.API.Blocks.state;
 using VoxelPrototype.common.Game.World;
-using VoxelPrototype.common.Game.World.Terrain;
 namespace VoxelPrototype.client.Render.World
 {
     public class ChunkMeshGenerator

@@ -1,7 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using VoxelPrototype.common.API.Blocks;
 using VoxelPrototype.common.Game.World;
-using VoxelPrototype.common.Game.World.Terrain;
 
 namespace Voxel.Generators
 {

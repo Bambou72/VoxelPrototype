@@ -3,8 +3,8 @@ using VoxelPrototype.client.Render.Entities;
 using VoxelPrototype.client.Render.World;
 using VoxelPrototype.common.API.Blocks.state;
 using VoxelPrototype.common.Game.Entities.Player.PlayerManager;
-using VoxelPrototype.common.Game.World.Terrain;
-using VoxelPrototype.common.Game.World.Terrain.ChunkManagers;
+using VoxelPrototype.common.Game.World.ChunkManagers;
+
 namespace VoxelPrototype.common.Game.World
 {
     public class ClientWorld : World, IRenderSystem

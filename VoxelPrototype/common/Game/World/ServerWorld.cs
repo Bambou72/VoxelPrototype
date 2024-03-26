@@ -3,8 +3,8 @@ using VoxelPrototype.common.API.Blocks;
 using VoxelPrototype.common.API.Blocks.state;
 using VoxelPrototype.common.API.WorldGenerator;
 using VoxelPrototype.common.Game.Entities.Player.PlayerManager;
-using VoxelPrototype.common.Game.World.Terrain;
-using VoxelPrototype.common.Game.World.Terrain.ChunkManagers;
+using VoxelPrototype.common.Game.World.ChunkManagers;
+
 namespace VoxelPrototype.common.Game.World
 {
     public class ServerWorld : World

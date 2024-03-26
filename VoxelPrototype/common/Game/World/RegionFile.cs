@@ -1,4 +1,4 @@
-﻿namespace VoxelPrototype.common.Game.World.Terrain
+﻿namespace VoxelPrototype.common.Game.World
 {
     public enum CompressionType : byte
     {
@@ -11,12 +11,12 @@
         public const int Size = 32;
         private const int SectorSize = 4096;
         FileStream FileStream { get; set; }
-        public List<bool> SectorsFree =new List<bool>();
+        public List<bool> SectorsFree = new List<bool>();
         public RegionFile(string Path)
         {
-            if(File.Exists(Path))
+            if (File.Exists(Path))
             {
-                FileStream = new(Path, FileMode.Open,FileAccess.ReadWrite);
+                FileStream = new(Path, FileMode.Open, FileAccess.ReadWrite);
             }
             else
             {
@@ -40,52 +40,52 @@
         //
         //Read Chunk
         //
-        public (byte[],CompressionType) ReadChunk(int X,int Z)
+        public (byte[], CompressionType) ReadChunk(int X, int Z)
         {
             (int Localization, byte Size) = GetOffset(X, Z);
-            if(Localization != 0 && Size != 0)
+            if (Localization != 0 && Size != 0)
             {
                 return ReadChunkData(Localization, Size);
             }
             return (new byte[0], CompressionType.Uncompressed);
         }
-        private (byte[],CompressionType) ReadChunkData(int Localisation,int Size)
+        private (byte[], CompressionType) ReadChunkData(int Localisation, int Size)
         {
-            FileStream.Seek(Localisation* SectorSize, SeekOrigin.Begin);
-            byte[] Data =new byte[Size*SectorSize];
-            int Length = FileStream.Read(Data,0,Size*SectorSize);
-            int DataLength = (Data[0] << 24) | (Data[1] << 16) | (Data[2] << 8) | Data[3];
+            FileStream.Seek(Localisation * SectorSize, SeekOrigin.Begin);
+            byte[] Data = new byte[Size * SectorSize];
+            int Length = FileStream.Read(Data, 0, Size * SectorSize);
+            int DataLength = Data[0] << 24 | Data[1] << 16 | Data[2] << 8 | Data[3];
             CompressionType CompressionType = (CompressionType)Data[4];
-            byte[] ChunkData= new byte[DataLength];
-            Array.Copy(Data, 5, ChunkData,0, DataLength);
-            return (ChunkData,CompressionType);
+            byte[] ChunkData = new byte[DataLength];
+            Array.Copy(Data, 5, ChunkData, 0, DataLength);
+            return (ChunkData, CompressionType);
         }
         //
         //Write Chunk
         //
-        public void WriteChunk(int X,int Z,byte[] ChunkData, CompressionType CompressionType)
+        public void WriteChunk(int X, int Z, byte[] ChunkData, CompressionType CompressionType)
         {
             int totalsize = ChunkData.Length + 5;
             int numSections = (int)Math.Ceiling((double)totalsize / SectorSize);
             (int Localization, byte Size) = GetOffset(X, Z);
-            if(Localization !=0 && Size != 0 && numSections <= Size )
+            if (Localization != 0 && Size != 0 && numSections <= Size)
             {
-                WriteChunkData(Localization,ChunkData,CompressionType);
+                WriteChunkData(Localization, ChunkData, CompressionType);
             }
             else
             {
                 int Index = FindFirstFreeSector(numSections);
                 if (Index != -1)
                 {
-                    WriteOffset(X, Z, Index , (byte)numSections);
-                    WriteChunkData(Index,ChunkData, CompressionType);
+                    WriteOffset(X, Z, Index, (byte)numSections);
+                    WriteChunkData(Index, ChunkData, CompressionType);
                 }
                 else
                 {
-                    int NewLoc = (int)AllocateSectors( numSections);
+                    int NewLoc = (int)AllocateSectors(numSections);
                     WriteOffset(X, Z, NewLoc, (byte)numSections);
                     WriteChunkData(NewLoc, ChunkData, CompressionType);
-                    if(Localization != 0 && Size != 0)
+                    if (Localization != 0 && Size != 0)
                     {
                         ClearSections(Localization, Size);
                     }
@@ -110,17 +110,17 @@
         //
         public (int, byte) GetOffset(int X, int Z)
         {
-            int index = (Z * Size) + X;
+            int index = Z * Size + X;
             byte[] Data = new byte[4];
             FileStream.Seek(index * 4, SeekOrigin.Begin);
             FileStream.Read(Data, 0, 4);
-            int Localization = (Data[0] << 16 | Data[1] << 8 | Data[2]);
+            int Localization = Data[0] << 16 | Data[1] << 8 | Data[2];
             byte NumberOfSectors = Data[3];
             return (Localization, NumberOfSectors);
         }
         public void WriteOffset(int X, int Z, int offset, byte NumberOfSectors)
         {
-            int index = (Z * Size) + X;
+            int index = Z * Size + X;
             byte[] offsetBytes = BitConverter.GetBytes(offset);
             if (!BitConverter.IsLittleEndian)
             {
@@ -132,9 +132,9 @@
         //
         //Utils
         //
-        private void ClearSections(int Index ,int Size)
+        private void ClearSections(int Index, int Size)
         {
-            for(int i = Index; i < Size; i++)
+            for (int i = Index; i < Size; i++)
             {
                 ClearSection(i);
             }
@@ -170,7 +170,7 @@
             int numSectors = (int)Math.Ceiling((double)FileStream.Length / SectorSize);
             for (int i = 0; i < numSectors; i++)
             {
-                if(i == 0)
+                if (i == 0)
                 {
                     SectorsFree.Add(false);
                 }
@@ -194,7 +194,7 @@
         {
             FileStream.Seek(0, SeekOrigin.End);
             long BaseAllocationLocation = FileStream.Position;
-            for (int i = 0; i < Count;i++)
+            for (int i = 0; i < Count; i++)
             {
                 FileStream.Write(new byte[SectorSize], 0, SectorSize);
             }

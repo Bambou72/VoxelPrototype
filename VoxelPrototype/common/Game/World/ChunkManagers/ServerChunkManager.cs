@@ -13,7 +13,7 @@ using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Network.server;
 using VoxelPrototype.common.Utils;
 using VoxelPrototype.server;
-namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
+namespace VoxelPrototype.common.Game.World.ChunkManagers
 {
     public partial class ServerChunkManager
     {
@@ -26,13 +26,13 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
         {
             foreach (Chunk chunk in LoadedChunks.Values)
             {
-                if(chunk.ServerState == ServerChunkSate.Dirty)
+                if (chunk.ServerState == ServerChunkSate.Dirty)
                 {
                     SaveChunk(chunk);
                 }
                 LoadedChunks.Remove(chunk.Position);
             }
-            foreach(RegionFile region in  TempRegions.Values)
+            foreach (RegionFile region in TempRegions.Values)
             {
                 region.Close();
             }
@@ -44,10 +44,11 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
             int RegionX = Chunk.X >> 5;
             int RehionZ = Chunk.Z >> 5;
             RegionFile Region;
-            if(TempRegions.ContainsKey(new Vector2i(RegionX,RehionZ)))
+            if (TempRegions.ContainsKey(new Vector2i(RegionX, RehionZ)))
             {
                 Region = TempRegions[new Vector2i(RegionX, RehionZ)];
-            }else
+            }
+            else
             {
                 string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
                 Region = new(path);
@@ -56,10 +57,10 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
             int LocalChunkX = Math.Abs(Chunk.X % RegionFile.Size);
             int LocalChunkZ = Math.Abs(Chunk.Z % RegionFile.Size);
             byte[] SerializedChunk = Chunk.Serialize();
-            byte[] CompressedChunk = LZ4Pickler.Pickle(SerializedChunk,LZ4Level.L11_OPT);
-            Region.WriteChunk(LocalChunkX, LocalChunkZ,CompressedChunk ,CompressionType.LZ4);
+            byte[] CompressedChunk = LZ4Pickler.Pickle(SerializedChunk, LZ4Level.L11_OPT);
+            Region.WriteChunk(LocalChunkX, LocalChunkZ, CompressedChunk, CompressionType.LZ4);
         }
-        internal Chunk LoadChunk(int X,int Z)
+        internal Chunk LoadChunk(int X, int Z)
         {
             int RegionX = X >> 5;
             int RehionZ = Z >> 5;
@@ -76,7 +77,7 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
             }
             int LocalChunkX = Math.Abs(X % RegionFile.Size);
             int LocalChunkZ = Math.Abs(Z % RegionFile.Size);
-            (byte[] CompressedData,CompressionType CompressionType) =  Region.ReadChunk(LocalChunkX, LocalChunkZ);
+            (byte[] CompressedData, CompressionType CompressionType) = Region.ReadChunk(LocalChunkX, LocalChunkZ);
             if (CompressedData.Length != 0)
             {
                 byte[] ChunkData;
@@ -114,9 +115,9 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
                 TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
             }
             int LocalChunkX = Math.Abs(Position.X % RegionFile.Size);
-            int LocalChunkZ = Math.Abs(Position.Y % RegionFile.Size );
+            int LocalChunkZ = Math.Abs(Position.Y % RegionFile.Size);
             (byte[] CompressedData, CompressionType CompressionType) = Region.ReadChunk(LocalChunkX, LocalChunkZ);
-            if(CompressedData.Length != 0)
+            if (CompressedData.Length != 0)
             {
                 byte[] ChunkData;
                 switch (CompressionType)
@@ -139,13 +140,14 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
 
         internal Chunk? GetChunk(Vector2i pos)
         {
-            if(LoadedChunks.ContainsKey(pos))
+            if (LoadedChunks.ContainsKey(pos))
             {
                 return LoadedChunks[pos];
-            }else
+            }
+            else
             {
                 Chunk LoadedChunk = LoadChunk(pos);
-                if(LoadedChunk != null)
+                if (LoadedChunk != null)
                 {
                     LoadedChunks.Add(pos, LoadedChunk);
                 }
@@ -200,17 +202,17 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
         }
         internal void PlayerChunk(Player play)
         {
-            int minx = (int)(Math.Floor(play.Position.X / Chunk.Size) - server.Server.TheServer.World.LoadDistance);
-            int minz = (int)(Math.Floor(play.Position.Z / Chunk.Size) - server.Server.TheServer.World.LoadDistance);
-            int maxx = (int)(Math.Floor(play.Position.X / Chunk.Size) + server.Server.TheServer.World.LoadDistance);
-            int maxz = (int)(Math.Floor(play.Position.Z / Chunk.Size) + server.Server.TheServer.World.LoadDistance);
+            int minx = (int)(Math.Floor(play.Position.X / Chunk.Size) - Server.TheServer.World.LoadDistance);
+            int minz = (int)(Math.Floor(play.Position.Z / Chunk.Size) - Server.TheServer.World.LoadDistance);
+            int maxx = (int)(Math.Floor(play.Position.X / Chunk.Size) + Server.TheServer.World.LoadDistance);
+            int maxz = (int)(Math.Floor(play.Position.Z / Chunk.Size) + Server.TheServer.World.LoadDistance);
             List<Vector2i> list = new List<Vector2i>();
             foreach (Vector2i ch in play.inChunk)
             {
                 Chunk chs = GetChunk(ch);
                 if (chs != null)
                 {
-                    if (ch.X < minx || ch.Y < minz  || ch.X > maxx || ch.Y > maxz )
+                    if (ch.X < minx || ch.Y < minz || ch.X > maxx || ch.Y > maxz)
                     {
                         chs.PlayerInChunk.Remove(play.ClientID);
                         list.Add(ch);
@@ -237,22 +239,22 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
                         CheckChunk(play, x, z, RelatPos);
                     }
                 }
-                
+
             }
         }
         //[Time]
         internal void Update()
         {
-            foreach(RegionFile Region in TempRegions.Values)
+            foreach (RegionFile Region in TempRegions.Values)
             {
                 Region.Close();
             }
             TempRegions.Clear();
-            foreach(Chunk chunk in LoadedChunks.Values)
-            { 
-                if(chunk.PlayerInChunk.Count == 0)
+            foreach (Chunk chunk in LoadedChunks.Values)
+            {
+                if (chunk.PlayerInChunk.Count == 0)
                 {
-                    if(chunk.ServerState== ServerChunkSate.Dirty)
+                    if (chunk.ServerState == ServerChunkSate.Dirty)
                     {
                         SaveChunk(chunk);
                     }
@@ -281,7 +283,7 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
         internal void ChangeBlock(Vector2i cp, Vector3i bp, BlockState State)
         {
             Chunk tempChunk = GetChunk(cp);
-            if(tempChunk != null)
+            if (tempChunk != null)
             {
                 tempChunk = CreateChunk(cp);
             }

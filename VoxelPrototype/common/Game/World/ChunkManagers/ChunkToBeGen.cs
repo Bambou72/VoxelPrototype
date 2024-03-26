@@ -1,5 +1,5 @@
 ﻿using OpenTK.Mathematics;
-namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
+namespace VoxelPrototype.common.Game.World.ChunkManagers
 {
     internal struct ChunkToBeGen
     {

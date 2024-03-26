@@ -1,4 +1,4 @@
-﻿namespace VoxelPrototype.common.Game.World.Terrain.Storage.Palette
+﻿namespace VoxelPrototype.common.Game.World.Storage.Palette
 {
     internal static class Utils
     {

@@ -1,4 +1,4 @@
-﻿namespace VoxelPrototype.common.Game.World.Terrain
+﻿namespace VoxelPrototype.common.Game.World
 {
     [Flags]
     internal enum ChunkSate

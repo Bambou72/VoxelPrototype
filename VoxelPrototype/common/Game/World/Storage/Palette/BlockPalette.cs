@@ -5,7 +5,7 @@ using VBF;
 using VoxelPrototype.common.API.Blocks;
 using VoxelPrototype.common.API.Blocks.state;
 using VoxelPrototype.common.Utils;
-namespace VoxelPrototype.common.Game.World.Terrain.Storage.Palette
+namespace VoxelPrototype.common.Game.World.Storage.Palette
 {
     internal class BlockPalette : IVBFSerializable<BlockPalette>
     {
@@ -65,7 +65,7 @@ namespace VoxelPrototype.common.Game.World.Terrain.Storage.Palette
         }
         public BlockState Get(Vector3i Position)
         {
-            
+
             return Get(Data[Utils.TreetoOne(Position.X, Position.Y, Position.Z)]);
         }
         public void Set(Vector3i Position, BlockState State)
@@ -139,7 +139,7 @@ namespace VoxelPrototype.common.Game.World.Terrain.Storage.Palette
                 LogManager.GetCurrentClassLogger().Error(ex, "Failed to deserialize block storage.");
                 return this;
             }
-            
+
         }
     }
 }

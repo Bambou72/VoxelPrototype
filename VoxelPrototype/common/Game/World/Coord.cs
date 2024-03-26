@@ -1,5 +1,5 @@
 ﻿using OpenTK.Mathematics;
-namespace VoxelPrototype.common.Game.World.Terrain
+namespace VoxelPrototype.common.Game.World
 {
     internal static class Coord
     {

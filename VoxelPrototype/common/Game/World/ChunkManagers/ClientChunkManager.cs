@@ -11,7 +11,7 @@ using VoxelPrototype.common.API.Blocks.state;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Utils;
-namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
+namespace VoxelPrototype.common.Game.World.ChunkManagers
 {
     internal partial class ClientChunkManager
     {
@@ -46,7 +46,7 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
         }
         internal void HandleChunkUnload(UnloadChunk data, NetPeer peer)
         {
-            foreach(Vector2i ChunkPosition in data.Positions)
+            foreach (Vector2i ChunkPosition in data.Positions)
             {
                 if (Clist.TryGetValue(ChunkPosition, out Chunk ch))
                 {
@@ -54,7 +54,7 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
                     ch = null;
                     Clist.Remove(ChunkPosition, out Chunk _);
                 }
-            }            
+            }
         }
         internal void HandleChunkUpdate(OneBlockChange data, NetPeer peer)
         {
@@ -103,7 +103,7 @@ namespace VoxelPrototype.common.Game.World.Terrain.ChunkManagers
             if (bpos.Z > Chunk.Size - 1)
             {
                 Rpos.Y += 1;
-                bpos.Z= 0;
+                bpos.Z = 0;
             }
             else if (bpos.Z < 0)
             {

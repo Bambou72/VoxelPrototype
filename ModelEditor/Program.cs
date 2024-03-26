@@ -10,15 +10,13 @@ using VoxPopuliLibrary.Engine.Render.Debug;
 public static class Program
 {
     public static Window? window;
-#pragma warning disable CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
     public static NativeWindowSettings nativeWindowSettings;
-#pragma warning restore CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
     private static void Main()
     {
         nativeWindowSettings = new()
         {
             Size = new Vector2i(1000, 800),
-            Title = "VoxPopuli Model Editor",
+            Title = "Voxel Prototype Model Editor",
             Flags = ContextFlags.ForwardCompatible,
         };
         Game();
@@ -34,9 +32,7 @@ public static class Program
 }
 public class Window : GameWindow
 {
-#pragma warning disable CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
     public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings) { }
-#pragma warning restore CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
     ImGuiController Controller;
     protected override void OnLoad()
     {

@@ -239,15 +239,15 @@ namespace VoxelPrototype.common.RessourceManager
             LoadRessourcesPacks();
             ReloadVoxelAtlas();
         }
-        public static string GetAssetId(string ModName, string AssetType, string Name, string SubAssetType = "")
+        public static string GetAssetId(string ModName, string Name, string SubAssetType = "")
         {
             if (SubAssetType == "")
             {
-                return ModName + "@" + AssetType + "/" + Name;
+                return ModName + "@"+ Name;
             }
             else
             {
-                return ModName + "@" + AssetType + "/" + SubAssetType + "/" + Name;
+                return ModName + "@" + SubAssetType + "/" + Name;
             }
         }
         //
@@ -262,7 +262,7 @@ namespace VoxelPrototype.common.RessourceManager
             else
             {
                 Logger.Warn("Block texture don't exist : {name}", Id);
-                return BlockAtlasTexture["Voxel@Textures/Blocks/unknow"];
+                return BlockAtlasTexture["Voxel@block/unknow"];
             }
         }
         public Shader GetShader(string Id)
@@ -295,15 +295,15 @@ namespace VoxelPrototype.common.RessourceManager
             Logger.Error("Entity mesh not found : " + Id);
             return default;
         }
-        public BlockData GetBlockData(string Id)
+        public BlockStateData GetBlockStateData(string Id)
         {
             for (int i = 0; i < CurrentPos; i++)
             {
                 string name = RessourcePacksLevel.FirstOrDefault(x => x.Value == i).Key;
-                return RessourcePacks[name].GetBlockData(Id);
+                return RessourcePacks[name].GetBlockStateData(Id);
             }
             Logger.Error("Block data not found : " + Id);
-            return default;
+            return new BlockStateData();
         }
         public Collider[] GetBlockCollider(string Id)
         {

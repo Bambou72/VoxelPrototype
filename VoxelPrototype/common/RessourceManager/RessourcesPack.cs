@@ -28,12 +28,12 @@ namespace VoxelPrototype.common.RessourceManager
         }
         private void LoadBlocksTexture(string path, string ModName, RessourcePackManager man)
         {
-            path += "/textures/blocks/";
+            path += "/textures/block/";
             string[] blockTextures = Directory.GetFiles(path, "*.png");
             foreach (string filePath in blockTextures)
             {
                 Image<Rgba32> Texture = Image.Load<Rgba32>(File.ReadAllBytes(filePath));
-                string TextureID = RessourcePackManager.GetAssetId(ModName, "Textures", System.IO.Path.GetFileNameWithoutExtension(filePath), "Blocks");
+                string TextureID = RessourcePackManager.GetAssetId(ModName, System.IO.Path.GetFileNameWithoutExtension(filePath), "block");
                 man.loadedTextures.Add(TextureID, Texture);
             }
         }
@@ -62,14 +62,14 @@ namespace VoxelPrototype.common.RessourceManager
         }
         void LoadBlockColliders(string path, string ModName)
         {
-            path += "/colliders/blocks";
+            path += "/colliders/block";
             string[] JsonModel = Directory.GetFiles(path, "*.json");
             foreach (string filePath in JsonModel)
             {
                 try
                 {
                     var data = JsonConvert.DeserializeObject<ColliderData>(File.ReadAllText(filePath));
-                    string ColliderId = RessourcePackManager.GetAssetId(ModName, "Colliders", data.Name, "Blocks");
+                    string ColliderId = RessourcePackManager.GetAssetId(ModName, data.Name, "block");
                     BlockColliders.Add(ColliderId, data.Colliders);
                     Logger.Info("Loaded collider : " + ColliderId);
                 }
@@ -104,14 +104,14 @@ namespace VoxelPrototype.common.RessourceManager
         }
         internal void LoadBlockMeshs(string path, string ModName)
         {
-            path += "/meshs/blocks";
+            path += "/models/block";
             string[] BlocksModel = Directory.GetFiles(path, "*.json");
             foreach (string filePath in BlocksModel)
             {
                 try
                 {
                     var data = JsonConvert.DeserializeObject<BlockMeshData>(File.ReadAllText(filePath));
-                    string MeshId = RessourcePackManager.GetAssetId(ModName, "Meshs", data.Name, "Blocks");
+                    string MeshId = RessourcePackManager.GetAssetId(ModName, data.Name, "block");
                     BlockMeshs.Add(MeshId, new BlockMesh(data.Vertex, data.Uv));
                     Logger.Info($"Loaded block mesh : {MeshId}");
                 }
@@ -153,7 +153,7 @@ namespace VoxelPrototype.common.RessourceManager
                 TomlTable tomlData = Toml.ToModel(File.ReadAllText(filePath + "/shader.toml"));
                 try
                 {
-                    string ShaderId = RessourcePackManager.GetAssetId(ModName, "Shaders", (string)tomlData["Name"]);
+                    string ShaderId = RessourcePackManager.GetAssetId(ModName, (string)tomlData["Name"]);
                     Shaders.Add(ShaderId, new Shader(filePath + "/vert.glsl", filePath + "/frag.glsl"));
                     Logger.Info($"New shader loaded : {ShaderId}");
                 }
@@ -166,12 +166,12 @@ namespace VoxelPrototype.common.RessourceManager
         //
         //BlockData
         //
-        private static Dictionary<string, BlockData> BlocksData = new Dictionary<string, BlockData>();
-        internal BlockData GetBlockData(string Id)
+        private static Dictionary<string, BlockStateData> BlocksStateData = new Dictionary<string, BlockStateData>();
+        internal BlockStateData GetBlockStateData(string Id)
         {
-            if (BlocksData.ContainsKey(Id))
+            if (BlocksStateData.ContainsKey(Id))
             {
-                return BlocksData[Id];
+                return BlocksStateData[Id];
             }
             else
             {
@@ -188,15 +188,15 @@ namespace VoxelPrototype.common.RessourceManager
         }
         private void LoadBlocksData(string path, string ModName)
         {
-            path += "/data/blocks";
+            path += "/data/block";
             string[] blocksData = Directory.GetFiles(path, "*.json");
             foreach (string filePath in blocksData)
             {
                 try
                 {
-                    var data = JsonConvert.DeserializeObject<BlockData>(File.ReadAllText(filePath));
-                    string DataId = RessourcePackManager.GetAssetId(ModName, "Data", data.Name, "Blocks");
-                    BlocksData.Add(DataId, data);
+                    var data = JsonConvert.DeserializeObject<BlockStateData>(File.ReadAllText(filePath));
+                    string DataId = RessourcePackManager.GetAssetId(ModName, System.IO.Path.GetFileNameWithoutExtension(filePath), "block");
+                    BlocksStateData.Add(DataId, data);
                     Logger.Info($"Loaded block data : {DataId}");
                 }
                 catch (Exception ex)
@@ -230,14 +230,14 @@ namespace VoxelPrototype.common.RessourceManager
         }
         internal void LoadEntitiesMesh(string path, string ModName)
         {
-            path += "/meshs/entities";
+            path += "/models/entity";
             string[] entitiesMesh = Directory.GetFiles(path, "*.json");
             foreach (string filePath in entitiesMesh)
             {
                 try
                 {
                     var data = JsonConvert.DeserializeObject<MeshData>(File.ReadAllText(filePath));
-                    string MeshId = RessourcePackManager.GetAssetId(ModName, "Meshs", data.Name, "Entities");
+                    string MeshId = RessourcePackManager.GetAssetId(ModName, data.Name, "entity");
                     EntitiesMesh.Add(MeshId, new Model(data.Model));
                     Logger.Info($"Loaded entity mesh :  {MeshId}");
                 }
@@ -272,7 +272,7 @@ namespace VoxelPrototype.common.RessourceManager
         }
         internal void LoadCubeMap(string path, string ModName)
         {
-            path += "/textures/cubemaps";
+            path += "/textures/cubemap";
             string[] Skyboxs = Directory.GetDirectories(path);
             foreach (string filePath in Skyboxs)
             {
@@ -323,13 +323,13 @@ namespace VoxelPrototype.common.RessourceManager
         }
         internal void LoadEntityTexture(string path, string ModName)
         {
-            path += "/textures/entities";
+            path += "/textures/entity";
             string[] textures = Directory.GetFiles(path, "*.png");
             foreach (string filePath in textures)
             {
                 try
                 {
-                    string EntityTextureID = RessourcePackManager.GetAssetId(ModName, "Textures", System.IO.Path.GetFileNameWithoutExtension(filePath), "Entities");
+                    string EntityTextureID = RessourcePackManager.GetAssetId(ModName, System.IO.Path.GetFileNameWithoutExtension(filePath), "entity");
                     EntitiesTexture.Add(EntityTextureID, Texture.LoadFromFile(filePath));
                     Logger.Info($"An entity texture loaded : {EntityTextureID}");
                 }

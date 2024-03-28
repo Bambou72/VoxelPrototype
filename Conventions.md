@@ -4,14 +4,15 @@
     - Class names must have the first char as upper.
         ```csharp
         //Bad
-        class Example
+        class example
         {
             
         }
 
         //Good
-        void Test(int Integer)
+        class Example
         {
+            
         }
         ```
     - Method parameters names must have the first char as upper.

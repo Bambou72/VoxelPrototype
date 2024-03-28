@@ -24,6 +24,6 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VoxPopuliEngine\VoxelPrototype.csproj" />
+    <ProjectReference Include="..\VoxelPrototype\VoxelPrototype.csproj" />
   </ItemGroup>
 </Project>

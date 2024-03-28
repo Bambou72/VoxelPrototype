@@ -1,8 +1,9 @@
-﻿namespace VoxelPrototype.common.API.Blocks.state.Properties
+﻿namespace VoxelPrototype.common.API.Blocks.Properties
 {
-    public class EnumProperty<T> : BlockProperty<T> where T : Enum
+    /*
+    public class EnumProperty<T> : Property<T> where T : Enum
     {
-        private readonly Type enumClass;
+        public readonly Type enumClass;
         private readonly T defaultValue;
         private readonly HashSet<T> valuesSet;
         private readonly string[] names;
@@ -13,34 +14,35 @@
                 throw new ArgumentNullException(nameof(values));
             }
             this.enumClass = enumClass ?? throw new ArgumentNullException(nameof(enumClass));
-            this.defaultValue = values[0];
-            this.valuesSet = new HashSet<T>(values);
-            this.names = values.Select(v => v.ToString().ToLower()).ToArray();
+            defaultValue = values[0];
+            valuesSet = new HashSet<T>(values);
+            names = values.Select(v => v.ToString().ToLower()).ToArray();
         }
-        public override IReadOnlyCollection<T> GetAllPossibleValues()
+        
+        public override IReadOnlyCollection<T> GetAllValues()
         {
-            return valuesSet;
+            //return valuesSet;
         }
-        public override T GetDefaultValue()
+        public override T DefaultValue()
         {
             return defaultValue;
         }
-        public override T GetValueFromName(string name)
+        public override T GetValueFromString(string name)
         {
             name = name.ToUpper();
-            foreach (T value in this.valuesSet)
+            foreach (T value in valuesSet)
             {
                 if (value.ToString().ToUpper() == name)
                 {
                     return value;
                 }
             }
-            return this.defaultValue;
+            return defaultValue;
         }
-        public override string GetValueName(T value)
+        public override string GetValueString(T value)
         {
             int ordinal = Convert.ToInt32(value);
             return names[ordinal];
         }
-    }
+    }*/
 }

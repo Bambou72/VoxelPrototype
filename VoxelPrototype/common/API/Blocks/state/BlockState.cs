@@ -1,107 +1,149 @@
-﻿using System.Collections.Immutable;
-namespace VoxelPrototype.common.API.Blocks.state
+﻿using VBF;
+using VoxelPrototype.common.API.Blocks.Properties;
+namespace VoxelPrototype.common.API.Blocks.State
 {
-    public class BlockState
+    public class BlockState : IVBFSerializable<BlockState>
     {
-        private readonly Block Parent;
-        private readonly ImmutableDictionary<BlockProperty<object>, object> Properties;
-        private Dictionary<(BlockProperty<object>, object), BlockState> StatesByValues;
-        private ushort Id;
-        public BlockState(Block owner, ImmutableDictionary<BlockProperty<object>, object> properties,ushort Id)
+        public Block Block { get; }
+        public uint ID { get; }
+        private readonly Dictionary<IProperty, object> Properties;
+        private Dictionary<(IProperty, object), BlockState> StatesByValues;
+        public BlockState(){}
+        public BlockState(Block Block, Dictionary<IProperty, object> Properties, uint ID)
         {
-            Parent = owner;
-            Properties = properties;
-            this.Id = Id;
+            this.Block= Block;
+            this.Properties = Properties;
+            this.ID = ID;
         }
-        public Block GetBlock()
-        {
-            return Parent;
-        }
-        public bool IsBlock(Block block)
-        {
-            return Parent == block;
-        }
-        public ushort GetId()
-        {
-            return Id;
-        }
-        public int GetPropertiesCount()
-        {
-            return Properties.Count;
-        }
-        public ImmutableDictionary<BlockProperty<object>, object> GetProperties()
-        {
-            return Properties;
-        }
-        public bool Has(BlockProperty<object> property)
+        public bool Has(Property<object> property)
         {
             return Properties.ContainsKey(property);
         }
-        public T Get<T>(BlockProperty<T> property)
+        public T Get<T>(Property<T> property)
         {
-            if (Properties.TryGetValue(property as BlockProperty<object>, out var value))
+            foreach(var prop in Properties)
             {
-                return (T)value;
+                if(prop.Key.Equals(property))
+                {
+                    return (T)prop.Value;
+                }
             }
-            throw new InvalidOperationException($"Block state for {this.Parent.Id} doesn't define the property {property.GetName()}.");
+            throw new Exception($"{property.Name} can't be found.");
         }
-        public BlockState With<T>(BlockProperty<T> property, T value)
+        public (T, IProperty) GetIntern<T>(Property<T> property)
         {
-            return WithRaw(property as BlockProperty<object>, value);
+            foreach (var prop in Properties)
+            {
+                if (prop.Key.Equals(property))
+                {
+                    return ((T)prop.Value, prop.Key);
+                }
+            }
+            throw new Exception($"{property.Name} can't be found.");
         }
-        public BlockState WithRaw(BlockProperty<object> property, object value)
+        public BlockState With<T>(Property<T> property, T value)
         {
-            object v = Get(property);
+            return WithRaw(property, value);
+        }
+        public BlockState WithRaw<T>(Property<T> property, object value)
+        {
+            (object v,IProperty Prop) = GetIntern(property);
             if (v == value)
+            {
                 return this;
-            BlockState state = StatesByValues[(property, value)];
+
+            }
+            BlockState state = StatesByValues[(Prop, value)];
             if (state == null)
-                throw new InvalidOperationException($"Block state for {Parent.Id} doesn't allow the value {value} for property {property.GetName()}.");
+            {
+                throw new InvalidOperationException($"Block state for {Block.ID} doesn't allow the value {value} for property {property.Name}.");
+            }
             return state;
         }
         public override bool Equals(object obj)
         {
             if (this == obj)
+            {
                 return true;
+            }
             if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
+            }
             var that = (BlockState)obj;
-            return this.Parent.Id == that.GetBlock().Id &&  Id == that.Id;
-        }
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
+            return Block.ID == that.Block.ID && ID == that.ID;
         }
         public override string ToString()
         {
-            return $"BlockState:{{block={Parent.Id}, properties={Properties}, uid={Id}}}";
-        }
-        public void SetAllStates(Dictionary<ImmutableDictionary<BlockProperty<object>, object>, BlockState> states)
-        {
-            if (StatesByValues != null)
+            string Base = "";
+            foreach( var property in Properties.Keys )
             {
-                throw new InvalidOperationException("States by values are already defined for this block state.");
-            }
-            var statesByValues = new Dictionary<(BlockProperty<object>,object), BlockState>();
-            var tempMapForGet = new Dictionary<BlockProperty<object>, object>(Properties);
-            foreach (var (prop, value) in Properties)
-            {
-                foreach (var allowedValue in prop.GetAllPossibleValues())
+                string Name = property.Name;
+                string Value = Properties[property].ToString();
+                if(Base != "")
                 {
-                    if (!ReferenceEquals(allowedValue, value))
-                    {
-                        if (tempMapForGet.TryGetValue(prop, out var oldValue))
-                        {
-                            tempMapForGet[prop] = allowedValue;
-                            statesByValues.Add((prop, allowedValue), states[tempMapForGet.ToImmutableDictionary()]);
-                            tempMapForGet[prop] = oldValue;
-                        }
-                    }
+                    Base += ";";
                 }
+                Base += Name+":"+Value;
             }
-            StatesByValues = statesByValues.Count == 0
-                ? new Dictionary<(BlockProperty<object>, object), BlockState>(statesByValues)
-                : new Dictionary<(BlockProperty<object>, object), BlockState>();
+            return Base;
+        }
+        public void SetAllStates(Dictionary<(IProperty, object), BlockState> states)
+        {
+            StatesByValues = states;
+        }
+        public VBFCompound Serialize()
+        {
+            VBFCompound BlockState = new();
+            BlockState.AddString("ID", Block.ID);
+            VBFCompound Properties = new();
+            foreach (var prop in this.Properties.Keys)
+            {
+                object obj = this.Properties[prop];
+                if (obj.GetType() == typeof(bool))
+                {
+                    Properties.AddBool(prop.Name, (bool)obj);
+
+                }
+                /*
+                else if (obj.GetType().IsEnum)
+                {
+                    VBFCompound EnumProperty = new VBFCompound();
+                    EnumProperty.AddString("Type", obj.GetType().Name);
+                    EnumProperty.AddString("Value", (IProperty<obj.GetType()>)prop.GetValueString(obj));
+                    Properties.Add(prop.Name, EnumProperty);
+
+                }*/
+            }
+            BlockState.Add("Properties", Properties);
+            return BlockState;
+        }
+        public BlockState Deserialize(VBFCompound compound)
+        {
+            var Block = BlockRegister.GetBlock(compound.GetString("ID").Value);
+            var CurrentBlockState = Block.GetDefaultState();
+
+            foreach (var prop in compound.Get<VBFCompound>("Properties").Tags)
+            {
+                if (prop.Value.GetType() == typeof(VBFBool))
+                {
+                    var Value = (VBFBool)prop.Value;
+                    CurrentBlockState = CurrentBlockState.With(new BooleanProperty(prop.Key), Value.Value);
+                }
+                /*
+                else if(prop.Value.GetType() == typeof(VBFCompound))
+                {
+                    var Value = (VBFCompound)(prop.Value);
+                    Type enumType = Type.GetType(Value.GetString("Type").Value);
+                    Type myClassType = typeof(EnumProperty<>).MakeGenericType(enumType);
+                    object EnumInstance = Activator.CreateInstance(myClassType);
+                    (T)Convert.ChangeType()
+                    var parsed =Enum.Parse(enumType, Value.GetString("Value").Value);
+                    CurrentBlockState = CurrentBlockState.With(EnumInstance,EnumInstance. );
+
+                }*/
+            }
+            return CurrentBlockState;
         }
     }
 }

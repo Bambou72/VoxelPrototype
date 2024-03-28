@@ -1,6 +1,4 @@
-﻿using VoxelPrototype.client;
-using VoxelPrototype.common.API.Blocks.state;
-using VoxelPrototype.common.RessourceManager.data;
+﻿using VoxelPrototype.common.API.Blocks.State;
 namespace VoxelPrototype.common.API.Blocks
 {
     public static class BlockRegister
@@ -21,7 +19,7 @@ namespace VoxelPrototype.common.API.Blocks
         {
             try
             {
-                block.Id = Id;
+                block.ID = Id;
                 block.Gernerate();
                 Blocks.Add(Id, block);
                 Logger.Info($"New block : {Id}");
@@ -42,7 +40,7 @@ namespace VoxelPrototype.common.API.Blocks
             {
                 return 1;
             }
-            else if (Blocks.TryGetValue(ID.GetBlock().Id, out var temp))
+            else if (Blocks.TryGetValue(ID.Block.ID, out var temp))
             {
                 if (temp.Transparency)
                 {

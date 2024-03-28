@@ -1,30 +1,32 @@
-﻿using System.Collections.ObjectModel;
+﻿using VoxelPrototype.common.API.Blocks.Properties;
+using System.Collections.Generic;
 namespace VoxelPrototype.common.API.Blocks.state
 {
     public class BlockStateBuilder
     {
-        private readonly Block Parent;
-	    private readonly Dictionary<string, BlockProperty<object>> Properties;
-        public BlockStateBuilder(Block owner)
+        private readonly Block Block;
+	    private readonly Dictionary<string, IProperty> Properties = new();
+        internal BlockStateBuilder(Block Block)
         {
-            Parent = owner;
-            Properties= new();
+            this.Block = Block;
         }
-        public void Register<T>(BlockProperty<T> property)
+        public void Register<T>(Property<T> property)
         {
-            string name =property.GetName();
-            IReadOnlyCollection<T> allowedValues = property.GetAllPossibleValues();
+            string name =property.Name;
+            List<T> allowedValues = property.GetAllValues();
             if (allowedValues.Count ==0)
+            {
                 throw new Exception("Given property '" + name + "' returns empty collection for allowed values.");
+            }
             if (Properties.ContainsKey(name))
             {
                 throw new Exception("Given property is already registered in this state container builder.");
             }
-            Properties.Add(name, property as BlockProperty<object>);
+            Properties.Add(name, property);
         }
-        public BlockStateHolder build()
+        internal BlockStateHolder Build()
         {
-            return new BlockStateHolder(Parent, Properties);
+            return new BlockStateHolder(Block, Properties);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using VoxelPrototype.client;
+﻿using OpenTK.Mathematics;
+using VoxelPrototype.client;
 using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.RessourceManager.data;
 namespace VoxelPrototype.common.API.Blocks
 {
@@ -9,7 +11,7 @@ namespace VoxelPrototype.common.API.Blocks
 
         public BlockStateHolder StateHolder;
         private BlockState Default;
-        internal string Id;
+        internal string ID;
         public string Model;
         public string Collider;
         public string Data;
@@ -21,11 +23,15 @@ namespace VoxelPrototype.common.API.Blocks
         {
             BlockStateBuilder Builder = new BlockStateBuilder(this);
             RegisterProperties(Builder);
-            StateHolder = Builder.build();
+            StateHolder = Builder.Build();
             Default = StateHolder.GetBaseState();
         }
         public virtual void RegisterProperties(BlockStateBuilder Builder)
         {
+        }
+        public virtual void OnInteract(Vector3i Pos,BlockState State)
+        {
+
         }
         public BlockState GetDefaultState()
         {
@@ -58,18 +64,32 @@ namespace VoxelPrototype.common.API.Blocks
                 return Array.Empty<float>();
             }
         }
-        internal float[] GetTextureCoordinates(int Face)
+        internal float[] GetTextureCoordinates(int Face,BlockState State)
         {
             try
             {
-                BlockData Data = ClientRessourcePackManager.GetRessourcePackManager().GetBlockData(this.Data);
-                if (Data.Textures.All != null)
+                BlockStateData StateData = ClientRessourcePackManager.GetRessourcePackManager().GetBlockStateData(this.Data);
+                BlockData Data;
+                if(StateHolder.GetStates().Count == 1)
                 {
-                    return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord(Data.Textures.All);
+                    Data = StateData.variants[""];
+                }else
+                {
+                    if(StateData.variants.ContainsKey(State.ToString()))
+                    {
+                        Data = StateData.variants[State.ToString()];
+                    }else
+                    {
+                        Data = StateData.variants[""];
+                    }
+                }
+                if (Data.textures.all != null)
+                {
+                    return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord(Data.textures.all);
                 }
                 else
                 {
-                    return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord(Data.Textures.Textures[Face]);
+                    return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord(Data.textures.textures[Face]);
                 }
             }
             catch (Exception e) 

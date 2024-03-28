@@ -1,23 +1,25 @@
 ﻿using LiteNetLib.Utils;
 using OpenTK.Mathematics;
+using VBF;
+using VoxelPrototype.common.API.Blocks.State;
 namespace VoxelPrototype.common.Network.packets
 {
     internal struct OneBlockChangeDemand : INetSerializable
     {
         public Vector2i ChunkPos;
         public Vector3i BlockPos;
-        public string BlockID;
+        public BlockState State;
         public void Serialize(NetDataWriter writer)
         {
             writer.Put(ChunkPos);
             writer.Put(BlockPos);
-            writer.Put(BlockID);
+            writer.Put( VBFSerializer.Serialize( State.Serialize()));
         }
         public void Deserialize(NetDataReader reader)
         {
             ChunkPos = reader.GetVector2i();
             BlockPos = reader.GetVector3i();
-            BlockID = reader.GetString();
+            State =  new BlockState().Deserialize( (VBFCompound)VBFSerializer.Deserialize(reader.GetRemainingBytes()));
         }
     }
 }

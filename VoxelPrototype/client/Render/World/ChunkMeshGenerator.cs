@@ -2,7 +2,7 @@
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Game.World;
 namespace VoxelPrototype.client.Render.World
 {
@@ -37,13 +37,13 @@ namespace VoxelPrototype.client.Render.World
             GL.BindVertexArray(VAO);
             GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
             GL.BufferData(BufferTarget.ArrayBuffer, Vertices.Length * sizeof(float), Vertices, BufferUsageHint.StaticDraw);
-            var vertexLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@Shaders/Chunk").GetAttribLocation("Vertex");
+            var vertexLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@chunk").GetAttribLocation("Vertex");
             GL.EnableVertexAttribArray(vertexLocation);
             GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 0);
-            var texCoordLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@Shaders/Chunk").GetAttribLocation("Texture");
+            var texCoordLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@chunk").GetAttribLocation("Texture");
             GL.EnableVertexAttribArray(texCoordLocation);
             GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 6 * sizeof(float), 3 * sizeof(float));
-            var AOLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@Shaders/Chunk").GetAttribLocation("AO");
+            var AOLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@chunk").GetAttribLocation("AO");
             GL.EnableVertexAttribArray(AOLocation);
             GL.VertexAttribPointer(AOLocation, 1, VertexAttribPointerType.Float, false, 6 * sizeof(float), 5 * sizeof(float));
             //EBO
@@ -69,13 +69,13 @@ namespace VoxelPrototype.client.Render.World
                         var block = Chunk.GetBlock(new Vector3i(x, y, z));
                         if (block !=  BlockRegister.Air)
                         {
-                            if (BlockRegister.Blocks[block.GetBlock().Id].RenderType == BlockRenderType.Cube)
+                            if (BlockRegister.Blocks[block.Block.ID].RenderType == BlockRenderType.Cube)
                             {
                                 GenerateDirection(new Vector3i(x, y, z));
                             }
                             else
                             {
-                                var blockMesh = ClientRessourcePackManager.GetRessourcePackManager().GetBlockMesh(BlockRegister.Blocks[block.GetBlock().Id].Model);
+                                var blockMesh = ClientRessourcePackManager.GetRessourcePackManager().GetBlockMesh(BlockRegister.Blocks[block.Block.ID].Model);
                                 var meshLength = blockMesh.GetMesh().Length;
                                 for (int i = 0; i < meshLength; i++)
                                 {
@@ -94,7 +94,7 @@ namespace VoxelPrototype.client.Render.World
             {
                 return true;
             }
-            return BlockRegister.Blocks[ID.GetBlock().Id].Transparency;
+            return BlockRegister.Blocks[ID.Block.ID].Transparency;
         }
 
         private bool IsMeshBlockTransparent(Vector2i ChunkPos, Vector3i BlockPos)
@@ -105,7 +105,7 @@ namespace VoxelPrototype.client.Render.World
                 return true;
             }else
             {
-                return Ch.GetBlock(BlockPos).GetBlock().Transparency;
+                return Ch.GetBlock(BlockPos).Block.Transparency;
             }
         }
         private void GenerateDirection(Vector3i BlockPos)
@@ -183,9 +183,9 @@ namespace VoxelPrototype.client.Render.World
         }
         private void AddMeshFace(BlockState Block,Vector3i BlockPos, int BF, bool ao)
         {
-            float[] Vert = Block.GetBlock().GetMesh(BF);
-            float[] Uv = Block.GetBlock().GetMeshTextureCoordinates(BF);
-            float[] Tex = Block.GetBlock().GetTextureCoordinates(BF);
+            float[] Vert = Block.Block.GetMesh(BF);
+            float[] Uv = Block.Block.GetMeshTextureCoordinates(BF);
+            float[] Tex = Block.Block.GetTextureCoordinates(BF,Block);
             int[] AO = BF switch
             {
                 0 => CalculateAO(Ch, BlockPos + new Vector3i(0,1,0),1),

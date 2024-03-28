@@ -32,7 +32,7 @@ namespace VoxelPrototype.client.Render.World
         internal void Render()
         {
             RenderedChunksCount = 0;
-            var Shader = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@Shaders/Chunk");
+            var Shader = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@chunk");
             Shader.SetMatrix4("view", Client.TheClient.World.GetLocalPlayerCamera().GetViewMatrix());
             Shader.SetMatrix4("projection", Client.TheClient.World.GetLocalPlayerCamera().GetProjectionMatrix());
             ClientRessourcePackManager.GetRessourcePackManager().GetAtlas().Use(TextureUnit.Texture0);

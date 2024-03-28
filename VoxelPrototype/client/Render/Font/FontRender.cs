@@ -5,7 +5,7 @@ namespace VoxelPrototype.client.Render.Font
     {
         internal static void Init()
         {
-            
+            //var test = FT_
         }
     }
 }

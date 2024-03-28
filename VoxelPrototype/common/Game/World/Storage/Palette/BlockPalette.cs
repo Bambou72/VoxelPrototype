@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 using System.Runtime.Serialization.Formatters.Binary;
 using VBF;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Utils;
 namespace VoxelPrototype.common.Game.World.Storage.Palette
 {
@@ -94,14 +94,24 @@ namespace VoxelPrototype.common.Game.World.Storage.Palette
                 VBFCompound PaletteElement = new VBFCompound();
                 if (this.Palette[i] != null)
                 {
-                    PaletteElement.AddString("ID", this.Palette[i].GetBlock().Id);
+                    PaletteElement.Add("Blockstate", this.Palette[i].Serialize());
+
+
+                    /*
+                     *                 PaletteElement.Add(", this.Palette[i].GetBlock().Id);
+
+                    if (this.Palette[i] != null)
+                    {
+                        PaletteElement.AddString("ID", this.Palette[i].GetBlock().Id);
+                    }
+                    else
+                    {
+                        PaletteElement.AddString("ID", "null");
+                    }*/
+                    PaletteElement.AddInt("RefCount", RefsCount[i]);
+                    Palette.Tags.Add(PaletteElement);
+
                 }
-                else
-                {
-                    PaletteElement.AddString("ID", "null");
-                }
-                PaletteElement.AddInt("RefCount", RefsCount[i]);
-                Palette.Tags.Add(PaletteElement);
             }
             BlockPalette.Add("Palette", Palette);
             return BlockPalette;
@@ -119,8 +129,8 @@ namespace VoxelPrototype.common.Game.World.Storage.Palette
                 for (int i = 0; i < paletteList.Tags.Count; i++)
                 {
                     VBFCompound PaletteElement = (VBFCompound)paletteList.Tags[i];
+                    /*
                     string ID = PaletteElement.GetString("ID").Value;
-                    BinaryFormatter formatter = new BinaryFormatter();
                     if (ID == "null")
                     {
                         storage.Palette[i] = null;
@@ -128,7 +138,8 @@ namespace VoxelPrototype.common.Game.World.Storage.Palette
                     else
                     {
                         storage.Palette[i] = BlockRegister.GetBlock(ID).GetDefaultState();
-                    }
+                    }*/
+                    storage.Palette[i] = new BlockState().Deserialize(PaletteElement.Get<VBFCompound>("Blockstate"));
                     storage.RefsCount[i] = PaletteElement.GetInt("RefCount").Value;
                 }
                 return storage;

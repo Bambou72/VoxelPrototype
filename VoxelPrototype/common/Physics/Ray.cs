@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
 using VoxelPrototype.client;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 namespace VoxelPrototype.common.Physics
 {
     public class Ray
@@ -46,7 +46,7 @@ namespace VoxelPrototype.common.Physics
                         {
                             if (State != BlockRegister.Air)
                             {
-                                foreach (Collider collider in ClientRessourcePackManager.GetRessourcePackManager().GetBlockCollider(State.GetBlock().Collider))
+                                foreach (Collider collider in ClientRessourcePackManager.GetRessourcePackManager().GetBlockCollider(State.Block.Collider))
                                 {
                                     (double? entry_time, Vector3i normal) = RayVSAABB(collider.Move(new Vector3i(i, j, k)));
                                     if (entry_time == null)

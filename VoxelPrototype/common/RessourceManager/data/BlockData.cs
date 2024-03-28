@@ -1,19 +1,22 @@
 ﻿namespace VoxelPrototype.common.RessourceManager.data
 {
+    public class BlockStateData
+    {
+        public Dictionary<string,BlockData> variants  =new();
+    }
     public struct BlockData
     {
-        public string Name { get; set; }
-        public TextureData Textures { get; set; }
+        public TextureData textures { get; set; }
     }
     public struct TextureData
     {
-        public string All { get; set; }
-        public string Top { get; set; }
-        public string Bottom { get; set; }
-        public string Left { get; set; }
-        public string Right { get; set; }
-        public string Front { get; set; }
-        public string Back { get; set; }
-        public string[] Textures { get; set; }
+        public string all { get; set; }
+        public string top { get; set; }
+        public string bottom { get; set; }
+        public string left { get; set; }
+        public string right { get; set; }
+        public string front { get; set; }
+        public string back { get; set; }
+        public string[] textures { get; set; }
     }
 }

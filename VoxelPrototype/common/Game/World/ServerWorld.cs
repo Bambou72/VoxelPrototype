@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.API.WorldGenerator;
 using VoxelPrototype.common.Game.Entities.Player.PlayerManager;
 using VoxelPrototype.common.Game.World.ChunkManagers;
@@ -77,7 +77,7 @@ namespace VoxelPrototype.common.Game.World
         }
         public override bool IsTransparent(int x, int y, int z)
         {
-            return ChunkManager.GetBlock(x, y, z).GetBlock().Transparency;
+            return ChunkManager.GetBlock(x, y, z).Block.Transparency;
         }
         public override bool IsChunkExist(int x, int z)
         {
@@ -86,6 +86,10 @@ namespace VoxelPrototype.common.Game.World
         public override Chunk GetChunk(int x, int z)
         {
             return ChunkManager.GetChunk(new Vector2i(x, z));
+        }
+        public override void SetBlock(int x, int y, int z, BlockState State)
+        {
+            ChunkManager.SetBlock(x,y,z,State);
         }
     }
 }

@@ -6,7 +6,7 @@
 using OpenTK.Mathematics;
 using VBF;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.server;
 namespace VoxelPrototype.common.Game.World
 {

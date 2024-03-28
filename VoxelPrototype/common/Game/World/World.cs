@@ -1,4 +1,5 @@
-﻿using VoxelPrototype.common.API.Blocks.state;
+﻿using VoxelPrototype.common.API.Blocks.State;
+
 namespace VoxelPrototype.common.Game.World
 {
     public class World : IBlockAcessor, IChunkAccessor, ITickable
@@ -42,5 +43,9 @@ namespace VoxelPrototype.common.Game.World
             throw new NotImplementedException();
         }
 
+        public virtual void SetBlock(int x, int y, int z, BlockState State)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

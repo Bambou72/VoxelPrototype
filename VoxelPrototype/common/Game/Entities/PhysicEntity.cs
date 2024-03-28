@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
 using VoxelPrototype.client;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Physics;
 using VoxelPrototype.common.RessourceManager.data;
 namespace VoxelPrototype.common.Game.Entities
@@ -30,7 +30,7 @@ namespace VoxelPrototype.common.Game.Entities
                 }
                 else if (Grounded)
                 {
-                    return new Vector3(GroundedBlock.GetBlock().Friction, GroundedBlock.GetBlock().Friction, GroundedBlock.GetBlock().Friction);
+                    return new Vector3(GroundedBlock.Block.Friction, GroundedBlock.Block.Friction, GroundedBlock.Block.Friction);
                 }
                 else if (Velocity.Y > 0)
                 {
@@ -96,7 +96,7 @@ namespace VoxelPrototype.common.Game.Entities
                             var State = Client.TheClient.World.GetBlock(i, j, k);
                             if (State != BlockRegister.Air)
                             {
-                                foreach (Collider collider in ClientRessourcePackManager.GetRessourcePackManager().GetBlockCollider(State.GetBlock().Collider))
+                                foreach (Collider collider in ClientRessourcePackManager.GetRessourcePackManager().GetBlockCollider(State.Block.Collider))
                                 {
                                     (double? entry_time, Vector3d normal) = Coll.Collide(collider.Move(new Vector3i(i, j, k)), AVel);
                                     if (entry_time == null)
@@ -178,7 +178,7 @@ namespace VoxelPrototype.common.Game.Entities
                             var State = server.Server.TheServer.World.GetBlock(i, j, k);
                             if (State != BlockRegister.Air)
                             {
-                                foreach (Collider collider in server.Server.TheServer.RessourcePackManager.GetBlockCollider(BlockRegister.Blocks[State.GetBlock().Id].Collider))
+                                foreach (Collider collider in server.Server.TheServer.RessourcePackManager.GetBlockCollider(BlockRegister.Blocks[State.Block.ID].Collider))
                                 {
                                     (double? entry_time, Vector3d normal) = Coll.Collide(collider.Move(new Vector3i(i, j, k)), AVel);
                                     if (entry_time == null)

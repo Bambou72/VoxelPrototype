@@ -1,7 +1,7 @@
 ﻿using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Render.Entities;
 using VoxelPrototype.client.Render.World;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Game.Entities.Player.PlayerManager;
 using VoxelPrototype.common.Game.World.ChunkManagers;
 
@@ -9,7 +9,7 @@ namespace VoxelPrototype.common.Game.World
 {
     public class ClientWorld : World, IRenderSystem
     {
-        internal ClientChunkManager ChunkManager;
+        public ClientChunkManager ChunkManager;
         internal ClientPlayerFactory PlayerFactory;
         internal WorldRenderer WorldRenderer;
         internal PlayersRenderer PlayerRenderer;

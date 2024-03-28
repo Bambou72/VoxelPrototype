@@ -4,7 +4,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using VoxelPrototype.client;
 using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Game.InventorySystem;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.packets;
@@ -54,7 +54,7 @@ namespace VoxelPrototype.common.Game.Entities.Player
                     _Camera = new Camera((Vector3)_Position, 16 / 9);
                     ViewRay = new Ray(Vector3d.Zero, Vector3.Zero, Reach);
                 }
-                _Model = ClientRessourcePackManager.GetRessourcePackManager().GetEntityMesh("Voxel@Meshs/Entities/Player");
+                _Model = ClientRessourcePackManager.GetRessourcePackManager().GetEntityMesh("Voxel@entity/player");
             }
             ClientID = _ClientID;
         }
@@ -69,7 +69,7 @@ namespace VoxelPrototype.common.Game.Entities.Player
             }
             else if (InputSystem.MousePressed(MouseButton.Right) && InputSystem.Grab)
             {
-                Client.TheClient.World.ChunkManager.ChangeChunk(BlockBefore, BlockRegister.Air);
+                State.Block.OnInteract(CurrentBlock, State);
             }
             /*
             else if (InputSystem.MousePressed(MouseButton.Middle))

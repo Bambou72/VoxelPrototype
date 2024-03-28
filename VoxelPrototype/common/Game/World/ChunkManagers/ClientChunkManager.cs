@@ -7,13 +7,13 @@ using LiteNetLib;
 using OpenTK.Mathematics;
 using VoxelPrototype.client;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Utils;
 namespace VoxelPrototype.common.Game.World.ChunkManagers
 {
-    internal partial class ClientChunkManager
+    public partial class ClientChunkManager
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         internal Dictionary<Vector2i, Chunk> Clist = new();
@@ -62,7 +62,7 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
             Vector3i bpos = data.BlockPos;
             if (Clist.TryGetValue(cpos, out Chunk ch))
             {
-                ch.SetBlock(bpos, BlockRegister.GetBlock(data.BlockID).GetDefaultState());
+                ch.SetBlock(bpos, data.State);
                 ch.State |= ChunkSate.Changed;
                 Client.TheClient.World.WorldRenderer.AddChunkToBeMesh(ch, 0);
             }
@@ -142,12 +142,12 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
             }
             return null;
         }
-        internal void ChangeChunk(Vector3i blockp, BlockState State)
+        public void ChangeChunk(Vector3i blockp, BlockState State)
         {
             (Vector2i cpos, Vector3i bpos) = Coord.GetVoxelCoord(blockp.X, blockp.Y, blockp.Z);
             OneBlockChangeDemand packet = new OneBlockChangeDemand
             {
-                BlockID = State.GetBlock().Id,
+                State = State,
                 ChunkPos = cpos,
                 BlockPos = bpos,
             };

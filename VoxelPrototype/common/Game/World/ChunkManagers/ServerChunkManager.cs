@@ -7,7 +7,7 @@ using K4os.Compression.LZ4;
 using LiteNetLib;
 using OpenTK.Mathematics;
 using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.state;
+using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Game.Entities.Player;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Network.server;
@@ -280,6 +280,15 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
                 return BlockRegister.Air;
             }
         }
+        internal void SetBlock(int x, int y, int z,BlockState State)
+        {
+            (Vector2i cpos, Vector3i bpos) = Coord.GetVoxelCoord(x, y, z);
+            Chunk ch = GetChunk(cpos);
+            if (ch != null)
+            {
+                ch.SetBlock(new Vector3i(bpos.X, bpos.Y, bpos.Z),State);
+            }
+        }
         internal void ChangeBlock(Vector2i cp, Vector3i bp, BlockState State)
         {
             Chunk tempChunk = GetChunk(cp);
@@ -292,7 +301,7 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
             {
                 ChunkPos = cp,
                 BlockPos = bp,
-                BlockID = State.GetBlock().Id
+                State = State
             };
             foreach (ushort ClientID in tempChunk.PlayerInChunk)
             {
@@ -304,12 +313,12 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
             Chunk tempChunk = GetChunk(data.ChunkPos);
             if (tempChunk != null)
             {
-                tempChunk.SetBlock(data.BlockPos, BlockRegister.GetBlock(data.BlockID).GetDefaultState());
+                tempChunk.SetBlock(data.BlockPos,data.State);
                 OneBlockChange packet = new OneBlockChange
                 {
                     ChunkPos = data.ChunkPos,
                     BlockPos = data.BlockPos,
-                    BlockID = data.BlockID
+                    State = data.State
                 };
                 foreach (ushort ClientID in tempChunk.PlayerInChunk)
                 {
@@ -319,7 +328,7 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
             else
             {
                 tempChunk = CreateChunk(data.ChunkPos);
-                tempChunk.SetBlock(data.BlockPos, BlockRegister.GetBlock(data.BlockID).GetDefaultState());
+                tempChunk.SetBlock(data.BlockPos, data.State);
             }
         }
     }

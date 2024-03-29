@@ -1,0 +1,1163 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.client.GLFWWindow
+  commentId: T:VoxelPrototype.client.GLFWWindow
+  id: GLFWWindow
+  parent: VoxelPrototype.client
+  children:
+  - VoxelPrototype.client.GLFWWindow.#ctor(System.String,System.Int32,System.Int32)
+  - VoxelPrototype.client.GLFWWindow.CursorState
+  - VoxelPrototype.client.GLFWWindow.Destroy
+  - VoxelPrototype.client.GLFWWindow.ErrorCallback(OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode,System.String)
+  - VoxelPrototype.client.GLFWWindow.GetKeyboardState
+  - VoxelPrototype.client.GLFWWindow.GetMouseState
+  - VoxelPrototype.client.GLFWWindow.GetWindowSize
+  - VoxelPrototype.client.GLFWWindow.NewInputFrame
+  - VoxelPrototype.client.GLFWWindow.ProcessWindowEvents
+  - VoxelPrototype.client.GLFWWindow.RegisterResizeCallback(System.Action{System.Int32,System.Int32})
+  - VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback(System.Action{System.String})
+  - VoxelPrototype.client.GLFWWindow.ShouldClose
+  - VoxelPrototype.client.GLFWWindow.SwapBuffer
+  - VoxelPrototype.client.GLFWWindow.TimerFrequency
+  - VoxelPrototype.client.GLFWWindow.WindowState
+  langs:
+  - csharp
+  - vb
+  name: GLFWWindow
+  nameWithType: GLFWWindow
+  fullName: VoxelPrototype.client.GLFWWindow
+  type: Class
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GLFWWindow
+    path: VoxelPrototype/client/Window.cs
+    startLine: 9
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public class GLFWWindow
+    content.vb: Public Class GLFWWindow
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VoxelPrototype.client.GLFWWindow.WindowState
+  commentId: P:VoxelPrototype.client.GLFWWindow.WindowState
+  id: WindowState
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: WindowState
+  nameWithType: GLFWWindow.WindowState
+  fullName: VoxelPrototype.client.GLFWWindow.WindowState
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: WindowState
+    path: VoxelPrototype/client/Window.cs
+    startLine: 22
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets or sets the <xref href="VoxelPrototype.client.GLFWWindow.WindowState" data-throw-if-not-resolved="false"></xref> for this window.
+  example: []
+  syntax:
+    content: public WindowState WindowState { get; set; }
+    parameters: []
+    return:
+      type: OpenTK.Windowing.Common.WindowState
+    content.vb: Public Property WindowState As WindowState
+  overload: VoxelPrototype.client.GLFWWindow.WindowState*
+- uid: VoxelPrototype.client.GLFWWindow.CursorState
+  commentId: P:VoxelPrototype.client.GLFWWindow.CursorState
+  id: CursorState
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: CursorState
+  nameWithType: GLFWWindow.CursorState
+  fullName: VoxelPrototype.client.GLFWWindow.CursorState
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: CursorState
+    path: VoxelPrototype/client/Window.cs
+    startLine: 46
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public CursorState CursorState { get; set; }
+    parameters: []
+    return:
+      type: OpenTK.Windowing.Common.CursorState
+    content.vb: Public Property CursorState As CursorState
+  overload: VoxelPrototype.client.GLFWWindow.CursorState*
+- uid: VoxelPrototype.client.GLFWWindow.TimerFrequency
+  commentId: P:VoxelPrototype.client.GLFWWindow.TimerFrequency
+  id: TimerFrequency
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: TimerFrequency
+  nameWithType: GLFWWindow.TimerFrequency
+  fullName: VoxelPrototype.client.GLFWWindow.TimerFrequency
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: TimerFrequency
+    path: VoxelPrototype/client/Window.cs
+    startLine: 85
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public long TimerFrequency { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly Property TimerFrequency As Long
+  overload: VoxelPrototype.client.GLFWWindow.TimerFrequency*
+- uid: VoxelPrototype.client.GLFWWindow.#ctor(System.String,System.Int32,System.Int32)
+  commentId: M:VoxelPrototype.client.GLFWWindow.#ctor(System.String,System.Int32,System.Int32)
+  id: '#ctor(System.String,System.Int32,System.Int32)'
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: GLFWWindow(string, int, int)
+  nameWithType: GLFWWindow.GLFWWindow(string, int, int)
+  fullName: VoxelPrototype.client.GLFWWindow.GLFWWindow(string, int, int)
+  type: Constructor
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: .ctor
+    path: VoxelPrototype/client/Window.cs
+    startLine: 86
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public GLFWWindow(string Name, int Width, int Height)
+    parameters:
+    - id: Name
+      type: System.String
+    - id: Width
+      type: System.Int32
+    - id: Height
+      type: System.Int32
+    content.vb: Public Sub New(Name As String, Width As Integer, Height As Integer)
+  overload: VoxelPrototype.client.GLFWWindow.#ctor*
+  nameWithType.vb: GLFWWindow.New(String, Integer, Integer)
+  fullName.vb: VoxelPrototype.client.GLFWWindow.New(String, Integer, Integer)
+  name.vb: New(String, Integer, Integer)
+- uid: VoxelPrototype.client.GLFWWindow.SwapBuffer
+  commentId: M:VoxelPrototype.client.GLFWWindow.SwapBuffer
+  id: SwapBuffer
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: SwapBuffer()
+  nameWithType: GLFWWindow.SwapBuffer()
+  fullName: VoxelPrototype.client.GLFWWindow.SwapBuffer()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: SwapBuffer
+    path: VoxelPrototype/client/Window.cs
+    startLine: 132
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public void SwapBuffer()
+    content.vb: Public Sub SwapBuffer()
+  overload: VoxelPrototype.client.GLFWWindow.SwapBuffer*
+- uid: VoxelPrototype.client.GLFWWindow.NewInputFrame
+  commentId: M:VoxelPrototype.client.GLFWWindow.NewInputFrame
+  id: NewInputFrame
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: NewInputFrame()
+  nameWithType: GLFWWindow.NewInputFrame()
+  fullName: VoxelPrototype.client.GLFWWindow.NewInputFrame()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: NewInputFrame
+    path: VoxelPrototype/client/Window.cs
+    startLine: 136
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public void NewInputFrame()
+    content.vb: Public Sub NewInputFrame()
+  overload: VoxelPrototype.client.GLFWWindow.NewInputFrame*
+- uid: VoxelPrototype.client.GLFWWindow.ProcessWindowEvents
+  commentId: M:VoxelPrototype.client.GLFWWindow.ProcessWindowEvents
+  id: ProcessWindowEvents
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: ProcessWindowEvents()
+  nameWithType: GLFWWindow.ProcessWindowEvents()
+  fullName: VoxelPrototype.client.GLFWWindow.ProcessWindowEvents()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ProcessWindowEvents
+    path: VoxelPrototype/client/Window.cs
+    startLine: 143
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public void ProcessWindowEvents()
+    content.vb: Public Sub ProcessWindowEvents()
+  overload: VoxelPrototype.client.GLFWWindow.ProcessWindowEvents*
+- uid: VoxelPrototype.client.GLFWWindow.Destroy
+  commentId: M:VoxelPrototype.client.GLFWWindow.Destroy
+  id: Destroy
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: Destroy()
+  nameWithType: GLFWWindow.Destroy()
+  fullName: VoxelPrototype.client.GLFWWindow.Destroy()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Destroy
+    path: VoxelPrototype/client/Window.cs
+    startLine: 147
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public void Destroy()
+    content.vb: Public Sub Destroy()
+  overload: VoxelPrototype.client.GLFWWindow.Destroy*
+- uid: VoxelPrototype.client.GLFWWindow.RegisterResizeCallback(System.Action{System.Int32,System.Int32})
+  commentId: M:VoxelPrototype.client.GLFWWindow.RegisterResizeCallback(System.Action{System.Int32,System.Int32})
+  id: RegisterResizeCallback(System.Action{System.Int32,System.Int32})
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: RegisterResizeCallback(Action<int, int>)
+  nameWithType: GLFWWindow.RegisterResizeCallback(Action<int, int>)
+  fullName: VoxelPrototype.client.GLFWWindow.RegisterResizeCallback(System.Action<int, int>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: RegisterResizeCallback
+    path: VoxelPrototype/client/Window.cs
+    startLine: 152
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public void RegisterResizeCallback(Action<int, int> Callback)
+    parameters:
+    - id: Callback
+      type: System.Action{System.Int32,System.Int32}
+    content.vb: Public Sub RegisterResizeCallback(Callback As Action(Of Integer, Integer))
+  overload: VoxelPrototype.client.GLFWWindow.RegisterResizeCallback*
+  nameWithType.vb: GLFWWindow.RegisterResizeCallback(Action(Of Integer, Integer))
+  fullName.vb: VoxelPrototype.client.GLFWWindow.RegisterResizeCallback(System.Action(Of Integer, Integer))
+  name.vb: RegisterResizeCallback(Action(Of Integer, Integer))
+- uid: VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback(System.Action{System.String})
+  commentId: M:VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback(System.Action{System.String})
+  id: RegisterTextInputCallback(System.Action{System.String})
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: RegisterTextInputCallback(Action<string>)
+  nameWithType: GLFWWindow.RegisterTextInputCallback(Action<string>)
+  fullName: VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback(System.Action<string>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: RegisterTextInputCallback
+    path: VoxelPrototype/client/Window.cs
+    startLine: 156
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public void RegisterTextInputCallback(Action<string> Callback)
+    parameters:
+    - id: Callback
+      type: System.Action{System.String}
+    content.vb: Public Sub RegisterTextInputCallback(Callback As Action(Of String))
+  overload: VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback*
+  nameWithType.vb: GLFWWindow.RegisterTextInputCallback(Action(Of String))
+  fullName.vb: VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback(System.Action(Of String))
+  name.vb: RegisterTextInputCallback(Action(Of String))
+- uid: VoxelPrototype.client.GLFWWindow.ShouldClose
+  commentId: M:VoxelPrototype.client.GLFWWindow.ShouldClose
+  id: ShouldClose
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: ShouldClose()
+  nameWithType: GLFWWindow.ShouldClose()
+  fullName: VoxelPrototype.client.GLFWWindow.ShouldClose()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ShouldClose
+    path: VoxelPrototype/client/Window.cs
+    startLine: 160
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public bool ShouldClose()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldClose() As Boolean
+  overload: VoxelPrototype.client.GLFWWindow.ShouldClose*
+- uid: VoxelPrototype.client.GLFWWindow.GetWindowSize
+  commentId: M:VoxelPrototype.client.GLFWWindow.GetWindowSize
+  id: GetWindowSize
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: GetWindowSize()
+  nameWithType: GLFWWindow.GetWindowSize()
+  fullName: VoxelPrototype.client.GLFWWindow.GetWindowSize()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetWindowSize
+    path: VoxelPrototype/client/Window.cs
+    startLine: 164
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public Vector2i GetWindowSize()
+    return:
+      type: OpenTK.Mathematics.Vector2i
+    content.vb: Public Function GetWindowSize() As Vector2i
+  overload: VoxelPrototype.client.GLFWWindow.GetWindowSize*
+- uid: VoxelPrototype.client.GLFWWindow.GetKeyboardState
+  commentId: M:VoxelPrototype.client.GLFWWindow.GetKeyboardState
+  id: GetKeyboardState
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: GetKeyboardState()
+  nameWithType: GLFWWindow.GetKeyboardState()
+  fullName: VoxelPrototype.client.GLFWWindow.GetKeyboardState()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetKeyboardState
+    path: VoxelPrototype/client/Window.cs
+    startLine: 169
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public KeyboardState GetKeyboardState()
+    return:
+      type: VoxelPrototype.client.KeyboardState
+    content.vb: Public Function GetKeyboardState() As KeyboardState
+  overload: VoxelPrototype.client.GLFWWindow.GetKeyboardState*
+- uid: VoxelPrototype.client.GLFWWindow.GetMouseState
+  commentId: M:VoxelPrototype.client.GLFWWindow.GetMouseState
+  id: GetMouseState
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: GetMouseState()
+  nameWithType: GLFWWindow.GetMouseState()
+  fullName: VoxelPrototype.client.GLFWWindow.GetMouseState()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetMouseState
+    path: VoxelPrototype/client/Window.cs
+    startLine: 173
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public MouseState GetMouseState()
+    return:
+      type: VoxelPrototype.client.MouseState
+    content.vb: Public Function GetMouseState() As MouseState
+  overload: VoxelPrototype.client.GLFWWindow.GetMouseState*
+- uid: VoxelPrototype.client.GLFWWindow.ErrorCallback(OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode,System.String)
+  commentId: M:VoxelPrototype.client.GLFWWindow.ErrorCallback(OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode,System.String)
+  id: ErrorCallback(OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode,System.String)
+  parent: VoxelPrototype.client.GLFWWindow
+  langs:
+  - csharp
+  - vb
+  name: ErrorCallback(ErrorCode, string)
+  nameWithType: GLFWWindow.ErrorCallback(ErrorCode, string)
+  fullName: VoxelPrototype.client.GLFWWindow.ErrorCallback(OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode, string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ErrorCallback
+    path: VoxelPrototype/client/Window.cs
+    startLine: 177
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  syntax:
+    content: public void ErrorCallback(ErrorCode Error, string Decsription)
+    parameters:
+    - id: Error
+      type: OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode
+    - id: Decsription
+      type: System.String
+    content.vb: Public Sub ErrorCallback([Error] As ErrorCode, Decsription As String)
+  overload: VoxelPrototype.client.GLFWWindow.ErrorCallback*
+  nameWithType.vb: GLFWWindow.ErrorCallback(ErrorCode, String)
+  fullName.vb: VoxelPrototype.client.GLFWWindow.ErrorCallback(OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode, String)
+  name.vb: ErrorCallback(ErrorCode, String)
+references:
+- uid: VoxelPrototype.client
+  commentId: N:VoxelPrototype.client
+  href: VoxelPrototype.html
+  name: VoxelPrototype.client
+  nameWithType: VoxelPrototype.client
+  fullName: VoxelPrototype.client
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VoxelPrototype.client.GLFWWindow.WindowState
+  commentId: P:VoxelPrototype.client.GLFWWindow.WindowState
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_WindowState
+  name: WindowState
+  nameWithType: GLFWWindow.WindowState
+  fullName: VoxelPrototype.client.GLFWWindow.WindowState
+- uid: VoxelPrototype.client.GLFWWindow.WindowState*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.WindowState
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_WindowState
+  name: WindowState
+  nameWithType: GLFWWindow.WindowState
+  fullName: VoxelPrototype.client.GLFWWindow.WindowState
+- uid: OpenTK.Windowing.Common.WindowState
+  commentId: T:OpenTK.Windowing.Common.WindowState
+  parent: OpenTK.Windowing.Common
+  isExternal: true
+  name: WindowState
+  nameWithType: WindowState
+  fullName: OpenTK.Windowing.Common.WindowState
+- uid: OpenTK.Windowing.Common
+  commentId: N:OpenTK.Windowing.Common
+  isExternal: true
+  name: OpenTK.Windowing.Common
+  nameWithType: OpenTK.Windowing.Common
+  fullName: OpenTK.Windowing.Common
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing
+    name: Windowing
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing.Common
+    name: Common
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing
+    name: Windowing
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing.Common
+    name: Common
+    isExternal: true
+- uid: VoxelPrototype.client.GLFWWindow.CursorState*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.CursorState
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_CursorState
+  name: CursorState
+  nameWithType: GLFWWindow.CursorState
+  fullName: VoxelPrototype.client.GLFWWindow.CursorState
+- uid: OpenTK.Windowing.Common.CursorState
+  commentId: T:OpenTK.Windowing.Common.CursorState
+  parent: OpenTK.Windowing.Common
+  isExternal: true
+  name: CursorState
+  nameWithType: CursorState
+  fullName: OpenTK.Windowing.Common.CursorState
+- uid: VoxelPrototype.client.GLFWWindow.TimerFrequency*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.TimerFrequency
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_TimerFrequency
+  name: TimerFrequency
+  nameWithType: GLFWWindow.TimerFrequency
+  fullName: VoxelPrototype.client.GLFWWindow.TimerFrequency
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: VoxelPrototype.client.GLFWWindow.#ctor*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.#ctor
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow__ctor_System_String_System_Int32_System_Int32_
+  name: GLFWWindow
+  nameWithType: GLFWWindow.GLFWWindow
+  fullName: VoxelPrototype.client.GLFWWindow.GLFWWindow
+  nameWithType.vb: GLFWWindow.New
+  fullName.vb: VoxelPrototype.client.GLFWWindow.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: VoxelPrototype.client.GLFWWindow.SwapBuffer*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.SwapBuffer
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_SwapBuffer
+  name: SwapBuffer
+  nameWithType: GLFWWindow.SwapBuffer
+  fullName: VoxelPrototype.client.GLFWWindow.SwapBuffer
+- uid: VoxelPrototype.client.GLFWWindow.NewInputFrame*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.NewInputFrame
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_NewInputFrame
+  name: NewInputFrame
+  nameWithType: GLFWWindow.NewInputFrame
+  fullName: VoxelPrototype.client.GLFWWindow.NewInputFrame
+- uid: VoxelPrototype.client.GLFWWindow.ProcessWindowEvents*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.ProcessWindowEvents
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_ProcessWindowEvents
+  name: ProcessWindowEvents
+  nameWithType: GLFWWindow.ProcessWindowEvents
+  fullName: VoxelPrototype.client.GLFWWindow.ProcessWindowEvents
+- uid: VoxelPrototype.client.GLFWWindow.Destroy*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.Destroy
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_Destroy
+  name: Destroy
+  nameWithType: GLFWWindow.Destroy
+  fullName: VoxelPrototype.client.GLFWWindow.Destroy
+- uid: VoxelPrototype.client.GLFWWindow.RegisterResizeCallback*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.RegisterResizeCallback
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_RegisterResizeCallback_System_Action_System_Int32_System_Int32__
+  name: RegisterResizeCallback
+  nameWithType: GLFWWindow.RegisterResizeCallback
+  fullName: VoxelPrototype.client.GLFWWindow.RegisterResizeCallback
+- uid: System.Action{System.Int32,System.Int32}
+  commentId: T:System.Action{System.Int32,System.Int32}
+  parent: System
+  definition: System.Action`2
+  href: https://learn.microsoft.com/dotnet/api/system.action-2
+  name: Action<int, int>
+  nameWithType: Action<int, int>
+  fullName: System.Action<int, int>
+  nameWithType.vb: Action(Of Integer, Integer)
+  fullName.vb: System.Action(Of Integer, Integer)
+  name.vb: Action(Of Integer, Integer)
+  spec.csharp:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Action`2
+  commentId: T:System.Action`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-2
+  name: Action<T1, T2>
+  nameWithType: Action<T1, T2>
+  fullName: System.Action<T1, T2>
+  nameWithType.vb: Action(Of T1, T2)
+  fullName.vb: System.Action(Of T1, T2)
+  name.vb: Action(Of T1, T2)
+  spec.csharp:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+- uid: VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_RegisterTextInputCallback_System_Action_System_String__
+  name: RegisterTextInputCallback
+  nameWithType: GLFWWindow.RegisterTextInputCallback
+  fullName: VoxelPrototype.client.GLFWWindow.RegisterTextInputCallback
+- uid: System.Action{System.String}
+  commentId: T:System.Action{System.String}
+  parent: System
+  definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<string>
+  nameWithType: Action<string>
+  fullName: System.Action<string>
+  nameWithType.vb: Action(Of String)
+  fullName.vb: System.Action(Of String)
+  name.vb: Action(Of String)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: VoxelPrototype.client.GLFWWindow.ShouldClose*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.ShouldClose
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_ShouldClose
+  name: ShouldClose
+  nameWithType: GLFWWindow.ShouldClose
+  fullName: VoxelPrototype.client.GLFWWindow.ShouldClose
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: VoxelPrototype.client.GLFWWindow.GetWindowSize*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.GetWindowSize
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_GetWindowSize
+  name: GetWindowSize
+  nameWithType: GLFWWindow.GetWindowSize
+  fullName: VoxelPrototype.client.GLFWWindow.GetWindowSize
+- uid: OpenTK.Mathematics.Vector2i
+  commentId: T:OpenTK.Mathematics.Vector2i
+  parent: OpenTK.Mathematics
+  isExternal: true
+  name: Vector2i
+  nameWithType: Vector2i
+  fullName: OpenTK.Mathematics.Vector2i
+- uid: OpenTK.Mathematics
+  commentId: N:OpenTK.Mathematics
+  isExternal: true
+  name: OpenTK.Mathematics
+  nameWithType: OpenTK.Mathematics
+  fullName: OpenTK.Mathematics
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+- uid: VoxelPrototype.client.GLFWWindow.GetKeyboardState*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.GetKeyboardState
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_GetKeyboardState
+  name: GetKeyboardState
+  nameWithType: GLFWWindow.GetKeyboardState
+  fullName: VoxelPrototype.client.GLFWWindow.GetKeyboardState
+- uid: VoxelPrototype.client.KeyboardState
+  commentId: T:VoxelPrototype.client.KeyboardState
+  parent: VoxelPrototype.client
+  href: VoxelPrototype.client.KeyboardState.html
+  name: KeyboardState
+  nameWithType: KeyboardState
+  fullName: VoxelPrototype.client.KeyboardState
+- uid: VoxelPrototype.client.GLFWWindow.GetMouseState*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.GetMouseState
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_GetMouseState
+  name: GetMouseState
+  nameWithType: GLFWWindow.GetMouseState
+  fullName: VoxelPrototype.client.GLFWWindow.GetMouseState
+- uid: VoxelPrototype.client.MouseState
+  commentId: T:VoxelPrototype.client.MouseState
+  parent: VoxelPrototype.client
+  href: VoxelPrototype.client.MouseState.html
+  name: MouseState
+  nameWithType: MouseState
+  fullName: VoxelPrototype.client.MouseState
+- uid: VoxelPrototype.client.GLFWWindow.ErrorCallback*
+  commentId: Overload:VoxelPrototype.client.GLFWWindow.ErrorCallback
+  href: VoxelPrototype.client.GLFWWindow.html#VoxelPrototype_client_GLFWWindow_ErrorCallback_OpenTK_Windowing_GraphicsLibraryFramework_ErrorCode_System_String_
+  name: ErrorCallback
+  nameWithType: GLFWWindow.ErrorCallback
+  fullName: VoxelPrototype.client.GLFWWindow.ErrorCallback
+- uid: OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode
+  commentId: T:OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode
+  parent: OpenTK.Windowing.GraphicsLibraryFramework
+  isExternal: true
+  name: ErrorCode
+  nameWithType: ErrorCode
+  fullName: OpenTK.Windowing.GraphicsLibraryFramework.ErrorCode
+- uid: OpenTK.Windowing.GraphicsLibraryFramework
+  commentId: N:OpenTK.Windowing.GraphicsLibraryFramework
+  isExternal: true
+  name: OpenTK.Windowing.GraphicsLibraryFramework
+  nameWithType: OpenTK.Windowing.GraphicsLibraryFramework
+  fullName: OpenTK.Windowing.GraphicsLibraryFramework
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing
+    name: Windowing
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing.GraphicsLibraryFramework
+    name: GraphicsLibraryFramework
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing
+    name: Windowing
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing.GraphicsLibraryFramework
+    name: GraphicsLibraryFramework
+    isExternal: true

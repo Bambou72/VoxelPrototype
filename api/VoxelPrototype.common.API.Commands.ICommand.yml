@@ -1,0 +1,198 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.API.Commands.ICommand
+  commentId: T:VoxelPrototype.common.API.Commands.ICommand
+  id: ICommand
+  parent: VoxelPrototype.common.API.Commands
+  children:
+  - VoxelPrototype.common.API.Commands.ICommand.Execute(System.String[],LiteNetLib.NetPeer)
+  - VoxelPrototype.common.API.Commands.ICommand.Name
+  langs:
+  - csharp
+  - vb
+  name: ICommand
+  nameWithType: ICommand
+  fullName: VoxelPrototype.common.API.Commands.ICommand
+  type: Interface
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Commands/ICommand.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ICommand
+    path: VoxelPrototype/common/API/Commands/ICommand.cs
+    startLine: 3
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Commands
+  syntax:
+    content: public interface ICommand
+    content.vb: Public Interface ICommand
+- uid: VoxelPrototype.common.API.Commands.ICommand.Name
+  commentId: P:VoxelPrototype.common.API.Commands.ICommand.Name
+  id: Name
+  parent: VoxelPrototype.common.API.Commands.ICommand
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: ICommand.Name
+  fullName: VoxelPrototype.common.API.Commands.ICommand.Name
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Commands/ICommand.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Name
+    path: VoxelPrototype/common/API/Commands/ICommand.cs
+    startLine: 5
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Commands
+  syntax:
+    content: string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property Name As String
+  overload: VoxelPrototype.common.API.Commands.ICommand.Name*
+- uid: VoxelPrototype.common.API.Commands.ICommand.Execute(System.String[],LiteNetLib.NetPeer)
+  commentId: M:VoxelPrototype.common.API.Commands.ICommand.Execute(System.String[],LiteNetLib.NetPeer)
+  id: Execute(System.String[],LiteNetLib.NetPeer)
+  parent: VoxelPrototype.common.API.Commands.ICommand
+  langs:
+  - csharp
+  - vb
+  name: Execute(string[], NetPeer)
+  nameWithType: ICommand.Execute(string[], NetPeer)
+  fullName: VoxelPrototype.common.API.Commands.ICommand.Execute(string[], LiteNetLib.NetPeer)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Commands/ICommand.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Execute
+    path: VoxelPrototype/common/API/Commands/ICommand.cs
+    startLine: 6
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Commands
+  syntax:
+    content: void Execute(string[] Arguments, NetPeer peer)
+    parameters:
+    - id: Arguments
+      type: System.String[]
+    - id: peer
+      type: LiteNetLib.NetPeer
+    content.vb: Sub Execute(Arguments As String(), peer As NetPeer)
+  overload: VoxelPrototype.common.API.Commands.ICommand.Execute*
+  nameWithType.vb: ICommand.Execute(String(), NetPeer)
+  fullName.vb: VoxelPrototype.common.API.Commands.ICommand.Execute(String(), LiteNetLib.NetPeer)
+  name.vb: Execute(String(), NetPeer)
+references:
+- uid: VoxelPrototype.common.API.Commands
+  commentId: N:VoxelPrototype.common.API.Commands
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.API.Commands
+  nameWithType: VoxelPrototype.common.API.Commands
+  fullName: VoxelPrototype.common.API.Commands
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Commands
+    name: Commands
+    href: VoxelPrototype.common.API.Commands.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Commands
+    name: Commands
+    href: VoxelPrototype.common.API.Commands.html
+- uid: VoxelPrototype.common.API.Commands.ICommand.Name*
+  commentId: Overload:VoxelPrototype.common.API.Commands.ICommand.Name
+  href: VoxelPrototype.common.API.Commands.ICommand.html#VoxelPrototype_common_API_Commands_ICommand_Name
+  name: Name
+  nameWithType: ICommand.Name
+  fullName: VoxelPrototype.common.API.Commands.ICommand.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VoxelPrototype.common.API.Commands.ICommand.Execute*
+  commentId: Overload:VoxelPrototype.common.API.Commands.ICommand.Execute
+  href: VoxelPrototype.common.API.Commands.ICommand.html#VoxelPrototype_common_API_Commands_ICommand_Execute_System_String___LiteNetLib_NetPeer_
+  name: Execute
+  nameWithType: ICommand.Execute
+  fullName: VoxelPrototype.common.API.Commands.ICommand.Execute
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+- uid: LiteNetLib.NetPeer
+  commentId: T:LiteNetLib.NetPeer
+  parent: LiteNetLib
+  isExternal: true
+  name: NetPeer
+  nameWithType: NetPeer
+  fullName: LiteNetLib.NetPeer
+- uid: LiteNetLib
+  commentId: N:LiteNetLib
+  isExternal: true
+  name: LiteNetLib
+  nameWithType: LiteNetLib
+  fullName: LiteNetLib

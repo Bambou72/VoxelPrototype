@@ -1,0 +1,1133 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.client.MouseState
+  commentId: T:VoxelPrototype.client.MouseState
+  id: MouseState
+  parent: VoxelPrototype.client
+  children:
+  - VoxelPrototype.client.MouseState.Delta
+  - VoxelPrototype.client.MouseState.GetSnapshot
+  - VoxelPrototype.client.MouseState.IsAnyButtonDown
+  - VoxelPrototype.client.MouseState.IsButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  - VoxelPrototype.client.MouseState.IsButtonPressed(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  - VoxelPrototype.client.MouseState.IsButtonReleased(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  - VoxelPrototype.client.MouseState.Item(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  - VoxelPrototype.client.MouseState.Position
+  - VoxelPrototype.client.MouseState.PreviousPosition
+  - VoxelPrototype.client.MouseState.PreviousScroll
+  - VoxelPrototype.client.MouseState.PreviousX
+  - VoxelPrototype.client.MouseState.PreviousY
+  - VoxelPrototype.client.MouseState.Scroll
+  - VoxelPrototype.client.MouseState.ScrollDelta
+  - VoxelPrototype.client.MouseState.ToString
+  - VoxelPrototype.client.MouseState.WasButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  - VoxelPrototype.client.MouseState.X
+  - VoxelPrototype.client.MouseState.Y
+  langs:
+  - csharp
+  - vb
+  name: MouseState
+  nameWithType: MouseState
+  fullName: VoxelPrototype.client.MouseState
+  type: Class
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: MouseState
+    path: VoxelPrototype/client/Window.cs
+    startLine: 379
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Encapsulates the state of a mouse device.
+  example: []
+  syntax:
+    content: public class MouseState
+    content.vb: Public Class MouseState
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: VoxelPrototype.client.MouseState.Position
+  commentId: P:VoxelPrototype.client.MouseState.Position
+  id: Position
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: Position
+  nameWithType: MouseState.Position
+  fullName: VoxelPrototype.client.MouseState.Position
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Position
+    path: VoxelPrototype/client/Window.cs
+    startLine: 410
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: >-
+    Gets a <xref href="OpenTK.Mathematics.Vector2" data-throw-if-not-resolved="false"></xref> representing the absolute position of the pointer
+
+    in the current frame, relative to the top-left corner of the contents of the window.
+  example: []
+  syntax:
+    content: public Vector2 Position { get; }
+    parameters: []
+    return:
+      type: OpenTK.Mathematics.Vector2
+    content.vb: Public Property Position As Vector2
+  overload: VoxelPrototype.client.MouseState.Position*
+- uid: VoxelPrototype.client.MouseState.PreviousPosition
+  commentId: P:VoxelPrototype.client.MouseState.PreviousPosition
+  id: PreviousPosition
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: PreviousPosition
+  nameWithType: MouseState.PreviousPosition
+  fullName: VoxelPrototype.client.MouseState.PreviousPosition
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: PreviousPosition
+    path: VoxelPrototype/client/Window.cs
+    startLine: 416
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: >-
+    Gets a <xref href="OpenTK.Mathematics.Vector2" data-throw-if-not-resolved="false"></xref> representing the absolute position of the pointer
+
+    in the previous frame, relative to the top-left corner of the contents of the window.
+  example: []
+  syntax:
+    content: public Vector2 PreviousPosition { get; }
+    parameters: []
+    return:
+      type: OpenTK.Mathematics.Vector2
+    content.vb: Public Property PreviousPosition As Vector2
+  overload: VoxelPrototype.client.MouseState.PreviousPosition*
+- uid: VoxelPrototype.client.MouseState.Delta
+  commentId: P:VoxelPrototype.client.MouseState.Delta
+  id: Delta
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: Delta
+  nameWithType: MouseState.Delta
+  fullName: VoxelPrototype.client.MouseState.Delta
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Delta
+    path: VoxelPrototype/client/Window.cs
+    startLine: 422
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: >-
+    Gets a <xref href="OpenTK.Mathematics.Vector2" data-throw-if-not-resolved="false"></xref> representing the amount that the mouse moved since the last frame.
+
+    This does not necessarily correspond to pixels, for example in the case of raw input.
+  example: []
+  syntax:
+    content: public Vector2 Delta { get; }
+    parameters: []
+    return:
+      type: OpenTK.Mathematics.Vector2
+    content.vb: Public ReadOnly Property Delta As Vector2
+  overload: VoxelPrototype.client.MouseState.Delta*
+- uid: VoxelPrototype.client.MouseState.Scroll
+  commentId: P:VoxelPrototype.client.MouseState.Scroll
+  id: Scroll
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: Scroll
+  nameWithType: MouseState.Scroll
+  fullName: VoxelPrototype.client.MouseState.Scroll
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Scroll
+    path: VoxelPrototype/client/Window.cs
+    startLine: 427
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Get a Vector2 representing the position of the mouse wheel.
+  example: []
+  syntax:
+    content: public Vector2 Scroll { get; }
+    parameters: []
+    return:
+      type: OpenTK.Mathematics.Vector2
+    content.vb: Public Property Scroll As Vector2
+  overload: VoxelPrototype.client.MouseState.Scroll*
+- uid: VoxelPrototype.client.MouseState.PreviousScroll
+  commentId: P:VoxelPrototype.client.MouseState.PreviousScroll
+  id: PreviousScroll
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: PreviousScroll
+  nameWithType: MouseState.PreviousScroll
+  fullName: VoxelPrototype.client.MouseState.PreviousScroll
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: PreviousScroll
+    path: VoxelPrototype/client/Window.cs
+    startLine: 432
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Get a Vector2 representing the position of the mouse wheel.
+  example: []
+  syntax:
+    content: public Vector2 PreviousScroll { get; }
+    parameters: []
+    return:
+      type: OpenTK.Mathematics.Vector2
+    content.vb: Public Property PreviousScroll As Vector2
+  overload: VoxelPrototype.client.MouseState.PreviousScroll*
+- uid: VoxelPrototype.client.MouseState.ScrollDelta
+  commentId: P:VoxelPrototype.client.MouseState.ScrollDelta
+  id: ScrollDelta
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: ScrollDelta
+  nameWithType: MouseState.ScrollDelta
+  fullName: VoxelPrototype.client.MouseState.ScrollDelta
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ScrollDelta
+    path: VoxelPrototype/client/Window.cs
+    startLine: 437
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Get a Vector2 representing the amount that the mouse wheel moved since the last frame.
+  example: []
+  syntax:
+    content: public Vector2 ScrollDelta { get; }
+    parameters: []
+    return:
+      type: OpenTK.Mathematics.Vector2
+    content.vb: Public ReadOnly Property ScrollDelta As Vector2
+  overload: VoxelPrototype.client.MouseState.ScrollDelta*
+- uid: VoxelPrototype.client.MouseState.Item(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  commentId: P:VoxelPrototype.client.MouseState.Item(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  id: Item(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: this[MouseButton]
+  nameWithType: MouseState.this[MouseButton]
+  fullName: VoxelPrototype.client.MouseState.this[OpenTK.Windowing.GraphicsLibraryFramework.MouseButton]
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: this[]
+    path: VoxelPrototype/client/Window.cs
+    startLine: 445
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: >-
+    Gets a <xref href="System.Boolean" data-throw-if-not-resolved="false"></xref> indicating whether the specified
+     <xref href="OpenTK.Windowing.GraphicsLibraryFramework.MouseButton" data-throw-if-not-resolved="false"></xref> is pressed.
+  example: []
+  syntax:
+    content: public bool this[MouseButton button] { get; }
+    parameters:
+    - id: button
+      type: OpenTK.Windowing.GraphicsLibraryFramework.MouseButton
+      description: The <xref href="OpenTK.Windowing.GraphicsLibraryFramework.MouseButton" data-throw-if-not-resolved="false"></xref> to check.
+    return:
+      type: System.Boolean
+      description: <code>true</code> if key is pressed; <code>false</code> otherwise.
+    content.vb: Public Default Property this[](button As MouseButton) As Boolean
+  overload: VoxelPrototype.client.MouseState.Item*
+  nameWithType.vb: MouseState.this[](MouseButton)
+  fullName.vb: VoxelPrototype.client.MouseState.this[](OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  name.vb: this[](MouseButton)
+- uid: VoxelPrototype.client.MouseState.X
+  commentId: P:VoxelPrototype.client.MouseState.X
+  id: X
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: X
+  nameWithType: MouseState.X
+  fullName: VoxelPrototype.client.MouseState.X
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: X
+    path: VoxelPrototype/client/Window.cs
+    startLine: 454
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets an integer representing the absolute x position of the pointer, in window pixel coordinates.
+  example: []
+  syntax:
+    content: public float X { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public ReadOnly Property X As Single
+  overload: VoxelPrototype.client.MouseState.X*
+- uid: VoxelPrototype.client.MouseState.Y
+  commentId: P:VoxelPrototype.client.MouseState.Y
+  id: Y
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: Y
+  nameWithType: MouseState.Y
+  fullName: VoxelPrototype.client.MouseState.Y
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Y
+    path: VoxelPrototype/client/Window.cs
+    startLine: 459
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets an integer representing the absolute y position of the pointer, in window pixel coordinates.
+  example: []
+  syntax:
+    content: public float Y { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public ReadOnly Property Y As Single
+  overload: VoxelPrototype.client.MouseState.Y*
+- uid: VoxelPrototype.client.MouseState.PreviousX
+  commentId: P:VoxelPrototype.client.MouseState.PreviousX
+  id: PreviousX
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: PreviousX
+  nameWithType: MouseState.PreviousX
+  fullName: VoxelPrototype.client.MouseState.PreviousX
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: PreviousX
+    path: VoxelPrototype/client/Window.cs
+    startLine: 464
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets an integer representing the absolute x position of the pointer, in window pixel coordinates.
+  example: []
+  syntax:
+    content: public float PreviousX { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public ReadOnly Property PreviousX As Single
+  overload: VoxelPrototype.client.MouseState.PreviousX*
+- uid: VoxelPrototype.client.MouseState.PreviousY
+  commentId: P:VoxelPrototype.client.MouseState.PreviousY
+  id: PreviousY
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: PreviousY
+  nameWithType: MouseState.PreviousY
+  fullName: VoxelPrototype.client.MouseState.PreviousY
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: PreviousY
+    path: VoxelPrototype/client/Window.cs
+    startLine: 469
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets an integer representing the absolute y position of the pointer, in window pixel coordinates.
+  example: []
+  syntax:
+    content: public float PreviousY { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public ReadOnly Property PreviousY As Single
+  overload: VoxelPrototype.client.MouseState.PreviousY*
+- uid: VoxelPrototype.client.MouseState.IsAnyButtonDown
+  commentId: P:VoxelPrototype.client.MouseState.IsAnyButtonDown
+  id: IsAnyButtonDown
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: IsAnyButtonDown
+  nameWithType: MouseState.IsAnyButtonDown
+  fullName: VoxelPrototype.client.MouseState.IsAnyButtonDown
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsAnyButtonDown
+    path: VoxelPrototype/client/Window.cs
+    startLine: 475
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets a value indicating whether any button is down.
+  example: []
+  syntax:
+    content: public bool IsAnyButtonDown { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <code>true</code> if any button is down; otherwise, <code>false</code>.
+    content.vb: Public ReadOnly Property IsAnyButtonDown As Boolean
+  overload: VoxelPrototype.client.MouseState.IsAnyButtonDown*
+- uid: VoxelPrototype.client.MouseState.ToString
+  commentId: M:VoxelPrototype.client.MouseState.ToString
+  id: ToString
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: MouseState.ToString()
+  fullName: VoxelPrototype.client.MouseState.ToString()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ToString
+    path: VoxelPrototype/client/Window.cs
+    startLine: 495
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Returns a <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="VoxelPrototype.client.MouseState" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="VoxelPrototype.client.MouseState" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.Object.ToString
+  overload: VoxelPrototype.client.MouseState.ToString*
+- uid: VoxelPrototype.client.MouseState.IsButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  commentId: M:VoxelPrototype.client.MouseState.IsButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  id: IsButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: IsButtonDown(MouseButton)
+  nameWithType: MouseState.IsButtonDown(MouseButton)
+  fullName: VoxelPrototype.client.MouseState.IsButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsButtonDown
+    path: VoxelPrototype/client/Window.cs
+    startLine: 523
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets a <xref href="System.Boolean" data-throw-if-not-resolved="false"></xref> indicating whether this button is down.
+  example: []
+  syntax:
+    content: public bool IsButtonDown(MouseButton button)
+    parameters:
+    - id: button
+      type: OpenTK.Windowing.GraphicsLibraryFramework.MouseButton
+      description: The <xref href="OpenTK.Windowing.GraphicsLibraryFramework.MouseButton" data-throw-if-not-resolved="false"></xref> to check.
+    return:
+      type: System.Boolean
+      description: <code>true</code> if the <code class="paramref">button</code> is down, otherwise <code>false</code>.
+    content.vb: Public Function IsButtonDown(button As MouseButton) As Boolean
+  overload: VoxelPrototype.client.MouseState.IsButtonDown*
+- uid: VoxelPrototype.client.MouseState.WasButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  commentId: M:VoxelPrototype.client.MouseState.WasButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  id: WasButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: WasButtonDown(MouseButton)
+  nameWithType: MouseState.WasButtonDown(MouseButton)
+  fullName: VoxelPrototype.client.MouseState.WasButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: WasButtonDown
+    path: VoxelPrototype/client/Window.cs
+    startLine: 533
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets a <xref href="System.Boolean" data-throw-if-not-resolved="false"></xref> indicating whether this button was down in the previous frame.
+  example: []
+  syntax:
+    content: public bool WasButtonDown(MouseButton button)
+    parameters:
+    - id: button
+      type: OpenTK.Windowing.GraphicsLibraryFramework.MouseButton
+      description: The <xref href="OpenTK.Windowing.GraphicsLibraryFramework.MouseButton" data-throw-if-not-resolved="false"></xref> to check.
+    return:
+      type: System.Boolean
+      description: <code>true</code> if the <code class="paramref">button</code> is down, otherwise <code>false</code>.
+    content.vb: Public Function WasButtonDown(button As MouseButton) As Boolean
+  overload: VoxelPrototype.client.MouseState.WasButtonDown*
+- uid: VoxelPrototype.client.MouseState.IsButtonPressed(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  commentId: M:VoxelPrototype.client.MouseState.IsButtonPressed(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  id: IsButtonPressed(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: IsButtonPressed(MouseButton)
+  nameWithType: MouseState.IsButtonPressed(MouseButton)
+  fullName: VoxelPrototype.client.MouseState.IsButtonPressed(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsButtonPressed
+    path: VoxelPrototype/client/Window.cs
+    startLine: 546
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets whether the specified mouse button is pressed in the current frame but released in the previous frame.
+  remarks: "\"Frame\" refers to invocations of NativeWindow.ProcessEvents(double) (NativeWindow.ProcessInputEvents() more precisely) here."
+  example: []
+  syntax:
+    content: public bool IsButtonPressed(MouseButton button)
+    parameters:
+    - id: button
+      type: OpenTK.Windowing.GraphicsLibraryFramework.MouseButton
+      description: The <xref href="OpenTK.Windowing.GraphicsLibraryFramework.MouseButton?text=mouse+button" data-throw-if-not-resolved="false"></xref> to check.
+    return:
+      type: System.Boolean
+      description: True if the mouse button is pressed in this frame, but not the last frame.
+    content.vb: Public Function IsButtonPressed(button As MouseButton) As Boolean
+  overload: VoxelPrototype.client.MouseState.IsButtonPressed*
+- uid: VoxelPrototype.client.MouseState.IsButtonReleased(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  commentId: M:VoxelPrototype.client.MouseState.IsButtonReleased(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  id: IsButtonReleased(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: IsButtonReleased(MouseButton)
+  nameWithType: MouseState.IsButtonReleased(MouseButton)
+  fullName: VoxelPrototype.client.MouseState.IsButtonReleased(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsButtonReleased
+    path: VoxelPrototype/client/Window.cs
+    startLine: 559
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: Gets whether the specified mouse button is released in the current frame but pressed in the previous frame.
+  remarks: "\"Frame\" refers to invocations of NativeWindow.ProcessEvents(double) (NativeWindow.ProcessInputEvents() more precisely) here."
+  example: []
+  syntax:
+    content: public bool IsButtonReleased(MouseButton button)
+    parameters:
+    - id: button
+      type: OpenTK.Windowing.GraphicsLibraryFramework.MouseButton
+      description: The <xref href="OpenTK.Windowing.GraphicsLibraryFramework.MouseButton?text=mouse+button" data-throw-if-not-resolved="false"></xref> to check.
+    return:
+      type: System.Boolean
+      description: True if the mouse button is released in this frame, but pressed the last frame.
+    content.vb: Public Function IsButtonReleased(button As MouseButton) As Boolean
+  overload: VoxelPrototype.client.MouseState.IsButtonReleased*
+- uid: VoxelPrototype.client.MouseState.GetSnapshot
+  commentId: M:VoxelPrototype.client.MouseState.GetSnapshot
+  id: GetSnapshot
+  parent: VoxelPrototype.client.MouseState
+  langs:
+  - csharp
+  - vb
+  name: GetSnapshot()
+  nameWithType: MouseState.GetSnapshot()
+  fullName: VoxelPrototype.client.MouseState.GetSnapshot()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/client/Window.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetSnapshot
+    path: VoxelPrototype/client/Window.cs
+    startLine: 569
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client
+  summary: >-
+    Gets an immutable snapshot of this MouseState.
+
+    This can be used to save the current mouse state for comparison later on.
+  example: []
+  syntax:
+    content: public MouseState GetSnapshot()
+    return:
+      type: VoxelPrototype.client.MouseState
+      description: Returns an immutable snapshot of this MouseState.
+    content.vb: Public Function GetSnapshot() As MouseState
+  overload: VoxelPrototype.client.MouseState.GetSnapshot*
+references:
+- uid: VoxelPrototype.client
+  commentId: N:VoxelPrototype.client
+  href: VoxelPrototype.html
+  name: VoxelPrototype.client
+  nameWithType: VoxelPrototype.client
+  fullName: VoxelPrototype.client
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: OpenTK.Mathematics.Vector2
+  commentId: T:OpenTK.Mathematics.Vector2
+  parent: OpenTK.Mathematics
+  isExternal: true
+  name: Vector2
+  nameWithType: Vector2
+  fullName: OpenTK.Mathematics.Vector2
+- uid: VoxelPrototype.client.MouseState.Position*
+  commentId: Overload:VoxelPrototype.client.MouseState.Position
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_Position
+  name: Position
+  nameWithType: MouseState.Position
+  fullName: VoxelPrototype.client.MouseState.Position
+- uid: OpenTK.Mathematics
+  commentId: N:OpenTK.Mathematics
+  isExternal: true
+  name: OpenTK.Mathematics
+  nameWithType: OpenTK.Mathematics
+  fullName: OpenTK.Mathematics
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+- uid: VoxelPrototype.client.MouseState.PreviousPosition*
+  commentId: Overload:VoxelPrototype.client.MouseState.PreviousPosition
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_PreviousPosition
+  name: PreviousPosition
+  nameWithType: MouseState.PreviousPosition
+  fullName: VoxelPrototype.client.MouseState.PreviousPosition
+- uid: VoxelPrototype.client.MouseState.Delta*
+  commentId: Overload:VoxelPrototype.client.MouseState.Delta
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_Delta
+  name: Delta
+  nameWithType: MouseState.Delta
+  fullName: VoxelPrototype.client.MouseState.Delta
+- uid: VoxelPrototype.client.MouseState.Scroll*
+  commentId: Overload:VoxelPrototype.client.MouseState.Scroll
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_Scroll
+  name: Scroll
+  nameWithType: MouseState.Scroll
+  fullName: VoxelPrototype.client.MouseState.Scroll
+- uid: VoxelPrototype.client.MouseState.PreviousScroll*
+  commentId: Overload:VoxelPrototype.client.MouseState.PreviousScroll
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_PreviousScroll
+  name: PreviousScroll
+  nameWithType: MouseState.PreviousScroll
+  fullName: VoxelPrototype.client.MouseState.PreviousScroll
+- uid: VoxelPrototype.client.MouseState.ScrollDelta*
+  commentId: Overload:VoxelPrototype.client.MouseState.ScrollDelta
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_ScrollDelta
+  name: ScrollDelta
+  nameWithType: MouseState.ScrollDelta
+  fullName: VoxelPrototype.client.MouseState.ScrollDelta
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: OpenTK.Windowing.GraphicsLibraryFramework.MouseButton
+  commentId: T:OpenTK.Windowing.GraphicsLibraryFramework.MouseButton
+  parent: OpenTK.Windowing.GraphicsLibraryFramework
+  isExternal: true
+  name: MouseButton
+  nameWithType: MouseButton
+  fullName: OpenTK.Windowing.GraphicsLibraryFramework.MouseButton
+- uid: VoxelPrototype.client.MouseState.Item*
+  commentId: Overload:VoxelPrototype.client.MouseState.Item
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_Item_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_
+  name: this
+  nameWithType: MouseState.this
+  fullName: VoxelPrototype.client.MouseState.this
+  nameWithType.vb: MouseState.this[]
+  fullName.vb: VoxelPrototype.client.MouseState.this[]
+  name.vb: this[]
+- uid: OpenTK.Windowing.GraphicsLibraryFramework
+  commentId: N:OpenTK.Windowing.GraphicsLibraryFramework
+  isExternal: true
+  name: OpenTK.Windowing.GraphicsLibraryFramework
+  nameWithType: OpenTK.Windowing.GraphicsLibraryFramework
+  fullName: OpenTK.Windowing.GraphicsLibraryFramework
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing
+    name: Windowing
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing.GraphicsLibraryFramework
+    name: GraphicsLibraryFramework
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing
+    name: Windowing
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Windowing.GraphicsLibraryFramework
+    name: GraphicsLibraryFramework
+    isExternal: true
+- uid: VoxelPrototype.client.MouseState.X*
+  commentId: Overload:VoxelPrototype.client.MouseState.X
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_X
+  name: X
+  nameWithType: MouseState.X
+  fullName: VoxelPrototype.client.MouseState.X
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: VoxelPrototype.client.MouseState.Y*
+  commentId: Overload:VoxelPrototype.client.MouseState.Y
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_Y
+  name: Y
+  nameWithType: MouseState.Y
+  fullName: VoxelPrototype.client.MouseState.Y
+- uid: VoxelPrototype.client.MouseState.PreviousX*
+  commentId: Overload:VoxelPrototype.client.MouseState.PreviousX
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_PreviousX
+  name: PreviousX
+  nameWithType: MouseState.PreviousX
+  fullName: VoxelPrototype.client.MouseState.PreviousX
+- uid: VoxelPrototype.client.MouseState.PreviousY*
+  commentId: Overload:VoxelPrototype.client.MouseState.PreviousY
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_PreviousY
+  name: PreviousY
+  nameWithType: MouseState.PreviousY
+  fullName: VoxelPrototype.client.MouseState.PreviousY
+- uid: VoxelPrototype.client.MouseState.IsAnyButtonDown*
+  commentId: Overload:VoxelPrototype.client.MouseState.IsAnyButtonDown
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_IsAnyButtonDown
+  name: IsAnyButtonDown
+  nameWithType: MouseState.IsAnyButtonDown
+  fullName: VoxelPrototype.client.MouseState.IsAnyButtonDown
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: VoxelPrototype.client.MouseState
+  commentId: T:VoxelPrototype.client.MouseState
+  parent: VoxelPrototype.client
+  href: VoxelPrototype.client.MouseState.html
+  name: MouseState
+  nameWithType: MouseState
+  fullName: VoxelPrototype.client.MouseState
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: VoxelPrototype.client.MouseState.ToString*
+  commentId: Overload:VoxelPrototype.client.MouseState.ToString
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_ToString
+  name: ToString
+  nameWithType: MouseState.ToString
+  fullName: VoxelPrototype.client.MouseState.ToString
+- uid: VoxelPrototype.client.MouseState.IsButtonDown*
+  commentId: Overload:VoxelPrototype.client.MouseState.IsButtonDown
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_IsButtonDown_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_
+  name: IsButtonDown
+  nameWithType: MouseState.IsButtonDown
+  fullName: VoxelPrototype.client.MouseState.IsButtonDown
+- uid: VoxelPrototype.client.MouseState.WasButtonDown*
+  commentId: Overload:VoxelPrototype.client.MouseState.WasButtonDown
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_WasButtonDown_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_
+  name: WasButtonDown
+  nameWithType: MouseState.WasButtonDown
+  fullName: VoxelPrototype.client.MouseState.WasButtonDown
+- uid: VoxelPrototype.client.MouseState.IsButtonPressed*
+  commentId: Overload:VoxelPrototype.client.MouseState.IsButtonPressed
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_IsButtonPressed_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_
+  name: IsButtonPressed
+  nameWithType: MouseState.IsButtonPressed
+  fullName: VoxelPrototype.client.MouseState.IsButtonPressed
+- uid: VoxelPrototype.client.MouseState.IsButtonReleased*
+  commentId: Overload:VoxelPrototype.client.MouseState.IsButtonReleased
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_IsButtonReleased_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_
+  name: IsButtonReleased
+  nameWithType: MouseState.IsButtonReleased
+  fullName: VoxelPrototype.client.MouseState.IsButtonReleased
+- uid: VoxelPrototype.client.MouseState.GetSnapshot*
+  commentId: Overload:VoxelPrototype.client.MouseState.GetSnapshot
+  href: VoxelPrototype.client.MouseState.html#VoxelPrototype_client_MouseState_GetSnapshot
+  name: GetSnapshot
+  nameWithType: MouseState.GetSnapshot
+  fullName: VoxelPrototype.client.MouseState.GetSnapshot

@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Network.server
+  commentId: N:VoxelPrototype.common.Network.server
+  id: VoxelPrototype.common.Network.server
+  children:
+  - VoxelPrototype.common.Network.server.ServerNetwork
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.Network.server
+  nameWithType: VoxelPrototype.common.Network.server
+  fullName: VoxelPrototype.common.Network.server
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.Network.server.ServerNetwork
+  commentId: T:VoxelPrototype.common.Network.server.ServerNetwork
+  href: VoxelPrototype.common.Network.server.ServerNetwork.html
+  name: ServerNetwork
+  nameWithType: ServerNetwork
+  fullName: VoxelPrototype.common.Network.server.ServerNetwork

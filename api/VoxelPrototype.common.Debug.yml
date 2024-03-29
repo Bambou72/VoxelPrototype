@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Debug
+  commentId: N:VoxelPrototype.common.Debug
+  id: VoxelPrototype.common.Debug
+  children:
+  - VoxelPrototype.common.Debug.LoggingSystem
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.Debug
+  nameWithType: VoxelPrototype.common.Debug
+  fullName: VoxelPrototype.common.Debug
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.Debug.LoggingSystem
+  commentId: T:VoxelPrototype.common.Debug.LoggingSystem
+  href: VoxelPrototype.common.Debug.LoggingSystem.html
+  name: LoggingSystem
+  nameWithType: LoggingSystem
+  fullName: VoxelPrototype.common.Debug.LoggingSystem

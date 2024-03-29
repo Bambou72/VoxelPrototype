@@ -1,0 +1,634 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Game.Entities.Player.Player
+  commentId: T:VoxelPrototype.common.Game.Entities.Player.Player
+  id: Player
+  parent: VoxelPrototype.common.Game.Entities.Player
+  children:
+  - VoxelPrototype.common.Game.Entities.Player.Player.#ctor(OpenTK.Mathematics.Vector3d,System.UInt16)
+  - VoxelPrototype.common.Game.Entities.Player.Player.#ctor(OpenTK.Mathematics.Vector3d,System.UInt16,System.Boolean,System.Boolean)
+  - VoxelPrototype.common.Game.Entities.Player.Player.Ghost
+  langs:
+  - csharp
+  - vb
+  name: Player
+  nameWithType: Player
+  fullName: VoxelPrototype.common.Game.Entities.Player.Player
+  type: Class
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/Entities/Player/Player.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Player
+    path: VoxelPrototype/common/Game/Entities/Player/Player.cs
+    startLine: 17
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.Entities.Player
+  syntax:
+    content: 'public class Player : PhysicEntity'
+    content.vb: Public Class Player Inherits PhysicEntity
+  inheritance:
+  - System.Object
+  - VoxelPrototype.common.Game.Entities.Entity
+  - VoxelPrototype.common.Game.Entities.PhysicEntity
+  inheritedMembers:
+  - VoxelPrototype.common.Game.Entities.PhysicEntity.Fly
+  - VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateClient(System.Single)
+  - VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateServer(System.Single)
+  - VoxelPrototype.common.Game.Entities.Entity.Position
+  - VoxelPrototype.common.Game.Entities.Entity.Rotation
+  - VoxelPrototype.common.Game.Entities.Entity.ID
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VoxelPrototype.common.Game.Entities.Player.Player.Ghost
+  commentId: F:VoxelPrototype.common.Game.Entities.Player.Player.Ghost
+  id: Ghost
+  parent: VoxelPrototype.common.Game.Entities.Player.Player
+  langs:
+  - csharp
+  - vb
+  name: Ghost
+  nameWithType: Player.Ghost
+  fullName: VoxelPrototype.common.Game.Entities.Player.Player.Ghost
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/Entities/Player/Player.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Ghost
+    path: VoxelPrototype/common/Game/Entities/Player/Player.cs
+    startLine: 29
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.Entities.Player
+  syntax:
+    content: public bool Ghost
+    return:
+      type: System.Boolean
+    content.vb: Public Ghost As Boolean
+- uid: VoxelPrototype.common.Game.Entities.Player.Player.#ctor(OpenTK.Mathematics.Vector3d,System.UInt16,System.Boolean,System.Boolean)
+  commentId: M:VoxelPrototype.common.Game.Entities.Player.Player.#ctor(OpenTK.Mathematics.Vector3d,System.UInt16,System.Boolean,System.Boolean)
+  id: '#ctor(OpenTK.Mathematics.Vector3d,System.UInt16,System.Boolean,System.Boolean)'
+  parent: VoxelPrototype.common.Game.Entities.Player.Player
+  langs:
+  - csharp
+  - vb
+  name: Player(Vector3d, ushort, bool, bool)
+  nameWithType: Player.Player(Vector3d, ushort, bool, bool)
+  fullName: VoxelPrototype.common.Game.Entities.Player.Player.Player(OpenTK.Mathematics.Vector3d, ushort, bool, bool)
+  type: Constructor
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/Entities/Player/Player.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: .ctor
+    path: VoxelPrototype/common/Game/Entities/Player/Player.cs
+    startLine: 46
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.Entities.Player
+  syntax:
+    content: public Player(Vector3d _Position, ushort _ClientID, bool Local, bool Client)
+    parameters:
+    - id: _Position
+      type: OpenTK.Mathematics.Vector3d
+    - id: _ClientID
+      type: System.UInt16
+    - id: Local
+      type: System.Boolean
+    - id: Client
+      type: System.Boolean
+    content.vb: Public Sub New(_Position As Vector3d, _ClientID As UShort, Local As Boolean, Client As Boolean)
+  overload: VoxelPrototype.common.Game.Entities.Player.Player.#ctor*
+  nameWithType.vb: Player.New(Vector3d, UShort, Boolean, Boolean)
+  fullName.vb: VoxelPrototype.common.Game.Entities.Player.Player.New(OpenTK.Mathematics.Vector3d, UShort, Boolean, Boolean)
+  name.vb: New(Vector3d, UShort, Boolean, Boolean)
+- uid: VoxelPrototype.common.Game.Entities.Player.Player.#ctor(OpenTK.Mathematics.Vector3d,System.UInt16)
+  commentId: M:VoxelPrototype.common.Game.Entities.Player.Player.#ctor(OpenTK.Mathematics.Vector3d,System.UInt16)
+  id: '#ctor(OpenTK.Mathematics.Vector3d,System.UInt16)'
+  parent: VoxelPrototype.common.Game.Entities.Player.Player
+  langs:
+  - csharp
+  - vb
+  name: Player(Vector3d, ushort)
+  nameWithType: Player.Player(Vector3d, ushort)
+  fullName: VoxelPrototype.common.Game.Entities.Player.Player.Player(OpenTK.Mathematics.Vector3d, ushort)
+  type: Constructor
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/Entities/Player/Player.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: .ctor
+    path: VoxelPrototype/common/Game/Entities/Player/Player.cs
+    startLine: 252
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.Entities.Player
+  syntax:
+    content: public Player(Vector3d _Position, ushort _ClientID)
+    parameters:
+    - id: _Position
+      type: OpenTK.Mathematics.Vector3d
+    - id: _ClientID
+      type: System.UInt16
+    content.vb: Public Sub New(_Position As Vector3d, _ClientID As UShort)
+  overload: VoxelPrototype.common.Game.Entities.Player.Player.#ctor*
+  nameWithType.vb: Player.New(Vector3d, UShort)
+  fullName.vb: VoxelPrototype.common.Game.Entities.Player.Player.New(OpenTK.Mathematics.Vector3d, UShort)
+  name.vb: New(Vector3d, UShort)
+references:
+- uid: VoxelPrototype.common.Game.Entities.Player
+  commentId: N:VoxelPrototype.common.Game.Entities.Player
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Game.Entities.Player
+  nameWithType: VoxelPrototype.common.Game.Entities.Player
+  fullName: VoxelPrototype.common.Game.Entities.Player
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities
+    name: Entities
+    href: VoxelPrototype.common.Game.Entities.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities.Player
+    name: Player
+    href: VoxelPrototype.common.Game.Entities.Player.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities
+    name: Entities
+    href: VoxelPrototype.common.Game.Entities.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities.Player
+    name: Player
+    href: VoxelPrototype.common.Game.Entities.Player.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: VoxelPrototype.common.Game.Entities.Entity
+  commentId: T:VoxelPrototype.common.Game.Entities.Entity
+  parent: VoxelPrototype.common.Game.Entities
+  href: VoxelPrototype.common.Game.Entities.Entity.html
+  name: Entity
+  nameWithType: Entity
+  fullName: VoxelPrototype.common.Game.Entities.Entity
+- uid: VoxelPrototype.common.Game.Entities.PhysicEntity
+  commentId: T:VoxelPrototype.common.Game.Entities.PhysicEntity
+  parent: VoxelPrototype.common.Game.Entities
+  href: VoxelPrototype.common.Game.Entities.PhysicEntity.html
+  name: PhysicEntity
+  nameWithType: PhysicEntity
+  fullName: VoxelPrototype.common.Game.Entities.PhysicEntity
+- uid: VoxelPrototype.common.Game.Entities.PhysicEntity.Fly
+  commentId: F:VoxelPrototype.common.Game.Entities.PhysicEntity.Fly
+  parent: VoxelPrototype.common.Game.Entities.PhysicEntity
+  href: VoxelPrototype.common.Game.Entities.PhysicEntity.html#VoxelPrototype_common_Game_Entities_PhysicEntity_Fly
+  name: Fly
+  nameWithType: PhysicEntity.Fly
+  fullName: VoxelPrototype.common.Game.Entities.PhysicEntity.Fly
+- uid: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateClient(System.Single)
+  commentId: M:VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateClient(System.Single)
+  parent: VoxelPrototype.common.Game.Entities.PhysicEntity
+  isExternal: true
+  href: VoxelPrototype.common.Game.Entities.PhysicEntity.html#VoxelPrototype_common_Game_Entities_PhysicEntity_UpdateClient_System_Single_
+  name: UpdateClient(float)
+  nameWithType: PhysicEntity.UpdateClient(float)
+  fullName: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateClient(float)
+  nameWithType.vb: PhysicEntity.UpdateClient(Single)
+  fullName.vb: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateClient(Single)
+  name.vb: UpdateClient(Single)
+  spec.csharp:
+  - uid: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateClient(System.Single)
+    name: UpdateClient
+    href: VoxelPrototype.common.Game.Entities.PhysicEntity.html#VoxelPrototype_common_Game_Entities_PhysicEntity_UpdateClient_System_Single_
+  - name: (
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: )
+  spec.vb:
+  - uid: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateClient(System.Single)
+    name: UpdateClient
+    href: VoxelPrototype.common.Game.Entities.PhysicEntity.html#VoxelPrototype_common_Game_Entities_PhysicEntity_UpdateClient_System_Single_
+  - name: (
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: )
+- uid: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateServer(System.Single)
+  commentId: M:VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateServer(System.Single)
+  parent: VoxelPrototype.common.Game.Entities.PhysicEntity
+  isExternal: true
+  href: VoxelPrototype.common.Game.Entities.PhysicEntity.html#VoxelPrototype_common_Game_Entities_PhysicEntity_UpdateServer_System_Single_
+  name: UpdateServer(float)
+  nameWithType: PhysicEntity.UpdateServer(float)
+  fullName: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateServer(float)
+  nameWithType.vb: PhysicEntity.UpdateServer(Single)
+  fullName.vb: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateServer(Single)
+  name.vb: UpdateServer(Single)
+  spec.csharp:
+  - uid: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateServer(System.Single)
+    name: UpdateServer
+    href: VoxelPrototype.common.Game.Entities.PhysicEntity.html#VoxelPrototype_common_Game_Entities_PhysicEntity_UpdateServer_System_Single_
+  - name: (
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: )
+  spec.vb:
+  - uid: VoxelPrototype.common.Game.Entities.PhysicEntity.UpdateServer(System.Single)
+    name: UpdateServer
+    href: VoxelPrototype.common.Game.Entities.PhysicEntity.html#VoxelPrototype_common_Game_Entities_PhysicEntity_UpdateServer_System_Single_
+  - name: (
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: )
+- uid: VoxelPrototype.common.Game.Entities.Entity.Position
+  commentId: F:VoxelPrototype.common.Game.Entities.Entity.Position
+  parent: VoxelPrototype.common.Game.Entities.Entity
+  href: VoxelPrototype.common.Game.Entities.Entity.html#VoxelPrototype_common_Game_Entities_Entity_Position
+  name: Position
+  nameWithType: Entity.Position
+  fullName: VoxelPrototype.common.Game.Entities.Entity.Position
+- uid: VoxelPrototype.common.Game.Entities.Entity.Rotation
+  commentId: F:VoxelPrototype.common.Game.Entities.Entity.Rotation
+  parent: VoxelPrototype.common.Game.Entities.Entity
+  href: VoxelPrototype.common.Game.Entities.Entity.html#VoxelPrototype_common_Game_Entities_Entity_Rotation
+  name: Rotation
+  nameWithType: Entity.Rotation
+  fullName: VoxelPrototype.common.Game.Entities.Entity.Rotation
+- uid: VoxelPrototype.common.Game.Entities.Entity.ID
+  commentId: F:VoxelPrototype.common.Game.Entities.Entity.ID
+  parent: VoxelPrototype.common.Game.Entities.Entity
+  href: VoxelPrototype.common.Game.Entities.Entity.html#VoxelPrototype_common_Game_Entities_Entity_ID
+  name: ID
+  nameWithType: Entity.ID
+  fullName: VoxelPrototype.common.Game.Entities.Entity.ID
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VoxelPrototype.common.Game.Entities
+  commentId: N:VoxelPrototype.common.Game.Entities
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Game.Entities
+  nameWithType: VoxelPrototype.common.Game.Entities
+  fullName: VoxelPrototype.common.Game.Entities
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities
+    name: Entities
+    href: VoxelPrototype.common.Game.Entities.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities
+    name: Entities
+    href: VoxelPrototype.common.Game.Entities.html
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: VoxelPrototype.common.Game.Entities.Player.Player.#ctor*
+  commentId: Overload:VoxelPrototype.common.Game.Entities.Player.Player.#ctor
+  href: VoxelPrototype.common.Game.Entities.Player.Player.html#VoxelPrototype_common_Game_Entities_Player_Player__ctor_OpenTK_Mathematics_Vector3d_System_UInt16_System_Boolean_System_Boolean_
+  name: Player
+  nameWithType: Player.Player
+  fullName: VoxelPrototype.common.Game.Entities.Player.Player.Player
+  nameWithType.vb: Player.New
+  fullName.vb: VoxelPrototype.common.Game.Entities.Player.Player.New
+  name.vb: New
+- uid: OpenTK.Mathematics.Vector3d
+  commentId: T:OpenTK.Mathematics.Vector3d
+  parent: OpenTK.Mathematics
+  isExternal: true
+  name: Vector3d
+  nameWithType: Vector3d
+  fullName: OpenTK.Mathematics.Vector3d
+- uid: System.UInt16
+  commentId: T:System.UInt16
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint16
+  name: ushort
+  nameWithType: ushort
+  fullName: ushort
+  nameWithType.vb: UShort
+  fullName.vb: UShort
+  name.vb: UShort
+- uid: OpenTK.Mathematics
+  commentId: N:OpenTK.Mathematics
+  isExternal: true
+  name: OpenTK.Mathematics
+  nameWithType: OpenTK.Mathematics
+  fullName: OpenTK.Mathematics
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true

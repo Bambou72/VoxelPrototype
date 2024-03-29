@@ -1,0 +1,69 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.API.WorldGenerator
+  commentId: N:VoxelPrototype.common.API.WorldGenerator
+  id: VoxelPrototype.common.API.WorldGenerator
+  children:
+  - VoxelPrototype.common.API.WorldGenerator.WorldGenerator
+  - VoxelPrototype.common.API.WorldGenerator.WorldGeneratorRegistry
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.API.WorldGenerator
+  nameWithType: VoxelPrototype.common.API.WorldGenerator
+  fullName: VoxelPrototype.common.API.WorldGenerator
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.API.WorldGenerator.WorldGenerator
+  commentId: T:VoxelPrototype.common.API.WorldGenerator.WorldGenerator
+  parent: VoxelPrototype.common.API.WorldGenerator
+  href: VoxelPrototype.common.API.WorldGenerator.WorldGenerator.html
+  name: WorldGenerator
+  nameWithType: WorldGenerator
+  fullName: VoxelPrototype.common.API.WorldGenerator.WorldGenerator
+- uid: VoxelPrototype.common.API.WorldGenerator.WorldGeneratorRegistry
+  commentId: T:VoxelPrototype.common.API.WorldGenerator.WorldGeneratorRegistry
+  href: VoxelPrototype.common.API.WorldGenerator.WorldGeneratorRegistry.html
+  name: WorldGeneratorRegistry
+  nameWithType: WorldGeneratorRegistry
+  fullName: VoxelPrototype.common.API.WorldGenerator.WorldGeneratorRegistry
+- uid: VoxelPrototype.common.API.WorldGenerator
+  commentId: N:VoxelPrototype.common.API.WorldGenerator
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.API.WorldGenerator
+  nameWithType: VoxelPrototype.common.API.WorldGenerator
+  fullName: VoxelPrototype.common.API.WorldGenerator
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.WorldGenerator
+    name: WorldGenerator
+    href: VoxelPrototype.common.API.WorldGenerator.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.WorldGenerator
+    name: WorldGenerator
+    href: VoxelPrototype.common.API.WorldGenerator.html

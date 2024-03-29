@@ -1,0 +1,70 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Game
+  commentId: N:VoxelPrototype.common.Game
+  id: VoxelPrototype.common.Game
+  children:
+  - VoxelPrototype.common.Game.IBlockAcessor
+  - VoxelPrototype.common.Game.ITickable
+  - VoxelPrototype.common.Game.WorldSettings
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.Game
+  nameWithType: VoxelPrototype.common.Game
+  fullName: VoxelPrototype.common.Game
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.Game.IBlockAcessor
+  commentId: T:VoxelPrototype.common.Game.IBlockAcessor
+  parent: VoxelPrototype.common.Game
+  href: VoxelPrototype.common.Game.IBlockAcessor.html
+  name: IBlockAcessor
+  nameWithType: IBlockAcessor
+  fullName: VoxelPrototype.common.Game.IBlockAcessor
+- uid: VoxelPrototype.common.Game.ITickable
+  commentId: T:VoxelPrototype.common.Game.ITickable
+  parent: VoxelPrototype.common.Game
+  href: VoxelPrototype.common.Game.ITickable.html
+  name: ITickable
+  nameWithType: ITickable
+  fullName: VoxelPrototype.common.Game.ITickable
+- uid: VoxelPrototype.common.Game.WorldSettings
+  commentId: T:VoxelPrototype.common.Game.WorldSettings
+  parent: VoxelPrototype.common.Game
+  href: VoxelPrototype.common.Game.WorldSettings.html
+  name: WorldSettings
+  nameWithType: WorldSettings
+  fullName: VoxelPrototype.common.Game.WorldSettings
+- uid: VoxelPrototype.common.Game
+  commentId: N:VoxelPrototype.common.Game
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Game
+  nameWithType: VoxelPrototype.common.Game
+  fullName: VoxelPrototype.common.Game
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html

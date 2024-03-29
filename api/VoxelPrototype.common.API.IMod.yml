@@ -1,0 +1,287 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.API.IMod
+  commentId: T:VoxelPrototype.common.API.IMod
+  id: IMod
+  parent: VoxelPrototype.common.API
+  children:
+  - VoxelPrototype.common.API.IMod.DeInit
+  - VoxelPrototype.common.API.IMod.Description
+  - VoxelPrototype.common.API.IMod.Init
+  - VoxelPrototype.common.API.IMod.Name
+  - VoxelPrototype.common.API.IMod.NameSpace
+  - VoxelPrototype.common.API.IMod.Version
+  langs:
+  - csharp
+  - vb
+  name: IMod
+  nameWithType: IMod
+  fullName: VoxelPrototype.common.API.IMod
+  type: Interface
+  source:
+    remote:
+      path: VoxelPrototype/common/API/IMod.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IMod
+    path: VoxelPrototype/common/API/IMod.cs
+    startLine: 2
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API
+  syntax:
+    content: public interface IMod
+    content.vb: Public Interface IMod
+- uid: VoxelPrototype.common.API.IMod.Name
+  commentId: P:VoxelPrototype.common.API.IMod.Name
+  id: Name
+  parent: VoxelPrototype.common.API.IMod
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: IMod.Name
+  fullName: VoxelPrototype.common.API.IMod.Name
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/API/IMod.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Name
+    path: VoxelPrototype/common/API/IMod.cs
+    startLine: 4
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API
+  syntax:
+    content: string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property Name As String
+  overload: VoxelPrototype.common.API.IMod.Name*
+- uid: VoxelPrototype.common.API.IMod.NameSpace
+  commentId: P:VoxelPrototype.common.API.IMod.NameSpace
+  id: NameSpace
+  parent: VoxelPrototype.common.API.IMod
+  langs:
+  - csharp
+  - vb
+  name: NameSpace
+  nameWithType: IMod.NameSpace
+  fullName: VoxelPrototype.common.API.IMod.NameSpace
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/API/IMod.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: NameSpace
+    path: VoxelPrototype/common/API/IMod.cs
+    startLine: 5
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API
+  syntax:
+    content: public static string NameSpace { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Shared ReadOnly Property [NameSpace] As String
+  overload: VoxelPrototype.common.API.IMod.NameSpace*
+- uid: VoxelPrototype.common.API.IMod.Description
+  commentId: P:VoxelPrototype.common.API.IMod.Description
+  id: Description
+  parent: VoxelPrototype.common.API.IMod
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: IMod.Description
+  fullName: VoxelPrototype.common.API.IMod.Description
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/API/IMod.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Description
+    path: VoxelPrototype/common/API/IMod.cs
+    startLine: 6
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API
+  syntax:
+    content: string Description { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property Description As String
+  overload: VoxelPrototype.common.API.IMod.Description*
+- uid: VoxelPrototype.common.API.IMod.Version
+  commentId: P:VoxelPrototype.common.API.IMod.Version
+  id: Version
+  parent: VoxelPrototype.common.API.IMod
+  langs:
+  - csharp
+  - vb
+  name: Version
+  nameWithType: IMod.Version
+  fullName: VoxelPrototype.common.API.IMod.Version
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/API/IMod.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Version
+    path: VoxelPrototype/common/API/IMod.cs
+    startLine: 7
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API
+  syntax:
+    content: string Version { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property Version As String
+  overload: VoxelPrototype.common.API.IMod.Version*
+- uid: VoxelPrototype.common.API.IMod.Init
+  commentId: M:VoxelPrototype.common.API.IMod.Init
+  id: Init
+  parent: VoxelPrototype.common.API.IMod
+  langs:
+  - csharp
+  - vb
+  name: Init()
+  nameWithType: IMod.Init()
+  fullName: VoxelPrototype.common.API.IMod.Init()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/API/IMod.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Init
+    path: VoxelPrototype/common/API/IMod.cs
+    startLine: 8
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API
+  syntax:
+    content: void Init()
+    content.vb: Sub Init()
+  overload: VoxelPrototype.common.API.IMod.Init*
+- uid: VoxelPrototype.common.API.IMod.DeInit
+  commentId: M:VoxelPrototype.common.API.IMod.DeInit
+  id: DeInit
+  parent: VoxelPrototype.common.API.IMod
+  langs:
+  - csharp
+  - vb
+  name: DeInit()
+  nameWithType: IMod.DeInit()
+  fullName: VoxelPrototype.common.API.IMod.DeInit()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/API/IMod.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: DeInit
+    path: VoxelPrototype/common/API/IMod.cs
+    startLine: 9
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API
+  syntax:
+    content: void DeInit()
+    content.vb: Sub DeInit()
+  overload: VoxelPrototype.common.API.IMod.DeInit*
+references:
+- uid: VoxelPrototype.common.API
+  commentId: N:VoxelPrototype.common.API
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.API
+  nameWithType: VoxelPrototype.common.API
+  fullName: VoxelPrototype.common.API
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+- uid: VoxelPrototype.common.API.IMod.Name*
+  commentId: Overload:VoxelPrototype.common.API.IMod.Name
+  href: VoxelPrototype.common.API.IMod.html#VoxelPrototype_common_API_IMod_Name
+  name: Name
+  nameWithType: IMod.Name
+  fullName: VoxelPrototype.common.API.IMod.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VoxelPrototype.common.API.IMod.NameSpace*
+  commentId: Overload:VoxelPrototype.common.API.IMod.NameSpace
+  href: VoxelPrototype.common.API.IMod.html#VoxelPrototype_common_API_IMod_NameSpace
+  name: NameSpace
+  nameWithType: IMod.NameSpace
+  fullName: VoxelPrototype.common.API.IMod.NameSpace
+- uid: VoxelPrototype.common.API.IMod.Description*
+  commentId: Overload:VoxelPrototype.common.API.IMod.Description
+  href: VoxelPrototype.common.API.IMod.html#VoxelPrototype_common_API_IMod_Description
+  name: Description
+  nameWithType: IMod.Description
+  fullName: VoxelPrototype.common.API.IMod.Description
+- uid: VoxelPrototype.common.API.IMod.Version*
+  commentId: Overload:VoxelPrototype.common.API.IMod.Version
+  href: VoxelPrototype.common.API.IMod.html#VoxelPrototype_common_API_IMod_Version
+  name: Version
+  nameWithType: IMod.Version
+  fullName: VoxelPrototype.common.API.IMod.Version
+- uid: VoxelPrototype.common.API.IMod.Init*
+  commentId: Overload:VoxelPrototype.common.API.IMod.Init
+  href: VoxelPrototype.common.API.IMod.html#VoxelPrototype_common_API_IMod_Init
+  name: Init
+  nameWithType: IMod.Init
+  fullName: VoxelPrototype.common.API.IMod.Init
+- uid: VoxelPrototype.common.API.IMod.DeInit*
+  commentId: Overload:VoxelPrototype.common.API.IMod.DeInit
+  href: VoxelPrototype.common.API.IMod.html#VoxelPrototype_common_API_IMod_DeInit
+  name: DeInit
+  nameWithType: IMod.DeInit
+  fullName: VoxelPrototype.common.API.IMod.DeInit

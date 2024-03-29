@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Chat
+  commentId: N:VoxelPrototype.common.Chat
+  id: VoxelPrototype.common.Chat
+  children:
+  - VoxelPrototype.common.Chat.ServerChat
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.Chat
+  nameWithType: VoxelPrototype.common.Chat
+  fullName: VoxelPrototype.common.Chat
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.Chat.ServerChat
+  commentId: T:VoxelPrototype.common.Chat.ServerChat
+  href: VoxelPrototype.common.Chat.ServerChat.html
+  name: ServerChat
+  nameWithType: ServerChat
+  fullName: VoxelPrototype.common.Chat.ServerChat

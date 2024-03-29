@@ -1,0 +1,807 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MouseState | Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MouseState | Documentation ">
+      
+      <meta name="description" content="Encapsulates the state of a mouse device.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Bambou72/VoxelPrototype/new/master/apiSpec/new?filename=VoxelPrototype_client_MouseState.md&amp;value=---%0Auid%3A%20VoxelPrototype.client.MouseState%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Documentation">
+            Documentation
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="VoxelPrototype.client.MouseState">
+
+
+
+  <h1 id="VoxelPrototype_client_MouseState" data-uid="VoxelPrototype.client.MouseState" class="text-break">
+Class MouseState  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L380"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="VoxelPrototype.html">VoxelPrototype</a>.<a class="xref" href="VoxelPrototype.client.html">client</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>VoxelPrototype.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Encapsulates the state of a mouse device.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MouseState</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">MouseState</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="VoxelPrototype_client_MouseState_Delta_" data-uid="VoxelPrototype.client.MouseState.Delta*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_Delta" data-uid="VoxelPrototype.client.MouseState.Delta">
+  Delta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L423"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a <span class="xref">OpenTK.Mathematics.Vector2</span> representing the amount that the mouse moved since the last frame.
+This does not necessarily correspond to pixels, for example in the case of raw input.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Delta { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector2</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_IsAnyButtonDown_" data-uid="VoxelPrototype.client.MouseState.IsAnyButtonDown*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_IsAnyButtonDown" data-uid="VoxelPrototype.client.MouseState.IsAnyButtonDown">
+  IsAnyButtonDown
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L476"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value indicating whether any button is down.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsAnyButtonDown { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if any button is down; otherwise, <code>false</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_Item_" data-uid="VoxelPrototype.client.MouseState.Item*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_Item_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_" data-uid="VoxelPrototype.client.MouseState.Item(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)">
+  this[MouseButton]
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L446"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> indicating whether the specified
+<span class="xref">OpenTK.Windowing.GraphicsLibraryFramework.MouseButton</span> is pressed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool this[MouseButton button] { get; }</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>button</code> <span class="xref">MouseButton</span></dt>
+    <dd><p>The <span class="xref">OpenTK.Windowing.GraphicsLibraryFramework.MouseButton</span> to check.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if key is pressed; <code>false</code> otherwise.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_Position_" data-uid="VoxelPrototype.client.MouseState.Position*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_Position" data-uid="VoxelPrototype.client.MouseState.Position">
+  Position
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L411"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a <span class="xref">OpenTK.Mathematics.Vector2</span> representing the absolute position of the pointer
+in the current frame, relative to the top-left corner of the contents of the window.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Position { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector2</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_PreviousPosition_" data-uid="VoxelPrototype.client.MouseState.PreviousPosition*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_PreviousPosition" data-uid="VoxelPrototype.client.MouseState.PreviousPosition">
+  PreviousPosition
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L417"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a <span class="xref">OpenTK.Mathematics.Vector2</span> representing the absolute position of the pointer
+in the previous frame, relative to the top-left corner of the contents of the window.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 PreviousPosition { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector2</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_PreviousScroll_" data-uid="VoxelPrototype.client.MouseState.PreviousScroll*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_PreviousScroll" data-uid="VoxelPrototype.client.MouseState.PreviousScroll">
+  PreviousScroll
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L433"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Get a Vector2 representing the position of the mouse wheel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 PreviousScroll { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector2</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_PreviousX_" data-uid="VoxelPrototype.client.MouseState.PreviousX*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_PreviousX" data-uid="VoxelPrototype.client.MouseState.PreviousX">
+  PreviousX
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L465"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets an integer representing the absolute x position of the pointer, in window pixel coordinates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PreviousX { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_PreviousY_" data-uid="VoxelPrototype.client.MouseState.PreviousY*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_PreviousY" data-uid="VoxelPrototype.client.MouseState.PreviousY">
+  PreviousY
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L470"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets an integer representing the absolute y position of the pointer, in window pixel coordinates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PreviousY { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_Scroll_" data-uid="VoxelPrototype.client.MouseState.Scroll*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_Scroll" data-uid="VoxelPrototype.client.MouseState.Scroll">
+  Scroll
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L428"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Get a Vector2 representing the position of the mouse wheel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Scroll { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector2</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_ScrollDelta_" data-uid="VoxelPrototype.client.MouseState.ScrollDelta*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_ScrollDelta" data-uid="VoxelPrototype.client.MouseState.ScrollDelta">
+  ScrollDelta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L438"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Get a Vector2 representing the amount that the mouse wheel moved since the last frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 ScrollDelta { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector2</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_X_" data-uid="VoxelPrototype.client.MouseState.X*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_X" data-uid="VoxelPrototype.client.MouseState.X">
+  X
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L455"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets an integer representing the absolute x position of the pointer, in window pixel coordinates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float X { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_Y_" data-uid="VoxelPrototype.client.MouseState.Y*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_Y" data-uid="VoxelPrototype.client.MouseState.Y">
+  Y
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L460"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets an integer representing the absolute y position of the pointer, in window pixel coordinates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Y { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="VoxelPrototype_client_MouseState_GetSnapshot_" data-uid="VoxelPrototype.client.MouseState.GetSnapshot*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_GetSnapshot" data-uid="VoxelPrototype.client.MouseState.GetSnapshot">
+  GetSnapshot()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L570"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets an immutable snapshot of this MouseState.
+This can be used to save the current mouse state for comparison later on.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MouseState GetSnapshot()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="VoxelPrototype.client.MouseState.html">MouseState</a></dt>
+    <dd><p>Returns an immutable snapshot of this MouseState.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_IsButtonDown_" data-uid="VoxelPrototype.client.MouseState.IsButtonDown*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_IsButtonDown_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_" data-uid="VoxelPrototype.client.MouseState.IsButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)">
+  IsButtonDown(MouseButton)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L524"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> indicating whether this button is down.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsButtonDown(MouseButton button)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>button</code> <span class="xref">MouseButton</span></dt>
+    <dd><p>The <span class="xref">OpenTK.Windowing.GraphicsLibraryFramework.MouseButton</span> to check.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the <code class="paramref">button</code> is down, otherwise <code>false</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_IsButtonPressed_" data-uid="VoxelPrototype.client.MouseState.IsButtonPressed*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_IsButtonPressed_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_" data-uid="VoxelPrototype.client.MouseState.IsButtonPressed(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)">
+  IsButtonPressed(MouseButton)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L547"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets whether the specified mouse button is pressed in the current frame but released in the previous frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsButtonPressed(MouseButton button)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>button</code> <span class="xref">MouseButton</span></dt>
+    <dd><p>The <span class="xref">mouse button</span> to check.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the mouse button is pressed in this frame, but not the last frame.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="VoxelPrototype_client_MouseState_IsButtonPressed_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>&quot;Frame&quot; refers to invocations of NativeWindow.ProcessEvents(double) (NativeWindow.ProcessInputEvents() more precisely) here.</p>
+</div>
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_IsButtonReleased_" data-uid="VoxelPrototype.client.MouseState.IsButtonReleased*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_IsButtonReleased_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_" data-uid="VoxelPrototype.client.MouseState.IsButtonReleased(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)">
+  IsButtonReleased(MouseButton)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L560"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets whether the specified mouse button is released in the current frame but pressed in the previous frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsButtonReleased(MouseButton button)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>button</code> <span class="xref">MouseButton</span></dt>
+    <dd><p>The <span class="xref">mouse button</span> to check.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the mouse button is released in this frame, but pressed the last frame.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="VoxelPrototype_client_MouseState_IsButtonReleased_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>&quot;Frame&quot; refers to invocations of NativeWindow.ProcessEvents(double) (NativeWindow.ProcessInputEvents() more precisely) here.</p>
+</div>
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_ToString_" data-uid="VoxelPrototype.client.MouseState.ToString*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_ToString" data-uid="VoxelPrototype.client.MouseState.ToString">
+  ToString()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a> that represents the current <a class="xref" href="VoxelPrototype.client.MouseState.html">MouseState</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a> that represents the current <a class="xref" href="VoxelPrototype.client.MouseState.html">MouseState</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_client_MouseState_WasButtonDown_" data-uid="VoxelPrototype.client.MouseState.WasButtonDown*"></a>
+
+  <h3 id="VoxelPrototype_client_MouseState_WasButtonDown_OpenTK_Windowing_GraphicsLibraryFramework_MouseButton_" data-uid="VoxelPrototype.client.MouseState.WasButtonDown(OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)">
+  WasButtonDown(MouseButton)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L534"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a> indicating whether this button was down in the previous frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool WasButtonDown(MouseButton button)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>button</code> <span class="xref">MouseButton</span></dt>
+    <dd><p>The <span class="xref">OpenTK.Windowing.GraphicsLibraryFramework.MouseButton</span> to check.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><code>true</code> if the <code class="paramref">button</code> is down, otherwise <code>false</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/client/Window.cs/#L380" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

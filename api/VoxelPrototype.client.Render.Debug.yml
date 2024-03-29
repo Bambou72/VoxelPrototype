@@ -1,0 +1,91 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.client.Render.Debug
+  commentId: N:VoxelPrototype.client.Render.Debug
+  id: VoxelPrototype.client.Render.Debug
+  children:
+  - VoxelPrototype.client.Render.Debug.DebugBox
+  - VoxelPrototype.client.Render.Debug.DebugLine
+  - VoxelPrototype.client.Render.Debug.DebugShaders
+  - VoxelPrototype.client.Render.Debug.DebugShapeRenderer
+  - VoxelPrototype.client.Render.Debug.Frustum
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.client.Render.Debug
+  nameWithType: VoxelPrototype.client.Render.Debug
+  fullName: VoxelPrototype.client.Render.Debug
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.client.Render.Debug.DebugShapeRenderer
+  commentId: T:VoxelPrototype.client.Render.Debug.DebugShapeRenderer
+  href: VoxelPrototype.client.Render.Debug.DebugShapeRenderer.html
+  name: DebugShapeRenderer
+  nameWithType: DebugShapeRenderer
+  fullName: VoxelPrototype.client.Render.Debug.DebugShapeRenderer
+- uid: VoxelPrototype.client.Render.Debug.DebugShaders
+  commentId: T:VoxelPrototype.client.Render.Debug.DebugShaders
+  href: VoxelPrototype.client.Render.Debug.DebugShaders.html
+  name: DebugShaders
+  nameWithType: DebugShaders
+  fullName: VoxelPrototype.client.Render.Debug.DebugShaders
+- uid: VoxelPrototype.client.Render.Debug.DebugBox
+  commentId: T:VoxelPrototype.client.Render.Debug.DebugBox
+  parent: VoxelPrototype.client.Render.Debug
+  href: VoxelPrototype.client.Render.Debug.DebugBox.html
+  name: DebugBox
+  nameWithType: DebugBox
+  fullName: VoxelPrototype.client.Render.Debug.DebugBox
+- uid: VoxelPrototype.client.Render.Debug.DebugLine
+  commentId: T:VoxelPrototype.client.Render.Debug.DebugLine
+  href: VoxelPrototype.client.Render.Debug.DebugLine.html
+  name: DebugLine
+  nameWithType: DebugLine
+  fullName: VoxelPrototype.client.Render.Debug.DebugLine
+- uid: VoxelPrototype.client.Render.Debug.Frustum
+  commentId: T:VoxelPrototype.client.Render.Debug.Frustum
+  parent: VoxelPrototype.client.Render.Debug
+  href: VoxelPrototype.client.Render.Debug.Frustum.html
+  name: Frustum
+  nameWithType: Frustum
+  fullName: VoxelPrototype.client.Render.Debug.Frustum
+- uid: VoxelPrototype.client.Render.Debug
+  commentId: N:VoxelPrototype.client.Render.Debug
+  href: VoxelPrototype.html
+  name: VoxelPrototype.client.Render.Debug
+  nameWithType: VoxelPrototype.client.Render.Debug
+  fullName: VoxelPrototype.client.Render.Debug
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+  - name: .
+  - uid: VoxelPrototype.client.Render
+    name: Render
+    href: VoxelPrototype.client.Render.html
+  - name: .
+  - uid: VoxelPrototype.client.Render.Debug
+    name: Debug
+    href: VoxelPrototype.client.Render.Debug.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+  - name: .
+  - uid: VoxelPrototype.client.Render
+    name: Render
+    href: VoxelPrototype.client.Render.html
+  - name: .
+  - uid: VoxelPrototype.client.Render.Debug
+    name: Debug
+    href: VoxelPrototype.client.Render.Debug.html

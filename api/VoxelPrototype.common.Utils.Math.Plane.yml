@@ -1,0 +1,485 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Utils.Math.Plane
+  commentId: T:VoxelPrototype.common.Utils.Math.Plane
+  id: Plane
+  parent: VoxelPrototype.common.Utils.Math
+  children:
+  - VoxelPrototype.common.Utils.Math.Plane.#ctor(OpenTK.Mathematics.Vector3,System.Single)
+  - VoxelPrototype.common.Utils.Math.Plane.D
+  - VoxelPrototype.common.Utils.Math.Plane.DistanceToPoint(OpenTK.Mathematics.Vector3)
+  - VoxelPrototype.common.Utils.Math.Plane.Normal
+  langs:
+  - csharp
+  - vb
+  name: Plane
+  nameWithType: Plane
+  fullName: VoxelPrototype.common.Utils.Math.Plane
+  type: Struct
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/Math/Plane.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Plane
+    path: VoxelPrototype/common/Utils/Math/Plane.cs
+    startLine: 4
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils.Math
+  syntax:
+    content: public struct Plane
+    content.vb: Public Structure Plane
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: VoxelPrototype.common.Utils.Math.Plane.Normal
+  commentId: P:VoxelPrototype.common.Utils.Math.Plane.Normal
+  id: Normal
+  parent: VoxelPrototype.common.Utils.Math.Plane
+  langs:
+  - csharp
+  - vb
+  name: Normal
+  nameWithType: Plane.Normal
+  fullName: VoxelPrototype.common.Utils.Math.Plane.Normal
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/Math/Plane.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Normal
+    path: VoxelPrototype/common/Utils/Math/Plane.cs
+    startLine: 6
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils.Math
+  syntax:
+    content: public readonly Vector3 Normal { get; }
+    parameters: []
+    return:
+      type: OpenTK.Mathematics.Vector3
+    content.vb: Public Property Normal As Vector3
+  overload: VoxelPrototype.common.Utils.Math.Plane.Normal*
+- uid: VoxelPrototype.common.Utils.Math.Plane.D
+  commentId: P:VoxelPrototype.common.Utils.Math.Plane.D
+  id: D
+  parent: VoxelPrototype.common.Utils.Math.Plane
+  langs:
+  - csharp
+  - vb
+  name: D
+  nameWithType: Plane.D
+  fullName: VoxelPrototype.common.Utils.Math.Plane.D
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/Math/Plane.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: D
+    path: VoxelPrototype/common/Utils/Math/Plane.cs
+    startLine: 7
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils.Math
+  syntax:
+    content: public readonly float D { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property D As Single
+  overload: VoxelPrototype.common.Utils.Math.Plane.D*
+- uid: VoxelPrototype.common.Utils.Math.Plane.#ctor(OpenTK.Mathematics.Vector3,System.Single)
+  commentId: M:VoxelPrototype.common.Utils.Math.Plane.#ctor(OpenTK.Mathematics.Vector3,System.Single)
+  id: '#ctor(OpenTK.Mathematics.Vector3,System.Single)'
+  parent: VoxelPrototype.common.Utils.Math.Plane
+  langs:
+  - csharp
+  - vb
+  name: Plane(Vector3, float)
+  nameWithType: Plane.Plane(Vector3, float)
+  fullName: VoxelPrototype.common.Utils.Math.Plane.Plane(OpenTK.Mathematics.Vector3, float)
+  type: Constructor
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/Math/Plane.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: .ctor
+    path: VoxelPrototype/common/Utils/Math/Plane.cs
+    startLine: 9
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils.Math
+  syntax:
+    content: public Plane(Vector3 normal, float d)
+    parameters:
+    - id: normal
+      type: OpenTK.Mathematics.Vector3
+    - id: d
+      type: System.Single
+    content.vb: Public Sub New(normal As Vector3, d As Single)
+  overload: VoxelPrototype.common.Utils.Math.Plane.#ctor*
+  nameWithType.vb: Plane.New(Vector3, Single)
+  fullName.vb: VoxelPrototype.common.Utils.Math.Plane.New(OpenTK.Mathematics.Vector3, Single)
+  name.vb: New(Vector3, Single)
+- uid: VoxelPrototype.common.Utils.Math.Plane.DistanceToPoint(OpenTK.Mathematics.Vector3)
+  commentId: M:VoxelPrototype.common.Utils.Math.Plane.DistanceToPoint(OpenTK.Mathematics.Vector3)
+  id: DistanceToPoint(OpenTK.Mathematics.Vector3)
+  parent: VoxelPrototype.common.Utils.Math.Plane
+  langs:
+  - csharp
+  - vb
+  name: DistanceToPoint(Vector3)
+  nameWithType: Plane.DistanceToPoint(Vector3)
+  fullName: VoxelPrototype.common.Utils.Math.Plane.DistanceToPoint(OpenTK.Mathematics.Vector3)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/Math/Plane.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: DistanceToPoint
+    path: VoxelPrototype/common/Utils/Math/Plane.cs
+    startLine: 16
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils.Math
+  syntax:
+    content: public float DistanceToPoint(Vector3 point)
+    parameters:
+    - id: point
+      type: OpenTK.Mathematics.Vector3
+    return:
+      type: System.Single
+    content.vb: Public Function DistanceToPoint(point As Vector3) As Single
+  overload: VoxelPrototype.common.Utils.Math.Plane.DistanceToPoint*
+references:
+- uid: VoxelPrototype.common.Utils.Math
+  commentId: N:VoxelPrototype.common.Utils.Math
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Utils.Math
+  nameWithType: VoxelPrototype.common.Utils.Math
+  fullName: VoxelPrototype.common.Utils.Math
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Utils
+    name: Utils
+    href: VoxelPrototype.common.Utils.html
+  - name: .
+  - uid: VoxelPrototype.common.Utils.Math
+    name: Math
+    href: VoxelPrototype.common.Utils.Math.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Utils
+    name: Utils
+    href: VoxelPrototype.common.Utils.html
+  - name: .
+  - uid: VoxelPrototype.common.Utils.Math
+    name: Math
+    href: VoxelPrototype.common.Utils.Math.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VoxelPrototype.common.Utils.Math.Plane.Normal*
+  commentId: Overload:VoxelPrototype.common.Utils.Math.Plane.Normal
+  href: VoxelPrototype.common.Utils.Math.Plane.html#VoxelPrototype_common_Utils_Math_Plane_Normal
+  name: Normal
+  nameWithType: Plane.Normal
+  fullName: VoxelPrototype.common.Utils.Math.Plane.Normal
+- uid: OpenTK.Mathematics.Vector3
+  commentId: T:OpenTK.Mathematics.Vector3
+  parent: OpenTK.Mathematics
+  isExternal: true
+  name: Vector3
+  nameWithType: Vector3
+  fullName: OpenTK.Mathematics.Vector3
+- uid: OpenTK.Mathematics
+  commentId: N:OpenTK.Mathematics
+  isExternal: true
+  name: OpenTK.Mathematics
+  nameWithType: OpenTK.Mathematics
+  fullName: OpenTK.Mathematics
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+- uid: VoxelPrototype.common.Utils.Math.Plane.D*
+  commentId: Overload:VoxelPrototype.common.Utils.Math.Plane.D
+  href: VoxelPrototype.common.Utils.Math.Plane.html#VoxelPrototype_common_Utils_Math_Plane_D
+  name: D
+  nameWithType: Plane.D
+  fullName: VoxelPrototype.common.Utils.Math.Plane.D
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: VoxelPrototype.common.Utils.Math.Plane.#ctor*
+  commentId: Overload:VoxelPrototype.common.Utils.Math.Plane.#ctor
+  href: VoxelPrototype.common.Utils.Math.Plane.html#VoxelPrototype_common_Utils_Math_Plane__ctor_OpenTK_Mathematics_Vector3_System_Single_
+  name: Plane
+  nameWithType: Plane.Plane
+  fullName: VoxelPrototype.common.Utils.Math.Plane.Plane
+  nameWithType.vb: Plane.New
+  fullName.vb: VoxelPrototype.common.Utils.Math.Plane.New
+  name.vb: New
+- uid: VoxelPrototype.common.Utils.Math.Plane.DistanceToPoint*
+  commentId: Overload:VoxelPrototype.common.Utils.Math.Plane.DistanceToPoint
+  href: VoxelPrototype.common.Utils.Math.Plane.html#VoxelPrototype_common_Utils_Math_Plane_DistanceToPoint_OpenTK_Mathematics_Vector3_
+  name: DistanceToPoint
+  nameWithType: Plane.DistanceToPoint
+  fullName: VoxelPrototype.common.Utils.Math.Plane.DistanceToPoint

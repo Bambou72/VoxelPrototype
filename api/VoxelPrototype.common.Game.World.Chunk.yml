@@ -1,0 +1,941 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Game.World.Chunk
+  commentId: T:VoxelPrototype.common.Game.World.Chunk
+  id: Chunk
+  parent: VoxelPrototype.common.Game.World
+  children:
+  - VoxelPrototype.common.Game.World.Chunk.Deserialize(System.Byte[])
+  - VoxelPrototype.common.Game.World.Chunk.GetBlock(OpenTK.Mathematics.Vector3i)
+  - VoxelPrototype.common.Game.World.Chunk.Height
+  - VoxelPrototype.common.Game.World.Chunk.Position
+  - VoxelPrototype.common.Game.World.Chunk.Serialize
+  - VoxelPrototype.common.Game.World.Chunk.SetBlock(OpenTK.Mathematics.Vector3i,VoxelPrototype.common.API.Blocks.State.BlockState)
+  - VoxelPrototype.common.Game.World.Chunk.Size
+  - VoxelPrototype.common.Game.World.Chunk.X
+  - VoxelPrototype.common.Game.World.Chunk.Z
+  langs:
+  - csharp
+  - vb
+  name: Chunk
+  nameWithType: Chunk
+  fullName: VoxelPrototype.common.Game.World.Chunk
+  type: Class
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Chunk
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 12
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  syntax:
+    content: 'public class Chunk : IVBFSerializableBinary<Chunk>'
+    content.vb: Public Class Chunk Implements IVBFSerializableBinary(Of Chunk)
+  inheritance:
+  - System.Object
+  implements:
+  - VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VoxelPrototype.common.Game.World.Chunk.Height
+  commentId: F:VoxelPrototype.common.Game.World.Chunk.Height
+  id: Height
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: Chunk.Height
+  fullName: VoxelPrototype.common.Game.World.Chunk.Height
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Height
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 17
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  syntax:
+    content: public const int Height = 32
+    return:
+      type: System.Int32
+    content.vb: Public Const Height As Integer = 32
+- uid: VoxelPrototype.common.Game.World.Chunk.Size
+  commentId: F:VoxelPrototype.common.Game.World.Chunk.Size
+  id: Size
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: Size
+  nameWithType: Chunk.Size
+  fullName: VoxelPrototype.common.Game.World.Chunk.Size
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Size
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 18
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  syntax:
+    content: public const int Size = 16
+    return:
+      type: System.Int32
+    content.vb: Public Const Size As Integer = 16
+- uid: VoxelPrototype.common.Game.World.Chunk.X
+  commentId: P:VoxelPrototype.common.Game.World.Chunk.X
+  id: X
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: X
+  nameWithType: Chunk.X
+  fullName: VoxelPrototype.common.Game.World.Chunk.X
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: X
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 22
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  syntax:
+    content: public int X { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property X As Integer
+  overload: VoxelPrototype.common.Game.World.Chunk.X*
+- uid: VoxelPrototype.common.Game.World.Chunk.Z
+  commentId: P:VoxelPrototype.common.Game.World.Chunk.Z
+  id: Z
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: Z
+  nameWithType: Chunk.Z
+  fullName: VoxelPrototype.common.Game.World.Chunk.Z
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Z
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 23
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  syntax:
+    content: public int Z { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Z As Integer
+  overload: VoxelPrototype.common.Game.World.Chunk.Z*
+- uid: VoxelPrototype.common.Game.World.Chunk.Position
+  commentId: P:VoxelPrototype.common.Game.World.Chunk.Position
+  id: Position
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: Position
+  nameWithType: Chunk.Position
+  fullName: VoxelPrototype.common.Game.World.Chunk.Position
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Position
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 24
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  syntax:
+    content: public Vector2i Position { get; set; }
+    parameters: []
+    return:
+      type: OpenTK.Mathematics.Vector2i
+    content.vb: Public Property Position As Vector2i
+  overload: VoxelPrototype.common.Game.World.Chunk.Position*
+- uid: VoxelPrototype.common.Game.World.Chunk.Serialize
+  commentId: M:VoxelPrototype.common.Game.World.Chunk.Serialize
+  id: Serialize
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: Serialize()
+  nameWithType: Chunk.Serialize()
+  fullName: VoxelPrototype.common.Game.World.Chunk.Serialize()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Serialize
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 25
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  example: []
+  syntax:
+    content: public byte[] Serialize()
+    return:
+      type: System.Byte[]
+    content.vb: Public Function Serialize() As Byte()
+  overload: VoxelPrototype.common.Game.World.Chunk.Serialize*
+  implements:
+  - VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Serialize
+- uid: VoxelPrototype.common.Game.World.Chunk.Deserialize(System.Byte[])
+  commentId: M:VoxelPrototype.common.Game.World.Chunk.Deserialize(System.Byte[])
+  id: Deserialize(System.Byte[])
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(byte[])
+  nameWithType: Chunk.Deserialize(byte[])
+  fullName: VoxelPrototype.common.Game.World.Chunk.Deserialize(byte[])
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Deserialize
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 41
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  example: []
+  syntax:
+    content: public Chunk Deserialize(byte[] data)
+    parameters:
+    - id: data
+      type: System.Byte[]
+    return:
+      type: VoxelPrototype.common.Game.World.Chunk
+    content.vb: Public Function Deserialize(data As Byte()) As Chunk
+  overload: VoxelPrototype.common.Game.World.Chunk.Deserialize*
+  implements:
+  - VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Deserialize(System.Byte[])
+  nameWithType.vb: Chunk.Deserialize(Byte())
+  fullName.vb: VoxelPrototype.common.Game.World.Chunk.Deserialize(Byte())
+  name.vb: Deserialize(Byte())
+- uid: VoxelPrototype.common.Game.World.Chunk.GetBlock(OpenTK.Mathematics.Vector3i)
+  commentId: M:VoxelPrototype.common.Game.World.Chunk.GetBlock(OpenTK.Mathematics.Vector3i)
+  id: GetBlock(OpenTK.Mathematics.Vector3i)
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: GetBlock(Vector3i)
+  nameWithType: Chunk.GetBlock(Vector3i)
+  fullName: VoxelPrototype.common.Game.World.Chunk.GetBlock(OpenTK.Mathematics.Vector3i)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetBlock
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 78
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  syntax:
+    content: public BlockState GetBlock(Vector3i pos)
+    parameters:
+    - id: pos
+      type: OpenTK.Mathematics.Vector3i
+    return:
+      type: VoxelPrototype.common.API.Blocks.State.BlockState
+    content.vb: Public Function GetBlock(pos As Vector3i) As BlockState
+  overload: VoxelPrototype.common.Game.World.Chunk.GetBlock*
+- uid: VoxelPrototype.common.Game.World.Chunk.SetBlock(OpenTK.Mathematics.Vector3i,VoxelPrototype.common.API.Blocks.State.BlockState)
+  commentId: M:VoxelPrototype.common.Game.World.Chunk.SetBlock(OpenTK.Mathematics.Vector3i,VoxelPrototype.common.API.Blocks.State.BlockState)
+  id: SetBlock(OpenTK.Mathematics.Vector3i,VoxelPrototype.common.API.Blocks.State.BlockState)
+  parent: VoxelPrototype.common.Game.World.Chunk
+  langs:
+  - csharp
+  - vb
+  name: SetBlock(Vector3i, BlockState)
+  nameWithType: Chunk.SetBlock(Vector3i, BlockState)
+  fullName: VoxelPrototype.common.Game.World.Chunk.SetBlock(OpenTK.Mathematics.Vector3i, VoxelPrototype.common.API.Blocks.State.BlockState)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Game/World/Chunk.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: SetBlock
+    path: VoxelPrototype/common/Game/World/Chunk.cs
+    startLine: 91
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Game.World
+  syntax:
+    content: public void SetBlock(Vector3i pos, BlockState id)
+    parameters:
+    - id: pos
+      type: OpenTK.Mathematics.Vector3i
+    - id: id
+      type: VoxelPrototype.common.API.Blocks.State.BlockState
+    content.vb: Public Sub SetBlock(pos As Vector3i, id As BlockState)
+  overload: VoxelPrototype.common.Game.World.Chunk.SetBlock*
+references:
+- uid: VoxelPrototype.common.Game.World
+  commentId: N:VoxelPrototype.common.Game.World
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Game.World
+  nameWithType: VoxelPrototype.common.Game.World
+  fullName: VoxelPrototype.common.Game.World
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.World
+    name: World
+    href: VoxelPrototype.common.Game.World.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.World
+    name: World
+    href: VoxelPrototype.common.Game.World.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}
+  commentId: T:VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}
+  parent: VBF
+  definition: VBF.IVBFSerializableBinary`1
+  href: VBF.IVBFSerializableBinary-1.html
+  name: IVBFSerializableBinary<Chunk>
+  nameWithType: IVBFSerializableBinary<Chunk>
+  fullName: VBF.IVBFSerializableBinary<VoxelPrototype.common.Game.World.Chunk>
+  nameWithType.vb: IVBFSerializableBinary(Of Chunk)
+  fullName.vb: VBF.IVBFSerializableBinary(Of VoxelPrototype.common.Game.World.Chunk)
+  name.vb: IVBFSerializableBinary(Of Chunk)
+  spec.csharp:
+  - uid: VBF.IVBFSerializableBinary`1
+    name: IVBFSerializableBinary
+    href: VBF.IVBFSerializableBinary-1.html
+  - name: <
+  - uid: VoxelPrototype.common.Game.World.Chunk
+    name: Chunk
+    href: VoxelPrototype.common.Game.World.Chunk.html
+  - name: '>'
+  spec.vb:
+  - uid: VBF.IVBFSerializableBinary`1
+    name: IVBFSerializableBinary
+    href: VBF.IVBFSerializableBinary-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: VoxelPrototype.common.Game.World.Chunk
+    name: Chunk
+    href: VoxelPrototype.common.Game.World.Chunk.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VBF.IVBFSerializableBinary`1
+  commentId: T:VBF.IVBFSerializableBinary`1
+  href: VBF.IVBFSerializableBinary-1.html
+  name: IVBFSerializableBinary<T>
+  nameWithType: IVBFSerializableBinary<T>
+  fullName: VBF.IVBFSerializableBinary<T>
+  nameWithType.vb: IVBFSerializableBinary(Of T)
+  fullName.vb: VBF.IVBFSerializableBinary(Of T)
+  name.vb: IVBFSerializableBinary(Of T)
+  spec.csharp:
+  - uid: VBF.IVBFSerializableBinary`1
+    name: IVBFSerializableBinary
+    href: VBF.IVBFSerializableBinary-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: VBF.IVBFSerializableBinary`1
+    name: IVBFSerializableBinary
+    href: VBF.IVBFSerializableBinary-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: VBF
+  commentId: N:VBF
+  href: VBF.html
+  name: VBF
+  nameWithType: VBF
+  fullName: VBF
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: VoxelPrototype.common.Game.World.Chunk.X*
+  commentId: Overload:VoxelPrototype.common.Game.World.Chunk.X
+  href: VoxelPrototype.common.Game.World.Chunk.html#VoxelPrototype_common_Game_World_Chunk_X
+  name: X
+  nameWithType: Chunk.X
+  fullName: VoxelPrototype.common.Game.World.Chunk.X
+- uid: VoxelPrototype.common.Game.World.Chunk.Z*
+  commentId: Overload:VoxelPrototype.common.Game.World.Chunk.Z
+  href: VoxelPrototype.common.Game.World.Chunk.html#VoxelPrototype_common_Game_World_Chunk_Z
+  name: Z
+  nameWithType: Chunk.Z
+  fullName: VoxelPrototype.common.Game.World.Chunk.Z
+- uid: VoxelPrototype.common.Game.World.Chunk.Position*
+  commentId: Overload:VoxelPrototype.common.Game.World.Chunk.Position
+  href: VoxelPrototype.common.Game.World.Chunk.html#VoxelPrototype_common_Game_World_Chunk_Position
+  name: Position
+  nameWithType: Chunk.Position
+  fullName: VoxelPrototype.common.Game.World.Chunk.Position
+- uid: OpenTK.Mathematics.Vector2i
+  commentId: T:OpenTK.Mathematics.Vector2i
+  parent: OpenTK.Mathematics
+  isExternal: true
+  name: Vector2i
+  nameWithType: Vector2i
+  fullName: OpenTK.Mathematics.Vector2i
+- uid: OpenTK.Mathematics
+  commentId: N:OpenTK.Mathematics
+  isExternal: true
+  name: OpenTK.Mathematics
+  nameWithType: OpenTK.Mathematics
+  fullName: OpenTK.Mathematics
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+- uid: VoxelPrototype.common.Game.World.Chunk.Serialize*
+  commentId: Overload:VoxelPrototype.common.Game.World.Chunk.Serialize
+  href: VoxelPrototype.common.Game.World.Chunk.html#VoxelPrototype_common_Game_World_Chunk_Serialize
+  name: Serialize
+  nameWithType: Chunk.Serialize
+  fullName: VoxelPrototype.common.Game.World.Chunk.Serialize
+- uid: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Serialize
+  commentId: M:VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Serialize
+  parent: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}
+  definition: VBF.IVBFSerializableBinary`1.Serialize
+  href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Serialize
+  name: Serialize()
+  nameWithType: IVBFSerializableBinary<Chunk>.Serialize()
+  fullName: VBF.IVBFSerializableBinary<VoxelPrototype.common.Game.World.Chunk>.Serialize()
+  nameWithType.vb: IVBFSerializableBinary(Of Chunk).Serialize()
+  fullName.vb: VBF.IVBFSerializableBinary(Of VoxelPrototype.common.Game.World.Chunk).Serialize()
+  spec.csharp:
+  - uid: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Serialize
+    name: Serialize
+    href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Serialize
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Serialize
+    name: Serialize
+    href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Serialize
+  - name: (
+  - name: )
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: VBF.IVBFSerializableBinary`1.Serialize
+  commentId: M:VBF.IVBFSerializableBinary`1.Serialize
+  href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Serialize
+  name: Serialize()
+  nameWithType: IVBFSerializableBinary<T>.Serialize()
+  fullName: VBF.IVBFSerializableBinary<T>.Serialize()
+  nameWithType.vb: IVBFSerializableBinary(Of T).Serialize()
+  fullName.vb: VBF.IVBFSerializableBinary(Of T).Serialize()
+  spec.csharp:
+  - uid: VBF.IVBFSerializableBinary`1.Serialize
+    name: Serialize
+    href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Serialize
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: VBF.IVBFSerializableBinary`1.Serialize
+    name: Serialize
+    href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Serialize
+  - name: (
+  - name: )
+- uid: VoxelPrototype.common.Game.World.Chunk.Deserialize*
+  commentId: Overload:VoxelPrototype.common.Game.World.Chunk.Deserialize
+  href: VoxelPrototype.common.Game.World.Chunk.html#VoxelPrototype_common_Game_World_Chunk_Deserialize_System_Byte___
+  name: Deserialize
+  nameWithType: Chunk.Deserialize
+  fullName: VoxelPrototype.common.Game.World.Chunk.Deserialize
+- uid: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Deserialize(System.Byte[])
+  commentId: M:VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Deserialize(System.Byte[])
+  parent: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}
+  definition: VBF.IVBFSerializableBinary`1.Deserialize(System.Byte[])
+  href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Deserialize_System_Byte___
+  name: Deserialize(byte[])
+  nameWithType: IVBFSerializableBinary<Chunk>.Deserialize(byte[])
+  fullName: VBF.IVBFSerializableBinary<VoxelPrototype.common.Game.World.Chunk>.Deserialize(byte[])
+  nameWithType.vb: IVBFSerializableBinary(Of Chunk).Deserialize(Byte())
+  fullName.vb: VBF.IVBFSerializableBinary(Of VoxelPrototype.common.Game.World.Chunk).Deserialize(Byte())
+  name.vb: Deserialize(Byte())
+  spec.csharp:
+  - uid: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Deserialize(System.Byte[])
+    name: Deserialize
+    href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Deserialize_System_Byte___
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: VBF.IVBFSerializableBinary{VoxelPrototype.common.Game.World.Chunk}.Deserialize(System.Byte[])
+    name: Deserialize
+    href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Deserialize_System_Byte___
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Game.World.Chunk
+  commentId: T:VoxelPrototype.common.Game.World.Chunk
+  parent: VoxelPrototype.common.Game.World
+  href: VoxelPrototype.common.Game.World.Chunk.html
+  name: Chunk
+  nameWithType: Chunk
+  fullName: VoxelPrototype.common.Game.World.Chunk
+- uid: VBF.IVBFSerializableBinary`1.Deserialize(System.Byte[])
+  commentId: M:VBF.IVBFSerializableBinary`1.Deserialize(System.Byte[])
+  isExternal: true
+  href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Deserialize_System_Byte___
+  name: Deserialize(byte[])
+  nameWithType: IVBFSerializableBinary<T>.Deserialize(byte[])
+  fullName: VBF.IVBFSerializableBinary<T>.Deserialize(byte[])
+  nameWithType.vb: IVBFSerializableBinary(Of T).Deserialize(Byte())
+  fullName.vb: VBF.IVBFSerializableBinary(Of T).Deserialize(Byte())
+  name.vb: Deserialize(Byte())
+  spec.csharp:
+  - uid: VBF.IVBFSerializableBinary`1.Deserialize(System.Byte[])
+    name: Deserialize
+    href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Deserialize_System_Byte___
+  - name: (
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: VBF.IVBFSerializableBinary`1.Deserialize(System.Byte[])
+    name: Deserialize
+    href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Deserialize_System_Byte___
+  - name: (
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Game.World.Chunk.GetBlock*
+  commentId: Overload:VoxelPrototype.common.Game.World.Chunk.GetBlock
+  href: VoxelPrototype.common.Game.World.Chunk.html#VoxelPrototype_common_Game_World_Chunk_GetBlock_OpenTK_Mathematics_Vector3i_
+  name: GetBlock
+  nameWithType: Chunk.GetBlock
+  fullName: VoxelPrototype.common.Game.World.Chunk.GetBlock
+- uid: OpenTK.Mathematics.Vector3i
+  commentId: T:OpenTK.Mathematics.Vector3i
+  parent: OpenTK.Mathematics
+  isExternal: true
+  name: Vector3i
+  nameWithType: Vector3i
+  fullName: OpenTK.Mathematics.Vector3i
+- uid: VoxelPrototype.common.API.Blocks.State.BlockState
+  commentId: T:VoxelPrototype.common.API.Blocks.State.BlockState
+  parent: VoxelPrototype.common.API.Blocks.State
+  href: VoxelPrototype.common.API.Blocks.State.BlockState.html
+  name: BlockState
+  nameWithType: BlockState
+  fullName: VoxelPrototype.common.API.Blocks.State.BlockState
+- uid: VoxelPrototype.common.API.Blocks.State
+  commentId: N:VoxelPrototype.common.API.Blocks.State
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.API.Blocks.State
+  nameWithType: VoxelPrototype.common.API.Blocks.State
+  fullName: VoxelPrototype.common.API.Blocks.State
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks
+    name: Blocks
+    href: VoxelPrototype.common.API.Blocks.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks.State
+    name: State
+    href: VoxelPrototype.common.API.Blocks.State.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks
+    name: Blocks
+    href: VoxelPrototype.common.API.Blocks.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks.State
+    name: State
+    href: VoxelPrototype.common.API.Blocks.State.html
+- uid: VoxelPrototype.common.Game.World.Chunk.SetBlock*
+  commentId: Overload:VoxelPrototype.common.Game.World.Chunk.SetBlock
+  href: VoxelPrototype.common.Game.World.Chunk.html#VoxelPrototype_common_Game_World_Chunk_SetBlock_OpenTK_Mathematics_Vector3i_VoxelPrototype_common_API_Blocks_State_BlockState_
+  name: SetBlock
+  nameWithType: Chunk.SetBlock
+  fullName: VoxelPrototype.common.Game.World.Chunk.SetBlock

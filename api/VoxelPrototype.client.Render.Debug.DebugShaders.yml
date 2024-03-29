@@ -1,0 +1,437 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.client.Render.Debug.DebugShaders
+  commentId: T:VoxelPrototype.client.Render.Debug.DebugShaders
+  id: DebugShaders
+  parent: VoxelPrototype.client.Render.Debug
+  children:
+  - VoxelPrototype.client.Render.Debug.DebugShaders.DebugFrag
+  - VoxelPrototype.client.Render.Debug.DebugShaders.DebugLineFrag
+  - VoxelPrototype.client.Render.Debug.DebugShaders.DebugLineVert
+  - VoxelPrototype.client.Render.Debug.DebugShaders.DebugVert
+  langs:
+  - csharp
+  - vb
+  name: DebugShaders
+  nameWithType: DebugShaders
+  fullName: VoxelPrototype.client.Render.Debug.DebugShaders
+  type: Class
+  source:
+    remote:
+      path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: DebugShaders
+    path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+    startLine: 150
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client.Render.Debug
+  syntax:
+    content: public static class DebugShaders
+    content.vb: Public Module DebugShaders
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VoxelPrototype.client.Render.Debug.DebugShaders.DebugVert
+  commentId: F:VoxelPrototype.client.Render.Debug.DebugShaders.DebugVert
+  id: DebugVert
+  parent: VoxelPrototype.client.Render.Debug.DebugShaders
+  langs:
+  - csharp
+  - vb
+  name: DebugVert
+  nameWithType: DebugShaders.DebugVert
+  fullName: VoxelPrototype.client.Render.Debug.DebugShaders.DebugVert
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: DebugVert
+    path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+    startLine: 152
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client.Render.Debug
+  syntax:
+    content: public static string DebugVert
+    return:
+      type: System.String
+    content.vb: Public Shared DebugVert As String
+- uid: VoxelPrototype.client.Render.Debug.DebugShaders.DebugFrag
+  commentId: F:VoxelPrototype.client.Render.Debug.DebugShaders.DebugFrag
+  id: DebugFrag
+  parent: VoxelPrototype.client.Render.Debug.DebugShaders
+  langs:
+  - csharp
+  - vb
+  name: DebugFrag
+  nameWithType: DebugShaders.DebugFrag
+  fullName: VoxelPrototype.client.Render.Debug.DebugShaders.DebugFrag
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: DebugFrag
+    path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+    startLine: 165
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client.Render.Debug
+  syntax:
+    content: public static string DebugFrag
+    return:
+      type: System.String
+    content.vb: Public Shared DebugFrag As String
+- uid: VoxelPrototype.client.Render.Debug.DebugShaders.DebugLineVert
+  commentId: F:VoxelPrototype.client.Render.Debug.DebugShaders.DebugLineVert
+  id: DebugLineVert
+  parent: VoxelPrototype.client.Render.Debug.DebugShaders
+  langs:
+  - csharp
+  - vb
+  name: DebugLineVert
+  nameWithType: DebugShaders.DebugLineVert
+  fullName: VoxelPrototype.client.Render.Debug.DebugShaders.DebugLineVert
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: DebugLineVert
+    path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+    startLine: 175
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client.Render.Debug
+  syntax:
+    content: public static string DebugLineVert
+    return:
+      type: System.String
+    content.vb: Public Shared DebugLineVert As String
+- uid: VoxelPrototype.client.Render.Debug.DebugShaders.DebugLineFrag
+  commentId: F:VoxelPrototype.client.Render.Debug.DebugShaders.DebugLineFrag
+  id: DebugLineFrag
+  parent: VoxelPrototype.client.Render.Debug.DebugShaders
+  langs:
+  - csharp
+  - vb
+  name: DebugLineFrag
+  nameWithType: DebugShaders.DebugLineFrag
+  fullName: VoxelPrototype.client.Render.Debug.DebugShaders.DebugLineFrag
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: DebugLineFrag
+    path: VoxelPrototype/client/Render/Debug/DebugShapeRender.cs
+    startLine: 188
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.client.Render.Debug
+  syntax:
+    content: public static string DebugLineFrag
+    return:
+      type: System.String
+    content.vb: Public Shared DebugLineFrag As String
+references:
+- uid: VoxelPrototype.client.Render.Debug
+  commentId: N:VoxelPrototype.client.Render.Debug
+  href: VoxelPrototype.html
+  name: VoxelPrototype.client.Render.Debug
+  nameWithType: VoxelPrototype.client.Render.Debug
+  fullName: VoxelPrototype.client.Render.Debug
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+  - name: .
+  - uid: VoxelPrototype.client.Render
+    name: Render
+    href: VoxelPrototype.client.Render.html
+  - name: .
+  - uid: VoxelPrototype.client.Render.Debug
+    name: Debug
+    href: VoxelPrototype.client.Render.Debug.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+  - name: .
+  - uid: VoxelPrototype.client.Render
+    name: Render
+    href: VoxelPrototype.client.Render.html
+  - name: .
+  - uid: VoxelPrototype.client.Render.Debug
+    name: Debug
+    href: VoxelPrototype.client.Render.Debug.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String

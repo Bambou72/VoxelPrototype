@@ -1,0 +1,573 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Collider | Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Collider | Documentation ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Bambou72/VoxelPrototype/new/master/apiSpec/new?filename=VoxelPrototype_common_Physics_Collider.md&amp;value=---%0Auid%3A%20VoxelPrototype.common.Physics.Collider%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Documentation">
+            Documentation
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="VoxelPrototype.common.Physics.Collider">
+
+
+
+  <h1 id="VoxelPrototype_common_Physics_Collider" data-uid="VoxelPrototype.common.Physics.Collider" class="text-break">
+Class Collider  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L4"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="VoxelPrototype.html">VoxelPrototype</a>.<a class="xref" href="VoxelPrototype.common.html">common</a>.<a class="xref" href="VoxelPrototype.common.Physics.html">Physics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>VoxelPrototype.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class Collider</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Collider</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="VoxelPrototype_common_Physics_Collider__ctor_" data-uid="VoxelPrototype.common.Physics.Collider.#ctor*"></a>
+
+  <h3 id="VoxelPrototype_common_Physics_Collider__ctor_OpenTK_Mathematics_Vector3d_OpenTK_Mathematics_Vector3d_" data-uid="VoxelPrototype.common.Physics.Collider.#ctor(OpenTK.Mathematics.Vector3d,OpenTK.Mathematics.Vector3d)">
+  Collider(Vector3d, Vector3d)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collider(Vector3d pos1 = default, Vector3d pos2 = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pos1</code> <span class="xref">Vector3d</span></dt>
+    <dd></dd>
+    <dt><code>pos2</code> <span class="xref">Vector3d</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_x1" data-uid="VoxelPrototype.common.Physics.Collider.x1">
+  x1
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double x1</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_x2" data-uid="VoxelPrototype.common.Physics.Collider.x2">
+  x2
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double x2</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_y1" data-uid="VoxelPrototype.common.Physics.Collider.y1">
+  y1
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double y1</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_y2" data-uid="VoxelPrototype.common.Physics.Collider.y2">
+  y2
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double y2</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_z1" data-uid="VoxelPrototype.common.Physics.Collider.z1">
+  z1
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double z1</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_z2" data-uid="VoxelPrototype.common.Physics.Collider.z2">
+  z2
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double z2</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="VoxelPrototype_common_Physics_Collider_max_" data-uid="VoxelPrototype.common.Physics.Collider.max*"></a>
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_max" data-uid="VoxelPrototype.common.Physics.Collider.max">
+  max
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d max { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector3d</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_common_Physics_Collider_min_" data-uid="VoxelPrototype.common.Physics.Collider.min*"></a>
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_min" data-uid="VoxelPrototype.common.Physics.Collider.min">
+  min
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d min { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector3d</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="VoxelPrototype_common_Physics_Collider_Collide_" data-uid="VoxelPrototype.common.Physics.Collider.Collide*"></a>
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_Collide_VoxelPrototype_common_Physics_Collider_OpenTK_Mathematics_Vector3_" data-uid="VoxelPrototype.common.Physics.Collider.Collide(VoxelPrototype.common.Physics.Collider,OpenTK.Mathematics.Vector3)">
+  Collide(Collider, Vector3)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public (double?, Vector3d) Collide(Collider collider, Vector3 velocity)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>collider</code> <a class="xref" href="VoxelPrototype.common.Physics.Collider.html">Collider</a></dt>
+    <dd></dd>
+    <dt><code>velocity</code> <span class="xref">Vector3</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?, <span class="xref">Vector3d</span>)</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_common_Physics_Collider_GetCorners_" data-uid="VoxelPrototype.common.Physics.Collider.GetCorners*"></a>
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_GetCorners" data-uid="VoxelPrototype.common.Physics.Collider.GetCorners">
+  GetCorners()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3d[] GetCorners()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Vector3d</span>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VoxelPrototype_common_Physics_Collider_Move_" data-uid="VoxelPrototype.common.Physics.Collider.Move*"></a>
+
+  <h3 id="VoxelPrototype_common_Physics_Collider_Move_OpenTK_Mathematics_Vector3d_" data-uid="VoxelPrototype.common.Physics.Collider.Move(OpenTK.Mathematics.Vector3d)">
+  Move(Vector3d)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collider Move(Vector3d pos)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pos</code> <span class="xref">Vector3d</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="VoxelPrototype.common.Physics.Collider.html">Collider</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Bambou72/VoxelPrototype/blob/master/VoxelPrototype/common/Physics/Collider.cs/#L4" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

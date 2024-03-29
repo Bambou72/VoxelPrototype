@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.RessourceManager
+  commentId: N:VoxelPrototype.common.RessourceManager
+  id: VoxelPrototype.common.RessourceManager
+  children:
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.RessourceManager
+  nameWithType: VoxelPrototype.common.RessourceManager
+  fullName: VoxelPrototype.common.RessourceManager
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  commentId: T:VoxelPrototype.common.RessourceManager.RessourcePackManager
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html
+  name: RessourcePackManager
+  nameWithType: RessourcePackManager
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager

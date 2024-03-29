@@ -1,0 +1,78 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  commentId: N:VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  id: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  children:
+  - VoxelPrototype.common.Game.Entities.Player.PlayerManager.ServerPlayerFactory
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  nameWithType: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  fullName: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.Game.Entities.Player.PlayerManager.ServerPlayerFactory
+  commentId: T:VoxelPrototype.common.Game.Entities.Player.PlayerManager.ServerPlayerFactory
+  parent: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  href: VoxelPrototype.common.Game.Entities.Player.PlayerManager.ServerPlayerFactory.html
+  name: ServerPlayerFactory
+  nameWithType: ServerPlayerFactory
+  fullName: VoxelPrototype.common.Game.Entities.Player.PlayerManager.ServerPlayerFactory
+- uid: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  commentId: N:VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  nameWithType: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  fullName: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities
+    name: Entities
+    href: VoxelPrototype.common.Game.Entities.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities.Player
+    name: Player
+    href: VoxelPrototype.common.Game.Entities.Player.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+    name: PlayerManager
+    href: VoxelPrototype.common.Game.Entities.Player.PlayerManager.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities
+    name: Entities
+    href: VoxelPrototype.common.Game.Entities.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities.Player
+    name: Player
+    href: VoxelPrototype.common.Game.Entities.Player.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.Entities.Player.PlayerManager
+    name: PlayerManager
+    href: VoxelPrototype.common.Game.Entities.Player.PlayerManager.html

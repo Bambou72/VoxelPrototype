@@ -1,0 +1,1329 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  commentId: T:VoxelPrototype.common.RessourceManager.RessourcePackManager
+  id: RessourcePackManager
+  parent: VoxelPrototype.common.RessourceManager
+  children:
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.BuildAtlas
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.CleanTempFolder
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId(System.String,System.String,System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlas
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.Initialize
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.InitializeServer
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacks
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacksServer
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete(System.IO.DirectoryInfo,System.Boolean)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadTexturePacks
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadVoxelAtlas
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack(System.String)
+  - VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack(System.String,System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: RessourcePackManager
+  nameWithType: RessourcePackManager
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  type: Class
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: RessourcePackManager
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 11
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public class RessourcePackManager
+    content.vb: Public Class RessourcePackManager
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.Initialize
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.Initialize
+  id: Initialize
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: Initialize()
+  nameWithType: RessourcePackManager.Initialize()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.Initialize()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Initialize
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 21
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void Initialize()
+    content.vb: Public Sub Initialize()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.Initialize*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.InitializeServer
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.InitializeServer
+  id: InitializeServer
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: InitializeServer()
+  nameWithType: RessourcePackManager.InitializeServer()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.InitializeServer()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: InitializeServer
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 26
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void InitializeServer()
+    content.vb: Public Sub InitializeServer()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.InitializeServer*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacksServer
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacksServer
+  id: LoadRessourcesPacksServer
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: LoadRessourcesPacksServer()
+  nameWithType: RessourcePackManager.LoadRessourcesPacksServer()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacksServer()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: LoadRessourcesPacksServer
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 32
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void LoadRessourcesPacksServer()
+    content.vb: Public Sub LoadRessourcesPacksServer()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacksServer*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacks
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacks
+  id: LoadRessourcesPacks
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: LoadRessourcesPacks()
+  nameWithType: RessourcePackManager.LoadRessourcesPacks()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacks()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: LoadRessourcesPacks
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 59
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void LoadRessourcesPacks()
+    content.vb: Public Sub LoadRessourcesPacks()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacks*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack(System.String,System.Int32)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack(System.String,System.Int32)
+  id: SetTexturePack(System.String,System.Int32)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: SetTexturePack(string, int)
+  nameWithType: RessourcePackManager.SetTexturePack(string, int)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack(string, int)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: SetTexturePack
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 95
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void SetTexturePack(string Name, int op)
+    parameters:
+    - id: Name
+      type: System.String
+    - id: op
+      type: System.Int32
+    content.vb: Public Sub SetTexturePack(Name As String, op As Integer)
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack*
+  nameWithType.vb: RessourcePackManager.SetTexturePack(String, Integer)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack(String, Integer)
+  name.vb: SetTexturePack(String, Integer)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.CleanTempFolder
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.CleanTempFolder
+  id: CleanTempFolder
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: CleanTempFolder()
+  nameWithType: RessourcePackManager.CleanTempFolder()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.CleanTempFolder()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: CleanTempFolder
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 126
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void CleanTempFolder()
+    content.vb: Public Sub CleanTempFolder()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.CleanTempFolder*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete(System.IO.DirectoryInfo,System.Boolean)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete(System.IO.DirectoryInfo,System.Boolean)
+  id: RecursiveDelete(System.IO.DirectoryInfo,System.Boolean)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: RecursiveDelete(DirectoryInfo, bool)
+  nameWithType: RessourcePackManager.RecursiveDelete(DirectoryInfo, bool)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete(System.IO.DirectoryInfo, bool)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: RecursiveDelete
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 138
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public static void RecursiveDelete(DirectoryInfo baseDir, bool isRootDir)
+    parameters:
+    - id: baseDir
+      type: System.IO.DirectoryInfo
+    - id: isRootDir
+      type: System.Boolean
+    content.vb: Public Shared Sub RecursiveDelete(baseDir As DirectoryInfo, isRootDir As Boolean)
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete*
+  nameWithType.vb: RessourcePackManager.RecursiveDelete(DirectoryInfo, Boolean)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete(System.IO.DirectoryInfo, Boolean)
+  name.vb: RecursiveDelete(DirectoryInfo, Boolean)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadVoxelAtlas
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadVoxelAtlas
+  id: ReloadVoxelAtlas
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: ReloadVoxelAtlas()
+  nameWithType: RessourcePackManager.ReloadVoxelAtlas()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadVoxelAtlas()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ReloadVoxelAtlas
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 150
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void ReloadVoxelAtlas()
+    content.vb: Public Sub ReloadVoxelAtlas()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadVoxelAtlas*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.BuildAtlas
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.BuildAtlas
+  id: BuildAtlas
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: BuildAtlas()
+  nameWithType: RessourcePackManager.BuildAtlas()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.BuildAtlas()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: BuildAtlas
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 164
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void BuildAtlas()
+    content.vb: Public Sub BuildAtlas()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.BuildAtlas*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlas
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlas
+  id: GetAtlas
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetAtlas()
+  nameWithType: RessourcePackManager.GetAtlas()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlas()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetAtlas
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 213
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public Texture GetAtlas()
+    return:
+      type: VoxelPrototype.client.Render.Components.Texture
+    content.vb: Public Function GetAtlas() As Texture
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlas*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack(System.String)
+  id: RemoveTexturePack(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: RemoveTexturePack(string)
+  nameWithType: RessourcePackManager.RemoveTexturePack(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: RemoveTexturePack
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 217
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void RemoveTexturePack(string Name)
+    parameters:
+    - id: Name
+      type: System.String
+    content.vb: Public Sub RemoveTexturePack(Name As String)
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack*
+  nameWithType.vb: RessourcePackManager.RemoveTexturePack(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack(String)
+  name.vb: RemoveTexturePack(String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadTexturePacks
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadTexturePacks
+  id: ReloadTexturePacks
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: ReloadTexturePacks()
+  nameWithType: RessourcePackManager.ReloadTexturePacks()
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadTexturePacks()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ReloadTexturePacks
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 234
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public void ReloadTexturePacks()
+    content.vb: Public Sub ReloadTexturePacks()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadTexturePacks*
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId(System.String,System.String,System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId(System.String,System.String,System.String)
+  id: GetAssetId(System.String,System.String,System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetAssetId(string, string, string)
+  nameWithType: RessourcePackManager.GetAssetId(string, string, string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId(string, string, string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetAssetId
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 241
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public static string GetAssetId(string ModName, string Name, string SubAssetType = "")
+    parameters:
+    - id: ModName
+      type: System.String
+    - id: Name
+      type: System.String
+    - id: SubAssetType
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public Shared Function GetAssetId(ModName As String, Name As String, SubAssetType As String = "") As String
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId*
+  nameWithType.vb: RessourcePackManager.GetAssetId(String, String, String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId(String, String, String)
+  name.vb: GetAssetId(String, String, String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord(System.String)
+  id: GetAtlasTexturesCoord(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetAtlasTexturesCoord(string)
+  nameWithType: RessourcePackManager.GetAtlasTexturesCoord(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetAtlasTexturesCoord
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 255
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public float[] GetAtlasTexturesCoord(string Id)
+    parameters:
+    - id: Id
+      type: System.String
+    return:
+      type: System.Single[]
+    content.vb: Public Function GetAtlasTexturesCoord(Id As String) As Single()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord*
+  nameWithType.vb: RessourcePackManager.GetAtlasTexturesCoord(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord(String)
+  name.vb: GetAtlasTexturesCoord(String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader(System.String)
+  id: GetShader(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetShader(string)
+  nameWithType: RessourcePackManager.GetShader(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetShader
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 267
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public Shader GetShader(string Id)
+    parameters:
+    - id: Id
+      type: System.String
+    return:
+      type: VoxelPrototype.client.Render.Components.Shader
+    content.vb: Public Function GetShader(Id As String) As Shader
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader*
+  nameWithType.vb: RessourcePackManager.GetShader(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader(String)
+  name.vb: GetShader(String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh(System.String)
+  id: GetBlockMesh(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetBlockMesh(string)
+  nameWithType: RessourcePackManager.GetBlockMesh(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetBlockMesh
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 277
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public BlockMesh GetBlockMesh(string Id)
+    parameters:
+    - id: Id
+      type: System.String
+    return:
+      type: VoxelPrototype.client.Render.Components.BlockMesh
+    content.vb: Public Function GetBlockMesh(Id As String) As BlockMesh
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh*
+  nameWithType.vb: RessourcePackManager.GetBlockMesh(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh(String)
+  name.vb: GetBlockMesh(String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh(System.String)
+  id: GetEntityMesh(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetEntityMesh(string)
+  nameWithType: RessourcePackManager.GetEntityMesh(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetEntityMesh
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 287
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public Model GetEntityMesh(string Id)
+    parameters:
+    - id: Id
+      type: System.String
+    return:
+      type: VoxelPrototype.client.Render.Components.Model
+    content.vb: Public Function GetEntityMesh(Id As String) As Model
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh*
+  nameWithType.vb: RessourcePackManager.GetEntityMesh(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh(String)
+  name.vb: GetEntityMesh(String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData(System.String)
+  id: GetBlockStateData(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetBlockStateData(string)
+  nameWithType: RessourcePackManager.GetBlockStateData(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetBlockStateData
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 297
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public BlockStateData GetBlockStateData(string Id)
+    parameters:
+    - id: Id
+      type: System.String
+    return:
+      type: VoxelPrototype.common.RessourceManager.data.BlockStateData
+    content.vb: Public Function GetBlockStateData(Id As String) As BlockStateData
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData*
+  nameWithType.vb: RessourcePackManager.GetBlockStateData(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData(String)
+  name.vb: GetBlockStateData(String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider(System.String)
+  id: GetBlockCollider(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetBlockCollider(string)
+  nameWithType: RessourcePackManager.GetBlockCollider(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetBlockCollider
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 307
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public Collider[] GetBlockCollider(string Id)
+    parameters:
+    - id: Id
+      type: System.String
+    return:
+      type: VoxelPrototype.common.Physics.Collider[]
+    content.vb: Public Function GetBlockCollider(Id As String) As Collider()
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider*
+  nameWithType.vb: RessourcePackManager.GetBlockCollider(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider(String)
+  name.vb: GetBlockCollider(String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap(System.String)
+  id: GetCubeMap(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetCubeMap(string)
+  nameWithType: RessourcePackManager.GetCubeMap(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetCubeMap
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 317
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public CubeMapTexture GetCubeMap(string Id)
+    parameters:
+    - id: Id
+      type: System.String
+    return:
+      type: VoxelPrototype.client.Render.Components.CubeMapTexture
+    content.vb: Public Function GetCubeMap(Id As String) As CubeMapTexture
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap*
+  nameWithType.vb: RessourcePackManager.GetCubeMap(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap(String)
+  name.vb: GetCubeMap(String)
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture(System.String)
+  commentId: M:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture(System.String)
+  id: GetEntityTexture(System.String)
+  parent: VoxelPrototype.common.RessourceManager.RessourcePackManager
+  langs:
+  - csharp
+  - vb
+  name: GetEntityTexture(string)
+  nameWithType: RessourcePackManager.GetEntityTexture(string)
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture(string)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetEntityTexture
+    path: VoxelPrototype/common/RessourceManager/RessourcePackManager.cs
+    startLine: 327
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager
+  syntax:
+    content: public Texture GetEntityTexture(string Id)
+    parameters:
+    - id: Id
+      type: System.String
+    return:
+      type: VoxelPrototype.client.Render.Components.Texture
+    content.vb: Public Function GetEntityTexture(Id As String) As Texture
+  overload: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture*
+  nameWithType.vb: RessourcePackManager.GetEntityTexture(String)
+  fullName.vb: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture(String)
+  name.vb: GetEntityTexture(String)
+references:
+- uid: VoxelPrototype.common.RessourceManager
+  commentId: N:VoxelPrototype.common.RessourceManager
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.RessourceManager
+  nameWithType: VoxelPrototype.common.RessourceManager
+  fullName: VoxelPrototype.common.RessourceManager
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager
+    name: RessourceManager
+    href: VoxelPrototype.common.RessourceManager.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager
+    name: RessourceManager
+    href: VoxelPrototype.common.RessourceManager.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.Initialize*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.Initialize
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_Initialize
+  name: Initialize
+  nameWithType: RessourcePackManager.Initialize
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.Initialize
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.InitializeServer*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.InitializeServer
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_InitializeServer
+  name: InitializeServer
+  nameWithType: RessourcePackManager.InitializeServer
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.InitializeServer
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacksServer*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacksServer
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_LoadRessourcesPacksServer
+  name: LoadRessourcesPacksServer
+  nameWithType: RessourcePackManager.LoadRessourcesPacksServer
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacksServer
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacks*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacks
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_LoadRessourcesPacks
+  name: LoadRessourcesPacks
+  nameWithType: RessourcePackManager.LoadRessourcesPacks
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.LoadRessourcesPacks
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_SetTexturePack_System_String_System_Int32_
+  name: SetTexturePack
+  nameWithType: RessourcePackManager.SetTexturePack
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.SetTexturePack
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.CleanTempFolder*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.CleanTempFolder
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_CleanTempFolder
+  name: CleanTempFolder
+  nameWithType: RessourcePackManager.CleanTempFolder
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.CleanTempFolder
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_RecursiveDelete_System_IO_DirectoryInfo_System_Boolean_
+  name: RecursiveDelete
+  nameWithType: RessourcePackManager.RecursiveDelete
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.RecursiveDelete
+- uid: System.IO.DirectoryInfo
+  commentId: T:System.IO.DirectoryInfo
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.directoryinfo
+  name: DirectoryInfo
+  nameWithType: DirectoryInfo
+  fullName: System.IO.DirectoryInfo
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadVoxelAtlas*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadVoxelAtlas
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_ReloadVoxelAtlas
+  name: ReloadVoxelAtlas
+  nameWithType: RessourcePackManager.ReloadVoxelAtlas
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadVoxelAtlas
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.BuildAtlas*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.BuildAtlas
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_BuildAtlas
+  name: BuildAtlas
+  nameWithType: RessourcePackManager.BuildAtlas
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.BuildAtlas
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlas*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlas
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetAtlas
+  name: GetAtlas
+  nameWithType: RessourcePackManager.GetAtlas
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlas
+- uid: VoxelPrototype.client.Render.Components.Texture
+  commentId: T:VoxelPrototype.client.Render.Components.Texture
+  parent: VoxelPrototype.client.Render.Components
+  href: VoxelPrototype.client.Render.Components.Texture.html
+  name: Texture
+  nameWithType: Texture
+  fullName: VoxelPrototype.client.Render.Components.Texture
+- uid: VoxelPrototype.client.Render.Components
+  commentId: N:VoxelPrototype.client.Render.Components
+  href: VoxelPrototype.html
+  name: VoxelPrototype.client.Render.Components
+  nameWithType: VoxelPrototype.client.Render.Components
+  fullName: VoxelPrototype.client.Render.Components
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+  - name: .
+  - uid: VoxelPrototype.client.Render
+    name: Render
+    href: VoxelPrototype.client.Render.html
+  - name: .
+  - uid: VoxelPrototype.client.Render.Components
+    name: Components
+    href: VoxelPrototype.client.Render.Components.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.client
+    name: client
+    href: VoxelPrototype.client.html
+  - name: .
+  - uid: VoxelPrototype.client.Render
+    name: Render
+    href: VoxelPrototype.client.Render.html
+  - name: .
+  - uid: VoxelPrototype.client.Render.Components
+    name: Components
+    href: VoxelPrototype.client.Render.Components.html
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_RemoveTexturePack_System_String_
+  name: RemoveTexturePack
+  nameWithType: RessourcePackManager.RemoveTexturePack
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.RemoveTexturePack
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadTexturePacks*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadTexturePacks
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_ReloadTexturePacks
+  name: ReloadTexturePacks
+  nameWithType: RessourcePackManager.ReloadTexturePacks
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.ReloadTexturePacks
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetAssetId_System_String_System_String_System_String_
+  name: GetAssetId
+  nameWithType: RessourcePackManager.GetAssetId
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAssetId
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetAtlasTexturesCoord_System_String_
+  name: GetAtlasTexturesCoord
+  nameWithType: RessourcePackManager.GetAtlasTexturesCoord
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetAtlasTexturesCoord
+- uid: System.Single[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float[]
+  nameWithType: float[]
+  fullName: float[]
+  nameWithType.vb: Single()
+  fullName.vb: Single()
+  name.vb: Single()
+  spec.csharp:
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: (
+  - name: )
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetShader_System_String_
+  name: GetShader
+  nameWithType: RessourcePackManager.GetShader
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetShader
+- uid: VoxelPrototype.client.Render.Components.Shader
+  commentId: T:VoxelPrototype.client.Render.Components.Shader
+  parent: VoxelPrototype.client.Render.Components
+  href: VoxelPrototype.client.Render.Components.Shader.html
+  name: Shader
+  nameWithType: Shader
+  fullName: VoxelPrototype.client.Render.Components.Shader
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetBlockMesh_System_String_
+  name: GetBlockMesh
+  nameWithType: RessourcePackManager.GetBlockMesh
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockMesh
+- uid: VoxelPrototype.client.Render.Components.BlockMesh
+  commentId: T:VoxelPrototype.client.Render.Components.BlockMesh
+  parent: VoxelPrototype.client.Render.Components
+  href: VoxelPrototype.client.Render.Components.BlockMesh.html
+  name: BlockMesh
+  nameWithType: BlockMesh
+  fullName: VoxelPrototype.client.Render.Components.BlockMesh
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetEntityMesh_System_String_
+  name: GetEntityMesh
+  nameWithType: RessourcePackManager.GetEntityMesh
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityMesh
+- uid: VoxelPrototype.client.Render.Components.Model
+  commentId: T:VoxelPrototype.client.Render.Components.Model
+  parent: VoxelPrototype.client.Render.Components
+  href: VoxelPrototype.client.Render.Components.Model.html
+  name: Model
+  nameWithType: Model
+  fullName: VoxelPrototype.client.Render.Components.Model
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetBlockStateData_System_String_
+  name: GetBlockStateData
+  nameWithType: RessourcePackManager.GetBlockStateData
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockStateData
+- uid: VoxelPrototype.common.RessourceManager.data.BlockStateData
+  commentId: T:VoxelPrototype.common.RessourceManager.data.BlockStateData
+  parent: VoxelPrototype.common.RessourceManager.data
+  href: VoxelPrototype.common.RessourceManager.data.BlockStateData.html
+  name: BlockStateData
+  nameWithType: BlockStateData
+  fullName: VoxelPrototype.common.RessourceManager.data.BlockStateData
+- uid: VoxelPrototype.common.RessourceManager.data
+  commentId: N:VoxelPrototype.common.RessourceManager.data
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.RessourceManager.data
+  nameWithType: VoxelPrototype.common.RessourceManager.data
+  fullName: VoxelPrototype.common.RessourceManager.data
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager
+    name: RessourceManager
+    href: VoxelPrototype.common.RessourceManager.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager.data
+    name: data
+    href: VoxelPrototype.common.RessourceManager.data.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager
+    name: RessourceManager
+    href: VoxelPrototype.common.RessourceManager.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager.data
+    name: data
+    href: VoxelPrototype.common.RessourceManager.data.html
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetBlockCollider_System_String_
+  name: GetBlockCollider
+  nameWithType: RessourcePackManager.GetBlockCollider
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetBlockCollider
+- uid: VoxelPrototype.common.Physics.Collider[]
+  isExternal: true
+  href: VoxelPrototype.common.Physics.Collider.html
+  name: Collider[]
+  nameWithType: Collider[]
+  fullName: VoxelPrototype.common.Physics.Collider[]
+  nameWithType.vb: Collider()
+  fullName.vb: VoxelPrototype.common.Physics.Collider()
+  name.vb: Collider()
+  spec.csharp:
+  - uid: VoxelPrototype.common.Physics.Collider
+    name: Collider
+    href: VoxelPrototype.common.Physics.Collider.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: VoxelPrototype.common.Physics.Collider
+    name: Collider
+    href: VoxelPrototype.common.Physics.Collider.html
+  - name: (
+  - name: )
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetCubeMap_System_String_
+  name: GetCubeMap
+  nameWithType: RessourcePackManager.GetCubeMap
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetCubeMap
+- uid: VoxelPrototype.client.Render.Components.CubeMapTexture
+  commentId: T:VoxelPrototype.client.Render.Components.CubeMapTexture
+  parent: VoxelPrototype.client.Render.Components
+  href: VoxelPrototype.client.Render.Components.CubeMapTexture.html
+  name: CubeMapTexture
+  nameWithType: CubeMapTexture
+  fullName: VoxelPrototype.client.Render.Components.CubeMapTexture
+- uid: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture
+  href: VoxelPrototype.common.RessourceManager.RessourcePackManager.html#VoxelPrototype_common_RessourceManager_RessourcePackManager_GetEntityTexture_System_String_
+  name: GetEntityTexture
+  nameWithType: RessourcePackManager.GetEntityTexture
+  fullName: VoxelPrototype.common.RessourceManager.RessourcePackManager.GetEntityTexture

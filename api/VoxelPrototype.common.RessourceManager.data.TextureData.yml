@@ -1,0 +1,613 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData
+  commentId: T:VoxelPrototype.common.RessourceManager.data.TextureData
+  id: TextureData
+  parent: VoxelPrototype.common.RessourceManager.data
+  children:
+  - VoxelPrototype.common.RessourceManager.data.TextureData.all
+  - VoxelPrototype.common.RessourceManager.data.TextureData.back
+  - VoxelPrototype.common.RessourceManager.data.TextureData.bottom
+  - VoxelPrototype.common.RessourceManager.data.TextureData.front
+  - VoxelPrototype.common.RessourceManager.data.TextureData.left
+  - VoxelPrototype.common.RessourceManager.data.TextureData.right
+  - VoxelPrototype.common.RessourceManager.data.TextureData.textures
+  - VoxelPrototype.common.RessourceManager.data.TextureData.top
+  langs:
+  - csharp
+  - vb
+  name: TextureData
+  nameWithType: TextureData
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData
+  type: Struct
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: TextureData
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 10
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public struct TextureData
+    content.vb: Public Structure TextureData
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.all
+  commentId: P:VoxelPrototype.common.RessourceManager.data.TextureData.all
+  id: all
+  parent: VoxelPrototype.common.RessourceManager.data.TextureData
+  langs:
+  - csharp
+  - vb
+  name: all
+  nameWithType: TextureData.all
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.all
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: all
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 12
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public string all { readonly get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property all As String
+  overload: VoxelPrototype.common.RessourceManager.data.TextureData.all*
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.top
+  commentId: P:VoxelPrototype.common.RessourceManager.data.TextureData.top
+  id: top
+  parent: VoxelPrototype.common.RessourceManager.data.TextureData
+  langs:
+  - csharp
+  - vb
+  name: top
+  nameWithType: TextureData.top
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.top
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: top
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 13
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public string top { readonly get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property top As String
+  overload: VoxelPrototype.common.RessourceManager.data.TextureData.top*
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.bottom
+  commentId: P:VoxelPrototype.common.RessourceManager.data.TextureData.bottom
+  id: bottom
+  parent: VoxelPrototype.common.RessourceManager.data.TextureData
+  langs:
+  - csharp
+  - vb
+  name: bottom
+  nameWithType: TextureData.bottom
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.bottom
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: bottom
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 14
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public string bottom { readonly get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property bottom As String
+  overload: VoxelPrototype.common.RessourceManager.data.TextureData.bottom*
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.left
+  commentId: P:VoxelPrototype.common.RessourceManager.data.TextureData.left
+  id: left
+  parent: VoxelPrototype.common.RessourceManager.data.TextureData
+  langs:
+  - csharp
+  - vb
+  name: left
+  nameWithType: TextureData.left
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.left
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: left
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 15
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public string left { readonly get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property left As String
+  overload: VoxelPrototype.common.RessourceManager.data.TextureData.left*
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.right
+  commentId: P:VoxelPrototype.common.RessourceManager.data.TextureData.right
+  id: right
+  parent: VoxelPrototype.common.RessourceManager.data.TextureData
+  langs:
+  - csharp
+  - vb
+  name: right
+  nameWithType: TextureData.right
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.right
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: right
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 16
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public string right { readonly get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property right As String
+  overload: VoxelPrototype.common.RessourceManager.data.TextureData.right*
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.front
+  commentId: P:VoxelPrototype.common.RessourceManager.data.TextureData.front
+  id: front
+  parent: VoxelPrototype.common.RessourceManager.data.TextureData
+  langs:
+  - csharp
+  - vb
+  name: front
+  nameWithType: TextureData.front
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.front
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: front
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 17
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public string front { readonly get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property front As String
+  overload: VoxelPrototype.common.RessourceManager.data.TextureData.front*
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.back
+  commentId: P:VoxelPrototype.common.RessourceManager.data.TextureData.back
+  id: back
+  parent: VoxelPrototype.common.RessourceManager.data.TextureData
+  langs:
+  - csharp
+  - vb
+  name: back
+  nameWithType: TextureData.back
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.back
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: back
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 18
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public string back { readonly get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property back As String
+  overload: VoxelPrototype.common.RessourceManager.data.TextureData.back*
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.textures
+  commentId: P:VoxelPrototype.common.RessourceManager.data.TextureData.textures
+  id: textures
+  parent: VoxelPrototype.common.RessourceManager.data.TextureData
+  langs:
+  - csharp
+  - vb
+  name: textures
+  nameWithType: TextureData.textures
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.textures
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: textures
+    path: VoxelPrototype/common/RessourceManager/data/BlockData.cs
+    startLine: 19
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.RessourceManager.data
+  syntax:
+    content: public string[] textures { readonly get; set; }
+    parameters: []
+    return:
+      type: System.String[]
+    content.vb: Public Property textures As String()
+  overload: VoxelPrototype.common.RessourceManager.data.TextureData.textures*
+references:
+- uid: VoxelPrototype.common.RessourceManager.data
+  commentId: N:VoxelPrototype.common.RessourceManager.data
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.RessourceManager.data
+  nameWithType: VoxelPrototype.common.RessourceManager.data
+  fullName: VoxelPrototype.common.RessourceManager.data
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager
+    name: RessourceManager
+    href: VoxelPrototype.common.RessourceManager.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager.data
+    name: data
+    href: VoxelPrototype.common.RessourceManager.data.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager
+    name: RessourceManager
+    href: VoxelPrototype.common.RessourceManager.html
+  - name: .
+  - uid: VoxelPrototype.common.RessourceManager.data
+    name: data
+    href: VoxelPrototype.common.RessourceManager.data.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.all*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.data.TextureData.all
+  href: VoxelPrototype.common.RessourceManager.data.TextureData.html#VoxelPrototype_common_RessourceManager_data_TextureData_all
+  name: all
+  nameWithType: TextureData.all
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.all
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.top*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.data.TextureData.top
+  href: VoxelPrototype.common.RessourceManager.data.TextureData.html#VoxelPrototype_common_RessourceManager_data_TextureData_top
+  name: top
+  nameWithType: TextureData.top
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.top
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.bottom*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.data.TextureData.bottom
+  href: VoxelPrototype.common.RessourceManager.data.TextureData.html#VoxelPrototype_common_RessourceManager_data_TextureData_bottom
+  name: bottom
+  nameWithType: TextureData.bottom
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.bottom
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.left*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.data.TextureData.left
+  href: VoxelPrototype.common.RessourceManager.data.TextureData.html#VoxelPrototype_common_RessourceManager_data_TextureData_left
+  name: left
+  nameWithType: TextureData.left
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.left
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.right*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.data.TextureData.right
+  href: VoxelPrototype.common.RessourceManager.data.TextureData.html#VoxelPrototype_common_RessourceManager_data_TextureData_right
+  name: right
+  nameWithType: TextureData.right
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.right
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.front*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.data.TextureData.front
+  href: VoxelPrototype.common.RessourceManager.data.TextureData.html#VoxelPrototype_common_RessourceManager_data_TextureData_front
+  name: front
+  nameWithType: TextureData.front
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.front
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.back*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.data.TextureData.back
+  href: VoxelPrototype.common.RessourceManager.data.TextureData.html#VoxelPrototype_common_RessourceManager_data_TextureData_back
+  name: back
+  nameWithType: TextureData.back
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.back
+- uid: VoxelPrototype.common.RessourceManager.data.TextureData.textures*
+  commentId: Overload:VoxelPrototype.common.RessourceManager.data.TextureData.textures
+  href: VoxelPrototype.common.RessourceManager.data.TextureData.html#VoxelPrototype_common_RessourceManager_data_TextureData_textures
+  name: textures
+  nameWithType: TextureData.textures
+  fullName: VoxelPrototype.common.RessourceManager.data.TextureData.textures
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )

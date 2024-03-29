@@ -1,0 +1,78 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Game.World.ChunkManagers
+  commentId: N:VoxelPrototype.common.Game.World.ChunkManagers
+  id: VoxelPrototype.common.Game.World.ChunkManagers
+  children:
+  - VoxelPrototype.common.Game.World.ChunkManagers.ClientChunkManager
+  - VoxelPrototype.common.Game.World.ChunkManagers.ServerChunkManager
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.Game.World.ChunkManagers
+  nameWithType: VoxelPrototype.common.Game.World.ChunkManagers
+  fullName: VoxelPrototype.common.Game.World.ChunkManagers
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.Game.World.ChunkManagers.ClientChunkManager
+  commentId: T:VoxelPrototype.common.Game.World.ChunkManagers.ClientChunkManager
+  parent: VoxelPrototype.common.Game.World.ChunkManagers
+  href: VoxelPrototype.common.Game.World.ChunkManagers.ClientChunkManager.html
+  name: ClientChunkManager
+  nameWithType: ClientChunkManager
+  fullName: VoxelPrototype.common.Game.World.ChunkManagers.ClientChunkManager
+- uid: VoxelPrototype.common.Game.World.ChunkManagers.ServerChunkManager
+  commentId: T:VoxelPrototype.common.Game.World.ChunkManagers.ServerChunkManager
+  parent: VoxelPrototype.common.Game.World.ChunkManagers
+  href: VoxelPrototype.common.Game.World.ChunkManagers.ServerChunkManager.html
+  name: ServerChunkManager
+  nameWithType: ServerChunkManager
+  fullName: VoxelPrototype.common.Game.World.ChunkManagers.ServerChunkManager
+- uid: VoxelPrototype.common.Game.World.ChunkManagers
+  commentId: N:VoxelPrototype.common.Game.World.ChunkManagers
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Game.World.ChunkManagers
+  nameWithType: VoxelPrototype.common.Game.World.ChunkManagers
+  fullName: VoxelPrototype.common.Game.World.ChunkManagers
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.World
+    name: World
+    href: VoxelPrototype.common.Game.World.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.World.ChunkManagers
+    name: ChunkManagers
+    href: VoxelPrototype.common.Game.World.ChunkManagers.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Game
+    name: Game
+    href: VoxelPrototype.common.Game.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.World
+    name: World
+    href: VoxelPrototype.common.Game.World.html
+  - name: .
+  - uid: VoxelPrototype.common.Game.World.ChunkManagers
+    name: ChunkManagers
+    href: VoxelPrototype.common.Game.World.ChunkManagers.html

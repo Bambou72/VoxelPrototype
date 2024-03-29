@@ -1,0 +1,2881 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Utils.BooleanSet
+  commentId: T:VoxelPrototype.common.Utils.BooleanSet
+  id: BooleanSet
+  parent: VoxelPrototype.common.Utils
+  children:
+  - VoxelPrototype.common.Utils.BooleanSet.Add(System.Boolean)
+  - VoxelPrototype.common.Utils.BooleanSet.Clear
+  - VoxelPrototype.common.Utils.BooleanSet.Contains(System.Boolean)
+  - VoxelPrototype.common.Utils.BooleanSet.CopyTo(System.Boolean[],System.Int32)
+  - VoxelPrototype.common.Utils.BooleanSet.Count
+  - VoxelPrototype.common.Utils.BooleanSet.ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.GetEnumerator
+  - VoxelPrototype.common.Utils.BooleanSet.IMMUTABLE
+  - VoxelPrototype.common.Utils.BooleanSet.IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.IsReadOnly
+  - VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.Remove(System.Boolean)
+  - VoxelPrototype.common.Utils.BooleanSet.SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  - VoxelPrototype.common.Utils.BooleanSet.UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  langs:
+  - csharp
+  - vb
+  name: BooleanSet
+  nameWithType: BooleanSet
+  fullName: VoxelPrototype.common.Utils.BooleanSet
+  type: Class
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: BooleanSet
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 3
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  syntax:
+    content: 'public class BooleanSet : ISet<bool>, ICollection<bool>, IEnumerable<bool>, IEnumerable'
+    content.vb: Public Class BooleanSet Implements ISet(Of Boolean), ICollection(Of Boolean), IEnumerable(Of Boolean), IEnumerable
+  inheritance:
+  - System.Object
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}
+  - System.Collections.Generic.ICollection{System.Boolean}
+  - System.Collections.Generic.IEnumerable{System.Boolean}
+  - System.Collections.IEnumerable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VoxelPrototype.common.Utils.BooleanSet.IMMUTABLE
+  commentId: F:VoxelPrototype.common.Utils.BooleanSet.IMMUTABLE
+  id: IMMUTABLE
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: IMMUTABLE
+  nameWithType: BooleanSet.IMMUTABLE
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IMMUTABLE
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IMMUTABLE
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 5
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  syntax:
+    content: public static readonly BooleanSet IMMUTABLE
+    return:
+      type: VoxelPrototype.common.Utils.BooleanSet
+    content.vb: Public Shared ReadOnly IMMUTABLE As BooleanSet
+- uid: VoxelPrototype.common.Utils.BooleanSet.Count
+  commentId: P:VoxelPrototype.common.Utils.BooleanSet.Count
+  id: Count
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: BooleanSet.Count
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Count
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Count
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 32
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Gets the number of elements contained in the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The number of elements contained in the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: VoxelPrototype.common.Utils.BooleanSet.Count*
+  implements:
+  - System.Collections.Generic.ICollection{System.Boolean}.Count
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsReadOnly
+  commentId: P:VoxelPrototype.common.Utils.BooleanSet.IsReadOnly
+  id: IsReadOnly
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: IsReadOnly
+  nameWithType: BooleanSet.IsReadOnly
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsReadOnly
+  type: Property
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsReadOnly
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 33
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Gets a value indicating whether the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only.
+  example: []
+  syntax:
+    content: public bool IsReadOnly { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public ReadOnly Property IsReadOnly As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.IsReadOnly*
+  implements:
+  - System.Collections.Generic.ICollection{System.Boolean}.IsReadOnly
+- uid: VoxelPrototype.common.Utils.BooleanSet.Contains(System.Boolean)
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.Contains(System.Boolean)
+  id: Contains(System.Boolean)
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: Contains(bool)
+  nameWithType: BooleanSet.Contains(bool)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Contains(bool)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Contains
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 34
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Determines whether the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> contains a specific value.
+  example: []
+  syntax:
+    content: public bool Contains(bool item)
+    parameters:
+    - id: item
+      type: System.Boolean
+      description: The object to locate in the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">item</code> is found in the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Contains(item As Boolean) As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.Contains*
+  implements:
+  - System.Collections.Generic.ICollection{System.Boolean}.Contains(System.Boolean)
+  nameWithType.vb: BooleanSet.Contains(Boolean)
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.Contains(Boolean)
+  name.vb: Contains(Boolean)
+- uid: VoxelPrototype.common.Utils.BooleanSet.GetEnumerator
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.GetEnumerator
+  id: GetEnumerator
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: BooleanSet.GetEnumerator()
+  fullName: VoxelPrototype.common.Utils.BooleanSet.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetEnumerator
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 38
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Returns an enumerator that iterates through the collection.
+  example: []
+  syntax:
+    content: public IEnumerator<bool> GetEnumerator()
+    return:
+      type: System.Collections.Generic.IEnumerator{System.Boolean}
+      description: An enumerator that can be used to iterate through the collection.
+    content.vb: Public Function GetEnumerator() As IEnumerator(Of Boolean)
+  overload: VoxelPrototype.common.Utils.BooleanSet.GetEnumerator*
+  implements:
+  - System.Collections.Generic.IEnumerable{System.Boolean}.GetEnumerator
+- uid: VoxelPrototype.common.Utils.BooleanSet.Add(System.Boolean)
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.Add(System.Boolean)
+  id: Add(System.Boolean)
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: Add(bool)
+  nameWithType: BooleanSet.Add(bool)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Add(bool)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Add
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 46
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Adds an item to the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void Add(bool item)
+    parameters:
+    - id: item
+      type: System.Boolean
+      description: The object to add to the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub Add(item As Boolean)
+  overload: VoxelPrototype.common.Utils.BooleanSet.Add*
+  exceptions:
+  - type: System.NotSupportedException
+    commentId: T:System.NotSupportedException
+    description: The <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only.
+  implements:
+  - System.Collections.Generic.ICollection{System.Boolean}.Add(System.Boolean)
+  nameWithType.vb: BooleanSet.Add(Boolean)
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.Add(Boolean)
+  name.vb: Add(Boolean)
+- uid: VoxelPrototype.common.Utils.BooleanSet.Clear
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.Clear
+  id: Clear
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: BooleanSet.Clear()
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Clear()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Clear
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 50
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Removes all items from the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void Clear()
+    content.vb: Public Sub Clear()
+  overload: VoxelPrototype.common.Utils.BooleanSet.Clear*
+  exceptions:
+  - type: System.NotSupportedException
+    commentId: T:System.NotSupportedException
+    description: The <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only.
+  implements:
+  - System.Collections.Generic.ICollection{System.Boolean}.Clear
+- uid: VoxelPrototype.common.Utils.BooleanSet.CopyTo(System.Boolean[],System.Int32)
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.CopyTo(System.Boolean[],System.Int32)
+  id: CopyTo(System.Boolean[],System.Int32)
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: CopyTo(bool[], int)
+  nameWithType: BooleanSet.CopyTo(bool[], int)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.CopyTo(bool[], int)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: CopyTo
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 54
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Copies the elements of the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> to an <xref href="System.Array" data-throw-if-not-resolved="false"></xref>, starting at a particular <xref href="System.Array" data-throw-if-not-resolved="false"></xref> index.
+  example: []
+  syntax:
+    content: public void CopyTo(bool[] array, int arrayIndex)
+    parameters:
+    - id: array
+      type: System.Boolean[]
+      description: The one-dimensional <xref href="System.Array" data-throw-if-not-resolved="false"></xref> that is the destination of the elements copied from <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>. The <xref href="System.Array" data-throw-if-not-resolved="false"></xref> must have zero-based indexing.
+    - id: arrayIndex
+      type: System.Int32
+      description: The zero-based index in <code class="paramref">array</code> at which copying begins.
+    content.vb: Public Sub CopyTo(array As Boolean(), arrayIndex As Integer)
+  overload: VoxelPrototype.common.Utils.BooleanSet.CopyTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">array</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">arrayIndex</code> is less than 0.
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The number of elements in the source <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is greater than the available space from <code class="paramref">arrayIndex</code> to the end of the destination <code class="paramref">array</code>.
+  implements:
+  - System.Collections.Generic.ICollection{System.Boolean}.CopyTo(System.Boolean[],System.Int32)
+  nameWithType.vb: BooleanSet.CopyTo(Boolean(), Integer)
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.CopyTo(Boolean(), Integer)
+  name.vb: CopyTo(Boolean(), Integer)
+- uid: VoxelPrototype.common.Utils.BooleanSet.ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: ExceptWith(IEnumerable<bool>)
+  nameWithType: BooleanSet.ExceptWith(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.ExceptWith(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: ExceptWith
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 65
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Removes all elements in the specified collection from the current set.
+  example: []
+  syntax:
+    content: public void ExceptWith(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection of items to remove from the set.
+    content.vb: Public Sub ExceptWith(other As IEnumerable(Of Boolean))
+  overload: VoxelPrototype.common.Utils.BooleanSet.ExceptWith*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.ExceptWith(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.ExceptWith(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: ExceptWith(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: IntersectWith(IEnumerable<bool>)
+  nameWithType: BooleanSet.IntersectWith(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IntersectWith(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IntersectWith
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 69
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Modifies the current set so that it contains only elements that are also in a specified collection.
+  example: []
+  syntax:
+    content: public void IntersectWith(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    content.vb: Public Sub IntersectWith(other As IEnumerable(Of Boolean))
+  overload: VoxelPrototype.common.Utils.BooleanSet.IntersectWith*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.IntersectWith(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.IntersectWith(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IntersectWith(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: IsProperSubsetOf(IEnumerable<bool>)
+  nameWithType: BooleanSet.IsProperSubsetOf(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsProperSubsetOf
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 73
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Determines whether the current set is a proper (strict) subset of a specified collection.
+  example: []
+  syntax:
+    content: public bool IsProperSubsetOf(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current set is a proper subset of <code class="paramref">other</code>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function IsProperSubsetOf(other As IEnumerable(Of Boolean)) As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.IsProperSubsetOf(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IsProperSubsetOf(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: IsProperSupersetOf(IEnumerable<bool>)
+  nameWithType: BooleanSet.IsProperSupersetOf(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsProperSupersetOf
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 77
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Determines whether the current set is a proper (strict) superset of a specified collection.
+  example: []
+  syntax:
+    content: public bool IsProperSupersetOf(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current set is a proper superset of <code class="paramref">other</code>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function IsProperSupersetOf(other As IEnumerable(Of Boolean)) As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.IsProperSupersetOf(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IsProperSupersetOf(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: IsSubsetOf(IEnumerable<bool>)
+  nameWithType: BooleanSet.IsSubsetOf(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsSubsetOf
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 81
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Determines whether a set is a subset of a specified collection.
+  example: []
+  syntax:
+    content: public bool IsSubsetOf(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current set is a subset of <code class="paramref">other</code>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function IsSubsetOf(other As IEnumerable(Of Boolean)) As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.IsSubsetOf(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IsSubsetOf(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: IsSupersetOf(IEnumerable<bool>)
+  nameWithType: BooleanSet.IsSupersetOf(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IsSupersetOf
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 85
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Determines whether the current set is a superset of a specified collection.
+  example: []
+  syntax:
+    content: public bool IsSupersetOf(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current set is a superset of <code class="paramref">other</code>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function IsSupersetOf(other As IEnumerable(Of Boolean)) As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.IsSupersetOf(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IsSupersetOf(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: Overlaps(IEnumerable<bool>)
+  nameWithType: BooleanSet.Overlaps(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Overlaps(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Overlaps
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 89
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Determines whether the current set overlaps with the specified collection.
+  example: []
+  syntax:
+    content: public bool Overlaps(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current set and <code class="paramref">other</code> share at least one common element; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Overlaps(other As IEnumerable(Of Boolean)) As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.Overlaps*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.Overlaps(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.Overlaps(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: Overlaps(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.Remove(System.Boolean)
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.Remove(System.Boolean)
+  id: Remove(System.Boolean)
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: Remove(bool)
+  nameWithType: BooleanSet.Remove(bool)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Remove(bool)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Remove
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 93
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Removes the first occurrence of a specific object from the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public bool Remove(bool item)
+    parameters:
+    - id: item
+      type: System.Boolean
+      description: The object to remove from the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">item</code> was successfully removed from the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>. This method also returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if <code class="paramref">item</code> is not found in the original <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Remove(item As Boolean) As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.Remove*
+  exceptions:
+  - type: System.NotSupportedException
+    commentId: T:System.NotSupportedException
+    description: The <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only.
+  implements:
+  - System.Collections.Generic.ICollection{System.Boolean}.Remove(System.Boolean)
+  nameWithType.vb: BooleanSet.Remove(Boolean)
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.Remove(Boolean)
+  name.vb: Remove(Boolean)
+- uid: VoxelPrototype.common.Utils.BooleanSet.SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: SetEquals(IEnumerable<bool>)
+  nameWithType: BooleanSet.SetEquals(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.SetEquals(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: SetEquals
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 97
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Determines whether the current set and the specified collection contain the same elements.
+  example: []
+  syntax:
+    content: public bool SetEquals(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current set is equal to <code class="paramref">other</code>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function SetEquals(other As IEnumerable(Of Boolean)) As Boolean
+  overload: VoxelPrototype.common.Utils.BooleanSet.SetEquals*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.SetEquals(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.SetEquals(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: SetEquals(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: SymmetricExceptWith(IEnumerable<bool>)
+  nameWithType: BooleanSet.SymmetricExceptWith(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: SymmetricExceptWith
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 101
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Modifies the current set so that it contains only elements that are present either in the current set or in the specified collection, but not both.
+  example: []
+  syntax:
+    content: public void SymmetricExceptWith(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    content.vb: Public Sub SymmetricExceptWith(other As IEnumerable(Of Boolean))
+  overload: VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.SymmetricExceptWith(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: SymmetricExceptWith(IEnumerable(Of Boolean))
+- uid: VoxelPrototype.common.Utils.BooleanSet.UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:VoxelPrototype.common.Utils.BooleanSet.UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  id: UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: VoxelPrototype.common.Utils.BooleanSet
+  langs:
+  - csharp
+  - vb
+  name: UnionWith(IEnumerable<bool>)
+  nameWithType: BooleanSet.UnionWith(IEnumerable<bool>)
+  fullName: VoxelPrototype.common.Utils.BooleanSet.UnionWith(System.Collections.Generic.IEnumerable<bool>)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Utils/BooleanSet.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: UnionWith
+    path: VoxelPrototype/common/Utils/BooleanSet.cs
+    startLine: 105
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.Utils
+  summary: Modifies the current set so that it contains all elements that are present in the current set, in the specified collection, or in both.
+  example: []
+  syntax:
+    content: public void UnionWith(IEnumerable<bool> other)
+    parameters:
+    - id: other
+      type: System.Collections.Generic.IEnumerable{System.Boolean}
+      description: The collection to compare to the current set.
+    content.vb: Public Sub UnionWith(other As IEnumerable(Of Boolean))
+  overload: VoxelPrototype.common.Utils.BooleanSet.UnionWith*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  implements:
+  - System.Collections.Generic.ISet{System.Boolean}.UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  nameWithType.vb: BooleanSet.UnionWith(IEnumerable(Of Boolean))
+  fullName.vb: VoxelPrototype.common.Utils.BooleanSet.UnionWith(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: UnionWith(IEnumerable(Of Boolean))
+references:
+- uid: VoxelPrototype.common.Utils
+  commentId: N:VoxelPrototype.common.Utils
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Utils
+  nameWithType: VoxelPrototype.common.Utils
+  fullName: VoxelPrototype.common.Utils
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Utils
+    name: Utils
+    href: VoxelPrototype.common.Utils.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Utils
+    name: Utils
+    href: VoxelPrototype.common.Utils.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Collections.Generic.ISet{System.Boolean}
+  commentId: T:System.Collections.Generic.ISet{System.Boolean}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ISet`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1
+  name: ISet<bool>
+  nameWithType: ISet<bool>
+  fullName: System.Collections.Generic.ISet<bool>
+  nameWithType.vb: ISet(Of Boolean)
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean)
+  name.vb: ISet(Of Boolean)
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1
+    name: ISet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1
+    name: ISet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Collections.Generic.ICollection{System.Boolean}
+  commentId: T:System.Collections.Generic.ICollection{System.Boolean}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  name: ICollection<bool>
+  nameWithType: ICollection<bool>
+  fullName: System.Collections.Generic.ICollection<bool>
+  nameWithType.vb: ICollection(Of Boolean)
+  fullName.vb: System.Collections.Generic.ICollection(Of Boolean)
+  name.vb: ICollection(Of Boolean)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{System.Boolean}
+  commentId: T:System.Collections.Generic.IEnumerable{System.Boolean}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<bool>
+  nameWithType: IEnumerable<bool>
+  fullName: System.Collections.Generic.IEnumerable<bool>
+  nameWithType.vb: IEnumerable(Of Boolean)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Boolean)
+  name.vb: IEnumerable(Of Boolean)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Generic.ISet`1
+  commentId: T:System.Collections.Generic.ISet`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1
+  name: ISet<T>
+  nameWithType: ISet<T>
+  fullName: System.Collections.Generic.ISet<T>
+  nameWithType.vb: ISet(Of T)
+  fullName.vb: System.Collections.Generic.ISet(Of T)
+  name.vb: ISet(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1
+    name: ISet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1
+    name: ISet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.ICollection`1
+  commentId: T:System.Collections.Generic.ICollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: VoxelPrototype.common.Utils.BooleanSet
+  commentId: T:VoxelPrototype.common.Utils.BooleanSet
+  parent: VoxelPrototype.common.Utils
+  href: VoxelPrototype.common.Utils.BooleanSet.html
+  name: BooleanSet
+  nameWithType: BooleanSet
+  fullName: VoxelPrototype.common.Utils.BooleanSet
+- uid: VoxelPrototype.common.Utils.BooleanSet.Count*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.Count
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_Count
+  name: Count
+  nameWithType: BooleanSet.Count
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Count
+- uid: System.Collections.Generic.ICollection{System.Boolean}.Count
+  commentId: P:System.Collections.Generic.ICollection{System.Boolean}.Count
+  parent: System.Collections.Generic.ICollection{System.Boolean}
+  definition: System.Collections.Generic.ICollection`1.Count
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.count
+  name: Count
+  nameWithType: ICollection<bool>.Count
+  fullName: System.Collections.Generic.ICollection<bool>.Count
+  nameWithType.vb: ICollection(Of Boolean).Count
+  fullName.vb: System.Collections.Generic.ICollection(Of Boolean).Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Collections.Generic.ICollection`1.Count
+  commentId: P:System.Collections.Generic.ICollection`1.Count
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.count
+  name: Count
+  nameWithType: ICollection<T>.Count
+  fullName: System.Collections.Generic.ICollection<T>.Count
+  nameWithType.vb: ICollection(Of T).Count
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Count
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsReadOnly*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.IsReadOnly
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_IsReadOnly
+  name: IsReadOnly
+  nameWithType: BooleanSet.IsReadOnly
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsReadOnly
+- uid: System.Collections.Generic.ICollection{System.Boolean}.IsReadOnly
+  commentId: P:System.Collections.Generic.ICollection{System.Boolean}.IsReadOnly
+  parent: System.Collections.Generic.ICollection{System.Boolean}
+  definition: System.Collections.Generic.ICollection`1.IsReadOnly
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.isreadonly
+  name: IsReadOnly
+  nameWithType: ICollection<bool>.IsReadOnly
+  fullName: System.Collections.Generic.ICollection<bool>.IsReadOnly
+  nameWithType.vb: ICollection(Of Boolean).IsReadOnly
+  fullName.vb: System.Collections.Generic.ICollection(Of Boolean).IsReadOnly
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Collections.Generic.ICollection`1.IsReadOnly
+  commentId: P:System.Collections.Generic.ICollection`1.IsReadOnly
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.isreadonly
+  name: IsReadOnly
+  nameWithType: ICollection<T>.IsReadOnly
+  fullName: System.Collections.Generic.ICollection<T>.IsReadOnly
+  nameWithType.vb: ICollection(Of T).IsReadOnly
+  fullName.vb: System.Collections.Generic.ICollection(Of T).IsReadOnly
+- uid: VoxelPrototype.common.Utils.BooleanSet.Contains*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.Contains
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_Contains_System_Boolean_
+  name: Contains
+  nameWithType: BooleanSet.Contains
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Contains
+- uid: System.Collections.Generic.ICollection{System.Boolean}.Contains(System.Boolean)
+  commentId: M:System.Collections.Generic.ICollection{System.Boolean}.Contains(System.Boolean)
+  parent: System.Collections.Generic.ICollection{System.Boolean}
+  definition: System.Collections.Generic.ICollection`1.Contains(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  name: Contains(bool)
+  nameWithType: ICollection<bool>.Contains(bool)
+  fullName: System.Collections.Generic.ICollection<bool>.Contains(bool)
+  nameWithType.vb: ICollection(Of Boolean).Contains(Boolean)
+  fullName.vb: System.Collections.Generic.ICollection(Of Boolean).Contains(Boolean)
+  name.vb: Contains(Boolean)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.Contains(System.Boolean)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.Contains(System.Boolean)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Contains(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Contains(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  name: Contains(T)
+  nameWithType: ICollection<T>.Contains(T)
+  fullName: System.Collections.Generic.ICollection<T>.Contains(T)
+  nameWithType.vb: ICollection(Of T).Contains(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Contains(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - name: T
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.GetEnumerator*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.GetEnumerator
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_GetEnumerator
+  name: GetEnumerator
+  nameWithType: BooleanSet.GetEnumerator
+  fullName: VoxelPrototype.common.Utils.BooleanSet.GetEnumerator
+- uid: System.Collections.Generic.IEnumerable{System.Boolean}.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable{System.Boolean}.GetEnumerator
+  parent: System.Collections.Generic.IEnumerable{System.Boolean}
+  definition: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<bool>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<bool>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of Boolean).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Boolean).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable{System.Boolean}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable{System.Boolean}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator{System.Boolean}
+  commentId: T:System.Collections.Generic.IEnumerator{System.Boolean}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerator`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<bool>
+  nameWithType: IEnumerator<bool>
+  fullName: System.Collections.Generic.IEnumerator<bool>
+  nameWithType.vb: IEnumerator(Of Boolean)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of Boolean)
+  name.vb: IEnumerator(Of Boolean)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable`1.GetEnumerator
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<T>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of T).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator`1
+  commentId: T:System.Collections.Generic.IEnumerator`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.NotSupportedException
+  commentId: T:System.NotSupportedException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.notsupportedexception
+  name: NotSupportedException
+  nameWithType: NotSupportedException
+  fullName: System.NotSupportedException
+- uid: VoxelPrototype.common.Utils.BooleanSet.Add*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.Add
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_Add_System_Boolean_
+  name: Add
+  nameWithType: BooleanSet.Add
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Add
+- uid: System.Collections.Generic.ICollection{System.Boolean}.Add(System.Boolean)
+  commentId: M:System.Collections.Generic.ICollection{System.Boolean}.Add(System.Boolean)
+  parent: System.Collections.Generic.ICollection{System.Boolean}
+  definition: System.Collections.Generic.ICollection`1.Add(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  name: Add(bool)
+  nameWithType: ICollection<bool>.Add(bool)
+  fullName: System.Collections.Generic.ICollection<bool>.Add(bool)
+  nameWithType.vb: ICollection(Of Boolean).Add(Boolean)
+  fullName.vb: System.Collections.Generic.ICollection(Of Boolean).Add(Boolean)
+  name.vb: Add(Boolean)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.Add(System.Boolean)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.Add(System.Boolean)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Add(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Add(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  name: Add(T)
+  nameWithType: ICollection<T>.Add(T)
+  fullName: System.Collections.Generic.ICollection<T>.Add(T)
+  nameWithType.vb: ICollection(Of T).Add(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Add(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  - name: (
+  - name: T
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.Clear*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.Clear
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_Clear
+  name: Clear
+  nameWithType: BooleanSet.Clear
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Clear
+- uid: System.Collections.Generic.ICollection{System.Boolean}.Clear
+  commentId: M:System.Collections.Generic.ICollection{System.Boolean}.Clear
+  parent: System.Collections.Generic.ICollection{System.Boolean}
+  definition: System.Collections.Generic.ICollection`1.Clear
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  name: Clear()
+  nameWithType: ICollection<bool>.Clear()
+  fullName: System.Collections.Generic.ICollection<bool>.Clear()
+  nameWithType.vb: ICollection(Of Boolean).Clear()
+  fullName.vb: System.Collections.Generic.ICollection(Of Boolean).Clear()
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Clear
+  commentId: M:System.Collections.Generic.ICollection`1.Clear
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  name: Clear()
+  nameWithType: ICollection<T>.Clear()
+  fullName: System.Collections.Generic.ICollection<T>.Clear()
+  nameWithType.vb: ICollection(Of T).Clear()
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Clear()
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+- uid: System.Array
+  commentId: T:System.Array
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.array
+  name: Array
+  nameWithType: Array
+  fullName: System.Array
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+  name: ArgumentOutOfRangeException
+  nameWithType: ArgumentOutOfRangeException
+  fullName: System.ArgumentOutOfRangeException
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentexception
+  name: ArgumentException
+  nameWithType: ArgumentException
+  fullName: System.ArgumentException
+- uid: VoxelPrototype.common.Utils.BooleanSet.CopyTo*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.CopyTo
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_CopyTo_System_Boolean___System_Int32_
+  name: CopyTo
+  nameWithType: BooleanSet.CopyTo
+  fullName: VoxelPrototype.common.Utils.BooleanSet.CopyTo
+- uid: System.Collections.Generic.ICollection{System.Boolean}.CopyTo(System.Boolean[],System.Int32)
+  commentId: M:System.Collections.Generic.ICollection{System.Boolean}.CopyTo(System.Boolean[],System.Int32)
+  parent: System.Collections.Generic.ICollection{System.Boolean}
+  definition: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  name: CopyTo(bool[], int)
+  nameWithType: ICollection<bool>.CopyTo(bool[], int)
+  fullName: System.Collections.Generic.ICollection<bool>.CopyTo(bool[], int)
+  nameWithType.vb: ICollection(Of Boolean).CopyTo(Boolean(), Integer)
+  fullName.vb: System.Collections.Generic.ICollection(Of Boolean).CopyTo(Boolean(), Integer)
+  name.vb: CopyTo(Boolean(), Integer)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.CopyTo(System.Boolean[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.CopyTo(System.Boolean[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Boolean[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool[]
+  nameWithType: bool[]
+  fullName: bool[]
+  nameWithType.vb: Boolean()
+  fullName.vb: Boolean()
+  name.vb: Boolean()
+  spec.csharp:
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  commentId: M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  name: CopyTo(T[], int)
+  nameWithType: ICollection<T>.CopyTo(T[], int)
+  fullName: System.Collections.Generic.ICollection<T>.CopyTo(T[], int)
+  nameWithType.vb: ICollection(Of T).CopyTo(T(), Integer)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).CopyTo(T(), Integer)
+  name.vb: CopyTo(T(), Integer)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  - name: (
+  - name: T
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  - name: (
+  - name: T
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.ExceptWith*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.ExceptWith
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_ExceptWith_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: ExceptWith
+  nameWithType: BooleanSet.ExceptWith
+  fullName: VoxelPrototype.common.Utils.BooleanSet.ExceptWith
+- uid: System.Collections.Generic.ISet{System.Boolean}.ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.exceptwith
+  name: ExceptWith(IEnumerable<bool>)
+  nameWithType: ISet<bool>.ExceptWith(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.ExceptWith(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).ExceptWith(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).ExceptWith(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: ExceptWith(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: ExceptWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.exceptwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.ExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: ExceptWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.exceptwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.exceptwith
+  name: ExceptWith(IEnumerable<T>)
+  nameWithType: ISet<T>.ExceptWith(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.ExceptWith(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).ExceptWith(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).ExceptWith(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: ExceptWith(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0})
+    name: ExceptWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.exceptwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0})
+    name: ExceptWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.exceptwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.IntersectWith*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.IntersectWith
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_IntersectWith_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: IntersectWith
+  nameWithType: BooleanSet.IntersectWith
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IntersectWith
+- uid: System.Collections.Generic.ISet{System.Boolean}.IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.intersectwith
+  name: IntersectWith(IEnumerable<bool>)
+  nameWithType: ISet<bool>.IntersectWith(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.IntersectWith(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).IntersectWith(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).IntersectWith(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IntersectWith(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IntersectWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.intersectwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IntersectWith(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IntersectWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.intersectwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.intersectwith
+  name: IntersectWith(IEnumerable<T>)
+  nameWithType: ISet<T>.IntersectWith(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.IntersectWith(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).IntersectWith(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).IntersectWith(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: IntersectWith(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0})
+    name: IntersectWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.intersectwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0})
+    name: IntersectWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.intersectwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_IsProperSubsetOf_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: IsProperSubsetOf
+  nameWithType: BooleanSet.IsProperSubsetOf
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsProperSubsetOf
+- uid: System.Collections.Generic.ISet{System.Boolean}.IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersubsetof
+  name: IsProperSubsetOf(IEnumerable<bool>)
+  nameWithType: ISet<bool>.IsProperSubsetOf(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.IsProperSubsetOf(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).IsProperSubsetOf(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).IsProperSubsetOf(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IsProperSubsetOf(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IsProperSubsetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersubsetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IsProperSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IsProperSubsetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersubsetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersubsetof
+  name: IsProperSubsetOf(IEnumerable<T>)
+  nameWithType: ISet<T>.IsProperSubsetOf(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.IsProperSubsetOf(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).IsProperSubsetOf(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).IsProperSubsetOf(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: IsProperSubsetOf(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})
+    name: IsProperSubsetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersubsetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})
+    name: IsProperSubsetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersubsetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_IsProperSupersetOf_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: IsProperSupersetOf
+  nameWithType: BooleanSet.IsProperSupersetOf
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsProperSupersetOf
+- uid: System.Collections.Generic.ISet{System.Boolean}.IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersupersetof
+  name: IsProperSupersetOf(IEnumerable<bool>)
+  nameWithType: ISet<bool>.IsProperSupersetOf(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.IsProperSupersetOf(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).IsProperSupersetOf(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).IsProperSupersetOf(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IsProperSupersetOf(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IsProperSupersetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersupersetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IsProperSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IsProperSupersetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersupersetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersupersetof
+  name: IsProperSupersetOf(IEnumerable<T>)
+  nameWithType: ISet<T>.IsProperSupersetOf(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.IsProperSupersetOf(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).IsProperSupersetOf(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).IsProperSupersetOf(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: IsProperSupersetOf(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})
+    name: IsProperSupersetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersupersetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})
+    name: IsProperSupersetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.ispropersupersetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_IsSubsetOf_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: IsSubsetOf
+  nameWithType: BooleanSet.IsSubsetOf
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsSubsetOf
+- uid: System.Collections.Generic.ISet{System.Boolean}.IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issubsetof
+  name: IsSubsetOf(IEnumerable<bool>)
+  nameWithType: ISet<bool>.IsSubsetOf(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.IsSubsetOf(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).IsSubsetOf(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).IsSubsetOf(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IsSubsetOf(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IsSubsetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issubsetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IsSubsetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IsSubsetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issubsetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issubsetof
+  name: IsSubsetOf(IEnumerable<T>)
+  nameWithType: ISet<T>.IsSubsetOf(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.IsSubsetOf(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).IsSubsetOf(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).IsSubsetOf(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: IsSubsetOf(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})
+    name: IsSubsetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issubsetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})
+    name: IsSubsetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issubsetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_IsSupersetOf_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: IsSupersetOf
+  nameWithType: BooleanSet.IsSupersetOf
+  fullName: VoxelPrototype.common.Utils.BooleanSet.IsSupersetOf
+- uid: System.Collections.Generic.ISet{System.Boolean}.IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issupersetof
+  name: IsSupersetOf(IEnumerable<bool>)
+  nameWithType: ISet<bool>.IsSupersetOf(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.IsSupersetOf(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).IsSupersetOf(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).IsSupersetOf(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: IsSupersetOf(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IsSupersetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issupersetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.IsSupersetOf(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: IsSupersetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issupersetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issupersetof
+  name: IsSupersetOf(IEnumerable<T>)
+  nameWithType: ISet<T>.IsSupersetOf(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.IsSupersetOf(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).IsSupersetOf(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).IsSupersetOf(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: IsSupersetOf(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})
+    name: IsSupersetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issupersetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})
+    name: IsSupersetOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.issupersetof
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.Overlaps*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.Overlaps
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_Overlaps_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: Overlaps
+  nameWithType: BooleanSet.Overlaps
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Overlaps
+- uid: System.Collections.Generic.ISet{System.Boolean}.Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.Overlaps(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.overlaps
+  name: Overlaps(IEnumerable<bool>)
+  nameWithType: ISet<bool>.Overlaps(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.Overlaps(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).Overlaps(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).Overlaps(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: Overlaps(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: Overlaps
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.overlaps
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.Overlaps(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: Overlaps
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.overlaps
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.Overlaps(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.Overlaps(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.overlaps
+  name: Overlaps(IEnumerable<T>)
+  nameWithType: ISet<T>.Overlaps(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.Overlaps(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).Overlaps(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).Overlaps(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: Overlaps(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.Overlaps(System.Collections.Generic.IEnumerable{`0})
+    name: Overlaps
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.overlaps
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.Overlaps(System.Collections.Generic.IEnumerable{`0})
+    name: Overlaps
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.overlaps
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.Remove*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.Remove
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_Remove_System_Boolean_
+  name: Remove
+  nameWithType: BooleanSet.Remove
+  fullName: VoxelPrototype.common.Utils.BooleanSet.Remove
+- uid: System.Collections.Generic.ICollection{System.Boolean}.Remove(System.Boolean)
+  commentId: M:System.Collections.Generic.ICollection{System.Boolean}.Remove(System.Boolean)
+  parent: System.Collections.Generic.ICollection{System.Boolean}
+  definition: System.Collections.Generic.ICollection`1.Remove(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  name: Remove(bool)
+  nameWithType: ICollection<bool>.Remove(bool)
+  fullName: System.Collections.Generic.ICollection<bool>.Remove(bool)
+  nameWithType.vb: ICollection(Of Boolean).Remove(Boolean)
+  fullName.vb: System.Collections.Generic.ICollection(Of Boolean).Remove(Boolean)
+  name.vb: Remove(Boolean)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.Remove(System.Boolean)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{System.Boolean}.Remove(System.Boolean)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Remove(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Remove(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  name: Remove(T)
+  nameWithType: ICollection<T>.Remove(T)
+  fullName: System.Collections.Generic.ICollection<T>.Remove(T)
+  nameWithType.vb: ICollection(Of T).Remove(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Remove(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  - name: (
+  - name: T
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.SetEquals*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.SetEquals
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_SetEquals_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: SetEquals
+  nameWithType: BooleanSet.SetEquals
+  fullName: VoxelPrototype.common.Utils.BooleanSet.SetEquals
+- uid: System.Collections.Generic.ISet{System.Boolean}.SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.SetEquals(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.setequals
+  name: SetEquals(IEnumerable<bool>)
+  nameWithType: ISet<bool>.SetEquals(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.SetEquals(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).SetEquals(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).SetEquals(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: SetEquals(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: SetEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.setequals
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.SetEquals(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: SetEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.setequals
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.SetEquals(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.SetEquals(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.setequals
+  name: SetEquals(IEnumerable<T>)
+  nameWithType: ISet<T>.SetEquals(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.SetEquals(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).SetEquals(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).SetEquals(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: SetEquals(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.SetEquals(System.Collections.Generic.IEnumerable{`0})
+    name: SetEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.setequals
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.SetEquals(System.Collections.Generic.IEnumerable{`0})
+    name: SetEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.setequals
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_SymmetricExceptWith_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: SymmetricExceptWith
+  nameWithType: BooleanSet.SymmetricExceptWith
+  fullName: VoxelPrototype.common.Utils.BooleanSet.SymmetricExceptWith
+- uid: System.Collections.Generic.ISet{System.Boolean}.SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.symmetricexceptwith
+  name: SymmetricExceptWith(IEnumerable<bool>)
+  nameWithType: ISet<bool>.SymmetricExceptWith(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.SymmetricExceptWith(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).SymmetricExceptWith(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).SymmetricExceptWith(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: SymmetricExceptWith(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: SymmetricExceptWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.symmetricexceptwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.SymmetricExceptWith(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: SymmetricExceptWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.symmetricexceptwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.symmetricexceptwith
+  name: SymmetricExceptWith(IEnumerable<T>)
+  nameWithType: ISet<T>.SymmetricExceptWith(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.SymmetricExceptWith(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).SymmetricExceptWith(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).SymmetricExceptWith(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: SymmetricExceptWith(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0})
+    name: SymmetricExceptWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.symmetricexceptwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0})
+    name: SymmetricExceptWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.symmetricexceptwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: VoxelPrototype.common.Utils.BooleanSet.UnionWith*
+  commentId: Overload:VoxelPrototype.common.Utils.BooleanSet.UnionWith
+  href: VoxelPrototype.common.Utils.BooleanSet.html#VoxelPrototype_common_Utils_BooleanSet_UnionWith_System_Collections_Generic_IEnumerable_System_Boolean__
+  name: UnionWith
+  nameWithType: BooleanSet.UnionWith
+  fullName: VoxelPrototype.common.Utils.BooleanSet.UnionWith
+- uid: System.Collections.Generic.ISet{System.Boolean}.UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  commentId: M:System.Collections.Generic.ISet{System.Boolean}.UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+  parent: System.Collections.Generic.ISet{System.Boolean}
+  definition: System.Collections.Generic.ISet`1.UnionWith(System.Collections.Generic.IEnumerable{`0})
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.unionwith
+  name: UnionWith(IEnumerable<bool>)
+  nameWithType: ISet<bool>.UnionWith(IEnumerable<bool>)
+  fullName: System.Collections.Generic.ISet<bool>.UnionWith(System.Collections.Generic.IEnumerable<bool>)
+  nameWithType.vb: ISet(Of Boolean).UnionWith(IEnumerable(Of Boolean))
+  fullName.vb: System.Collections.Generic.ISet(Of Boolean).UnionWith(System.Collections.Generic.IEnumerable(Of Boolean))
+  name.vb: UnionWith(IEnumerable(Of Boolean))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: UnionWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.unionwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet{System.Boolean}.UnionWith(System.Collections.Generic.IEnumerable{System.Boolean})
+    name: UnionWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.unionwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.ISet`1.UnionWith(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:System.Collections.Generic.ISet`1.UnionWith(System.Collections.Generic.IEnumerable{`0})
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.unionwith
+  name: UnionWith(IEnumerable<T>)
+  nameWithType: ISet<T>.UnionWith(IEnumerable<T>)
+  fullName: System.Collections.Generic.ISet<T>.UnionWith(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: ISet(Of T).UnionWith(IEnumerable(Of T))
+  fullName.vb: System.Collections.Generic.ISet(Of T).UnionWith(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: UnionWith(IEnumerable(Of T))
+  spec.csharp:
+  - uid: System.Collections.Generic.ISet`1.UnionWith(System.Collections.Generic.IEnumerable{`0})
+    name: UnionWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.unionwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ISet`1.UnionWith(System.Collections.Generic.IEnumerable{`0})
+    name: UnionWith
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1.unionwith
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )

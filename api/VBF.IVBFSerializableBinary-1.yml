@@ -1,0 +1,155 @@
+### YamlMime:ManagedReference
+items:
+- uid: VBF.IVBFSerializableBinary`1
+  commentId: T:VBF.IVBFSerializableBinary`1
+  id: IVBFSerializableBinary`1
+  parent: VBF
+  children:
+  - VBF.IVBFSerializableBinary`1.Deserialize(System.Byte[])
+  - VBF.IVBFSerializableBinary`1.Serialize
+  langs:
+  - csharp
+  - vb
+  name: IVBFSerializableBinary<T>
+  nameWithType: IVBFSerializableBinary<T>
+  fullName: VBF.IVBFSerializableBinary<T>
+  type: Interface
+  source:
+    remote:
+      path: VoxelPrototype/common/Serializer/VBF.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IVBFSerializableBinary
+    path: VoxelPrototype/common/Serializer/VBF.cs
+    startLine: 6
+  assemblies:
+  - VoxelPrototype
+  namespace: VBF
+  syntax:
+    content: 'public interface IVBFSerializableBinary<T> where T : class'
+    typeParameters:
+    - id: T
+    content.vb: Public Interface IVBFSerializableBinary(Of T As Class)
+  nameWithType.vb: IVBFSerializableBinary(Of T)
+  fullName.vb: VBF.IVBFSerializableBinary(Of T)
+  name.vb: IVBFSerializableBinary(Of T)
+- uid: VBF.IVBFSerializableBinary`1.Serialize
+  commentId: M:VBF.IVBFSerializableBinary`1.Serialize
+  id: Serialize
+  parent: VBF.IVBFSerializableBinary`1
+  langs:
+  - csharp
+  - vb
+  name: Serialize()
+  nameWithType: IVBFSerializableBinary<T>.Serialize()
+  fullName: VBF.IVBFSerializableBinary<T>.Serialize()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Serializer/VBF.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Serialize
+    path: VoxelPrototype/common/Serializer/VBF.cs
+    startLine: 8
+  assemblies:
+  - VoxelPrototype
+  namespace: VBF
+  syntax:
+    content: byte[] Serialize()
+    return:
+      type: System.Byte[]
+    content.vb: Function Serialize() As Byte()
+  overload: VBF.IVBFSerializableBinary`1.Serialize*
+  nameWithType.vb: IVBFSerializableBinary(Of T).Serialize()
+  fullName.vb: VBF.IVBFSerializableBinary(Of T).Serialize()
+- uid: VBF.IVBFSerializableBinary`1.Deserialize(System.Byte[])
+  commentId: M:VBF.IVBFSerializableBinary`1.Deserialize(System.Byte[])
+  id: Deserialize(System.Byte[])
+  parent: VBF.IVBFSerializableBinary`1
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(byte[])
+  nameWithType: IVBFSerializableBinary<T>.Deserialize(byte[])
+  fullName: VBF.IVBFSerializableBinary<T>.Deserialize(byte[])
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Serializer/VBF.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Deserialize
+    path: VoxelPrototype/common/Serializer/VBF.cs
+    startLine: 9
+  assemblies:
+  - VoxelPrototype
+  namespace: VBF
+  syntax:
+    content: T Deserialize(byte[] data)
+    parameters:
+    - id: data
+      type: System.Byte[]
+    return:
+      type: '{T}'
+    content.vb: Function Deserialize(data As Byte()) As T
+  overload: VBF.IVBFSerializableBinary`1.Deserialize*
+  nameWithType.vb: IVBFSerializableBinary(Of T).Deserialize(Byte())
+  fullName.vb: VBF.IVBFSerializableBinary(Of T).Deserialize(Byte())
+  name.vb: Deserialize(Byte())
+references:
+- uid: VBF
+  commentId: N:VBF
+  href: VBF.html
+  name: VBF
+  nameWithType: VBF
+  fullName: VBF
+- uid: VBF.IVBFSerializableBinary`1.Serialize*
+  commentId: Overload:VBF.IVBFSerializableBinary`1.Serialize
+  href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Serialize
+  name: Serialize
+  nameWithType: IVBFSerializableBinary<T>.Serialize
+  fullName: VBF.IVBFSerializableBinary<T>.Serialize
+  nameWithType.vb: IVBFSerializableBinary(Of T).Serialize
+  fullName.vb: VBF.IVBFSerializableBinary(Of T).Serialize
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: VBF.IVBFSerializableBinary`1.Deserialize*
+  commentId: Overload:VBF.IVBFSerializableBinary`1.Deserialize
+  href: VBF.IVBFSerializableBinary-1.html#VBF_IVBFSerializableBinary_1_Deserialize_System_Byte___
+  name: Deserialize
+  nameWithType: IVBFSerializableBinary<T>.Deserialize
+  fullName: VBF.IVBFSerializableBinary<T>.Deserialize
+  nameWithType.vb: IVBFSerializableBinary(Of T).Deserialize
+  fullName.vb: VBF.IVBFSerializableBinary(Of T).Deserialize
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T

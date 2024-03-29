@@ -1,0 +1,840 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.API.Blocks.Block
+  commentId: T:VoxelPrototype.common.API.Blocks.Block
+  id: Block
+  parent: VoxelPrototype.common.API.Blocks
+  children:
+  - VoxelPrototype.common.API.Blocks.Block.BreakingTime
+  - VoxelPrototype.common.API.Blocks.Block.Collider
+  - VoxelPrototype.common.API.Blocks.Block.Data
+  - VoxelPrototype.common.API.Blocks.Block.Friction
+  - VoxelPrototype.common.API.Blocks.Block.GetDefaultState
+  - VoxelPrototype.common.API.Blocks.Block.Model
+  - VoxelPrototype.common.API.Blocks.Block.OnInteract(OpenTK.Mathematics.Vector3i,VoxelPrototype.common.API.Blocks.State.BlockState)
+  - VoxelPrototype.common.API.Blocks.Block.RegisterProperties(VoxelPrototype.common.API.Blocks.state.BlockStateBuilder)
+  - VoxelPrototype.common.API.Blocks.Block.RenderType
+  - VoxelPrototype.common.API.Blocks.Block.StateHolder
+  - VoxelPrototype.common.API.Blocks.Block.Transparency
+  langs:
+  - csharp
+  - vb
+  name: Block
+  nameWithType: Block
+  fullName: VoxelPrototype.common.API.Blocks.Block
+  type: Class
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Block
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 7
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public class Block
+    content.vb: Public Class Block
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VoxelPrototype.common.API.Blocks.Block.StateHolder
+  commentId: F:VoxelPrototype.common.API.Blocks.Block.StateHolder
+  id: StateHolder
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: StateHolder
+  nameWithType: Block.StateHolder
+  fullName: VoxelPrototype.common.API.Blocks.Block.StateHolder
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: StateHolder
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 11
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public BlockStateHolder StateHolder
+    return:
+      type: VoxelPrototype.common.API.Blocks.state.BlockStateHolder
+    content.vb: Public StateHolder As BlockStateHolder
+- uid: VoxelPrototype.common.API.Blocks.Block.Model
+  commentId: F:VoxelPrototype.common.API.Blocks.Block.Model
+  id: Model
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: Model
+  nameWithType: Block.Model
+  fullName: VoxelPrototype.common.API.Blocks.Block.Model
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Model
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 14
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public string Model
+    return:
+      type: System.String
+    content.vb: Public Model As String
+- uid: VoxelPrototype.common.API.Blocks.Block.Collider
+  commentId: F:VoxelPrototype.common.API.Blocks.Block.Collider
+  id: Collider
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: Collider
+  nameWithType: Block.Collider
+  fullName: VoxelPrototype.common.API.Blocks.Block.Collider
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Collider
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 15
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public string Collider
+    return:
+      type: System.String
+    content.vb: Public Collider As String
+- uid: VoxelPrototype.common.API.Blocks.Block.Data
+  commentId: F:VoxelPrototype.common.API.Blocks.Block.Data
+  id: Data
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: Data
+  nameWithType: Block.Data
+  fullName: VoxelPrototype.common.API.Blocks.Block.Data
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Data
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 16
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public string Data
+    return:
+      type: System.String
+    content.vb: Public Data As String
+- uid: VoxelPrototype.common.API.Blocks.Block.Friction
+  commentId: F:VoxelPrototype.common.API.Blocks.Block.Friction
+  id: Friction
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: Friction
+  nameWithType: Block.Friction
+  fullName: VoxelPrototype.common.API.Blocks.Block.Friction
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Friction
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 17
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public float Friction
+    return:
+      type: System.Single
+    content.vb: Public Friction As Single
+- uid: VoxelPrototype.common.API.Blocks.Block.BreakingTime
+  commentId: F:VoxelPrototype.common.API.Blocks.Block.BreakingTime
+  id: BreakingTime
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: BreakingTime
+  nameWithType: Block.BreakingTime
+  fullName: VoxelPrototype.common.API.Blocks.Block.BreakingTime
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: BreakingTime
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 18
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public int BreakingTime
+    return:
+      type: System.Int32
+    content.vb: Public BreakingTime As Integer
+- uid: VoxelPrototype.common.API.Blocks.Block.RenderType
+  commentId: F:VoxelPrototype.common.API.Blocks.Block.RenderType
+  id: RenderType
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: RenderType
+  nameWithType: Block.RenderType
+  fullName: VoxelPrototype.common.API.Blocks.Block.RenderType
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: RenderType
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 19
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public BlockRenderType RenderType
+    return:
+      type: VoxelPrototype.common.API.Blocks.BlockRenderType
+    content.vb: Public RenderType As BlockRenderType
+- uid: VoxelPrototype.common.API.Blocks.Block.Transparency
+  commentId: F:VoxelPrototype.common.API.Blocks.Block.Transparency
+  id: Transparency
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: Transparency
+  nameWithType: Block.Transparency
+  fullName: VoxelPrototype.common.API.Blocks.Block.Transparency
+  type: Field
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Transparency
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 20
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public bool Transparency
+    return:
+      type: System.Boolean
+    content.vb: Public Transparency As Boolean
+- uid: VoxelPrototype.common.API.Blocks.Block.RegisterProperties(VoxelPrototype.common.API.Blocks.state.BlockStateBuilder)
+  commentId: M:VoxelPrototype.common.API.Blocks.Block.RegisterProperties(VoxelPrototype.common.API.Blocks.state.BlockStateBuilder)
+  id: RegisterProperties(VoxelPrototype.common.API.Blocks.state.BlockStateBuilder)
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: RegisterProperties(BlockStateBuilder)
+  nameWithType: Block.RegisterProperties(BlockStateBuilder)
+  fullName: VoxelPrototype.common.API.Blocks.Block.RegisterProperties(VoxelPrototype.common.API.Blocks.state.BlockStateBuilder)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: RegisterProperties
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 28
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public virtual void RegisterProperties(BlockStateBuilder Builder)
+    parameters:
+    - id: Builder
+      type: VoxelPrototype.common.API.Blocks.state.BlockStateBuilder
+    content.vb: Public Overridable Sub RegisterProperties(Builder As BlockStateBuilder)
+  overload: VoxelPrototype.common.API.Blocks.Block.RegisterProperties*
+- uid: VoxelPrototype.common.API.Blocks.Block.OnInteract(OpenTK.Mathematics.Vector3i,VoxelPrototype.common.API.Blocks.State.BlockState)
+  commentId: M:VoxelPrototype.common.API.Blocks.Block.OnInteract(OpenTK.Mathematics.Vector3i,VoxelPrototype.common.API.Blocks.State.BlockState)
+  id: OnInteract(OpenTK.Mathematics.Vector3i,VoxelPrototype.common.API.Blocks.State.BlockState)
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: OnInteract(Vector3i, BlockState)
+  nameWithType: Block.OnInteract(Vector3i, BlockState)
+  fullName: VoxelPrototype.common.API.Blocks.Block.OnInteract(OpenTK.Mathematics.Vector3i, VoxelPrototype.common.API.Blocks.State.BlockState)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: OnInteract
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 31
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public virtual void OnInteract(Vector3i Pos, BlockState State)
+    parameters:
+    - id: Pos
+      type: OpenTK.Mathematics.Vector3i
+    - id: State
+      type: VoxelPrototype.common.API.Blocks.State.BlockState
+    content.vb: Public Overridable Sub OnInteract(Pos As Vector3i, State As BlockState)
+  overload: VoxelPrototype.common.API.Blocks.Block.OnInteract*
+- uid: VoxelPrototype.common.API.Blocks.Block.GetDefaultState
+  commentId: M:VoxelPrototype.common.API.Blocks.Block.GetDefaultState
+  id: GetDefaultState
+  parent: VoxelPrototype.common.API.Blocks.Block
+  langs:
+  - csharp
+  - vb
+  name: GetDefaultState()
+  nameWithType: Block.GetDefaultState()
+  fullName: VoxelPrototype.common.API.Blocks.Block.GetDefaultState()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/API/Blocks/Block.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: GetDefaultState
+    path: VoxelPrototype/common/API/Blocks/Block.cs
+    startLine: 35
+  assemblies:
+  - VoxelPrototype
+  namespace: VoxelPrototype.common.API.Blocks
+  syntax:
+    content: public BlockState GetDefaultState()
+    return:
+      type: VoxelPrototype.common.API.Blocks.State.BlockState
+    content.vb: Public Function GetDefaultState() As BlockState
+  overload: VoxelPrototype.common.API.Blocks.Block.GetDefaultState*
+references:
+- uid: VoxelPrototype.common.API.Blocks
+  commentId: N:VoxelPrototype.common.API.Blocks
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.API.Blocks
+  nameWithType: VoxelPrototype.common.API.Blocks
+  fullName: VoxelPrototype.common.API.Blocks
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks
+    name: Blocks
+    href: VoxelPrototype.common.API.Blocks.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks
+    name: Blocks
+    href: VoxelPrototype.common.API.Blocks.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VoxelPrototype.common.API.Blocks.state.BlockStateHolder
+  commentId: T:VoxelPrototype.common.API.Blocks.state.BlockStateHolder
+  parent: VoxelPrototype.common.API.Blocks.state
+  href: VoxelPrototype.common.API.Blocks.state.BlockStateHolder.html
+  name: BlockStateHolder
+  nameWithType: BlockStateHolder
+  fullName: VoxelPrototype.common.API.Blocks.state.BlockStateHolder
+- uid: VoxelPrototype.common.API.Blocks.state
+  commentId: N:VoxelPrototype.common.API.Blocks.state
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.API.Blocks.state
+  nameWithType: VoxelPrototype.common.API.Blocks.state
+  fullName: VoxelPrototype.common.API.Blocks.state
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks
+    name: Blocks
+    href: VoxelPrototype.common.API.Blocks.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks.state
+    name: state
+    href: VoxelPrototype.common.API.Blocks.state.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks
+    name: Blocks
+    href: VoxelPrototype.common.API.Blocks.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks.state
+    name: state
+    href: VoxelPrototype.common.API.Blocks.state.html
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: VoxelPrototype.common.API.Blocks.BlockRenderType
+  commentId: T:VoxelPrototype.common.API.Blocks.BlockRenderType
+  parent: VoxelPrototype.common.API.Blocks
+  href: VoxelPrototype.common.API.Blocks.BlockRenderType.html
+  name: BlockRenderType
+  nameWithType: BlockRenderType
+  fullName: VoxelPrototype.common.API.Blocks.BlockRenderType
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: VoxelPrototype.common.API.Blocks.Block.RegisterProperties*
+  commentId: Overload:VoxelPrototype.common.API.Blocks.Block.RegisterProperties
+  href: VoxelPrototype.common.API.Blocks.Block.html#VoxelPrototype_common_API_Blocks_Block_RegisterProperties_VoxelPrototype_common_API_Blocks_state_BlockStateBuilder_
+  name: RegisterProperties
+  nameWithType: Block.RegisterProperties
+  fullName: VoxelPrototype.common.API.Blocks.Block.RegisterProperties
+- uid: VoxelPrototype.common.API.Blocks.state.BlockStateBuilder
+  commentId: T:VoxelPrototype.common.API.Blocks.state.BlockStateBuilder
+  parent: VoxelPrototype.common.API.Blocks.state
+  href: VoxelPrototype.common.API.Blocks.state.BlockStateBuilder.html
+  name: BlockStateBuilder
+  nameWithType: BlockStateBuilder
+  fullName: VoxelPrototype.common.API.Blocks.state.BlockStateBuilder
+- uid: VoxelPrototype.common.API.Blocks.Block.OnInteract*
+  commentId: Overload:VoxelPrototype.common.API.Blocks.Block.OnInteract
+  href: VoxelPrototype.common.API.Blocks.Block.html#VoxelPrototype_common_API_Blocks_Block_OnInteract_OpenTK_Mathematics_Vector3i_VoxelPrototype_common_API_Blocks_State_BlockState_
+  name: OnInteract
+  nameWithType: Block.OnInteract
+  fullName: VoxelPrototype.common.API.Blocks.Block.OnInteract
+- uid: OpenTK.Mathematics.Vector3i
+  commentId: T:OpenTK.Mathematics.Vector3i
+  parent: OpenTK.Mathematics
+  isExternal: true
+  name: Vector3i
+  nameWithType: Vector3i
+  fullName: OpenTK.Mathematics.Vector3i
+- uid: VoxelPrototype.common.API.Blocks.State.BlockState
+  commentId: T:VoxelPrototype.common.API.Blocks.State.BlockState
+  parent: VoxelPrototype.common.API.Blocks.State
+  href: VoxelPrototype.common.API.Blocks.State.BlockState.html
+  name: BlockState
+  nameWithType: BlockState
+  fullName: VoxelPrototype.common.API.Blocks.State.BlockState
+- uid: OpenTK.Mathematics
+  commentId: N:OpenTK.Mathematics
+  isExternal: true
+  name: OpenTK.Mathematics
+  nameWithType: OpenTK.Mathematics
+  fullName: OpenTK.Mathematics
+  spec.csharp:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+  spec.vb:
+  - uid: OpenTK
+    name: OpenTK
+    isExternal: true
+  - name: .
+  - uid: OpenTK.Mathematics
+    name: Mathematics
+    isExternal: true
+- uid: VoxelPrototype.common.API.Blocks.State
+  commentId: N:VoxelPrototype.common.API.Blocks.State
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.API.Blocks.State
+  nameWithType: VoxelPrototype.common.API.Blocks.State
+  fullName: VoxelPrototype.common.API.Blocks.State
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks
+    name: Blocks
+    href: VoxelPrototype.common.API.Blocks.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks.State
+    name: State
+    href: VoxelPrototype.common.API.Blocks.State.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.API
+    name: API
+    href: VoxelPrototype.common.API.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks
+    name: Blocks
+    href: VoxelPrototype.common.API.Blocks.html
+  - name: .
+  - uid: VoxelPrototype.common.API.Blocks.State
+    name: State
+    href: VoxelPrototype.common.API.Blocks.State.html
+- uid: VoxelPrototype.common.API.Blocks.Block.GetDefaultState*
+  commentId: Overload:VoxelPrototype.common.API.Blocks.Block.GetDefaultState
+  href: VoxelPrototype.common.API.Blocks.Block.html#VoxelPrototype_common_API_Blocks_Block_GetDefaultState
+  name: GetDefaultState
+  nameWithType: Block.GetDefaultState
+  fullName: VoxelPrototype.common.API.Blocks.Block.GetDefaultState

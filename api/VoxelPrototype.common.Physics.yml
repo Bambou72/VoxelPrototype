@@ -1,0 +1,61 @@
+### YamlMime:ManagedReference
+items:
+- uid: VoxelPrototype.common.Physics
+  commentId: N:VoxelPrototype.common.Physics
+  id: VoxelPrototype.common.Physics
+  children:
+  - VoxelPrototype.common.Physics.Collider
+  - VoxelPrototype.common.Physics.Ray
+  langs:
+  - csharp
+  - vb
+  name: VoxelPrototype.common.Physics
+  nameWithType: VoxelPrototype.common.Physics
+  fullName: VoxelPrototype.common.Physics
+  type: Namespace
+  assemblies:
+  - VoxelPrototype
+references:
+- uid: VoxelPrototype.common.Physics.Collider
+  commentId: T:VoxelPrototype.common.Physics.Collider
+  parent: VoxelPrototype.common.Physics
+  href: VoxelPrototype.common.Physics.Collider.html
+  name: Collider
+  nameWithType: Collider
+  fullName: VoxelPrototype.common.Physics.Collider
+- uid: VoxelPrototype.common.Physics.Ray
+  commentId: T:VoxelPrototype.common.Physics.Ray
+  href: VoxelPrototype.common.Physics.Ray.html
+  name: Ray
+  nameWithType: Ray
+  fullName: VoxelPrototype.common.Physics.Ray
+- uid: VoxelPrototype.common.Physics
+  commentId: N:VoxelPrototype.common.Physics
+  href: VoxelPrototype.html
+  name: VoxelPrototype.common.Physics
+  nameWithType: VoxelPrototype.common.Physics
+  fullName: VoxelPrototype.common.Physics
+  spec.csharp:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Physics
+    name: Physics
+    href: VoxelPrototype.common.Physics.html
+  spec.vb:
+  - uid: VoxelPrototype
+    name: VoxelPrototype
+    href: VoxelPrototype.html
+  - name: .
+  - uid: VoxelPrototype.common
+    name: common
+    href: VoxelPrototype.common.html
+  - name: .
+  - uid: VoxelPrototype.common.Physics
+    name: Physics
+    href: VoxelPrototype.common.Physics.html

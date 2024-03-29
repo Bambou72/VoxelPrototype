@@ -1,0 +1,138 @@
+### YamlMime:ManagedReference
+items:
+- uid: VBF.IVBFSerializable`1
+  commentId: T:VBF.IVBFSerializable`1
+  id: IVBFSerializable`1
+  parent: VBF
+  children:
+  - VBF.IVBFSerializable`1.Deserialize(VBF.VBFCompound)
+  - VBF.IVBFSerializable`1.Serialize
+  langs:
+  - csharp
+  - vb
+  name: IVBFSerializable<T>
+  nameWithType: IVBFSerializable<T>
+  fullName: VBF.IVBFSerializable<T>
+  type: Interface
+  source:
+    remote:
+      path: VoxelPrototype/common/Serializer/VBF.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: IVBFSerializable
+    path: VoxelPrototype/common/Serializer/VBF.cs
+    startLine: 11
+  assemblies:
+  - VoxelPrototype
+  namespace: VBF
+  syntax:
+    content: 'public interface IVBFSerializable<T> where T : class'
+    typeParameters:
+    - id: T
+    content.vb: Public Interface IVBFSerializable(Of T As Class)
+  nameWithType.vb: IVBFSerializable(Of T)
+  fullName.vb: VBF.IVBFSerializable(Of T)
+  name.vb: IVBFSerializable(Of T)
+- uid: VBF.IVBFSerializable`1.Serialize
+  commentId: M:VBF.IVBFSerializable`1.Serialize
+  id: Serialize
+  parent: VBF.IVBFSerializable`1
+  langs:
+  - csharp
+  - vb
+  name: Serialize()
+  nameWithType: IVBFSerializable<T>.Serialize()
+  fullName: VBF.IVBFSerializable<T>.Serialize()
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Serializer/VBF.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Serialize
+    path: VoxelPrototype/common/Serializer/VBF.cs
+    startLine: 13
+  assemblies:
+  - VoxelPrototype
+  namespace: VBF
+  syntax:
+    content: VBFCompound Serialize()
+    return:
+      type: VBF.VBFCompound
+    content.vb: Function Serialize() As VBFCompound
+  overload: VBF.IVBFSerializable`1.Serialize*
+  nameWithType.vb: IVBFSerializable(Of T).Serialize()
+  fullName.vb: VBF.IVBFSerializable(Of T).Serialize()
+- uid: VBF.IVBFSerializable`1.Deserialize(VBF.VBFCompound)
+  commentId: M:VBF.IVBFSerializable`1.Deserialize(VBF.VBFCompound)
+  id: Deserialize(VBF.VBFCompound)
+  parent: VBF.IVBFSerializable`1
+  langs:
+  - csharp
+  - vb
+  name: Deserialize(VBFCompound)
+  nameWithType: IVBFSerializable<T>.Deserialize(VBFCompound)
+  fullName: VBF.IVBFSerializable<T>.Deserialize(VBF.VBFCompound)
+  type: Method
+  source:
+    remote:
+      path: VoxelPrototype/common/Serializer/VBF.cs
+      branch: master
+      repo: https://github.com/Bambou72/VoxelPrototype.git
+    id: Deserialize
+    path: VoxelPrototype/common/Serializer/VBF.cs
+    startLine: 14
+  assemblies:
+  - VoxelPrototype
+  namespace: VBF
+  syntax:
+    content: T Deserialize(VBFCompound compound)
+    parameters:
+    - id: compound
+      type: VBF.VBFCompound
+    return:
+      type: '{T}'
+    content.vb: Function Deserialize(compound As VBFCompound) As T
+  overload: VBF.IVBFSerializable`1.Deserialize*
+  nameWithType.vb: IVBFSerializable(Of T).Deserialize(VBFCompound)
+  fullName.vb: VBF.IVBFSerializable(Of T).Deserialize(VBF.VBFCompound)
+references:
+- uid: VBF
+  commentId: N:VBF
+  href: VBF.html
+  name: VBF
+  nameWithType: VBF
+  fullName: VBF
+- uid: VBF.IVBFSerializable`1.Serialize*
+  commentId: Overload:VBF.IVBFSerializable`1.Serialize
+  href: VBF.IVBFSerializable-1.html#VBF_IVBFSerializable_1_Serialize
+  name: Serialize
+  nameWithType: IVBFSerializable<T>.Serialize
+  fullName: VBF.IVBFSerializable<T>.Serialize
+  nameWithType.vb: IVBFSerializable(Of T).Serialize
+  fullName.vb: VBF.IVBFSerializable(Of T).Serialize
+- uid: VBF.VBFCompound
+  commentId: T:VBF.VBFCompound
+  parent: VBF
+  href: VBF.VBFCompound.html
+  name: VBFCompound
+  nameWithType: VBFCompound
+  fullName: VBF.VBFCompound
+- uid: VBF.IVBFSerializable`1.Deserialize*
+  commentId: Overload:VBF.IVBFSerializable`1.Deserialize
+  href: VBF.IVBFSerializable-1.html#VBF_IVBFSerializable_1_Deserialize_VBF_VBFCompound_
+  name: Deserialize
+  nameWithType: IVBFSerializable<T>.Deserialize
+  fullName: VBF.IVBFSerializable<T>.Deserialize
+  nameWithType.vb: IVBFSerializable(Of T).Deserialize
+  fullName.vb: VBF.IVBFSerializable(Of T).Deserialize
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T

@@ -1,617 +1,617 @@
 {
   "Commands.html": {
     "href": "Commands.html",
-    "title": "| Documentation",
+    "title": "| VoxelPrototype Documentation",
     "keywords": "to remove all blank lines : ^\\s*$\\n"
   },
   "Conventions.html": {
     "href": "Conventions.html",
-    "title": "Conventions: | Documentation",
+    "title": "Conventions: | VoxelPrototype Documentation",
     "keywords": "Conventions: Code naming in the engine Class names must have the first char as upper. //Bad class example { } //Good class Example { } Method parameters names must have the first char as upper. //Bad void Test(int integer) { } //Good void Test(int Integer) { } Always use block of code {} and never use tabulation. //Bad if(Exemple) Example(); //Good if(Exemple) { Example(); } Asset Naming Assets must have there name with only lower case. e.g. with stairs block model the name is stairs."
-  },
-  "Doc/getting-started.html": {
-    "href": "Doc/getting-started.html",
-    "title": "Getting Started | Documentation",
-    "keywords": "Getting Started"
-  },
-  "Doc/introduction.html": {
-    "href": "Doc/introduction.html",
-    "title": "Introduction | Documentation",
-    "keywords": "Introduction"
   },
   "README.html": {
     "href": "README.html",
-    "title": "| Documentation",
+    "title": "| VoxelPrototype Documentation",
     "keywords": "Creator : @Bambou72 Todo Conventions"
   },
   "TODO.html": {
     "href": "TODO.html",
-    "title": "TODO | Documentation",
+    "title": "TODO | VoxelPrototype Documentation",
     "keywords": "TODO Priority: Tag Description [P0] High [P1] Medium [P2] Low [P3] Not needed but useful VoxelPrototype [ ] [P3] Write and add an defragmentation algorithm to region system VoxelPrototypeClient VoxelPrototypeServer Ended tasks Ended tasks for VoxelPrototype Ended tasks for VoxelPrototypeClient Ended tasks for VoxelPrototypeServer"
   },
   "api/VBF.IVBFSerializable-1.html": {
     "href": "api/VBF.IVBFSerializable-1.html",
-    "title": "Interface IVBFSerializable<T> | Documentation",
+    "title": "Interface IVBFSerializable<T> | VoxelPrototype Documentation",
     "keywords": "Interface IVBFSerializable<T> Namespace VBF Assembly VoxelPrototype.dll public interface IVBFSerializable<T> where T : class Type Parameters T Methods Deserialize(VBFCompound) T Deserialize(VBFCompound compound) Parameters compound VBFCompound Returns T Serialize() VBFCompound Serialize() Returns VBFCompound"
   },
   "api/VBF.IVBFSerializableBinary-1.html": {
     "href": "api/VBF.IVBFSerializableBinary-1.html",
-    "title": "Interface IVBFSerializableBinary<T> | Documentation",
+    "title": "Interface IVBFSerializableBinary<T> | VoxelPrototype Documentation",
     "keywords": "Interface IVBFSerializableBinary<T> Namespace VBF Assembly VoxelPrototype.dll public interface IVBFSerializableBinary<T> where T : class Type Parameters T Methods Deserialize(byte[]) T Deserialize(byte[] data) Parameters data byte[] Returns T Serialize() byte[] Serialize() Returns byte[]"
   },
   "api/VBF.VBFBool.html": {
     "href": "api/VBF.VBFBool.html",
-    "title": "Class VBFBool | Documentation",
+    "title": "Class VBFBool | VoxelPrototype Documentation",
     "keywords": "Class VBFBool Namespace VBF Assembly VoxelPrototype.dll public class VBFBool : VBFTag Inheritance object VBFTag VBFBool Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFBool(bool) public VBFBool(bool value) Parameters value bool Properties Value public bool Value { get; set; } Property Value bool"
   },
   "api/VBF.VBFByte.html": {
     "href": "api/VBF.VBFByte.html",
-    "title": "Class VBFByte | Documentation",
+    "title": "Class VBFByte | VoxelPrototype Documentation",
     "keywords": "Class VBFByte Namespace VBF Assembly VoxelPrototype.dll public class VBFByte : VBFTag Inheritance object VBFTag VBFByte Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFByte(byte) public VBFByte(byte value) Parameters value byte Properties Value public byte Value { get; set; } Property Value byte"
   },
   "api/VBF.VBFByteArray.html": {
     "href": "api/VBF.VBFByteArray.html",
-    "title": "Class VBFByteArray | Documentation",
+    "title": "Class VBFByteArray | VoxelPrototype Documentation",
     "keywords": "Class VBFByteArray Namespace VBF Assembly VoxelPrototype.dll public class VBFByteArray : VBFTag Inheritance object VBFTag VBFByteArray Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFByteArray(byte[]) public VBFByteArray(byte[] value) Parameters value byte[] Properties Value public byte[] Value { get; set; } Property Value byte[]"
   },
   "api/VBF.VBFCompound.html": {
     "href": "api/VBF.VBFCompound.html",
-    "title": "Class VBFCompound | Documentation",
+    "title": "Class VBFCompound | VoxelPrototype Documentation",
     "keywords": "Class VBFCompound Namespace VBF Assembly VoxelPrototype.dll public class VBFCompound : VBFTag Inheritance object VBFTag VBFCompound Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFCompound() public VBFCompound() Properties this[string] public VBFTag this[string Name] { get; set; } Parameters Name string Property Value VBFTag Methods Add(string, VBFTag) public void Add(string Name, VBFTag tag) Parameters Name string tag VBFTag AddBool(string, bool) public void AddBool(string Name, bool Value) Parameters Name string Value bool AddByte(string, byte) public void AddByte(string Name, byte Value) Parameters Name string Value byte AddDouble(string, double) public void AddDouble(string Name, double Value) Parameters Name string Value double AddFloat(string, float) public void AddFloat(string Name, float Value) Parameters Name string Value float AddInt(string, int) public void AddInt(string Name, int Value) Parameters Name string Value int AddIntArray(string, int[]) public void AddIntArray(string Name, int[] Value) Parameters Name string Value int[] AddLong(string, long) public void AddLong(string Name, long Value) Parameters Name string Value long AddString(string, string) public void AddString(string Name, string Value) Parameters Name string Value string GetBool(string) public VBFBool GetBool(string Name) Parameters Name string Returns VBFBool GetByte(string) public VBFByte GetByte(string Name) Parameters Name string Returns VBFByte GetDouble(string) public VBFDouble GetDouble(string Name) Parameters Name string Returns VBFDouble GetFloat(string) public VBFFloat GetFloat(string Name) Parameters Name string Returns VBFFloat GetInt(string) public VBFInt GetInt(string Name) Parameters Name string Returns VBFInt GetIntArray(string) public VBFIntArray GetIntArray(string Name) Parameters Name string Returns VBFIntArray GetLong(string) public VBFLong GetLong(string Name) Parameters Name string Returns VBFLong GetString(string) public VBFString GetString(string Name) Parameters Name string Returns VBFString Get<T>(string) public T Get<T>(string Name) where T : VBFTag Parameters Name string Returns T Type Parameters T"
   },
   "api/VBF.VBFDouble.html": {
     "href": "api/VBF.VBFDouble.html",
-    "title": "Class VBFDouble | Documentation",
+    "title": "Class VBFDouble | VoxelPrototype Documentation",
     "keywords": "Class VBFDouble Namespace VBF Assembly VoxelPrototype.dll public class VBFDouble : VBFTag Inheritance object VBFTag VBFDouble Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFDouble(double) public VBFDouble(double value) Parameters value double Properties Value public double Value { get; set; } Property Value double"
   },
   "api/VBF.VBFFloat.html": {
     "href": "api/VBF.VBFFloat.html",
-    "title": "Class VBFFloat | Documentation",
+    "title": "Class VBFFloat | VoxelPrototype Documentation",
     "keywords": "Class VBFFloat Namespace VBF Assembly VoxelPrototype.dll public class VBFFloat : VBFTag Inheritance object VBFTag VBFFloat Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFFloat(float) public VBFFloat(float value) Parameters value float Properties Value public float Value { get; set; } Property Value float"
   },
   "api/VBF.VBFInt.html": {
     "href": "api/VBF.VBFInt.html",
-    "title": "Class VBFInt | Documentation",
+    "title": "Class VBFInt | VoxelPrototype Documentation",
     "keywords": "Class VBFInt Namespace VBF Assembly VoxelPrototype.dll public class VBFInt : VBFTag Inheritance object VBFTag VBFInt Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFInt(int) public VBFInt(int value) Parameters value int Properties Value public int Value { get; set; } Property Value int"
   },
   "api/VBF.VBFIntArray.html": {
     "href": "api/VBF.VBFIntArray.html",
-    "title": "Class VBFIntArray | Documentation",
+    "title": "Class VBFIntArray | VoxelPrototype Documentation",
     "keywords": "Class VBFIntArray Namespace VBF Assembly VoxelPrototype.dll public class VBFIntArray : VBFTag Inheritance object VBFTag VBFIntArray Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFIntArray(int[]) public VBFIntArray(int[] value) Parameters value int[] Properties Value public int[] Value { get; set; } Property Value int[]"
   },
   "api/VBF.VBFList.html": {
     "href": "api/VBF.VBFList.html",
-    "title": "Class VBFList | Documentation",
+    "title": "Class VBFList | VoxelPrototype Documentation",
     "keywords": "Class VBFList Namespace VBF Assembly VoxelPrototype.dll public class VBFList : VBFTag Inheritance object VBFTag VBFList Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFList() public VBFList() Properties ListType public VBFTag.DataType ListType { get; set; } Property Value VBFTag.DataType Tags public List<VBFTag> Tags { get; set; } Property Value List<VBFTag>"
   },
   "api/VBF.VBFLong.html": {
     "href": "api/VBF.VBFLong.html",
-    "title": "Class VBFLong | Documentation",
+    "title": "Class VBFLong | VoxelPrototype Documentation",
     "keywords": "Class VBFLong Namespace VBF Assembly VoxelPrototype.dll public class VBFLong : VBFTag Inheritance object VBFTag VBFLong Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFLong(long) public VBFLong(long value) Parameters value long Properties Value public long Value { get; set; } Property Value long"
   },
   "api/VBF.VBFSerializer.html": {
     "href": "api/VBF.VBFSerializer.html",
-    "title": "Class VBFSerializer | Documentation",
+    "title": "Class VBFSerializer | VoxelPrototype Documentation",
     "keywords": "Class VBFSerializer Namespace VBF Assembly VoxelPrototype.dll public class VBFSerializer Inheritance object VBFSerializer Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods Deserialize(byte[]) public static VBFTag Deserialize(byte[] data) Parameters data byte[] Returns VBFTag DeserializeList(BinaryReader) public static VBFList DeserializeList(BinaryReader reader) Parameters reader BinaryReader Returns VBFList Serialize(VBFTag) public static byte[] Serialize(VBFTag tag) Parameters tag VBFTag Returns byte[]"
   },
   "api/VBF.VBFString.html": {
     "href": "api/VBF.VBFString.html",
-    "title": "Class VBFString | Documentation",
+    "title": "Class VBFString | VoxelPrototype Documentation",
     "keywords": "Class VBFString Namespace VBF Assembly VoxelPrototype.dll public class VBFString : VBFTag Inheritance object VBFTag VBFString Inherited Members VBFTag.Type object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors VBFString(string) public VBFString(string value) Parameters value string Properties Value public string Value { get; set; } Property Value string"
   },
   "api/VBF.VBFTag.DataType.html": {
     "href": "api/VBF.VBFTag.DataType.html",
-    "title": "Enum VBFTag.DataType | Documentation",
+    "title": "Enum VBFTag.DataType | VoxelPrototype Documentation",
     "keywords": "Enum VBFTag.DataType Namespace VBF Assembly VoxelPrototype.dll public enum VBFTag.DataType : byte Fields Bool = 7 Byte = 5 ByteArray = 6 Compound = 3 Double = 17 End = 0 Float = 16 Int = 1 IntArray = 8 List = 4 Long = 9 String = 2"
   },
   "api/VBF.VBFTag.html": {
     "href": "api/VBF.VBFTag.html",
-    "title": "Class VBFTag | Documentation",
+    "title": "Class VBFTag | VoxelPrototype Documentation",
     "keywords": "Class VBFTag Namespace VBF Assembly VoxelPrototype.dll public class VBFTag Inheritance object VBFTag Derived VBFBool VBFByte VBFByteArray VBFCompound VBFDouble VBFFloat VBFInt VBFIntArray VBFList VBFLong VBFString Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Properties Type public VBFTag.DataType Type { get; set; } Property Value VBFTag.DataType"
   },
   "api/VBF.html": {
     "href": "api/VBF.html",
-    "title": "Namespace VBF | Documentation",
+    "title": "Namespace VBF | VoxelPrototype Documentation",
     "keywords": "Namespace VBF Classes VBFBool VBFByte VBFByteArray VBFCompound VBFDouble VBFFloat VBFInt VBFIntArray VBFList VBFLong VBFSerializer VBFString VBFTag Interfaces IVBFSerializableBinary<T> IVBFSerializable<T> Enums VBFTag.DataType"
   },
   "api/VoxelPrototype.client.Client.html": {
     "href": "api/VoxelPrototype.client.Client.html",
-    "title": "Class Client | Documentation",
+    "title": "Class Client | VoxelPrototype Documentation",
     "keywords": "Class Client Namespace VoxelPrototype.client Assembly VoxelPrototype.dll public class Client : IRunnable Inheritance object Client Implements IRunnable Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Client() public Client() Fields TheClient public static Client TheClient Field Value Client World public ClientWorld World Field Value ClientWorld Properties IsRunningSlowly protected bool IsRunningSlowly { get; } Property Value bool Methods AccurateSleep(double, int) public static void AccurateSleep(double seconds, int expectedSchedulerPeriod) Parameters seconds double expectedSchedulerPeriod int DeInitWorld() public void DeInitWorld() Load() public void Load() Run() public void Run()"
   },
   "api/VoxelPrototype.client.Debug.ImGuiController.html": {
     "href": "api/VoxelPrototype.client.Debug.ImGuiController.html",
-    "title": "Class ImGuiController | Documentation",
+    "title": "Class ImGuiController | VoxelPrototype Documentation",
     "keywords": "Class ImGuiController Namespace VoxelPrototype.client.Debug Assembly VoxelPrototype.dll public class ImGuiController : IDisposable Inheritance object ImGuiController Implements IDisposable Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors ImGuiController(int, int) Constructs a new ImGuiController. public ImGuiController(int width, int height) Parameters width int height int Methods CheckGLError(string) public static void CheckGLError(string title) Parameters title string CreateDeviceResources() public void CreateDeviceResources() CreateProgram(string, string, string) public static int CreateProgram(string name, string vertexSource, string fragmentSoruce) Parameters name string vertexSource string fragmentSoruce string Returns int DestroyDeviceObjects() public void DestroyDeviceObjects() Dispose() Frees all graphics resources used by the Luxon. public void Dispose() LabelObject(ObjectLabelIdentifier, int, string) public static void LabelObject(ObjectLabelIdentifier objLabelIdent, int glObject, string name) Parameters objLabelIdent ObjectLabelIdentifier glObject int name string MouseScroll(Vector2) public void MouseScroll(Vector2 offset) Parameters offset Vector2 PressChar(char) public void PressChar(char keyChar) Parameters keyChar char RecreateFontDeviceTexture() Recreates the device texture used to render text. public void RecreateFontDeviceTexture() Render() Renders the ImGui draw list data. public void Render() Update(GLFWWindow, float) Updates ImGui InputSystem and IO configuration state. public void Update(GLFWWindow wnd, float deltaSeconds) Parameters wnd GLFWWindow deltaSeconds float WindowResized(int, int) public void WindowResized(int width, int height) Parameters width int height int"
   },
   "api/VoxelPrototype.client.Debug.html": {
     "href": "api/VoxelPrototype.client.Debug.html",
-    "title": "Namespace VoxelPrototype.client.Debug | Documentation",
+    "title": "Namespace VoxelPrototype.client.Debug | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.client.Debug Classes ImGuiController"
   },
   "api/VoxelPrototype.client.GLFWWindow.html": {
     "href": "api/VoxelPrototype.client.GLFWWindow.html",
-    "title": "Class GLFWWindow | Documentation",
+    "title": "Class GLFWWindow | VoxelPrototype Documentation",
     "keywords": "Class GLFWWindow Namespace VoxelPrototype.client Assembly VoxelPrototype.dll public class GLFWWindow Inheritance object GLFWWindow Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors GLFWWindow(string, int, int) public GLFWWindow(string Name, int Width, int Height) Parameters Name string Width int Height int Properties CursorState public CursorState CursorState { get; set; } Property Value CursorState TimerFrequency public long TimerFrequency { get; } Property Value long WindowState Gets or sets the WindowState for this window. public WindowState WindowState { get; set; } Property Value WindowState Methods Destroy() public void Destroy() ErrorCallback(ErrorCode, string) public void ErrorCallback(ErrorCode Error, string Decsription) Parameters Error ErrorCode Decsription string GetKeyboardState() public KeyboardState GetKeyboardState() Returns KeyboardState GetMouseState() public MouseState GetMouseState() Returns MouseState GetWindowSize() public Vector2i GetWindowSize() Returns Vector2i NewInputFrame() public void NewInputFrame() ProcessWindowEvents() public void ProcessWindowEvents() RegisterResizeCallback(Action<int, int>) public void RegisterResizeCallback(Action<int, int> Callback) Parameters Callback Action<int, int> RegisterTextInputCallback(Action<string>) public void RegisterTextInputCallback(Action<string> Callback) Parameters Callback Action<string> ShouldClose() public bool ShouldClose() Returns bool SwapBuffer() public void SwapBuffer()"
   },
   "api/VoxelPrototype.client.KeyboardState.html": {
     "href": "api/VoxelPrototype.client.KeyboardState.html",
-    "title": "Class KeyboardState | Documentation",
+    "title": "Class KeyboardState | VoxelPrototype Documentation",
     "keywords": "Class KeyboardState Namespace VoxelPrototype.client Assembly VoxelPrototype.dll Encapsulates the state of a Keyboard device. public class KeyboardState Inheritance object KeyboardState Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Properties IsAnyKeyDown Gets a value indicating whether any key is currently down. public bool IsAnyKeyDown { get; } Property Value bool true if any key is down; otherwise, false. this[Keys] Gets a bool indicating whether the specified OpenTK.Windowing.GraphicsLibraryFramework.Keys is currently down. public bool this[Keys key] { get; } Parameters key Keys The key to check. Property Value bool true if key is down; false otherwise. Methods GetSnapshot() Gets an immutable snapshot of this KeyboardState. This can be used to save the current keyboard state for comparison later on. public KeyboardState GetSnapshot() Returns KeyboardState Returns an immutable snapshot of this KeyboardState. IsKeyDown(Keys) Gets a bool indicating whether this key is currently down. public bool IsKeyDown(Keys key) Parameters key Keys The key to check. Returns bool true if key is in the down state; otherwise, false. IsKeyPressed(Keys) Gets whether the specified key is pressed in the current frame but released in the previous frame. public bool IsKeyPressed(Keys key) Parameters key Keys The key to check. Returns bool True if the key is pressed in this frame, but not the last frame. Remarks \"Frame\" refers to invocations of NativeWindow.ProcessEvents(double) (NativeWindow.ProcessInputEvents() more precisely) here. IsKeyReleased(Keys) Gets whether the specified key is released in the current frame but pressed in the previous frame. public bool IsKeyReleased(Keys key) Parameters key Keys The key to check. Returns bool True if the key is released in this frame, but pressed the last frame. Remarks \"Frame\" refers to invocations of NativeWindow.ProcessEvents(double) (NativeWindow.ProcessInputEvents() more precisely) here. ToString() Returns a string that represents the current object. public override string ToString() Returns string A string that represents the current object. WasKeyDown(Keys) Gets a bool indicating whether this key was down in the previous frame. public bool WasKeyDown(Keys key) Parameters key Keys The OpenTK.Windowing.GraphicsLibraryFramework.Keys to check. Returns bool true if key was in the down state; otherwise, false."
   },
   "api/VoxelPrototype.client.MouseState.html": {
     "href": "api/VoxelPrototype.client.MouseState.html",
-    "title": "Class MouseState | Documentation",
+    "title": "Class MouseState | VoxelPrototype Documentation",
     "keywords": "Class MouseState Namespace VoxelPrototype.client Assembly VoxelPrototype.dll Encapsulates the state of a mouse device. public class MouseState Inheritance object MouseState Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Properties Delta Gets a OpenTK.Mathematics.Vector2 representing the amount that the mouse moved since the last frame. This does not necessarily correspond to pixels, for example in the case of raw input. public Vector2 Delta { get; } Property Value Vector2 IsAnyButtonDown Gets a value indicating whether any button is down. public bool IsAnyButtonDown { get; } Property Value bool true if any button is down; otherwise, false. this[MouseButton] Gets a bool indicating whether the specified OpenTK.Windowing.GraphicsLibraryFramework.MouseButton is pressed. public bool this[MouseButton button] { get; } Parameters button MouseButton The OpenTK.Windowing.GraphicsLibraryFramework.MouseButton to check. Property Value bool true if key is pressed; false otherwise. Position Gets a OpenTK.Mathematics.Vector2 representing the absolute position of the pointer in the current frame, relative to the top-left corner of the contents of the window. public Vector2 Position { get; } Property Value Vector2 PreviousPosition Gets a OpenTK.Mathematics.Vector2 representing the absolute position of the pointer in the previous frame, relative to the top-left corner of the contents of the window. public Vector2 PreviousPosition { get; } Property Value Vector2 PreviousScroll Get a Vector2 representing the position of the mouse wheel. public Vector2 PreviousScroll { get; } Property Value Vector2 PreviousX Gets an integer representing the absolute x position of the pointer, in window pixel coordinates. public float PreviousX { get; } Property Value float PreviousY Gets an integer representing the absolute y position of the pointer, in window pixel coordinates. public float PreviousY { get; } Property Value float Scroll Get a Vector2 representing the position of the mouse wheel. public Vector2 Scroll { get; } Property Value Vector2 ScrollDelta Get a Vector2 representing the amount that the mouse wheel moved since the last frame. public Vector2 ScrollDelta { get; } Property Value Vector2 X Gets an integer representing the absolute x position of the pointer, in window pixel coordinates. public float X { get; } Property Value float Y Gets an integer representing the absolute y position of the pointer, in window pixel coordinates. public float Y { get; } Property Value float Methods GetSnapshot() Gets an immutable snapshot of this MouseState. This can be used to save the current mouse state for comparison later on. public MouseState GetSnapshot() Returns MouseState Returns an immutable snapshot of this MouseState. IsButtonDown(MouseButton) Gets a bool indicating whether this button is down. public bool IsButtonDown(MouseButton button) Parameters button MouseButton The OpenTK.Windowing.GraphicsLibraryFramework.MouseButton to check. Returns bool true if the button is down, otherwise false. IsButtonPressed(MouseButton) Gets whether the specified mouse button is pressed in the current frame but released in the previous frame. public bool IsButtonPressed(MouseButton button) Parameters button MouseButton The mouse button to check. Returns bool True if the mouse button is pressed in this frame, but not the last frame. Remarks \"Frame\" refers to invocations of NativeWindow.ProcessEvents(double) (NativeWindow.ProcessInputEvents() more precisely) here. IsButtonReleased(MouseButton) Gets whether the specified mouse button is released in the current frame but pressed in the previous frame. public bool IsButtonReleased(MouseButton button) Parameters button MouseButton The mouse button to check. Returns bool True if the mouse button is released in this frame, but pressed the last frame. Remarks \"Frame\" refers to invocations of NativeWindow.ProcessEvents(double) (NativeWindow.ProcessInputEvents() more precisely) here. ToString() Returns a string that represents the current MouseState. public override string ToString() Returns string A string that represents the current MouseState. WasButtonDown(MouseButton) Gets a bool indicating whether this button was down in the previous frame. public bool WasButtonDown(MouseButton button) Parameters button MouseButton The OpenTK.Windowing.GraphicsLibraryFramework.MouseButton to check. Returns bool true if the button is down, otherwise false."
   },
   "api/VoxelPrototype.client.Render.Components.BlockMesh.html": {
     "href": "api/VoxelPrototype.client.Render.Components.BlockMesh.html",
-    "title": "Class BlockMesh | Documentation",
+    "title": "Class BlockMesh | VoxelPrototype Documentation",
     "keywords": "Class BlockMesh Namespace VoxelPrototype.client.Render.Components Assembly VoxelPrototype.dll public class BlockMesh Inheritance object BlockMesh Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods GetMesh() public float[][] GetMesh() Returns float[][] GetUV() public float[][] GetUV() Returns float[][]"
   },
   "api/VoxelPrototype.client.Render.Components.Camera.html": {
     "href": "api/VoxelPrototype.client.Render.Components.Camera.html",
-    "title": "Class Camera | Documentation",
+    "title": "Class Camera | VoxelPrototype Documentation",
     "keywords": "Class Camera Namespace VoxelPrototype.client.Render.Components Assembly VoxelPrototype.dll public class Camera Inheritance object Camera Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString()"
   },
   "api/VoxelPrototype.client.Render.Components.CubeMapTexture.html": {
     "href": "api/VoxelPrototype.client.Render.Components.CubeMapTexture.html",
-    "title": "Class CubeMapTexture | Documentation",
+    "title": "Class CubeMapTexture | VoxelPrototype Documentation",
     "keywords": "Class CubeMapTexture Namespace VoxelPrototype.client.Render.Components Assembly VoxelPrototype.dll public class CubeMapTexture Inheritance object CubeMapTexture Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors CubeMapTexture(int) public CubeMapTexture(int glHandle) Parameters glHandle int Fields Handle public readonly int Handle Field Value int Methods LoadCubeMap(List<string>) public static CubeMapTexture LoadCubeMap(List<string> faces) Parameters faces List<string> Returns CubeMapTexture Use(TextureUnit) public void Use(TextureUnit Textu) Parameters Textu TextureUnit"
   },
   "api/VoxelPrototype.client.Render.Components.Model.html": {
     "href": "api/VoxelPrototype.client.Render.Components.Model.html",
-    "title": "Struct Model | Documentation",
+    "title": "Struct Model | VoxelPrototype Documentation",
     "keywords": "Struct Model Namespace VoxelPrototype.client.Render.Components Assembly VoxelPrototype.dll public struct Model Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Constructors Model(float[]) public Model(float[] Vertices) Parameters Vertices float[]"
   },
   "api/VoxelPrototype.client.Render.Components.Shader.html": {
     "href": "api/VoxelPrototype.client.Render.Components.Shader.html",
-    "title": "Class Shader | Documentation",
+    "title": "Class Shader | VoxelPrototype Documentation",
     "keywords": "Class Shader Namespace VoxelPrototype.client.Render.Components Assembly VoxelPrototype.dll public class Shader Inheritance object Shader Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Shader(string, string) public Shader(string vertPath, string fragPath) Parameters vertPath string fragPath string Shader(string, string, bool) public Shader(string vert, string frag, bool nopath) Parameters vert string frag string nopath bool Shader(string, string, string, bool) public Shader(string vert, string frag, string geo, bool nopath) Parameters vert string frag string geo string nopath bool Fields Handle public readonly int Handle Field Value int Methods GetAttribLocation(string) public int GetAttribLocation(string attribName) Parameters attribName string Returns int SetFloat(string, float) Set a uniform float on this shader. public void SetFloat(string name, float data) Parameters name string The name of the uniform data float The data to set SetFloatA(string, float) public void SetFloatA(string name, float data) Parameters name string data float SetInt(string, int) Set a uniform int on this shader. public void SetInt(string name, int data) Parameters name string The name of the uniform data int The data to set SetMatrix3(string, Matrix3) public void SetMatrix3(string name, Matrix3 data) Parameters name string data Matrix3 SetMatrix4(string, Matrix4) Set a uniform Matrix4 on this shader public void SetMatrix4(string name, Matrix4 data) Parameters name string The name of the uniform data Matrix4 The data to set Remarks The matrix is transposed before being sent to the shader. SetMatrix4A(string, Matrix4) public void SetMatrix4A(string name, Matrix4 mat) Parameters name string mat Matrix4 SetMatrix4NoTranspose(string, Matrix4) public void SetMatrix4NoTranspose(string name, Matrix4 data) Parameters name string data Matrix4 SetVector2(string, Vector2) Set a uniform Vector3 on this shader. public void SetVector2(string name, Vector2 data) Parameters name string The name of the uniform data Vector2 The data to set SetVector3(string, Vector3) public void SetVector3(string name, Vector3 data) Parameters name string data Vector3 SetVector3A(string, Vector3) public void SetVector3A(string name, Vector3 data) Parameters name string data Vector3 SetVector4(string, Vector4) public void SetVector4(string name, Vector4 data) Parameters name string data Vector4 Use() public void Use()"
   },
   "api/VoxelPrototype.client.Render.Components.Texture.html": {
     "href": "api/VoxelPrototype.client.Render.Components.Texture.html",
-    "title": "Class Texture | Documentation",
+    "title": "Class Texture | VoxelPrototype Documentation",
     "keywords": "Class Texture Namespace VoxelPrototype.client.Render.Components Assembly VoxelPrototype.dll public class Texture Inheritance object Texture Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString()"
   },
   "api/VoxelPrototype.client.Render.Components.html": {
     "href": "api/VoxelPrototype.client.Render.Components.html",
-    "title": "Namespace VoxelPrototype.client.Render.Components | Documentation",
+    "title": "Namespace VoxelPrototype.client.Render.Components | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.client.Render.Components Classes BlockMesh Camera CubeMapTexture Shader Texture Structs Model"
   },
   "api/VoxelPrototype.client.Render.Debug.DebugBox.html": {
     "href": "api/VoxelPrototype.client.Render.Debug.DebugBox.html",
-    "title": "Struct DebugBox | Documentation",
+    "title": "Struct DebugBox | VoxelPrototype Documentation",
     "keywords": "Struct DebugBox Namespace VoxelPrototype.client.Render.Debug Assembly VoxelPrototype.dll public struct DebugBox Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Fields Color public Vector4 Color Field Value Vector4 Position public Vector3 Position Field Value Vector3 Rotation public Quaternion Rotation Field Value Quaternion Size public Vector3d Size Field Value Vector3d"
   },
   "api/VoxelPrototype.client.Render.Debug.DebugLine.html": {
     "href": "api/VoxelPrototype.client.Render.Debug.DebugLine.html",
-    "title": "Struct DebugLine | Documentation",
+    "title": "Struct DebugLine | VoxelPrototype Documentation",
     "keywords": "Struct DebugLine Namespace VoxelPrototype.client.Render.Debug Assembly VoxelPrototype.dll public struct DebugLine Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Fields Color public Vector4 Color Field Value Vector4 End public Vector3 End Field Value Vector3 Position public Vector3 Position Field Value Vector3 Start public Vector3 Start Field Value Vector3"
   },
   "api/VoxelPrototype.client.Render.Debug.DebugShaders.html": {
     "href": "api/VoxelPrototype.client.Render.Debug.DebugShaders.html",
-    "title": "Class DebugShaders | Documentation",
+    "title": "Class DebugShaders | VoxelPrototype Documentation",
     "keywords": "Class DebugShaders Namespace VoxelPrototype.client.Render.Debug Assembly VoxelPrototype.dll public static class DebugShaders Inheritance object DebugShaders Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields DebugFrag public static string DebugFrag Field Value string DebugLineFrag public static string DebugLineFrag Field Value string DebugLineVert public static string DebugLineVert Field Value string DebugVert public static string DebugVert Field Value string"
   },
   "api/VoxelPrototype.client.Render.Debug.DebugShapeRenderer.html": {
     "href": "api/VoxelPrototype.client.Render.Debug.DebugShapeRenderer.html",
-    "title": "Class DebugShapeRenderer | Documentation",
+    "title": "Class DebugShapeRenderer | VoxelPrototype Documentation",
     "keywords": "Class DebugShapeRenderer Namespace VoxelPrototype.client.Render.Debug Assembly VoxelPrototype.dll public static class DebugShapeRenderer Inheritance object DebugShapeRenderer Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods RenderAxe(Quaternion, Vector3) public static void RenderAxe(Quaternion Rotation, Vector3 Position) Parameters Rotation Quaternion Position Vector3 RenderDebugBox(DebugBox) public static void RenderDebugBox(DebugBox box) Parameters box DebugBox RenderDebugFrustums(Frustum) public static void RenderDebugFrustums(Frustum frustum) Parameters frustum Frustum RenderLine(Vector3, Vector3, Vector4, Vector3) public static void RenderLine(Vector3 pos1, Vector3 pos2, Vector4 color, Vector3 Position) Parameters pos1 Vector3 pos2 Vector3 color Vector4 Position Vector3"
   },
   "api/VoxelPrototype.client.Render.Debug.Frustum.html": {
     "href": "api/VoxelPrototype.client.Render.Debug.Frustum.html",
-    "title": "Struct Frustum | Documentation",
+    "title": "Struct Frustum | VoxelPrototype Documentation",
     "keywords": "Struct Frustum Namespace VoxelPrototype.client.Render.Debug Assembly VoxelPrototype.dll public struct Frustum Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Constructors Frustum(Vector3[], Vector4) public Frustum(Vector3[] corners, Vector4 Color) Parameters corners Vector3[] Color Vector4 Fields EBO public int EBO Field Value int VAO public int VAO Field Value int VBO public int VBO Field Value int color public Vector4 color Field Value Vector4 count public int count Field Value int Methods Delete() public void Delete()"
   },
   "api/VoxelPrototype.client.Render.Debug.html": {
     "href": "api/VoxelPrototype.client.Render.Debug.html",
-    "title": "Namespace VoxelPrototype.client.Render.Debug | Documentation",
+    "title": "Namespace VoxelPrototype.client.Render.Debug | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.client.Render.Debug Classes DebugShaders DebugShapeRenderer Structs DebugBox DebugLine Frustum"
   },
   "api/VoxelPrototype.client.Render.World.ChunkMeshGenerator.html": {
     "href": "api/VoxelPrototype.client.Render.World.ChunkMeshGenerator.html",
-    "title": "Class ChunkMeshGenerator | Documentation",
+    "title": "Class ChunkMeshGenerator | VoxelPrototype Documentation",
     "keywords": "Class ChunkMeshGenerator Namespace VoxelPrototype.client.Render.World Assembly VoxelPrototype.dll public class ChunkMeshGenerator Inheritance object ChunkMeshGenerator Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods GenerateChunkMesh(Chunk) public void GenerateChunkMesh(Chunk Chunk) Parameters Chunk Chunk"
   },
   "api/VoxelPrototype.client.Render.World.html": {
     "href": "api/VoxelPrototype.client.Render.World.html",
-    "title": "Namespace VoxelPrototype.client.Render.World | Documentation",
+    "title": "Namespace VoxelPrototype.client.Render.World | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.client.Render.World Classes ChunkMeshGenerator"
   },
   "api/VoxelPrototype.client.Utils.html": {
     "href": "api/VoxelPrototype.client.Utils.html",
-    "title": "Class Utils | Documentation",
+    "title": "Class Utils | VoxelPrototype Documentation",
     "keywords": "Class Utils Namespace VoxelPrototype.client Assembly VoxelPrototype.dll public static class Utils Inheritance object Utils Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields SW_HIDE public const int SW_HIDE = 0 Field Value int Methods GetConsoleWindow() public static extern nint GetConsoleWindow() Returns nint ShowWindow(nint, int) public static extern bool ShowWindow(nint hWnd, int nCmdShow) Parameters hWnd nint nCmdShow int Returns bool"
   },
   "api/VoxelPrototype.client.html": {
     "href": "api/VoxelPrototype.client.html",
-    "title": "Namespace VoxelPrototype.client | Documentation",
+    "title": "Namespace VoxelPrototype.client | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.client Classes Client GLFWWindow KeyboardState Encapsulates the state of a Keyboard device. MouseState Encapsulates the state of a mouse device. Utils"
   },
   "api/VoxelPrototype.common.API.Blocks.Block.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.Block.html",
-    "title": "Class Block | Documentation",
+    "title": "Class Block | VoxelPrototype Documentation",
     "keywords": "Class Block Namespace VoxelPrototype.common.API.Blocks Assembly VoxelPrototype.dll public class Block Inheritance object Block Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields BreakingTime public int BreakingTime Field Value int Collider public string Collider Field Value string Data public string Data Field Value string Friction public float Friction Field Value float Model public string Model Field Value string RenderType public BlockRenderType RenderType Field Value BlockRenderType StateHolder public BlockStateHolder StateHolder Field Value BlockStateHolder Transparency public bool Transparency Field Value bool Methods GetDefaultState() public BlockState GetDefaultState() Returns BlockState OnInteract(Vector3i, BlockState) public virtual void OnInteract(Vector3i Pos, BlockState State) Parameters Pos Vector3i State BlockState RegisterProperties(BlockStateBuilder) public virtual void RegisterProperties(BlockStateBuilder Builder) Parameters Builder BlockStateBuilder"
   },
   "api/VoxelPrototype.common.API.Blocks.BlockRegister.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.BlockRegister.html",
-    "title": "Class BlockRegister | Documentation",
+    "title": "Class BlockRegister | VoxelPrototype Documentation",
     "keywords": "Class BlockRegister Namespace VoxelPrototype.common.API.Blocks Assembly VoxelPrototype.dll public static class BlockRegister Inheritance object BlockRegister Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields Air public static BlockState Air Field Value BlockState Methods GetBlock(string) public static Block GetBlock(string Id) Parameters Id string Returns Block GetBlockID(string, string) public static string GetBlockID(string ModName, string BlockName) Parameters ModName string BlockName string Returns string RegisterBlock(string, Block) public static bool RegisterBlock(string Id, Block block) Parameters Id string block Block Returns bool"
   },
   "api/VoxelPrototype.common.API.Blocks.BlockRenderType.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.BlockRenderType.html",
-    "title": "Enum BlockRenderType | Documentation",
+    "title": "Enum BlockRenderType | VoxelPrototype Documentation",
     "keywords": "Enum BlockRenderType Namespace VoxelPrototype.common.API.Blocks Assembly VoxelPrototype.dll public enum BlockRenderType Fields Cube = 0 Custom = 1"
   },
   "api/VoxelPrototype.common.API.Blocks.Properties.BooleanProperty.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.Properties.BooleanProperty.html",
-    "title": "Class BooleanProperty | Documentation",
+    "title": "Class BooleanProperty | VoxelPrototype Documentation",
     "keywords": "Class BooleanProperty Namespace VoxelPrototype.common.API.Blocks.Properties Assembly VoxelPrototype.dll public class BooleanProperty : Property<bool>, IProperty Inheritance object Property<bool> BooleanProperty Implements IProperty Inherited Members Property<bool>.Name Property<bool>.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors BooleanProperty(string) public BooleanProperty(string name) Parameters name string Methods DefaultValue() public override bool DefaultValue() Returns bool GetAllValues() public override List<bool> GetAllValues() Returns List<bool> GetValueFromString(string) public override bool GetValueFromString(string name) Parameters name string Returns bool GetValueString(bool) public override string GetValueString(bool value) Parameters value bool Returns string"
   },
   "api/VoxelPrototype.common.API.Blocks.Properties.IProperty.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.Properties.IProperty.html",
-    "title": "Interface IProperty | Documentation",
+    "title": "Interface IProperty | VoxelPrototype Documentation",
     "keywords": "Interface IProperty Namespace VoxelPrototype.common.API.Blocks.Properties Assembly VoxelPrototype.dll public interface IProperty Properties Name string Name { get; } Property Value string"
   },
   "api/VoxelPrototype.common.API.Blocks.Properties.Property-1.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.Properties.Property-1.html",
-    "title": "Class Property<T> | Documentation",
+    "title": "Class Property<T> | VoxelPrototype Documentation",
     "keywords": "Class Property<T> Namespace VoxelPrototype.common.API.Blocks.Properties Assembly VoxelPrototype.dll public class Property<T> : IProperty Type Parameters T Inheritance object Property<T> Implements IProperty Derived BooleanProperty Inherited Members object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Property(string) public Property(string Name) Parameters Name string Properties Name public string Name { get; } Property Value string Methods DefaultValue() public virtual T DefaultValue() Returns T Equals(object) Determines whether the specified object is equal to the current object. public override bool Equals(object obj) Parameters obj object The object to compare with the current object. Returns bool true if the specified object is equal to the current object; otherwise, false. GetAllValues() public virtual List<T> GetAllValues() Returns List<T> GetValueFromString(string) public virtual T GetValueFromString(string value) Parameters value string Returns T GetValueString(T) public virtual string GetValueString(T value) Parameters value T Returns string"
   },
   "api/VoxelPrototype.common.API.Blocks.Properties.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.Properties.html",
-    "title": "Namespace VoxelPrototype.common.API.Blocks.Properties | Documentation",
+    "title": "Namespace VoxelPrototype.common.API.Blocks.Properties | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.API.Blocks.Properties Classes BooleanProperty Property<T> Interfaces IProperty"
   },
   "api/VoxelPrototype.common.API.Blocks.State.BlockState.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.State.BlockState.html",
-    "title": "Class BlockState | Documentation",
+    "title": "Class BlockState | VoxelPrototype Documentation",
     "keywords": "Class BlockState Namespace VoxelPrototype.common.API.Blocks.State Assembly VoxelPrototype.dll public class BlockState : IVBFSerializable<BlockState> Inheritance object BlockState Implements IVBFSerializable<BlockState> Inherited Members object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors BlockState() public BlockState() BlockState(Block, Dictionary<IProperty, object>, uint) public BlockState(Block Block, Dictionary<IProperty, object> Properties, uint ID) Parameters Block Block Properties Dictionary<IProperty, object> ID uint Properties Block public Block Block { get; } Property Value Block ID public uint ID { get; } Property Value uint Methods Deserialize(VBFCompound) public BlockState Deserialize(VBFCompound compound) Parameters compound VBFCompound Returns BlockState Equals(object) Determines whether the specified object is equal to the current object. public override bool Equals(object obj) Parameters obj object The object to compare with the current object. Returns bool true if the specified object is equal to the current object; otherwise, false. GetIntern<T>(Property<T>) public (T, IProperty) GetIntern<T>(Property<T> property) Parameters property Property<T> Returns (T, IProperty) Type Parameters T Get<T>(Property<T>) public T Get<T>(Property<T> property) Parameters property Property<T> Returns T Type Parameters T Has(Property<object>) public bool Has(Property<object> property) Parameters property Property<object> Returns bool Serialize() public VBFCompound Serialize() Returns VBFCompound SetAllStates(Dictionary<(IProperty, object), BlockState>) public void SetAllStates(Dictionary<(IProperty, object), BlockState> states) Parameters states Dictionary<(IProperty, object), BlockState> ToString() Returns a string that represents the current object. public override string ToString() Returns string A string that represents the current object. WithRaw<T>(Property<T>, object) public BlockState WithRaw<T>(Property<T> property, object value) Parameters property Property<T> value object Returns BlockState Type Parameters T With<T>(Property<T>, T) public BlockState With<T>(Property<T> property, T value) Parameters property Property<T> value T Returns BlockState Type Parameters T"
   },
   "api/VoxelPrototype.common.API.Blocks.State.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.State.html",
-    "title": "Namespace VoxelPrototype.common.API.Blocks.State | Documentation",
+    "title": "Namespace VoxelPrototype.common.API.Blocks.State | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.API.Blocks.State Classes BlockState"
   },
   "api/VoxelPrototype.common.API.Blocks.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.html",
-    "title": "Namespace VoxelPrototype.common.API.Blocks | Documentation",
+    "title": "Namespace VoxelPrototype.common.API.Blocks | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.API.Blocks Classes Block BlockRegister Enums BlockRenderType"
   },
   "api/VoxelPrototype.common.API.Blocks.state.BlockStateBuilder.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.state.BlockStateBuilder.html",
-    "title": "Class BlockStateBuilder | Documentation",
+    "title": "Class BlockStateBuilder | VoxelPrototype Documentation",
     "keywords": "Class BlockStateBuilder Namespace VoxelPrototype.common.API.Blocks.state Assembly VoxelPrototype.dll public class BlockStateBuilder Inheritance object BlockStateBuilder Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods Register<T>(Property<T>) public void Register<T>(Property<T> property) Parameters property Property<T> Type Parameters T"
   },
   "api/VoxelPrototype.common.API.Blocks.state.BlockStateHolder.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.state.BlockStateHolder.html",
-    "title": "Class BlockStateHolder | Documentation",
+    "title": "Class BlockStateHolder | VoxelPrototype Documentation",
     "keywords": "Class BlockStateHolder Namespace VoxelPrototype.common.API.Blocks.state Assembly VoxelPrototype.dll public class BlockStateHolder Inheritance object BlockStateHolder Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods GetBaseState() public BlockState GetBaseState() Returns BlockState GetPropertiesByName(string) public IProperty GetPropertiesByName(string name) Parameters name string Returns IProperty GetStates() public List<BlockState> GetStates() Returns List<BlockState>"
   },
   "api/VoxelPrototype.common.API.Blocks.state_1.html": {
     "href": "api/VoxelPrototype.common.API.Blocks.state_1.html",
-    "title": "Namespace VoxelPrototype.common.API.Blocks.state | Documentation",
+    "title": "Namespace VoxelPrototype.common.API.Blocks.state | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.API.Blocks.state Classes BlockStateBuilder BlockStateHolder"
   },
   "api/VoxelPrototype.common.API.Commands.CommandRegister.html": {
     "href": "api/VoxelPrototype.common.API.Commands.CommandRegister.html",
-    "title": "Class CommandRegister | Documentation",
+    "title": "Class CommandRegister | VoxelPrototype Documentation",
     "keywords": "Class CommandRegister Namespace VoxelPrototype.common.API.Commands Assembly VoxelPrototype.dll public static class CommandRegister Inheritance object CommandRegister Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods ExecuteCommand(string, NetPeer) public static void ExecuteCommand(string input, NetPeer peer) Parameters input string peer NetPeer RegisterCommand(ICommand) public static void RegisterCommand(ICommand command) Parameters command ICommand"
   },
   "api/VoxelPrototype.common.API.Commands.ICommand.html": {
     "href": "api/VoxelPrototype.common.API.Commands.ICommand.html",
-    "title": "Interface ICommand | Documentation",
+    "title": "Interface ICommand | VoxelPrototype Documentation",
     "keywords": "Interface ICommand Namespace VoxelPrototype.common.API.Commands Assembly VoxelPrototype.dll public interface ICommand Properties Name string Name { get; } Property Value string Methods Execute(string[], NetPeer) void Execute(string[] Arguments, NetPeer peer) Parameters Arguments string[] peer NetPeer"
   },
   "api/VoxelPrototype.common.API.Commands.html": {
     "href": "api/VoxelPrototype.common.API.Commands.html",
-    "title": "Namespace VoxelPrototype.common.API.Commands | Documentation",
+    "title": "Namespace VoxelPrototype.common.API.Commands | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.API.Commands Classes CommandRegister Interfaces ICommand"
   },
   "api/VoxelPrototype.common.API.IMod.html": {
     "href": "api/VoxelPrototype.common.API.IMod.html",
-    "title": "Interface IMod | Documentation",
+    "title": "Interface IMod | VoxelPrototype Documentation",
     "keywords": "Interface IMod Namespace VoxelPrototype.common.API Assembly VoxelPrototype.dll public interface IMod Properties Description string Description { get; } Property Value string Name string Name { get; } Property Value string NameSpace public static string NameSpace { get; } Property Value string Version string Version { get; } Property Value string Methods DeInit() void DeInit() Init() void Init()"
   },
   "api/VoxelPrototype.common.API.Items.Item.html": {
     "href": "api/VoxelPrototype.common.API.Items.Item.html",
-    "title": "Class Item | Documentation",
+    "title": "Class Item | VoxelPrototype Documentation",
     "keywords": "Class Item Namespace VoxelPrototype.common.API.Items Assembly VoxelPrototype.dll public class Item Inheritance object Item Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString()"
   },
   "api/VoxelPrototype.common.API.Items.ItemRegister.html": {
     "href": "api/VoxelPrototype.common.API.Items.ItemRegister.html",
-    "title": "Class ItemRegister | Documentation",
+    "title": "Class ItemRegister | VoxelPrototype Documentation",
     "keywords": "Class ItemRegister Namespace VoxelPrototype.common.API.Items Assembly VoxelPrototype.dll public static class ItemRegister Inheritance object ItemRegister Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields Items public static Dictionary<string, Item> Items Field Value Dictionary<string, Item> Methods GetItemID(string, string) public static string GetItemID(string ModName, string ItemName) Parameters ModName string ItemName string Returns string GetTexture(string) public static Texture GetTexture(string id) Parameters id string Returns Texture RegisterItem(string, Item) public static bool RegisterItem(string Id, Item block) Parameters Id string block Item Returns bool"
   },
   "api/VoxelPrototype.common.API.Items.html": {
     "href": "api/VoxelPrototype.common.API.Items.html",
-    "title": "Namespace VoxelPrototype.common.API.Items | Documentation",
+    "title": "Namespace VoxelPrototype.common.API.Items | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.API.Items Classes Item ItemRegister"
   },
   "api/VoxelPrototype.common.API.WorldGenerator.WorldGenerator.html": {
     "href": "api/VoxelPrototype.common.API.WorldGenerator.WorldGenerator.html",
-    "title": "Class WorldGenerator | Documentation",
+    "title": "Class WorldGenerator | VoxelPrototype Documentation",
     "keywords": "Class WorldGenerator Namespace VoxelPrototype.common.API.WorldGenerator Assembly VoxelPrototype.dll public class WorldGenerator Inheritance object WorldGenerator Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods GenerateChunk(Chunk) public virtual void GenerateChunk(Chunk chunk) Parameters chunk Chunk GetOriginHeight() public virtual int GetOriginHeight() Returns int SetData(long) public virtual void SetData(long seed) Parameters seed long"
   },
   "api/VoxelPrototype.common.API.WorldGenerator.WorldGeneratorRegistry.html": {
     "href": "api/VoxelPrototype.common.API.WorldGenerator.WorldGeneratorRegistry.html",
-    "title": "Class WorldGeneratorRegistry | Documentation",
+    "title": "Class WorldGeneratorRegistry | VoxelPrototype Documentation",
     "keywords": "Class WorldGeneratorRegistry Namespace VoxelPrototype.common.API.WorldGenerator Assembly VoxelPrototype.dll public static class WorldGeneratorRegistry Inheritance object WorldGeneratorRegistry Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods AllGeneratorsName() public static string[] AllGeneratorsName() Returns string[] CreateWorldGenerator(string) public static WorldGenerator CreateWorldGenerator(string name) Parameters name string Returns WorldGenerator RegisterWorldGenerator(string, Type) public static bool RegisterWorldGenerator(string Name, Type Generator) Parameters Name string Generator Type Returns bool"
   },
   "api/VoxelPrototype.common.API.WorldGenerator.html": {
     "href": "api/VoxelPrototype.common.API.WorldGenerator.html",
-    "title": "Namespace VoxelPrototype.common.API.WorldGenerator | Documentation",
+    "title": "Namespace VoxelPrototype.common.API.WorldGenerator | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.API.WorldGenerator Classes WorldGenerator WorldGeneratorRegistry"
   },
   "api/VoxelPrototype.common.API.html": {
     "href": "api/VoxelPrototype.common.API.html",
-    "title": "Namespace VoxelPrototype.common.API | Documentation",
+    "title": "Namespace VoxelPrototype.common.API | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.API Interfaces IMod"
   },
   "api/VoxelPrototype.common.Chat.ServerChat.html": {
     "href": "api/VoxelPrototype.common.Chat.ServerChat.html",
-    "title": "Class ServerChat | Documentation",
+    "title": "Class ServerChat | VoxelPrototype Documentation",
     "keywords": "Class ServerChat Namespace VoxelPrototype.common.Chat Assembly VoxelPrototype.dll public static class ServerChat Inheritance object ServerChat Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods SendMessage(string, NetPeer) public static void SendMessage(string message, NetPeer peer) Parameters message string peer NetPeer SendServerMessage(string, NetPeer) public static void SendServerMessage(string message, NetPeer peer) Parameters message string peer NetPeer"
   },
   "api/VoxelPrototype.common.Chat.html": {
     "href": "api/VoxelPrototype.common.Chat.html",
-    "title": "Namespace VoxelPrototype.common.Chat | Documentation",
+    "title": "Namespace VoxelPrototype.common.Chat | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Chat Classes ServerChat"
   },
   "api/VoxelPrototype.common.Debug.LoggingSystem.html": {
     "href": "api/VoxelPrototype.common.Debug.LoggingSystem.html",
-    "title": "Class LoggingSystem | Documentation",
+    "title": "Class LoggingSystem | VoxelPrototype Documentation",
     "keywords": "Class LoggingSystem Namespace VoxelPrototype.common.Debug Assembly VoxelPrototype.dll public static class LoggingSystem Inheritance object LoggingSystem Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods Init() public static void Init()"
   },
   "api/VoxelPrototype.common.Debug.html": {
     "href": "api/VoxelPrototype.common.Debug.html",
-    "title": "Namespace VoxelPrototype.common.Debug | Documentation",
+    "title": "Namespace VoxelPrototype.common.Debug | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Debug Classes LoggingSystem"
   },
   "api/VoxelPrototype.common.Game.Entities.Entity.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.Entity.html",
-    "title": "Class Entity | Documentation",
+    "title": "Class Entity | VoxelPrototype Documentation",
     "keywords": "Class Entity Namespace VoxelPrototype.common.Game.Entities Assembly VoxelPrototype.dll public class Entity Inheritance object Entity Derived PhysicEntity Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields ID public string ID Field Value string Position public Vector3d Position Field Value Vector3d Rotation public Vector3 Rotation Field Value Vector3 Methods UpdateClient(float) public virtual void UpdateClient(float DT) Parameters DT float UpdateServer(float) public virtual void UpdateServer(float DT) Parameters DT float"
   },
   "api/VoxelPrototype.common.Game.Entities.PhysicEntity.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.PhysicEntity.html",
-    "title": "Class PhysicEntity | Documentation",
+    "title": "Class PhysicEntity | VoxelPrototype Documentation",
     "keywords": "Class PhysicEntity Namespace VoxelPrototype.common.Game.Entities Assembly VoxelPrototype.dll public class PhysicEntity : Entity Inheritance object Entity PhysicEntity Derived Player Inherited Members Entity.Position Entity.Rotation Entity.ID object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields Fly public bool Fly Field Value bool Methods UpdateClient(float) public override void UpdateClient(float DT) Parameters DT float UpdateServer(float) public override void UpdateServer(float DT) Parameters DT float"
   },
   "api/VoxelPrototype.common.Game.Entities.Player.InputState.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.Player.InputState.html",
-    "title": "Class InputState | Documentation",
+    "title": "Class InputState | VoxelPrototype Documentation",
     "keywords": "Class InputState Namespace VoxelPrototype.common.Game.Entities.Player Assembly VoxelPrototype.dll public class InputState Inheritance object InputState Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields currentTick public ulong currentTick Field Value ulong dt public float dt Field Value float"
   },
   "api/VoxelPrototype.common.Game.Entities.Player.Player.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.Player.Player.html",
-    "title": "Class Player | Documentation",
+    "title": "Class Player | VoxelPrototype Documentation",
     "keywords": "Class Player Namespace VoxelPrototype.common.Game.Entities.Player Assembly VoxelPrototype.dll public class Player : PhysicEntity Inheritance object Entity PhysicEntity Player Inherited Members PhysicEntity.Fly PhysicEntity.UpdateClient(float) PhysicEntity.UpdateServer(float) Entity.Position Entity.Rotation Entity.ID object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Player(Vector3d, ushort) public Player(Vector3d _Position, ushort _ClientID) Parameters _Position Vector3d _ClientID ushort Player(Vector3d, ushort, bool, bool) public Player(Vector3d _Position, ushort _ClientID, bool Local, bool Client) Parameters _Position Vector3d _ClientID ushort Local bool Client bool Fields Ghost public bool Ghost Field Value bool"
   },
   "api/VoxelPrototype.common.Game.Entities.Player.PlayerManager.ServerPlayerFactory.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.Player.PlayerManager.ServerPlayerFactory.html",
-    "title": "Class ServerPlayerFactory | Documentation",
+    "title": "Class ServerPlayerFactory | VoxelPrototype Documentation",
     "keywords": "Class ServerPlayerFactory Namespace VoxelPrototype.common.Game.Entities.Player.PlayerManager Assembly VoxelPrototype.dll public class ServerPlayerFactory Inheritance object ServerPlayerFactory Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields List public Dictionary<ushort, Player> List Field Value Dictionary<ushort, Player>"
   },
   "api/VoxelPrototype.common.Game.Entities.Player.PlayerManager.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.Player.PlayerManager.html",
-    "title": "Namespace VoxelPrototype.common.Game.Entities.Player.PlayerManager | Documentation",
+    "title": "Namespace VoxelPrototype.common.Game.Entities.Player.PlayerManager | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Game.Entities.Player.PlayerManager Classes ServerPlayerFactory"
   },
   "api/VoxelPrototype.common.Game.Entities.Player.SimulationState.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.Player.SimulationState.html",
-    "title": "Class SimulationState | Documentation",
+    "title": "Class SimulationState | VoxelPrototype Documentation",
     "keywords": "Class SimulationState Namespace VoxelPrototype.common.Game.Entities.Player Assembly VoxelPrototype.dll public class SimulationState Inheritance object SimulationState Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields currentTick public ulong currentTick Field Value ulong position public Vector3d position Field Value Vector3d"
   },
   "api/VoxelPrototype.common.Game.Entities.Player.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.Player.html",
-    "title": "Namespace VoxelPrototype.common.Game.Entities.Player | Documentation",
+    "title": "Namespace VoxelPrototype.common.Game.Entities.Player | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Game.Entities.Player Classes InputState Player SimulationState"
   },
   "api/VoxelPrototype.common.Game.Entities.html": {
     "href": "api/VoxelPrototype.common.Game.Entities.html",
-    "title": "Namespace VoxelPrototype.common.Game.Entities | Documentation",
+    "title": "Namespace VoxelPrototype.common.Game.Entities | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Game.Entities Classes Entity PhysicEntity"
   },
   "api/VoxelPrototype.common.Game.IBlockAcessor.html": {
     "href": "api/VoxelPrototype.common.Game.IBlockAcessor.html",
-    "title": "Interface IBlockAcessor | Documentation",
+    "title": "Interface IBlockAcessor | VoxelPrototype Documentation",
     "keywords": "Interface IBlockAcessor Namespace VoxelPrototype.common.Game Assembly VoxelPrototype.dll public interface IBlockAcessor Methods GetBlock(int, int, int) BlockState GetBlock(int x, int y, int z) Parameters x int y int z int Returns BlockState IsAir(int, int, int) bool IsAir(int x, int y, int z) Parameters x int y int z int Returns bool IsTransparent(int, int, int) bool IsTransparent(int x, int y, int z) Parameters x int y int z int Returns bool SetBlock(int, int, int, BlockState) void SetBlock(int x, int y, int z, BlockState State) Parameters x int y int z int State BlockState"
   },
   "api/VoxelPrototype.common.Game.ITickable.html": {
     "href": "api/VoxelPrototype.common.Game.ITickable.html",
-    "title": "Interface ITickable | Documentation",
+    "title": "Interface ITickable | VoxelPrototype Documentation",
     "keywords": "Interface ITickable Namespace VoxelPrototype.common.Game Assembly VoxelPrototype.dll public interface ITickable Methods Tick() void Tick()"
   },
   "api/VoxelPrototype.common.Game.World.Chunk.html": {
     "href": "api/VoxelPrototype.common.Game.World.Chunk.html",
-    "title": "Class Chunk | Documentation",
+    "title": "Class Chunk | VoxelPrototype Documentation",
     "keywords": "Class Chunk Namespace VoxelPrototype.common.Game.World Assembly VoxelPrototype.dll public class Chunk : IVBFSerializableBinary<Chunk> Inheritance object Chunk Implements IVBFSerializableBinary<Chunk> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields Height public const int Height = 32 Field Value int Size public const int Size = 16 Field Value int Properties Position public Vector2i Position { get; set; } Property Value Vector2i X public int X { get; set; } Property Value int Z public int Z { get; set; } Property Value int Methods Deserialize(byte[]) public Chunk Deserialize(byte[] data) Parameters data byte[] Returns Chunk GetBlock(Vector3i) public BlockState GetBlock(Vector3i pos) Parameters pos Vector3i Returns BlockState Serialize() public byte[] Serialize() Returns byte[] SetBlock(Vector3i, BlockState) public void SetBlock(Vector3i pos, BlockState id) Parameters pos Vector3i id BlockState"
   },
   "api/VoxelPrototype.common.Game.World.ChunkManagers.ClientChunkManager.html": {
     "href": "api/VoxelPrototype.common.Game.World.ChunkManagers.ClientChunkManager.html",
-    "title": "Class ClientChunkManager | Documentation",
+    "title": "Class ClientChunkManager | VoxelPrototype Documentation",
     "keywords": "Class ClientChunkManager Namespace VoxelPrototype.common.Game.World.ChunkManagers Assembly VoxelPrototype.dll public class ClientChunkManager Inheritance object ClientChunkManager Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods ChangeChunk(Vector3i, BlockState) public void ChangeChunk(Vector3i blockp, BlockState State) Parameters blockp Vector3i State BlockState"
   },
   "api/VoxelPrototype.common.Game.World.ChunkManagers.ServerChunkManager.html": {
     "href": "api/VoxelPrototype.common.Game.World.ChunkManagers.ServerChunkManager.html",
-    "title": "Class ServerChunkManager | Documentation",
+    "title": "Class ServerChunkManager | VoxelPrototype Documentation",
     "keywords": "Class ServerChunkManager Namespace VoxelPrototype.common.Game.World.ChunkManagers Assembly VoxelPrototype.dll public class ServerChunkManager Inheritance object ServerChunkManager Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString()"
   },
   "api/VoxelPrototype.common.Game.World.ChunkManagers.html": {
     "href": "api/VoxelPrototype.common.Game.World.ChunkManagers.html",
-    "title": "Namespace VoxelPrototype.common.Game.World.ChunkManagers | Documentation",
+    "title": "Namespace VoxelPrototype.common.Game.World.ChunkManagers | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Game.World.ChunkManagers Classes ClientChunkManager ServerChunkManager"
   },
   "api/VoxelPrototype.common.Game.World.ClientWorld.html": {
     "href": "api/VoxelPrototype.common.Game.World.ClientWorld.html",
-    "title": "Class ClientWorld | Documentation",
+    "title": "Class ClientWorld | VoxelPrototype Documentation",
     "keywords": "Class ClientWorld Namespace VoxelPrototype.common.Game.World Assembly VoxelPrototype.dll public class ClientWorld : World, IBlockAcessor, ITickable Inheritance object World ClientWorld Implements IBlockAcessor ITickable Inherited Members World.IsAir(int, int, int) World.IsTransparent(int, int, int) World.SetBlock(int, int, int, BlockState) object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors ClientWorld() public ClientWorld() Fields ChunkManager public ClientChunkManager ChunkManager Field Value ClientChunkManager Methods Dispose() public override void Dispose() GetBlock(int, int, int) public override BlockState GetBlock(int x, int y, int z) Parameters x int y int z int Returns BlockState GetChunk(int, int) public override Chunk GetChunk(int x, int z) Parameters x int z int Returns Chunk GetChunkCount() public int GetChunkCount() Returns int GetLocalPlayerCamera() public Camera GetLocalPlayerCamera() Returns Camera Init() public void Init() IsChunkExist(int, int) public override bool IsChunkExist(int x, int z) Parameters x int z int Returns bool IsLocalPlayerExist() public bool IsLocalPlayerExist() Returns bool Render() public void Render() Tick() public override void Tick() UpdateRender() public void UpdateRender()"
   },
   "api/VoxelPrototype.common.Game.World.CompressionType.html": {
     "href": "api/VoxelPrototype.common.Game.World.CompressionType.html",
-    "title": "Enum CompressionType | Documentation",
+    "title": "Enum CompressionType | VoxelPrototype Documentation",
     "keywords": "Enum CompressionType Namespace VoxelPrototype.common.Game.World Assembly VoxelPrototype.dll public enum CompressionType : byte Fields Deflate = 1 LZ4 = 2 Uncompressed = 0"
   },
   "api/VoxelPrototype.common.Game.World.RegionFile.html": {
     "href": "api/VoxelPrototype.common.Game.World.RegionFile.html",
-    "title": "Class RegionFile | Documentation",
+    "title": "Class RegionFile | VoxelPrototype Documentation",
     "keywords": "Class RegionFile Namespace VoxelPrototype.common.Game.World Assembly VoxelPrototype.dll public class RegionFile Inheritance object RegionFile Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors RegionFile(string) public RegionFile(string Path) Parameters Path string Fields SectorsFree public List<bool> SectorsFree Field Value List<bool> Size public const int Size = 32 Field Value int Methods AllocateSectors(int) public long AllocateSectors(int Count) Parameters Count int Returns long Close() public void Close() GetOffset(int, int) public (int, byte) GetOffset(int X, int Z) Parameters X int Z int Returns (int, byte) ReadChunk(int, int) public (byte[], CompressionType) ReadChunk(int X, int Z) Parameters X int Z int Returns (byte[], CompressionType) WriteChunk(int, int, byte[], CompressionType) public void WriteChunk(int X, int Z, byte[] ChunkData, CompressionType CompressionType) Parameters X int Z int ChunkData byte[] CompressionType CompressionType WriteOffset(int, int, int, byte) public void WriteOffset(int X, int Z, int offset, byte NumberOfSectors) Parameters X int Z int offset int NumberOfSectors byte"
   },
   "api/VoxelPrototype.common.Game.World.Section.html": {
     "href": "api/VoxelPrototype.common.Game.World.Section.html",
-    "title": "Class Section | Documentation",
+    "title": "Class Section | VoxelPrototype Documentation",
     "keywords": "Class Section Namespace VoxelPrototype.common.Game.World Assembly VoxelPrototype.dll public class Section : IVBFSerializable<Section> Inheritance object Section Implements IVBFSerializable<Section> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Section() public Section() Fields Size public const int Size = 16 Field Value int Properties Empty public bool Empty { get; } Property Value bool Methods Deserialize(VBFCompound) public Section Deserialize(VBFCompound compound) Parameters compound VBFCompound Returns Section GetBlock(Vector3i) public BlockState GetBlock(Vector3i pos) Parameters pos Vector3i Returns BlockState Serialize() public VBFCompound Serialize() Returns VBFCompound SetBlock(Vector3i, BlockState) public void SetBlock(Vector3i pos, BlockState id) Parameters pos Vector3i id BlockState"
   },
   "api/VoxelPrototype.common.Game.World.ServerWorld.html": {
     "href": "api/VoxelPrototype.common.Game.World.ServerWorld.html",
-    "title": "Class ServerWorld | Documentation",
+    "title": "Class ServerWorld | VoxelPrototype Documentation",
     "keywords": "Class ServerWorld Namespace VoxelPrototype.common.Game.World Assembly VoxelPrototype.dll public class ServerWorld : World, IBlockAcessor, ITickable Inheritance object World ServerWorld Implements IBlockAcessor ITickable Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors ServerWorld(WorldSettings, string) public ServerWorld(WorldSettings Settings, string Path) Parameters Settings WorldSettings Path string Fields ChunkManager public ServerChunkManager ChunkManager Field Value ServerChunkManager PlayerFactory public ServerPlayerFactory PlayerFactory Field Value ServerPlayerFactory Methods Dispose() public override void Dispose() GetBlock(int, int, int) public override BlockState GetBlock(int x, int y, int z) Parameters x int y int z int Returns BlockState GetChunk(int, int) public override Chunk GetChunk(int x, int z) Parameters x int z int Returns Chunk IsAir(int, int, int) public override bool IsAir(int x, int y, int z) Parameters x int y int z int Returns bool IsChunkExist(int, int) public override bool IsChunkExist(int x, int z) Parameters x int z int Returns bool IsTransparent(int, int, int) public override bool IsTransparent(int x, int y, int z) Parameters x int y int z int Returns bool SetBlock(int, int, int, BlockState) public override void SetBlock(int x, int y, int z, BlockState State) Parameters x int y int z int State BlockState Tick() public override void Tick()"
   },
   "api/VoxelPrototype.common.Game.World.World.html": {
     "href": "api/VoxelPrototype.common.Game.World.World.html",
-    "title": "Class World | Documentation",
+    "title": "Class World | VoxelPrototype Documentation",
     "keywords": "Class World Namespace VoxelPrototype.common.Game.World Assembly VoxelPrototype.dll public class World : IBlockAcessor, ITickable Inheritance object World Implements IBlockAcessor ITickable Derived ClientWorld ServerWorld Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods Dispose() public virtual void Dispose() GetBlock(int, int, int) public virtual BlockState GetBlock(int x, int y, int z) Parameters x int y int z int Returns BlockState GetChunk(int, int) public virtual Chunk GetChunk(int x, int z) Parameters x int z int Returns Chunk IsAir(int, int, int) public virtual bool IsAir(int x, int y, int z) Parameters x int y int z int Returns bool IsChunkExist(int, int) public virtual bool IsChunkExist(int x, int z) Parameters x int z int Returns bool IsTransparent(int, int, int) public virtual bool IsTransparent(int x, int y, int z) Parameters x int y int z int Returns bool SetBlock(int, int, int, BlockState) public virtual void SetBlock(int x, int y, int z, BlockState State) Parameters x int y int z int State BlockState Tick() public virtual void Tick()"
   },
   "api/VoxelPrototype.common.Game.World.WorldInfo.html": {
     "href": "api/VoxelPrototype.common.Game.World.WorldInfo.html",
-    "title": "Class WorldInfo | Documentation",
+    "title": "Class WorldInfo | VoxelPrototype Documentation",
     "keywords": "Class WorldInfo Namespace VoxelPrototype.common.Game.World Assembly VoxelPrototype.dll public class WorldInfo : IVBFSerializableBinary<WorldInfo> Inheritance object WorldInfo Implements IVBFSerializableBinary<WorldInfo> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors WorldInfo() public WorldInfo() Methods Deserialize(byte[]) public WorldInfo Deserialize(byte[] data) Parameters data byte[] Returns WorldInfo GetSeed() public long GetSeed() Returns long GetWorldGenerator() public string GetWorldGenerator() Returns string Serialize() public byte[] Serialize() Returns byte[] SetSeed(long) public void SetSeed(long Seed) Parameters Seed long SetWorldGenerator(string) public void SetWorldGenerator(string WorldGenerator) Parameters WorldGenerator string"
   },
   "api/VoxelPrototype.common.Game.World.html": {
     "href": "api/VoxelPrototype.common.Game.World.html",
-    "title": "Namespace VoxelPrototype.common.Game.World | Documentation",
+    "title": "Namespace VoxelPrototype.common.Game.World | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Game.World Classes Chunk ClientWorld RegionFile Section ServerWorld World WorldInfo Enums CompressionType"
   },
   "api/VoxelPrototype.common.Game.WorldSettings.html": {
     "href": "api/VoxelPrototype.common.Game.WorldSettings.html",
-    "title": "Class WorldSettings | Documentation",
+    "title": "Class WorldSettings | VoxelPrototype Documentation",
     "keywords": "Class WorldSettings Namespace VoxelPrototype.common.Game Assembly VoxelPrototype.dll public class WorldSettings Inheritance object WorldSettings Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors WorldSettings(long, string, string) public WorldSettings(long Seed, string Generator, string Name) Parameters Seed long Generator string Name string WorldSettings(string, WorldInfo) public WorldSettings(string Name, WorldInfo worldInfo) Parameters Name string worldInfo WorldInfo Methods GetGenerator() public string GetGenerator() Returns string GetName() public string GetName() Returns string GetSeed() public long GetSeed() Returns long"
   },
   "api/VoxelPrototype.common.Game.html": {
     "href": "api/VoxelPrototype.common.Game.html",
-    "title": "Namespace VoxelPrototype.common.Game | Documentation",
+    "title": "Namespace VoxelPrototype.common.Game | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Game Classes WorldSettings Interfaces IBlockAcessor ITickable"
   },
   "api/VoxelPrototype.common.Network.Extensions.html": {
     "href": "api/VoxelPrototype.common.Network.Extensions.html",
-    "title": "Class Extensions | Documentation",
+    "title": "Class Extensions | VoxelPrototype Documentation",
     "keywords": "Class Extensions Namespace VoxelPrototype.common.Network Assembly VoxelPrototype.dll public static class Extensions Inheritance object Extensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods GetQuaternion(NetDataReader) public static Quaternion GetQuaternion(this NetDataReader reader) Parameters reader NetDataReader Returns Quaternion GetVector2(NetDataReader) public static Vector2 GetVector2(this NetDataReader reader) Parameters reader NetDataReader Returns Vector2 GetVector2i(NetDataReader) public static Vector2i GetVector2i(this NetDataReader reader) Parameters reader NetDataReader Returns Vector2i GetVector2iArray(NetDataReader) public static Vector2i[] GetVector2iArray(this NetDataReader reader) Parameters reader NetDataReader Returns Vector2i[] GetVector3(NetDataReader) public static Vector3 GetVector3(this NetDataReader reader) Parameters reader NetDataReader Returns Vector3 GetVector3d(NetDataReader) public static Vector3d GetVector3d(this NetDataReader reader) Parameters reader NetDataReader Returns Vector3d GetVector3i(NetDataReader) public static Vector3i GetVector3i(this NetDataReader reader) Parameters reader NetDataReader Returns Vector3i GetVector3iArray(NetDataReader) public static Vector3i[] GetVector3iArray(this NetDataReader reader) Parameters reader NetDataReader Returns Vector3i[] Put(NetDataWriter, Quaternion) public static void Put(this NetDataWriter writer, Quaternion quaternion) Parameters writer NetDataWriter quaternion Quaternion Put(NetDataWriter, Vector2) public static void Put(this NetDataWriter writer, Vector2 vector) Parameters writer NetDataWriter vector Vector2 Put(NetDataWriter, Vector2i) public static void Put(this NetDataWriter writer, Vector2i vector) Parameters writer NetDataWriter vector Vector2i Put(NetDataWriter, Vector2i[]) public static void Put(this NetDataWriter writer, Vector2i[] vectors) Parameters writer NetDataWriter vectors Vector2i[] Put(NetDataWriter, Vector3) public static void Put(this NetDataWriter writer, Vector3 vector) Parameters writer NetDataWriter vector Vector3 Put(NetDataWriter, Vector3d) public static void Put(this NetDataWriter writer, Vector3d vector) Parameters writer NetDataWriter vector Vector3d Put(NetDataWriter, Vector3i) public static void Put(this NetDataWriter writer, Vector3i vector) Parameters writer NetDataWriter vector Vector3i Put(NetDataWriter, Vector3i[]) public static void Put(this NetDataWriter writer, Vector3i[] vectors) Parameters writer NetDataWriter vectors Vector3i[]"
   },
   "api/VoxelPrototype.common.Network.client.ClientNetwork.html": {
     "href": "api/VoxelPrototype.common.Network.client.ClientNetwork.html",
-    "title": "Class ClientNetwork | Documentation",
+    "title": "Class ClientNetwork | VoxelPrototype Documentation",
     "keywords": "Class ClientNetwork Namespace VoxelPrototype.common.Network.client Assembly VoxelPrototype.dll The network manager for client public static class ClientNetwork Inheritance object ClientNetwork Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods SendPacket<T>(T, DeliveryMethod) Send a packet to the server public static void SendPacket<T>(T packet, DeliveryMethod deliveryMethod) where T : INetSerializable Parameters packet T The packet variable deliveryMethod DeliveryMethod DeliveryMethod Type Parameters T A struct who implement INetSerialize"
   },
   "api/VoxelPrototype.common.Network.client.html": {
     "href": "api/VoxelPrototype.common.Network.client.html",
-    "title": "Namespace VoxelPrototype.common.Network.client | Documentation",
+    "title": "Namespace VoxelPrototype.common.Network.client | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Network.client Classes ClientNetwork The network manager for client"
   },
   "api/VoxelPrototype.common.Network.html": {
     "href": "api/VoxelPrototype.common.Network.html",
-    "title": "Namespace VoxelPrototype.common.Network | Documentation",
+    "title": "Namespace VoxelPrototype.common.Network | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Network Classes Extensions"
   },
   "api/VoxelPrototype.common.Network.server.ServerNetwork.html": {
     "href": "api/VoxelPrototype.common.Network.server.ServerNetwork.html",
-    "title": "Class ServerNetwork | Documentation",
+    "title": "Class ServerNetwork | VoxelPrototype Documentation",
     "keywords": "Class ServerNetwork Namespace VoxelPrototype.common.Network.server Assembly VoxelPrototype.dll The network manager for server public static class ServerNetwork Inheritance object ServerNetwork Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods SendPacketToAllWithoutOnePeer<T>(T, NetPeer, DeliveryMethod) Send a packet to all client exclude one public static void SendPacketToAllWithoutOnePeer<T>(T packet, NetPeer peer, DeliveryMethod deliveryMethod) where T : INetSerializable Parameters packet T The packet peer NetPeer The excluded peer deliveryMethod DeliveryMethod The DeliveryMethod Type Parameters T A struct who implement INetSerialize SendPacketToAll<T>(T, DeliveryMethod) Send packet to all client public static void SendPacketToAll<T>(T packet, DeliveryMethod deliveryMethod) where T : INetSerializable Parameters packet T The packet deliveryMethod DeliveryMethod The DeliveryMethod Type Parameters T A struct who implement INetSerialize SendPacket<T>(T, NetPeer, DeliveryMethod) Send packet to a specific client public static void SendPacket<T>(T packet, NetPeer peer, DeliveryMethod deliveryMethod) where T : INetSerializable Parameters packet T The packet peer NetPeer The peer deliveryMethod DeliveryMethod The DeliveryMethod Type Parameters T A struct who implement INetSerialize"
   },
   "api/VoxelPrototype.common.Network.server.html": {
     "href": "api/VoxelPrototype.common.Network.server.html",
-    "title": "Namespace VoxelPrototype.common.Network.server | Documentation",
+    "title": "Namespace VoxelPrototype.common.Network.server | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Network.server Classes ServerNetwork The network manager for server"
   },
   "api/VoxelPrototype.common.Physics.Collider.html": {
     "href": "api/VoxelPrototype.common.Physics.Collider.html",
-    "title": "Class Collider | Documentation",
+    "title": "Class Collider | VoxelPrototype Documentation",
     "keywords": "Class Collider Namespace VoxelPrototype.common.Physics Assembly VoxelPrototype.dll [Serializable] public class Collider Inheritance object Collider Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Collider(Vector3d, Vector3d) public Collider(Vector3d pos1 = default, Vector3d pos2 = default) Parameters pos1 Vector3d pos2 Vector3d Fields x1 public double x1 Field Value double x2 public double x2 Field Value double y1 public double y1 Field Value double y2 public double y2 Field Value double z1 public double z1 Field Value double z2 public double z2 Field Value double Properties max public Vector3d max { get; } Property Value Vector3d min public Vector3d min { get; } Property Value Vector3d Methods Collide(Collider, Vector3) public (double?, Vector3d) Collide(Collider collider, Vector3 velocity) Parameters collider Collider velocity Vector3 Returns (double?, Vector3d) GetCorners() public Vector3d[] GetCorners() Returns Vector3d[] Move(Vector3d) public Collider Move(Vector3d pos) Parameters pos Vector3d Returns Collider"
   },
   "api/VoxelPrototype.common.Physics.Ray.html": {
     "href": "api/VoxelPrototype.common.Physics.Ray.html",
-    "title": "Class Ray | Documentation",
+    "title": "Class Ray | VoxelPrototype Documentation",
     "keywords": "Class Ray Namespace VoxelPrototype.common.Physics Assembly VoxelPrototype.dll public class Ray Inheritance object Ray Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Ray(Vector3d, Vector3, float) public Ray(Vector3d startPosition, Vector3 direction, float length) Parameters startPosition Vector3d direction Vector3 length float Methods TestWithTerrain(Action<Vector3i, Vector3i, BlockState>) public void TestWithTerrain(Action<Vector3i, Vector3i, BlockState> Callback) Parameters Callback Action<Vector3i, Vector3i, BlockState> Update(Vector3d, Vector3, float) public void Update(Vector3d startPosition, Vector3 direction, float length) Parameters startPosition Vector3d direction Vector3 length float"
   },
   "api/VoxelPrototype.common.Physics.html": {
     "href": "api/VoxelPrototype.common.Physics.html",
-    "title": "Namespace VoxelPrototype.common.Physics | Documentation",
+    "title": "Namespace VoxelPrototype.common.Physics | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Physics Classes Collider Ray"
   },
   "api/VoxelPrototype.common.RessourceManager.RessourcePackManager.html": {
     "href": "api/VoxelPrototype.common.RessourceManager.RessourcePackManager.html",
-    "title": "Class RessourcePackManager | Documentation",
+    "title": "Class RessourcePackManager | VoxelPrototype Documentation",
     "keywords": "Class RessourcePackManager Namespace VoxelPrototype.common.RessourceManager Assembly VoxelPrototype.dll public class RessourcePackManager Inheritance object RessourcePackManager Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods BuildAtlas() public void BuildAtlas() CleanTempFolder() public void CleanTempFolder() GetAssetId(string, string, string) public static string GetAssetId(string ModName, string Name, string SubAssetType = \"\") Parameters ModName string Name string SubAssetType string Returns string GetAtlas() public Texture GetAtlas() Returns Texture GetAtlasTexturesCoord(string) public float[] GetAtlasTexturesCoord(string Id) Parameters Id string Returns float[] GetBlockCollider(string) public Collider[] GetBlockCollider(string Id) Parameters Id string Returns Collider[] GetBlockMesh(string) public BlockMesh GetBlockMesh(string Id) Parameters Id string Returns BlockMesh GetBlockStateData(string) public BlockStateData GetBlockStateData(string Id) Parameters Id string Returns BlockStateData GetCubeMap(string) public CubeMapTexture GetCubeMap(string Id) Parameters Id string Returns CubeMapTexture GetEntityMesh(string) public Model GetEntityMesh(string Id) Parameters Id string Returns Model GetEntityTexture(string) public Texture GetEntityTexture(string Id) Parameters Id string Returns Texture GetShader(string) public Shader GetShader(string Id) Parameters Id string Returns Shader Initialize() public void Initialize() InitializeServer() public void InitializeServer() LoadRessourcesPacks() public void LoadRessourcesPacks() LoadRessourcesPacksServer() public void LoadRessourcesPacksServer() RecursiveDelete(DirectoryInfo, bool) public static void RecursiveDelete(DirectoryInfo baseDir, bool isRootDir) Parameters baseDir DirectoryInfo isRootDir bool ReloadTexturePacks() public void ReloadTexturePacks() ReloadVoxelAtlas() public void ReloadVoxelAtlas() RemoveTexturePack(string) public void RemoveTexturePack(string Name) Parameters Name string SetTexturePack(string, int) public void SetTexturePack(string Name, int op) Parameters Name string op int"
   },
   "api/VoxelPrototype.common.RessourceManager.data.BlockData.html": {
     "href": "api/VoxelPrototype.common.RessourceManager.data.BlockData.html",
-    "title": "Struct BlockData | Documentation",
+    "title": "Struct BlockData | VoxelPrototype Documentation",
     "keywords": "Struct BlockData Namespace VoxelPrototype.common.RessourceManager.data Assembly VoxelPrototype.dll public struct BlockData Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Properties textures public TextureData textures { readonly get; set; } Property Value TextureData"
   },
   "api/VoxelPrototype.common.RessourceManager.data.BlockStateData.html": {
     "href": "api/VoxelPrototype.common.RessourceManager.data.BlockStateData.html",
-    "title": "Class BlockStateData | Documentation",
+    "title": "Class BlockStateData | VoxelPrototype Documentation",
     "keywords": "Class BlockStateData Namespace VoxelPrototype.common.RessourceManager.data Assembly VoxelPrototype.dll public class BlockStateData Inheritance object BlockStateData Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields variants public Dictionary<string, BlockData> variants Field Value Dictionary<string, BlockData>"
   },
   "api/VoxelPrototype.common.RessourceManager.data.TextureData.html": {
     "href": "api/VoxelPrototype.common.RessourceManager.data.TextureData.html",
-    "title": "Struct TextureData | Documentation",
+    "title": "Struct TextureData | VoxelPrototype Documentation",
     "keywords": "Struct TextureData Namespace VoxelPrototype.common.RessourceManager.data Assembly VoxelPrototype.dll public struct TextureData Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Properties all public string all { readonly get; set; } Property Value string back public string back { readonly get; set; } Property Value string bottom public string bottom { readonly get; set; } Property Value string front public string front { readonly get; set; } Property Value string left public string left { readonly get; set; } Property Value string right public string right { readonly get; set; } Property Value string textures public string[] textures { readonly get; set; } Property Value string[] top public string top { readonly get; set; } Property Value string"
   },
   "api/VoxelPrototype.common.RessourceManager.data.html": {
     "href": "api/VoxelPrototype.common.RessourceManager.data.html",
-    "title": "Namespace VoxelPrototype.common.RessourceManager.data | Documentation",
+    "title": "Namespace VoxelPrototype.common.RessourceManager.data | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.RessourceManager.data Classes BlockStateData Structs BlockData TextureData"
   },
   "api/VoxelPrototype.common.RessourceManager.html": {
     "href": "api/VoxelPrototype.common.RessourceManager.html",
-    "title": "Namespace VoxelPrototype.common.RessourceManager | Documentation",
+    "title": "Namespace VoxelPrototype.common.RessourceManager | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.RessourceManager Classes RessourcePackManager"
   },
   "api/VoxelPrototype.common.Utils.BooleanSet.html": {
     "href": "api/VoxelPrototype.common.Utils.BooleanSet.html",
-    "title": "Class BooleanSet | Documentation",
+    "title": "Class BooleanSet | VoxelPrototype Documentation",
     "keywords": "Class BooleanSet Namespace VoxelPrototype.common.Utils Assembly VoxelPrototype.dll public class BooleanSet : ISet<bool>, ICollection<bool>, IEnumerable<bool>, IEnumerable Inheritance object BooleanSet Implements ISet<bool> ICollection<bool> IEnumerable<bool> IEnumerable Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields IMMUTABLE public static readonly BooleanSet IMMUTABLE Field Value BooleanSet Properties Count Gets the number of elements contained in the ICollection<T>. public int Count { get; } Property Value int The number of elements contained in the ICollection<T>. IsReadOnly Gets a value indicating whether the ICollection<T> is read-only. public bool IsReadOnly { get; } Property Value bool true if the ICollection<T> is read-only; otherwise, false. Methods Add(bool) Adds an item to the ICollection<T>. public void Add(bool item) Parameters item bool The object to add to the ICollection<T>. Exceptions NotSupportedException The ICollection<T> is read-only. Clear() Removes all items from the ICollection<T>. public void Clear() Exceptions NotSupportedException The ICollection<T> is read-only. Contains(bool) Determines whether the ICollection<T> contains a specific value. public bool Contains(bool item) Parameters item bool The object to locate in the ICollection<T>. Returns bool true if item is found in the ICollection<T>; otherwise, false. CopyTo(bool[], int) Copies the elements of the ICollection<T> to an Array, starting at a particular Array index. public void CopyTo(bool[] array, int arrayIndex) Parameters array bool[] The one-dimensional Array that is the destination of the elements copied from ICollection<T>. The Array must have zero-based indexing. arrayIndex int The zero-based index in array at which copying begins. Exceptions ArgumentNullException array is null. ArgumentOutOfRangeException arrayIndex is less than 0. ArgumentException The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array. ExceptWith(IEnumerable<bool>) Removes all elements in the specified collection from the current set. public void ExceptWith(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection of items to remove from the set. Exceptions ArgumentNullException other is null. GetEnumerator() Returns an enumerator that iterates through the collection. public IEnumerator<bool> GetEnumerator() Returns IEnumerator<bool> An enumerator that can be used to iterate through the collection. IntersectWith(IEnumerable<bool>) Modifies the current set so that it contains only elements that are also in a specified collection. public void IntersectWith(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Exceptions ArgumentNullException other is null. IsProperSubsetOf(IEnumerable<bool>) Determines whether the current set is a proper (strict) subset of a specified collection. public bool IsProperSubsetOf(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Returns bool true if the current set is a proper subset of other; otherwise, false. Exceptions ArgumentNullException other is null. IsProperSupersetOf(IEnumerable<bool>) Determines whether the current set is a proper (strict) superset of a specified collection. public bool IsProperSupersetOf(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Returns bool true if the current set is a proper superset of other; otherwise, false. Exceptions ArgumentNullException other is null. IsSubsetOf(IEnumerable<bool>) Determines whether a set is a subset of a specified collection. public bool IsSubsetOf(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Returns bool true if the current set is a subset of other; otherwise, false. Exceptions ArgumentNullException other is null. IsSupersetOf(IEnumerable<bool>) Determines whether the current set is a superset of a specified collection. public bool IsSupersetOf(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Returns bool true if the current set is a superset of other; otherwise, false. Exceptions ArgumentNullException other is null. Overlaps(IEnumerable<bool>) Determines whether the current set overlaps with the specified collection. public bool Overlaps(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Returns bool true if the current set and other share at least one common element; otherwise, false. Exceptions ArgumentNullException other is null. Remove(bool) Removes the first occurrence of a specific object from the ICollection<T>. public bool Remove(bool item) Parameters item bool The object to remove from the ICollection<T>. Returns bool true if item was successfully removed from the ICollection<T>; otherwise, false. This method also returns false if item is not found in the original ICollection<T>. Exceptions NotSupportedException The ICollection<T> is read-only. SetEquals(IEnumerable<bool>) Determines whether the current set and the specified collection contain the same elements. public bool SetEquals(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Returns bool true if the current set is equal to other; otherwise, false. Exceptions ArgumentNullException other is null. SymmetricExceptWith(IEnumerable<bool>) Modifies the current set so that it contains only elements that are present either in the current set or in the specified collection, but not both. public void SymmetricExceptWith(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Exceptions ArgumentNullException other is null. UnionWith(IEnumerable<bool>) Modifies the current set so that it contains all elements that are present in the current set, in the specified collection, or in both. public void UnionWith(IEnumerable<bool> other) Parameters other IEnumerable<bool> The collection to compare to the current set. Exceptions ArgumentNullException other is null."
   },
   "api/VoxelPrototype.common.Utils.Deflate.html": {
     "href": "api/VoxelPrototype.common.Utils.Deflate.html",
-    "title": "Class Deflate | Documentation",
+    "title": "Class Deflate | VoxelPrototype Documentation",
     "keywords": "Class Deflate Namespace VoxelPrototype.common.Utils Assembly VoxelPrototype.dll public static class Deflate Inheritance object Deflate Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods Compress(byte[]) public static byte[] Compress(byte[] data) Parameters data byte[] Returns byte[] Decompress(byte[]) public static byte[] Decompress(byte[] data) Parameters data byte[] Returns byte[]"
   },
   "api/VoxelPrototype.common.Utils.IRunnable.html": {
     "href": "api/VoxelPrototype.common.Utils.IRunnable.html",
-    "title": "Interface IRunnable | Documentation",
+    "title": "Interface IRunnable | VoxelPrototype Documentation",
     "keywords": "Interface IRunnable Namespace VoxelPrototype.common.Utils Assembly VoxelPrototype.dll public interface IRunnable Methods Run() void Run()"
   },
   "api/VoxelPrototype.common.Utils.Math.Plane.html": {
     "href": "api/VoxelPrototype.common.Utils.Math.Plane.html",
-    "title": "Struct Plane | Documentation",
+    "title": "Struct Plane | VoxelPrototype Documentation",
     "keywords": "Struct Plane Namespace VoxelPrototype.common.Utils.Math Assembly VoxelPrototype.dll public struct Plane Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Constructors Plane(Vector3, float) public Plane(Vector3 normal, float d) Parameters normal Vector3 d float Properties D public readonly float D { get; } Property Value float Normal public readonly Vector3 Normal { get; } Property Value Vector3 Methods DistanceToPoint(Vector3) public float DistanceToPoint(Vector3 point) Parameters point Vector3 Returns float"
   },
   "api/VoxelPrototype.common.Utils.Math.html": {
     "href": "api/VoxelPrototype.common.Utils.Math.html",
-    "title": "Namespace VoxelPrototype.common.Utils.Math | Documentation",
+    "title": "Namespace VoxelPrototype.common.Utils.Math | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Utils.Math Structs Plane"
   },
   "api/VoxelPrototype.common.Utils.html": {
     "href": "api/VoxelPrototype.common.Utils.html",
-    "title": "Namespace VoxelPrototype.common.Utils | Documentation",
+    "title": "Namespace VoxelPrototype.common.Utils | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.common.Utils Classes BooleanSet Deflate Interfaces IRunnable"
   },
   "api/VoxelPrototype.server.Server.html": {
     "href": "api/VoxelPrototype.server.Server.html",
-    "title": "Class Server | Documentation",
+    "title": "Class Server | VoxelPrototype Documentation",
     "keywords": "Class Server Namespace VoxelPrototype.server Assembly VoxelPrototype.dll public class Server : IRunnable Inheritance object Server Implements IRunnable Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Server() public Server() Fields TheServer public static Server TheServer Field Value Server Methods GetWorld() public ServerWorld GetWorld() Returns ServerWorld Run() public virtual void Run() Shutdown() public virtual void Shutdown()"
   },
   "api/VoxelPrototype.server.html": {
     "href": "api/VoxelPrototype.server.html",
-    "title": "Namespace VoxelPrototype.server | Documentation",
+    "title": "Namespace VoxelPrototype.server | VoxelPrototype Documentation",
     "keywords": "Namespace VoxelPrototype.server Classes Server"
+  },
+  "doc/getting-started.html": {
+    "href": "doc/getting-started.html",
+    "title": "Getting Started | VoxelPrototype Documentation",
+    "keywords": "Getting Started"
+  },
+  "doc/introduction.html": {
+    "href": "doc/introduction.html",
+    "title": "Introduction | VoxelPrototype Documentation",
+    "keywords": "Introduction"
   },
   "index.html": {
     "href": "index.html",
-    "title": "This is the HOMEPAGE. | Documentation",
+    "title": "This is the HOMEPAGE. | VoxelPrototype Documentation",
     "keywords": "This is the HOMEPAGE. Refer to Markdown for how to write markdown files. Quick Start Notes: Add images to the images folder if the file is referencing an image."
   }
 }

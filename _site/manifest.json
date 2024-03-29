@@ -32,39 +32,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "Doc/getting-started.md",
-      "output": {
-        ".html": {
-          "relative_path": "Doc/getting-started.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "Doc/introduction.md",
-      "output": {
-        ".html": {
-          "relative_path": "Doc/introduction.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "Doc/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Doc/toc.html"
-        },
-        ".json": {
-          "relative_path": "Doc/toc.json"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "README.md",
       "output": {
         ".html": {
@@ -1252,6 +1219,39 @@
         },
         ".json": {
           "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "doc/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "doc/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "doc/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "doc/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "doc/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "doc/toc.html"
+        },
+        ".json": {
+          "relative_path": "doc/toc.json"
         }
       },
       "version": ""

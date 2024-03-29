@@ -6,6 +6,7 @@
         Deflate = 1,
         LZ4 = 2,
     }
+    // TODO : Add a defragmentation algorithm
     public class RegionFile
     {
         public const int Size = 32;

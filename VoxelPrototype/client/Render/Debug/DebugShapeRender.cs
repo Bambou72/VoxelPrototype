@@ -54,7 +54,7 @@ namespace VoxelPrototype.client.Render.Debug
                         (float)(Box.Size.X),0, 0,
                         (float)(Box.Size.X),(float)(Box.Size.Y), 0,
                         0,(float)(Box.Size.Y), 0,
-                        0,/*(float)(Box.Size.Y)*/0,(float)(Box.Size.Z),
+                        0,0,(float)(Box.Size.Z),
                         (float)(Box.Size.X),0,(float)(Box.Size.Z),
                         (float)(Box.Size.X),(float)(Box.Size.Y),(float)(Box.Size.Z),
                         0,(float)(Box.Size.Y),(float)(Box.Size.Z)

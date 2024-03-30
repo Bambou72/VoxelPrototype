@@ -116,7 +116,7 @@ namespace VBF
     }
     public class VBFCompound : VBFTag
     {
-        internal Dictionary<string, VBFTag> Tags { get; set; } = new Dictionary<string, VBFTag>();
+        public Dictionary<string, VBFTag> Tags { get; set; } = new Dictionary<string, VBFTag>();
         public VBFCompound()
         {
             Type = DataType.Compound;

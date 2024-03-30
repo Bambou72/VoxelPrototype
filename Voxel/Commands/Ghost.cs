@@ -1,5 +1,5 @@
 ﻿using LiteNetLib;
-using VoxelPrototype.common.API.Commands;
+using VoxelPrototype.API.Commands;
 using VoxelPrototype.common.Chat;
 using VoxelPrototype.common.Game.Entities.Player;
 using VoxelPrototype.server;

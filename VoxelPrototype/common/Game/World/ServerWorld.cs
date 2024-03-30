@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.State;
-using VoxelPrototype.common.API.WorldGenerator;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.State;
+using VoxelPrototype.API.WorldGenerator;
 using VoxelPrototype.common.Game.Entities.Player.PlayerManager;
 using VoxelPrototype.common.Game.World.ChunkManagers;
 

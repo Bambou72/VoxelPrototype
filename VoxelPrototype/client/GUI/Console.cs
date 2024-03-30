@@ -1,7 +1,7 @@
 ﻿using ImGuiNET;
 using System.Numerics;
-using VoxelPrototype.common.API;
-using VoxelPrototype.common.API.Commands;
+using VoxelPrototype.API;
+using VoxelPrototype.API.Commands;
 using VoxelPrototype.common.Chat;
 namespace VoxelPrototype.client.GUI
 {

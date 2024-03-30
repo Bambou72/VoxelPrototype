@@ -1,10 +1,11 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.common.API.Blocks;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.WorldGenerator;
 using VoxelPrototype.common.Game.World;
 
 namespace Voxel.Generators
 {
-    internal class FlatGenerator : VoxelPrototype.common.API.WorldGenerator.WorldGenerator
+    internal class FlatGenerator : WorldGenerator
     {
         public int GetOriginHeigh()
         {

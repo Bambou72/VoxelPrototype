@@ -1,11 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Concurrent;
-using VoxelPrototype.client.GUI;
-using VoxelPrototype.common.API;
 using VoxelPrototype.common.Game.World;
 using VoxelPrototype.common.Physics;
-using VoxelPrototype.common.Utils.Math;
 namespace VoxelPrototype.client.Render.World
 {
     internal class WorldRenderer

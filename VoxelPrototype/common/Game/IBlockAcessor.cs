@@ -1,4 +1,4 @@
-﻿using VoxelPrototype.common.API.Blocks.State;
+﻿using VoxelPrototype.API.Blocks.State;
 
 namespace VoxelPrototype.common.Game
 {

@@ -1,11 +1,12 @@
 ﻿using DotnetNoise;
 using OpenTK.Mathematics;
-using VoxelPrototype.common.API.Blocks;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.WorldGenerator;
 using VoxelPrototype.common.Game.World;
 
 namespace Voxel.Generators
 {
-    internal class ComplexGenerator : VoxelPrototype.common.API.WorldGenerator.WorldGenerator
+    internal class ComplexGenerator : WorldGenerator
     {
         FastNoise lib;
         public override int GetOriginHeight()

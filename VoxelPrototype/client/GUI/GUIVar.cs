@@ -2,8 +2,8 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
+using VoxelPrototype.API;
 using VoxelPrototype.client.Debug;
-using VoxelPrototype.common.API;
 namespace VoxelPrototype.client.GUI
 {
     internal static class GUIVar

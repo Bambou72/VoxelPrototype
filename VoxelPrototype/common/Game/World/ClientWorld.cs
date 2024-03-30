@@ -1,7 +1,7 @@
-﻿using VoxelPrototype.client.Render.Components;
+﻿using VoxelPrototype.API.Blocks.State;
+using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Render.Entities;
 using VoxelPrototype.client.Render.World;
-using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Game.Entities.Player.PlayerManager;
 using VoxelPrototype.common.Game.World.ChunkManagers;
 

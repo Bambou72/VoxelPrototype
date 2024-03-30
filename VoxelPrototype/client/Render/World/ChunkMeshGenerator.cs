@@ -1,8 +1,8 @@
 ﻿using MethodTimer;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.State;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.common.Game.World;
 namespace VoxelPrototype.client.Render.World
 {

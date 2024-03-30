@@ -2,8 +2,8 @@
 using OpenTK.Mathematics;
 using System.Runtime.Serialization.Formatters.Binary;
 using VBF;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.State;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.common.Utils;
 namespace VoxelPrototype.common.Game.World.Storage.Palette
 {

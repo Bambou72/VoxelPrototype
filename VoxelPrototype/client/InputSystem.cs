@@ -1,7 +1,7 @@
 ﻿using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using VoxelPrototype.API;
 using VoxelPrototype.client.GUI;
-using VoxelPrototype.common.API;
 namespace VoxelPrototype.client
 {
     internal static class InputSystem

@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using VBF;
-using VoxelPrototype.common.API.Blocks.State;
+using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.common.Game.World.Storage.Palette;
 namespace VoxelPrototype.common.Game.World
 {

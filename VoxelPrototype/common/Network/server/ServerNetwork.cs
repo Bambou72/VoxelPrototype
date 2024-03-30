@@ -1,5 +1,6 @@
 ﻿using LiteNetLib;
 using LiteNetLib.Utils;
+using VoxelPrototype.API;
 using VoxelPrototype.common.Chat;
 using VoxelPrototype.common.Game.Entities.Player;
 using VoxelPrototype.common.Network.packets;
@@ -61,8 +62,8 @@ namespace VoxelPrototype.common.Network.server
                 Server.TheServer.World.PlayerFactory.AddPlayer((ushort)peer.Id, peer);       // Send with reliability
                 ServerInitialPacket packet = new ServerInitialPacket
                 {
-                    EngineVersion = Version.EngineVersion,
-                    APIVersion = Version.APIVersion
+                    EngineVersion = EngineVersion.Version.ToString(),
+                    APIVersion = APIVersion.Version.ToString()
                 };
                 SendPacket(packet, peer, DeliveryMethod.ReliableOrdered);
             };

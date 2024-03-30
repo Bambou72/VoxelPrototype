@@ -1,5 +1,7 @@
 ﻿using OpenTK.Mathematics;
-namespace VoxelPrototype.common.Game.World
+using VoxelPrototype.common.Game.World;
+
+namespace VoxelPrototype.common.Utils
 {
     internal static class Coord
     {
@@ -7,8 +9,8 @@ namespace VoxelPrototype.common.Game.World
         {
             Vector2i cpos;
             Vector3i bpos;
-            int blockX = Math.Abs(x % Chunk.Size);
-            int blockZ = Math.Abs(z % Chunk.Size);
+            int blockX = System.Math.Abs(x % Chunk.Size);
+            int blockZ = System.Math.Abs(z % Chunk.Size);
 
             if (x < 0 && z >= 0)
             {

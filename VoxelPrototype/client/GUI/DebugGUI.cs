@@ -1,5 +1,6 @@
 ﻿using ImGuiNET;
 using OpenTK.Mathematics;
+using VoxelPrototype.API;
 using VoxelPrototype.client.Render.Debug;
 using VoxelPrototype.common.Game.Entities;
 using VoxelPrototype.common.Game.World;
@@ -39,8 +40,8 @@ namespace VoxelPrototype.client.GUI
 
             }
             ImGui.TextColored(Black, "Game Version:");
-            ImGui.TextColored(Black, "Client engine version: " + Version.EngineVersion);
-            ImGui.TextColored(Black, "Client api version: " + Version.APIVersion);
+            ImGui.TextColored(Black, "Client engine version: " + EngineVersion.Version);
+            ImGui.TextColored(Black, "Client api version: " + APIVersion.Version);
             ImGui.TextColored(Black, "Server engine version: " + ClientNetwork.ServerEngineVersion);
             ImGui.TextColored(Black, "Server api version: " + ClientNetwork.ServerAPIVersion);
             ImGui.PopStyleColor(2);

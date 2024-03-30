@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoxelPrototypeClient", "Vox
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoxelPrototypeServer", "VoxelPrototypeServer\VoxelPrototypeServer.csproj", "{E66BDFF2-927B-42C4-8A55-B9648832B0DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voxel", "Voxel\Voxel.csproj", "{26AD7C9D-453A-4117-832A-27F62BF6D136}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voxel", "Voxel\Voxel.csproj", "{26AD7C9D-453A-4117-832A-27F62BF6D136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VBF", "VBF\VBF.csproj", "{8B7AF960-744D-45B8-A037-157D803E534A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,18 @@ Global
 		{26AD7C9D-453A-4117-832A-27F62BF6D136}.Release|x64.Build.0 = Release|Any CPU
 		{26AD7C9D-453A-4117-832A-27F62BF6D136}.Release|x86.ActiveCfg = Release|Any CPU
 		{26AD7C9D-453A-4117-832A-27F62BF6D136}.Release|x86.Build.0 = Release|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Release|x64.Build.0 = Release|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B7AF960-744D-45B8-A037-157D803E534A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

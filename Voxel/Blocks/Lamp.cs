@@ -1,9 +1,8 @@
 ﻿using OpenTK.Mathematics;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.Properties;
+using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.client;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.Properties;
-using VoxelPrototype.common.API.Blocks.state;
-using VoxelPrototype.common.API.Blocks.State;
 
 namespace Voxel.Blocks
 {

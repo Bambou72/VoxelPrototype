@@ -5,9 +5,9 @@
  */
 using LiteNetLib;
 using OpenTK.Mathematics;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.client;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Utils;

@@ -1,5 +1,6 @@
 ﻿using LiteNetLib;
-using VoxelPrototype.common.API.Commands;
+using VoxelPrototype.API.Commands;
+
 namespace Voxel.Commands
 {
     internal class Tp : ICommand

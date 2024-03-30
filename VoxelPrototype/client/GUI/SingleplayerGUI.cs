@@ -1,6 +1,6 @@
 ﻿using ImGuiNET;
 using System.Numerics;
-using VoxelPrototype.common.API.WorldGenerator;
+using VoxelPrototype.API.WorldGenerator;
 using VoxelPrototype.common.Game;
 using VoxelPrototype.common.Network.client;
 namespace VoxelPrototype.client.GUI

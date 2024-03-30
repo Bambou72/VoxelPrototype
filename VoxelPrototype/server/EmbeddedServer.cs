@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using VoxelPrototype.API;
 using VoxelPrototype.client;
 using VoxelPrototype.common.Game;
 using VoxelPrototype.common.Network.server;
@@ -40,8 +41,8 @@ namespace VoxelPrototype.server
             World = new(Settings, Path);
             ServerNetwork.StartServer(ServerPort);
             Logger.Info("The server has finished initializing, it is now ready at: " + ServerNetwork.server.LocalPort);
-            Logger.Info("Server engine version: " + Version.EngineVersion);
-            Logger.Info("Server api version: " + Version.APIVersion);
+            Logger.Info("Server engine version: " + EngineVersion.Version);
+            Logger.Info("Server api version: " + APIVersion.Version);
             while (Running)
             {
                 if (TickCounter < 20)

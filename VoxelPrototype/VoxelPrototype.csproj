@@ -36,4 +36,10 @@
     <PackageReference Include="StbImageSharp" Version="2.27.13" />
     <PackageReference Include="Tomlyn" Version="0.17.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Serializer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VBF\VBF.csproj" />
+  </ItemGroup>
 </Project>

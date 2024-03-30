@@ -1,7 +1,7 @@
 ﻿using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
 using System.Numerics;
-using VoxelPrototype.common.API;
+using VoxelPrototype.API;
 using VoxelPrototype.server;
 namespace VoxelPrototype.client.GUI
 {

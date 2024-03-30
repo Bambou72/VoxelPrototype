@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.client;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.Physics;
 using VoxelPrototype.common.RessourceManager.data;
 namespace VoxelPrototype.common.Game.Entities

@@ -1,7 +1,7 @@
 ﻿using LiteNetLib;
 using OpenTK.Mathematics;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Commands;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Commands;
 using VoxelPrototype.common.Chat;
 using VoxelPrototype.common.Game.Entities.Player;
 using VoxelPrototype.server;

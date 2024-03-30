@@ -1,7 +1,7 @@
 ﻿using ImGuiNET;
 using OpenTK.Windowing.Common;
 using System.Numerics;
-using VoxelPrototype.common.API;
+using VoxelPrototype.API;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.server;
 namespace VoxelPrototype.client.GUI

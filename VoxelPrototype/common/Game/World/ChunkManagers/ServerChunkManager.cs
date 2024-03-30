@@ -6,8 +6,8 @@
 using K4os.Compression.LZ4;
 using LiteNetLib;
 using OpenTK.Mathematics;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Blocks.State;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.common.Game.Entities.Player;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Network.server;

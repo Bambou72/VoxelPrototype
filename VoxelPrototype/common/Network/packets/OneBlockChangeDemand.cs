@@ -1,7 +1,8 @@
 ﻿using LiteNetLib.Utils;
 using OpenTK.Mathematics;
 using VBF;
-using VoxelPrototype.common.API.Blocks.State;
+using VoxelPrototype.API.Blocks.State;
+
 namespace VoxelPrototype.common.Network.packets
 {
     internal struct OneBlockChangeDemand : INetSerializable

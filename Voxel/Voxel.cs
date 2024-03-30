@@ -1,10 +1,11 @@
 ﻿using Voxel.Blocks;
 using Voxel.Commands;
 using Voxel.Generators;
-using VoxelPrototype.common.API;
-using VoxelPrototype.common.API.Blocks;
-using VoxelPrototype.common.API.Commands;
-using VoxelPrototype.common.API.WorldGenerator;
+using VoxelPrototype.API;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Commands;
+using VoxelPrototype.API.WorldGenerator;
+
 namespace Voxel
 {
     public class Voxel : IMod

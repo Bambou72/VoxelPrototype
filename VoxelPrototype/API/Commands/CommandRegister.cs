@@ -1,5 +1,5 @@
 ﻿using LiteNetLib;
-namespace VoxelPrototype.common.API.Commands
+namespace VoxelPrototype.API.Commands
 {
     public static class CommandRegister
     {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
-namespace VoxelPrototype.common.API
+namespace VoxelPrototype.API
 {
     internal static class ModManager
     {

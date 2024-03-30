@@ -1,9 +1,8 @@
 ﻿using OpenTK.Mathematics;
+using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.client;
-using VoxelPrototype.common.API.Blocks.state;
-using VoxelPrototype.common.API.Blocks.State;
 using VoxelPrototype.common.RessourceManager.data;
-namespace VoxelPrototype.common.API.Blocks
+namespace VoxelPrototype.API.Blocks
 {
     public class Block
     {
@@ -29,7 +28,7 @@ namespace VoxelPrototype.common.API.Blocks
         public virtual void RegisterProperties(BlockStateBuilder Builder)
         {
         }
-        public virtual void OnInteract(Vector3i Pos,BlockState State)
+        public virtual void OnInteract(Vector3i Pos, BlockState State)
         {
 
         }
@@ -37,48 +36,51 @@ namespace VoxelPrototype.common.API.Blocks
         {
             return Default;
         }
-        internal float[] GetMesh( int Face)
+        internal float[] GetMesh(int Face)
         {
             try
             {
                 var modelData = ClientRessourcePackManager.GetRessourcePackManager().GetBlockMesh(Model);
                 return modelData.GetMesh()[Face];
 
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Logger.Error(e);
                 return Array.Empty<float>();
 
             }
         }
-        internal  float[] GetMeshTextureCoordinates( int Face)
+        internal float[] GetMeshTextureCoordinates(int Face)
         {
             try
             {
                 var modelData = ClientRessourcePackManager.GetRessourcePackManager().GetBlockMesh(Model);
                 return modelData.GetUV()[Face];
             }
-            catch(Exception e) 
+            catch (Exception e)
             {
                 Logger.Error(e);
                 return Array.Empty<float>();
             }
         }
-        internal float[] GetTextureCoordinates(int Face,BlockState State)
+        internal float[] GetTextureCoordinates(int Face, BlockState State)
         {
             try
             {
                 BlockStateData StateData = ClientRessourcePackManager.GetRessourcePackManager().GetBlockStateData(this.Data);
                 BlockData Data;
-                if(StateHolder.GetStates().Count == 1)
+                if (StateHolder.GetStates().Count == 1)
                 {
                     Data = StateData.variants[""];
-                }else
+                }
+                else
                 {
-                    if(StateData.variants.ContainsKey(State.ToString()))
+                    if (StateData.variants.ContainsKey(State.ToString()))
                     {
                         Data = StateData.variants[State.ToString()];
-                    }else
+                    }
+                    else
                     {
                         Data = StateData.variants[""];
                     }
@@ -92,7 +94,7 @@ namespace VoxelPrototype.common.API.Blocks
                     return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord(Data.textures.textures[Face]);
                 }
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Logger.Error(e);
                 return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord("unknow");

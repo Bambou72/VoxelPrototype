@@ -1,4 +1,4 @@
-﻿namespace VoxelPrototype.common.API
+﻿namespace VoxelPrototype.API
 {
     public interface IMod
     {

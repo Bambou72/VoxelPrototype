@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using VoxelPrototype.client;
-namespace VoxelPrototype.common.API
+namespace VoxelPrototype.API
 {
     internal class ClientAPI
     {

@@ -1,14 +1,13 @@
-﻿
-using VoxelPrototype.common.Game.World;
+﻿using VoxelPrototype.common.Game.World;
 
-namespace VoxelPrototype.common.API.WorldGenerator
+namespace VoxelPrototype.API.WorldGenerator
 {
-    public  class WorldGenerator
+    public class WorldGenerator
     {
         long Seed;
         public virtual void SetData(long seed)
         {
-           Seed = seed;
+            Seed = seed;
         }
         public virtual int GetOriginHeight()
         {

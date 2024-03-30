@@ -1,20 +1,21 @@
-﻿using VoxelPrototype.common.API.Blocks.Properties;
-using System.Collections.Generic;
-namespace VoxelPrototype.common.API.Blocks.state
+﻿using System.Collections.Generic;
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.Properties;
+namespace VoxelPrototype.API.Blocks.State
 {
     public class BlockStateBuilder
     {
         private readonly Block Block;
-	    private readonly Dictionary<string, IProperty> Properties = new();
+        private readonly Dictionary<string, IProperty> Properties = new();
         internal BlockStateBuilder(Block Block)
         {
             this.Block = Block;
         }
         public void Register<T>(Property<T> property)
         {
-            string name =property.Name;
+            string name = property.Name;
             List<T> allowedValues = property.GetAllValues();
-            if (allowedValues.Count ==0)
+            if (allowedValues.Count == 0)
             {
                 throw new Exception("Given property '" + name + "' returns empty collection for allowed values.");
             }

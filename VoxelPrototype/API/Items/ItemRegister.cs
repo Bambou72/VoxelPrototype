@@ -1,6 +1,5 @@
 ﻿using VoxelPrototype.client.Render.Components;
-using VoxelPrototype.common.API.Blocks;
-namespace VoxelPrototype.common.API.Items
+namespace VoxelPrototype.API.Items
 {
     public static class ItemRegister
     {

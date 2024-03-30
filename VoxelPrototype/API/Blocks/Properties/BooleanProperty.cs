@@ -1,4 +1,4 @@
-﻿namespace VoxelPrototype.common.API.Blocks.Properties
+﻿namespace VoxelPrototype.API.Blocks.Properties
 {
     public class BooleanProperty : Property<bool>
     {
@@ -19,7 +19,7 @@
         }
         public override List<bool> GetAllValues()
         {
-            return new List<bool> {false, true };
+            return new List<bool> { false, true };
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using VoxelPrototype.common.API.Blocks.State;
-namespace VoxelPrototype.common.API.Blocks
+﻿using VoxelPrototype.API.Blocks.State;
+
+namespace VoxelPrototype.API.Blocks
 {
     public static class BlockRegister
     {
@@ -9,7 +10,7 @@ namespace VoxelPrototype.common.API.Blocks
         internal static void Initialize()
         {
             RegisterBlock("air", new Block() { Transparency = true });
-            Air =GetBlock("air").GetDefaultState();
+            Air = GetBlock("air").GetDefaultState();
         }
         public static string GetBlockID(string ModName, string BlockName)
         {
@@ -36,7 +37,7 @@ namespace VoxelPrototype.common.API.Blocks
         }
         internal static int GetTransForAO(BlockState ID)
         {
-            if (ID == BlockRegister.Air)
+            if (ID == Air)
             {
                 return 1;
             }

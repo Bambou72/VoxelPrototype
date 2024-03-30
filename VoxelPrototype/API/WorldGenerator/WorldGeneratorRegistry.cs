@@ -1,16 +1,17 @@
-﻿namespace VoxelPrototype.common.API.WorldGenerator
+﻿namespace VoxelPrototype.API.WorldGenerator
 {
     public static class WorldGeneratorRegistry
     {
         private static Dictionary<string, Type> GeneratorTypes = new();
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        public static bool RegisterWorldGenerator(string Name,Type Generator)
+        public static bool RegisterWorldGenerator(string Name, Type Generator)
         {
             try
             {
                 GeneratorTypes.Add(Name, Generator);
                 return true;
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Logger.Error(e);
                 return false;

@@ -1,10 +1,8 @@
-﻿using System.Xml.Linq;
-
-namespace VoxelPrototype.common.API.Blocks.Properties
+﻿namespace VoxelPrototype.API.Blocks.Properties
 {
     public interface IProperty
     {
-        public string Name { get;}
+        public string Name { get; }
     }
     public class Property<T> : IProperty
     {
@@ -38,7 +36,7 @@ namespace VoxelPrototype.common.API.Blocks.Properties
 
         public virtual T DefaultValue()
         {
-            return default(T);
+            return default;
         }
     }
 }

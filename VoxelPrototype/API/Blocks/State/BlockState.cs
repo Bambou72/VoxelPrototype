@@ -1,6 +1,8 @@
 ﻿using VBF;
-using VoxelPrototype.common.API.Blocks.Properties;
-namespace VoxelPrototype.common.API.Blocks.State
+using VoxelPrototype.API.Blocks;
+using VoxelPrototype.API.Blocks.Properties;
+
+namespace VoxelPrototype.API.Blocks.State
 {
     public class BlockState : IVBFSerializable<BlockState>
     {
@@ -8,10 +10,10 @@ namespace VoxelPrototype.common.API.Blocks.State
         public uint ID { get; }
         private readonly Dictionary<IProperty, object> Properties;
         private Dictionary<(IProperty, object), BlockState> StatesByValues;
-        public BlockState(){}
+        public BlockState() { }
         public BlockState(Block Block, Dictionary<IProperty, object> Properties, uint ID)
         {
-            this.Block= Block;
+            this.Block = Block;
             this.Properties = Properties;
             this.ID = ID;
         }
@@ -21,9 +23,9 @@ namespace VoxelPrototype.common.API.Blocks.State
         }
         public T Get<T>(Property<T> property)
         {
-            foreach(var prop in Properties)
+            foreach (var prop in Properties)
             {
-                if(prop.Key.Equals(property))
+                if (prop.Key.Equals(property))
                 {
                     return (T)prop.Value;
                 }
@@ -47,7 +49,7 @@ namespace VoxelPrototype.common.API.Blocks.State
         }
         public BlockState WithRaw<T>(Property<T> property, object value)
         {
-            (object v,IProperty Prop) = GetIntern(property);
+            (object v, IProperty Prop) = GetIntern(property);
             if (v == value)
             {
                 return this;
@@ -76,15 +78,15 @@ namespace VoxelPrototype.common.API.Blocks.State
         public override string ToString()
         {
             string Base = "";
-            foreach( var property in Properties.Keys )
+            foreach (var property in Properties.Keys)
             {
                 string Name = property.Name;
                 string Value = Properties[property].ToString();
-                if(Base != "")
+                if (Base != "")
                 {
                     Base += ";";
                 }
-                Base += Name+":"+Value;
+                Base += Name + ":" + Value;
             }
             return Base;
         }
@@ -103,17 +105,15 @@ namespace VoxelPrototype.common.API.Blocks.State
                 if (obj.GetType() == typeof(bool))
                 {
                     Properties.AddBool(prop.Name, (bool)obj);
-
                 }
-                /*
                 else if (obj.GetType().IsEnum)
                 {
                     VBFCompound EnumProperty = new VBFCompound();
                     EnumProperty.AddString("Type", obj.GetType().Name);
-                    EnumProperty.AddString("Value", (IProperty<obj.GetType()>)prop.GetValueString(obj));
+                    EnumProperty.AddString("Value", obj.ToString());
                     Properties.Add(prop.Name, EnumProperty);
 
-                }*/
+                }
             }
             BlockState.Add("Properties", Properties);
             return BlockState;
@@ -129,17 +129,14 @@ namespace VoxelPrototype.common.API.Blocks.State
                 {
                     var Value = (VBFBool)prop.Value;
                     CurrentBlockState = CurrentBlockState.With(new BooleanProperty(prop.Key), Value.Value);
-                }
-                /*
+                }/*
                 else if(prop.Value.GetType() == typeof(VBFCompound))
                 {
                     var Value = (VBFCompound)(prop.Value);
                     Type enumType = Type.GetType(Value.GetString("Type").Value);
-                    Type myClassType = typeof(EnumProperty<>).MakeGenericType(enumType);
-                    object EnumInstance = Activator.CreateInstance(myClassType);
-                    (T)Convert.ChangeType()
                     var parsed =Enum.Parse(enumType, Value.GetString("Value").Value);
-                    CurrentBlockState = CurrentBlockState.With(EnumInstance,EnumInstance. );
+                    var pro = Activator.CreateInstance(typeof(EnumProperty<>).MakeGenericType(enumType), prop.Key);
+                    CurrentBlockState = CurrentBlockState.With(pro, parsed);
 
                 }*/
             }

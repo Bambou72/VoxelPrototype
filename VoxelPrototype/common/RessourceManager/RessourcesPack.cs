@@ -5,6 +5,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using Tomlyn;
 using Tomlyn.Model;
 using VoxelPrototype.client.Render.Components;
+using VoxelPrototype.client.Text;
 using VoxelPrototype.common.Physics;
 using VoxelPrototype.common.RessourceManager.data;
 namespace VoxelPrototype.common.RessourceManager
@@ -337,6 +338,48 @@ namespace VoxelPrototype.common.RessourceManager
                 {
                     Logger.Error(ex, "Entity texture can't load : " + filePath);
                 }
+            }
+        }
+        //
+        //Font
+        //
+        
+        private static Dictionary<string, Font> Fonts = new Dictionary<string, Font>();
+        internal Font GetFont(string Id)
+        {
+            if (Fonts.ContainsKey(Id))
+            {
+                return Fonts[Id];
+            }
+            else
+            {
+                Logger.Error("Font not found : " + Id);
+                return null;
+            }
+        }
+        internal void LoadFont(string[] Paths)
+        {
+            foreach (var path in Paths)
+            {
+                LoadFont(path, System.IO.Path.GetFileNameWithoutExtension(path));
+            }
+        }
+        private void LoadFont(string path, string ModName)
+        {
+            path += "/font";
+            string[] textures = Directory.GetFiles(path, "*.ttf");
+            foreach (string filePath in textures)
+            {
+                //try
+                //{
+                    string FontID = RessourcePackManager.GetAssetId(ModName, System.IO.Path.GetFileNameWithoutExtension(filePath));
+                    Fonts.Add(FontID, new Font(filePath,40));
+                    Logger.Info($"A font loaded : {FontID}");
+                //}
+                /*catch (Exception ex)
+                {
+                    Logger.Error(ex, "A font can't load : " + filePath);
+                }*/
             }
         }
     }

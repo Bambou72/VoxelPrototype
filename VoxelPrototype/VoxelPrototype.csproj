@@ -33,13 +33,16 @@
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="OpenTK" Version="4.8.2" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.3" />
+    <PackageReference Include="SpaceWizards.SharpFont" Version="1.0.2" />
     <PackageReference Include="StbImageSharp" Version="2.27.13" />
     <PackageReference Include="Tomlyn" Version="0.17.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\Serializer\" />
+    <ProjectReference Include="..\VBF\VBF.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VBF\VBF.csproj" />
+    <None Update="freetype6.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

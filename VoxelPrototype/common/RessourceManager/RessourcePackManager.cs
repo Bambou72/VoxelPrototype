@@ -5,6 +5,9 @@ using System.IO.Compression;
 using Tomlyn;
 using Tomlyn.Model;
 using VoxelPrototype.client.Render.Components;
+using VoxelPrototype.client.Text;
+
+//using VoxelPrototype.client.Text;
 using VoxelPrototype.common.Physics;
 using VoxelPrototype.common.RessourceManager.data;
 namespace VoxelPrototype.common.RessourceManager
@@ -89,6 +92,7 @@ namespace VoxelPrototype.common.RessourceManager
                     RessourcesPack.LoadEntitiesMesh(ModAssetsPath);
                     RessourcesPack.LoadEntityTexture(ModAssetsPath);
                     RessourcesPack.LoadCubeMap(ModAssetsPath);
+                    RessourcesPack.LoadFont(ModAssetsPath);
                 }
             }
             BuildAtlas();
@@ -333,6 +337,17 @@ namespace VoxelPrototype.common.RessourceManager
                 return RessourcePacks[name].GetEntityTexture(Id);
             }
             Logger.Error("Entity texture not found : " + Id);
+            return null;
+        }
+        
+        public Font GetFont(string Id)
+        {
+            for (int i = 0; i < CurrentPos; i++)
+            {
+                string name = RessourcePacksLevel.FirstOrDefault(x => x.Value == i).Key;
+                return RessourcePacks[name].GetFont(Id);
+            }
+            Logger.Error("Font not found : " + Id);
             return null;
         }
     }

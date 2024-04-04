@@ -1,5 +1,4 @@
 ﻿using ImGuiNET;
-using Newtonsoft.Json;
 using VBF;
 using VoxelPrototype.common.Game.World;
 
@@ -230,7 +229,10 @@ namespace VBFViewer
                     ImGui.EndMenu();
                 }
                 ImGui.Separator();
-                ImGui.Text("Number of loaded chunks : " + Chunks.Length);
+                if(Chunks != null)
+                {
+                    ImGui.Text("Number of loaded chunks : " + Chunks.Length);
+                }
                 ImGui.EndMainMenuBar();
             }
             ImGui.SetNextWindowSize( new System.Numerics.Vector2(Program.window.ClientSize.X, Program.window.ClientSize.Y), ImGuiCond.Always);

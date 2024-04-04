@@ -1,4 +1,9 @@
-﻿namespace VoxelPrototype.common.Game.World
+﻿using K4os.Compression.LZ4;
+using System;
+using VBF;
+using VoxelPrototype.common.Utils;
+
+namespace VoxelPrototype.common.Game.World
 {
     public enum CompressionType : byte
     {
@@ -41,6 +46,25 @@
         //
         //Read Chunk
         //
+        public VBFCompound[] ReadAllChunkAsVBF()
+        {
+            var Offsets= GetAllUsedOffset();
+            List<VBFCompound> Chunks = new();
+            foreach (var offset in Offsets)
+            {
+                (byte[] data,CompressionType CompType) = ReadChunkData(offset.Item1, offset.Item2);
+                byte[] FinalData = data;
+                if(CompType == CompressionType.LZ4)
+                {
+                    FinalData = LZ4Pickler.Unpickle(data);
+                }else if(CompType == CompressionType.Deflate)
+                {
+                    FinalData = Deflate.Decompress(data);
+                }
+                Chunks.Add((VBFCompound)VBFSerializer.Deserialize(FinalData));
+            }
+            return Chunks.ToArray();
+        }
         public (byte[], CompressionType) ReadChunk(int X, int Z)
         {
             (int Localization, byte Size) = GetOffset(X, Z);
@@ -109,6 +133,23 @@
         //
         //Offset table
         //
+        public (int, byte)[] GetAllUsedOffset()
+        {
+            List<(int, byte)> Offsets = new();
+            for(int i = 0; i <1024; i++)
+            {
+                byte[] Data = new byte[4];
+                FileStream.Seek(i * 4, SeekOrigin.Begin);
+                FileStream.Read(Data, 0, 4);
+                int Localization = Data[0] << 16 | Data[1] << 8 | Data[2];
+                byte NumberOfSectors = Data[3];
+                if(Localization !=0 && NumberOfSectors !=0)
+                {
+                    Offsets.Add((Localization, NumberOfSectors));
+                }
+            }
+            return Offsets.ToArray();
+        }
         public (int, byte) GetOffset(int X, int Z)
         {
             int index = Z * Size + X;

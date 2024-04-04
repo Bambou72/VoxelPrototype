@@ -17,8 +17,6 @@ public static class Program
             ClientSize = new Vector2i(1000, 800),
             Title = "VBF Viewer",
             Flags = ContextFlags.ForwardCompatible,
-            MaximumClientSize = new Vector2i(600, 600),
-            MinimumClientSize = new Vector2i(600, 600),
         };
         Game();
     }

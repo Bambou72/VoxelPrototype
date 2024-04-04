@@ -9,42 +9,63 @@ namespace VBFViewer
     {
         static RegionFile LoadedRegion;
         static VBFCompound[] Chunks;
-        internal static void RenderVBFList(VBFList list,int Index)
+        static long Index = 0;
+        internal static void RenderVBFList(VBFList list)
         {
             if (list.ListType== VBFTag.DataType.Int)
             {
-                ImGui.Text("Value : ");
-                ImGui.SameLine();
+                ImGui.Text("Values : ");
                 foreach (var tag in list.Tags)
                 {
                     VBFInt vBFInt = (VBFInt)tag;
                     ImGui.Text(vBFInt.Value.ToString());
                 }
-
+            }
+            if (list.ListType == VBFTag.DataType.Byte)
+            {
+                ImGui.Text("Values : ");
+                foreach (var tag in list.Tags)
+                {
+                    VBFByte vBFByte = (VBFByte)tag;
+                    ImGui.Text(vBFByte.Value.ToString());
+                }
+            }
+            if (list.ListType == VBFTag.DataType.Long)
+            {
+                ImGui.Text("Values : ");
+                foreach (var tag in list.Tags)
+                {
+                    VBFLong vBFLong = (VBFLong)tag;
+                    ImGui.Text(vBFLong.Value.ToString());
+                }
+            }
+            if (list.ListType == VBFTag.DataType.Double)
+            {
+                ImGui.Text("Values : ");
+                foreach (var tag in list.Tags)
+                {
+                    VBFDouble vBFDouble = (VBFDouble)tag;
+                    ImGui.Text(vBFDouble.Value.ToString());
+                }
             }
             if (list.ListType == VBFTag.DataType.Float)
             {
-                ImGui.Text("Value : ");
-                ImGui.SameLine();
+                ImGui.Text("Values : ");
                 foreach (var tag in list.Tags)
                 {
                     VBFFloat vBFFloat = (VBFFloat)tag;
                     ImGui.Text(vBFFloat.Value.ToString());
                 }
-
             }
             if (list.ListType == VBFTag.DataType.String)
             {
-                ImGui.Text("Value : ");
-                ImGui.SameLine();
-
+                ImGui.Text("Values : ");
                 foreach (var tag in list.Tags)
                 {
 
                     VBFString vBFString = (VBFString)tag;
                     ImGui.Text(vBFString.Value.ToString());
                 }
-
             }
             if (list.ListType == VBFTag.DataType.Bool)
             {
@@ -55,74 +76,118 @@ namespace VBFViewer
                     ImGui.Text(vBFBool.Value.ToString());
 
                 }
-
-
             }
             if (list.ListType == VBFTag.DataType.Compound)
             {
+                long ListIndex = 0;
                 foreach(var tag in  list.Tags)
                 {
-                    RenderVBF((VBFCompound)tag, Index);
+                    RenderTag(ListIndex.ToString(),tag);
+                    ListIndex++;
                 }
             }
         }
-
-        internal static void RenderVBF(VBFCompound Comp,int Index)
+        internal static void RenderTag(string Name,VBFTag Tag)
         {
-            foreach (var Tag in Comp.Tags)
+            if (ImGui.TreeNodeEx(Name + $"##{Index++}"))
             {
-                if (ImGui.TreeNodeEx(Tag.Key+$"##{Index++}"))
+                if (Tag.Type == VBFTag.DataType.Int)
                 {
+                    ImGui.Text("Value : ");
+                    ImGui.SameLine();
 
-                    if (Tag.Value.Type == VBFTag.DataType.Int)
-                    {
-                        ImGui.Text("Value : ");
-                        ImGui.SameLine();
+                    VBFInt vBFInt = (VBFInt)Tag;
+                    ImGui.Text(vBFInt.Value.ToString());
 
-                        VBFInt vBFInt = (VBFInt)Tag.Value;
-                        ImGui.Text(vBFInt.Value.ToString());
-
-                    }
-                    if (Tag.Value.Type == VBFTag.DataType.Float)
-                    {
-                        ImGui.Text("Value : ");
-                        ImGui.SameLine();
-
-                        VBFFloat vBFFloat = (VBFFloat)Tag.Value;
-                        ImGui.Text(vBFFloat.Value.ToString());
-
-                    }
-                    if (Tag.Value.Type == VBFTag.DataType.String)
-                    {
-                        ImGui.Text("Value : ");
-                        ImGui.SameLine();
-
-
-                        VBFString vBFString = (VBFString)Tag.Value;
-                        ImGui.Text(vBFString.Value.ToString());
-
-                    }
-                    if (Tag.Value.Type == VBFTag.DataType.Bool)
-                    {
-                        ImGui.Text("Value : ");
-                        ImGui.SameLine();
-
-
-                        VBFBool vBFBool = (VBFBool)Tag.Value;
-                        ImGui.Text(vBFBool.Value.ToString());
-
-                    }
-                    if (Tag.Value.Type == VBFTag.DataType.List)
-                    {
-                        RenderVBFList((VBFList)Tag.Value,Index);
-                    }
-                    if (Tag.Value.Type == VBFTag.DataType.Compound)
-                    {
-
-                        RenderVBF((VBFCompound)Tag.Value,Index);
-                    }
-                    ImGui.TreePop();
                 }
+                if (Tag.Type == VBFTag.DataType.Byte)
+                {
+                    ImGui.Text("Value : ");
+                    ImGui.SameLine();
+
+                    VBFByte vBFByte = (VBFByte)Tag;
+                    ImGui.Text(vBFByte.Value.ToString());
+
+                }
+                if (Tag.Type == VBFTag.DataType.Long)
+                {
+                    ImGui.Text("Value : ");
+                    ImGui.SameLine();
+
+                    VBFLong vBFLong = (VBFLong)Tag;
+                    ImGui.Text(vBFLong.Value.ToString());
+
+                }
+                if (Tag.Type == VBFTag.DataType.Double)
+                {
+                    ImGui.Text("Value : ");
+                    ImGui.SameLine();
+
+                    VBFDouble vBFDouble = (VBFDouble)Tag;
+                    ImGui.Text(vBFDouble.Value.ToString());
+
+                }
+                if (Tag.Type == VBFTag.DataType.ByteArray)
+                {
+                    ImGui.Text("Values : ");
+
+                    VBFByteArray vBFByteArray = (VBFByteArray)Tag;
+                    foreach (byte b in vBFByteArray.Value)
+                    {
+                        ImGui.Text(b.ToString());
+                    }
+                }
+                if (Tag.Type == VBFTag.DataType.IntArray)
+                {
+                    ImGui.Text("Values : ");
+                    VBFIntArray vBFIntArray = (VBFIntArray)Tag;
+                    foreach (int b in vBFIntArray.Value)
+                    {
+                        ImGui.Text(b.ToString());
+                    }
+                }
+                if (Tag.Type == VBFTag.DataType.Float)
+                {
+                    ImGui.Text("Value : ");
+                    ImGui.SameLine();
+
+                    VBFFloat vBFFloat = (VBFFloat)Tag;
+                    ImGui.Text(vBFFloat.Value.ToString());
+
+                }
+                if (Tag.Type == VBFTag.DataType.String)
+                {
+                    ImGui.Text("Value : ");
+                    ImGui.SameLine();
+
+
+                    VBFString vBFString = (VBFString)Tag;
+                    ImGui.Text(vBFString.Value.ToString());
+
+                }
+                if (Tag.Type == VBFTag.DataType.Bool)
+                {
+                    ImGui.Text("Value : ");
+                    ImGui.SameLine();
+
+
+                    VBFBool vBFBool = (VBFBool)Tag;
+                    ImGui.Text(vBFBool.Value.ToString());
+
+                }
+                if (Tag.Type == VBFTag.DataType.List)
+                {
+                    RenderVBFList((VBFList)Tag);
+                }
+                if (Tag.Type == VBFTag.DataType.Compound)
+                {
+                    VBFCompound VBFCompoundTag = (VBFCompound)Tag;
+                    foreach (var CompTag in VBFCompoundTag.Tags)
+                    {
+                        RenderTag(CompTag.Key, CompTag.Value);
+                    }
+                }
+                ImGui.TreePop();
             }
         }
         internal static void RenderGUI()
@@ -164,9 +229,11 @@ namespace VBFViewer
                     }
                     ImGui.EndMenu();
                 }
+                ImGui.Separator();
+                ImGui.Text("Number of loaded chunks : " + Chunks.Length);
                 ImGui.EndMainMenuBar();
             }
-            ImGui.SetNextWindowSize(new System.Numerics.Vector2(600, 600), ImGuiCond.Always);
+            ImGui.SetNextWindowSize( new System.Numerics.Vector2(Program.window.ClientSize.X, Program.window.ClientSize.Y), ImGuiCond.Always);
             ImGuiWindowFlags windowFlags = ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar;
 
             // Création de la fenêtre ImGui
@@ -175,14 +242,13 @@ namespace VBFViewer
             {
                 if(LoadedRegion != null)
                 {
+                    Index = 0;
                     // Contenu de la fenêtre ImGui
                     if (ImGui.TreeNodeEx("Chunks"))
                     {
                         foreach (var chunk in Chunks)
                         {
-                            var temp= new VBFCompound();
-                            temp.Add(chunk.GetInt("PosX").Value.ToString() + ":" + chunk.GetInt("PosZ").Value.ToString(), chunk);
-                            RenderVBF( temp,0);
+                            RenderTag(chunk.GetInt("PosX").Value.ToString() + ":" + chunk.GetInt("PosZ").Value.ToString(),chunk);
                         }
                         ImGui.TreePop();
                     }

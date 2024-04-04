@@ -15,9 +15,10 @@ public static class Program
     {
         nativeWindowSettings = new()
         {
-            Size = new Vector2i(1000, 800),
+            ClientSize = new Vector2i(800, 600),
             Title = "Voxel Prototype Model Editor",
             Flags = ContextFlags.ForwardCompatible,
+
         };
         Game();
     }

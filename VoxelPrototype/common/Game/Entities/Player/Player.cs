@@ -1,6 +1,7 @@
 ﻿using LiteNetLib;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using VoxelPrototype.API;
 using VoxelPrototype.API.Blocks;
 using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.client;
@@ -11,8 +12,6 @@ using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Network.server;
 using VoxelPrototype.common.Physics;
 using VoxelPrototype.server;
-using KeyboardState = VoxelPrototype.client.KeyboardState;
-using MouseState = VoxelPrototype.client.MouseState;
 namespace VoxelPrototype.common.Game.Entities.Player
 {
     public class Player : PhysicEntity
@@ -33,17 +32,17 @@ namespace VoxelPrototype.common.Game.Entities.Player
         internal Vector2 _lastPos;
         internal Camera? _Camera;
         internal bool Local = false;
+        internal bool ServerSide = false;
         internal Model _Model;
         internal Vector3i ViewedBlockPos;
         internal Ray? ViewRay;
         internal bool ViewBlock = false;
         //BlockBreaking
         internal Vector3i BlockCurrentBreaking;
-        internal byte update = 0;
         internal float sensitivity = 0.2f;
-        const float BOUND = 89.0f;
         internal bool _firstMove = true;
         internal ulong LastServerTick = 0;
+
         public Player(Vector3d _Position, ushort _ClientID, bool Local, bool Client)
         {
             Position = _Position;
@@ -51,12 +50,18 @@ namespace VoxelPrototype.common.Game.Entities.Player
             {
                 if (Local)
                 {
-                    _Camera = new Camera((Vector3)_Position, 16 / 9);
                     ViewRay = new Ray(Vector3d.Zero, Vector3.Zero, Reach);
+
+                    _Camera = new Camera((Vector3)_Position, (float)ClientAPI.WindowWidth()/ClientAPI.WindowHeight());
                 }
-                _Model = ClientRessourcePackManager.GetRessourcePackManager().GetEntityMesh("Voxel@entity/player");
+                _Model = client.Client.TheClient.ResourcePackManager.GetEntityMesh("Voxel@entity/player");
+            }
+            else
+            {
+                ServerSide = true;
             }
             ClientID = _ClientID;
+
         }
         internal void HitCallBack(Vector3i CurrentBlock, Vector3i Normal, BlockState State)
         {
@@ -69,7 +74,7 @@ namespace VoxelPrototype.common.Game.Entities.Player
             }
             else if (InputSystem.MousePressed(MouseButton.Right) && InputSystem.Grab)
             {
-                State.Block.OnInteract(CurrentBlock, State);
+                State.Block.OnInteract(CurrentBlock, State,ServerSide);
             }
             /*
             else if (InputSystem.MousePressed(MouseButton.Middle))
@@ -99,7 +104,7 @@ namespace VoxelPrototype.common.Game.Entities.Player
             };
             ClientNetwork.SendPacket(message, DeliveryMethod.ReliableOrdered);
         }
-        internal InputState GetInput(float DT, MouseState Mouse, KeyboardState Keyboard)
+        internal InputState GetInput(double DT, MouseState Mouse, KeyboardState Keyboard)
         {
             PlayerControls Controls = new PlayerControls();
             if (InputSystem.GetNoInput() == false)
@@ -172,10 +177,10 @@ namespace VoxelPrototype.common.Game.Entities.Player
                         var change = Mouse.Delta;
                         Rotation.X -= change.Y * sensitivity;
                         Rotation.Y += change.X * sensitivity;
-                        if (Rotation.X > BOUND)
-                            Rotation.X = BOUND;
-                        else if (Rotation.X < -BOUND)
-                            Rotation.X = -BOUND;
+                        if (Rotation.X > 89)
+                            Rotation.X = 89;
+                        else if (Rotation.X < -89)
+                            Rotation.X = -89;
                         if (Rotation.Y > 360)
                             Rotation.Y = 0;
                         else if (Rotation.Y < 0)
@@ -252,6 +257,8 @@ namespace VoxelPrototype.common.Game.Entities.Player
         internal ulong LastClientTick;
         public Player(Vector3d _Position, ushort _ClientID)
         {
+            ViewRay = new Ray(Vector3d.Zero, Vector3.Zero, Reach);
+
             Position = _Position;
             ClientID = _ClientID;
         }
@@ -265,6 +272,8 @@ namespace VoxelPrototype.common.Game.Entities.Player
         }
         internal void UpdateServer(PlayerControlsServer Control)
         {
+            //ViewRay.Update(new Vector3d(Position.X, Position.Y + EntityEYEHeight, Position.Z), _Camera.Front, Reach);
+           // ViewRay.TestWithTerrain(HitCallBack);
             LastClientTick = Control.ClientTick;
             base.UpdateServer(Control.Dt);
             float Speed = NormalSpeed;

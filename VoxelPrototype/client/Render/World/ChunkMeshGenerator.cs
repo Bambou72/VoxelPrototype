@@ -1,5 +1,4 @@
-﻿using MethodTimer;
-using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using VoxelPrototype.API.Blocks;
 using VoxelPrototype.API.Blocks.State;
@@ -37,13 +36,13 @@ namespace VoxelPrototype.client.Render.World
             GL.BindVertexArray(VAO);
             GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
             GL.BufferData(BufferTarget.ArrayBuffer, Vertices.Length * sizeof(float), Vertices, BufferUsageHint.StaticDraw);
-            var vertexLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@chunk").GetAttribLocation("Vertex");
+            var vertexLocation = Client.TheClient.ResourcePackManager.GetShader("Voxel@chunk").GetAttribLocation("Vertex");
             GL.EnableVertexAttribArray(vertexLocation);
             GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 0);
-            var texCoordLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@chunk").GetAttribLocation("Texture");
+            var texCoordLocation = Client.TheClient.ResourcePackManager.GetShader("Voxel@chunk").GetAttribLocation("Texture");
             GL.EnableVertexAttribArray(texCoordLocation);
             GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 6 * sizeof(float), 3 * sizeof(float));
-            var AOLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@chunk").GetAttribLocation("AO");
+            var AOLocation = Client.TheClient.ResourcePackManager.GetShader("Voxel@chunk").GetAttribLocation("AO");
             GL.EnableVertexAttribArray(AOLocation);
             GL.VertexAttribPointer(AOLocation, 1, VertexAttribPointerType.Float, false, 6 * sizeof(float), 5 * sizeof(float));
             //EBO
@@ -75,7 +74,7 @@ namespace VoxelPrototype.client.Render.World
                             }
                             else
                             {
-                                var blockMesh = ClientRessourcePackManager.GetRessourcePackManager().GetBlockMesh(BlockRegister.Blocks[block.Block.ID].Model);
+                                var blockMesh = Client.TheClient.ResourcePackManager.GetBlockMesh(BlockRegister.Blocks[block.Block.ID].Model);
                                 var meshLength = blockMesh.GetMesh().Length;
                                 for (int i = 0; i < meshLength; i++)
                                 {

@@ -115,7 +115,7 @@ namespace VoxelPrototype.client.GUI
         {
             MultiplayerGUI.SaveSevers();
         }
-        internal static void Render()
+        internal static void RenderI()
         {
             if (DebugMenu)
             {
@@ -175,7 +175,7 @@ namespace VoxelPrototype.client.GUI
                 {
                     Console.ConsoleDraw();
                 }
-                if (!ConsoleMenu )
+                if (!ConsoleMenu)
                 {
                     InInputText = false;
                 }
@@ -187,14 +187,14 @@ namespace VoxelPrototype.client.GUI
         /// </summary>
         /// <param name="window">Main window</param>
         /// <param name="deltaSecond"> delta time</param>
-        internal static void Update(GLFWWindow window, float deltaSecond)
+        internal static void Update(GameWindow window, double deltaSecond)
         {
             Controller.Update(window, deltaSecond);
         }
         /// <summary>
         /// Render Imgui
         /// </summary>
-        internal static void FinalRender()
+        internal static void Render()
         {
             Controller.Render();
         }

@@ -1,4 +1,4 @@
-﻿using VBF;
+﻿using VoxelPrototype.VBF;
 namespace VoxelPrototype.common.Game.World
 {
     public class WorldInfo : IVBFSerializableBinary<WorldInfo>

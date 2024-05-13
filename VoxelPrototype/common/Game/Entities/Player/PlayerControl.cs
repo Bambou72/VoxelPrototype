@@ -16,7 +16,7 @@ namespace VoxelPrototype.common.Game.Entities.Player
         internal Vector3 Right = Vector3.Zero;
         internal Vector3 Rotation = Vector3.Zero;
         internal ulong ClientTick;
-        internal float Dt;
+        internal double Dt;
         public PlayerControlsServer() { }
     }
 }

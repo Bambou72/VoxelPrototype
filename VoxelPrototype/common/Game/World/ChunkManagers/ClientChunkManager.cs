@@ -18,6 +18,11 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         internal Dictionary<Vector2i, Chunk> Clist = new();
         internal Dictionary<Vector3i, int> Breaking = new();
+        internal void Dispose()
+        {
+            Clist.Clear();
+            Breaking.Clear();
+        }
 
         internal void Update()
         {

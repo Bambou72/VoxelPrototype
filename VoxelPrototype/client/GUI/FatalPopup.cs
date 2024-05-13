@@ -14,9 +14,7 @@ namespace VoxelPrototype.client.GUI
                 ImGui.Text("Error message");
                 ImGui.TextWrapped(ex.Message);
                 ImGui.Text("Error source");
-#pragma warning disable CS8602 // Déréférencement d'une éventuelle référence null.
                 ImGui.TextWrapped(ex.TargetSite.ToString());
-#pragma warning restore CS8602 // Déréférencement d'une éventuelle référence null.
                 if (ImGui.Button("OK"))
                 {
                     ImGui.CloseCurrentPopup();

@@ -3,7 +3,6 @@ using VoxelPrototype.API.Blocks;
 using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.client;
 using VoxelPrototype.common.Physics;
-using VoxelPrototype.common.RessourceManager.data;
 namespace VoxelPrototype.common.Game.Entities
 {
     public class PhysicEntity : Entity
@@ -16,11 +15,11 @@ namespace VoxelPrototype.common.Game.Entities
         internal float JumpHeight = 1.25f;
         internal bool Grounded;
         internal BlockState GroundedBlock;
-        internal Vector3 Velocity;
-        internal Vector3 Acceleration;
+        internal Vector3d Velocity;
+        internal Vector3d Acceleration;
         public bool Fly;
 
-        internal Vector3 Friction
+        internal Vector3d Friction
         {
             get
             {
@@ -64,14 +63,14 @@ namespace VoxelPrototype.common.Game.Entities
             {
                 height = JumpHeight;
             }
-            Velocity.Y = (float)Math.Sqrt(-2 * PhysicConst.Gravity.Y * height);
+            Velocity.Y = Math.Sqrt(-2 * PhysicConst.Gravity.Y * height);
         }
-        internal void CollisionTerrain(float DT)
+        internal void CollisionTerrain(double DT)
         {
             Grounded = false;
             for (int _ = 0; _ < 3; _++)
             {
-                Vector3 AVel = Velocity * DT;
+                Vector3d AVel = Velocity * DT;
                 double vx = AVel.X;
                 double vy = AVel.Y;
                 double vz = AVel.Z;
@@ -96,7 +95,7 @@ namespace VoxelPrototype.common.Game.Entities
                             var State = Client.TheClient.World.GetBlock(i, j, k);
                             if (State != BlockRegister.Air)
                             {
-                                foreach (Collider collider in ClientRessourcePackManager.GetRessourcePackManager().GetBlockCollider(State.Block.Collider))
+                                foreach (Collider collider in State.Block.GetColliders())
                                 {
                                     (double? entry_time, Vector3d normal) = Coll.Collide(collider.Move(new Vector3i(i, j, k)), AVel);
                                     if (entry_time == null)
@@ -136,7 +135,7 @@ namespace VoxelPrototype.common.Game.Entities
                 }
             }
             Position += Velocity * DT;
-            Vector3 gravity;
+            Vector3d gravity;
             if (Fly)
             {
                 gravity = PhysicConst.Zero;
@@ -148,12 +147,12 @@ namespace VoxelPrototype.common.Game.Entities
             Velocity += gravity * DT;
             Velocity -= MinAbs(Velocity * Friction * DT, Velocity);
         }
-        internal void CollisionTerrainServer(float DT)
+        internal void CollisionTerrainServer(double DT)
         {
             Grounded = false;
             for (int _ = 0; _ < 3; _++)
             {
-                Vector3 AVel = Velocity * DT;
+                Vector3d AVel = Velocity * DT;
                 double vx = AVel.X;
                 double vy = AVel.Y;
                 double vz = AVel.Z;
@@ -178,7 +177,7 @@ namespace VoxelPrototype.common.Game.Entities
                             var State = server.Server.TheServer.World.GetBlock(i, j, k);
                             if (State != BlockRegister.Air)
                             {
-                                foreach (Collider collider in server.Server.TheServer.RessourcePackManager.GetBlockCollider(BlockRegister.Blocks[State.Block.ID].Collider))
+                                foreach (Collider collider in BlockRegister.Blocks[State.Block.ID].GetColliders())
                                 {
                                     (double? entry_time, Vector3d normal) = Coll.Collide(collider.Move(new Vector3i(i, j, k)), AVel);
                                     if (entry_time == null)
@@ -208,9 +207,7 @@ namespace VoxelPrototype.common.Game.Entities
                     if (normal.Z != 0)
                     {
                         Velocity.Z = 0;
-#pragma warning disable CS8629 // Le type valeur Nullable peut avoir une valeur null.
                         Position.Z += (double)(vz * entry_time);
-#pragma warning restore CS8629 // Le type valeur Nullable peut avoir une valeur null.
                     }
                     if (normal.Y == 1)
                     {
@@ -220,7 +217,7 @@ namespace VoxelPrototype.common.Game.Entities
                 }
             }
             Position += Velocity * DT;
-            Vector3 gravity;
+            Vector3d gravity;
             if (Fly)
             {
                 gravity = PhysicConst.Zero;
@@ -232,22 +229,22 @@ namespace VoxelPrototype.common.Game.Entities
             Velocity += gravity * DT;
             Velocity -= MinAbs(Velocity * Friction * DT, Velocity);
         }
-        public override void UpdateClient(float DT)
+        public override void UpdateClient(double DT)
         {
             base.UpdateClient(DT);
             Velocity += Acceleration * DT * Friction;
             Acceleration = new Vector3(0);
             UpdateCollider();
         }
-        public override void UpdateServer(float DT)
+        public override void UpdateServer(double DT)
         {
             Velocity += Acceleration * DT * Friction;
             Acceleration = new Vector3(0);
             UpdateCollider();
         }
-        internal static Vector3 MinAbs(Vector3 a, Vector3 b)
+        internal static Vector3d MinAbs(Vector3d a, Vector3d b)
         {
-            return new Vector3(
+            return new Vector3d(
                 Math.Abs(a.X) < Math.Abs(b.X) ? a.X : b.X,
                 Math.Abs(a.Y) < Math.Abs(b.Y) ? a.Y : b.Y,
                 Math.Abs(a.Z) < Math.Abs(b.Z) ? a.Z : b.Z

@@ -55,6 +55,7 @@ namespace VoxelPrototype.client.GUI
             {
                 Client.TheClient.World.GetLocalPlayerCamera().Fov = Fov;
             }
+            /*
             ImGui.Checkbox("Frustum FOV follow camera's fov", ref FollowCameraFov);
             if (FollowCameraFov)
             {
@@ -62,7 +63,7 @@ namespace VoxelPrototype.client.GUI
             }else
             {
                 ImGui.DragFloat("Frustum FOV", ref FrustumFov,0.5f, 1, 110);
-            }
+            }*/
         }
         private static void VoxelOption()
         {

@@ -38,6 +38,12 @@ namespace VoxelPrototype.client.GUI
                 Option = true;
                 ModelEditor = false;
             }
+            ImGui.Dummy(new Vector2(0, 10));
+
+            if (ImGui.Button("Quit", new Vector2(ImGui.GetIO().DisplaySize.X / 6 - 20, 60)))
+            {
+                Client.TheClient.Close();
+            }
             ImGui.End();
         }
     }

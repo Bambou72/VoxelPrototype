@@ -3,155 +3,124 @@
  * Copyrights Florian Pfeiffer
  * Author Florian Pfeiffer
  **/
+using Crecerelle;
 using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using System.Diagnostics;
+using OpenTK.Windowing.Desktop;
 using VoxelPrototype.API;
 using VoxelPrototype.API.Blocks;
 using VoxelPrototype.client.Debug;
 using VoxelPrototype.client.GUI;
 using VoxelPrototype.client.Render;
 using VoxelPrototype.client.Render.Debug;
-using VoxelPrototype.common.Debug;
+using VoxelPrototype.client.Render.UI;
+using VoxelPrototype.client.Resources;
+using VoxelPrototype.client.UI;
+using VoxelPrototype.client.Utils;
 using VoxelPrototype.common.Game.World;
 using VoxelPrototype.common.Network.client;
-using VoxelPrototype.common.Utils;
 using VoxelPrototype.server;
 namespace VoxelPrototype.client
 {
-    public class Client: IRunnable
+    public class Client : GameWindow
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        const float UpdateTime = 1f / 60f;
-        Stopwatch Garbage = new();
-        private readonly Stopwatch _watchUpdate = new Stopwatch();
-        private int _slowUpdates = 0;
-        protected bool IsRunningSlowly { get; private set; }
-        internal GLFWWindow Window;
         public ClientWorld World;
         public static Client TheClient;
         internal EmbeddedServer EmbedderServer;
-        public Client()
+        internal Config ClientConfig;
+        internal ResourcePackManager ResourcePackManager;
+        internal UIManager UIManager;
+        internal UIMaster UIMaster;
+        internal Renderer Renderer;
+        public Client(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
-            if(TheClient == null)
+            if (TheClient == null)
             {
                 TheClient = this;
-
             }
+            ClientConfig = new();
         }
-        internal double deltaTime;
-        internal double accumulator;
-        public void Run()
+        protected override void OnLoad()
         {
-            Window = new("Voxel Prototype", 900, 800);
-            Window.RegisterResizeCallback(OnResize);
-            Window.RegisterTextInputCallback(OnTextInput);
-            LoggingSystem.Init();
-            Logger.Info("GLFW timer frequency: " + Window.TimerFrequency +"HZ");
-            GUIVar.Init( Window.GetWindowSize());
+            base.OnLoad();
+            ResourcePackManager = new ResourcePackManager();
+            ResourcePackManager.Initialize();
+            GUIVar.Init(ClientSize);
+            Renderer= new Renderer();
             Renderer.Init();
-            ClientRessourcePackManager.RessourcePackManager.Initialize();
-            ModManager.LoadMods();
             BlockRegister.Initialize();
+            ModManager.LoadMods();
+            
             ModManager.Init();
             GUIVar.Load();
             Load();
-            Garbage.Start();
-            GL.ClearColor(0.39f, 0.58f, 0.92f, 1.0f);
+            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             World = new ClientWorld();
-            _watchUpdate.Start();
-            double currentFrame = GLFW.GetTime();
-            double lastFrame = currentFrame;
-
-            while (!Window.ShouldClose())
-            {
-                Window.NewInputFrame();
-                Window.ProcessWindowEvents();
-                currentFrame = GLFW.GetTime();
-                deltaTime = currentFrame - lastFrame;
-                lastFrame = currentFrame;
-                accumulator += deltaTime;
-                //
-                GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
-
-                //Update
-                //
-                InputSystem.Update(Window.GetKeyboardState(), Window.GetMouseState());
-                //InputSystem.Update(new(), new());
-                ClientNetwork.Update();
-                if (World.Initialized)
-                {
-                    World.Tick();
-                }
-
-                if (Garbage.ElapsedMilliseconds >= 4000)
-                {
-                    GC.Collect();
-                    Garbage.Restart();
-                }
-
-
-                //Render
-                //
-                //World
-                if (World.Initialized)
-                {
-                    World.UpdateRender();
-                    World.Render();
-                    if (World.IsLocalPlayerExist())
-                    {
-                        //Player.Draw(Subsystems.RessourceManager.RessourceManager.GetShader("Nentity"), PlayerAnimator);
-                    }
-                    if (World.IsLocalPlayerExist())
-                    {
-                        DebugShapeRenderer.Render(World.GetLocalPlayerCamera().GetViewMatrix(), World.GetLocalPlayerCamera().GetProjectionMatrix());
-                    }
-                }
-                //
-                //Debug
-                //
-                //
-                //Debug UI
-                //
-                GUIVar.Update(Window, (float)deltaTime);
-                //ImGui.ShowDemoWindow();
-                GUIVar.Render();
-                GUIVar.FinalRender();
-                ImGuiController.CheckGLError("End of frame");
-                //Window
-                Window.SwapBuffer();
-            }
-            
-            GUIVar.DeLoad();
-
-            Window.Destroy();
+            OnResize(new());
+            UIManager = new(new UIRenderer());
+            UIMaster = new();
         }
-        public static void AccurateSleep(double seconds, int expectedSchedulerPeriod)
+        protected override void OnUpdateFrame(FrameEventArgs args)
         {
-            // FIXME: Make this a parameter?
-            const double TOLERANCE = 0.02;
-
-            long t0 = Stopwatch.GetTimestamp();
-            long target = t0 + (long)(seconds * Stopwatch.Frequency);
-
-            double ms = (seconds * 1000) - (expectedSchedulerPeriod * TOLERANCE);
-            int ticks = (int)(ms / expectedSchedulerPeriod);
-            if (ticks > 0)
+            InputSystem.Update(KeyboardState, MouseState, args.Time);
+            GUIVar.Update(this, args.Time);
+            
+            ClientNetwork.Update();
+            UIManager.Update(ClientSize,(Vector2i)MouseState.Position);
+            if (World.Initialized)
             {
-                Thread.Sleep(ticks * expectedSchedulerPeriod);
+                World.Tick();
             }
+        }
 
-            while (Stopwatch.GetTimestamp() < target)
+        protected override void OnRenderFrame(FrameEventArgs args)
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
+            //Render
+            //
+            //World
+            if (World.Initialized)
             {
-                Thread.Yield();
+                World.UpdateRender();
+                World.Render();
+                if (World.IsLocalPlayerExist())
+                {
+                    //Player.Draw(Subsystems.RessourceManager.RessourceManager.GetShader("Nentity"), PlayerAnimator);
+                }
+                if (World.IsLocalPlayerExist())
+                {
+                    DebugShapeRenderer.Render(World.GetLocalPlayerCamera().GetViewMatrix(), World.GetLocalPlayerCamera().GetProjectionMatrix());
+                }
             }
+            //
+            //Debug
+            //
+            //
+            //Debug UI
+            //
+            //ImGui.ShowDemoWindow();
+            UIManager.Render();
+
+            GUIVar.RenderI();
+            GUIVar.Render();
+            ImGuiController.CheckGLError("End of frame");
+            //Window
+            //button.Draw();
+            SwapBuffers();
+
+        }
+        protected override void OnUnload()
+        {
+            base.OnUnload();
+            GUIVar.DeLoad();
+            ClientConfig.SaveProperties();
         }
         internal List<string> Worlds = new();
-        internal  List<WorldInfo> WorldsInfo = new();
-        public  void Load()
+        internal List<WorldInfo> WorldsInfo = new();
+        public void Load()
         {
             string[] WorldFolders = Directory.GetDirectories("worlds");
             foreach (string world in WorldFolders)
@@ -180,18 +149,21 @@ namespace VoxelPrototype.client
         {
             World.Dispose();
         }
-        void OnResize(int Width , int Height)
+        protected override void OnResize(ResizeEventArgs e)
         {
-            GL.Viewport(0, 0, Width, Height);
+            base.OnResize(e);
+            GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
             if (World.IsLocalPlayerExist())
             {
-                World.GetLocalPlayerCamera().AspectRatio = Window.GetWindowSize().X / (float)Window.GetWindowSize().Y;
+                World.GetLocalPlayerCamera().AspectRatio = ClientSize.X / (float)ClientSize.Y;
             }
-            GUIVar.Resize(Window.GetWindowSize());
+            GUIVar.Resize(ClientSize);
         }
-        void OnTextInput(string text)
+        protected override void OnTextInput(TextInputEventArgs e)
         {
-            GUIVar.Char(char.Parse(text));
+            base.OnTextInput(e);
+            GUIVar.Char((char)(e.Unicode));
+
         }
     }
 }

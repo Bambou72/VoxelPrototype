@@ -1,8 +1,7 @@
 ﻿using OpenTK.Mathematics;
 namespace VoxelPrototype.common.Physics
 {
-    [Serializable]
-    public class Collider
+    public struct Collider
     {
         public double x1, y1, z1;
         public double x2, y2, z2;
@@ -26,7 +25,6 @@ namespace VoxelPrototype.common.Physics
         public Vector3d[] GetCorners()
         {
             Vector3d[] corners = new Vector3d[8];
-
             corners[0] = new Vector3d(x1, y1, z1);
             corners[1] = new Vector3d(x2, y1, z1);
             corners[2] = new Vector3d(x1, y2, z1);
@@ -49,7 +47,7 @@ namespace VoxelPrototype.common.Physics
                 return x / y;
             }
         }
-        public (double?, Vector3d) Collide(Collider collider, Vector3 velocity)
+        public (double?, Vector3d) Collide(Collider collider, Vector3d velocity)
         {
             double vx = velocity.X, vy = velocity.Y, vz = velocity.Z;
             double x_entry = Time(vx > 0 ? collider.x1 - x2 : collider.x2 - x1, vx);

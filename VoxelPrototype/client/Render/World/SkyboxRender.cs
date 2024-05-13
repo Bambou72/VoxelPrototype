@@ -9,12 +9,12 @@ namespace VoxelPrototype.client.Render.World
         internal static void RenderSkyBox(Matrix4 View, Matrix4 Projection)
         {
             GL.Disable(EnableCap.DepthTest);
-            var Shader = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@cubemap");
+            var Shader = Client.TheClient.ResourcePackManager.GetShader("Voxel@cubemap");
             Shader.Use();
             Shader.SetMatrix4("projection", Projection);
             Shader.SetMatrix4("view", View);
             GL.BindVertexArray(SkyboxModel.Vao);
-            ClientRessourcePackManager.GetRessourcePackManager().GetCubeMap("Voxel@base").Use(TextureUnit.Texture0);
+            Client.TheClient.ResourcePackManager.GetCubeMap("Voxel@base").Use(TextureUnit.Texture0);
             GL.DrawArrays(PrimitiveType.Triangles, 0, 36);
             GL.BindVertexArray(0);
             GL.Enable(EnableCap.DepthTest);

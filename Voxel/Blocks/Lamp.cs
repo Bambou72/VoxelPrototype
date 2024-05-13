@@ -17,9 +17,9 @@ namespace Voxel.Blocks
             base.RegisterProperties(Builder);
             Builder.Register(Lit);
         }
-        public override void OnInteract(Vector3i Pos, BlockState State)
+        public override void OnInteract(Vector3i Pos, BlockState State,bool ServerSide)
         {
-            base.OnInteract(Pos, State);
+            base.OnInteract(Pos, State,ServerSide);
             if(State.Get(new BooleanProperty("Lit")) ==  true)
             {
                 Client.TheClient.World.ChunkManager.ChangeChunk(Pos,State.With(new BooleanProperty("Lit"),false));

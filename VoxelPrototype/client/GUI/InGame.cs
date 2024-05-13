@@ -3,7 +3,6 @@ using OpenTK.Windowing.Common;
 using System.Numerics;
 using VoxelPrototype.API;
 using VoxelPrototype.common.Network.client;
-using VoxelPrototype.server;
 namespace VoxelPrototype.client.GUI
 {
     internal static class InGameGUI
@@ -31,8 +30,9 @@ namespace VoxelPrototype.client.GUI
             ImGui.Dummy(new Vector2(0, 10));
             if (ImGui.Button("Quit", new Vector2(ImGui.GetIO().DisplaySize.X / 6 - 20, 60)))
             {
+                Client.TheClient.DeInitWorld();
                 ClientNetwork.Deconnect();
-                Client.TheClient.EmbedderServer.Stop();
+                Client.TheClient.EmbedderServer.Stop();              
                 GUIVar.MainMenu = true;
                 GUIVar.IngameMenu = false;
                 Option = true;

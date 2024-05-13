@@ -1,4 +1,4 @@
-﻿using NLog;
+﻿ using NLog;
 using NLog.Conditions;
 using NLog.Layouts;
 using NLog.Targets;
@@ -20,13 +20,13 @@ namespace VoxelPrototype.common.Debug
                 ConcurrentWrites = true,
                 KeepFileOpen = false,
             };
-            logfile.Layout = new SimpleLayout("${longdate}|${level:uppercase=true}|${message}${exception}");
+            logfile.Layout = new SimpleLayout("${longdate}|${level:uppercase=true}|${callsite:className=true:includeSourcePath=false:methodName=false:includeNamespace=false}|${message}${exception}");
             config.AddTarget(logfile);
             var logconsole = new ColoredConsoleTarget("logconsole");
             //Info
             var InfohighlightRule = new ConsoleRowHighlightingRule();
             InfohighlightRule.Condition = ConditionParser.ParseExpression("level == LogLevel.Info");
-            InfohighlightRule.ForegroundColor = ConsoleOutputColor.Blue;
+            InfohighlightRule.ForegroundColor = ConsoleOutputColor.White;
             logconsole.RowHighlightingRules.Add(InfohighlightRule);
             //Warn
             var WarnhighlightRule = new ConsoleRowHighlightingRule();
@@ -44,7 +44,8 @@ namespace VoxelPrototype.common.Debug
             FatalhighlightRule.ForegroundColor = ConsoleOutputColor.Magenta;
             logconsole.RowHighlightingRules.Add(FatalhighlightRule);
             //
-            logconsole.Layout = new SimpleLayout("${longdate}|${level:uppercase=true}|${message}${exception}");
+            logconsole.Layout = new SimpleLayout("${level:uppercase=true}|${callsite:className=true:includeSourcePath=false:methodName=false:includeNamespace=false}|${message}${exception}");
+            
             config.AddRule(LogLevel.Debug, LogLevel.Fatal, logconsole);
             // Rules for mapping loggers to targets            
             config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);

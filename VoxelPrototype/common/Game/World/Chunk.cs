@@ -4,10 +4,10 @@
  * Author Florian Pfeiffer
  */
 using OpenTK.Mathematics;
-using VBF;
 using VoxelPrototype.API.Blocks;
 using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.server;
+using VoxelPrototype.VBF;
 namespace VoxelPrototype.common.Game.World
 {
     public class Chunk : IVBFSerializableBinary<Chunk>

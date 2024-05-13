@@ -5,14 +5,14 @@ using System.Diagnostics;
 using VoxelPrototype.common.Game.World;
 using VoxelPrototype.common.Game;
 using VoxelPrototype.common.Network.server;
-using VoxelPrototype.common.RessourceManager;
+using VoxelPrototype.client.Resources;
 
 namespace VoxelPrototypeServer
 {
     internal class StandaloneServer
     {
         internal WorldSettings InitialSettings;
-        internal RessourcePackManager RessourcePackManager;
+        internal ResourcePackManager RessourcePackManager;
         internal static string Title = @"
          __      __           _ _____           _        _                       _____                          
          \ \    / /          | |  __ \         | |      | |                     / ____|                         

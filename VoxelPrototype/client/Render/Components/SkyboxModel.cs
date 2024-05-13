@@ -13,7 +13,7 @@ namespace VoxelPrototype.client.Render.Components
             GL.BindBuffer(BufferTarget.ArrayBuffer, Vbo);
             GL.BufferData(BufferTarget.ArrayBuffer, Vertices.Length * sizeof(float), Vertices, BufferUsageHint.StaticDraw);
             GL.BindVertexArray(Vao);
-            var vertexLocation = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@cubemap").GetAttribLocation("aPos");
+            var vertexLocation = Client.TheClient.ResourcePackManager.GetShader("Voxel@cubemap").GetAttribLocation("aPos");
             GL.EnableVertexAttribArray(vertexLocation);
             GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
         }

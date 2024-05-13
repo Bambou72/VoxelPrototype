@@ -9,7 +9,7 @@ namespace VoxelPrototype.common.Game.Entities.Player
     public class InputState
     {
         internal PlayerControls controls;
-        public float dt;
+        public double dt;
         public ulong currentTick;
     }
 }

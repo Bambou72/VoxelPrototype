@@ -1,10 +1,9 @@
 ﻿using NLog;
 using OpenTK.Mathematics;
-using System.Runtime.Serialization.Formatters.Binary;
-using VBF;
 using VoxelPrototype.API.Blocks;
 using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.common.Utils;
+using VoxelPrototype.VBF;
 namespace VoxelPrototype.common.Game.World.Storage.Palette
 {
     internal class BlockPalette : IVBFSerializable<BlockPalette>

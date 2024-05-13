@@ -25,6 +25,7 @@ namespace VoxelPrototype.common.Game.World
         public override void Dispose()
         {
             Initialized = false;
+            ChunkManager.Dispose();
             WorldRenderer.Dispose();
             PlayerFactory.Dispose();
         }

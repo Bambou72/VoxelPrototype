@@ -1,5 +1,6 @@
 ﻿using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using System.Runtime.CompilerServices;
 using VoxelPrototype.API;
 using VoxelPrototype.client.GUI;
 namespace VoxelPrototype.client
@@ -10,6 +11,7 @@ namespace VoxelPrototype.client
         public static MouseState Mouse;
         public static bool Grab = false;
         public static bool NoInput = false;
+        public static double DT;
         internal static bool GetGrab()
         {
             return Grab;
@@ -21,8 +23,9 @@ namespace VoxelPrototype.client
         //
         //Warning remove same class instance resetification
         //
-        internal static void Update(KeyboardState K, MouseState M)
+        internal static void Update(KeyboardState K, MouseState M, double Dt)
         {
+            DT = Dt;
             Keyboard = K;
             Mouse = M;
             if (Keyboard.IsKeyPressed(Keys.Escape) && !GUIVar.ConsoleMenu && Client.TheClient.World.Initialized)

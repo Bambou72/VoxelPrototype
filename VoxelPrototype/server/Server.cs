@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using VoxelPrototype.common.Game.World;
-using VoxelPrototype.common.RessourceManager;
+﻿using VoxelPrototype.common.Game.World;
 using VoxelPrototype.common.Utils;
 
 namespace VoxelPrototype.server
@@ -12,14 +10,12 @@ namespace VoxelPrototype.server
         internal int ServerPort = 23482;
         //Set if the server is running
         internal volatile bool Running =false;
-        //Ressources
-        internal RessourcePackManager RessourcePackManager;
         //
         internal ServerWorld World;
 
         public static Server TheServer;
-        internal Stopwatch Stopwatch = new Stopwatch();
-        internal int TickCounter = 0;
+        internal const int TICKS_PER_SECOND = 20;
+        internal Timer ServerTimer;
 
         public Server()
         {

@@ -29,10 +29,10 @@ namespace VoxelPrototype.client.Render.World
         internal void Render()
         {
             RenderedChunksCount = 0;
-            var Shader = ClientRessourcePackManager.GetRessourcePackManager().GetShader("Voxel@chunk");
+            var Shader = Client.TheClient.ResourcePackManager.GetShader("Voxel@chunk");
             Shader.SetMatrix4("view", Client.TheClient.World.GetLocalPlayerCamera().GetViewMatrix());
             Shader.SetMatrix4("projection", Client.TheClient.World.GetLocalPlayerCamera().GetProjectionMatrix());
-            ClientRessourcePackManager.GetRessourcePackManager().GetAtlas().Use(TextureUnit.Texture0);
+            Client.TheClient.ResourcePackManager.GetAtlas().Use(TextureUnit.Texture0);
             int minx = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Chunk.Size) - Client.TheClient.World.RenderDistance;
             int minz = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Chunk.Size) - Client.TheClient.World.RenderDistance;
             int maxx = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Chunk.Size) + Client.TheClient.World.RenderDistance;

@@ -1,7 +1,10 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenTK.Graphics.ES20;
+using OpenTK.Mathematics;
+using System.Net.Sockets;
 using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.client;
-using VoxelPrototype.common.RessourceManager.data;
+using VoxelPrototype.client.Resources.data;
+using VoxelPrototype.common.Physics;
 namespace VoxelPrototype.API.Blocks
 {
     public class Block
@@ -12,7 +15,6 @@ namespace VoxelPrototype.API.Blocks
         private BlockState Default;
         internal string ID;
         public string Model;
-        public string Collider;
         public string Data;
         public float Friction = 8;
         public int BreakingTime = 20;
@@ -28,10 +30,7 @@ namespace VoxelPrototype.API.Blocks
         public virtual void RegisterProperties(BlockStateBuilder Builder)
         {
         }
-        public virtual void OnInteract(Vector3i Pos, BlockState State)
-        {
-
-        }
+        
         public BlockState GetDefaultState()
         {
             return Default;
@@ -40,7 +39,7 @@ namespace VoxelPrototype.API.Blocks
         {
             try
             {
-                var modelData = ClientRessourcePackManager.GetRessourcePackManager().GetBlockMesh(Model);
+                var modelData = Client.TheClient.ResourcePackManager.GetBlockMesh(Model);
                 return modelData.GetMesh()[Face];
 
             }
@@ -55,7 +54,7 @@ namespace VoxelPrototype.API.Blocks
         {
             try
             {
-                var modelData = ClientRessourcePackManager.GetRessourcePackManager().GetBlockMesh(Model);
+                var modelData = Client.TheClient.ResourcePackManager.GetBlockMesh(Model);
                 return modelData.GetUV()[Face];
             }
             catch (Exception e)
@@ -68,7 +67,7 @@ namespace VoxelPrototype.API.Blocks
         {
             try
             {
-                BlockStateData StateData = ClientRessourcePackManager.GetRessourcePackManager().GetBlockStateData(this.Data);
+                BlockStateData StateData = Client.TheClient.ResourcePackManager.GetBlockStateData(this.Data);
                 BlockData Data;
                 if (StateHolder.GetStates().Count == 1)
                 {
@@ -87,19 +86,36 @@ namespace VoxelPrototype.API.Blocks
                 }
                 if (Data.textures.all != null)
                 {
-                    return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord(Data.textures.all);
+                    return Client.TheClient.ResourcePackManager.GetAtlasTexturesCoord(Data.textures.all);
                 }
                 else
                 {
-                    return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord(Data.textures.textures[Face]);
+                    return Client.TheClient.ResourcePackManager.GetAtlasTexturesCoord(Data.textures.textures[Face]);
                 }
             }
             catch (Exception e)
             {
                 Logger.Error(e);
-                return ClientRessourcePackManager.GetRessourcePackManager().GetAtlasTexturesCoord("unknow");
+                return Client.TheClient.ResourcePackManager.GetAtlasTexturesCoord("unknow");
             }
         }
+        public virtual Collider[] GetColliders()
+        {
+            return new Collider[] { new Collider(Vector3d.Zero,Vector3d.One)};
+        }
+        public virtual void OnInteract(Vector3i BlockPosition, BlockState State,bool ServerSide)
+        {
+
+        }
+        public virtual void OnPlaced(Vector3i BlockPosition,BlockState State,bool ServerSide) 
+        {
+
+        }
+        public virtual void OnBreaked(Vector3i BlockPosition, BlockState State, bool ServerSide)
+        {
+
+        }
+
     }
     public enum BlockRenderType
     {

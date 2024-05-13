@@ -159,7 +159,7 @@ void main()
         /// <summary>
         /// Updates ImGui InputSystem and IO configuration state.
         /// </summary>
-        public void Update(GLFWWindow wnd, float deltaSeconds)
+        public void Update(GameWindow wnd, double deltaSeconds)
         {
             if (_frameBegun)
             {
@@ -174,14 +174,14 @@ void main()
         /// Sets per-frame data based on the associated window.
         /// This is called by Update(float).
         /// </summary>
-        private void SetPerFrameImGuiData(float deltaSeconds)
+        private void SetPerFrameImGuiData(double deltaSeconds)
         {
             ImGuiIOPtr io = ImGui.GetIO();
             io.DisplaySize = new System.Numerics.Vector2(
                 _windowWidth / _scaleFactor.X,
                 _windowHeight / _scaleFactor.Y);
             io.DisplayFramebufferScale = new System.Numerics.Vector2(_scaleFactor.X, _scaleFactor.Y);
-            io.DeltaTime = deltaSeconds; // DeltaTime is in seconds.
+            io.DeltaTime = (float)deltaSeconds; // DeltaTime is in seconds.
         }
         readonly List<char> PressedChars = new List<char>();
         private ImGuiKey TryMapKey(Keys key)
@@ -231,11 +231,11 @@ void main()
             }
             return result;
         }
-        private void UpdateImGuiInputSystem(GLFWWindow wnd)
+        private void UpdateImGuiInputSystem(GameWindow wnd)
         {
             ImGuiIOPtr io = ImGui.GetIO();
-            MouseState MouseState = wnd.GetMouseState();
-            KeyboardState KeyboardState = wnd.GetKeyboardState();
+            MouseState MouseState = wnd.MouseState;
+            KeyboardState KeyboardState = wnd.KeyboardState;
             io.MouseDown[0] = MouseState[MouseButton.Left];
             io.MouseDown[1] = MouseState[MouseButton.Right];
             io.MouseDown[2] = MouseState[MouseButton.Middle];
@@ -347,7 +347,7 @@ void main()
                     int newSize = (int)Math.Max(_vertexBufferSize * 1.5f, vertexSize);
                     GL.BufferData(BufferTarget.ArrayBuffer, newSize, nint.Zero, BufferUsageHint.DynamicDraw);
                     _vertexBufferSize = newSize;
-                    Console.WriteLine($"Resized dear imgui vertex buffer to new size {_vertexBufferSize}");
+                    //Console.WriteLine($"Resized dear imgui vertex buffer to new size {_vertexBufferSize}");
                 }
                 int indexSize = cmd_list.IdxBuffer.Size * sizeof(ushort);
                 if (indexSize > _indexBufferSize)
@@ -355,7 +355,7 @@ void main()
                     int newSize = (int)Math.Max(_indexBufferSize * 1.5f, indexSize);
                     GL.BufferData(BufferTarget.ElementArrayBuffer, newSize, nint.Zero, BufferUsageHint.DynamicDraw);
                     _indexBufferSize = newSize;
-                    Console.WriteLine($"Resized dear imgui index buffer to new size {_indexBufferSize}");
+                    //Console.WriteLine($"Resized dear imgui index buffer to new size {_indexBufferSize}");
                 }
             }
             // Setup orthographic projection matrix into our constant buffer

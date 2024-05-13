@@ -1,10 +1,7 @@
 ﻿namespace VoxelPrototype.API.Blocks.Properties
 {
-    public interface EnumProperty 
-    {
 
-    }
-    public class EnumProperty<T> : Property<T> where T : struct,Enum  , EnumProperty
+    public class EnumProperty<T> : Property<T> where T : struct,Enum 
     {
         public EnumProperty(string name) : base(name)
         {
@@ -15,6 +12,7 @@
         }
         public override T DefaultValue()
         {
+
             return default;
         }
         public override T GetValueFromString(string name)

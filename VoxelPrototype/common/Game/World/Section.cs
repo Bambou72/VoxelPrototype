@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
-using VBF;
 using VoxelPrototype.API.Blocks.State;
 using VoxelPrototype.common.Game.World.Storage.Palette;
+using VoxelPrototype.VBF;
 namespace VoxelPrototype.common.Game.World
 {
     public class Section : IVBFSerializable<Section>

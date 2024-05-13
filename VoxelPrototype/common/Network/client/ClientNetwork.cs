@@ -7,7 +7,6 @@ using LiteNetLib;
 using LiteNetLib.Utils;
 using VoxelPrototype.client;
 using VoxelPrototype.client.GUI;
-using VoxelPrototype.common.Chat;
 using VoxelPrototype.common.Network.packets;
 namespace VoxelPrototype.common.Network.client
 {
@@ -82,12 +81,6 @@ namespace VoxelPrototype.common.Network.client
             client.Start();
             Initialized = true;
         }
-        /// <summary>
-        /// Send a packet to the server
-        /// </summary>
-        /// <typeparam name="T">A struct who implement INetSerialize</typeparam>
-        /// <param name="packet">The packet variable</param>
-        /// <param name="deliveryMethod">DeliveryMethod</param>
         public static void SendPacket<T>(T packet, DeliveryMethod deliveryMethod) where T : INetSerializable
         {
             if (Server != null)
@@ -110,8 +103,6 @@ namespace VoxelPrototype.common.Network.client
         internal static void Deconnect()
         {
             client.Stop();
-            Client.TheClient.DeInitWorld();
-            GUIVar.MainMenu = true;
             Initialized = false;
         }
         internal static void Update()

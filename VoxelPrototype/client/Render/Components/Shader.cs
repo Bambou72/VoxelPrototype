@@ -211,6 +211,10 @@ namespace VoxelPrototype.client.Render.Components
         {
             GL.UseProgram(Handle);
         }
+        public void Delete()
+        { 
+            GL.DeleteProgram(Handle);
+        }
         // The shader sources provided with this project use hardcoded layout(location)-s. If you want to do it dynamically,
         // you can omit the layout(location=X) lines in the vertex shader, and use this in VertexAttribPointer instead of the hardcoded values.
         public int GetAttribLocation(string attribName)

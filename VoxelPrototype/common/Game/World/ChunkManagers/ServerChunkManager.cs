@@ -32,11 +32,13 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
                 }
                 LoadedChunks.Remove(chunk.Position);
             }
+            LoadedChunks.Clear();
             foreach (RegionFile region in TempRegions.Values)
             {
                 region.Close();
             }
             TempRegions.Clear();
+            ChunkToBeSend.Clear();
         }
         internal void SaveChunk(Chunk Chunk)
         {
@@ -63,17 +65,17 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
         internal Chunk LoadChunk(int X, int Z)
         {
             int RegionX = X >> 5;
-            int RehionZ = Z >> 5;
+            int RegionZ = Z >> 5;
             RegionFile Region;
-            if (TempRegions.ContainsKey(new Vector2i(RegionX, RehionZ)))
+            if (TempRegions.ContainsKey(new Vector2i(RegionX, RegionZ)))
             {
-                Region = TempRegions[new Vector2i(RegionX, RehionZ)];
+                Region = TempRegions[new Vector2i(RegionX, RegionZ)];
             }
             else
             {
-                string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
+                string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RegionZ + ".vpr";
                 Region = new(path);
-                TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
+                TempRegions.Add(new Vector2i(RegionX, RegionZ), Region);
             }
             int LocalChunkX = Math.Abs(X % RegionFile.Size);
             int LocalChunkZ = Math.Abs(Z % RegionFile.Size);
@@ -191,6 +193,7 @@ namespace VoxelPrototype.common.Game.World.ChunkManagers
             else
             {
                 Chunk CH = CreateChunk(chunkPos);
+                CH.PlayerInChunk.Add(play.ClientID);
                 ChunkData chunkData = new ChunkData();
                 chunkData.importance = (int)Vector2.Distance(RelatPos.Xz, chunkPos);
                 chunkData.Pos = chunkPos;

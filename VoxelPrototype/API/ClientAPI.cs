@@ -9,33 +9,33 @@ namespace VoxelPrototype.API
         {
             if (fullscreen)
             {
-                Client.TheClient.Window.WindowState = WindowState.Fullscreen;
+               Client.TheClient.WindowState = WindowState.Fullscreen;
             }
             else
             {
-                Client.TheClient.Window.WindowState = WindowState.Normal;
+                Client.TheClient.WindowState = WindowState.Normal;
             }
         }
         public static void SetCursorState(CursorState state)
         {
-            Client.TheClient.Window.CursorState = state;
+            Client.TheClient.CursorState = state;
         }
         public static Vector2 GetCursorPos()
         {
-            return Client.TheClient.Window.GetMouseState().Position;
+            return Client.TheClient.MouseState.Position;
         }
 
         public static int WindowWidth()
         {
-            return Client.TheClient.Window.GetWindowSize().X;
+            return Client.TheClient.ClientSize.X;
         }
         public static int WindowHeight()
         {
-            return Client.TheClient.Window.GetWindowSize().Y;
+            return Client.TheClient.ClientSize.Y;
         }
         public static float AspectRatio()
         {
-            return Client.TheClient.Window.GetWindowSize().X / Client.TheClient.Window.GetWindowSize().Y;
+            return Client.TheClient.ClientSize.X / Client.TheClient.ClientSize.Y;
         }
     }
 }

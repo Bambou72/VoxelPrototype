@@ -1,8 +1,6 @@
 ﻿using K4os.Compression.LZ4;
-using System;
-using VBF;
 using VoxelPrototype.common.Utils;
-
+using VoxelPrototype.VBF;
 namespace VoxelPrototype.common.Game.World
 {
     public enum CompressionType : byte

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿
+using SharpFont;
 using VoxelPrototype.API;
 using VoxelPrototype.client;
 using VoxelPrototype.common.Game;
@@ -13,9 +14,9 @@ namespace VoxelPrototype.server
         internal string Path;
         public EmbeddedServer(WorldSettings Settings, string Path) : base()
         {
-            //Ressources
-            RessourcePackManager = ClientRessourcePackManager.RessourcePackManager;
+            //Resources
             InitialSettings = Settings;
+            ServerTimer = new Timer();
             this.Path = Path;
         }
         public override void Run()
@@ -36,6 +37,7 @@ namespace VoxelPrototype.server
         {
             return Running;
         }
+        
         public void ServerLoop(WorldSettings Settings,string Path)
         {
             World = new(Settings, Path);
@@ -43,35 +45,40 @@ namespace VoxelPrototype.server
             Logger.Info("The server has finished initializing, it is now ready at: " + ServerNetwork.server.LocalPort);
             Logger.Info("Server engine version: " + EngineVersion.Version);
             Logger.Info("Server api version: " + APIVersion.Version);
+            ServerTimer.Init();
+            float delta;
+            float accumulator = 0f;
+            float interval = 1f / TICKS_PER_SECOND;
+            float alpha;
             while (Running)
             {
-                if (TickCounter < 20)
+                delta = ServerTimer.GetDelta();
+                accumulator += delta;
+                ServerNetwork.Update();
+                while (accumulator >= interval)
                 {
-                    Stopwatch.Start();
-                    ServerNetwork.Update();
+                    ServerTimer.UpdateUPS();
                     World.Tick();
-                    TickCounter++;
-                    Stopwatch.Stop();
+                    accumulator -= interval;
                 }
-                else
+                ServerTimer.Update();
+                if (ServerTimer.GetTPS() <= 5)
                 {
-                    TickCounter = 0;
+                    Logger.Warn("The server TPS <= 5");
                 }
-                double elapsed = Stopwatch.ElapsedMilliseconds;
-                if (elapsed < 50)
+                else if (ServerTimer.GetTPS() <= 10)
                 {
-
-                    Thread.Sleep(50 - (int)elapsed);
+                    Logger.Warn("The server TPS <= 10");
                 }
-                else
+                else if (ServerTimer.GetTPS() <= 15)
                 {
-                    Logger.Warn("Tick can't run at 20tps, current time for one tick :" + elapsed);
+                    Logger.Warn("The server TPS <= 15");
                 }
-                Stopwatch.Reset();
             }
             World.Dispose();
             ServerNetwork.StopServer();
             TheServer = null;
+            Logger.Info("Server closed");
         }
     }
 }

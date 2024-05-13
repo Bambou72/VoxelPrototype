@@ -46,7 +46,7 @@ namespace VoxelPrototype.common.Physics
                         {
                             if (State != BlockRegister.Air)
                             {
-                                foreach (Collider collider in ClientRessourcePackManager.GetRessourcePackManager().GetBlockCollider(State.Block.Collider))
+                                foreach (Collider collider in State.Block.GetColliders())
                                 {
                                     (double? entry_time, Vector3i normal) = RayVSAABB(collider.Move(new Vector3i(i, j, k)));
                                     if (entry_time == null)

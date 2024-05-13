@@ -2,7 +2,6 @@
 using System.Numerics;
 using VoxelPrototype.API;
 using VoxelPrototype.API.Commands;
-using VoxelPrototype.common.Chat;
 namespace VoxelPrototype.client.GUI
 {
     internal static class Console

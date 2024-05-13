@@ -15,7 +15,7 @@ namespace VoxelPrototype.common.Network.packets
         public Vector3 Front;
         public Vector3 CRight;
         public ulong ClientTick;
-        public float dt;
+        public double dt;
         public void Serialize(NetDataWriter writer)
         {
             writer.Put(Forward);
@@ -43,7 +43,7 @@ namespace VoxelPrototype.common.Network.packets
             Rotation = reader.GetVector3();
             Front = reader.GetVector3();
             CRight = reader.GetVector3();
-            dt = reader.GetFloat();
+            dt = reader.GetDouble();
             ClientTick = reader.GetULong();
         }
     }

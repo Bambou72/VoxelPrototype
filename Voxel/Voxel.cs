@@ -1,9 +1,7 @@
 ﻿using Voxel.Blocks;
-using Voxel.Commands;
 using Voxel.Generators;
 using VoxelPrototype.API;
 using VoxelPrototype.API.Blocks;
-using VoxelPrototype.API.Commands;
 using VoxelPrototype.API.WorldGenerator;
 
 namespace Voxel
@@ -21,7 +19,6 @@ namespace Voxel
             string DirtID = BlockRegister.GetBlockID("Voxel", "Dirt");
             var Dirt = new Block()
             {
-                Collider = "Voxel@block/cube",
                 Model = "Voxel@block/cube",
                 Data = "Voxel@block/dirt"
             };
@@ -29,7 +26,6 @@ namespace Voxel
             string GrassID = BlockRegister.GetBlockID("Voxel", "Grass");
             var Grass = new Block()
             {
-                Collider = "Voxel@block/cube",
                 Model = "Voxel@block/cube",
                 Data = "Voxel@block/grass"
             };
@@ -37,18 +33,11 @@ namespace Voxel
             string LampID = BlockRegister.GetBlockID("Voxel", "Lamp");
             var Lamp = new Lamp()
             {
-                Collider = "Voxel@block/cube",
                 Model = "Voxel@block/cube",
                 Data = "Voxel@block/lamp"
             };
             BlockRegister.RegisterBlock(LampID, Lamp);
-            //
-            //Commands
-            //
-            CommandRegister.RegisterCommand(new Tp());
-            CommandRegister.RegisterCommand(new Fly());
-            CommandRegister.RegisterCommand(new Ghost());
-            CommandRegister.RegisterCommand(new Set());
+
             //
             //World Generators
             //

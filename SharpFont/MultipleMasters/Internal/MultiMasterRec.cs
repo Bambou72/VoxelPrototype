@@ -22,18 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace SharpFont.MultipleMasters.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct MultiMasterRec
-	{
-		internal uint num_axis;
-		internal uint num_designs;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct MultiMasterRec
+    {
+        internal uint num_axis;
+        internal uint num_designs;
 
-		[MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-		internal MMAxisRec[] axis;
-	}
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        internal MMAxisRec[] axis;
+    }
 }

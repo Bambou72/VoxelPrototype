@@ -22,75 +22,73 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.MultipleMasters.Internal;
+using System;
 
 namespace SharpFont.MultipleMasters
 {
-	/// <summary><para>
-	/// A simple structure used to model a named style in a GX var font.
-	/// </para><para>
-	/// This structure can't be used for MM fonts.
-	/// </para></summary>
-	public class VarNamedStyle
-	{
-		#region Fields
+    /// <summary><para>
+    /// A simple structure used to model a named style in a GX var font.
+    /// </para><para>
+    /// This structure can't be used for MM fonts.
+    /// </para></summary>
+    public class VarNamedStyle
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private VarNamedStyleRec rec;
+        private IntPtr reference;
+        private VarNamedStyleRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal VarNamedStyle(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal VarNamedStyle(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the design coordinates for this style. This is an array with one entry for each axis.
-		/// </summary>
-		public IntPtr Coordinates
-		{
-			get
-			{
-				return rec.coords;
-			}
-		}
+        /// <summary>
+        /// Gets the design coordinates for this style. This is an array with one entry for each axis.
+        /// </summary>
+        public IntPtr Coordinates
+        {
+            get
+            {
+                return rec.coords;
+            }
+        }
 
-		/// <summary>
-		/// Gets the entry in ‘name’ table identifying this style.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint StrId
-		{
-			get
-			{
-				return rec.strid;
-			}
-		}
+        /// <summary>
+        /// Gets the entry in ‘name’ table identifying this style.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint StrId
+        {
+            get
+            {
+                return rec.strid;
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<VarNamedStyleRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<VarNamedStyleRec>(reference);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

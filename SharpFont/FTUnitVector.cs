@@ -22,25 +22,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// A simple structure used to store a 2D vector unit vector. Uses <see cref="Fixed2Dot14"/> types.
-	/// </summary>
-	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	public struct FTUnitVector
-	{
-		/// <summary>
-		/// Horizontal coordinate.
-		/// </summary>
-		public Fixed2Dot14 X;
+    /// <summary>
+    /// A simple structure used to store a 2D vector unit vector. Uses <see cref="Fixed2Dot14"/> types.
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct FTUnitVector
+    {
+        /// <summary>
+        /// Horizontal coordinate.
+        /// </summary>
+        public Fixed2Dot14 X;
 
-		/// <summary>
-		/// Vertical coordinate.
-		/// </summary>
-		public Fixed2Dot14 Y;
-	}
+        /// <summary>
+        /// Vertical coordinate.
+        /// </summary>
+        public Fixed2Dot14 Y;
+    }
 }

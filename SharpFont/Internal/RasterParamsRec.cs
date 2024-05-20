@@ -27,24 +27,24 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct RasterParamsRec
-	{
-		internal IntPtr target;
-		internal IntPtr source;
-		internal RasterFlags flags;
-		internal RasterSpanFunc gray_spans;
-		internal RasterSpanFunc black_spans;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct RasterParamsRec
+    {
+        internal IntPtr target;
+        internal IntPtr source;
+        internal RasterFlags flags;
+        internal RasterSpanFunc gray_spans;
+        internal RasterSpanFunc black_spans;
 
-		[Obsolete("Unused")]
-		internal RasterBitTestFunc bit_test;
+        [Obsolete("Unused")]
+        internal RasterBitTestFunc bit_test;
 
-		[Obsolete("Unused")]
-		internal RasterBitSetFunc bit_set;
+        [Obsolete("Unused")]
+        internal RasterBitSetFunc bit_set;
 
-		internal IntPtr user;
-		internal BBox clip_box;
+        internal IntPtr user;
+        internal BBox clip_box;
 
-		internal static int SizeInBytes { get { return Marshal.SizeOf(typeof(RasterParamsRec)); } }
-	}
+        internal static int SizeInBytes { get { return Marshal.SizeOf(typeof(RasterParamsRec)); } }
+    }
 }

@@ -22,91 +22,89 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.Internal;
+using System;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// A structure used to model a single span of gray (or black) pixels when rendering a monochrome or anti-aliased
-	/// bitmap.
-	/// </summary>
-	/// <remarks><para>
-	/// This structure is used by the span drawing callback type named <see cref="RasterSpanFunc"/> which takes the y
-	/// coordinate of the span as a a parameter.
-	/// </para><para>
-	/// The coverage value is always between 0 and 255. If you want less gray values, the callback function has to
-	/// reduce them.
-	/// </para></remarks>
-	public class Span : NativeObject
-	{
-		#region Fields
+    /// <summary>
+    /// A structure used to model a single span of gray (or black) pixels when rendering a monochrome or anti-aliased
+    /// bitmap.
+    /// </summary>
+    /// <remarks><para>
+    /// This structure is used by the span drawing callback type named <see cref="RasterSpanFunc"/> which takes the y
+    /// coordinate of the span as a a parameter.
+    /// </para><para>
+    /// The coverage value is always between 0 and 255. If you want less gray values, the callback function has to
+    /// reduce them.
+    /// </para></remarks>
+    public class Span : NativeObject
+    {
+        #region Fields
 
-		private SpanRec rec;
+        private SpanRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal Span(IntPtr reference) : base(reference)
-		{
-		}
+        internal Span(IntPtr reference) : base(reference)
+        {
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the span's horizontal start position.
-		/// </summary>
-		public short X
-		{
-			get
-			{
-				return rec.x;
-			}
-		}
+        /// <summary>
+        /// Gets the span's horizontal start position.
+        /// </summary>
+        public short X
+        {
+            get
+            {
+                return rec.x;
+            }
+        }
 
-		/// <summary>
-		/// Gets the span's length in pixels.
-		/// </summary>
-		[CLSCompliant(false)]
-		public ushort Length
-		{
-			get
-			{
-				return rec.len;
-			}
-		}
+        /// <summary>
+        /// Gets the span's length in pixels.
+        /// </summary>
+        [CLSCompliant(false)]
+        public ushort Length
+        {
+            get
+            {
+                return rec.len;
+            }
+        }
 
-		/// <summary>
-		/// Gets the span color/coverage, ranging from 0 (background) to 255 (foreground). Only used for anti-aliased
-		/// rendering.
-		/// </summary>
-		public byte Coverage
-		{
-			get
-			{
-				return rec.coverage;
-			}
-		}
+        /// <summary>
+        /// Gets the span color/coverage, ranging from 0 (background) to 255 (foreground). Only used for anti-aliased
+        /// rendering.
+        /// </summary>
+        public byte Coverage
+        {
+            get
+            {
+                return rec.coverage;
+            }
+        }
 
-		internal override IntPtr Reference
-		{
-			get
-			{
-				return base.Reference;
-			}
+        internal override IntPtr Reference
+        {
+            get
+            {
+                return base.Reference;
+            }
 
-			set
-			{
-				base.Reference = value;
-				rec = PInvokeHelper.PtrToStructure<SpanRec>(value);
-			}
-		}
+            set
+            {
+                base.Reference = value;
+                rec = PInvokeHelper.PtrToStructure<SpanRec>(value);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

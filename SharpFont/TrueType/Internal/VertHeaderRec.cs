@@ -26,48 +26,47 @@ using System;
 using System.Runtime.InteropServices;
 
 using FT_Long = System.IntPtr;
-using FT_ULong = System.UIntPtr;
 
 namespace SharpFont.TrueType.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal unsafe struct VertHeaderRec
-	{
-		internal FT_Long Version;
-		internal short Ascender;
-		internal short Descender;
-		internal short Line_Gap;
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct VertHeaderRec
+    {
+        internal FT_Long Version;
+        internal short Ascender;
+        internal short Descender;
+        internal short Line_Gap;
 
-		internal ushort advance_Height_Max;
+        internal ushort advance_Height_Max;
 
-		internal short min_Top_Side_Bearing;
-		internal short min_Bottom_Side_Bearing;
-		internal short yMax_Extent;
-		internal short caret_Slope_Rise;
-		internal short caret_Slope_Run;
-		internal short caret_Offset;
+        internal short min_Top_Side_Bearing;
+        internal short min_Bottom_Side_Bearing;
+        internal short yMax_Extent;
+        internal short caret_Slope_Rise;
+        internal short caret_Slope_Run;
+        internal short caret_Offset;
 
-		private fixed short reserved[4];
-		internal short[] Reserved
-		{
-			get
-			{
-				var array = new short[4];
+        private fixed short reserved[4];
+        internal short[] Reserved
+        {
+            get
+            {
+                var array = new short[4];
 
-				fixed (short* p = reserved)
-				{
-					for (int i = 0; i < array.Length; i++)
-						array[i] = p[i];
-				}
+                fixed (short* p = reserved)
+                {
+                    for (int i = 0; i < array.Length; i++)
+                        array[i] = p[i];
+                }
 
-				return array;
-			}
-		}
+                return array;
+            }
+        }
 
-		internal short metric_Data_Format;
-		internal ushort number_Of_VMetrics;
+        internal short metric_Data_Format;
+        internal ushort number_Of_VMetrics;
 
-		internal IntPtr long_metrics;
-		internal IntPtr short_metrics;
-	}
+        internal IntPtr long_metrics;
+        internal IntPtr short_metrics;
+    }
 }

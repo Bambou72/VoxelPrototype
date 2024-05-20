@@ -24,28 +24,26 @@ SOFTWARE.*/
 
 using System;
 using System.Runtime.InteropServices;
-
-using FT_Long = System.IntPtr;
 using FT_ULong = System.UIntPtr;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct StreamRec
-	{
-		internal IntPtr @base;
-		internal FT_ULong size;
-		internal FT_ULong pos;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct StreamRec
+    {
+        internal IntPtr @base;
+        internal FT_ULong size;
+        internal FT_ULong pos;
 
-		internal StreamDescRec descriptor;
-		internal StreamDescRec pathname;
-		internal StreamIOFunc read;
-		internal StreamCloseFunc close;
+        internal StreamDescRec descriptor;
+        internal StreamDescRec pathname;
+        internal StreamIOFunc read;
+        internal StreamCloseFunc close;
 
-		internal IntPtr memory;
-		internal IntPtr cursor;
-		internal IntPtr limit;
+        internal IntPtr memory;
+        internal IntPtr cursor;
+        internal IntPtr limit;
 
-		internal static int SizeInBytes { get { return Marshal.SizeOf(typeof(StreamRec)); } }
-	}
+        internal static int SizeInBytes { get { return Marshal.SizeOf(typeof(StreamRec)); } }
+    }
 }

@@ -22,28 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-
 namespace SharpFont
 {
-	/// <summary>
-	/// An enumeration used to specify which kerning values to return in <see cref="Face.GetKerning"/>.
-	/// </summary>
-	public enum KerningMode
-	{
-		/// <summary>
-		/// Return scaled and grid-fitted kerning distances.
-		/// </summary>
-		Default = 0,
+    /// <summary>
+    /// An enumeration used to specify which kerning values to return in <see cref="Face.GetKerning"/>.
+    /// </summary>
+    public enum KerningMode
+    {
+        /// <summary>
+        /// Return scaled and grid-fitted kerning distances.
+        /// </summary>
+        Default = 0,
 
-		/// <summary>
-		/// Return scaled but un-grid-fitted kerning distances.
-		/// </summary>
-		Unfitted,
+        /// <summary>
+        /// Return scaled but un-grid-fitted kerning distances.
+        /// </summary>
+        Unfitted,
 
-		/// <summary>
-		/// Return the kerning vector in original font units.
-		/// </summary>
-		Unscaled
-	}
+        /// <summary>
+        /// Return the kerning vector in original font units.
+        /// </summary>
+        Unscaled
+    }
 }

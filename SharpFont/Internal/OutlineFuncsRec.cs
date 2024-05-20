@@ -26,18 +26,17 @@ using System;
 using System.Runtime.InteropServices;
 
 using FT_Long = System.IntPtr;
-using FT_ULong = System.UIntPtr;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct OutlineFuncsRec
-	{
-		internal IntPtr moveTo;
-		internal IntPtr lineTo;
-		internal IntPtr conicTo;
-		internal IntPtr cubicTo;
-		internal int shift;
-		internal FT_Long delta;
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct OutlineFuncsRec
+    {
+        internal IntPtr moveTo;
+        internal IntPtr lineTo;
+        internal IntPtr conicTo;
+        internal IntPtr cubicTo;
+        internal int shift;
+        internal FT_Long delta;
+    }
 }

@@ -22,76 +22,75 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-
 using SharpFont.Internal;
+using System;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// The data exchange structure for the increase-x-height property.
-	/// </summary>
-	public class IncreaseXHeightProperty
-	{
-		private IncreaseXHeightPropertyRec rec;
-		private Face face;
+    /// <summary>
+    /// The data exchange structure for the increase-x-height property.
+    /// </summary>
+    public class IncreaseXHeightProperty
+    {
+        private IncreaseXHeightPropertyRec rec;
+        private Face face;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="IncreaseXHeightProperty"/> class.
-		/// </summary>
-		/// <param name="face">The face to increase the X height of.</param>
-		public IncreaseXHeightProperty(Face face)
-		{
-			this.rec.face = face.Reference;
-			this.face = face;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IncreaseXHeightProperty"/> class.
+        /// </summary>
+        /// <param name="face">The face to increase the X height of.</param>
+        public IncreaseXHeightProperty(Face face)
+        {
+            this.rec.face = face.Reference;
+            this.face = face;
+        }
 
-		internal IncreaseXHeightProperty(IncreaseXHeightPropertyRec rec, Face face)
-		{
-			this.rec = rec;
-			this.face = face;
-		}
+        internal IncreaseXHeightProperty(IncreaseXHeightPropertyRec rec, Face face)
+        {
+            this.rec = rec;
+            this.face = face;
+        }
 
-		/// <summary>
-		/// Gets or sets the associated face.
-		/// </summary>
-		public Face Face
-		{
-			get
-			{
-				return face;
-			}
+        /// <summary>
+        /// Gets or sets the associated face.
+        /// </summary>
+        public Face Face
+        {
+            get
+            {
+                return face;
+            }
 
-			set
-			{
-				face = value;
-				rec.face = face.Reference;
-			}
-		}
+            set
+            {
+                face = value;
+                rec.face = face.Reference;
+            }
+        }
 
-		/// <summary>
-		/// Gets or sets the limit property.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint Limit
-		{
-			get
-			{
-				return rec.limit;
-			}
+        /// <summary>
+        /// Gets or sets the limit property.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint Limit
+        {
+            get
+            {
+                return rec.limit;
+            }
 
-			set
-			{
-				rec.limit = value;
-			}
-		}
+            set
+            {
+                rec.limit = value;
+            }
+        }
 
-		internal IncreaseXHeightPropertyRec Rec
-		{
-			get
-			{
-				return rec;
-			}
-		}
-	}
+        internal IncreaseXHeightPropertyRec Rec
+        {
+            get
+            {
+                return rec;
+            }
+        }
+    }
 }

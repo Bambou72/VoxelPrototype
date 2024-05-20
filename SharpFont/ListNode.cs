@@ -22,87 +22,85 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.Internal;
+using System;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// A structure used to hold a single list element.
-	/// </summary>
-	public class ListNode: NativeObject
-	{
-		#region Fields
+    /// <summary>
+    /// A structure used to hold a single list element.
+    /// </summary>
+    public class ListNode : NativeObject
+    {
+        #region Fields
 
-		private ListNodeRec rec;
+        private ListNodeRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal ListNode(IntPtr reference): base(reference)
-		{
-		}
+        internal ListNode(IntPtr reference) : base(reference)
+        {
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the previous element in the list. NULL if first.
-		/// </summary>
-		public ListNode Previous
-		{
-			get
-			{
-				if (rec.prev == IntPtr.Zero)
-					return null;
+        /// <summary>
+        /// Gets the previous element in the list. NULL if first.
+        /// </summary>
+        public ListNode Previous
+        {
+            get
+            {
+                if (rec.prev == IntPtr.Zero)
+                    return null;
 
-				return new ListNode(rec.prev);
-			}
-		}
+                return new ListNode(rec.prev);
+            }
+        }
 
-		/// <summary>
-		/// Gets the next element in the list. NULL if last.
-		/// </summary>
-		public ListNode Next
-		{
-			get
-			{
-				if (rec.next == IntPtr.Zero)
-					return null;
+        /// <summary>
+        /// Gets the next element in the list. NULL if last.
+        /// </summary>
+        public ListNode Next
+        {
+            get
+            {
+                if (rec.next == IntPtr.Zero)
+                    return null;
 
-				return new ListNode(rec.next);
-			}
-		}
+                return new ListNode(rec.next);
+            }
+        }
 
-		/// <summary>
-		/// Gets a typeless pointer to the listed object.
-		/// </summary>
-		public IntPtr Data
-		{
-			get
-			{
-				return rec.data;
-			}
-		}
+        /// <summary>
+        /// Gets a typeless pointer to the listed object.
+        /// </summary>
+        public IntPtr Data
+        {
+            get
+            {
+                return rec.data;
+            }
+        }
 
-		internal override IntPtr Reference
-		{
-			get
-			{
-				return base.Reference;
-			}
+        internal override IntPtr Reference
+        {
+            get
+            {
+                return base.Reference;
+            }
 
-			set
-			{
-				base.Reference = value;
-				rec = PInvokeHelper.PtrToStructure<ListNodeRec>(value);
-			}
-		}
+            set
+            {
+                base.Reference = value;
+                rec = PInvokeHelper.PtrToStructure<ListNodeRec>(value);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

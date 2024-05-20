@@ -27,14 +27,14 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct MemoryRec
-	{
-		internal IntPtr user;
-		internal AllocFunc alloc;
-		internal FreeFunc free;
-		internal ReallocFunc realloc;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct MemoryRec
+    {
+        internal IntPtr user;
+        internal AllocFunc alloc;
+        internal FreeFunc free;
+        internal ReallocFunc realloc;
 
-		internal static int SizeInBytes { get { return Marshal.SizeOf(typeof(MemoryRec)); } }
-	}
+        internal static int SizeInBytes { get { return Marshal.SizeOf(typeof(MemoryRec)); } }
+    }
 }

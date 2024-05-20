@@ -22,85 +22,83 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.Internal;
+using System;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// A simple structure used to pass more or less generic parameters to <see cref="Library.OpenFace"/>.
-	/// </summary>
-	/// <remarks>
-	/// The ID and function of parameters are driver-specific. See the various <see cref="ParamTag"/> flags for more
-	/// information.
-	/// </remarks>
-	public sealed class Parameter
-	{
-		#region Fields
+    /// <summary>
+    /// A simple structure used to pass more or less generic parameters to <see cref="Library.OpenFace"/>.
+    /// </summary>
+    /// <remarks>
+    /// The ID and function of parameters are driver-specific. See the various <see cref="ParamTag"/> flags for more
+    /// information.
+    /// </remarks>
+    public sealed class Parameter
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private ParameterRec rec;
+        private IntPtr reference;
+        private ParameterRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal Parameter(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal Parameter(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets a four-byte identification tag.
-		/// </summary>
-		[CLSCompliant(false)]
-		public ParamTag Tag
-		{
-			get
-			{
-				return (ParamTag)rec.tag;
-			}
-		}
+        /// <summary>
+        /// Gets a four-byte identification tag.
+        /// </summary>
+        [CLSCompliant(false)]
+        public ParamTag Tag
+        {
+            get
+            {
+                return (ParamTag)rec.tag;
+            }
+        }
 
-		/// <summary>
-		/// Gets a pointer to the parameter data.
-		/// </summary>
-		public IntPtr Data
-		{
-			get
-			{
-				return rec.data;
-			}
-		}
+        /// <summary>
+        /// Gets a pointer to the parameter data.
+        /// </summary>
+        public IntPtr Data
+        {
+            get
+            {
+                return rec.data;
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<ParameterRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<ParameterRec>(reference);
+            }
+        }
 
-		internal ParameterRec Record
-		{
-			get
-			{
-				return rec;
-			}
-		}
+        internal ParameterRec Record
+        {
+            get
+            {
+                return rec;
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

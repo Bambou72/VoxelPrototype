@@ -22,125 +22,123 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.Cache.Internal;
+using System;
 
 namespace SharpFont.Cache
 {
-	/// <summary>
-	/// A structure used to describe a given character size in either pixels or points to the cache manager.
-	/// </summary>
-	/// <remarks>
-	/// This type is mainly used to retrieve <see cref="FTSize"/> objects through the cache manager.
-	/// </remarks>
-	/// <see cref="Manager.LookupSize"/>
-	public class Scaler
-	{
-		#region Fields
+    /// <summary>
+    /// A structure used to describe a given character size in either pixels or points to the cache manager.
+    /// </summary>
+    /// <remarks>
+    /// This type is mainly used to retrieve <see cref="FTSize"/> objects through the cache manager.
+    /// </remarks>
+    /// <see cref="Manager.LookupSize"/>
+    public class Scaler
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private ScalerRec rec;
+        private IntPtr reference;
+        private ScalerRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal Scaler(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal Scaler(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the source face ID.
-		/// </summary>
-		public IntPtr FaceId
-		{
-			get
-			{
-				return rec.face_id;
-			}
-		}
+        /// <summary>
+        /// Gets the source face ID.
+        /// </summary>
+        public IntPtr FaceId
+        {
+            get
+            {
+                return rec.face_id;
+            }
+        }
 
-		/// <summary>
-		/// Gets the character width.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint Width
-		{
-			get
-			{
-				return rec.width;
-			}
-		}
+        /// <summary>
+        /// Gets the character width.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint Width
+        {
+            get
+            {
+                return rec.width;
+            }
+        }
 
-		/// <summary>
-		/// Gets the character height.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint Height
-		{
-			get
-			{
-				return rec.height;
-			}
-		}
+        /// <summary>
+        /// Gets the character height.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint Height
+        {
+            get
+            {
+                return rec.height;
+            }
+        }
 
-		/// <summary>
-		/// Gets a value indicating whether the ‘width’ and ‘height’ fields are interpreted as integer pixel character
-		/// sizes. Otherwise, they are expressed as 1/64th of points.
-		/// </summary>
-		public bool Pixel
-		{
-			get
-			{
-				return rec.pixel == 1;
-			}
-		}
+        /// <summary>
+        /// Gets a value indicating whether the ‘width’ and ‘height’ fields are interpreted as integer pixel character
+        /// sizes. Otherwise, they are expressed as 1/64th of points.
+        /// </summary>
+        public bool Pixel
+        {
+            get
+            {
+                return rec.pixel == 1;
+            }
+        }
 
-		/// <summary>
-		/// Gets the horizontal resolution in dpi; only used when ‘pixel’ is value 0.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint ResolutionX
-		{
-			get
-			{
-				return rec.x_res;
-			}
-		}
+        /// <summary>
+        /// Gets the horizontal resolution in dpi; only used when ‘pixel’ is value 0.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint ResolutionX
+        {
+            get
+            {
+                return rec.x_res;
+            }
+        }
 
-		/// <summary>
-		/// Gets the vertical resolution in dpi; only used when ‘pixel’ is value 0.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint ResolutionY
-		{
-			get
-			{
-				return rec.y_res;
-			}
-		}
+        /// <summary>
+        /// Gets the vertical resolution in dpi; only used when ‘pixel’ is value 0.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint ResolutionY
+        {
+            get
+            {
+                return rec.y_res;
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<ScalerRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<ScalerRec>(reference);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

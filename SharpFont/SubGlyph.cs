@@ -23,51 +23,50 @@ SOFTWARE.*/
 #endregion
 
 using System;
-using System.Runtime.InteropServices;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// The subglyph structure is an internal object used to describe subglyphs (for example, in the case of
-	/// composites).
-	/// </summary>
-	/// <remarks><para>
-	/// The subglyph implementation is not part of the high-level API, hence the forward structure declaration.
-	/// </para><para>
-	/// You can however retrieve subglyph information with <see cref="GlyphSlot.GetSubGlyphInfo"/>.
-	/// </para></remarks>
-	public sealed class SubGlyph
-	{
-		#region Fields
+    /// <summary>
+    /// The subglyph structure is an internal object used to describe subglyphs (for example, in the case of
+    /// composites).
+    /// </summary>
+    /// <remarks><para>
+    /// The subglyph implementation is not part of the high-level API, hence the forward structure declaration.
+    /// </para><para>
+    /// You can however retrieve subglyph information with <see cref="GlyphSlot.GetSubGlyphInfo"/>.
+    /// </para></remarks>
+    public sealed class SubGlyph
+    {
+        #region Fields
 
-		private IntPtr reference;
+        private IntPtr reference;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal SubGlyph(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal SubGlyph(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-			}
-		}
+            set
+            {
+                reference = value;
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

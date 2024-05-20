@@ -22,15 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct OutlineGlyphRec
-	{
-		internal GlyphRec root;
-		internal OutlineRec outline;
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct OutlineGlyphRec
+    {
+        internal GlyphRec root;
+        internal OutlineRec outline;
+    }
 }

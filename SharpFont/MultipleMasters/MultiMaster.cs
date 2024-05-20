@@ -22,93 +22,91 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.MultipleMasters.Internal;
+using System;
 
 namespace SharpFont.MultipleMasters
 {
-	/// <summary><para>
-	/// A structure used to model the axes and space of a Multiple Masters font.
-	/// </para><para>
-	/// This structure can't be used for GX var fonts.
-	/// </para></summary>
-	public class MultiMaster
-	{
-		#region Fields
+    /// <summary><para>
+    /// A structure used to model the axes and space of a Multiple Masters font.
+    /// </para><para>
+    /// This structure can't be used for GX var fonts.
+    /// </para></summary>
+    public class MultiMaster
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private MultiMasterRec rec;
+        private IntPtr reference;
+        private MultiMasterRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal MultiMaster(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal MultiMaster(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the number of axes. Cannot exceed 4.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint AxisCount
-		{
-			get
-			{
-				return rec.num_axis;
-			}
-		}
+        /// <summary>
+        /// Gets the number of axes. Cannot exceed 4.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint AxisCount
+        {
+            get
+            {
+                return rec.num_axis;
+            }
+        }
 
-		/// <summary>
-		/// Gets the number of designs; should be normally 2^num_axis even though the Type 1 specification strangely
-		/// allows for intermediate designs to be present. This number cannot exceed 16.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint DesignsCount
-		{
-			get
-			{
-				return rec.num_designs;
-			}
-		}
+        /// <summary>
+        /// Gets the number of designs; should be normally 2^num_axis even though the Type 1 specification strangely
+        /// allows for intermediate designs to be present. This number cannot exceed 16.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint DesignsCount
+        {
+            get
+            {
+                return rec.num_designs;
+            }
+        }
 
-		/// <summary>
-		/// Gets a table of axis descriptors.
-		/// </summary>
-		public MMAxis[] Axis
-		{
-			get
-			{
-				MMAxis[] axis = new MMAxis[rec.num_axis];
+        /// <summary>
+        /// Gets a table of axis descriptors.
+        /// </summary>
+        public MMAxis[] Axis
+        {
+            get
+            {
+                MMAxis[] axis = new MMAxis[rec.num_axis];
 
-				for (int i = 0; i < rec.num_axis; i++)
-					axis[i] = new MMAxis(rec.axis[i]);
+                for (int i = 0; i < rec.num_axis; i++)
+                    axis[i] = new MMAxis(rec.axis[i]);
 
-				return axis;
-			}
-		}
+                return axis;
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<MultiMasterRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<MultiMasterRec>(reference);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

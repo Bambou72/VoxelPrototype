@@ -27,10 +27,10 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.MultipleMasters.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct VarNamedStyleRec
-	{
-		internal IntPtr coords;
-		internal uint strid;
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct VarNamedStyleRec
+    {
+        internal IntPtr coords;
+        internal uint strid;
+    }
 }

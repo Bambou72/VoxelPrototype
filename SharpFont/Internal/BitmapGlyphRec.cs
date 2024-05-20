@@ -22,17 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct BitmapGlyphRec
-	{
-		internal GlyphRec root;
-		internal int left;
-		internal int top;
-		internal BitmapRec bitmap;
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct BitmapGlyphRec
+    {
+        internal GlyphRec root;
+        internal int left;
+        internal int top;
+        internal BitmapRec bitmap;
+    }
 }

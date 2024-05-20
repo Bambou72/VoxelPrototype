@@ -27,63 +27,63 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// Read-only binary data represented as a pointer and a length.
-	/// </summary>
-	public sealed class Data
-	{
-		#region Fields
+    /// <summary>
+    /// Read-only binary data represented as a pointer and a length.
+    /// </summary>
+    public sealed class Data
+    {
+        #region Fields
 
-		private IntPtr reference;
+        private IntPtr reference;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal Data(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal Data(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the data.
-		/// </summary>
-		public IntPtr Pointer
-		{
-			get
-			{
-				return Marshal.ReadIntPtr(reference, 0);
-			}
-		}
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        public IntPtr Pointer
+        {
+            get
+            {
+                return Marshal.ReadIntPtr(reference, 0);
+            }
+        }
 
-		/// <summary>
-		/// Gets the length of the data in bytes.
-		/// </summary>
-		public int Length
-		{
-			get
-			{
-				return Marshal.ReadInt32(reference, IntPtr.Size);
-			}
-		}
+        /// <summary>
+        /// Gets the length of the data in bytes.
+        /// </summary>
+        public int Length
+        {
+            get
+            {
+                return Marshal.ReadInt32(reference, IntPtr.Size);
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-			}
-		}
+            set
+            {
+                reference = value;
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -26,62 +26,62 @@ using System;
 
 namespace SharpFont.Cache
 {
-	/// <summary><para>
-	/// An opaque handle to a cache node object. Each cache node is reference-counted. A node with a count of 0 might
-	/// be flushed out of a full cache whenever a lookup request is performed.
-	/// </para><para>
-	/// If you look up nodes, you have the ability to ‘acquire’ them, i.e., to increment their reference count. This
-	/// will prevent the node from being flushed out of the cache until you explicitly ‘release’ it.
-	/// </para></summary>
-	/// <see cref="Node.Unref"/>
-	/// <seealso cref="SBitCache.Lookup"/>
-	/// <seealso cref="ImageCache.Lookup"/>
-	public class Node
-	{
-		#region Fields
+    /// <summary><para>
+    /// An opaque handle to a cache node object. Each cache node is reference-counted. A node with a count of 0 might
+    /// be flushed out of a full cache whenever a lookup request is performed.
+    /// </para><para>
+    /// If you look up nodes, you have the ability to ‘acquire’ them, i.e., to increment their reference count. This
+    /// will prevent the node from being flushed out of the cache until you explicitly ‘release’ it.
+    /// </para></summary>
+    /// <see cref="Node.Unref"/>
+    /// <seealso cref="SBitCache.Lookup"/>
+    /// <seealso cref="ImageCache.Lookup"/>
+    public class Node
+    {
+        #region Fields
 
-		private IntPtr reference;
+        private IntPtr reference;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal Node(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal Node(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-			}
-		}
+            set
+            {
+                reference = value;
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
 
-		/// <summary>
-		/// Decrement a cache node's internal reference count. When the count reaches 0, it is not destroyed but
-		/// becomes eligible for subsequent cache flushes.
-		/// </summary>
-		/// <param name="manager">The cache manager handle.</param>
-		public void Unref(Manager manager)
-		{
-			FT.FTC_Node_Unref(Reference, manager.Reference);
-		}
+        /// <summary>
+        /// Decrement a cache node's internal reference count. When the count reaches 0, it is not destroyed but
+        /// becomes eligible for subsequent cache flushes.
+        /// </summary>
+        /// <param name="manager">The cache manager handle.</param>
+        public void Unref(Manager manager)
+        {
+            FT.FTC_Node_Unref(Reference, manager.Reference);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

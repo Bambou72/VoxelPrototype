@@ -27,12 +27,12 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct GlyphRec
-	{
-		internal IntPtr library;
-		private IntPtr clazz;
-		internal GlyphFormat format;
-		internal FTVector advance;
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct GlyphRec
+    {
+        internal IntPtr library;
+        private IntPtr clazz;
+        internal GlyphFormat format;
+        internal FTVector advance;
+    }
 }

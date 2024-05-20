@@ -22,19 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-
 namespace SharpFont.Cff
 {
-	/// <summary>
-	/// A list of constants used for the hinting-engine property to select the hinting engine for CFF fonts.
-	/// </summary>
-	public enum HintingEngine
-	{
-		/// <summary>Use the old FreeType hinting engine.</summary>
-		FreeType = 0,
+    /// <summary>
+    /// A list of constants used for the hinting-engine property to select the hinting engine for CFF fonts.
+    /// </summary>
+    public enum HintingEngine
+    {
+        /// <summary>Use the old FreeType hinting engine.</summary>
+        FreeType = 0,
 
-		/// <summary>Use the hinting engine contributed by Adobe.</summary>
-		Adobe = 1
-	}
+        /// <summary>Use the hinting engine contributed by Adobe.</summary>
+        Adobe = 1
+    }
 }

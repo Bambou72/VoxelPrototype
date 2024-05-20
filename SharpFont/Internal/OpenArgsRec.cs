@@ -26,23 +26,22 @@ using System;
 using System.Runtime.InteropServices;
 
 using FT_Long = System.IntPtr;
-using FT_ULong = System.UIntPtr;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct OpenArgsRec
-	{
-		internal OpenFlags flags;
-		internal IntPtr memory_base;
-		internal FT_Long memory_size;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct OpenArgsRec
+    {
+        internal OpenFlags flags;
+        internal IntPtr memory_base;
+        internal FT_Long memory_size;
 
-		[MarshalAs(UnmanagedType.LPStr)]
-		internal string pathname;
+        [MarshalAs(UnmanagedType.LPStr)]
+        internal string pathname;
 
-		internal IntPtr stream;
-		internal IntPtr driver;
-		internal int num_params;
-		internal IntPtr @params;
-	}
+        internal IntPtr stream;
+        internal IntPtr driver;
+        internal int num_params;
+        internal IntPtr @params;
+    }
 }

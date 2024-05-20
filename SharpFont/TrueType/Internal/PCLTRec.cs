@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 using FT_Long = System.IntPtr;
@@ -30,56 +29,56 @@ using FT_ULong = System.UIntPtr;
 
 namespace SharpFont.TrueType.Internal
 {
-	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-	internal unsafe struct PCLTRec
-	{
-		internal FT_Long Version;
-		internal FT_ULong FontNumber;
-		internal ushort Pitch;
-		internal ushort xHeight;
-		internal ushort Style;
-		internal ushort TypeFamily;
-		internal ushort CapHeight;
-		internal ushort SymbolSet;
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    internal unsafe struct PCLTRec
+    {
+        internal FT_Long Version;
+        internal FT_ULong FontNumber;
+        internal ushort Pitch;
+        internal ushort xHeight;
+        internal ushort Style;
+        internal ushort TypeFamily;
+        internal ushort CapHeight;
+        internal ushort SymbolSet;
 
-		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
-		internal string TypeFace;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
+        internal string TypeFace;
 
-		private fixed byte characterComplement[8];
-		internal byte[] CharacterComplement
-		{
-			get
-			{
-				var array = new byte[8];
-				fixed (byte* p = characterComplement)
-				{
-					for (int i = 0; i < array.Length; i++)
-						array[i] = p[i];
-				}
-				return array;
-			}
-		}
+        private fixed byte characterComplement[8];
+        internal byte[] CharacterComplement
+        {
+            get
+            {
+                var array = new byte[8];
+                fixed (byte* p = characterComplement)
+                {
+                    for (int i = 0; i < array.Length; i++)
+                        array[i] = p[i];
+                }
+                return array;
+            }
+        }
 
-		private fixed byte fileName[6];
-		internal byte[] FileName
-		{
-			get
-			{
-				var array = new byte[6];
+        private fixed byte fileName[6];
+        internal byte[] FileName
+        {
+            get
+            {
+                var array = new byte[6];
 
-				fixed (byte* p = fileName)
-				{
-					for (int i = 0; i < array.Length; i++)
-						array[i] = p[i];
-				}
+                fixed (byte* p = fileName)
+                {
+                    for (int i = 0; i < array.Length; i++)
+                        array[i] = p[i];
+                }
 
-				return array;
-			}
-		}
+                return array;
+            }
+        }
 
-		internal byte StrokeWeight;
-		internal byte WidthType;
-		internal byte SerifStyle;
-		internal byte Reserved;
-	}
+        internal byte StrokeWeight;
+        internal byte WidthType;
+        internal byte SerifStyle;
+        internal byte Reserved;
+    }
 }

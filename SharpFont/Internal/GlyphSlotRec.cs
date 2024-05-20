@@ -26,49 +26,48 @@ using System;
 using System.Runtime.InteropServices;
 
 using FT_Long = System.IntPtr;
-using FT_ULong = System.UIntPtr;
 
 namespace SharpFont.Internal
 {
-	/// <summary>
-	/// Internally represents a GlyphSlot.
-	/// </summary>
-	/// <remarks>
-	/// Refer to <see cref="GlyphSlot"/> for FreeType documentation.
-	/// </remarks>
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct GlyphSlotRec
-	{
-		internal IntPtr library;
-		internal IntPtr face;
-		internal IntPtr next;
-		internal uint reserved;
-		internal GenericRec generic;
+    /// <summary>
+    /// Internally represents a GlyphSlot.
+    /// </summary>
+    /// <remarks>
+    /// Refer to <see cref="GlyphSlot"/> for FreeType documentation.
+    /// </remarks>
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct GlyphSlotRec
+    {
+        internal IntPtr library;
+        internal IntPtr face;
+        internal IntPtr next;
+        internal uint reserved;
+        internal GenericRec generic;
 
-		internal GlyphMetricsRec metrics;
-		internal FT_Long linearHoriAdvance;
-		internal FT_Long linearVertAdvance;
-		internal FTVector26Dot6 advance;
+        internal GlyphMetricsRec metrics;
+        internal FT_Long linearHoriAdvance;
+        internal FT_Long linearVertAdvance;
+        internal FTVector26Dot6 advance;
 
-		internal GlyphFormat format;
+        internal GlyphFormat format;
 
-		internal BitmapRec bitmap;
-		internal int bitmap_left;
-		internal int bitmap_top;
+        internal BitmapRec bitmap;
+        internal int bitmap_left;
+        internal int bitmap_top;
 
-		internal OutlineRec outline;
+        internal OutlineRec outline;
 
-		internal uint num_subglyphs;
-		internal IntPtr subglyphs;
+        internal uint num_subglyphs;
+        internal IntPtr subglyphs;
 
-		internal IntPtr control_data;
-		internal FT_Long control_len;
+        internal IntPtr control_data;
+        internal FT_Long control_len;
 
-		internal FT_Long lsb_delta;
-		internal FT_Long rsb_delta;
+        internal FT_Long lsb_delta;
+        internal FT_Long rsb_delta;
 
-		internal IntPtr other;
+        internal IntPtr other;
 
-		private IntPtr @internal;
-	}
+        private IntPtr @internal;
+    }
 }

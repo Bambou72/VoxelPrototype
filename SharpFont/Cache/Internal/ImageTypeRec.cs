@@ -27,12 +27,12 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.Cache.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct ImageTypeRec
-	{
-		internal IntPtr face_id;
-		internal int width;
-		internal int height;
-		internal LoadFlags flags;
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct ImageTypeRec
+    {
+        internal IntPtr face_id;
+        internal int width;
+        internal int height;
+        internal LoadFlags flags;
+    }
 }

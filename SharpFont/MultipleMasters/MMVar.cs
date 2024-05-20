@@ -22,113 +22,111 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.MultipleMasters.Internal;
+using System;
 
 namespace SharpFont.MultipleMasters
 {
-	/// <summary><para>
-	/// A structure used to model the axes and space of a Multiple Masters or GX var distortable font.
-	/// </para><para>
-	/// Some fields are specific to one format and not to the other.
-	/// </para></summary>
-	public class MMVar
-	{
-		#region Fields
+    /// <summary><para>
+    /// A structure used to model the axes and space of a Multiple Masters or GX var distortable font.
+    /// </para><para>
+    /// Some fields are specific to one format and not to the other.
+    /// </para></summary>
+    public class MMVar
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private MMVarRec rec;
+        private IntPtr reference;
+        private MMVarRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal MMVar(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal MMVar(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the number of axes. The maximum value is 4 for MM; no limit in GX.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint AxisCount
-		{
-			get
-			{
-				return rec.num_axis;
-			}
-		}
+        /// <summary>
+        /// Gets the number of axes. The maximum value is 4 for MM; no limit in GX.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint AxisCount
+        {
+            get
+            {
+                return rec.num_axis;
+            }
+        }
 
-		/// <summary>
-		/// Gets the number of designs; should be normally 2^num_axis for MM fonts. Not meaningful for GX (where every
-		/// glyph could have a different number of designs).
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint DesignsCount
-		{
-			get
-			{
-				return rec.num_designs;
-			}
-		}
+        /// <summary>
+        /// Gets the number of designs; should be normally 2^num_axis for MM fonts. Not meaningful for GX (where every
+        /// glyph could have a different number of designs).
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint DesignsCount
+        {
+            get
+            {
+                return rec.num_designs;
+            }
+        }
 
-		/// <summary>
-		/// Gets the number of named styles; only meaningful for GX which allows certain design coordinates to have a
-		/// string ID (in the ‘name’ table) associated with them. The font can tell the user that, for example,
-		/// Weight=1.5 is ‘Bold’.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint NamedStylesCount
-		{
-			get
-			{
-				return rec.num_namedstyles;
-			}
-		}
+        /// <summary>
+        /// Gets the number of named styles; only meaningful for GX which allows certain design coordinates to have a
+        /// string ID (in the ‘name’ table) associated with them. The font can tell the user that, for example,
+        /// Weight=1.5 is ‘Bold’.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint NamedStylesCount
+        {
+            get
+            {
+                return rec.num_namedstyles;
+            }
+        }
 
-		/// <summary>
-		/// Gets a table of axis descriptors. GX fonts contain slightly more data than MM.
-		/// </summary>
-		public VarAxis Axis
-		{
-			get
-			{
-				return new VarAxis(rec.axis);
-			}
-		}
+        /// <summary>
+        /// Gets a table of axis descriptors. GX fonts contain slightly more data than MM.
+        /// </summary>
+        public VarAxis Axis
+        {
+            get
+            {
+                return new VarAxis(rec.axis);
+            }
+        }
 
-		/// <summary>
-		/// Gets a table of named styles. Only meaningful with GX.
-		/// </summary>
-		public VarNamedStyle NamedStyle
-		{
-			get
-			{
-				return new VarNamedStyle(rec.namedstyle);
-			}
-		}
+        /// <summary>
+        /// Gets a table of named styles. Only meaningful with GX.
+        /// </summary>
+        public VarNamedStyle NamedStyle
+        {
+            get
+            {
+                return new VarNamedStyle(rec.namedstyle);
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<MMVarRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<MMVarRec>(reference);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

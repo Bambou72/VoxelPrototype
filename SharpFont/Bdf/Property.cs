@@ -22,100 +22,99 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
+using SharpFont.Bdf.Internal;
 using System;
 using System.Runtime.InteropServices;
 
-using SharpFont.Bdf.Internal;
-
 namespace SharpFont.Bdf
 {
-	/// <summary>
-	/// This structure models a given BDF/PCF property.
-	/// </summary>
-	public class Property
-	{
-		#region Fields
+    /// <summary>
+    /// This structure models a given BDF/PCF property.
+    /// </summary>
+    public class Property
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private PropertyRec rec;
+        private IntPtr reference;
+        private PropertyRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal Property(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal Property(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the property type.
-		/// </summary>
-		public PropertyType Type
-		{
-			get
-			{
-				return rec.type;
-			}
-		}
+        /// <summary>
+        /// Gets the property type.
+        /// </summary>
+        public PropertyType Type
+        {
+            get
+            {
+                return rec.type;
+            }
+        }
 
-		/// <summary>
-		/// Gets the atom string, if type is <see cref="PropertyType.Atom"/>.
-		/// </summary>
-		public string Atom
-		{
-			get
-			{
-				// only this property throws an exception because the pointer could be to unmanaged memory not owned by
-				// the process.
-				if (rec.type != PropertyType.Atom)
-					throw new InvalidOperationException("The property type is not Atom.");
+        /// <summary>
+        /// Gets the atom string, if type is <see cref="PropertyType.Atom"/>.
+        /// </summary>
+        public string Atom
+        {
+            get
+            {
+                // only this property throws an exception because the pointer could be to unmanaged memory not owned by
+                // the process.
+                if (rec.type != PropertyType.Atom)
+                    throw new InvalidOperationException("The property type is not Atom.");
 
-				return Marshal.PtrToStringAnsi(rec.atom);
-			}
-		}
+                return Marshal.PtrToStringAnsi(rec.atom);
+            }
+        }
 
-		/// <summary>
-		/// Gets a signed integer, if type is <see cref="PropertyType.Integer"/>.
-		/// </summary>
-		public int Integer
-		{
-			get
-			{
-				return rec.integer;
-			}
-		}
+        /// <summary>
+        /// Gets a signed integer, if type is <see cref="PropertyType.Integer"/>.
+        /// </summary>
+        public int Integer
+        {
+            get
+            {
+                return rec.integer;
+            }
+        }
 
-		/// <summary>
-		/// Gets an unsigned integer, if type is <see cref="PropertyType.Cardinal"/>.
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint Cardinal
-		{
-			get
-			{
-				return rec.cardinal;
-			}
-		}
+        /// <summary>
+        /// Gets an unsigned integer, if type is <see cref="PropertyType.Cardinal"/>.
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint Cardinal
+        {
+            get
+            {
+                return rec.cardinal;
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<PropertyRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<PropertyRec>(reference);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

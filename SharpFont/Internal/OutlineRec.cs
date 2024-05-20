@@ -27,16 +27,16 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct OutlineRec
-	{
-		internal short n_contours;
-		internal short n_points;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct OutlineRec
+    {
+        internal short n_contours;
+        internal short n_points;
 
-		internal IntPtr points;
-		internal IntPtr tags;
-		internal IntPtr contours;
+        internal IntPtr points;
+        internal IntPtr tags;
+        internal IntPtr contours;
 
-		internal OutlineFlags flags;
-	}
+        internal OutlineFlags flags;
+    }
 }

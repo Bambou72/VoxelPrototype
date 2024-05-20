@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 using FT_Long = System.IntPtr;
@@ -30,17 +29,17 @@ using FT_ULong = System.UIntPtr;
 
 namespace SharpFont.MultipleMasters.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct VarAxisRec
-	{
-		[MarshalAs(UnmanagedType.LPStr)]
-		internal string name;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct VarAxisRec
+    {
+        [MarshalAs(UnmanagedType.LPStr)]
+        internal string name;
 
-		internal FT_Long minimum;
-		internal FT_Long def;
-		internal FT_Long maximum;
+        internal FT_Long minimum;
+        internal FT_Long def;
+        internal FT_Long maximum;
 
-		internal FT_ULong tag;
-		internal uint strid;
-	}
+        internal FT_ULong tag;
+        internal uint strid;
+    }
 }

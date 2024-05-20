@@ -22,18 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct SpanRec
-	{
-		internal short x;
-		internal ushort len;
-		internal byte coverage;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct SpanRec
+    {
+        internal short x;
+        internal ushort len;
+        internal byte coverage;
 
-		internal static int SizeInBytes { get { return Marshal.SizeOf(typeof(SpanRec)); } }
-	}
+        internal static int SizeInBytes { get { return Marshal.SizeOf(typeof(SpanRec)); } }
+    }
 }

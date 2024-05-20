@@ -22,73 +22,71 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.Internal;
+using System;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// A union type used to store either a long or a pointer. This is used to store a file descriptor or a ‘FILE*’ in
-	/// an input stream.
-	/// </summary>
-	public class StreamDesc
-	{
-		#region Fields
+    /// <summary>
+    /// A union type used to store either a long or a pointer. This is used to store a file descriptor or a ‘FILE*’ in
+    /// an input stream.
+    /// </summary>
+    public class StreamDesc
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private StreamDescRec rec;
+        private IntPtr reference;
+        private StreamDescRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal StreamDesc(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal StreamDesc(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the <see cref="StreamDesc"/> as a file descriptor.
-		/// </summary>
-		public int Value
-		{
-			get
-			{
-				return (int)rec.value;
-			}
-		}
+        /// <summary>
+        /// Gets the <see cref="StreamDesc"/> as a file descriptor.
+        /// </summary>
+        public int Value
+        {
+            get
+            {
+                return (int)rec.value;
+            }
+        }
 
-		/// <summary>
-		/// Gets the <see cref="StreamDesc"/> as an input stream (FILE*).
-		/// </summary>
-		public IntPtr Pointer
-		{
-			get
-			{
-				return rec.pointer;
-			}
-		}
+        /// <summary>
+        /// Gets the <see cref="StreamDesc"/> as an input stream (FILE*).
+        /// </summary>
+        public IntPtr Pointer
+        {
+            get
+            {
+                return rec.pointer;
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<StreamDescRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<StreamDescRec>(reference);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

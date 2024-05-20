@@ -22,13 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace SharpFont.Cache.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct SBitCacheRec
-	{
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct SBitCacheRec
+    {
+    }
 }

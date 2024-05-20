@@ -27,18 +27,18 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct RendererClassRec
-	{
-		internal ModuleClassRec root;
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct RendererClassRec
+    {
+        internal ModuleClassRec root;
 
-		internal GlyphFormat glyph_format;
+        internal GlyphFormat glyph_format;
 
-		internal IntPtr render_glyph;
-		internal IntPtr transform_glyph;
-		internal IntPtr get_glyph_cbox;
-		internal IntPtr set_mode;
+        internal IntPtr render_glyph;
+        internal IntPtr transform_glyph;
+        internal IntPtr get_glyph_cbox;
+        internal IntPtr set_mode;
 
-		internal IntPtr raster_class;
-	}
+        internal IntPtr raster_class;
+    }
 }

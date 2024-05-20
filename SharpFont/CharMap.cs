@@ -22,149 +22,147 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.Internal;
 using SharpFont.TrueType;
+using System;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// The base charmap structure.
-	/// </summary>
-	public sealed class CharMap
-	{
-		#region Fields
+    /// <summary>
+    /// The base charmap structure.
+    /// </summary>
+    public sealed class CharMap
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private CharMapRec rec;
+        private IntPtr reference;
+        private CharMapRec rec;
 
-		private Face parentFace;
+        private Face parentFace;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal CharMap(IntPtr reference, Face parent)
-		{
-			Reference = reference;
-			this.parentFace = parent;
-		}
+        internal CharMap(IntPtr reference, Face parent)
+        {
+            Reference = reference;
+            this.parentFace = parent;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets a handle to the parent face object.
-		/// </summary>
-		public Face Face
-		{
-			get
-			{
-				return parentFace;
-			}
-		}
+        /// <summary>
+        /// Gets a handle to the parent face object.
+        /// </summary>
+        public Face Face
+        {
+            get
+            {
+                return parentFace;
+            }
+        }
 
-		/// <summary>
-		/// Gets an <see cref="Encoding"/> tag identifying the charmap. Use this with
-		/// <see cref="SharpFont.Face.SelectCharmap"/>.
-		/// </summary>
-		[CLSCompliant(false)]
-		public Encoding Encoding
-		{
-			get
-			{
-				return rec.encoding;
-			}
-		}
+        /// <summary>
+        /// Gets an <see cref="Encoding"/> tag identifying the charmap. Use this with
+        /// <see cref="SharpFont.Face.SelectCharmap"/>.
+        /// </summary>
+        [CLSCompliant(false)]
+        public Encoding Encoding
+        {
+            get
+            {
+                return rec.encoding;
+            }
+        }
 
-		/// <summary>
-		/// Gets an ID number describing the platform for the following encoding ID. This comes directly from the
-		/// TrueType specification and should be emulated for other formats.
-		/// </summary>
-		[CLSCompliant(false)]
-		public PlatformId PlatformId
-		{
-			get
-			{
-				return rec.platform_id;
-			}
-		}
+        /// <summary>
+        /// Gets an ID number describing the platform for the following encoding ID. This comes directly from the
+        /// TrueType specification and should be emulated for other formats.
+        /// </summary>
+        [CLSCompliant(false)]
+        public PlatformId PlatformId
+        {
+            get
+            {
+                return rec.platform_id;
+            }
+        }
 
-		/// <summary>
-		/// Gets a platform specific encoding number. This also comes from the TrueType specification and should be
-		/// emulated similarly.
-		/// </summary>
-		[CLSCompliant(false)]
-		public ushort EncodingId
-		{
-			get
-			{
-				//TODO find some way of getting a proper encoding ID enum...
-				return rec.encoding_id;
-			}
-		}
+        /// <summary>
+        /// Gets a platform specific encoding number. This also comes from the TrueType specification and should be
+        /// emulated similarly.
+        /// </summary>
+        [CLSCompliant(false)]
+        public ushort EncodingId
+        {
+            get
+            {
+                //TODO find some way of getting a proper encoding ID enum...
+                return rec.encoding_id;
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<CharMapRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<CharMapRec>(reference);
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		#region Base Interface
+        #region Base Interface
 
-		/// <summary>
-		/// Retrieve index of a given charmap.
-		/// </summary>
-		/// <returns>The index into the array of character maps within the face to which ‘charmap’ belongs.</returns>
-		public int GetCharmapIndex()
-		{
-			return FT.FT_Get_Charmap_Index(Reference);
-		}
+        /// <summary>
+        /// Retrieve index of a given charmap.
+        /// </summary>
+        /// <returns>The index into the array of character maps within the face to which ‘charmap’ belongs.</returns>
+        public int GetCharmapIndex()
+        {
+            return FT.FT_Get_Charmap_Index(Reference);
+        }
 
-		#endregion
+        #endregion
 
-		#region TrueType Tables
+        #region TrueType Tables
 
-		/// <summary>
-		/// Return TrueType/sfnt specific cmap language ID. Definitions of language ID values are in
-		/// ‘freetype/ttnameid.h’.
-		/// </summary>
-		/// <returns>
-		/// The language ID of ‘charmap’. If ‘charmap’ doesn't belong to a TrueType/sfnt face, just return 0 as the
-		/// default value.
-		/// </returns>
-		[CLSCompliant(false)]
-		public uint GetCMapLanguageId()
-		{
-			return FT.FT_Get_CMap_Language_ID(Reference);
-		}
+        /// <summary>
+        /// Return TrueType/sfnt specific cmap language ID. Definitions of language ID values are in
+        /// ‘freetype/ttnameid.h’.
+        /// </summary>
+        /// <returns>
+        /// The language ID of ‘charmap’. If ‘charmap’ doesn't belong to a TrueType/sfnt face, just return 0 as the
+        /// default value.
+        /// </returns>
+        [CLSCompliant(false)]
+        public uint GetCMapLanguageId()
+        {
+            return FT.FT_Get_CMap_Language_ID(Reference);
+        }
 
-		/// <summary>
-		/// Return TrueType/sfnt specific cmap format.
-		/// </summary>
-		/// <returns>The format of ‘charmap’. If ‘charmap’ doesn't belong to a TrueType/sfnt face, return -1.</returns>
-		public int GetCMapFormat()
-		{
-			return FT.FT_Get_CMap_Format(Reference);
-		}
+        /// <summary>
+        /// Return TrueType/sfnt specific cmap format.
+        /// </summary>
+        /// <returns>The format of ‘charmap’. If ‘charmap’ doesn't belong to a TrueType/sfnt face, return -1.</returns>
+        public int GetCMapFormat()
+        {
+            return FT.FT_Get_CMap_Format(Reference);
+        }
 
-		#endregion
+        #endregion
 
-		#endregion
-	}
+        #endregion
+    }
 }

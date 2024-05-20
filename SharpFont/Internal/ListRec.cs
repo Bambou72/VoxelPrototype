@@ -27,10 +27,10 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.Internal
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct ListRec
-	{
-		internal IntPtr head;
-		internal IntPtr tail;
-	}
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct ListRec
+    {
+        internal IntPtr head;
+        internal IntPtr tail;
+    }
 }

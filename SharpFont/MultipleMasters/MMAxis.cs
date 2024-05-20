@@ -22,90 +22,88 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.MultipleMasters.Internal;
+using System;
 
 namespace SharpFont.MultipleMasters
 {
-	/// <summary><para>
-	/// A simple structure used to model a given axis in design space for Multiple Masters fonts.
-	/// </para><para>
-	/// This structure can't be used for GX var fonts.
-	/// </para></summary>
-	public class MMAxis
-	{
-		#region Fields
+    /// <summary><para>
+    /// A simple structure used to model a given axis in design space for Multiple Masters fonts.
+    /// </para><para>
+    /// This structure can't be used for GX var fonts.
+    /// </para></summary>
+    public class MMAxis
+    {
+        #region Fields
 
-		private IntPtr reference;
-		private MMAxisRec rec;
+        private IntPtr reference;
+        private MMAxisRec rec;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		internal MMAxis(IntPtr reference)
-		{
-			Reference = reference;
-		}
+        internal MMAxis(IntPtr reference)
+        {
+            Reference = reference;
+        }
 
-		internal MMAxis(MMAxisRec axisInternal)
-		{
-			this.rec = axisInternal;
-		}
+        internal MMAxis(MMAxisRec axisInternal)
+        {
+            this.rec = axisInternal;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Gets the axis's name.
-		/// </summary>
-		public string Name
-		{
-			get
-			{
-				return rec.name;
-			}
-		}
+        /// <summary>
+        /// Gets the axis's name.
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return rec.name;
+            }
+        }
 
-		/// <summary>
-		/// Gets the axis's minimum design coordinate.
-		/// </summary>
-		public int Minimum
-		{
-			get
-			{
-				return (int)rec.minimum;
-			}
-		}
+        /// <summary>
+        /// Gets the axis's minimum design coordinate.
+        /// </summary>
+        public int Minimum
+        {
+            get
+            {
+                return (int)rec.minimum;
+            }
+        }
 
-		/// <summary>
-		/// Gets the axis's maximum design coordinate.
-		/// </summary>
-		public int Maximum
-		{
-			get
-			{
-				return (int)rec.maximum;
-			}
-		}
+        /// <summary>
+        /// Gets the axis's maximum design coordinate.
+        /// </summary>
+        public int Maximum
+        {
+            get
+            {
+                return (int)rec.maximum;
+            }
+        }
 
-		internal IntPtr Reference
-		{
-			get
-			{
-				return reference;
-			}
+        internal IntPtr Reference
+        {
+            get
+            {
+                return reference;
+            }
 
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<MMAxisRec>(reference);
-			}
-		}
+            set
+            {
+                reference = value;
+                rec = PInvokeHelper.PtrToStructure<MMAxisRec>(reference);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

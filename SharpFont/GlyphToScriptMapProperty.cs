@@ -22,75 +22,73 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.*/
 #endregion
 
-using System;
-using System.Runtime.InteropServices;
-
 using SharpFont.Internal;
+using System;
 
 namespace SharpFont
 {
-	/// <summary>
-	/// The data exchange structure for the glyph-to-script-map property.
-	/// </summary>
-	public class GlyphToScriptMapProperty
-	{
-		private GlyphToScriptMapPropertyRec rec;
-		private Face face;
+    /// <summary>
+    /// The data exchange structure for the glyph-to-script-map property.
+    /// </summary>
+    public class GlyphToScriptMapProperty
+    {
+        private GlyphToScriptMapPropertyRec rec;
+        private Face face;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="GlyphToScriptMapProperty"/> class.
-		/// </summary>
-		/// <param name="face">The face to apply the property to.</param>
-		public GlyphToScriptMapProperty(Face face)
-		{
-			Face = face;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GlyphToScriptMapProperty"/> class.
+        /// </summary>
+        /// <param name="face">The face to apply the property to.</param>
+        public GlyphToScriptMapProperty(Face face)
+        {
+            Face = face;
+        }
 
-		internal GlyphToScriptMapProperty(GlyphToScriptMapPropertyRec rec, Face face)
-		{
-			this.rec = rec;
-			this.face = face;
-		}
+        internal GlyphToScriptMapProperty(GlyphToScriptMapPropertyRec rec, Face face)
+        {
+            this.rec = rec;
+            this.face = face;
+        }
 
-		/// <summary>
-		/// Gets or sets the associated face.
-		/// </summary>
-		public Face Face
-		{
-			get
-			{
-				return face;
-			}
+        /// <summary>
+        /// Gets or sets the associated face.
+        /// </summary>
+        public Face Face
+        {
+            get
+            {
+                return face;
+            }
 
-			set
-			{
-				face = value;
-				rec.face = face.Reference;
-			}
-		}
+            set
+            {
+                face = value;
+                rec.face = face.Reference;
+            }
+        }
 
-		/// <summary>
-		/// Gets or sets the associated map.
-		/// </summary>
-		public IntPtr Map
-		{
-			get
-			{
-				return rec.map;
-			}
+        /// <summary>
+        /// Gets or sets the associated map.
+        /// </summary>
+        public IntPtr Map
+        {
+            get
+            {
+                return rec.map;
+            }
 
-			set
-			{
-				rec.map = value;
-			}
-		}
+            set
+            {
+                rec.map = value;
+            }
+        }
 
-		internal GlyphToScriptMapPropertyRec Rec
-		{
-			get
-			{
-				return rec;
-			}
-		}
-	}
+        internal GlyphToScriptMapPropertyRec Rec
+        {
+            get
+            {
+                return rec;
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace VoxelPrototype.API.WorldGenerator
+﻿namespace VoxelPrototype.api.WorldGenerator
 {
     public static class WorldGeneratorRegistry
     {

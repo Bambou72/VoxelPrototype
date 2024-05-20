@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using VoxelPrototype.client;
-namespace VoxelPrototype.API
+namespace VoxelPrototype.api
 {
     internal class ClientAPI
     {
@@ -9,7 +9,7 @@ namespace VoxelPrototype.API
         {
             if (fullscreen)
             {
-               Client.TheClient.WindowState = WindowState.Fullscreen;
+                Client.TheClient.WindowState = WindowState.Fullscreen;
             }
             else
             {

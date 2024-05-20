@@ -1,5 +1,5 @@
 ﻿using LiteNetLib;
-namespace VoxelPrototype.API.Commands
+namespace VoxelPrototype.api.Commands
 {
     public interface ICommand
     {

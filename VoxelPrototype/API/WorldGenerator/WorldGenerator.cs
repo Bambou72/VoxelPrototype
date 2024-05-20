@@ -1,6 +1,6 @@
 ﻿using VoxelPrototype.common.Game.World;
 
-namespace VoxelPrototype.API.WorldGenerator
+namespace VoxelPrototype.api.WorldGenerator
 {
     public class WorldGenerator
     {

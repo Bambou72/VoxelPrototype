@@ -1,4 +1,4 @@
-﻿namespace VoxelPrototype.API.Items
+﻿namespace VoxelPrototype.api.Items
 {
     public class Item
     {

@@ -1,11 +1,9 @@
-﻿using OpenTK.Graphics.ES20;
-using OpenTK.Mathematics;
-using System.Net.Sockets;
-using VoxelPrototype.API.Blocks.State;
+﻿using OpenTK.Mathematics;
+using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client;
 using VoxelPrototype.client.Resources.data;
 using VoxelPrototype.common.Physics;
-namespace VoxelPrototype.API.Blocks
+namespace VoxelPrototype.api.Blocks
 {
     public class Block
     {
@@ -30,7 +28,7 @@ namespace VoxelPrototype.API.Blocks
         public virtual void RegisterProperties(BlockStateBuilder Builder)
         {
         }
-        
+
         public BlockState GetDefaultState()
         {
             return Default;
@@ -101,13 +99,13 @@ namespace VoxelPrototype.API.Blocks
         }
         public virtual Collider[] GetColliders()
         {
-            return new Collider[] { new Collider(Vector3d.Zero,Vector3d.One)};
+            return new Collider[] { new Collider(Vector3d.Zero, Vector3d.One) };
         }
-        public virtual void OnInteract(Vector3i BlockPosition, BlockState State,bool ServerSide)
+        public virtual void OnInteract(Vector3i BlockPosition, BlockState State, bool ServerSide)
         {
 
         }
-        public virtual void OnPlaced(Vector3i BlockPosition,BlockState State,bool ServerSide) 
+        public virtual void OnPlaced(Vector3i BlockPosition, BlockState State, bool ServerSide)
         {
 
         }

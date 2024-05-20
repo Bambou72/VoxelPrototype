@@ -2,12 +2,12 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using VoxelPrototype.common.Base;
-namespace VoxelPrototype.API
+namespace VoxelPrototype.api
 {
     internal static class ModManager
     {
         static Dictionary<string, IMod> ModList = new Dictionary<string, IMod>();
-        static Dictionary<string,string> ModPath = new Dictionary<string,string>();
+        static Dictionary<string, string> ModPath = new Dictionary<string, string>();
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private static string TempPath = "temp/mods";
         internal static void LoadMods()
@@ -25,15 +25,15 @@ namespace VoxelPrototype.API
                         zip.ExtractToDirectory(TempPath + "/" + Path.GetFileNameWithoutExtension(filePath));
                         string path = TempPath + "/" + Path.GetFileNameWithoutExtension(filePath);
                         Assembly ass = null;
-                        ass = Assembly.LoadFrom(path+"/"+Path.GetFileNameWithoutExtension(filePath)+".dll");
+                        ass = Assembly.LoadFrom(path + "/" + Path.GetFileNameWithoutExtension(filePath) + ".dll");
                         if (ass != null)
                         {
                             foreach (Type t in ass.GetTypes())
                             {
-                                if (t.GetInterface("VoxelPrototype.API.IMod") != null)
+                                if (t.GetInterface("VoxelPrototype.api.IMod") != null)
                                 {
                                     ModList.Add(t.Namespace, (IMod)Activator.CreateInstance(t));
-                                    ModPath.Add(t.Namespace,path);
+                                    ModPath.Add(t.Namespace, path);
                                     Logger.Info("Load a new mod: " + t.Name);
                                 }
                                 else

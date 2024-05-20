@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using VoxelPrototype.API.Blocks;
-using VoxelPrototype.API.Blocks.Properties;
-namespace VoxelPrototype.API.Blocks.State
+﻿using VoxelPrototype.api.Blocks.Properties;
+namespace VoxelPrototype.api.Blocks.State
 {
     public class BlockStateBuilder
     {

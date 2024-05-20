@@ -1,6 +1,6 @@
-﻿using VoxelPrototype.API.Blocks.State;
+﻿using VoxelPrototype.api.Blocks.State;
 
-namespace VoxelPrototype.API.Blocks
+namespace VoxelPrototype.api.Blocks
 {
     public static class BlockRegister
     {

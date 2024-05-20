@@ -1,8 +1,7 @@
-﻿using VoxelPrototype.API.Blocks;
-using VoxelPrototype.API.Blocks.Properties;
+﻿using VoxelPrototype.api.Blocks.Properties;
 using VoxelPrototype.VBF;
 
-namespace VoxelPrototype.API.Blocks.State
+namespace VoxelPrototype.api.Blocks.State
 {
     public class BlockState : IVBFSerializable<BlockState>
     {
@@ -129,11 +128,11 @@ namespace VoxelPrototype.API.Blocks.State
                     var Value = (VBFBool)prop.Value;
                     CurrentBlockState = CurrentBlockState.With(new BooleanProperty(prop.Key), Value.Value);
                 }
-                else if(prop.Value.GetType() == typeof(VBFCompound))
+                else if (prop.Value.GetType() == typeof(VBFCompound))
                 {
                     var Value = (VBFCompound)(prop.Value);
                     Type enumType = Type.GetType(Value.GetString("Type").Value);
-                    var parsed =Enum.Parse(enumType, Value.GetString("Value").Value);
+                    var parsed = Enum.Parse(enumType, Value.GetString("Value").Value);
                     var pro = Activator.CreateInstance(typeof(EnumProperty<>).MakeGenericType(enumType), prop.Key);
                     CurrentBlockState = CurrentBlockState.With((dynamic)pro, (dynamic)parsed);
                 }

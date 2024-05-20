@@ -1,5 +1,5 @@
 ﻿using VoxelPrototype.client.Render.Components;
-namespace VoxelPrototype.API.Items
+namespace VoxelPrototype.api.Items
 {
     public static class ItemRegister
     {

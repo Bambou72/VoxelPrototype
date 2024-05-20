@@ -1,4 +1,4 @@
-﻿namespace VoxelPrototype.API.Blocks.Properties
+﻿namespace VoxelPrototype.api.Blocks.Properties
 {
     public class BooleanProperty : Property<bool>
     {

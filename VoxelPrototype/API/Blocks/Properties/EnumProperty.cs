@@ -1,7 +1,7 @@
-﻿namespace VoxelPrototype.API.Blocks.Properties
+﻿namespace VoxelPrototype.api.Blocks.Properties
 {
 
-    public class EnumProperty<T> : Property<T> where T : struct,Enum 
+    public class EnumProperty<T> : Property<T> where T : struct, Enum
     {
         public EnumProperty(string name) : base(name)
         {

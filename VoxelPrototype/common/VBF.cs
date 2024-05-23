@@ -2,7 +2,7 @@
 //COPYRIGHTS Florian Pfeiffer
 //
 using System.Text;
-namespace VoxelPrototype.VBF
+namespace VoxelPrototype.common
 {
     public interface IVBFSerializableBinary<T> where T : class
     {

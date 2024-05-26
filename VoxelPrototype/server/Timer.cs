@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace VoxelPrototype.server
+﻿namespace VoxelPrototype.server
 {
     public class Timer
     {
@@ -23,7 +20,7 @@ namespace VoxelPrototype.server
         }
         public double GetTime()
         {
-            return (double)DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
+            return (double)DateTime.UtcNow.Ticks / TimeSpan.TicksPerSecond;
         }
         public void UpdateUPS()
         {
@@ -38,7 +35,7 @@ namespace VoxelPrototype.server
                 timeCount -= 1;
             }
         }
-       
+
         public int GetTPS()
         {
             return tps > 0 ? tps : tpsCount;

@@ -1,11 +1,11 @@
 ﻿using VoxelPrototype.client.Render.Components;
 namespace VoxelPrototype.api.Items
 {
-    public static class ItemRegister
+    public  class ItemRegister
     {
-        public static Dictionary<string, Item> Items = new Dictionary<string, Item>();
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        public static Texture GetTexture(string id)
+        public  Dictionary<string, Item> Items = new Dictionary<string, Item>();
+        private  readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        public  Texture GetTexture(string id)
         {
             Items.TryGetValue(id, out var item);
             if (item != null)
@@ -14,11 +14,8 @@ namespace VoxelPrototype.api.Items
             }
             return null;
         }
-        public static string GetItemID(string ModName, string ItemName)
-        {
-            return ModName + "@" + ItemName;
-        }
-        public static bool RegisterItem(string Id, Item block)
+
+        public  bool RegisterItem(string Id, Item block)
         {
             try
             {

@@ -2,21 +2,23 @@
 
 namespace VoxelPrototype.api.Blocks
 {
-    public static class BlockRegister
+    public class BlockRegister
     {
-        internal static Dictionary<string, Block> Blocks = new Dictionary<string, Block>();
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        public static BlockState Air;
-        internal static void Initialize()
+        internal Dictionary<string, Block> Blocks = new Dictionary<string, Block>();
+        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        public BlockState Air;
+
+        public BlockRegister()
         {
             RegisterBlock("air", new Block() { Transparency = true });
             Air = GetBlock("air").GetDefaultState();
+
         }
-        public static string GetBlockID(string ModName, string BlockName)
+        public  string GetBlockID(string ModName, string BlockName)
         {
-            return ModName + "@" + BlockName;
+            return ModName + ":" + BlockName;
         }
-        public static bool RegisterBlock(string Id, Block block)
+        public  bool RegisterBlock(string Id, Block block)
         {
             try
             {
@@ -31,11 +33,11 @@ namespace VoxelPrototype.api.Blocks
                 return false;
             }
         }
-        public static Block GetBlock(string Id)
+        public  Block GetBlock(string Id)
         {
             return Blocks[Id];
         }
-        internal static int GetTransForAO(BlockState ID)
+        internal  int GetTransForAO(BlockState ID)
         {
             if (ID == Air)
             {

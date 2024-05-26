@@ -6,7 +6,8 @@
         public static string NameSpace { get; }
         public string Description { get; }
         public string Version { get; }
-        public void Init();
-        public void DeInit();
+        public void PreInit(ModManager Manager);
+        public void Init(ModManager Manager);
+        public void DeInit(ModManager Manager);
     }
 }

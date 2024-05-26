@@ -1,4 +1,4 @@
-﻿using VoxelPrototype.common.Game.World;
+﻿using VoxelPrototype.common.World;
 
 namespace VoxelPrototype.api.WorldGenerator
 {

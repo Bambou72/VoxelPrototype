@@ -1,18 +1,35 @@
 ﻿using System.IO.Compression;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using VoxelPrototype.common.Base;
+using VoxelPrototype.api.Blocks;
+using VoxelPrototype.api.Commands;
+using VoxelPrototype.api.Items;
+using VoxelPrototype.api.WorldGenerator;
 namespace VoxelPrototype.api
 {
-    internal static class ModManager
+    public class ModManager
     {
-        static Dictionary<string, IMod> ModList = new Dictionary<string, IMod>();
-        static Dictionary<string, string> ModPath = new Dictionary<string, string>();
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        private static string TempPath = "temp/mods";
-        internal static void LoadMods()
+        internal Dictionary<string, IMod> ModList = new Dictionary<string, IMod>();
+        internal  Dictionary<string, string> ModPath = new Dictionary<string, string>();
+        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private string TempPath = "temp/mods";
+        public BlockRegister BlockRegister;
+        public ItemRegister ItemRegister;
+        public CommandRegister CommandRegister;
+        public WorldGeneratorRegistry WorldGeneratorRegistry;
+        public ModManager()
         {
-            ModList.Add("Base", new Base());
+            var VoxelPrototype = new  common.Game.VoxelPrototype();
+            ModList.Add(VoxelPrototype.Name, VoxelPrototype) ;
+            ModPath.Add(VoxelPrototype.Name, null);
+            BlockRegister = new BlockRegister();
+            ItemRegister = new ItemRegister();
+            CommandRegister = new CommandRegister();
+            WorldGeneratorRegistry = new WorldGeneratorRegistry();
+        }
+
+        internal void LoadMods()
+        {
             CleanTempFolder();
             Logger.Info("The mod temp folder has been cleaned.");
             string[] Mods = Directory.GetFiles("mods", "*.modif");
@@ -32,8 +49,9 @@ namespace VoxelPrototype.api
                             {
                                 if (t.GetInterface("VoxelPrototype.api.IMod") != null)
                                 {
-                                    ModList.Add(t.Namespace, (IMod)Activator.CreateInstance(t));
-                                    ModPath.Add(t.Namespace, path);
+                                    var temp = (IMod)Activator.CreateInstance(t);
+                                    ModList.Add(t.Name, temp);
+                                    ModPath.Add(t.Name, path);
                                     Logger.Info("Load a new mod: " + t.Name);
                                 }
                                 else
@@ -50,22 +68,37 @@ namespace VoxelPrototype.api
                 }
             }
         }
-        internal static void Init()
+        internal void PreInit()
         {
             foreach (IMod mod in ModList.Values)
             {
                 try
                 {
-                    mod.Init();
+                    mod.PreInit(this);
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex, "{Name} failed to load.", mod.Name);
+                    Logger.Error(ex, "{Name} failed to preinit.", mod.Name);
+                }
+            }
+            Logger.Info("All mods are preinitialized.");
+        }
+        internal  void Init()
+        {
+            foreach (IMod mod in ModList.Values)
+            {
+                try
+                {
+                    mod.Init(this);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "{Name} failed to init.", mod.Name);
                 }
             }
             Logger.Info("All mods are initialized.");
         }
-        public static void CleanTempFolder()
+        public  void CleanTempFolder()
         {
             if (!Path.Exists(TempPath))
             {
@@ -77,7 +110,7 @@ namespace VoxelPrototype.api
                 Directory.CreateDirectory(TempPath + "/");
             }
         }
-        public static void RecursiveDelete(DirectoryInfo baseDir, bool isRootDir)
+        public  void RecursiveDelete(DirectoryInfo baseDir, bool isRootDir)
         {
             if (!baseDir.Exists)
                 return;

@@ -1,10 +1,10 @@
 ﻿namespace VoxelPrototype.api.WorldGenerator
 {
-    public static class WorldGeneratorRegistry
+    public class WorldGeneratorRegistry
     {
-        private static Dictionary<string, Type> GeneratorTypes = new();
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        public static bool RegisterWorldGenerator(string Name, Type Generator)
+        private Dictionary<string, Type> GeneratorTypes = new();
+        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        public bool RegisterWorldGenerator(string Name, Type Generator)
         {
             try
             {
@@ -17,7 +17,7 @@
                 return false;
             }
         }
-        public static WorldGenerator CreateWorldGenerator(string name)
+        public WorldGenerator CreateWorldGenerator(string name)
         {
             if (GeneratorTypes.ContainsKey(name))
             {
@@ -29,7 +29,7 @@
             }
             return null; // Ou lancez une exception, selon votre logique de gestion d'erreurs.
         }
-        public static string[] AllGeneratorsName()
+        public string[] AllGeneratorsName()
         {
             return GeneratorTypes.Keys.ToArray();
         }

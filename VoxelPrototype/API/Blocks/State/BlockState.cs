@@ -1,9 +1,10 @@
 ﻿using VoxelPrototype.api.Blocks.Properties;
-using VoxelPrototype.VBF;
+using VoxelPrototype.client;
+using VoxelPrototype.common;
 
 namespace VoxelPrototype.api.Blocks.State
 {
-    public class BlockState : IVBFSerializable<BlockState>
+    public class BlockState : IVBFSerializable<BlockState> , IEquatable<BlockState>
     {
         public Block Block { get; }
         public uint ID { get; }
@@ -60,6 +61,12 @@ namespace VoxelPrototype.api.Blocks.State
                 throw new InvalidOperationException($"Block state for {Block.ID} doesn't allow the value {value} for property {property.Name}.");
             }
             return state;
+        }
+        public bool Equals(BlockState? other)
+        {
+           if(other.ID != this.ID) return false;
+           if(other.Block.ID != this.Block.ID) return false;
+           return true;
         }
         public override bool Equals(object obj)
         {
@@ -118,7 +125,7 @@ namespace VoxelPrototype.api.Blocks.State
         }
         public BlockState Deserialize(VBFCompound compound)
         {
-            var Block = BlockRegister.GetBlock(compound.GetString("ID").Value);
+            var Block = Client.TheClient.ModManager.BlockRegister.GetBlock(compound.GetString("ID").Value);
             var CurrentBlockState = Block.GetDefaultState();
 
             foreach (var prop in compound.Get<VBFCompound>("Properties").Tags)
@@ -139,5 +146,7 @@ namespace VoxelPrototype.api.Blocks.State
             }
             return CurrentBlockState;
         }
+
+        
     }
 }

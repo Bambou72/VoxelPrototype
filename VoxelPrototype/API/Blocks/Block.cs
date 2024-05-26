@@ -1,7 +1,9 @@
 ﻿using OpenTK.Mathematics;
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client;
-using VoxelPrototype.client.Resources.data;
+using VoxelPrototype.client.Render.Components;
+using VoxelPrototype.client.Resources;
+using VoxelPrototype.client.Resources.Managers;
 using VoxelPrototype.common.Physics;
 namespace VoxelPrototype.api.Blocks
 {
@@ -12,8 +14,8 @@ namespace VoxelPrototype.api.Blocks
         public BlockStateHolder StateHolder;
         private BlockState Default;
         internal string ID;
-        public string Model;
-        public string Data;
+        public ResourceID Model;
+        public ResourceID Data;
         public float Friction = 8;
         public int BreakingTime = 20;
         public BlockRenderType RenderType;
@@ -37,7 +39,7 @@ namespace VoxelPrototype.api.Blocks
         {
             try
             {
-                var modelData = Client.TheClient.ResourcePackManager.GetBlockMesh(Model);
+                var modelData = Client.TheClient.ModelManager.GetBlockMesh(Model);
                 return modelData.GetMesh()[Face];
 
             }
@@ -52,7 +54,7 @@ namespace VoxelPrototype.api.Blocks
         {
             try
             {
-                var modelData = Client.TheClient.ResourcePackManager.GetBlockMesh(Model);
+                var modelData = Client.TheClient.ModelManager.GetBlockMesh(Model);
                 return modelData.GetUV()[Face];
             }
             catch (Exception e)
@@ -63,9 +65,10 @@ namespace VoxelPrototype.api.Blocks
         }
         internal float[] GetTextureCoordinates(int Face, BlockState State)
         {
+            var Atlas = (TextureAtlas)(Client.TheClient.TextureManager.GetTexture(new ResourceID("textures/block/atlas")));
             try
             {
-                BlockStateData StateData = Client.TheClient.ResourcePackManager.GetBlockStateData(this.Data);
+                BlockStateData StateData = Client.TheClient.BlockDataManager.GetBlockStateData(this.Data);
                 BlockData Data;
                 if (StateHolder.GetStates().Count == 1)
                 {
@@ -82,19 +85,21 @@ namespace VoxelPrototype.api.Blocks
                         Data = StateData.variants[""];
                     }
                 }
+               
+
                 if (Data.textures.all != null)
                 {
-                    return Client.TheClient.ResourcePackManager.GetAtlasTexturesCoord(Data.textures.all);
+                    return Atlas.GetCoordinates(ResourceID.FromString(Data.textures.all));
                 }
                 else
                 {
-                    return Client.TheClient.ResourcePackManager.GetAtlasTexturesCoord(Data.textures.textures[Face]);
+                    return Atlas.GetCoordinates(ResourceID.FromString(Data.textures.textures[Face]));
                 }
             }
             catch (Exception e)
             {
                 Logger.Error(e);
-                return Client.TheClient.ResourcePackManager.GetAtlasTexturesCoord("unknow");
+                return Atlas.GetCoordinates(ResourceID.FromString("unknow"));
             }
         }
         public virtual Collider[] GetColliders()

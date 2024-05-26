@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 namespace VoxelPrototype.client.Utils
 {
-    public static class Console
+    public static class ConsoleUtils
     {
         [DllImport("kernel32.dll")]
         public static extern nint GetConsoleWindow();

@@ -6,10 +6,8 @@ using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Numerics;
-using ErrorCode = OpenTK.Graphics.OpenGL4.ErrorCode;
+using System.Runtime.CompilerServices;
 namespace VBFViewer
 {
     public class ImGuiController : IDisposable

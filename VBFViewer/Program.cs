@@ -3,7 +3,6 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 using VBFViewer;
 
 public static class Program
@@ -31,8 +30,8 @@ public static class Program
 }
 public class Window : GameWindow
 {
-    public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings) 
-    { 
+    public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
+    {
 
     }
     ImGuiController Controller;
@@ -72,7 +71,7 @@ public class Window : GameWindow
     {
         base.OnResize(e);
         GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
-        if(Controller != null)
+        if (Controller != null)
         {
             Controller.WindowResized(ClientSize.X, ClientSize.Y); ;
 

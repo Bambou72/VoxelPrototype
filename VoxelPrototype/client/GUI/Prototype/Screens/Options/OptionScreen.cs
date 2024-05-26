@@ -19,8 +19,8 @@ namespace VoxelPrototype.client.GUI.Prototype.Screens.Options
         {
             base.Render(Renderer);
             string Version = "V" + EngineVersion.Version.ToString() + "{" + Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyMetadataAttribute>()?.Value + "}";
-            Renderer.RenderText("Voxel@opensans", Version
-    , new Vector2(Size.X / 2 - TextSizeCalculator.CalculateSize("Voxel@opensans", 20, Version) / 2, Size.Y - 10), 20);
+            Renderer.RenderText(new Resources.ResourceID("font/opensans"), Version
+    , new Vector2(Size.X / 2 - TextSizeCalculator.CalculateSize(new Resources.ResourceID("font/opensans"), 20, Version) / 2, Size.Y - 10), 20);
 
         }
         public OptionScreen()

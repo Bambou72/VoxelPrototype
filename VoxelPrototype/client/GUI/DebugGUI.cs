@@ -1,11 +1,10 @@
 ﻿using ImGuiNET;
 using OpenTK.Mathematics;
-using VoxelPrototype.API;
+using VoxelPrototype.api;
 using VoxelPrototype.client.Render.Debug;
-using VoxelPrototype.common.Game.Entities;
-using VoxelPrototype.common.Game.World;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.server;
+using VoxelPrototype.common.World;
 using VoxelPrototype.server;
 namespace VoxelPrototype.client.GUI
 {
@@ -23,11 +22,11 @@ namespace VoxelPrototype.client.GUI
             ImGui.PushStyleColor(ImGuiCol.Border, ImGui.ColorConvertFloat4ToU32(new System.Numerics.Vector4(0)));
             ImGui.Begin("DebugMenu", ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoTitleBar);
             ImGui.SetWindowPos(new System.Numerics.Vector2(0, 0));
-            System.Numerics.Vector4 Black = new System.Numerics.Vector4(1, 0f,0f,1);
-            ImGui.TextColored(Black,"Profiling:");
+            System.Numerics.Vector4 Black = new System.Numerics.Vector4(1, 0f, 0f, 1);
+            ImGui.TextColored(Black, "Profiling:");
             ImGui.TextColored(Black, $"Fps average {1000.0f / ImGui.GetIO().Framerate:0.##} ms/frame ({ImGui.GetIO().Framerate:0.#} FPS)");
             ImGui.SeparatorText("Client");
-            if(Client.TheClient.World.Initialized)
+            if (Client.TheClient.World.Initialized)
             {
                 ImGui.TextColored(Black, "Player position" + Client.TheClient.World.PlayerFactory.LocalPlayer.Position);
             }
@@ -45,9 +44,7 @@ namespace VoxelPrototype.client.GUI
             }
             ImGui.TextColored(Black, "Game Version:");
             ImGui.TextColored(Black, "Client engine version: " + EngineVersion.Version);
-            ImGui.TextColored(Black, "Client api version: " + APIVersion.Version);
             ImGui.TextColored(Black, "Server engine version: " + ClientNetwork.ServerEngineVersion);
-            ImGui.TextColored(Black, "Server api version: " + ClientNetwork.ServerAPIVersion);
             ImGui.PopStyleColor(2);
         }
         internal static void RenderDebug()
@@ -63,7 +60,7 @@ namespace VoxelPrototype.client.GUI
                         {
                             Size = new Vector3d(entity.EntityWidth, entity.EntityHeight, entity.EntityWidth),
                             Color = new Vector4(1f, 0f, 0f, 1f),
-                            Position = new Vector3((float)entity.Coll.x1 , (float)(entity.Coll.y1 ), (float)(entity.Coll.z1)),
+                            Position = new Vector3((float)entity.Coll.x1, (float)(entity.Coll.y1), (float)(entity.Coll.z1)),
                             Rotation = Quaternion.Identity,
                         });
                     }
@@ -75,9 +72,9 @@ namespace VoxelPrototype.client.GUI
                     {
                         DebugShapeRenderer.RenderDebugBox(new DebugBox()
                         {
-                            Size = new Vector3d(Chunk.Size,Chunk.Height * Section.Size,Chunk.Size),
+                            Size = new Vector3d(Chunk.Size, Chunk.Height * Section.Size, Chunk.Size),
                             Color = new Vector4(1f, 0f, 0f, 1f),
-                            Position = new Vector3(pos.X ,0, pos.Y ) * Chunk.Size,
+                            Position = new Vector3(pos.X, 0, pos.Y) * Chunk.Size,
                             Rotation = Quaternion.Identity,
                         });
                     }

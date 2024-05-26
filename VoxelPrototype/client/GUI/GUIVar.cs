@@ -2,7 +2,8 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
-using VoxelPrototype.API;
+using OpenTK.Windowing.GraphicsLibraryFramework;
+using VoxelPrototype.api;
 using VoxelPrototype.client.Debug;
 namespace VoxelPrototype.client.GUI
 {
@@ -115,6 +116,72 @@ namespace VoxelPrototype.client.GUI
         {
             MultiplayerGUI.SaveSevers();
         }
+        internal static void Update()
+        {
+            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.T) && !InInputText)
+            {
+                if (!ConsoleMenu)
+                {
+                    Client.TheClient.InputEventManager.NoInput = true;
+                    ConsoleMenu = true;
+                    ClientAPI.SetCursorState(CursorState.Normal);
+                    Client.TheClient.InputEventManager.Grab = false;
+                }
+                else
+                {
+                    ConsoleMenu = false;
+                    Client.TheClient.InputEventManager.NoInput = false;
+                    ClientAPI.SetCursorState(CursorState.Grabbed);
+                    Client.TheClient.InputEventManager.Grab = true;
+                }
+            }
+            if (ConsoleMenu == true && Client.TheClient.InputEventManager.IsKeyPressed(Keys.Escape))
+            {
+                ConsoleMenu = false;
+                Client.TheClient.InputEventManager.NoInput = false;
+                ClientAPI.SetCursorState(CursorState.Grabbed);
+                Client.TheClient.InputEventManager.Grab = true;
+            }
+            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.Escape) && !ConsoleMenu && Client.TheClient.World.Initialized)
+            {
+                if (GUIVar.IngameMenu)
+                {
+                    GUIVar.IngameMenu = false;
+                    ClientAPI.SetCursorState(CursorState.Grabbed);
+                    Client.TheClient.InputEventManager.Grab = true;
+                }
+                else
+                {
+                    GUIVar.IngameMenu = true;
+                    ClientAPI.SetCursorState(CursorState.Normal);
+                    Client.TheClient.InputEventManager.Grab = false;
+                }
+            }
+            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.F2))
+            {
+                if (Client.TheClient.InputEventManager.Grab == false)
+                {
+                    ClientAPI.SetCursorState(CursorState.Grabbed);
+                    Client.TheClient.InputEventManager.Grab = true;
+                }
+                else
+                {
+                    ClientAPI.SetCursorState(CursorState.Normal);
+                    Client.TheClient.InputEventManager.Grab = false;
+                }
+            }
+            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.F1))
+            {
+                if (GUIVar.DebugMenu == false)
+                {
+                    GUIVar.DebugMenu = true;
+                }
+                else
+                {
+                    GUIVar.DebugMenu = false;
+                }
+            }
+        }
         internal static void RenderI()
         {
             if (DebugMenu)
@@ -147,30 +214,7 @@ namespace VoxelPrototype.client.GUI
             }
             if (Client.TheClient.World.Initialized)
             {
-                if (InputSystem.KeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.T) && !InInputText)
-                {
-                    if (!ConsoleMenu)
-                    {
-                        InputSystem.NoInput = true;
-                        ConsoleMenu = true;
-                        ClientAPI.SetCursorState(CursorState.Normal);
-                        InputSystem.Grab = false;
-                    }
-                    else
-                    {
-                        ConsoleMenu = false;
-                        InputSystem.NoInput = false;
-                        ClientAPI.SetCursorState(CursorState.Grabbed);
-                        InputSystem.Grab = true;
-                    }
-                }
-                if (ConsoleMenu == true && InputSystem.KeyPressed(OpenTK.Windowing.GraphicsLibraryFramework.Keys.Escape))
-                {
-                    ConsoleMenu = false;
-                    InputSystem.NoInput = false;
-                    ClientAPI.SetCursorState(CursorState.Grabbed);
-                    InputSystem.Grab = true;
-                }
+                
                 if (ConsoleMenu)
                 {
                     Console.ConsoleDraw();
@@ -214,5 +258,6 @@ namespace VoxelPrototype.client.GUI
         {
             Controller.PressChar(Char);
         }
+
     }
 }

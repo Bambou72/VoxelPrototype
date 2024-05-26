@@ -1,11 +1,12 @@
 ﻿using VoxelPrototype.client.Render.Text;
+using VoxelPrototype.client.Resources;
 namespace VoxelPrototype.client.GUI.Prototype.Utils
 {
     public static class TextSizeCalculator
     {
-        public static float CalculateSize(string Font, float Scale, string Text)
+        public static float CalculateSize(ResourceID Font, float Scale, string Text)
         {
-            var RealFont = Client.TheClient.ResourcePackManager.GetFont(Font);
+            var RealFont = Client.TheClient.FontManager.GetFont(Font);
 
             Scale = Scale / RealFont.FontSize;
             float size = 0;
@@ -15,9 +16,9 @@ namespace VoxelPrototype.client.GUI.Prototype.Utils
             }
             return size;
         }
-        public static float CalculateVerticalSize(string Font, float Scale, string Text)
+        public static float CalculateVerticalSize(ResourceID Font, float Scale, string Text)
         {
-            var RealFont = Client.TheClient.ResourcePackManager.GetFont(Font);
+            var RealFont = Client.TheClient.FontManager.GetFont(Font);
             Scale = Scale / RealFont.FontSize;
 
             float size = 0;

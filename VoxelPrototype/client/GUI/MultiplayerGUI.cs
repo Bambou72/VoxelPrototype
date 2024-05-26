@@ -38,7 +38,7 @@ namespace VoxelPrototype.client.GUI
                 if (ImGui.Button("Connect"))
                 {
                     ClientNetwork.Connect(Servers[i].Ip, Servers[i].Port);
-                    GUIVar.MainMenu = false;
+                    //GUIVar.MainMenu = false;
                 }
                 ImGui.SameLine();
                 if (ImGui.Button("Delete"))

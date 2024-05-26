@@ -23,8 +23,8 @@ namespace VoxelPrototype.client.GUI.Prototype.Elements
         public override void Render(UIRenderer Renderer)
         {
             Renderer.RenderTextureQuad(Position, Size, Active ? Color : UIStyle.ButtonColor);
-            Renderer.RenderText("Voxel@opensans", Text, Position +
-                new Vector2(Size.X / 2, Size.Y / 2 + TextSizeCalculator.CalculateVerticalSize("Voxel@opensans", 24, Text) / 2),
+            Renderer.RenderText(new Resources.ResourceID("font/opensans"), Text, Position +
+                new Vector2(Size.X / 2, Size.Y / 2 + TextSizeCalculator.CalculateVerticalSize(new Resources.ResourceID("font/opensans"), 24, Text) / 2),
                 24, AlignType: AlignementType.Center);
         }
         public override bool OnMouseClicked(MouseClickedEvent Event)

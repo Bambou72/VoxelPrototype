@@ -1,7 +1,7 @@
 ﻿using ImGuiNET;
 using System.Numerics;
-using VoxelPrototype.API;
-using VoxelPrototype.API.Commands;
+using VoxelPrototype.api;
+using VoxelPrototype.api.Commands;
 namespace VoxelPrototype.client.GUI
 {
     internal static class Console
@@ -45,8 +45,8 @@ namespace VoxelPrototype.client.GUI
                 ImGui.EndChild();
                 ImGuiInputTextFlags flags = ImGuiInputTextFlags.EnterReturnsTrue;
                 ImGui.SetNextItemWidth(485);
-                ImGui.InputText("##input", ref inputText, 100, flags) ;
-                
+                ImGui.InputText("##input", ref inputText, 100, flags);
+
                 GUIVar.InInputText = ImGui.IsItemActive();
                 if (ImGui.IsWindowFocused(ImGuiFocusedFlags.RootAndChildWindows) && !ImGui.IsAnyItemActive() && !ImGui.IsMouseClicked(0))
                 {
@@ -58,7 +58,7 @@ namespace VoxelPrototype.client.GUI
                     ImGui.SetKeyboardFocusHere(-1);
 
                     ClientChat.SendMessage(inputText);
-                    if (inputText.Length > 0 && inputText[0] == CommandRegister.commandPrefix)
+                    if (inputText.Length > 0 && inputText[0] == Client.TheClient.ModManager.CommandRegister.commandPrefix)
                     {
                         AddToConsoleHistory(inputText);
                     }
@@ -105,7 +105,7 @@ namespace VoxelPrototype.client.GUI
             {
                 return;
             }
-            suggestions = CommandRegister.autocommands.Where(cmd => cmd.StartsWith(inputText)).ToList();
+            suggestions = Client.TheClient.ModManager.CommandRegister.autocommands.Where(cmd => cmd.StartsWith(inputText)).ToList();
             if (suggestions.Count > 0)
             {
                 showAutoComplete = true;

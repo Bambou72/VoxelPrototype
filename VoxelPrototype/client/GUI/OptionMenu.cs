@@ -1,14 +1,14 @@
 ﻿using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
 using System.Numerics;
-using VoxelPrototype.API;
+using VoxelPrototype.api;
 using VoxelPrototype.server;
 namespace VoxelPrototype.client.GUI
 {
     internal static class OptionMenu
     {
         static float Fov;
-        internal static float FrustumFov=70;
+        internal static float FrustumFov = 70;
         static bool FollowCameraFov = true;
         static bool WireFrameView = false;
         static bool Fullscreen = false;
@@ -51,7 +51,7 @@ namespace VoxelPrototype.client.GUI
         private static void GraphicOption()
         {
             if (ImGui.Checkbox("Fullscreen", ref Fullscreen)) { ClientAPI.SetFullscreen(Fullscreen); };
-            if (ImGui.DragFloat("FOV", ref Fov,0.5f, 1, 110))
+            if (ImGui.DragFloat("FOV", ref Fov, 0.5f, 1, 110))
             {
                 Client.TheClient.World.GetLocalPlayerCamera().Fov = Fov;
             }
@@ -73,7 +73,7 @@ namespace VoxelPrototype.client.GUI
                 {
                     if (Client.TheClient.EmbedderServer != null && Client.TheClient.EmbedderServer.IsRunning())
                     {
-                        Server.TheServer.World.LoadDistance = Client.TheClient.World.RenderDistance+1;
+                        Server.TheServer.World.LoadDistance = Client.TheClient.World.RenderDistance + 1;
                     }
                 }
             }

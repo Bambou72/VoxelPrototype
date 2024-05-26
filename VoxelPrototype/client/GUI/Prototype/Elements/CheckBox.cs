@@ -23,7 +23,7 @@ namespace VoxelPrototype.client.GUI.Prototype.Elements
         {
             if (Value)
             {
-                Renderer.RenderTextureQuad(Position, Size, Vector4.One, "Voxel@ui/icons", new Vector2(0f, 1f), new Vector2(0.5f, 0.5f));
+                Renderer.RenderTextureQuad(Position, Size, Vector4.One, new Resources.ResourceID("textures/gui/icons"), new Vector2(0f, 1f), new Vector2(0.5f, 0.5f));
             }
             Renderer.RenderTextureQuad(Position, Size, UIStyle.ButtonColor);
         }

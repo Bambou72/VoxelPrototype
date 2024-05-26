@@ -3,6 +3,7 @@ using System.Reflection;
 using VoxelPrototype.client.GUI.Prototype.Elements;
 using VoxelPrototype.client.GUI.Prototype.Layouts;
 using VoxelPrototype.client.GUI.Prototype.Utils;
+using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Render.UI;
 
 namespace VoxelPrototype.client.GUI.Prototype.Screens
@@ -28,12 +29,12 @@ namespace VoxelPrototype.client.GUI.Prototype.Screens
         {
 
             Renderer.RenderTextureQuad(new Vector2(Size.X / 2 - Size.X * 0.4f / 2, (int)(Size.Y * 0.05f)),
-              new Vector2(Size.X * 0.4f, Size.X * 0.4f / 3.49f), Vector4.One, "Voxel@ui/title", TextureStart: Vector2.Zero, TextureEnd: Vector2.One);
+              new Vector2(Size.X * 0.4f, Size.X * 0.4f / 3.49f), Vector4.One, new Resources.ResourceID("textures/gui/title"), TextureStart: Vector2.Zero, TextureEnd: Vector2.One);
             base.Render(Renderer);
-            Renderer.RenderText("Voxel@opensans", "V" + EngineVersion.Version.ToString()
+            Renderer.RenderText(new Resources.ResourceID("font/opensans"), "V" + EngineVersion.Version.ToString()
                 , new Vector2(10, Size.Y - 10), 22);
-            Renderer.RenderText("Voxel@opensans", "©Florian Pfeiffer"
-                , new Vector2(Size.X - TextSizeCalculator.CalculateSize("Voxel@opensans", 22, "©Florian Pfeiffer") - 10, Size.Y - 10), 22);
+            Renderer.RenderText(new Resources.ResourceID("font/opensans"), "©Florian Pfeiffer"
+                , new Vector2(Size.X - TextSizeCalculator.CalculateSize(new Resources.ResourceID("font/opensans"), 22, "©Florian Pfeiffer") - 10, Size.Y - 10), 22);
         }
         public override void Compose(Vector2i ScreenSize)
         {

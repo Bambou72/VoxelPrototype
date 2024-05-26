@@ -1,8 +1,10 @@
 ﻿using ImGuiNET;
+using OpenTK.Graphics.ES30;
 using System.Numerics;
-using VoxelPrototype.API.WorldGenerator;
+using VoxelPrototype.api.WorldGenerator;
 using VoxelPrototype.common.Game;
 using VoxelPrototype.common.Network.client;
+using VoxelPrototype.common.World;
 namespace VoxelPrototype.client.GUI
 {
     internal static class SingleplayerGUI
@@ -46,10 +48,10 @@ namespace VoxelPrototype.client.GUI
         {
             ImGui.Text("World Name: "); ImGui.SameLine(); ImGui.InputText("## wc1", ref WorldName, 100);
             ImGui.Text("World Seed: "); ImGui.SameLine(); ImGui.InputText("## wc3", ref WorldSeed, 10);
-            ImGui.Combo("World Generators",ref CurrentWorldGenerator,WorldGeneratorRegistry.AllGeneratorsName(), WorldGeneratorRegistry.AllGeneratorsName().Length);
+            ImGui.Combo("World Generators", ref CurrentWorldGenerator,Client.TheClient.ModManager.WorldGeneratorRegistry.AllGeneratorsName(), Client.TheClient.ModManager.WorldGeneratorRegistry.AllGeneratorsName().Length);
             if (ImGui.Button("Create", new Vector2(200, 75)))
             {
-                var param = new WorldSettings(WorldSeed == "" ? new Random().Next() : int.Parse(WorldSeed), WorldGeneratorRegistry.AllGeneratorsName()[CurrentWorldGenerator], WorldName);
+                var param = new WorldSettings(WorldSeed == "" ? new Random().Next() : int.Parse(WorldSeed), Client.TheClient.ModManager.WorldGeneratorRegistry.AllGeneratorsName()[CurrentWorldGenerator], WorldName);
                 Client.TheClient.EmbedderServer = new(param, "worlds/" + WorldName + "/");
                 Client.TheClient.EmbedderServer.Run();
                 ClientNetwork.Connect("localhost", 23482);

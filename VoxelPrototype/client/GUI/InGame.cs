@@ -1,7 +1,7 @@
 ﻿using ImGuiNET;
 using OpenTK.Windowing.Common;
 using System.Numerics;
-using VoxelPrototype.API;
+using VoxelPrototype.api;
 using VoxelPrototype.common.Network.client;
 namespace VoxelPrototype.client.GUI
 {
@@ -19,7 +19,7 @@ namespace VoxelPrototype.client.GUI
             {
                 GUIVar.IngameMenu = false;
                 ClientAPI.SetCursorState(CursorState.Grabbed);
-                InputSystem.Grab = true;
+                Client.TheClient.InputEventManager.Grab = true;
                 Option = false;
             }
             ImGui.Dummy(new Vector2(0, 10));
@@ -32,7 +32,7 @@ namespace VoxelPrototype.client.GUI
             {
                 Client.TheClient.DeInitWorld();
                 ClientNetwork.Deconnect();
-                Client.TheClient.EmbedderServer.Stop();              
+                Client.TheClient.EmbedderServer.Stop();
                 GUIVar.MainMenu = true;
                 GUIVar.IngameMenu = false;
                 Option = true;

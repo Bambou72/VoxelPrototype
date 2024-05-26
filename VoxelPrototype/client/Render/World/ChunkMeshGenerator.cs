@@ -1,13 +1,18 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using NLog;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using VoxelPrototype.API.Blocks;
-using VoxelPrototype.API.Blocks.State;
-using VoxelPrototype.common.Game.World;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using VoxelPrototype.api.Blocks;
+using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.client.Render.UI;
+using VoxelPrototype.common.World;
 namespace VoxelPrototype.client.Render.World
 {
     public class ChunkMeshGenerator
     {
-        internal List<float> Vertices;
+        internal List<ChunkVertex> Vertices;
         List<uint> Indices;
         uint IndexCounter = 0;
         internal Vector2i pos;
@@ -28,251 +33,303 @@ namespace VoxelPrototype.client.Render.World
             Ch.State &= ~ChunkSate.Changed;
             return new ChunkMesh() { VAO = VAO, VBO = VBO, EBO = EBO, IndC = IndexCount, VertC = VerticeCount };
         }
-        private (int, int, int) GenerateVAO(float[] Vertices)
+        private (int, int, int) GenerateVAO(ChunkVertex[] Vertices)
         {
             int VAO = GL.GenVertexArray();
             int VBO = GL.GenBuffer();
-            int EBO = GL.GenBuffer();
             var ChunkShader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/chunk"));
             GL.BindVertexArray(VAO);
             GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
-            GL.BufferData(BufferTarget.ArrayBuffer, Vertices.Length * sizeof(float), Vertices, BufferUsageHint.StaticDraw);
-            var vertexLocation = Client.TheClient.ResourcePackManager.GetShader("Voxel@chunk").GetAttribLocation("Vertex");
+            GL.BufferData(BufferTarget.ArrayBuffer, Vertices.Length * Unsafe.SizeOf<ChunkVertex>(), Vertices, BufferUsageHint.StaticDraw);
+            var vertexLocation = ChunkShader.GetAttribLocation("Vertex");
             GL.EnableVertexAttribArray(vertexLocation);
-            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 6 * sizeof(float), 0);
-            var texCoordLocation = Client.TheClient.ResourcePackManager.GetShader("Voxel@chunk").GetAttribLocation("Texture");
+            GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, Unsafe.SizeOf<ChunkVertex>(), 0);
+            var texCoordLocation = ChunkShader.GetAttribLocation("Texture");
             GL.EnableVertexAttribArray(texCoordLocation);
-            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 6 * sizeof(float), 3 * sizeof(float));
-            var AOLocation = Client.TheClient.ResourcePackManager.GetShader("Voxel@chunk").GetAttribLocation("AO");
+            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, Unsafe.SizeOf<ChunkVertex>(), Marshal.OffsetOf<ChunkVertex>("Uv"));
+            var AOLocation = ChunkShader.GetAttribLocation("AO");
             GL.EnableVertexAttribArray(AOLocation);
-            GL.VertexAttribPointer(AOLocation, 1, VertexAttribPointerType.Float, false, 6 * sizeof(float), 5 * sizeof(float));
+            GL.VertexAttribIPointer(AOLocation, 1, VertexAttribIntegerType.Int, Unsafe.SizeOf<ChunkVertex>(), Marshal.OffsetOf<ChunkVertex>("AO"));
+            
             //EBO
+            int EBO = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, EBO);
             GL.BufferData(BufferTarget.ElementArrayBuffer, Indices.Count * sizeof(uint), Indices.ToArray(), BufferUsageHint.StaticDraw);
             GL.BindVertexArray(0);
             return (VAO, VBO, EBO);
         }
         //[Time]
+
+        //0: Up,1:Bottom,2:right,3:left,4:Front,5:Back
+
+        public Block[] GetNeigboors(Block[] Neighboors, Chunk chunk, Vector3i position)
+        {
+            int chunkSizeMinusOne = Chunk.Size - 1;
+            int chunkHeightTimesSectionSize = Chunk.Height * Section.Size;
+
+            // Up
+            if (position.Y < chunkHeightTimesSectionSize)
+            {
+                Neighboors[0] = chunk.GetBlockFast(new Vector3i(position.X, position.Y + 1, position.Z)).Block;
+            }
+
+            // Down
+            if (position.Y > 0)
+            {
+                Neighboors[1] = chunk.GetBlockFast(new Vector3i(position.X, position.Y - 1, position.Z)).Block;
+            }
+
+            // Right
+            if (position.X < chunkSizeMinusOne)
+            {
+                Neighboors[2] = chunk.GetBlockFast(new Vector3i(position.X + 1, position.Y, position.Z)).Block;
+            }
+            else
+            {
+                Chunk rightChunk = Client.TheClient.World.GetChunk(chunk.X + 1, chunk.Z);
+                Neighboors[2] = rightChunk.GetBlockFast(new Vector3i(0, position.Y, position.Z)).Block;
+            }
+
+            // Left
+            if (position.X > 0)
+            {
+                Neighboors[3] = chunk.GetBlockFast(new Vector3i(position.X - 1, position.Y, position.Z)).Block;
+            }
+            else
+            {
+                Chunk leftChunk = Client.TheClient.World.GetChunk(chunk.X - 1, chunk.Z);
+                Neighboors[3] = leftChunk.GetBlockFast(new Vector3i(chunkSizeMinusOne, position.Y, position.Z)).Block;
+            }
+
+            // Front
+            if (position.Z > 0)
+            {
+                Neighboors[4] = chunk.GetBlockFast(new Vector3i(position.X, position.Y, position.Z - 1)).Block;
+            }
+            else
+            {
+                Chunk frontChunk = Client.TheClient.World.GetChunk(chunk.X, chunk.Z - 1);
+                Neighboors[4] = frontChunk.GetBlockFast(new Vector3i(position.X, position.Y, chunkSizeMinusOne)).Block;
+            }
+
+            // Back
+            if (position.Z < chunkSizeMinusOne)
+            {
+                Neighboors[5] = chunk.GetBlockFast(new Vector3i(position.X, position.Y, position.Z + 1)).Block;
+            }
+            else
+            {
+                Chunk backChunk = Client.TheClient.World.GetChunk(chunk.X, chunk.Z + 1);
+                Neighboors[5] = backChunk.GetBlockFast(new Vector3i(position.X, position.Y, 0)).Block;
+            }
+
+            return Neighboors;
+        }
         public void GenerateChunkMesh(Chunk Chunk)
         {
+            //var watch = System.Diagnostics.Stopwatch.StartNew();
+
             pos = Chunk.Position;
             Vertices = new();
             Indices = new();
             IndexCounter = 0;
             Ch = Chunk;
-            Parallel.For(0, Chunk.Size, x =>
+            Block[] Neighbors = new Block[6];
+            for(int x = 0; x < Chunk.Size; x++)
             {
-                for (int y = 0; y < Chunk.Height *Section.Size; y++)
+                for (int y = 0; y < Chunk.Height * Section.Size; y++)
                 {
                     for (int z = 0; z < Chunk.Size; z++)
                     {
-                        var block = Chunk.GetBlock(new Vector3i(x, y, z));
-                        if (block !=  BlockRegister.Air)
+                        Vector3i BPosition = new Vector3i(x, y, z);
+                        var block = Chunk.GetBlockFast(BPosition);
+                        if (block != Client.TheClient.ModManager.BlockRegister.Air)
                         {
-                            if (BlockRegister.Blocks[block.Block.ID].RenderType == BlockRenderType.Cube)
+                            Block[] Neighboors = GetNeigboors(Neighbors,Chunk, BPosition);
+                            if (block.Block.RenderType == BlockRenderType.Cube)
                             {
-                                GenerateDirection(new Vector3i(x, y, z));
+                                GenerateDirection(Neighboors, Chunk, BPosition, block);
                             }
                             else
                             {
-                                var blockMesh = Client.TheClient.ResourcePackManager.GetBlockMesh(BlockRegister.Blocks[block.Block.ID].Model);
-                                var meshLength = blockMesh.GetMesh().Length;
-                                for (int i = 0; i < meshLength; i++)
+                                var blockMesh = Client.TheClient.ModelManager.GetBlockMesh(block.Block.Model);
+                                for (int i = 0; i < blockMesh.GetMesh().Length; i++)
                                 {
-                                    AddMeshFace(block, new Vector3i((int)x, y, z), i, false);
+                                    AddMeshFace(block, Chunk, BPosition, i, false);
                                 }
                             }
                         }
                     }
                 }
-            });
-        }
-        private bool IsTransparent(int dx, int dy, int dz, Vector3i blockPos)
-        {
-            BlockState ID = Ch.GetBlock(blockPos + new Vector3i(dx, dy, dz));
-            if (ID == BlockRegister.Air)
-            {
-                return true;
             }
-            return BlockRegister.Blocks[ID.Block.ID].Transparency;
-        }
+            //watch.Stop();
+            //Console.WriteLine("chunk:" + watch.ElapsedMilliseconds);
 
-        private bool IsMeshBlockTransparent(Vector2i ChunkPos, Vector3i BlockPos)
+        }
+        private void GenerateDirection(Block[] Neighboor, Chunk chunk,Vector3i BlockPos,BlockState Current)
         {
-            Chunk Ch = Client.TheClient.World.GetChunk(ChunkPos.X,ChunkPos.Y);
-            if(Ch == null)
+            //Up
+            if (Neighboor[0] != null)
             {
-                return true;
-            }else
+                if (Neighboor[0].Transparency)
+                {
+                    AddMeshFace(Current, chunk, BlockPos, 0, true);
+                }
+            }
+            else
             {
-                return Ch.GetBlock(BlockPos).Block.Transparency;
+                AddMeshFace(Current, chunk, BlockPos, 0, true);
+
+            }
+            //Bottom
+            if (Neighboor[1] != null)
+            {
+                if (Neighboor[1].Transparency)
+                {
+                    AddMeshFace(Current, chunk, BlockPos, 1, true);
+                }
+            }
+            else
+            {
+                if(BlockPos.Y >0)
+                {
+                    AddMeshFace(Current, chunk, BlockPos, 1, true);
+                }
+            }
+            //Right
+            if (Neighboor[2] != null)
+            {
+                if (Neighboor[2].Transparency)
+                {
+                    AddMeshFace(Current, chunk, BlockPos, 4, true);
+                }
+            }
+            else
+            {
+                AddMeshFace(Current, chunk, BlockPos, 4, true);
+
+            }
+            //Left
+            if (Neighboor[3] != null)
+            {
+                if (Neighboor[3].Transparency)
+                {
+                    AddMeshFace(Current, chunk, BlockPos, 5, true);
+                }
+            }
+            else
+            {
+                AddMeshFace(Current, chunk, BlockPos, 5, true);
+
+            }
+            //Front
+            if (Neighboor[4] != null)
+            {
+                if (Neighboor[4].Transparency)
+                {
+                    AddMeshFace(Current, chunk, BlockPos, 3, true);
+                }
+            }
+            else
+            {
+                AddMeshFace(Current, chunk, BlockPos, 3, true);
+
+            }
+            //Back
+            if (Neighboor[5] != null)
+            {
+                if (Neighboor[5].Transparency)
+                {
+                    AddMeshFace(Current, chunk, BlockPos, 2, true);
+                }
+            }
+            else
+            {
+                AddMeshFace(Current, chunk, BlockPos, 2, true);
+
             }
         }
-        private void GenerateDirection(Vector3i BlockPos)
+        private void AddMeshFace(BlockState Block,Chunk chunk, Vector3i BlockPos, int BF, bool ao)
         {
-            var block = Ch.GetBlock(BlockPos);
-            //
-            //X
-            //
-            if (BlockPos.X == Chunk.Size - 1)
-            {
-                if (IsMeshBlockTransparent(new Vector2i(Ch.Position.X + 1, Ch.Position.Y), new Vector3i(0, BlockPos.Y, BlockPos.Z)))
-                {
-                    AddMeshFace( block, BlockPos, 4, true);
-                }
-            }
-            else if (IsTransparent(1, 0, 0, BlockPos))
-            {
-                AddMeshFace( block, BlockPos, 4, true);
-            }
-            if (BlockPos.X == 0)
-            {
-                if (IsMeshBlockTransparent(new Vector2i(Ch.Position.X - 1, Ch.Position.Y), new Vector3i(Chunk.Size - 1, BlockPos.Y, BlockPos.Z)))
-                {
-                    AddMeshFace( block, BlockPos, 5, true);
-                }
-            }
-            else if (IsTransparent(-1, 0, 0, BlockPos))
-            {
-                AddMeshFace( block, BlockPos, 5, true);
-            }
-            //
-            //Y
-            //
-            if (BlockPos.Y == (Chunk.Height * Section.Size) - 1 )
-            {
-                AddMeshFace( block, BlockPos, 0, true);
-            }
-            else if (IsTransparent(0, 1, 0, BlockPos))
-            {
-                AddMeshFace( block, BlockPos, 0, true);
-            }
-            if (BlockPos.Y == 0)
-            {
-                AddMeshFace( block, BlockPos, 1, true);
-            }
-            else if(IsTransparent(0, -1, 0, BlockPos))
-            {
-                AddMeshFace( block,BlockPos, 1, true);
-            }
-            //
-            //Z
-            //
-            if (BlockPos.Z == Chunk.Size - 1)
-            {
-                if (IsMeshBlockTransparent(new Vector2i(Ch.Position.X, Ch.Position.Y + 1),new Vector3i(BlockPos.X, BlockPos.Y, 0)))
-                {
-                    AddMeshFace( block, BlockPos, 2, true);
-                }
-            }
-            else if (IsTransparent(0, 0, 1, BlockPos))
-            {
-                AddMeshFace( block, BlockPos, 2, true);
-            }
-            if (BlockPos.Z == 0)
-            {
-                if (IsMeshBlockTransparent(new Vector2i(Ch.Position.X, Ch.Position.Y - 1),new Vector3i(BlockPos.X, BlockPos.Y, Chunk.Size - 1)))
-                {
-                    AddMeshFace( block, BlockPos, 3, true);
-                }
-            }
-            else if (IsTransparent(0, 0, -1, BlockPos))
-            {
-                AddMeshFace(block, BlockPos, 3, true);
-            }
-        }
-        private void AddMeshFace(BlockState Block,Vector3i BlockPos, int BF, bool ao)
-        {
+
             float[] Vert = Block.Block.GetMesh(BF);
             float[] Uv = Block.Block.GetMeshTextureCoordinates(BF);
-            float[] Tex = Block.Block.GetTextureCoordinates(BF,Block);
+            float[] Tex = Block.Block.GetTextureCoordinates(BF, Block);
             int[] AO = BF switch
             {
-                0 => CalculateAO(Ch, BlockPos + new Vector3i(0,1,0),1),
-                1 => CalculateAO(Ch, BlockPos + new Vector3i(0,-1,0),1),
-                2 => CalculateAO(Ch, BlockPos + new Vector3i(0,0,1),2),
-                3 => CalculateAO(Ch, BlockPos + new Vector3i(0,0,-1),2),
-                4 => CalculateAO(Ch, BlockPos + new Vector3i(1,0,0),0),
-                _ => CalculateAO(Ch, BlockPos + new Vector3i(-1,0,0),0),
+                0 => CalculateAO(chunk, BlockPos + new Vector3i(0, 1, 0), 1),
+                1 => CalculateAO(chunk, BlockPos + new Vector3i(0, -1, 0), 1),
+                2 => CalculateAO(chunk, BlockPos + new Vector3i(0, 0, 1), 2),
+                3 => CalculateAO(chunk, BlockPos + new Vector3i(0, 0, -1), 2),
+                4 => CalculateAO(chunk, BlockPos + new Vector3i(1, 0, 0), 0),
+                _ => CalculateAO(chunk, BlockPos + new Vector3i(-1, 0, 0), 0),
             };
             bool flip_id = AO[1] + AO[3] > AO[0] + AO[2];
-            bool addedv = false;
-            while (!addedv)
+            ChunkVertex CVert;
+            for (int i = flip_id ? 1 : 0; i < 4; i++)
             {
-                lock (Vertices)
+                CVert= new()
                 {
-                    for (int i = flip_id ? 1 : 0; i < 4; i++)
-                    {
-                        Vertices.Add(Vert[i * 3] + BlockPos.X);
-                        Vertices.Add(Vert[i * 3 + 1] + BlockPos.Y);
-                        Vertices.Add(Vert[i * 3 + 2] + BlockPos.Z);
-                        Vertices.Add((Tex[4] - Tex[0]) * Uv[i * 2] + Tex[0]);
-                        Vertices.Add((Tex[3] - Tex[1]) * Uv[i * 2 + 1] + Tex[1]);
-                        Vertices.Add(ao ? AO[i] : 3);
-                    }
-                    if (flip_id)
-                    {
-                        Vertices.Add(Vert[0 * 3] + BlockPos.X);
-                        Vertices.Add(Vert[0 * 3 + 1] + BlockPos.Y);
-                        Vertices.Add(Vert[0 * 3 + 2] + BlockPos.Z);
-                        Vertices.Add((Tex[4] - Tex[0]) * Uv[0 * 2] + Tex[0]);
-                        Vertices.Add((Tex[3] - Tex[1]) * Uv[0 * 2 + 1] + Tex[1]);
-                        Vertices.Add(ao ? AO[0] : 3);
-                    }
-                    addedv = true;
-                }
+                    Position = new Vector3(Vert[i * 3] + BlockPos.X, Vert[i * 3 + 1] + BlockPos.Y, Vert[i * 3 + 2] + BlockPos.Z),
+                    Uv = new Vector2((Tex[4] - Tex[0]) * Uv[i * 2] + Tex[0], (Tex[3] - Tex[1]) * Uv[i * 2 + 1] + Tex[1]),
+                    AO = ao ? AO[i] : 3
+                };
+                Vertices.Add(CVert);
             }
-            bool added = false;
-            while (!added)
+            if (flip_id)
             {
-                lock (Indices)
+                CVert = new()
                 {
-                    uint[] indice = new uint[] { 0, 1, 2, 2, 3, 0 };
-                    for (uint i = 0; i < 6; i++)
-                    {
-                        indice[i] += IndexCounter;
-                    }
-                    Indices.AddRange(indice);
-                    IndexCounter += 4;
-                    added = true;
-                }
+                    Position = new Vector3(Vert[0] + BlockPos.X, Vert[1] + BlockPos.Y, Vert[2] + BlockPos.Z),
+                    Uv = new Vector2((Tex[4] - Tex[0]) * Uv[0 * 2] + Tex[0],(Tex[3] - Tex[1]) * Uv[0 * 2 + 1] + Tex[1]),
+                    AO = ao ? AO[0] : 3
+                };
+                Vertices.Add(CVert);
             }
+            uint[] indice = { 0, 1, 2, 2, 3, 0 };
+            for (uint i = 0; i < 6; i++)
+            {
+                indice[i] += IndexCounter;
+            }
+            Indices.AddRange(indice);
+            IndexCounter += 4;
+
         }
         private static int[] CalculateAO(Chunk Ch, Vector3i bpos, int plane)
         {
             int a, b, c, d, e, f, g, h;
             if (plane == 1)
             {
-                a = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1), Ch.Position));
-                b = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z - 1), Ch.Position));
-                c = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z), Ch.Position));
-                d = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z + 1), Ch.Position));
-                e = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z + 1), Ch.Position));
-                f = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z + 1), Ch.Position));
-                g = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z), Ch.Position));
-                h = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z - 1), Ch.Position));
+                a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1), Ch.Position));
+                b = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z - 1), Ch.Position));
+                c = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z), Ch.Position));
+                d = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z + 1), Ch.Position));
+                e = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z + 1), Ch.Position));
+                f = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z + 1), Ch.Position));
+                g = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z), Ch.Position));
+                h = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z - 1), Ch.Position));
             }
             else if (plane == 0)
             {
-                a = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1), Ch.Position));
-                b = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z - 1), Ch.Position));
-                c = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z), Ch.Position));
-                d = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z + 1), Ch.Position));
-                e = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z + 1), Ch.Position));
-                f = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z + 1), Ch.Position));
-                g = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z), Ch.Position));
-                h = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z - 1), Ch.Position));
+                a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1), Ch.Position));
+                b = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z - 1), Ch.Position));
+                c = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z), Ch.Position));
+                d = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z + 1), Ch.Position));
+                e = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z + 1), Ch.Position));
+                f = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z + 1), Ch.Position));
+                g = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z), Ch.Position));
+                h = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z - 1), Ch.Position));
             }
             else
             {
-                a = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z), Ch.Position));
-                b = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y - 1, bpos.Z), Ch.Position));
-                c = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z), Ch.Position));
-                d = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y - 1, bpos.Z), Ch.Position));
-                e = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z), Ch.Position));
-                f = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y + 1, bpos.Z), Ch.Position));
-                g = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z), Ch.Position));
-                h = BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y + 1, bpos.Z), Ch.Position));
+                a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z), Ch.Position));
+                b = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y - 1, bpos.Z), Ch.Position));
+                c = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z), Ch.Position));
+                d = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y - 1, bpos.Z), Ch.Position));
+                e = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z), Ch.Position));
+                f = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y + 1, bpos.Z), Ch.Position));
+                g = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z), Ch.Position));
+                h = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y + 1, bpos.Z), Ch.Position));
             }
             int[] AO = new int[4]
             { 

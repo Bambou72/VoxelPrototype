@@ -2,18 +2,18 @@
 using OpenTK.Mathematics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using VoxelPrototype.api;
 using VoxelPrototype.client.Render.Components;
 namespace VoxelPrototype.client.Render.UI.Batch
 {
     internal class UIBatch
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        private int[] Indices = new int[6]
-        {
+        private int[] Indices = {
             0,1,2,
             1,2,3
         };
-        public int BATCH_SIZE = 500;
+        public int BATCH_SIZE = 100;
         public Vertex[] Vertices;
         public int Pos;
         public int VAO;
@@ -31,7 +31,7 @@ namespace VoxelPrototype.client.Render.UI.Batch
             GenerateEBO();
             GL.BindVertexArray(VAO);
             GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, Unsafe.SizeOf<Vertex>(), 0);
+            GL.VertexAttribPointer(0, 2, VertexAttribPointerType.Float, false, Unsafe.SizeOf<Vertex>(), 0);
             GL.EnableVertexAttribArray(1);
             GL.VertexAttribPointer(1, 2, VertexAttribPointerType.Float, false, Unsafe.SizeOf<Vertex>(), Marshal.OffsetOf<Vertex>("TexCoords"));
             GL.EnableVertexAttribArray(2);
@@ -44,7 +44,7 @@ namespace VoxelPrototype.client.Render.UI.Batch
         {
             if (Pos > BATCH_SIZE)
             {
-                Resize(BATCH_SIZE + 10);
+                throw new Exception("UI to render to high");
             }
             for (int i = 0; i < 4; i++)
             {
@@ -65,6 +65,7 @@ namespace VoxelPrototype.client.Render.UI.Batch
             GL.BufferData(BufferTarget.ElementArrayBuffer, ElementBuffer.Length * sizeof(int), ElementBuffer, BufferUsageHint.StaticDraw);
             GL.BindVertexArray(0);
         }
+        /*
         public void TestSize(int VertexSize)
         {
             if (VertexSize > BATCH_SIZE)
@@ -72,7 +73,8 @@ namespace VoxelPrototype.client.Render.UI.Batch
                 int NewSize = (int)Math.Max(BATCH_SIZE * 1.5f, VertexSize);
                 Resize(NewSize);
             }
-        }
+        }*/
+        /*
         public void Resize(int Size)
         {
             Logger.Info($"Resize UI batch to a size of {Size} vertices");
@@ -80,23 +82,31 @@ namespace VoxelPrototype.client.Render.UI.Batch
             Vertices = new Vertex[BATCH_SIZE];
             GL.BufferData(BufferTarget.ArrayBuffer, BATCH_SIZE * Unsafe.SizeOf<Vertex>(), nint.Zero, BufferUsageHint.DynamicDraw);
             GenerateEBO();
-        }
+        }*/
         public void Flush()
         {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
-            GL.BufferSubData(BufferTarget.ArrayBuffer, 0, Unsafe.SizeOf<Vertex>() * Vertices.Length, Vertices);
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            var shader = Client.TheClient.ResourcePackManager.GetShader("Voxel@ui");
-            shader.Use();
-            shader.SetMatrix4("projection", Matrix4.CreateOrthographicOffCenter(0, API.ClientAPI.WindowWidth(), API.ClientAPI.WindowHeight(), 0, 0, 100));
-            CurrentTexture.Use(TextureUnit.Texture0);
-            GL.BindVertexArray(VAO);
-            GL.DrawElements(PrimitiveType.Triangles, Pos * 6, DrawElementsType.UnsignedInt, 0);
-            GL.BindVertexArray(0);
-            GL.ActiveTexture(TextureUnit.Texture0);
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-            Pos = 0;
-            Vertices = new Vertex[BATCH_SIZE];
+            if(Pos>0)
+            {
+
+                if(CurrentTexture !=null)
+                {
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
+                    GL.BufferSubData(BufferTarget.ArrayBuffer, 0, Unsafe.SizeOf<Vertex>() * Vertices.Length, Vertices);
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+                    var shader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/ui"));
+                    shader.Use();
+                    shader.SetMatrix4("projection", Matrix4.CreateOrthographicOffCenter(0, ClientAPI.WindowWidth(), ClientAPI.WindowHeight(), 0, 0, 100));
+                    CurrentTexture.Use(TextureUnit.Texture0);
+                    GL.BindVertexArray(VAO);
+                    GL.DrawElements(PrimitiveType.Triangles, Pos * 6, DrawElementsType.UnsignedInt, 0);
+                    GL.BindVertexArray(0);
+                    GL.ActiveTexture(TextureUnit.Texture0);
+                    GL.BindTexture(TextureTarget.Texture2D, 0);
+                    Pos = 0;
+                    Vertices = new Vertex[BATCH_SIZE];
+
+                }
+            }
         }
     }
 }

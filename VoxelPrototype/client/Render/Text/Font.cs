@@ -1,8 +1,7 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.client.Render.Components;
 using SharpFont;
 using StbImageSharp;
-using StbImageWriteSharp;
+using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Utils;
 namespace VoxelPrototype.client.Render.Text
 {
@@ -26,16 +25,16 @@ namespace VoxelPrototype.client.Render.Text
             Library library = new Library();
             Face = new Face(library, FilePath);
             Face.SetPixelSizes(0, (uint)FontSize);
-            
+
             CharacterMap = new Dictionary<char, Character>();
             ImageResult Atlas = GenerateAtlas(256);
-            byte[] OpenGLAtlasDATA = new byte[Atlas.Width* Atlas.Height];
+            byte[] OpenGLAtlasDATA = new byte[Atlas.Width * Atlas.Height];
             for (int y = 0; y < Atlas.Height; y++)
             {
-                for (int x =0; x < Atlas.Width; x++)
+                for (int x = 0; x < Atlas.Width; x++)
                 {
-                
-                    byte pixelValue = Atlas.Data[(y * Atlas.Width + x )*4];
+
+                    byte pixelValue = Atlas.Data[(y * Atlas.Width + x) * 4];
                     int index = (y * Atlas.Width + x);
                     OpenGLAtlasDATA[index] = pixelValue;
                 }
@@ -49,13 +48,13 @@ namespace VoxelPrototype.client.Render.Text
             };
 
 
-            FontAtlas = Texture.LoadFromDataFont(OpenGLAtlas,OpenTK.Graphics.OpenGL4.TextureMinFilter.Linear,false);
+            FontAtlas = TextureLoader.LoadFromDataFont(OpenGLAtlas, OpenTK.Graphics.OpenGL4.TextureMinFilter.Linear, false);
             if (!Directory.Exists("debug/atlas/fonts"))
             {
                 Directory.CreateDirectory("debug/atlas/fonts");
             }
             ImageSaver.SaveAsPNG("debug/atlas/fonts/" + Path.GetFileNameWithoutExtension(FilePath) + ".png", Atlas);
-            
+
         }
         public Character GetCharacter(char character)
         {
@@ -64,19 +63,19 @@ namespace VoxelPrototype.client.Render.Text
         public List<char> GetCharSet()
         {
             List<char> CharSet = new();
-            for (int i = 0;i<256;i++)
+            for (int i = 0; i < 256; i++)
             {
                 CharSet.Add((char)i);
             }
             return CharSet;
         }
         public ImageResult GenerateAtlas(int TextureSize)
-        { 
+        {
             int offsetX = 0, offsetY = 0, MaxHeight = 0;
             byte[] image = new byte[TextureSize * TextureSize * 4];
-            foreach(char c in GetCharSet())
+            foreach (char c in GetCharSet())
             {
-                if(Face.GetCharIndex(c)!= 0)
+                if (Face.GetCharIndex(c) != 0)
                 {
                     Face.LoadChar(c, LoadFlags.Render, LoadTarget.Normal);
                     Character character = new Character
@@ -128,8 +127,12 @@ namespace VoxelPrototype.client.Render.Text
                 Width = TextureSize,
                 Height = TextureSize,
                 Comp = StbImageSharp.ColorComponents.RedGreenBlueAlpha
-                
+
             };
+        }
+        public void Clean()
+        {
+            FontAtlas.Clean();
         }
         //public Font(string FilePath)
         //{

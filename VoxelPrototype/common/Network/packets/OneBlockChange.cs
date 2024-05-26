@@ -1,7 +1,6 @@
 ﻿using LiteNetLib.Utils;
 using OpenTK.Mathematics;
-using VoxelPrototype.API.Blocks.State;
-using VoxelPrototype.VBF;
+using VoxelPrototype.api.Blocks.State;
 
 namespace VoxelPrototype.common.Network.packets
 {

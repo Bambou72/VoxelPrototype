@@ -1,7 +1,6 @@
 ﻿using LiteNetLib.Utils;
 using OpenTK.Mathematics;
-using VoxelPrototype.API.Blocks.State;
-using VoxelPrototype.VBF;
+using VoxelPrototype.api.Blocks.State;
 
 namespace VoxelPrototype.common.Network.packets
 {
@@ -14,13 +13,13 @@ namespace VoxelPrototype.common.Network.packets
         {
             writer.Put(ChunkPos);
             writer.Put(BlockPos);
-            writer.Put( VBFSerializer.Serialize( State.Serialize()));
+            writer.Put(VBFSerializer.Serialize(State.Serialize()));
         }
         public void Deserialize(NetDataReader reader)
         {
             ChunkPos = reader.GetVector2i();
             BlockPos = reader.GetVector3i();
-            State =  new BlockState().Deserialize( (VBFCompound)VBFSerializer.Deserialize(reader.GetRemainingBytes()));
+            State = new BlockState().Deserialize((VBFCompound)VBFSerializer.Deserialize(reader.GetRemainingBytes()));
         }
     }
 }

@@ -21,7 +21,6 @@ namespace VoxelPrototype.common.Network.client
         internal static NetDataWriter message;
         private static NetPacketProcessor packetProcessor;
         internal static NetPeer Server;
-        internal static string ServerAPIVersion = "NotConnected";
         internal static string ServerEngineVersion = "NotConnected";
         internal static void Init()
         {
@@ -45,7 +44,7 @@ namespace VoxelPrototype.common.Network.client
             {
                 client.Stop();
                 Client.TheClient.World.Dispose();
-                GUIVar.MainMenu = true;
+                //GUIVar.MainMenu = true;
                 Initialized = false;
             };
             listener.PeerConnectedEvent += (server) =>
@@ -93,7 +92,6 @@ namespace VoxelPrototype.common.Network.client
         internal static void HandleInitialPacket(ServerInitialPacket data)
         {
             ServerEngineVersion = data.EngineVersion;
-            ServerAPIVersion = data.APIVersion;
         }
         internal static void Connect(string ip, int port)
         {

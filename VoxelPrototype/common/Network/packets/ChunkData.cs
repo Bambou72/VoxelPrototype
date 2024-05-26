@@ -1,7 +1,6 @@
-﻿using LiteNetLib.Utils;
-using LiteNetLib;
+﻿using LiteNetLib;
+using LiteNetLib.Utils;
 using OpenTK.Mathematics;
-using VoxelPrototype.common.Utils;
 namespace VoxelPrototype.common.Network.packets
 {
     internal struct ChunkData : INetSerializable
@@ -20,7 +19,7 @@ namespace VoxelPrototype.common.Network.packets
         {
             Pos = reader.GetVector2i();
             importance = reader.GetInt();
-            Data =reader.GetRemainingBytes();
+            Data = reader.GetRemainingBytes();
         }
     }
 }

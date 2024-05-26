@@ -14,7 +14,7 @@ namespace VoxelPrototype.common.Network.packets
         public void Deserialize(NetDataReader reader)
         {
             ClientID = reader.GetUShort();
-             Position = reader.GetVector3d();
+            Position = reader.GetVector3d();
         }
     }
 }

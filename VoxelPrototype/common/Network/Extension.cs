@@ -69,7 +69,7 @@ namespace VoxelPrototype.common.Network
             writer.Put(vector.Y);
             writer.Put(vector.Z);
         }
-        
+
         public static Vector3i GetVector3i(this NetDataReader reader)
         {
             Vector3i v;
@@ -78,7 +78,7 @@ namespace VoxelPrototype.common.Network
             v.Z = reader.GetInt();
             return v;
         }
-       
+
         public static Quaternion GetQuaternion(this NetDataReader reader)
         {
             Quaternion q = new();
@@ -101,7 +101,7 @@ namespace VoxelPrototype.common.Network
         public static Vector3i[] GetVector3iArray(this NetDataReader reader)
         {
             Vector3i[] array = new Vector3i[reader.GetInt()];
-            for(int i =0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 Vector3i v;
                 v.X = reader.GetInt();

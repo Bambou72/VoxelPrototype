@@ -1,7 +1,7 @@
 ﻿using LiteNetLib;
 using LiteNetLib.Utils;
-using VoxelPrototype.API;
-using VoxelPrototype.common.Game.Entities.Player;
+using VoxelPrototype.api;
+using VoxelPrototype.common.Entities.Player;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.server;
 namespace VoxelPrototype.common.Network.server
@@ -62,7 +62,6 @@ namespace VoxelPrototype.common.Network.server
                 ServerInitialPacket packet = new ServerInitialPacket
                 {
                     EngineVersion = EngineVersion.Version.ToString(),
-                    APIVersion = APIVersion.Version.ToString()
                 };
                 SendPacket(packet, peer, DeliveryMethod.ReliableOrdered);
             };

@@ -27,7 +27,7 @@ namespace VoxelPrototype.common.Network.packets
         {
             ClientID = reader.GetUShort();
             Name = reader.GetString();
-            Position= reader.GetVector3d();
+            Position = reader.GetVector3d();
             Rotation = reader.GetVector3();
             ServerTick = reader.GetULong();
             ClientTick = reader.GetULong();

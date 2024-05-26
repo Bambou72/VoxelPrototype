@@ -3,24 +3,24 @@
  * Copyrights Florian Pfeiffer
  * Author Florian Pfeiffer
  **/
-using Crecerelle;
-using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
-using VoxelPrototype.API;
-using VoxelPrototype.API.Blocks;
+using OpenTK.Windowing.GraphicsLibraryFramework;
+
+using VoxelPrototype.api;
+using VoxelPrototype.api.Blocks;
+using VoxelPrototype.api.Items;
 using VoxelPrototype.client.Debug;
 using VoxelPrototype.client.GUI;
+using VoxelPrototype.client.GUI.Prototype;
 using VoxelPrototype.client.Render;
 using VoxelPrototype.client.Render.Debug;
 using VoxelPrototype.client.Render.UI;
-using VoxelPrototype.client.Resources;
-using VoxelPrototype.client.UI;
-using VoxelPrototype.client.Utils;
-using VoxelPrototype.common.Game.World;
+using VoxelPrototype.client.Resources.Managers;
 using VoxelPrototype.common.Network.client;
+using VoxelPrototype.common.World;
 using VoxelPrototype.server;
 namespace VoxelPrototype.client
 {
@@ -31,10 +31,17 @@ namespace VoxelPrototype.client
         public static Client TheClient;
         internal EmbeddedServer EmbedderServer;
         internal Config ClientConfig;
-        internal ResourcePackManager ResourcePackManager;
-        internal UIManager UIManager;
-        internal UIMaster UIMaster;
+        // internal UIManager UIManager;
+        //internal UIMaster UIMaster;
+        internal ModManager ModManager;
+        internal Resources.ResourceManager ResourceManager;
         internal Renderer Renderer;
+        internal InputEventManager InputEventManager;
+        internal TextureManager TextureManager;
+        internal FontManager FontManager;
+        internal ModelManager ModelManager;
+        internal BlockDataManager BlockDataManager;
+        internal ShaderManager ShaderManager;
         public Client(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
             if (TheClient == null)
@@ -46,34 +53,62 @@ namespace VoxelPrototype.client
         protected override void OnLoad()
         {
             base.OnLoad();
-            ResourcePackManager = new ResourcePackManager();
-            ResourcePackManager.Initialize();
-            GUIVar.Init(ClientSize);
-            Renderer= new Renderer();
+            //Renderer
+            Renderer = new Renderer();
             Renderer.Init();
-            BlockRegister.Initialize();
-            ModManager.LoadMods();
-            
-            ModManager.Init();
-            GUIVar.Load();
-            Load();
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            //Mod
+            ModManager = new();
+            ModManager.LoadMods();
+            ModManager.PreInit();
+            //Resources
+            ResourceManager = new();
+            ShaderManager = new ShaderManager();
+            ResourceManager.RegisterManager(ShaderManager);
+            FontManager = new FontManager();
+            ResourceManager.RegisterManager(FontManager);
+            TextureManager = new TextureManager();
+            ResourceManager.RegisterManager(TextureManager);
+            ModelManager = new ModelManager();
+            ResourceManager.RegisterManager(ModelManager);
+            BlockDataManager = new BlockDataManager();
+            ResourceManager.RegisterManager(BlockDataManager);
+            ResourceManager.Init();
+            //Mod
+            ModManager.Init();
+            //GUi
+            GUIVar.Init(ClientSize);
+            GUIVar.Load();
+            //Input
+            InputEventManager = new InputEventManager();
+            //World
             World = new ClientWorld();
-            OnResize(new());
-            UIManager = new(new UIRenderer());
-            UIMaster = new();
+            LoadWorld();
+            //OnResize(new());
+            //UIManager = new();
+            //InputEventManager.RegisterOnKeyDownCallback(UIManager.OnKeyDown);
+            //InputEventManager.RegisterOnMouseUpCallback(UIManager.OnMouseUp);
+            // InputEventManager.RegisterOnKeyPressedCallback(UIManager.OnKeyPressed);
+            //InputEventManager.RegisterOnMouseMoveCallback(UIManager.OnMouseMove);
+            //InputEventManager.RegisterOnMouseWheelCallback(UIManager.OnMouseWheel);
+            //InputEventManager.RegisterOnMouseDownCallback(UIManager.OnMouseDown);
+            //InputEventManager.RegisterOnMouseClickedCallback(UIManager.OnMouseClicked);
+            //InputEventManager.RegisterOnMouseWheelCallback(UIManager.OnMouseWheel);
+            //UIMaster = new();
         }
         protected override void OnUpdateFrame(FrameEventArgs args)
         {
-            InputSystem.Update(KeyboardState, MouseState, args.Time);
-            GUIVar.Update(this, args.Time);
             
             ClientNetwork.Update();
-            UIManager.Update(ClientSize,(Vector2i)MouseState.Position);
+            GUIVar.Update(this, args.Time);
+            GUIVar.Update();
+            //UIManager.Update();
             if (World.Initialized)
             {
-                World.Tick();
+                World.Tick((float)args.Time);
             }
+            InputEventManager.Update();
+            World.UpdateRender();
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
@@ -84,7 +119,6 @@ namespace VoxelPrototype.client
             //World
             if (World.Initialized)
             {
-                World.UpdateRender();
                 World.Render();
                 if (World.IsLocalPlayerExist())
                 {
@@ -102,15 +136,12 @@ namespace VoxelPrototype.client
             //Debug UI
             //
             //ImGui.ShowDemoWindow();
-            UIManager.Render();
-
+            //UIManager.Render();
+            
             GUIVar.RenderI();
             GUIVar.Render();
             ImGuiController.CheckGLError("End of frame");
-            //Window
-            //button.Draw();
             SwapBuffers();
-
         }
         protected override void OnUnload()
         {
@@ -120,7 +151,7 @@ namespace VoxelPrototype.client
         }
         internal List<string> Worlds = new();
         internal List<WorldInfo> WorldsInfo = new();
-        public void Load()
+        public void LoadWorld()
         {
             string[] WorldFolders = Directory.GetDirectories("worlds");
             foreach (string world in WorldFolders)
@@ -144,6 +175,39 @@ namespace VoxelPrototype.client
                 {
                 }
             }
+        }
+        
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+            InputEventManager.OnMouseDown(e.Button, (Vector2i)MousePosition);
+        }
+
+        protected override void OnMouseUp(MouseButtonEventArgs e)
+        {
+            
+           
+            base.OnMouseUp(e);
+            InputEventManager.OnMouseUp(e.Button, (Vector2i)MousePosition);
+
+
+        }
+        protected override void OnMouseMove(MouseMoveEventArgs e)
+        {
+            InputEventManager.OnMouseMove((Vector2i)e.Position, (Vector2i)e.Delta);
+        }
+        protected override void OnKeyDown(KeyboardKeyEventArgs e)
+        {
+
+            InputEventManager.OnKeyDown(e.Key, e.Modifiers);
+        }
+        protected override void OnKeyUp(KeyboardKeyEventArgs e)
+        {
+            InputEventManager.OnKeyUp(e.Key, e.Modifiers);
+        }
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            InputEventManager.OnMouseWheel((Vector2i)e.Offset);
         }
         public void DeInitWorld()
         {

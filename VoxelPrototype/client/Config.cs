@@ -11,7 +11,7 @@ namespace VoxelPrototype.client
             CreateBaseConfig();
             if (Path.Exists("config.toml"))
             {
-                var temp= Toml.ToModel(File.ReadAllText("config.toml"));
+                var temp = Toml.ToModel(File.ReadAllText("config.toml"));
                 foreach (string keyset in temp.Keys)
                 {
                     if (temp.ContainsKey(keyset))

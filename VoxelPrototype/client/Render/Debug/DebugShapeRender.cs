@@ -66,7 +66,7 @@ namespace VoxelPrototype.client.Render.Debug
                 };
             RenderDebug(vertices, indices, Matrix4.CreateFromQuaternion(Box.Rotation) * Matrix4.CreateTranslation(Box.Position), Box.Color);
         }
-        internal static void Render(Matrix4 View , Matrix4 Projection)
+        internal static void Render(Matrix4 View, Matrix4 Projection)
         {
             DebugShader.Use();
             DebugShader.SetMatrix4("view", View);

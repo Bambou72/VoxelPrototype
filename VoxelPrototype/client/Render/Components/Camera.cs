@@ -24,7 +24,7 @@ namespace VoxelPrototype.client.Render.Components
         internal Vector3 Front => _front;
         internal Vector3 Up => _up;
         internal Vector3 Right => _right;
-        internal float Near= 0.05f;
+        internal float Near = 0.05f;
         internal float Far = 1024f;
         internal float Pitch
         {

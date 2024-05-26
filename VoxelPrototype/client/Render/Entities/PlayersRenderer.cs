@@ -1,7 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.Components;
-using VoxelPrototype.common.Game.Entities.Player;
+using VoxelPrototype.common.Entities.Player;
+
 namespace VoxelPrototype.client.Render.Entities
 {
     internal class PlayersRenderer

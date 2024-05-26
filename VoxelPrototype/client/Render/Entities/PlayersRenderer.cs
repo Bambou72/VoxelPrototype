@@ -31,8 +31,8 @@ namespace VoxelPrototype.client.Render.Entities
         internal void RenderPlayer(Player play)
         {
             GL.BindVertexArray(play._Model.Vao);
-            var Shader = Client.TheClient.ResourcePackManager.GetShader("Voxel@entity");
-            Client.TheClient.ResourcePackManager.GetEntityTexture("Voxel@entity/player").Use(TextureUnit.Texture0);
+            var Shader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/entity"));
+            Client.TheClient.TextureManager.GetTexture(new Resources.ResourceID("textures/entity/player")).Use(TextureUnit.Texture0);
             Shader.Use();
             var model = Matrix4.Identity * Matrix4.CreateTranslation(new Vector3((float)play.Position.X, (float)(play.Position.Y + play.EntityEYEHeight), (float)play.Position.Z)) /** Matrix4.CreateRotationY(Rotation.Y)*/;
             Shader.SetMatrix4("model", model);

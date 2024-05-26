@@ -33,6 +33,7 @@ namespace VoxelPrototype.client.Render.World
             int VAO = GL.GenVertexArray();
             int VBO = GL.GenBuffer();
             int EBO = GL.GenBuffer();
+            var ChunkShader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/chunk"));
             GL.BindVertexArray(VAO);
             GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
             GL.BufferData(BufferTarget.ArrayBuffer, Vertices.Length * sizeof(float), Vertices, BufferUsageHint.StaticDraw);

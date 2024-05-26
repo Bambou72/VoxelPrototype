@@ -18,7 +18,7 @@ namespace VoxelPrototype.client.Render.UI
         internal UIRenderer()
         {
             TextBatch.InitBatch();
-            TextBatch.Font = Client.TheClient.ResourcePackManager.GetFont("Voxel@opensans");
+            TextBatch.Font = Client.TheClient.FontManager.GetFont( new ResourceID("font/opensans"));
         }
         public void RenderText(string Font, string Text, Vector3 Pos, float Scale = 25, Vector3 Color = default, AlignementType AlignType = AlignementType.Left)
         {
@@ -41,11 +41,11 @@ namespace VoxelPrototype.client.Render.UI
             Texture Tex = null;
             if (Texture == null)
             {
-                Tex = Client.TheClient.ResourcePackManager.GetUITexture("Voxel@ui/blank");
+                Tex = (Texture)Client.TheClient.TextureManager.GetTexture(new ResourceID("textures/ui/blank"));
             }
             else
             {
-                Tex = Client.TheClient.ResourcePackManager.GetUITexture(Texture);
+                Tex = (Texture)Client.TheClient.TextureManager.GetTexture(Texture);
             }
             UICommands.Add(new QUADCMD
             {

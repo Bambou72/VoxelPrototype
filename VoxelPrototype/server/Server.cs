@@ -1,15 +1,15 @@
-﻿using VoxelPrototype.common.Game.World;
-using VoxelPrototype.common.Utils;
+﻿using VoxelPrototype.common.Utils;
+using VoxelPrototype.common.World;
 
 namespace VoxelPrototype.server
 {
-    public class Server :IRunnable
+    public class Server : IRunnable
     {
         internal static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         internal string ServerName;
         internal int ServerPort = 23482;
         //Set if the server is running
-        internal volatile bool Running =false;
+        internal volatile bool Running = false;
         //
         internal ServerWorld World;
 
@@ -19,7 +19,7 @@ namespace VoxelPrototype.server
 
         public Server()
         {
-            if(TheServer == null)
+            if (TheServer == null)
             {
                 TheServer = this;
             }

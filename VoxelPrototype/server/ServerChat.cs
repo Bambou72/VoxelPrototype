@@ -1,5 +1,6 @@
 ﻿using LiteNetLib;
-using VoxelPrototype.API.Commands;
+using VoxelPrototype.api.Commands;
+using VoxelPrototype.client;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Network.server;
 namespace VoxelPrototype.server
@@ -9,9 +10,9 @@ namespace VoxelPrototype.server
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         internal static void HandleMessage(ClientChatMessage data, NetPeer peer)
         {
-            if (data.Message[0] == CommandRegister.commandPrefix)
+            if (data.Message[0] == Client.TheClient.ModManager.CommandRegister.commandPrefix)
             {
-                CommandRegister.ExecuteCommand(data.Message, peer);
+                Client.TheClient.ModManager.CommandRegister.ExecuteCommand(data.Message, peer);
             }
             else
             {

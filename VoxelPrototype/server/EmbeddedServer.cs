@@ -1,9 +1,6 @@
-﻿
-using SharpFont;
-using VoxelPrototype.API;
-using VoxelPrototype.client;
-using VoxelPrototype.common.Game;
+﻿using VoxelPrototype.api;
 using VoxelPrototype.common.Network.server;
+using VoxelPrototype.common.World;
 
 namespace VoxelPrototype.server
 {
@@ -22,29 +19,28 @@ namespace VoxelPrototype.server
         public override void Run()
         {
             Running = true;
-            ServerLocalThread = new(() => this.ServerLoop(InitialSettings,Path));
+            ServerLocalThread = new(() => this.ServerLoop(InitialSettings, Path));
             ServerLocalThread.Name = "EmbeddedServer";
             ServerLocalThread.Start();
-            
+
 
         }
         public void Stop()
         {
-            Running=false;
+            Running = false;
 
         }
         public bool IsRunning()
         {
             return Running;
         }
-        
-        public void ServerLoop(WorldSettings Settings,string Path)
+
+        public void ServerLoop(WorldSettings Settings, string Path)
         {
             World = new(Settings, Path);
             ServerNetwork.StartServer(ServerPort);
             Logger.Info("The server has finished initializing, it is now ready at: " + ServerNetwork.server.LocalPort);
             Logger.Info("Server engine version: " + EngineVersion.Version);
-            Logger.Info("Server api version: " + APIVersion.Version);
             ServerTimer.Init();
             float delta;
             float accumulator = 0f;
@@ -58,10 +54,12 @@ namespace VoxelPrototype.server
                 while (accumulator >= interval)
                 {
                     ServerTimer.UpdateUPS();
-                    World.Tick();
+                    World.Tick(0);
                     accumulator -= interval;
                 }
                 ServerTimer.Update();
+                /*
+
                 if (ServerTimer.GetTPS() <= 5)
                 {
                     Logger.Warn("The server TPS <= 5");
@@ -73,7 +71,7 @@ namespace VoxelPrototype.server
                 else if (ServerTimer.GetTPS() <= 15)
                 {
                     Logger.Warn("The server TPS <= 15");
-                }
+                }*/
             }
             World.Dispose();
             ServerNetwork.StopServer();

@@ -14,6 +14,7 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>vp.ico</ApplicationIcon>
+    <Configurations>Debug;Release;DistributeBuild</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>

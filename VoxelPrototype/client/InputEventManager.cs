@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using VoxelPrototype.client.GUI.Elements;
+using System.Collections.Generic;
 namespace VoxelPrototype.client
 {
     internal class InputEventManager
@@ -16,16 +16,23 @@ namespace VoxelPrototype.client
         List<Func<KeyDownEvent,bool>> OnKeyDownCallbacks = new List<Func<KeyDownEvent, bool>>();
         List<Func<KeyUpEvent,bool>> OnKeyUpCallbacks = new List<Func<KeyUpEvent, bool>>();
         List<Func<KeyPressedEvent,bool>> OnKeyPressedCallbacks = new List<Func<KeyPressedEvent, bool>>();
-        private bool[] prevKeys;
-        private bool[] currentKeys;
+        private Dictionary<Keys, bool> prevKeys;
+        private Dictionary<Keys, bool> currentKeys;
         private bool[] prevButtons;
         private bool[] currentButtons;
         public InputEventManager()
         {
-            int numKeys = Enum.GetValues(typeof(Keys)).Length;
-            prevKeys = new bool[numKeys];
-            currentKeys = new bool[numKeys];
-            int numButtons = Enum.GetValues(typeof(MouseButton)).Length;
+            prevKeys = new Dictionary<Keys, bool>();
+            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+            {
+                prevKeys[key] = false;
+            }
+            currentKeys = new Dictionary<Keys, bool>();
+            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+            {
+                currentKeys[key] = false;
+            }
+            int numButtons = Enum.GetNames(typeof(MouseButton)).Length;
             prevButtons = new bool[numButtons];
             currentButtons = new bool[numButtons];
         }
@@ -101,8 +108,8 @@ namespace VoxelPrototype.client
         }
         internal void OnKeyDown(Keys Key,KeyModifiers Modifiers)
         {
-            currentKeys[(int)Key] = true;
-            if (prevKeys[(int)Key] == false)
+            currentKeys[Key] = true;
+            if (prevKeys[Key] == false)
             {
                 var KeyPressedEvent = new KeyPressedEvent
                 {
@@ -132,9 +139,33 @@ namespace VoxelPrototype.client
                 }
             }
         }
+        internal bool IsKeyPressed(Keys Key)
+        {
+            if (currentKeys[Key] == true && prevKeys[Key] == false)
+            {
+                return true;
+            }
+            return false;
+        }
+        internal bool IsKeyDown(Keys Key)
+        {
+            return currentKeys[Key] == true;
+        }
+        internal bool IsMouseButtonPressed(MouseButton Button)
+        {
+            if (currentButtons[(int)Button] == true && prevButtons[(int)Button] == false)
+            {
+                return true;
+            }
+            return false;
+        }
+        internal bool IsMouseButtonDown(MouseButton Button)
+        {
+            return currentButtons[(int)Button] == true;
+        }
         internal void OnKeyUp(Keys Key, KeyModifiers Modifiers)
         {
-            currentKeys[(int)Key] = false;
+            currentKeys[Key] = false;
 
             var KeyUpEvent = new KeyUpEvent
             {
@@ -149,11 +180,19 @@ namespace VoxelPrototype.client
                 }
             }
         }
+        public void CopyCurrentToPrevious()
+        {
+            prevKeys.Clear();
+            foreach (var kvp in currentKeys)
+            {
+                prevKeys[kvp.Key] = kvp.Value;
+            }
+        }
         public void Update()
         {
             foreach(MouseButton but in Enum.GetValues(typeof(MouseButton)))
             {
-                if (currentButtons[(int)but])
+                if (currentButtons[  ( int)but])
                 {
                     var MouseDownEvent = new MouseDownEvent
                     {
@@ -169,8 +208,7 @@ namespace VoxelPrototype.client
                     }
                 }
             }
-            Array.Copy(currentKeys, prevKeys, currentKeys.Length);
-            currentKeys = new bool[Enum.GetValues(typeof(Keys)).Length];
+            CopyCurrentToPrevious();
             Array.Copy(currentButtons, prevButtons, currentButtons.Length);
         }
         public void RegisterOnMouseMoveCallback(Func<MouseMovedEvent,bool> Callback)
@@ -209,6 +247,6 @@ namespace VoxelPrototype.client
         {
             return false;
         }
-        //
+
     }
 }

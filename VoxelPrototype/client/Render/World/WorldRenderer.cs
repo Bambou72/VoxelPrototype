@@ -1,8 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Collections.Concurrent;
-using VoxelPrototype.common.Game.World;
 using VoxelPrototype.common.Physics;
+using VoxelPrototype.common.World;
 namespace VoxelPrototype.client.Render.World
 {
     internal class WorldRenderer
@@ -10,7 +10,7 @@ namespace VoxelPrototype.client.Render.World
         internal Dictionary<Vector2i, ChunkMesh> ChunksMesh = new();
         internal static ConcurrentQueue<ChunkToBeMesh> ChunkToBeMesh = new();
         internal static ConcurrentQueue<ChunkMeshGenerator> ChunkToBeOG = new();
-        internal Collider ChunkCollider = new(new Vector3d(0,0,0),new Vector3d(32,32,32));
+        internal Collider ChunkCollider = new(new Vector3d(0, 0, 0), new Vector3d(32, 32, 32));
         internal int RenderableChunkCount { get { return ChunksMesh.Count; } }
         internal int RenderedChunksCount = 0;
         internal void Dispose()
@@ -20,7 +20,7 @@ namespace VoxelPrototype.client.Render.World
         }
         internal void AddChunkToBeMesh(Chunk ch, int prior)
         {
-            if (!ChunkToBeMesh.Contains(new() { ch = ch, prior = prior }) && Vector2.Distance((Vector2)Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Xz,ch.Position) <= Client.TheClient.World.RenderDistance *Chunk.Size)
+            if (!ChunkToBeMesh.Contains(new() { ch = ch, prior = prior }) && Vector2.Distance((Vector2)Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Xz, ch.Position) <= Client.TheClient.World.RenderDistance * Chunk.Size)
             {
                 ChunkToBeMesh.Enqueue(new() { ch = ch, prior = prior });
 
@@ -48,17 +48,17 @@ namespace VoxelPrototype.client.Render.World
                 if (pos.X >= minx && pos.Y >= minz && pos.X <= maxx && pos.Y <= maxz)
                 {
                     var mesh = ChunksMesh[pos];
-                    if(mesh.VertC != 0)
+                    if (mesh.VertC != 0)
                     {
                         //if(FrustumCulling.AABBIntersect(Frustum,ChunkCollider.Move(new Vector3(pos.X * Chunk.Size, pos.Y * Chunk.Size, pos.Z * Chunk.Size))))
                         //{
-                            RenderedChunksCount++;
-                            Matrix4 model = Matrix4.CreateTranslation(new Vector3(pos.X * Chunk.Size,0,pos.Y * Chunk.Size));
-                            Shader.SetMatrix4("model", model);
-                            Shader.Use();
-                            GL.BindVertexArray(mesh.VAO);
-                            GL.DrawElements(PrimitiveType.Triangles, mesh.IndC, DrawElementsType.UnsignedInt, 0);
-                            GL.BindVertexArray(0);
+                        RenderedChunksCount++;
+                        Matrix4 model = Matrix4.CreateTranslation(new Vector3(pos.X * Chunk.Size, 0, pos.Y * Chunk.Size));
+                        Shader.SetMatrix4("model", model);
+                        Shader.Use();
+                        GL.BindVertexArray(mesh.VAO);
+                        GL.DrawElements(PrimitiveType.Triangles, mesh.IndC, DrawElementsType.UnsignedInt, 0);
+                        GL.BindVertexArray(0);
                         //}
                     }
                 }
@@ -111,29 +111,31 @@ namespace VoxelPrototype.client.Render.World
             ChunkToBeMesh = new ConcurrentQueue<ChunkToBeMesh>(ChunkToBeMesh.OrderBy(x => x.prior));
             if (ChunkToBeMesh.Count > 0 && !isGeneratingMesh)
             {
-                if (!isGeneratingMesh)
+                ThreadPool.QueueUserWorkItem(async state =>
                 {
                     isGeneratingMesh = true;
-                    ThreadPool.QueueUserWorkItem(state =>
+                    List<Task> tasks = new List<Task>();
+                    for (int i = 0; i < 10; i++)
                     {
-                        while (ChunkToBeMesh.Count > 0)
+                        if (ChunkToBeMesh.TryDequeue(out var chunk))
                         {
-                            if (ChunkToBeMesh.TryDequeue(out var chunk))
+                            if (chunk.ch.State.HasFlag(ChunkSate.Changed)  && chunk.ch.IsSurrendedClient()  /*&& !chunk.ch.Empty*/)
                             {
                                 var MeshCreator = new ChunkMeshGenerator();
-                                if(  chunk.ch.State.HasFlag(ChunkSate.Changed) /*&& !chunk.ch.Empty*/)
+                                tasks.Add(Task.Run(() =>
                                 {
                                     MeshCreator.GenerateChunkMesh(chunk.ch);
-                                    if(MeshCreator.Vertices.Count != 0)
+                                    if (MeshCreator.Vertices.Count != 0)
                                     {
                                         ChunkToBeOG.Enqueue(MeshCreator);
                                     }
-                                }
+                                }));
                             }
                         }
-                        isGeneratingMesh = false;
-                    });
-                }
+                    }
+                    await Task.WhenAll(tasks);
+                    isGeneratingMesh = false;
+                });
             }
         }
     }

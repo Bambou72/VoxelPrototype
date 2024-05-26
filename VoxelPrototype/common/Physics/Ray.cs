@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.API.Blocks;
-using VoxelPrototype.API.Blocks.State;
+using VoxelPrototype.api.Blocks;
+using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client;
 namespace VoxelPrototype.common.Physics
 {
@@ -44,7 +44,7 @@ namespace VoxelPrototype.common.Physics
                     {
                         if (Client.TheClient.World.ChunkManager.GetBlock(i, j, k, out BlockState State))
                         {
-                            if (State != BlockRegister.Air)
+                            if (State != Client.TheClient.ModManager.BlockRegister.Air)
                             {
                                 foreach (Collider collider in State.Block.GetColliders())
                                 {
@@ -53,7 +53,7 @@ namespace VoxelPrototype.common.Physics
                                     {
                                         continue;
                                     }
-                                    PossibleCollision.Add(new Tuple<double?, Vector3i, Vector3i, BlockState>(entry_time, normal, new Vector3i(i, j, k),State));
+                                    PossibleCollision.Add(new Tuple<double?, Vector3i, Vector3i, BlockState>(entry_time, normal, new Vector3i(i, j, k), State));
                                 }
                             }
                         }

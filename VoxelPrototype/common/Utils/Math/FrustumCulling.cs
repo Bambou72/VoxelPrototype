@@ -1,12 +1,4 @@
-﻿using OpenTK.Mathematics;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using System.ComponentModel;
-using System.Numerics;
-using VoxelPrototype.client.Render.Components;
-using VoxelPrototype.client.Render.Debug;
-using VoxelPrototype.common.Physics;
-
-namespace VoxelPrototype.common.Utils.Math
+﻿namespace VoxelPrototype.common.Utils.Math
 {
     /*
     public static class FrustumCulling

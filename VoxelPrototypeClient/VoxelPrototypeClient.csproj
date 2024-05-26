@@ -37,5 +37,8 @@
 	<PropertyGroup>
 		<PublishAot>true</PublishAot>
 	</PropertyGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="call $(SolutionDir)VoxelPrototype\resourcespacking.bat         $(TargetDir) $(SolutionDir)VoxelPrototype\assets" />
+	</Target>
 
 </Project>

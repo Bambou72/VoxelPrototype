@@ -1,0 +1,3 @@
+Name = "entity"
+Vertex = "entity.vert"
+Frag = "entity.frag"

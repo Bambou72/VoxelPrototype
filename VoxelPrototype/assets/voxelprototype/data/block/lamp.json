@@ -1,0 +1,19 @@
+{
+    "variants":
+    {
+        "":
+        {
+            "textures":
+            {
+                "all":"voxelprototype:textures/block/lamp_off"
+            }  
+        },
+        "Lit:True":
+        {
+            "textures":
+            {
+                "all":"voxelprototype:textures/block/lamp_on"
+            }  
+        }       
+    }
+}

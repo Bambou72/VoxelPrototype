@@ -1,0 +1,3 @@
+Name = "cubemap"
+Vertex = "cubemap.vert"
+Frag = "cubemap.frag"

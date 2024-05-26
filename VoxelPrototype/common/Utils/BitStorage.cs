@@ -1,5 +1,6 @@
 ﻿namespace VoxelPrototype.common.Utils
 {
+
     internal sealed class BitStorage
     {
         internal int[] Data;
@@ -17,6 +18,7 @@
             EntryMask = (1 << bitPerEntry) - 1;
             Data = data;
         }
+
         public BitStorage(int size, int bitPerEntry)
         {
             if (bitPerEntry <= 0 || bitPerEntry > 32)
@@ -28,23 +30,12 @@
             EntryMask = (1 << bitPerEntry) - 1;
             Data = new int[(Size * BitPerEntry + 31) / 32];
         }
+
         public int this[int index]
         {
             get
             {
-                int intIndex = index * BitPerEntry / 32;
-                int offsetWithinInt = index * BitPerEntry % 32;
-                if (offsetWithinInt + BitPerEntry <= 32)
-                {
-                    return Data[intIndex] >> offsetWithinInt & EntryMask;
-                }
-                else
-                {
-                    int remainingBits = 32 - offsetWithinInt;
-                    int firstPart = Data[intIndex] >> offsetWithinInt;
-                    int secondPart = Data[intIndex + 1] & (1 << BitPerEntry - remainingBits) - 1;
-                    return (secondPart << remainingBits | firstPart) & EntryMask;
-                }
+                return (Data[(index * BitPerEntry) >> 5] >> ((index * BitPerEntry) & 31)) & EntryMask;
             }
             set
             {

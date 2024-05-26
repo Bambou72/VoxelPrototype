@@ -1,11 +1,5 @@
-﻿using NLog;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using VoxelPrototype.common.Game.World;
-using VoxelPrototype.common.Game;
-using VoxelPrototype.common.Network.server;
-using VoxelPrototype.client.Resources;
+﻿using VoxelPrototype.client.Resources.temp;
+using VoxelPrototype.common.World;
 
 namespace VoxelPrototypeServer
 {
@@ -66,7 +60,7 @@ namespace VoxelPrototypeServer
                 Stopwatch.Reset();
             }*/
             //World.Dispose();
-           // ServerNetwork.StopServer();
+            // ServerNetwork.StopServer();
 
 
         }

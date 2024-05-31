@@ -18,7 +18,7 @@ namespace VoxelPrototype.common.World
         public const int Height = 32;
         public const int Size = 16;
         internal List<int> PlayerInChunk { get; set; }
-        Section[] Sections;
+        internal Section[] Sections;
         //Chunk coordinates
         public int X { get; set; }
         public int Z { get; set; }
@@ -61,6 +61,7 @@ namespace VoxelPrototype.common.World
             for (int i = 0; i < SectionsCount; i++)
             {
                 Sections[i] = new Section().Deserialize((VBFCompound)DeSections.Tags[i]);
+                Sections[i].Chunk = this;
             }
             return this;
         }
@@ -81,6 +82,7 @@ namespace VoxelPrototype.common.World
                 var Temp = new Section();
                 Temp.Y = y;
                 Sections[y] = Temp;
+                Sections[y].Chunk = this;
             }
             if (Gen)
             {
@@ -90,6 +92,19 @@ namespace VoxelPrototype.common.World
         public BlockState GetBlockFast(Vector3i pos)
         {
             return Sections[pos.Y >> 4].BlockPalette.Get(new Vector3i(pos.X, pos.Y & 15, pos.Z));
+        }
+        public Section GetSection(int Y)
+        {
+            if (Y < Height * Section.Size && Y >= 0)
+            {
+                return Sections[Y >> 4];
+            }
+            return null;
+        }
+        public Section GetSectionByIndex(int Y)
+        {
+            if(Y >= 0 && Y< Height) return Sections[Y];
+            return null;
         }
         public BlockState GetBlock(Vector3i pos)
         {

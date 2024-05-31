@@ -78,7 +78,7 @@ namespace VoxelPrototype.common.World
         }
         public override bool IsTransparent(int x, int y, int z)
         {
-            return ChunkManager.GetBlock(x, y, z).Block.Transparency;
+            return ChunkManager.GetBlock(x, y, z).Block.Transparent;
         }
         public override bool IsChunkExist(int x, int z)
         {

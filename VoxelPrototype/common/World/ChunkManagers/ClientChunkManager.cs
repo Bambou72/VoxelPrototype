@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using VoxelPrototype.api.Blocks;
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client;
+using VoxelPrototype.client.Render.World;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Utils;
@@ -48,7 +49,10 @@ namespace VoxelPrototype.common.World.ChunkManagers
             {
                 AddChunk(new Chunk().Deserialize(Deflate.Decompress(data.Data)));
                 Clist[pos].State |= ChunkSate.Changed;
-                Client.TheClient.World.WorldRenderer.AddChunkToBeMesh(Clist[pos], data.importance);
+                foreach (Section section in Clist[pos].Sections)
+                {
+                    Client.TheClient.World.WorldRenderer.GenerateSection(section);
+                }
             }
         }
         internal void HandleChunkUnload(UnloadChunk data, NetPeer peer)
@@ -57,7 +61,10 @@ namespace VoxelPrototype.common.World.ChunkManagers
             {
                 if (Clist.TryGetValue(ChunkPosition, out Chunk ch))
                 {
-                    Client.TheClient.World.WorldRenderer.RemoveChunkMesh(ch.Position);
+                    foreach(Section section in ch.Sections)
+                    {
+                        Client.TheClient.World.WorldRenderer.DestroySection(section);
+                    }
                     ch = null;
                     Clist.Remove(ChunkPosition, out Chunk _);
                 }
@@ -70,28 +77,24 @@ namespace VoxelPrototype.common.World.ChunkManagers
             if (Clist.TryGetValue(cpos, out Chunk ch))
             {
                 ch.SetBlock(bpos, data.State);
-                ch.State |= ChunkSate.Changed;
-                Client.TheClient.World.WorldRenderer.AddChunkToBeMesh(ch, 0);
             }
-            if (Clist.TryGetValue(new Vector2i(cpos.X + 1, cpos.Y), out Chunk ch1))
+            //Neighboors
+            int SecPos = bpos.Y / 16 ;
+            foreach (Vector2i neighborpos in CubeNeighbours.XZNeighbours)
             {
-                ch1.State |= ChunkSate.Changed;
-                Client.TheClient.World.WorldRenderer.AddChunkToBeMesh(ch1, 0);
-            }
-            if (Clist.TryGetValue(new Vector2i(cpos.X - 1, cpos.Y), out Chunk ch2))
-            {
-                ch2.State |= ChunkSate.Changed;
-                Client.TheClient.World.WorldRenderer.AddChunkToBeMesh(ch2, 0);
-            }
-            if (Clist.TryGetValue(new Vector2i(cpos.X, cpos.Y - 1), out Chunk ch3))
-            {
-                ch3.State |= ChunkSate.Changed;
-                Client.TheClient.World.WorldRenderer.AddChunkToBeMesh(ch3, 0);
-            }
-            if (Clist.TryGetValue(new Vector2i(cpos.X, cpos.Y + 1), out Chunk ch4))
-            {
-                ch4.State |= ChunkSate.Changed;
-                Client.TheClient.World.WorldRenderer.AddChunkToBeMesh(ch4, 0);
+                if(Clist.ContainsKey(neighborpos + cpos))
+                {
+                    Chunk Neighbor = Clist[neighborpos+ cpos];
+                    Neighbor.State |= ChunkSate.Changed;
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        Section sec = ch.GetSectionByIndex(SecPos + i);
+                        if(sec != null) 
+                        {
+                            Client.TheClient.World.WorldRenderer.GenerateSection(sec);
+                        }
+                    }
+                }
             }
         }
         internal BlockState GetBlockForMesh(Vector3i bpos, Vector2i cpos)

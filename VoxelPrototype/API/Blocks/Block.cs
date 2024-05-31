@@ -19,7 +19,7 @@ namespace VoxelPrototype.api.Blocks
         public float Friction = 8;
         public int BreakingTime = 20;
         public BlockRenderType RenderType;
-        public bool Transparency = false;
+        public bool Transparent = false;
         internal void Gernerate()
         {
             BlockStateBuilder Builder = new BlockStateBuilder(this);
@@ -104,7 +104,7 @@ namespace VoxelPrototype.api.Blocks
         }
         public virtual Collider[] GetColliders()
         {
-            return new Collider[] { new Collider(Vector3d.Zero, Vector3d.One) };
+            return [new Collider(Vector3d.Zero, Vector3d.One)];
         }
         public virtual void OnInteract(Vector3i BlockPosition, BlockState State, bool ServerSide)
         {

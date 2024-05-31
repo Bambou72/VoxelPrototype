@@ -10,7 +10,7 @@ namespace VoxelPrototype.api.Blocks
 
         public BlockRegister()
         {
-            RegisterBlock("air", new Block() { Transparency = true });
+            RegisterBlock("air", new Block() { Transparent = true });
             Air = GetBlock("air").GetDefaultState();
 
         }
@@ -45,7 +45,7 @@ namespace VoxelPrototype.api.Blocks
             }
             else if (Blocks.TryGetValue(ID.Block.ID, out var temp))
             {
-                if (temp.Transparency)
+                if (temp.Transparent)
                 {
                     return 1;
                 }

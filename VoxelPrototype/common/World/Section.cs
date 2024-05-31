@@ -8,7 +8,7 @@ namespace VoxelPrototype.common.World
         public const int Size = 16;
         internal BlockPalette BlockPalette;
         internal int Y;
-
+        internal Chunk Chunk;
         public Section()
         {
             BlockPalette = new(1);

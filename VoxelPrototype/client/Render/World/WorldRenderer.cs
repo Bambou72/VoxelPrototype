@@ -7,23 +7,56 @@ namespace VoxelPrototype.client.Render.World
 {
     internal class WorldRenderer
     {
-        internal Dictionary<Vector2i, ChunkMesh> ChunksMesh = new();
-        internal static ConcurrentQueue<ChunkToBeMesh> ChunkToBeMesh = new();
-        internal static ConcurrentQueue<ChunkMeshGenerator> ChunkToBeOG = new();
+        internal Dictionary<Vector3i, SectionMesh> SectionMesh = new();
+        ConcurrentQueue<SectionMesh> SectionsToBeGenerate = new();
+        ConcurrentQueue<SectionMesh> SectionsToBeFinalize = new();
+        Queue<SectionMesh> SectionsToBeDestroy = new();
+
         internal Collider ChunkCollider = new(new Vector3d(0, 0, 0), new Vector3d(32, 32, 32));
-        internal int RenderableChunkCount { get { return ChunksMesh.Count; } }
+        internal int RenderableChunkCount { get { return SectionMesh.Count; } }
         internal int RenderedChunksCount = 0;
+        private static bool isGeneratingMesh = false;
+        internal static bool DisposeVar = false;
+
         internal void Dispose()
         {
-            ChunkToBeMesh.Clear();
-            ChunkToBeOG.Clear();
-        }
-        internal void AddChunkToBeMesh(Chunk ch, int prior)
-        {
-            if (!ChunkToBeMesh.Contains(new() { ch = ch, prior = prior }) && Vector2.Distance((Vector2)Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Xz, ch.Position) <= Client.TheClient.World.RenderDistance * Chunk.Size)
+            DisposeVar = true;
+            foreach (var sectionmesh in SectionMesh.Values) 
             {
-                ChunkToBeMesh.Enqueue(new() { ch = ch, prior = prior });
-
+                sectionmesh.Destroy();
+            }
+            SectionMesh.Clear();
+        }
+        internal void AddSection(Section section)
+        {
+            if(!section.Empty)
+            {
+                var Pos = new Vector3i(section.Chunk.X,section.Y,section.Chunk.Z);
+                SectionMesh[Pos] = new SectionMesh(Pos, section);
+            }
+        }
+        internal void GenerateSection(Section section)
+        {
+            var Pos = new Vector3i(section.Chunk.X, section.Y, section.Chunk.Z);
+            if (!SectionMesh.ContainsKey(Pos))
+            {
+               AddSection(section);
+            }
+            if (!section.Empty)
+            {
+                var sec = SectionMesh[Pos];
+                if (!SectionsToBeGenerate.Contains(sec))
+                {
+                    SectionsToBeGenerate.Enqueue(sec);
+                }
+            }
+        }
+        internal void DestroySection(Section section)
+        {
+            var Pos = new Vector3i(section.Chunk.X, section.Y, section.Chunk.Z);
+            if (SectionMesh.ContainsKey(Pos))
+            {
+                SectionsToBeDestroy.Enqueue(SectionMesh[Pos]);
             }
         }
         internal void Render()
@@ -37,111 +70,97 @@ namespace VoxelPrototype.client.Render.World
             int minz = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Chunk.Size) - Client.TheClient.World.RenderDistance;
             int maxx = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Chunk.Size) + Client.TheClient.World.RenderDistance;
             int maxz = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Chunk.Size) + Client.TheClient.World.RenderDistance;
+            Shader.Use();
             /*Frustum Frustum = FrustumCulling.CreateFrustumFromCamera(
                 Client.TheClient.World.GetLocalPlayerCamera(),
                 ClientAPI.AspectRatio(),
                 MathHelper.DegreesToRadians(OptionMenu.FrustumFov),
                 Client.TheClient.World.GetLocalPlayerCamera().Near,
                 Client.TheClient.World.GetLocalPlayerCamera().Far);*/
-            foreach (var pos in ChunksMesh.Keys)
+            foreach (var pos in SectionMesh.Keys)
             {
-                if (pos.X >= minx && pos.Y >= minz && pos.X <= maxx && pos.Y <= maxz)
+                if(pos.X >= minx && pos.Z >= minz && pos.X <= maxx && pos.Z <= maxz)
                 {
-                    var mesh = ChunksMesh[pos];
-                    if (mesh.VertC != 0)
+                    var mesh = SectionMesh[pos];
+                    if (mesh.GetOpaqueMesh().GetVerticesCount() != 0)
                     {
                         //if(FrustumCulling.AABBIntersect(Frustum,ChunkCollider.Move(new Vector3(pos.X * Chunk.Size, pos.Y * Chunk.Size, pos.Z * Chunk.Size))))
                         //{
                         RenderedChunksCount++;
-                        Matrix4 model = Matrix4.CreateTranslation(new Vector3(pos.X * Chunk.Size, 0, pos.Y * Chunk.Size));
+                        Matrix4 model = Matrix4.CreateTranslation(new Vector3(pos.X * Chunk.Size, pos.Y * Section.Size, pos.Z * Chunk.Size));
                         Shader.SetMatrix4("model", model);
-                        Shader.Use();
-                        GL.BindVertexArray(mesh.VAO);
-                        GL.DrawElements(PrimitiveType.Triangles, mesh.IndC, DrawElementsType.UnsignedInt, 0);
+ 
+                        GL.BindVertexArray(mesh.GetOpaqueMesh().GetVAO());
+                        GL.DrawElements(PrimitiveType.Triangles, mesh.GetOpaqueMesh().GetIndicesCount(), DrawElementsType.UnsignedInt, 0);
                         GL.BindVertexArray(0);
                         //}
                     }
                 }
             }
         }
-        internal void RemoveChunkMesh(Vector2i pos)
-        {
-            if (ChunksMesh.ContainsKey(pos))
-            {
-                var mesh = ChunksMesh[pos];
-                GL.DeleteVertexArray(mesh.VAO);
-                GL.DeleteBuffer(mesh.VBO);
-                GL.DeleteBuffer(mesh.EBO);
-                ChunksMesh.Remove(pos);
-            }
-        }
         internal void Update()
         {
-            GenerateMesh();
-            for (int i = 0; i < 10; i++)
-            {
-                if (ChunkToBeOG.Count > 0)
-                {
-                    if (ChunkToBeOG.TryDequeue(out ChunkMeshGenerator chunkMeshGenerator))
-                    {
-                        if (ChunksMesh.ContainsKey(chunkMeshGenerator.pos))
-                        {
-                            RemoveChunkMesh(chunkMeshGenerator.pos);
-                            ChunksMesh.Add(chunkMeshGenerator.pos, chunkMeshGenerator.GenerateOG());
-                        }
-                        else
-                        {
-                            ChunksMesh.Add(chunkMeshGenerator.pos, chunkMeshGenerator.GenerateOG());
-                        }
-                    }
-                    else
-                    {
-                        ChunkToBeOG.Enqueue(chunkMeshGenerator);
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        private static bool isGeneratingMesh = false;
-        internal static void GenerateMesh()
-        {
-            ChunkToBeMesh = new ConcurrentQueue<ChunkToBeMesh>(ChunkToBeMesh.OrderBy(x => x.prior));
-            if (ChunkToBeMesh.Count > 0 && !isGeneratingMesh)
+            //MeshGeneration
+            if (SectionsToBeGenerate.Count > 0 && !isGeneratingMesh)
             {
                 ThreadPool.QueueUserWorkItem(async state =>
                 {
+                    List<SectionMesh> ToReQueue = new List<SectionMesh>();
                     isGeneratingMesh = true;
                     List<Task> tasks = new List<Task>();
-                    for (int i = 0; i < 10; i++)
+                    for(int i =  0;i<100;i++)
                     {
-                        if (ChunkToBeMesh.TryDequeue(out var chunk))
+                        if (SectionsToBeGenerate.TryDequeue(out var section))
                         {
-                            if (chunk.ch.State.HasFlag(ChunkSate.Changed)  && chunk.ch.IsSurrendedClient()  /*&& !chunk.ch.Empty*/)
+                            if ( section.Section.Chunk.IsSurrendedClient())
                             {
-                                var MeshCreator = new ChunkMeshGenerator();
-                                tasks.Add(Task.Run(() =>
+                                if(!section.Section.Empty)
                                 {
-                                    MeshCreator.GenerateChunkMesh(chunk.ch);
-                                    if (MeshCreator.Vertices.Count != 0)
+                                    tasks.Add(Task.Run(() =>
                                     {
-                                        ChunkToBeOG.Enqueue(MeshCreator);
-                                    }
-                                }));
+                                        section.Generate();
+                                        SectionsToBeFinalize.Enqueue(section);
+                                    }));
+                                }
+                            }else
+                            {
+                                ToReQueue.Add(section);
                             }
                         }
+                    }
+                    foreach(var section in ToReQueue) 
+                    {
+                        SectionsToBeGenerate.Enqueue(section);
                     }
                     await Task.WhenAll(tasks);
                     isGeneratingMesh = false;
                 });
             }
+            //Finalize
+            while(SectionsToBeFinalize.Count > 0)
+            {
+                if (SectionsToBeFinalize.TryDequeue(out var Sec))
+                {
+                    if(Sec != null)
+                    {
+                        Sec.Upload();
+                    }
+                }
+            }
+            //Destroy
+            while (SectionsToBeDestroy.Count > 0)
+            {
+                if (SectionsToBeDestroy.TryDequeue(out var Sec))
+                {
+                    if( Sec != null) 
+                    {
+                        Sec.Destroy();
+                        SectionMesh.Remove(Sec.Position);
+                        Sec = null;
+                    }
+
+                }
+            }
         }
-    }
-    internal struct ChunkToBeMesh
-    {
-        internal Chunk ch;
-        internal int prior;
     }
 }

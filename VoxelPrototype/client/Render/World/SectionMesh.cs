@@ -8,6 +8,7 @@ namespace VoxelPrototype.client.Render.World
     {
         SubMesh OpaqueMesh;
         internal Vector3i Position;
+        internal Vector3 Center;
         internal Section Section;
         internal SectionMeshGenerator Generator;
 
@@ -17,6 +18,7 @@ namespace VoxelPrototype.client.Render.World
             Position = position;
             Section = section;
             Generator = new SectionMeshGenerator(section, position);
+            Center = (Position + new Vector3(0.5f)) * Section.Size;
         }
         public void Destroy()
         {

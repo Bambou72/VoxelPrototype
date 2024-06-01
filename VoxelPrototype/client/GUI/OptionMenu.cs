@@ -8,7 +8,6 @@ namespace VoxelPrototype.client.GUI
     internal static class OptionMenu
     {
         static float Fov;
-        internal static float FrustumFov = 70;
         static bool FollowCameraFov = true;
         static bool WireFrameView = false;
         static bool Fullscreen = false;

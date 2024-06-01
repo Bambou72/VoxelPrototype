@@ -31,7 +31,7 @@ namespace VoxelPrototype.common.Entities.Player
 
         //Client
         internal Vector2 _lastPos;
-        internal Camera? _Camera;
+        internal FrustumCamera? _Camera;
         internal bool Local = false;
         internal bool ServerSide = false;
         internal Model _Model;
@@ -53,7 +53,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     ViewRay = new Ray(Vector3d.Zero, Vector3.Zero, Reach);
 
-                    _Camera = new Camera((Vector3)_Position, (float)ClientAPI.WindowWidth() / ClientAPI.WindowHeight());
+                    _Camera = new FrustumCamera((Vector3)_Position, (float)ClientAPI.WindowWidth() / ClientAPI.WindowHeight());
                 }
                 _Model = client.Client.TheClient.ModelManager.GetEntityModel(new ResourceID("models/entity/player"));
             }

@@ -6,6 +6,7 @@ namespace VoxelPrototype.common.World
     public class Section : IVBFSerializable<Section>
     {
         public const int Size = 16;
+        public readonly static float SphereRadius = (Size* MathF.Sqrt(3))/2;
         internal BlockPalette BlockPalette;
         internal int Y;
         internal Chunk Chunk;

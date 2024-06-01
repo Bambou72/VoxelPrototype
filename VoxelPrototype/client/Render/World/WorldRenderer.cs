@@ -63,8 +63,10 @@ namespace VoxelPrototype.client.Render.World
         {
             RenderedChunksCount = 0;
             var Shader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/chunk"));
-            Shader.SetMatrix4("view", Client.TheClient.World.GetLocalPlayerCamera().GetViewMatrix());
-            Shader.SetMatrix4("projection", Client.TheClient.World.GetLocalPlayerCamera().GetProjectionMatrix());
+            var Camera = Client.TheClient.World.GetLocalPlayerCamera();
+            Camera.Update();
+            Shader.SetMatrix4("view", Camera.GetViewMatrix());
+            Shader.SetMatrix4("projection", Camera.GetProjectionMatrix());
             Client.TheClient.TextureManager.GetTexture(new Resources.ResourceID("textures/block/atlas")).Use(TextureUnit.Texture0);
             int minx = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Chunk.Size) - Client.TheClient.World.RenderDistance;
             int minz = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Chunk.Size) - Client.TheClient.World.RenderDistance;
@@ -82,7 +84,7 @@ namespace VoxelPrototype.client.Render.World
                 if(pos.X >= minx && pos.Z >= minz && pos.X <= maxx && pos.Z <= maxz)
                 {
                     var mesh = SectionMesh[pos];
-                    if (mesh.GetOpaqueMesh().GetVerticesCount() != 0)
+                    if (mesh.GetOpaqueMesh().GetVerticesCount() != 0 && Camera.Frustum.IsSectionInFrustum(mesh))
                     {
                         //if(FrustumCulling.AABBIntersect(Frustum,ChunkCollider.Move(new Vector3(pos.X * Chunk.Size, pos.Y * Chunk.Size, pos.Z * Chunk.Size))))
                         //{

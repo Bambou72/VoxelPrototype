@@ -83,7 +83,7 @@ namespace VoxelPrototype.common.World
         {
             return PlayerFactory.LocalPlayerExist;
         }
-        public Camera GetLocalPlayerCamera()
+        public FrustumCamera GetLocalPlayerCamera()
         {
             return PlayerFactory.LocalPlayer._Camera;
         }

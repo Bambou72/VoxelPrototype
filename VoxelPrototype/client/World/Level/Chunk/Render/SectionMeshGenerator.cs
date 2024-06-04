@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VoxelPrototype.client.World;
+using VoxelPrototype.client.Render.World;
+using VoxelPrototype.client.World.Level.Chunk;
 using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.World;
 
-namespace VoxelPrototype.client.Render.World
+namespace VoxelPrototype.client.World.Level.Chunk.Render
 {
     internal class SectionMeshGenerator
     {
@@ -26,28 +27,29 @@ namespace VoxelPrototype.client.Render.World
             Position = position;
         }
 
-        public Block[] GetNeigbours( Vector3i position)
+        public Block[] GetNeigbours(Vector3i position)
         {
             Block[] Neighbours = new Block[6];
             int chunkSizeMinusOne = Section.Size - 1;
 
             // Up
-            if (position.Y < Section.Size-1)
+            if (position.Y < Section.Size - 1)
             {
                 Neighbours[0] = Section.BlockPalette.Get(new Vector3i(position.X, position.Y + 1, position.Z)).Block;
             }
-            else if(Position.Y < Const.ChunkHeight- 1) 
+            else if (Position.Y < Const.ChunkHeight - 1)
             {
-                Neighbours[0] = Section.Chunk.Sections[Position.Y+1].BlockPalette.Get(new Vector3i(position.X, 0, position.Z)).Block;
+                Neighbours[0] = Section.Chunk.Sections[Position.Y + 1].BlockPalette.Get(new Vector3i(position.X, 0, position.Z)).Block;
             }
 
             // Down
             if (position.Y > 0)
             {
                 Neighbours[1] = Section.BlockPalette.Get(new Vector3i(position.X, position.Y - 1, position.Z)).Block;
-            }else if(Position.Y >0)
+            }
+            else if (Position.Y > 0)
             {
-                Neighbours[1] = Section.Chunk.Sections[Position.Y -1].BlockPalette.Get(new Vector3i(position.X, Section.Size - 1, position.Z)).Block;
+                Neighbours[1] = Section.Chunk.Sections[Position.Y - 1].BlockPalette.Get(new Vector3i(position.X, Section.Size - 1, position.Z)).Block;
             }
 
             // Right
@@ -91,7 +93,7 @@ namespace VoxelPrototype.client.Render.World
             else
             {
                 Chunk backChunk = Client.TheClient.World.GetChunk(Position.X, Position.Z + 1);
-                Neighbours[5] = backChunk.GetBlockFast(new Vector3i(position.X, position.Y + Section.Size*Position.Y, 0)).Block;
+                Neighbours[5] = backChunk.GetBlockFast(new Vector3i(position.X, position.Y + Section.Size * Position.Y, 0)).Block;
             }
 
             return Neighbours;
@@ -99,7 +101,7 @@ namespace VoxelPrototype.client.Render.World
         internal void Generate()
         {
             OpaqueVertices = new();
-            OpaqueIndices= new();
+            OpaqueIndices = new();
             IndexCounter = 0;
             for (int x = 0; x < Section.Size; x++)
             {
@@ -107,27 +109,26 @@ namespace VoxelPrototype.client.Render.World
                 {
                     for (int z = 0; z < Section.Size; z++)
                     {
-                        if(!WorldRenderer.DisposeVar)
+
+                        Vector3i BPosition = new Vector3i(x, y, z);
+                        var block = Section.BlockPalette.Get(BPosition);
+                        if (block != Client.TheClient.ModManager.BlockRegister.Air)
                         {
-                            Vector3i BPosition = new Vector3i(x, y, z);
-                            var block = Section.BlockPalette.Get(BPosition);
-                            if (block != Client.TheClient.ModManager.BlockRegister.Air)
+                            Block[] Neighbours = GetNeigbours(BPosition);
+                            if (block.Block.RenderType == BlockRenderType.Cube)
                             {
-                                Block[] Neighbours = GetNeigbours(BPosition);
-                                if (block.Block.RenderType == BlockRenderType.Cube)
+                                GenerateDirection(Neighbours, BPosition, block);
+                            }
+                            else
+                            {
+                                var blockMesh = Client.TheClient.ModelManager.GetBlockMesh(block.Block.Model);
+                                for (int i = 0; i < blockMesh.GetMesh().Length; i++)
                                 {
-                                    GenerateDirection(Neighbours, BPosition, block);
-                                }
-                                else
-                                {
-                                    var blockMesh = Client.TheClient.ModelManager.GetBlockMesh(block.Block.Model);
-                                    for (int i = 0; i < blockMesh.GetMesh().Length; i++)
-                                    {
-                                        AddMeshFace(block, BPosition, i, false);
-                                    }
+                                    AddMeshFace(block, BPosition, i, false);
                                 }
                             }
                         }
+                        
                     }
                 }
             }
@@ -137,7 +138,7 @@ namespace VoxelPrototype.client.Render.World
             //Up
             if (Neighboor[0] != null)
             {
-                if(Neighboor[0].Transparent)
+                if (Neighboor[0].Transparent)
                 {
                     AddMeshFace(Current, BlockPos, 0, true);
 
@@ -158,7 +159,7 @@ namespace VoxelPrototype.client.Render.World
             }
             else
             {
-                if ( Position.Y > 0)
+                if (Position.Y > 0)
                 {
                     AddMeshFace(Current, BlockPos, 1, true);
                 }
@@ -262,17 +263,17 @@ namespace VoxelPrototype.client.Render.World
             IndexCounter += 4;
 
         }
-        private  int[] CalculateAO(Vector3i bpos, int plane)
+        private int[] CalculateAO(Vector3i bpos, int plane)
         {
             int a, b, c, d, e, f, g, h;
             if (plane == 1)
             {
-                a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1),Position.Xz));
+                a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1), Position.Xz));
                 b = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z - 1), Position.Xz));
                 c = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z), Position.Xz));
                 d = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z + 1), Position.Xz));
                 e = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z + 1), Position.Xz));
-                f = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z + 1),Position.Xz));
+                f = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z + 1), Position.Xz));
                 g = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z), Position.Xz));
                 h = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z - 1), Position.Xz));
             }

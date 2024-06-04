@@ -1,9 +1,9 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.client.World;
+using VoxelPrototype.client.World.Level.Chunk;
 using VoxelPrototype.common.Utils;
 using VoxelPrototype.common.World;
 
-namespace VoxelPrototype.client.Render.World
+namespace VoxelPrototype.client.World.Level.Chunk.Render
 {
     internal class SectionMesh : IDestroyable
     {
@@ -33,7 +33,6 @@ namespace VoxelPrototype.client.Render.World
         }
         internal void Upload()
         {
-
             OpaqueMesh.SetupData(Generator.OpaqueVertices, Generator.OpaqueIndices);
             Generator.Clear();
         }

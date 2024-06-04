@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VoxelPrototype.client.Render.Components;
-using VoxelPrototype.client.Render.World;
+using VoxelPrototype.client.World.Level.Chunk.Render;
 using VoxelPrototype.common.World;
 
 namespace VoxelPrototype.client.Utils.Math
@@ -39,20 +39,20 @@ namespace VoxelPrototype.client.Utils.Math
             Vector3 sphere_vec = Section.Center - Camera.Position;
             //Near and Far
             float SZ = Vector3.Dot(sphere_vec, Camera.Front);
-            if(!(Camera.Near - World.Section.SphereRadius <= SZ && SZ <= Camera.Far + World.Section.SphereRadius))
+            if(!(Camera.Near - World.Level.Chunk.Section.SphereRadius <= SZ && SZ <= Camera.Far + World.Level.Chunk.Section.SphereRadius))
             {
                 return false;
             }
             //Top and Bottom
             float SY  = Vector3.Dot(sphere_vec, Camera.Up);
-            float Dist = FactorY * World.Section.SphereRadius +SZ * TanY;
+            float Dist = FactorY * World.Level.Chunk.Section.SphereRadius +SZ * TanY;
             if (!(-Dist<= SY && SY <= Dist))
             {
                 return false;
             }
             //Right and Left
             float SX = Vector3.Dot(sphere_vec, Camera.Right);
-            Dist = FactorX * World.Section.SphereRadius + SZ * TanX;
+            Dist = FactorX * World.Level.Chunk.Section.SphereRadius + SZ * TanX;
             if (!(-Dist <= SX && SX <= Dist))
             {
                 return false;

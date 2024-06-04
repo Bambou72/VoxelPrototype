@@ -1,7 +1,7 @@
 ﻿using ImGuiNET;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.Debug;
-using VoxelPrototype.client.World;
+using VoxelPrototype.client.World.Level.Chunk;
 using VoxelPrototype.common;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.server;
@@ -32,8 +32,7 @@ namespace VoxelPrototype.client.Render.GUI
                 ImGui.TextColored(Black, "Player position" + Client.TheClient.World.PlayerFactory.LocalPlayer.Position);
             }
             ImGui.TextColored(Black, $"Number of client loaded chunks: {Client.TheClient.World.GetChunkCount()}");
-            ImGui.TextColored(Black, $"Number of renderable chunks: {Client.TheClient.World.WorldRenderer.RenderableChunkCount}");
-            ImGui.TextColored(Black, $"Number of rendered chunks: {Client.TheClient.World.WorldRenderer.RenderedChunksCount}");
+            ImGui.TextColored(Black, $"Number of rendered chunks: {Client.TheClient.World.ChunkManager.RenderedChunksCount}");
             if (Client.TheClient.EmbedderServer != null && Client.TheClient.EmbedderServer.IsRunning())
             {
                 ImGui.SeparatorText("Embedded Server");

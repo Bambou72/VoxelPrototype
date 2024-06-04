@@ -1,5 +1,5 @@
 ﻿using OpenTK.Mathematics;
-namespace VoxelPrototype.client.Render.World
+namespace VoxelPrototype.client.World.Level.Chunk.Render
 {
     internal struct SectionVertex
     {

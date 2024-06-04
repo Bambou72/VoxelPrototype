@@ -1,25 +1,22 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VoxelPrototype.common.World;
 using VoxelPrototype.VBF;
 using VoxelPrototype.common.Utils.Storage.Palette;
 using VoxelPrototype.common.Blocks.State;
+using VoxelPrototype.client.World.Level.Chunk.Render;
 
-namespace VoxelPrototype.client.World
+namespace VoxelPrototype.client.World.Level.Chunk
 {
     public class Section : IVBFSerializable<Section>
     {
         public const int Size = 16;
-        public readonly static float SphereRadius = (Size * MathF.Sqrt(3)) / 2;
+        public readonly static float SphereRadius = Size * MathF.Sqrt(3) / 2;
         internal BlockPalette BlockPalette;
+        internal SectionMesh SectionMesh;
         internal int Y;
         internal Chunk Chunk;
-        public Section()
+        public Section(Chunk chunk)
         {
+            this.Chunk = chunk;
             BlockPalette = new(1);
         }
 
@@ -29,6 +26,7 @@ namespace VoxelPrototype.client.World
         {
             Y = compound.GetInt("YPos").Value;
             BlockPalette = BlockPalette.Deserialize(compound.Get<VBFCompound>("BlockPalette"));
+            SectionMesh = new(new Vector3i(Chunk.X, Y, Chunk.Z), this);
             return this;
         }
         public VBFCompound Serialize()

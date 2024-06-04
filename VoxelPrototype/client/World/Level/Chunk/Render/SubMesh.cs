@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VoxelPrototype.common.Utils;
 
-namespace VoxelPrototype.client.Render.World
+namespace VoxelPrototype.client.World.Level.Chunk.Render
 {
     internal class SubMesh : IDestroyable
     {
@@ -24,7 +24,7 @@ namespace VoxelPrototype.client.Render.World
             GL.BindVertexArray(VAO);
             //VBO config
             GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
-            GL.BufferData(BufferTarget.ArrayBuffer, 0, IntPtr.Zero, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, 0, nint.Zero, BufferUsageHint.StaticDraw);
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, Unsafe.SizeOf<SectionVertex>(), 0);
             GL.EnableVertexAttribArray(1);
@@ -33,7 +33,7 @@ namespace VoxelPrototype.client.Render.World
             GL.VertexAttribIPointer(2, 1, VertexAttribIntegerType.Int, Unsafe.SizeOf<SectionVertex>(), Marshal.OffsetOf<SectionVertex>("AO"));
             //EBO config
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, EBO);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, 0, IntPtr.Zero, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, 0, nint.Zero, BufferUsageHint.StaticDraw);
             GL.BindVertexArray(0);
         }
         public int GetVAO()
@@ -54,7 +54,7 @@ namespace VoxelPrototype.client.Render.World
             indicesCount = indices.Count;
             //VBO
             GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
-            
+
             GL.BufferData(BufferTarget.ArrayBuffer, vertices.Count * Marshal.SizeOf<SectionVertex>(), vertices.ToArray(), BufferUsageHint.StaticDraw);
             //EBO
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, EBO);

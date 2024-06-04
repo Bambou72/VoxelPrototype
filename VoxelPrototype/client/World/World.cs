@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Render.Entities;
 using VoxelPrototype.client.Render.World;
+using VoxelPrototype.client.World.Level;
+using VoxelPrototype.client.World.Level.Chunk;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.Entities.Player.PlayerManager;
 using VoxelPrototype.common.Utils;
@@ -21,7 +23,6 @@ namespace VoxelPrototype.client.World
 
         public ClientChunkManager ChunkManager;
         internal ClientPlayerFactory PlayerFactory;
-        internal WorldRenderer WorldRenderer;
         internal PlayersRenderer PlayerRenderer;
         internal bool Initialized = false;
         internal int RenderDistance = 12;
@@ -30,12 +31,10 @@ namespace VoxelPrototype.client.World
             ChunkManager = new ClientChunkManager();
             PlayerFactory = new ClientPlayerFactory();
             PlayerRenderer = new PlayersRenderer();
-            WorldRenderer = new();
         }
         public  void Dispose()
         {
             Initialized = false;
-            WorldRenderer.Dispose();
             ChunkManager.Dispose();
             PlayerFactory.Dispose();
         }
@@ -58,14 +57,13 @@ namespace VoxelPrototype.client.World
 
         public void UpdateRender()
         {
-            WorldRenderer.Update();
         }
         public void Render()
         {
             if (PlayerFactory.LocalPlayerExist)
             {
                 //SkyboxRender.RenderSkyBox(PlayerFactory.LocalPlayer._Camera.GetViewMatrix(), PlayerFactory.LocalPlayer._Camera.GetProjectionMatrix());
-                WorldRenderer.Render();
+                ChunkManager.Render();
                 PlayerRenderer.RenderPlayers();
             }
         }

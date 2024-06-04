@@ -1,16 +1,9 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks.State;
-using VoxelPrototype.common.World;
-using VoxelPrototype.server;
 using VoxelPrototype.VBF;
 
-namespace VoxelPrototype.client.World
+namespace VoxelPrototype.client.World.Level.Chunk
 {
     [Flags]
     internal enum ChunkSate
@@ -20,7 +13,7 @@ namespace VoxelPrototype.client.World
         Changed = 2,
         Unsaved = 4,
     }
-    public class Chunk : IVBFSerializableBinary<Chunk> 
+    public class Chunk : IVBFSerializableBinary<Chunk>
     {
         //Chunk state for meshing
         internal ChunkSate State = ChunkSate.Changed;
@@ -66,7 +59,7 @@ namespace VoxelPrototype.client.World
             VBFList DeSections = compound.Get<VBFList>("Sections");
             for (int i = 0; i < SectionsCount; i++)
             {
-                Sections[i] = new Section().Deserialize((VBFCompound)DeSections.Tags[i]);
+                Sections[i] = new Section(this).Deserialize((VBFCompound)DeSections.Tags[i]);
                 Sections[i].Chunk = this;
             }
             return this;

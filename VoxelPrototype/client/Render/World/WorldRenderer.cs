@@ -3,6 +3,8 @@ using OpenTK.Mathematics;
 using System.Collections.Concurrent;
 using VoxelPrototype.common.Physics;
 using VoxelPrototype.common.World;
+using VoxelPrototype.client.World;
+using VoxelPrototype.common;
 namespace VoxelPrototype.client.Render.World
 {
     internal class WorldRenderer
@@ -68,10 +70,10 @@ namespace VoxelPrototype.client.Render.World
             Shader.SetMatrix4("view", Camera.GetViewMatrix());
             Shader.SetMatrix4("projection", Camera.GetProjectionMatrix());
             Client.TheClient.TextureManager.GetTexture(new Resources.ResourceID("textures/block/atlas")).Use(TextureUnit.Texture0);
-            int minx = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Chunk.Size) - Client.TheClient.World.RenderDistance;
-            int minz = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Chunk.Size) - Client.TheClient.World.RenderDistance;
-            int maxx = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Chunk.Size) + Client.TheClient.World.RenderDistance;
-            int maxz = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Chunk.Size) + Client.TheClient.World.RenderDistance;
+            int minx = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Const.ChunkSize) - Client.TheClient.World.RenderDistance;
+            int minz = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Const.ChunkSize) - Client.TheClient.World.RenderDistance;
+            int maxx = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Const.ChunkSize) + Client.TheClient.World.RenderDistance;
+            int maxz = (int)(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Const.ChunkSize) + Client.TheClient.World.RenderDistance;
             Shader.Use();
             /*Frustum Frustum = FrustumCulling.CreateFrustumFromCamera(
                 Client.TheClient.World.GetLocalPlayerCamera(),
@@ -86,10 +88,10 @@ namespace VoxelPrototype.client.Render.World
                     var mesh = SectionMesh[pos];
                     if (mesh.GetOpaqueMesh().GetVerticesCount() != 0 && Camera.Frustum.IsSectionInFrustum(mesh))
                     {
-                        //if(FrustumCulling.AABBIntersect(Frustum,ChunkCollider.Move(new Vector3(pos.X * Chunk.Size, pos.Y * Chunk.Size, pos.Z * Chunk.Size))))
+                        //if(FrustumCulling.AABBIntersect(Frustum,ChunkCollider.Move(new Vector3(pos.X * Const.ChunkSize, pos.Y * Const.ChunkSize, pos.Z * Const.ChunkSize))))
                         //{
                         RenderedChunksCount++;
-                        Matrix4 model = Matrix4.CreateTranslation(new Vector3(pos.X * Chunk.Size, pos.Y * Section.Size, pos.Z * Chunk.Size));
+                        Matrix4 model = Matrix4.CreateTranslation(new Vector3(pos.X * Const.ChunkSize, pos.Y * Section.Size, pos.Z * Const.ChunkSize));
                         Shader.SetMatrix4("model", model);
  
                         GL.BindVertexArray(mesh.GetOpaqueMesh().GetVAO());

@@ -1,6 +1,5 @@
 ﻿using LiteNetLib;
 using LiteNetLib.Utils;
-using VoxelPrototype.api;
 using VoxelPrototype.common.Entities.Player;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.server;

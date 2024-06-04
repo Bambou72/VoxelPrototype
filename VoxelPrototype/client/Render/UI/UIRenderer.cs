@@ -1,8 +1,8 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using VoxelPrototype.client.GUI.Prototype.Text;
-using VoxelPrototype.client.GUI.Prototype.Utils;
 using VoxelPrototype.client.Render.Components;
+using VoxelPrototype.client.Render.GUI.Prototype.Text;
+using VoxelPrototype.client.Render.GUI.Prototype.Utils;
 using VoxelPrototype.client.Render.Text;
 using VoxelPrototype.client.Render.UI.Batch;
 using VoxelPrototype.client.Resources;

@@ -1,6 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using VoxelPrototype.api;
 using VoxelPrototype.client.Render.Text;
 
 namespace VoxelPrototype.client.Render.UI.Batch

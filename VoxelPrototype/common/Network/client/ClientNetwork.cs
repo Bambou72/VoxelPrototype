@@ -6,7 +6,6 @@
 using LiteNetLib;
 using LiteNetLib.Utils;
 using VoxelPrototype.client;
-using VoxelPrototype.client.GUI;
 using VoxelPrototype.common.Network.packets;
 namespace VoxelPrototype.common.Network.client
 {

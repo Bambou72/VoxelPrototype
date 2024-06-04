@@ -2,7 +2,6 @@
 using OpenTK.Mathematics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using VoxelPrototype.api;
 using VoxelPrototype.client.Render.Components;
 namespace VoxelPrototype.client.Render.UI.Batch
 {

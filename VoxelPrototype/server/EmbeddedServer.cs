@@ -1,5 +1,4 @@
-﻿using VoxelPrototype.api;
-using VoxelPrototype.common.Network.server;
+﻿using VoxelPrototype.common.Network.server;
 using VoxelPrototype.common.World;
 
 namespace VoxelPrototype.server

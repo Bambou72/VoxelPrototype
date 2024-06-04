@@ -1,4 +1,5 @@
 ﻿using OpenTK.Mathematics;
+using VoxelPrototype.client.World;
 using VoxelPrototype.common.Utils;
 using VoxelPrototype.common.World;
 

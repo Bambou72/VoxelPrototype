@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.client.World;
+using VoxelPrototype.common;
+using VoxelPrototype.common.Blocks;
+using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.World;
 
 namespace VoxelPrototype.client.Render.World
@@ -34,7 +36,7 @@ namespace VoxelPrototype.client.Render.World
             {
                 Neighbours[0] = Section.BlockPalette.Get(new Vector3i(position.X, position.Y + 1, position.Z)).Block;
             }
-            else if(Position.Y < Chunk.Height-1) 
+            else if(Position.Y < Const.ChunkHeight- 1) 
             {
                 Neighbours[0] = Section.Chunk.Sections[Position.Y+1].BlockPalette.Get(new Vector3i(position.X, 0, position.Z)).Block;
             }

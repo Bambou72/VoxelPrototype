@@ -8,17 +8,13 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-
-using VoxelPrototype.api;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Items;
-using VoxelPrototype.client.Debug;
-using VoxelPrototype.client.GUI;
-using VoxelPrototype.client.GUI.Prototype;
 using VoxelPrototype.client.Render;
 using VoxelPrototype.client.Render.Debug;
+using VoxelPrototype.client.Render.GUI;
 using VoxelPrototype.client.Render.UI;
 using VoxelPrototype.client.Resources.Managers;
+using VoxelPrototype.client.World;
+using VoxelPrototype.common;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.World;
 using VoxelPrototype.server;
@@ -27,7 +23,7 @@ namespace VoxelPrototype.client
     public class Client : GameWindow
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        public ClientWorld World;
+        public World.World World;
         public static Client TheClient;
         internal EmbeddedServer EmbedderServer;
         internal Config ClientConfig;
@@ -82,7 +78,7 @@ namespace VoxelPrototype.client
             //Input
             InputEventManager = new InputEventManager();
             //World
-            World = new ClientWorld();
+            World = new World.World();
             LoadWorld();
             //OnResize(new());
             //UIManager = new();

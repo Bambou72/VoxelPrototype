@@ -39,20 +39,20 @@ namespace VoxelPrototype.client.Utils.Math
             Vector3 sphere_vec = Section.Center - Camera.Position;
             //Near and Far
             float SZ = Vector3.Dot(sphere_vec, Camera.Front);
-            if(!(Camera.Near - common.World.Section.SphereRadius <= SZ && SZ <= Camera.Far + common.World.Section.SphereRadius))
+            if(!(Camera.Near - World.Section.SphereRadius <= SZ && SZ <= Camera.Far + World.Section.SphereRadius))
             {
                 return false;
             }
             //Top and Bottom
             float SY  = Vector3.Dot(sphere_vec, Camera.Up);
-            float Dist = FactorY * common.World.Section.SphereRadius +SZ * TanY;
+            float Dist = FactorY * World.Section.SphereRadius +SZ * TanY;
             if (!(-Dist<= SY && SY <= Dist))
             {
                 return false;
             }
             //Right and Left
             float SX = Vector3.Dot(sphere_vec, Camera.Right);
-            Dist = FactorX * common.World.Section.SphereRadius + SZ * TanX;
+            Dist = FactorX * World.Section.SphereRadius + SZ * TanX;
             if (!(-Dist <= SX && SX <= Dist))
             {
                 return false;

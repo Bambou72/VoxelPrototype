@@ -1,4 +1,6 @@
-﻿namespace VoxelPrototype.common.World
+﻿using VoxelPrototype.VBF;
+
+namespace VoxelPrototype.common.World
 {
     public class WorldInfo : IVBFSerializableBinary<WorldInfo>
     {

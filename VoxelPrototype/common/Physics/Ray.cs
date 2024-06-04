@@ -1,7 +1,6 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client;
+using VoxelPrototype.common.Blocks.State;
 namespace VoxelPrototype.common.Physics
 {
     public class Ray

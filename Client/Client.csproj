@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AssemblyVersion>1.2023.0402.8492</AssemblyVersion>
+    <FileVersion>1.2023.0402.8492</FileVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <ErrorReport>prompt</ErrorReport>
+    <Authors>OutlawTeam</Authors>
+    <RepositoryUrl>https://github.com/OutlawTeam/VoxPopuli</RepositoryUrl>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <OutputType>Exe</OutputType>
+    <ApplicationIcon>vp.ico</ApplicationIcon>
+    <Configurations>Debug;Release;DistributeBuild</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="vp.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoxelPrototype\VoxelPrototype.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="freetype6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+	<PropertyGroup>
+		<PublishAot>true</PublishAot>
+	</PropertyGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="call $(SolutionDir)VoxelPrototype\resourcespacking.bat         $(TargetDir) $(SolutionDir)VoxelPrototype\assets" />
+	</Target>
+
+</Project>

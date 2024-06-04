@@ -10,21 +10,8 @@
     <Authors>OutlawTeam</Authors>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <Platforms>AnyCPU;x64</Platforms>
-    <Configurations>Debug;Release;DistributeBuild</Configurations>
-	  <GeneratedCodeFile>$(IntermediateOutputPath)CommitInfo.cs</GeneratedCodeFile>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
-	<Target Name="GenerateCommitId" BeforeTargets="BeforeBuild">
-		<!-- Run Git command to get the commit ID -->
-		<Exec Command="git rev-parse --short  HEAD" ConsoleToMSBuild="true">
-			<Output TaskParameter="ConsoleOutput" PropertyName="GitCommitId" />
-		</Exec>
-		<!-- Ensure the directory for the generated file exists -->
-		<MakeDir Directories="$(IntermediateOutputPath)" />
-		<!-- Delete the existing CommitInfo.cs file if it exists -->
-		<Exec Command="if exist $(GeneratedCodeFile) del $(GeneratedCodeFile)" />
-		<!-- Write the commit ID to a C# file -->
-		<WriteLinesToFile File="$(GeneratedCodeFile)" Lines="[assembly: System.Reflection.AssemblyMetadata(&quot;CommitId&quot;, &quot;$(GitCommitId)&quot;)]" />
-	</Target>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>embedded</DebugType>
   </PropertyGroup>
@@ -45,14 +32,16 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.3.2" />
     <PackageReference Include="OpenTK" Version="4.8.2" />
+    <PackageReference Include="SpaceWizards.SharpFont" Version="1.0.2" />
     <PackageReference Include="StbImageSharp" Version="2.27.14" />
     <PackageReference Include="StbImageWriteSharp" Version="1.16.7" />
     <PackageReference Include="Tomlyn" Version="0.17.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpFont\SharpFont.csproj" />
-    <Compile Remove="CommitInfo.cs" />
 	  <Compile Include="$(GeneratedCodeFile)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoxelPrototype.VBF\VoxelPrototype.VBF.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="nlog.config">

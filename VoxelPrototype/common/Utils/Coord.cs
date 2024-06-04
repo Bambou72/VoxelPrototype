@@ -9,27 +9,27 @@ namespace VoxelPrototype.common.Utils
         {
             Vector2i cpos;
             Vector3i bpos;
-            int blockX = System.Math.Abs(x % Chunk.Size);
-            int blockZ = System.Math.Abs(z % Chunk.Size);
+            int blockX = System.Math.Abs(x % Const.ChunkSize);
+            int blockZ = System.Math.Abs(z % Const.ChunkSize);
 
             if (x < 0 && z >= 0)
             {
-                cpos = new Vector2i(x / Chunk.Size - (x % Chunk.Size == 0 ? 0 : 1), z / Chunk.Size);
-                bpos = new Vector3i(blockX == 0 ? 0 : Chunk.Size - blockX, y, blockZ);
+                cpos = new Vector2i(x / Const.ChunkSize - (x % Const.ChunkSize == 0 ? 0 : 1), z / Const.ChunkSize);
+                bpos = new Vector3i(blockX == 0 ? 0 : Const.ChunkSize - blockX, y, blockZ);
             }
             else if (x >= 0 && z < 0)
             {
-                cpos = new Vector2i(x / Chunk.Size, z / Chunk.Size - (z % Chunk.Size == 0 ? 0 : 1));
-                bpos = new Vector3i(blockX, y, blockZ == 0 ? 0 : Chunk.Size - blockZ);
+                cpos = new Vector2i(x / Const.ChunkSize, z / Const.ChunkSize - (z % Const.ChunkSize == 0 ? 0 : 1));
+                bpos = new Vector3i(blockX, y, blockZ == 0 ? 0 : Const.ChunkSize - blockZ);
             }
             else if (x < 0 && z < 0)
             {
-                cpos = new Vector2i(x / Chunk.Size - (x % Chunk.Size == 0 ? 0 : 1), z / Chunk.Size - (z % Chunk.Size == 0 ? 0 : 1));
-                bpos = new Vector3i(blockX == 0 ? 0 : Chunk.Size - blockX, y, blockZ == 0 ? 0 : Chunk.Size - blockZ);
-            }
+                cpos = new Vector2i(x / Const.ChunkSize - (x % Const.ChunkSize == 0 ? 0 : 1), z / Const.ChunkSize - (z % Const.ChunkSize == 0 ? 0 : 1));
+                bpos = new Vector3i(blockX == 0 ? 0 : Const.ChunkSize - blockX, y, blockZ == 0 ? 0 : Const.ChunkSize - blockZ);
+            }   
             else
             {
-                cpos = new Vector2i(x / Chunk.Size, z / Chunk.Size);
+                cpos = new Vector2i(x / Const.ChunkSize, z / Const.ChunkSize);
                 bpos = new Vector3i(blockX, y, blockZ);
             }
             return (cpos, bpos);

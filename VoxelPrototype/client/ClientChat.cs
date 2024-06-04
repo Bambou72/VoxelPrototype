@@ -12,7 +12,7 @@ namespace VoxelPrototype.client
         }
         internal static void HandleMessage(ServerChatMessage data, NetPeer peer)
         {
-            GUI.Console.AddToConsoleHistory(data.Message);
+            Render.GUI.Console.AddToConsoleHistory(data.Message);
         }
     }
 }

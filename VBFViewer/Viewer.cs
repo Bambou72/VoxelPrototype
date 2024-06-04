@@ -1,6 +1,6 @@
 ﻿using ImGuiNET;
 using VoxelPrototype.common;
-using VoxelPrototype.common.World;
+using VoxelPrototype.server.World;
 
 namespace VBFViewer
 {

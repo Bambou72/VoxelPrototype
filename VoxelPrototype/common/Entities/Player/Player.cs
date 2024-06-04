@@ -1,12 +1,10 @@
 ﻿using LiteNetLib;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using VoxelPrototype.api;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client;
 using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Resources;
+using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.Entities;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.Network.packets;

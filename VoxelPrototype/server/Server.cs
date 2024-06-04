@@ -11,7 +11,7 @@ namespace VoxelPrototype.server
         //Set if the server is running
         internal volatile bool Running = false;
         //
-        internal ServerWorld World;
+        internal World.World World;
 
         public static Server TheServer;
         internal const int TICKS_PER_SECOND = 20;
@@ -24,7 +24,7 @@ namespace VoxelPrototype.server
                 TheServer = this;
             }
         }
-        public ServerWorld GetWorld()
+        public World.World GetWorld()
         {
             return World;
         }

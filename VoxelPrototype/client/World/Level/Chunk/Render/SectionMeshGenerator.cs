@@ -1,16 +1,7 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VoxelPrototype.client.Render.World;
-using VoxelPrototype.client.World.Level.Chunk;
 using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks;
 using VoxelPrototype.common.Blocks.State;
-using VoxelPrototype.common.World;
-
 namespace VoxelPrototype.client.World.Level.Chunk.Render
 {
     internal class SectionMeshGenerator
@@ -60,7 +51,7 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
             else
             {
                 Chunk rightChunk = Client.TheClient.World.GetChunk(Position.X + 1, Position.Z);
-                Neighbours[2] = rightChunk.GetBlockFast(new Vector3i(0, position.Y + Section.Size * Position.Y, position.Z)).Block;
+                Neighbours[2] = rightChunk.Sections[Position.Y].BlockPalette.Get(new Vector3i(0, position.Y , position.Z)).Block;
             }
 
             // Left
@@ -71,7 +62,7 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
             else
             {
                 Chunk leftChunk = Client.TheClient.World.GetChunk(Position.X - 1, Position.Z);
-                Neighbours[3] = leftChunk.GetBlockFast(new Vector3i(chunkSizeMinusOne, position.Y + Section.Size * Position.Y, position.Z)).Block;
+                Neighbours[3] = leftChunk.Sections[Position.Y].BlockPalette.Get(new Vector3i(chunkSizeMinusOne, position.Y , position.Z)).Block;
             }
 
             // Front
@@ -82,7 +73,7 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
             else
             {
                 Chunk frontChunk = Client.TheClient.World.GetChunk(Position.X, Position.Z - 1);
-                Neighbours[4] = frontChunk.GetBlockFast(new Vector3i(position.X, position.Y + Section.Size * Position.Y, chunkSizeMinusOne)).Block;
+                Neighbours[4] = frontChunk.Sections[Position.Y].BlockPalette.Get(new Vector3i(position.X, position.Y , chunkSizeMinusOne)).Block;
             }
 
             // Back
@@ -93,7 +84,7 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
             else
             {
                 Chunk backChunk = Client.TheClient.World.GetChunk(Position.X, Position.Z + 1);
-                Neighbours[5] = backChunk.GetBlockFast(new Vector3i(position.X, position.Y + Section.Size * Position.Y, 0)).Block;
+                Neighbours[5] = backChunk.Sections[Position.Y].BlockPalette.Get(new Vector3i(position.X, position.Y, 0)).Block;
             }
 
             return Neighbours;

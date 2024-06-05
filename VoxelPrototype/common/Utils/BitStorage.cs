@@ -1,4 +1,6 @@
-﻿namespace VoxelPrototype.common.Utils
+﻿using System.Runtime.CompilerServices;
+
+namespace VoxelPrototype.common.Utils
 {
 
     internal sealed class BitStorage
@@ -64,6 +66,40 @@
                 }
             }
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int Get(int index)
+        {
+            return (Data[(index * BitPerEntry) >> 5] >> ((index * BitPerEntry) & 31)) & EntryMask;
+
+        }
+        public void Set(int index, int value)
+        {
+            if (value < 0 || value > EntryMask)
+            {
+                throw new ArgumentException($"Value should be in the range (0, {EntryMask}].", nameof(value));
+            }
+            int intIndex = index * BitPerEntry / 32;
+            int offsetWithinInt = index * BitPerEntry % 32;
+            int oldValue = this[index]; // Get the existing entry value
+            if (oldValue != value)
+            {
+                if (offsetWithinInt + BitPerEntry <= 32)
+                {
+                    int mask = EntryMask << offsetWithinInt;
+                    Data[intIndex] = Data[intIndex] & ~mask | value << offsetWithinInt;
+                }
+                else
+                {
+                    int bitsRemaining = 32 - offsetWithinInt;
+                    int mask1 = EntryMask << offsetWithinInt;
+                    int mask2 = (1 << BitPerEntry - bitsRemaining) - 1;
+                    Data[intIndex] = Data[intIndex] & ~mask1 | value << offsetWithinInt;
+                    Data[intIndex + 1] = Data[intIndex + 1] & ~mask2 | value >> bitsRemaining;
+                }
+            }
+
+        }
+
         public BitStorage Grow(int NewBitPerEntry)
         {
             if (NewBitPerEntry <= BitPerEntry)
@@ -73,7 +109,7 @@
             BitStorage Ne = new BitStorage(Size, NewBitPerEntry);
             for (int i = 0; i < Size; i++)
             {
-                Ne[i] = this[i];
+                Ne.Set(i, Get(i));
             }
             return Ne;
         }

@@ -64,10 +64,6 @@ namespace VoxelPrototype.client.World.Level.Chunk
             }
             return this;
         }
-        public BlockState GetBlockFast(Vector3i pos)
-        {
-            return Sections[pos.Y >> 4].BlockPalette.Get(new Vector3i(pos.X, pos.Y & 15, pos.Z));
-        }
         public Section GetSection(int Y)
         {
             if (Y < Const.ChunkHeight * Section.Size && Y >= 0)

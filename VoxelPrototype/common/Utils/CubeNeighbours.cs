@@ -1,10 +1,4 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace VoxelPrototype.common.Utils
 {
     public static class CubeNeighbours
@@ -50,7 +44,6 @@ namespace VoxelPrototype.common.Utils
             new Vector2i( 1,  0),
             new Vector2i( 0,  1),
             new Vector2i( 1,  1),
-            new Vector2i( 0,  0),
         };
     }
 }

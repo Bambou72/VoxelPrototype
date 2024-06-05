@@ -1,5 +1,5 @@
-﻿/*ChunkManager for client side
- *Copyrights Florian Pfeiffer
+﻿/* ChunkManager for client side
+ * Copyrights Florian Pfeiffer
  * Author Florian Pfeiffer
  */
 using LiteNetLib;
@@ -12,13 +12,14 @@ using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks.State;
 using OpenTK.Graphics.OpenGL4;
 using VoxelPrototype.client.World.Level.Chunk;
+using VoxelPrototype.game.Commands;
 namespace VoxelPrototype.client.World.Level
 {
     public  class ClientChunkManager
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         internal ConcurrentDictionary<Vector2i, Chunk.Chunk> Clist = new();
-        internal ConcurrentQueue<Section> SectionToBeMesh = new();
+        internal ConcurrentQueue<(ushort,Section)> SectionToBeMesh = new();
         internal Dictionary<Vector3i, int> Breaking = new();
         internal int RenderedChunksCount = 0;
 
@@ -47,9 +48,9 @@ namespace VoxelPrototype.client.World.Level
             {
                 AddChunk(new Chunk.Chunk().Deserialize(Deflate.Decompress(data.Data)));
                 Clist[pos].State |= Chunk.ChunkSate.Changed;
-                foreach (Chunk.Section section in Clist[pos].Sections)
+                foreach (Section section in Clist[pos].Sections)
                 {
-                    SectionToBeMesh.Enqueue(section);
+                    SectionToBeMesh.Enqueue(((ushort)data.importance,section));
                 }
             }
         }
@@ -64,31 +65,46 @@ namespace VoxelPrototype.client.World.Level
                 }
             }
         }
+        internal void AddSectionToBeMesh(ushort importance,Section section)
+        {
+            if(!SectionToBeMesh.Any(x => x.Item2 == section))
+            {
+                SectionToBeMesh.Enqueue((importance,section));
+            }
+        }
+
         internal void HandleChunkUpdate(OneBlockChange data, NetPeer peer)
         {
-            Vector2i cpos = data.ChunkPos;
-            Vector3i bpos = data.BlockPos;
-            if (Clist.TryGetValue(cpos, out Chunk.Chunk ch))
+            if (Clist.TryGetValue(data.ChunkPos, out Chunk.Chunk ch))
             {
-                ch.SetBlock(bpos, data.State);
+                ch.SetBlock(data.BlockPos, data.State);
+                int SecPos = data.BlockPos.Y / 16;
+                AddSectionToBeMesh(0,ch.Sections[SecPos]);
+                if(SecPos < Const.ChunkHeight)
+                {
+                   AddSectionToBeMesh(0,ch.Sections[SecPos+1]);
+                }
+                if(SecPos > 0)
+                { 
+                    AddSectionToBeMesh(0,ch.Sections[SecPos-1]);
+                }
                 //Neighboors
-                int SecPos = bpos.Y / 16;
                 foreach (Vector2i neighborpos in CubeNeighbours.XZNeighbours)
                 {
-                    if (Clist.TryGetValue(cpos+ neighborpos,out var Neighbor))
+                    if (Clist.TryGetValue(data.ChunkPos+ neighborpos,out var Neighbor))
                     {
                         Neighbor.State |= ChunkSate.Changed;
-                        for (int i = -1; i <= 1; i++)
+                        AddSectionToBeMesh(0,Neighbor.Sections[SecPos]);
+                        if (SecPos < Const.ChunkHeight)
                         {
-                            Section sec = ch.Sections[SecPos + i];
-                            if (sec != null && !SectionToBeMesh.Contains(sec))
-                            {
-                                SectionToBeMesh.Enqueue(sec);
-                            }
+                            AddSectionToBeMesh(0,Neighbor.Sections[SecPos + 1]);
+                        }
+                        if (SecPos > 0)
+                        {
+                            AddSectionToBeMesh(0,Neighbor.Sections[SecPos - 1]);
                         }
                     }
                 }
-                
             }
         }
         internal BlockState GetBlockForMesh(Vector3i bpos, Vector2i cpos)
@@ -119,7 +135,7 @@ namespace VoxelPrototype.client.World.Level
                 Chunk.Chunk CH = GetChunk(Rpos.X, Rpos.Y);
                 if (CH != null)
                 {
-                    return CH.GetBlock(bpos);
+                    return CH.Sections[bpos.Y >> 4].BlockPalette.Get(new Vector3i(bpos.X,bpos.Y & 15 , bpos.Z));
                 }
                 return Client.TheClient.ModManager.BlockRegister.Air;
             }
@@ -176,24 +192,29 @@ namespace VoxelPrototype.client.World.Level
         }
         internal void Update()
         {
-            for (int i = 0; i < 100; i++)
+            SectionToBeMesh = new ConcurrentQueue<(ushort,Section)>(SectionToBeMesh.OrderBy(x => x.Item1));
+            ConcurrentQueue<Section> Section2BeOG = new();
+            //for (int i = 0; i < 50; i++)
+            Parallel.For(0,50, i =>
             {
-                if(SectionToBeMesh.Count == 0)
+                
+                if (SectionToBeMesh.Count != 0 && SectionToBeMesh.TryDequeue(out var sec))
                 {
-                    break;
-                }
-                if(SectionToBeMesh.TryDequeue(out Section sec))
-                {
-                    if (sec.Chunk.IsSurrendedClient())
+                    if (sec.Item2.Chunk.IsSurrendedClient())
                     {
-                        sec.SectionMesh.Generate();
-                        sec.SectionMesh.Upload();
-
-                    }else
+                        sec.Item2.SectionMesh.Generate();
+                        Section2BeOG.Enqueue(sec.Item2);
+                    } else
                     {
-                        SectionToBeMesh.Enqueue(sec);
+                        SectionToBeMesh.Enqueue((10000, sec.Item2));
                     }
-
+                }
+            });
+            while(Section2BeOG.Count > 0)
+            {
+                if(Section2BeOG.TryDequeue(out var Sec2BeOG))
+                {
+                    Sec2BeOG.SectionMesh.Upload();
                 }
             }
         }

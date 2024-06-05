@@ -60,18 +60,18 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
         }
         public BlockState Get(Vector3i Position)
         {
-            return Palette[Data[Utils.TreetoOne(Position)]];
+            return Palette[Data.Get(Utils.TreetoOne(Position))];
         }
         public void Set(Vector3i Position, BlockState State)
         {
-            int previousId = Data[Utils.TreetoOne(Position)];
+            int previousId = Data.Get(Utils.TreetoOne(Position));
             RefsCount[previousId]--;
             int indexid = GetOrAdd(State);
             if (BitCount > Data.BitPerEntry)
             {
                 Data = Data.Grow(BitCount);
             }
-            Data[Utils.TreetoOne(Position)] = indexid;
+            Data.Set(Utils.TreetoOne(Position), indexid);
         }
 
         public VBFCompound Serialize()

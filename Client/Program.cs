@@ -3,20 +3,31 @@
  * Copyright Florian Pfeiffer
  * Author Florian Pfeiffer
  **/
+using CommandLine;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
 using StbImageSharp;
-using System.Runtime.InteropServices;
 using VoxelPrototype.client;
-using VoxelPrototype.client.Utils;
 namespace VoxelPrototypeClient
 {
+
+    public class Options
+    {
+        [Option("resources-paths", Required = false, Default = null, HelpText = "Add folder to the to look-up for resourcespacks.")]
+        public IEnumerable<string> RessourcesPaths { get; set; }
+    }
     public static class Program
     {
-        private static void Main()
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
+        private static void Main(string[] args)
         {
+            Options options = new Options();
+            Parser.Default.ParseArguments<Options>(args)
+                .WithParsed(opts => options = opts)
+                .WithNotParsed((errs) => HandleParseError(errs));
 #if !DEBUG
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -34,6 +45,7 @@ namespace VoxelPrototypeClient
 
             Config conf = new Config();
             var Client = new Client(
+                options.RessourcesPaths.ToArray(),
                 new GameWindowSettings()
                 {
                     UpdateFrequency = 60,
@@ -49,6 +61,12 @@ namespace VoxelPrototypeClient
                     Vsync = VSyncMode.Off
                 });
             Client.Run();
+            NLog.LogManager.Shutdown();
+        }
+        static void HandleParseError(IEnumerable<Error> errs)
+        {
+            // Handle errors here
+            Logger.Error(errs);
         }
     }
 }

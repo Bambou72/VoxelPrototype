@@ -180,6 +180,10 @@ namespace VoxelPrototype.client.Render.GUI
                     DebugMenu = false;
                 }
             }
+            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.F3))
+            {
+                Client.TheClient.ResourceManager.Reload();
+            }
         }
         internal static void RenderI()
         {

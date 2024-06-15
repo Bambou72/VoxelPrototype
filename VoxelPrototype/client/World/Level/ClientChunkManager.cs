@@ -60,6 +60,7 @@ namespace VoxelPrototype.client.World.Level
             {
                 if (Clist.TryGetValue(ChunkPosition, out Chunk.Chunk ch))
                 {
+                    ch.Dispose();
                     ch = null;
                     Clist.Remove(ChunkPosition, out Chunk.Chunk _);
                 }
@@ -195,7 +196,7 @@ namespace VoxelPrototype.client.World.Level
             SectionToBeMesh = new ConcurrentQueue<(ushort,Section)>(SectionToBeMesh.OrderBy(x => x.Item1));
             ConcurrentQueue<Section> Section2BeOG = new();
             //for (int i = 0; i < 50; i++)
-            Parallel.For(0,50, i =>
+            Parallel.For(0,100, i =>
             {
                 
                 if (SectionToBeMesh.Count != 0 && SectionToBeMesh.TryDequeue(out var sec))

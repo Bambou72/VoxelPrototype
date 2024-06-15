@@ -33,7 +33,7 @@ namespace VoxelPrototype.common
         {
             CleanTempFolder();
             Logger.Info("The mod temp folder has been cleaned.");
-            string[] Mods = Directory.GetFiles("mods", "*.modif");
+            string[] Mods = Directory.GetFiles("mods", "*.zip");
             foreach (string filePath in Mods)
             {
                 try
@@ -98,6 +98,8 @@ namespace VoxelPrototype.common
                 }
             }
             Logger.Info("All mods are initialized.");
+            BlockRegister.Finalize();
+            CommandRegister.Finalize();
         }
         public void CleanTempFolder()
         {

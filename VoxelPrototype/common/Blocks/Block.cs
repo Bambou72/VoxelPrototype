@@ -99,7 +99,7 @@ namespace VoxelPrototype.common.Blocks
             catch (Exception e)
             {
                 Logger.Error(e);
-                return Atlas.GetCoordinates(ResourceID.FromString("unknow"));
+                return Atlas.GetCoordinates(ResourceID.FromString("voxelprototype:textures/block/unknow"));
             }
         }
         public virtual Collider[] GetColliders()

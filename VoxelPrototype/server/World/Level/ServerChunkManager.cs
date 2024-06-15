@@ -13,20 +13,19 @@ using VoxelPrototype.common.Entities.Player;
 using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Network.server;
 using VoxelPrototype.common.Utils;
-using VoxelPrototype.common.World;
-using VoxelPrototype.server;
-namespace VoxelPrototype.server.World
+using VoxelPrototype.server.World.Level.Chunk;
+namespace VoxelPrototype.server.World.Level
 {
     public partial class ServerChunkManager
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        internal Dictionary<Vector2i, Chunk> LoadedChunks = new();
+        internal Dictionary<Vector2i, Chunk.Chunk> LoadedChunks = new();
         internal int LoadedChunkCount { get { return LoadedChunks.Count; } }
         internal Dictionary<Vector2i, RegionFile> TempRegions = new();
         internal List<ChunkData> ChunkToBeSend = new();
         internal void Dispose()
         {
-            foreach (Chunk chunk in LoadedChunks.Values)
+            foreach (Chunk.Chunk chunk in LoadedChunks.Values)
             {
                 if (chunk.ServerState == ServerChunkSate.Dirty)
                 {
@@ -42,7 +41,7 @@ namespace VoxelPrototype.server.World
             TempRegions.Clear();
             ChunkToBeSend.Clear();
         }
-        internal void SaveChunk(Chunk Chunk)
+        internal void SaveChunk(Chunk.Chunk Chunk)
         {
             Chunk.ServerState = ServerChunkSate.None;
             int RegionX = Chunk.X >> 5;
@@ -64,7 +63,7 @@ namespace VoxelPrototype.server.World
             byte[] CompressedChunk = LZ4Pickler.Pickle(SerializedChunk, LZ4Level.L11_OPT);
             Region.WriteChunk(LocalChunkX, LocalChunkZ, CompressedChunk, CompressionType.LZ4);
         }
-        internal Chunk LoadChunk(int X, int Z)
+        internal Chunk.Chunk LoadChunk(int X, int Z)
         {
             int RegionX = X >> 5;
             int RegionZ = Z >> 5;
@@ -98,12 +97,12 @@ namespace VoxelPrototype.server.World
                         ChunkData = CompressedData;
                         break;
                 }
-                return new Chunk().Deserialize(ChunkData);
+                return new Chunk.Chunk().Deserialize(ChunkData);
             }
             return null;
 
         }
-        internal Chunk? LoadChunk(Vector2i Position)
+        internal Chunk.Chunk? LoadChunk(Vector2i Position)
         {
             int RegionX = Position.X >> 5;
             int RehionZ = Position.Y >> 5;
@@ -137,12 +136,12 @@ namespace VoxelPrototype.server.World
                         ChunkData = CompressedData;
                         break;
                 }
-                return new Chunk().Deserialize(ChunkData);
+                return new Chunk.Chunk().Deserialize(ChunkData);
             }
             return null;
         }
 
-        internal Chunk? GetChunk(Vector2i pos)
+        internal Chunk.Chunk? GetChunk(Vector2i pos)
         {
             if (LoadedChunks.ContainsKey(pos))
             {
@@ -150,7 +149,7 @@ namespace VoxelPrototype.server.World
             }
             else
             {
-                Chunk LoadedChunk = LoadChunk(pos);
+                Chunk.Chunk LoadedChunk = LoadChunk(pos);
                 if (LoadedChunk != null)
                 {
                     LoadedChunks.Add(pos, LoadedChunk);
@@ -158,10 +157,11 @@ namespace VoxelPrototype.server.World
                 return LoadedChunk;
             }
         }
-        internal Chunk CreateChunk(Vector2i pos)
+        internal Chunk.Chunk CreateChunk(Vector2i pos)
         {
-            Chunk tempChunk = new Chunk(pos, true);
+            Chunk.Chunk tempChunk = new Chunk.Chunk(pos, true);
             SaveChunk(tempChunk);
+            LoadedChunks[pos] = tempChunk;
             return tempChunk;
         }
         internal void SendChunk()
@@ -181,7 +181,7 @@ namespace VoxelPrototype.server.World
         internal void CheckChunk(Player play, int x, int z, Vector3i RelatPos)
         {
             Vector2i chunkPos = new Vector2i(x, z);
-            Chunk ch = GetChunk(chunkPos);
+            Chunk.Chunk ch = GetChunk(chunkPos);
             if (ch != null)
             {
                 ch.PlayerInChunk.Add(play.ClientID);
@@ -194,7 +194,7 @@ namespace VoxelPrototype.server.World
             }
             else
             {
-                Chunk CH = CreateChunk(chunkPos);
+                Chunk.Chunk CH = CreateChunk(chunkPos);
                 CH.PlayerInChunk.Add(play.ClientID);
                 ChunkData chunkData = new ChunkData();
                 chunkData.importance = (int)Vector2.Distance(RelatPos.Xz, chunkPos);
@@ -214,7 +214,7 @@ namespace VoxelPrototype.server.World
             List<Vector2i> list = new List<Vector2i>();
             foreach (Vector2i ch in play.inChunk)
             {
-                Chunk chs = GetChunk(ch);
+                Chunk.Chunk chs = GetChunk(ch);
                 if (chs != null)
                 {
                     if (ch.X < minx || ch.Y < minz || ch.X > maxx || ch.Y > maxz)
@@ -255,7 +255,7 @@ namespace VoxelPrototype.server.World
                 Region.Close();
             }
             TempRegions.Clear();
-            foreach (Chunk chunk in LoadedChunks.Values)
+            foreach (Chunk.Chunk chunk in LoadedChunks.Values)
             {
                 if (chunk.PlayerInChunk.Count == 0)
                 {
@@ -275,7 +275,7 @@ namespace VoxelPrototype.server.World
         internal BlockState GetBlock(int x, int y, int z)
         {
             (Vector2i cpos, Vector3i bpos) = Coord.GetVoxelCoord(x, y, z);
-            Chunk ch = GetChunk(cpos);
+            Chunk.Chunk ch = GetChunk(cpos);
             if (ch != null)
             {
                 return ch.GetBlock(new Vector3i(bpos.X, bpos.Y, bpos.Z));
@@ -288,7 +288,7 @@ namespace VoxelPrototype.server.World
         internal void SetBlock(int x, int y, int z, BlockState State)
         {
             (Vector2i cpos, Vector3i bpos) = Coord.GetVoxelCoord(x, y, z);
-            Chunk ch = GetChunk(cpos);
+            Chunk.Chunk ch = GetChunk(cpos);
             if (ch != null)
             {
                 ch.SetBlock(new Vector3i(bpos.X, bpos.Y, bpos.Z), State);
@@ -296,7 +296,7 @@ namespace VoxelPrototype.server.World
         }
         internal void ChangeBlock(Vector2i cp, Vector3i bp, BlockState State)
         {
-            Chunk tempChunk = GetChunk(cp);
+            Chunk.Chunk tempChunk = GetChunk(cp);
             if (tempChunk != null)
             {
                 tempChunk = CreateChunk(cp);
@@ -315,7 +315,7 @@ namespace VoxelPrototype.server.World
         }
         internal void HandleBlockChange(OneBlockChangeDemand data, NetPeer peer)
         {
-            Chunk tempChunk = GetChunk(data.ChunkPos);
+            Chunk.Chunk tempChunk = GetChunk(data.ChunkPos);
             if (tempChunk != null)
             {
                 tempChunk.SetBlock(data.BlockPos, data.State);

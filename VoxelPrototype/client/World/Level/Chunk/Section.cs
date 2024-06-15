@@ -44,5 +44,9 @@ namespace VoxelPrototype.client.World.Level.Chunk
             }
             BlockPalette.Set(new Vector3i(pos.X, pos.Y, pos.Z), id);
         }
+        public void Dispose()
+        {
+            SectionMesh.Destroy();
+        }
     }
 }

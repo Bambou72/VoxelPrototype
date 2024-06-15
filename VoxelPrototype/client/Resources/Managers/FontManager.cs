@@ -26,7 +26,7 @@ namespace VoxelPrototype.client.Resources.Managers
             }
             throw new Exception("Can't find font");
         }
-        public void Reload(ResourceManager Manager)
+        public void Reload(ResourcesManager Manager)
         {
             Clean();
             var fonts = Manager.ListResources("font", path => path.EndsWith(".ttf"));

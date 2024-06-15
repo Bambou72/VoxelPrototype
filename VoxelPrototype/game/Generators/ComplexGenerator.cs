@@ -2,9 +2,9 @@
 using OpenTK.Mathematics;
 using VoxelPrototype.client;
 using VoxelPrototype.common.World;
-using VoxelPrototype.server.World;
 using VoxelPrototype.common.WorldGenerator;
 using VoxelPrototype.common;
+using VoxelPrototype.server.World.Level.Chunk;
 
 namespace VoxelPrototype.game.Generators
 {
@@ -24,16 +24,19 @@ namespace VoxelPrototype.game.Generators
                     int GlobalX = x + chunk.X * Const.ChunkSize;
                     int GlobalZ = z + chunk.Z * Const.ChunkSize;
                     int Height = GetHeight(GlobalX, GlobalZ);
-                    for (int y = 0; y < Const.ChunkSize * Section.Size; y++)
+                    for (int y = 0; y < Const.ChunkHeight * Section.Size; y++)
                     {
 
                         if (y == Height)
                         {
                             chunk.SetBlock(new Vector3i(x, y, z), Client.TheClient.ModManager.BlockRegister.GetBlock("voxelprototype:grass").GetDefaultState());
                         }
-                        else if (y < Height)
+                        else if (y < Height&&   y > (Height-4))
                         {
                             chunk.SetBlock(new Vector3i(x, y, z), Client.TheClient.ModManager.BlockRegister.GetBlock("voxelprototype:dirt").GetDefaultState());
+                        }else if( y <= (Height-4))
+                        {
+                            chunk.SetBlock(new Vector3i(x, y, z), Client.TheClient.ModManager.BlockRegister.GetBlock("voxelprototype:stone").GetDefaultState());
                         }
                     }
                 }
@@ -41,11 +44,9 @@ namespace VoxelPrototype.game.Generators
         }
         internal int GetHeight(int x, int z)
         {
-            return (int)(lib.GetNoise(x, z) * 200 + 256);
+            return (int)(lib.GetNoise(x, z) * 100 + (Const.ChunkHeight * Section.Size)/2);
         }
-
         public override void SetData(long seed)
-
         {
             base.SetData(seed);
             lib = new FastNoise((int)seed);

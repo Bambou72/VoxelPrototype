@@ -2,6 +2,6 @@
 {
     public interface IReloadableResourceManager
     {
-        void Reload(ResourceManager Manager);
+        void Reload(ResourcesManager Manager);
     }
 }

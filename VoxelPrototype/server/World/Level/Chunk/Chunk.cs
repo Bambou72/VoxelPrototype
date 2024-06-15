@@ -1,16 +1,11 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VoxelPrototype.client;
 using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.World;
 using VoxelPrototype.VBF;
 
-namespace VoxelPrototype.server.World
+namespace VoxelPrototype.server.World.Level.Chunk
 {
     [Flags]
     internal enum ChunkSate
@@ -27,7 +22,7 @@ namespace VoxelPrototype.server.World
     }
 
     public class Chunk : IVBFSerializableBinary<Chunk>
-    { 
+    {
         //Chunk state for meshing
         internal ChunkSate State = ChunkSate.Changed;
         internal ServerChunkSate ServerState = ServerChunkSate.None;

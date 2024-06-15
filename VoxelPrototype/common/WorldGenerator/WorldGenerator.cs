@@ -1,4 +1,4 @@
-﻿using VoxelPrototype.server.World;
+﻿using VoxelPrototype.server.World.Level.Chunk;
 
 namespace VoxelPrototype.common.WorldGenerator
 {

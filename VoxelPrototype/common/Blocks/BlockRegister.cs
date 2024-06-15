@@ -7,7 +7,7 @@ namespace VoxelPrototype.common.Blocks
         internal Dictionary<string, Block> Blocks = new Dictionary<string, Block>();
         private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         public BlockState Air;
-
+        public int RegisteredBlockCounter;
         public BlockRegister()
         {
             RegisterBlock("air", new Block() { Transparent = true });
@@ -25,13 +25,18 @@ namespace VoxelPrototype.common.Blocks
                 block.ID = Id;
                 block.Gernerate();
                 Blocks.Add(Id, block);
-                Logger.Info($"New block : {Id}");
+                //Logger.Info($"New block : {Id}");
+                RegisteredBlockCounter++;
                 return true;
             }
             catch
             {
                 return false;
             }
+        }
+        public void Finalize()
+        {
+            Logger.Info(RegisteredBlockCounter + " blocks have been loaded.");
         }
         public Block GetBlock(string Id)
         {

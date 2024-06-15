@@ -99,6 +99,13 @@ namespace VoxelPrototype.client.World.Level.Chunk
             int y = pos.Y - YValue * 16;
             section.SetBlock(new Vector3i(pos.X, y, pos.Z), id);
         }
+        public void Dispose()
+        {
+            foreach(var section in Sections)
+            {
+                section.Dispose();
+            }
+        }
     }
 
 }

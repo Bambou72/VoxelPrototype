@@ -1,161 +1,197 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using System.Runtime.CompilerServices;
-
-internal sealed class BitStorage
+public class VoxelSection1D
 {
-    internal int[] Data;
-    private int Size;
-    internal int BitPerEntry;
-    private int EntryMask;
-    public BitStorage(int[] data, int size, int bitPerEntry)
+    private short[] voxels;
+    private int width;
+    private int height;
+    private int depth;
+
+    public VoxelSection1D(int width, int height, int depth)
     {
-        if (bitPerEntry <= 0 || bitPerEntry > 32)
-        {
-            throw new ArgumentException("BitPerEntry should be in the range (0, 32].", nameof(bitPerEntry));
-        }
-        Size = size;
-        BitPerEntry = bitPerEntry;
-        EntryMask = (1 << bitPerEntry) - 1;
-        Data = data;
+        this.width = width;
+        this.height = height;
+        this.depth = depth;
+        voxels = new short[width * height * depth];
     }
 
-    public BitStorage(int size, int bitPerEntry)
+    private int GetIndex(int x, int y, int z)
     {
-        if (bitPerEntry <= 0 || bitPerEntry > 32)
-        {
-            throw new ArgumentException("BitPerEntry should be in the range (0, 32].", nameof(bitPerEntry));
-        }
-        Size = size;
-        BitPerEntry = bitPerEntry;
-        EntryMask = (1 << bitPerEntry) - 1;
-        Data = new int[(Size * BitPerEntry + 31) / 32];
+        return x + y * width + z * width * height;
     }
 
-    public int this[int index]
+    public short GetVoxel(int x, int y, int z)
     {
-        get
-        {
-            return (Data[(index * BitPerEntry) >> 5] >> ((index * BitPerEntry) & 31)) & EntryMask;
-        }
-        set
-        {
-            if (value < 0 || value > EntryMask)
-            {
-                throw new ArgumentException($"Value should be in the range (0, {EntryMask}].", nameof(value));
-            }
-            int intIndex = index * BitPerEntry / 32;
-            int offsetWithinInt = index * BitPerEntry % 32;
-            int oldValue = this[index]; // Get the existing entry value
-            if (oldValue != value)
-            {
-                if (offsetWithinInt + BitPerEntry <= 32)
-                {
-                    int mask = EntryMask << offsetWithinInt;
-                    Data[intIndex] = Data[intIndex] & ~mask | value << offsetWithinInt;
-                }
-                else
-                {
-                    int bitsRemaining = 32 - offsetWithinInt;
-                    int mask1 = EntryMask << offsetWithinInt;
-                    int mask2 = (1 << BitPerEntry - bitsRemaining) - 1;
-                    Data[intIndex] = Data[intIndex] & ~mask1 | value << offsetWithinInt;
-                    Data[intIndex + 1] = Data[intIndex + 1] & ~mask2 | value >> bitsRemaining;
-                }
-            }
-        }
+        return voxels[GetIndex(x, y, z)];
     }
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public int Get(int index)
-    {
-        return (Data[(index * BitPerEntry) >> 5] >> ((index * BitPerEntry) & 31)) & EntryMask;
 
-    }
-    public void Set(int index, int value)
+    public void SetVoxel(int x, int y, int z, short value)
     {
-        if (value < 0 || value > EntryMask)
+        voxels[GetIndex(x, y, z)] = value;
+    }
+}
+
+public class OctreeNode
+{
+    public short? Value;
+    public OctreeNode[] Children;
+
+    public OctreeNode(short? value)
+    {
+        Value = value;
+        Children = null;
+    }
+
+    public void Subdivide()
+    {
+        if (Children == null)
         {
-            throw new ArgumentException($"Value should be in the range (0, {EntryMask}].", nameof(value));
+            Children = new OctreeNode[8];
+            for (int i = 0; i < 8; i++)
+            {
+                Children[i] = new OctreeNode(Value);
+            }
+            Value = null;
         }
-        int intIndex = index * BitPerEntry / 32;
-        int offsetWithinInt = index * BitPerEntry % 32;
-        int oldValue = this[index]; // Get the existing entry value
-        if (oldValue != value)
+    }
+
+    public bool IsLeaf()
+    {
+        return Children == null;
+    }
+}
+
+public class Octree
+{
+    private OctreeNode root;
+    private int size;
+
+    public Octree(short initialValue, int size = 16)
+    {
+        root = new OctreeNode(initialValue);
+        this.size = size;
+    }
+
+    private int GetChildIndex(int x, int y, int z, int level)
+    {
+        int halfSize = 1 << (level - 1);
+        return (x >= halfSize ? 1 : 0) | (y >= halfSize ? 2 : 0) | (z >= halfSize ? 4 : 0);
+    }
+
+    public void SetVoxel(int x, int y, int z, short value)
+    {
+        SetVoxel(root, x, y, z, value, size, 0);
+    }
+
+    private void SetVoxel(OctreeNode node, int x, int y, int z, short value, int currentSize, int level)
+    {
+        if (node.IsLeaf())
         {
-            if (offsetWithinInt + BitPerEntry <= 32)
+            if (node.Value == value)
+                return;
+
+            if (currentSize == 1)
             {
-                int mask = EntryMask << offsetWithinInt;
-                Data[intIndex] = Data[intIndex] & ~mask | value << offsetWithinInt;
+                node.Value = value;
+                return;
             }
-            else
-            {
-                int bitsRemaining = 32 - offsetWithinInt;
-                int mask1 = EntryMask << offsetWithinInt;
-                int mask2 = (1 << BitPerEntry - bitsRemaining) - 1;
-                Data[intIndex] = Data[intIndex] & ~mask1 | value << offsetWithinInt;
-                Data[intIndex + 1] = Data[intIndex + 1] & ~mask2 | value >> bitsRemaining;
-            }
+
+            node.Subdivide();
         }
 
+        int halfSize = currentSize / 2;
+        int childIndex = GetChildIndex(x, y, z, (int)Math.Log2(currentSize));
+        int offsetX = (childIndex & 1) * halfSize;
+        int offsetY = ((childIndex & 2) >> 1) * halfSize;
+        int offsetZ = ((childIndex & 4) >> 2) * halfSize;
+
+        SetVoxel(node.Children[childIndex], x - offsetX, y - offsetY, z - offsetZ, value, halfSize, level + 1);
     }
-    public BitStorage Grow(int NewBitPerEntry)
+
+    public short GetVoxel(int x, int y, int z)
     {
-        if (NewBitPerEntry <= BitPerEntry)
+        return GetVoxel(root, x, y, z, size);
+    }
+
+    private short GetVoxel(OctreeNode node, int x, int y, int z, int currentSize)
+    {
+        if (node.IsLeaf())
         {
-            return this;
+            return node.Value ?? 0;
         }
-        BitStorage Ne = new BitStorage(Size, NewBitPerEntry);
-        for (int i = 0; i < Size; i++)
-        {
-            Ne[i] = this[i];
-        }
-        return Ne;
+
+        int halfSize = currentSize / 2;
+        int childIndex = GetChildIndex(x, y, z, (int)Math.Log2(currentSize));
+        int offsetX = (childIndex & 1) * halfSize;
+        int offsetY = ((childIndex & 2) >> 1) * halfSize;
+        int offsetZ = ((childIndex & 4) >> 2) * halfSize;
+
+        return GetVoxel(node.Children[childIndex], x - offsetX, y - offsetY, z - offsetZ, halfSize);
     }
 }
 
 
-
-
-public class BitArrayBenchmark
+public class VoxelBenchmark
 {
-    private BitStorage bitArray;
+    private VoxelSection1D voxelSection1D;
+    private Octree octree;
 
     [GlobalSetup]
     public void Setup()
     {
-        bitArray = new BitStorage(4096, 1);
-    }
+        voxelSection1D = new VoxelSection1D(16, 16, 16);
+        octree = new Octree(0, 16);
 
-
-    [Benchmark]
-    public void IndexerGetBenchmark()
-    {
-        for (int i = 0; i < 1000000000; i++)
+        // Initialiser les voxels
+        for (int x = 0; x < 16; x++)
         {
-            for (int k = 0; k < 1000; k++)
+            for (int y = 0; y < 16; y++)
             {
-                int value = bitArray[i % 4096];
+                for (int z = 0; z < 16; z++)
+                {
+                    voxelSection1D.SetVoxel(x, y, z, (short)(x + y + z));
+                    octree.SetVoxel(x, y, z, (short)(x + y + z));
+                }
             }
         }
     }
 
     [Benchmark]
-    public void MethodGetBenchmark()
+    public void AccessVoxel1D()
     {
-        for (int i = 0; i < 1000000000; i++)
+        for (int x = 0; x < 16; x++)
         {
-            for (int k = 0; k < 1000; k++)
+            for (int y = 0; y < 16; y++)
             {
-                int value = bitArray.Get(i % 4096);
+                for (int z = 0; z < 16; z++)
+                {
+                    short value = voxelSection1D.GetVoxel(x, y, z);
+                }
+            }
+        }
+    }
+
+    [Benchmark]
+    public void AccessVoxelOctree()
+    {
+        for (int x = 0; x < 16; x++)
+        {
+            for (int y = 0; y < 16; y++)
+            {
+                for (int z = 0; z < 16; z++)
+                {
+                    short value = octree.GetVoxel(x, y, z);
+                }
             }
         }
     }
 }
 
-public class Program
+class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
-        var summary = BenchmarkRunner.Run<BitArrayBenchmark>();
+        var summary = BenchmarkRunner.Run<VoxelBenchmark>();
     }
 }

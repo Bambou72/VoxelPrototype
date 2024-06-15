@@ -14,7 +14,7 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>vp.ico</ApplicationIcon>
-    <Configurations>Debug;Release;DistributeBuild</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>
@@ -26,6 +26,9 @@
     <Content Include="vp.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VoxelPrototype\VoxelPrototype.csproj" />
@@ -41,8 +44,4 @@
 	<PropertyGroup>
 		<PublishAot>true</PublishAot>
 	</PropertyGroup>
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="call $(SolutionDir)VoxelPrototype\resourcespacking.bat         $(TargetDir) $(SolutionDir)VoxelPrototype\assets" />
-	</Target>
-
 </Project>

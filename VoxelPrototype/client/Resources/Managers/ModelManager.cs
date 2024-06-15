@@ -41,7 +41,7 @@ namespace VoxelPrototype.client.Resources.Managers
             }
             EntitiesMesh.Clear();
         }
-        public void Reload(ResourceManager Manager)
+        public void Reload(ResourcesManager Manager)
         {
             Clean();
             //Block Mesh

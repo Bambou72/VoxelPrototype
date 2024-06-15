@@ -23,7 +23,7 @@ namespace VoxelPrototype.client.Resources.Managers
             }
             throw new Exception("Can't find requested texture");
         }
-        public void Reload(ResourceManager Manager)
+        public void Reload(ResourcesManager Manager)
         {
             Clean();
             //UI

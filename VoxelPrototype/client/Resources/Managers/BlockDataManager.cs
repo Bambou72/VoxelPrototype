@@ -18,7 +18,7 @@ namespace VoxelPrototype.client.Resources.Managers
             }
             throw new Exception("Can't find block data");
         }
-        public void Reload(ResourceManager Manager)
+        public void Reload(ResourcesManager Manager)
         {
             Clean();
             var blocksdata= Manager.ListResources("data/block", path => path.EndsWith(".json"));

@@ -1,8 +1,9 @@
 {
   "profiles": {
-    "VoxelPrototypeClient": {
+    "Client": {
       "commandName": "Project",
-      "nativeDebugging": false
+      "commandLineArgs": "--resources-paths ../../../../Assets ",
+      "nativeDebugging": true
     }
   }
 }

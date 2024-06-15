@@ -4,6 +4,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using VoxelPrototype.client;
 using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Resources;
+using VoxelPrototype.common.Blocks;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.Entities;
 using VoxelPrototype.common.Network.client;
@@ -36,6 +37,7 @@ namespace VoxelPrototype.common.Entities.Player
         internal Vector3i ViewedBlockPos;
         internal Ray? ViewRay;
         internal bool ViewBlock = false;
+        internal Block SelectedBlock = null;
         //BlockBreaking
         internal Vector3i BlockCurrentBreaking;
         internal float sensitivity = 0.2f;
@@ -68,22 +70,22 @@ namespace VoxelPrototype.common.Entities.Player
             ViewedBlockPos = CurrentBlock;
             Vector3i BlockBefore = new Vector3i(CurrentBlock.X + Normal.X, CurrentBlock.Y + Normal.Y, CurrentBlock.Z + Normal.Z);
 
-            if (Client.TheClient.InputEventManager.IsMouseButtonDown(MouseButton.Left) && Client.TheClient.InputEventManager.Grab)
+            if (Client.TheClient.InputEventManager.IsMouseButtonPressed(MouseButton.Left) && Client.TheClient.InputEventManager.Grab)
             {
                 Client.TheClient.World.ChunkManager.ChangeChunk(CurrentBlock, Client.TheClient.ModManager.BlockRegister.Air);
             }
             else if (Client.TheClient.InputEventManager.IsMouseButtonPressed(MouseButton.Right) && Client.TheClient.InputEventManager.Grab)
             {
-                State.Block.OnInteract(CurrentBlock, State, ServerSide);
-            }
-            /*
-            else if (InputSystem.MousePressed(MouseButton.Middle))
-            {
-                if (ClientWorldManager.world.GetBlock(CurrentBlock.X, CurrentBlock.Y, CurrentBlock.Z, out VoxelInstance id))
+                if(SelectedBlock == null)
                 {
-                    SelectedBlock = id;
+                    SelectedBlock = Client.TheClient.ModManager.BlockRegister.GetBlock("voxelprototype:cobblestone");
                 }
-            }*/
+                Client.TheClient.World.ChunkManager.ChangeChunk(CurrentBlock+Normal, SelectedBlock.GetDefaultState());
+            }
+            else if (Client.TheClient.InputEventManager.IsMouseButtonPressed(MouseButton.Middle))
+            {
+                SelectedBlock = Client.TheClient.World.GetBlock(CurrentBlock.X, CurrentBlock.Y, CurrentBlock.Z).Block;
+            }
         }
         internal void SendControl(InputState st)
         {

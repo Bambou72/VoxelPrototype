@@ -7,7 +7,7 @@
     <AssemblyVersion>1.2023.0325.8484</AssemblyVersion>
     <FileVersion>1.2023.0325.8484</FileVersion>
     <Platforms>AnyCPU;x64</Platforms>
-    <Configurations>Debug;Release;DistributeBuild</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);SERVER</DefineConstants>

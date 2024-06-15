@@ -1,0 +1,12 @@
+{
+    "variants":
+    {
+        "":
+        {
+            "textures":
+            {
+                "all":"voxelprototype:textures/block/cobblestone"
+            }    
+        }
+    } 
+}

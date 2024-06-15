@@ -8,11 +8,13 @@ namespace VoxelPrototype.common.Commands
         private Dictionary<string, ICommand> Commands = new Dictionary<string, ICommand>();
         internal char commandPrefix = '#'; // Le préfixe spécial pour les commandes
         internal List<string> autocommands = new();
+        internal int RegisteredCommandCount;
         public void RegisterCommand(ICommand command)
         {
             Commands.Add(command.Name, command);
             autocommands.Add(commandPrefix.ToString() + command.Name);
-            Logger.Info($"New command registered : {command.Name}");
+            //Logger.Info($"New command registered : {command.Name}");
+            RegisteredCommandCount++;
         }
         public void ExecuteCommand(string input, NetPeer peer)
         {
@@ -28,5 +30,10 @@ namespace VoxelPrototype.common.Commands
                 Commands[commandName].Execute(parameters, peer);
             }
         }
+        public void Finalize()
+        {
+            Logger.Info(RegisteredCommandCount + " commands have been loaded.");
+        }
+
     }
 }

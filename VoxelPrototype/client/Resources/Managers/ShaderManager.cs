@@ -31,7 +31,7 @@ namespace VoxelPrototype.client.Resources.Managers
             }
             throw new Exception("Can't find shader");
         }
-        public void Reload(ResourceManager Manager)
+        public void Reload(ResourcesManager Manager)
         {
             Clean();
             //Block Mesh

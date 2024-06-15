@@ -1,5 +1,5 @@
 ﻿using OpenTK.Mathematics;
-namespace VoxelPrototype.server.World
+namespace VoxelPrototype.server.World.Level
 {
     internal struct ChunkToBeGen
     {

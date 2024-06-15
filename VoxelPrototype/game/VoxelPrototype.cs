@@ -30,6 +30,21 @@ namespace VoxelPrototype.game
                 Data = new ResourceID("data/block/grass")
             };
             Manager.BlockRegister.RegisterBlock(GrassID, Grass);
+            string StoneID = Manager.BlockRegister.GetBlockID(Name, "stone");
+            var Stone = new Block()
+            {
+                Model = new ResourceID("models/block/cube"),
+                Data = new ResourceID("data/block/stone")
+            };
+            Manager.BlockRegister.RegisterBlock(StoneID, Stone);
+
+            string CobblestoneID = Manager.BlockRegister.GetBlockID(Name, "cobblestone");
+            var Cobblestone = new Block()
+            {
+                Model = new ResourceID("models/block/cube"),
+                Data = new ResourceID("data/block/cobblestone")
+            };
+            Manager.BlockRegister.RegisterBlock(CobblestoneID, Cobblestone);
             string LampID = Manager.BlockRegister.GetBlockID(Name, "lamp");
             var Lamp = new Blocks.Lamp()
             {

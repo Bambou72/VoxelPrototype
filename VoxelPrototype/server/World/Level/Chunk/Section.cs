@@ -8,12 +8,12 @@ using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.Utils.Storage.Palette;
 using VoxelPrototype.VBF;
 
-namespace VoxelPrototype.server.World
+namespace VoxelPrototype.server.World.Level.Chunk
 {
     public class Section : IVBFSerializable<Section>
     {
         public const int Size = 16;
-        public readonly static float SphereRadius = (Size * MathF.Sqrt(3)) / 2;
+        public readonly static float SphereRadius = Size * MathF.Sqrt(3) / 2;
         internal BlockPalette BlockPalette;
         internal int Y;
         internal Chunk Chunk;

@@ -30,7 +30,7 @@ namespace VoxelPrototype.client
         // internal UIManager UIManager;
         //internal UIMaster UIMaster;
         internal ModManager ModManager;
-        internal Resources.ResourceManager ResourceManager;
+        internal Resources.ResourcesManager ResourceManager;
         internal Renderer Renderer;
         internal InputEventManager InputEventManager;
         internal TextureManager TextureManager;
@@ -38,12 +38,15 @@ namespace VoxelPrototype.client
         internal ModelManager ModelManager;
         internal BlockDataManager BlockDataManager;
         internal ShaderManager ShaderManager;
-        public Client(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
+        //temp
+        string[] ResourcesPacksPaths;
+        public Client(string[]? ResourcesPacksPaths, GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
             if (TheClient == null)
             {
                 TheClient = this;
             }
+            this.ResourcesPacksPaths = ResourcesPacksPaths;
             ClientConfig = new();
         }
         protected override void OnLoad()
@@ -58,7 +61,7 @@ namespace VoxelPrototype.client
             ModManager.LoadMods();
             ModManager.PreInit();
             //Resources
-            ResourceManager = new();
+            ResourceManager = new(ResourcesPacksPaths);
             ShaderManager = new ShaderManager();
             ResourceManager.RegisterManager(ShaderManager);
             FontManager = new FontManager();

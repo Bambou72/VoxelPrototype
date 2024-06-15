@@ -2,32 +2,37 @@
 using Tomlyn;
 using System.IO.Compression;
 using VoxelPrototype.common.Utils;
-using OpenTK.Windowing.Common.Input;
-using System.Resources;
 using VoxelPrototype.client.Resources.Managers;
 
 namespace VoxelPrototype.client.Resources
 {
-    public class ResourceManager
+    public class ResourcesManager
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         const string TempPath = "temp/resourcespacks";
         const string CorePackName = "core.resources";
         List<ResourcesPack> Available = new();
         List<ResourcesPack> Active = new();
         List<IReloadableResourceManager> ResourcesManagers = new();
-
-        public ResourceManager()
+        List<string> ResourcesPacksPaths = new List<string>{ "resourcespacks" };
+        public ResourcesManager(string[]? MoreResourcesPacksPaths)
         {
-            
+            if (MoreResourcesPacksPaths != null)
+            {
+                ResourcesPacksPaths.AddRange(MoreResourcesPacksPaths);
+            }
         }
         public void Init()
         {
             FindResourcesPack();
             ReloadResources();
         }
-        public void ReloadPacks()
+        public void Reload()
         {
             FindResourcesPack();
+            ReloadResources();
+
         }
 
         public void RegisterManager(IReloadableResourceManager manager)
@@ -58,65 +63,63 @@ namespace VoxelPrototype.client.Resources
             }
             if (!isRootDir) baseDir.Delete();
         }
+        internal void AddPack(ResourcesPack Pack)
+        {
+            Available.Add(Pack);
+            Logger.Info("Added new resourcespack "+Pack.Name+" "+"Version:"+Pack.Version);
+        }
         internal void FindResourcesPack()
         {
+            Available.Clear();
             CleanTempFolder();
-            //BaseGame assets
-            if (File.Exists(CorePackName))
+            //Resourcepacks Folders
+            foreach (string resourcespacksfolder in ResourcesPacksPaths)
             {
-                ZipArchive zip = ZipFile.Open(CorePackName, ZipArchiveMode.Read);
-                zip.ExtractToDirectory("temp/resourcespacks/"+ Path.GetFileNameWithoutExtension(CorePackName));
-                zip = null;
-                string path = "temp/resourcespacks" + "/" + Path.GetFileNameWithoutExtension(CorePackName);
-                TomlTable PackData = Toml.ToModel(File.ReadAllText(path + "/pack.toml"));
-                string[] NameSpaces = RelativePath.GetRelativePathsDirectories(path);
-                ResourcesPack Pack = new()
+                Logger.Info("Loading resourcespacks from " + resourcespacksfolder);
+                string[] ResourceDirect = Directory.GetDirectories(resourcespacksfolder);
+                foreach (string directory in ResourceDirect)
                 {
-                    Name = (string)PackData["Name"],
-                    Version = (string)PackData["Version"],
-                    Description = (string)PackData["Description"],
-                    Namespaces = NameSpaces,
-                    Path = path
-                };
-                Available.Add(Pack);
-            }
-            //Resourcepacks Folder
-            string[] ResourceDirect = Directory.GetDirectories("resourcespacks");
-            foreach (string directory in ResourceDirect)
-            {
-                if (File.Exists(directory + "/pack.toml"))
-                {
-                    TomlTable PackData = Toml.ToModel(File.ReadAllText(directory + "/pack.toml"));
-                    string[] NameSpaces = RelativePath.GetRelativePathsDirectories(directory);
-                    ResourcesPack Pack = new()
+                    if (File.Exists(directory + "/pack.toml"))
                     {
-                        Name = (string)PackData["Name"],
-                        Version = (string)PackData["Version"],
-                        Description = (string)PackData["Description"],
-                        Namespaces = NameSpaces,
-                        Path = directory
-                    };
-                    Available.Add(Pack);
+                        TomlTable PackData = Toml.ToModel(File.ReadAllText(directory + "/pack.toml"));
+                        string[] NameSpaces = RelativePath.GetRelativePathsDirectories(directory);
+                        ResourcesPack Pack = new()
+                        {
+                            Name = (string)PackData["Name"],
+                            Version = (string)PackData["Version"],
+                            Description = (string)PackData["Description"],
+                            Namespaces = NameSpaces,
+                            Path = directory
+                        };
+                        AddPack(Pack);
+                    }
                 }
-            }
-            string[] ResourceZip = Directory.GetFiles("resourcespacks", "*.zip");
-            foreach (string Zip in ResourceZip)
-            {
-                ZipArchive zip = ZipFile.Open(Zip, ZipArchiveMode.Read);
-                zip.ExtractToDirectory("temp/resourcespacks");
-                zip = null;
-                string path = "temp/resourcespacks" + "/" + Path.GetFileNameWithoutExtension(Zip);
-                TomlTable PackData = Toml.ToModel(File.ReadAllText(path + "/pack.toml"));
-                string[] NameSpaces = RelativePath.GetRelativePathsDirectories(path);
-                ResourcesPack Pack = new()
+                string[] ResourceZip = Directory.GetFiles("resourcespacks", "*.zip");
+                foreach (string Zip in ResourceZip)
                 {
-                    Name = (string)PackData["Name"],
-                    Version = (string)PackData["Version"],
-                    Description = (string)PackData["Description"],
-                    Namespaces = NameSpaces,
-                    Path = path
-                };
-                Available.Add(Pack);
+                    try
+                    {
+                        ZipArchive zip = ZipFile.Open(Zip, ZipArchiveMode.Read);
+                        zip.ExtractToDirectory("temp/resourcespacks");
+                        zip = null;
+                        string path = "temp/resourcespacks" + "/" + Path.GetFileNameWithoutExtension(Zip);
+                        TomlTable PackData = Toml.ToModel(File.ReadAllText(path + "/pack.toml"));
+                        string[] NameSpaces = RelativePath.GetRelativePathsDirectories(path);
+                        ResourcesPack Pack = new()
+                        {
+                            Name = (string)PackData["Name"],
+                            Version = (string)PackData["Version"],
+                            Description = (string)PackData["Description"],
+                            Namespaces = NameSpaces,
+                            Path = path
+                        };
+                        AddPack(Pack);
+                    }
+                    catch
+                    {
+                        Logger.Error("ResourceManager failed to load a resourcespack from a zip file.");
+                    }
+                }
             }
             //Mods
             foreach(string Mod in Client.TheClient.ModManager.ModPath.Values)
@@ -134,8 +137,9 @@ namespace VoxelPrototype.client.Resources
                         Namespaces = NameSpaces,
                         Path = path
                     };
-                    Available.Add(Pack);
-                }catch
+                    AddPack(Pack);
+                }
+                catch
                 {
 
                 }

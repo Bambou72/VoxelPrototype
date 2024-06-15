@@ -223,7 +223,7 @@ namespace VoxelPrototype.VBF
             return Get<VBFDouble>(Name);
         }
     }
-    public class VBFList : VBFTag
+    public class VBFList  :VBFTag
     {
         public DataType ListType { get; set; }
         public List<VBFTag> Tags { get; set; } = new List<VBFTag>();
@@ -325,7 +325,7 @@ namespace VoxelPrototype.VBF
             }
             writer.Write((byte)VBFTag.DataType.End); // End of compound
         }
-        private static void SerializeList(VBFList Tag, BinaryWriter writer)
+        private static void SerializeList(VBFList Tag, BinaryWriter writer) 
         {
             writer.Write((byte)Tag.ListType); // List type
             writer.Write(Tag.Tags.Count); // List length
@@ -429,7 +429,7 @@ namespace VoxelPrototype.VBF
             }
             return compoundTag;
         }
-        public static VBFList DeserializeList(BinaryReader reader)
+        private static VBFList DeserializeList(BinaryReader reader)
         {
             VBFList listTag = new VBFList();
             listTag.ListType = (VBFTag.DataType)reader.ReadByte(); // List type

@@ -78,9 +78,9 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
         {
             VBFCompound BlockPalette = new VBFCompound();
             BlockPalette.AddIntArray("Data", Data.Data);
-            BlockPalette.AddInt("BitPerEntry", Data.BitPerEntry);
-            BlockPalette.AddInt("PaletteCount", PaletteCount);
-            BlockPalette.AddInt("BitCount", BitCount);
+            BlockPalette.AddInt("BPE", Data.BitPerEntry);
+            BlockPalette.AddInt("PC", PaletteCount);
+            BlockPalette.AddInt("BC", BitCount);
             VBFList Palette = new VBFList();
             Palette.ListType = VBFTag.DataType.Compound;
             for (int i = 0; i < this.Palette.Length; i++)
@@ -88,7 +88,7 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
                 VBFCompound PaletteElement = new VBFCompound();
                 if (this.Palette[i] != null)
                 {
-                    PaletteElement.Add("Blockstate", this.Palette[i].Serialize());
+                    PaletteElement.Add("Bs", this.Palette[i].Serialize());
 
 
                     /*
@@ -102,7 +102,7 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
                     {
                         PaletteElement.AddString("ID", "null");
                     }*/
-                    PaletteElement.AddInt("RefCount", RefsCount[i]);
+                    PaletteElement.AddInt("RC", RefsCount[i]);
                     Palette.Tags.Add(PaletteElement);
 
                 }
@@ -116,9 +116,9 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
         {
             try
             {
-                BlockPalette storage = new BlockPalette(compound.GetInt("BitCount").Value);
-                storage.Data = new BitStorage(compound.GetIntArray("Data").Value, 4096, compound.GetInt("BitPerEntry").Value);
-                storage.PaletteCount = compound.GetInt("PaletteCount").Value;
+                BlockPalette storage = new BlockPalette(compound.GetInt("BC").Value);
+                storage.Data = new BitStorage(compound.GetIntArray("Data").Value, 4096, compound.GetInt("BPE").Value);
+                storage.PaletteCount = compound.GetInt("PC").Value;
                 VBFList paletteList = compound.Get<VBFList>("Palette");
                 for (int i = 0; i < paletteList.Tags.Count; i++)
                 {
@@ -133,8 +133,8 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
                     {
                         storage.Palette[i] = BlockRegister.GetBlock(ID).GetDefaultState();
                     }*/
-                    storage.Palette[i] = new BlockState().Deserialize(PaletteElement.Get<VBFCompound>("Blockstate"));
-                    storage.RefsCount[i] = PaletteElement.GetInt("RefCount").Value;
+                    storage.Palette[i] = new BlockState().Deserialize(PaletteElement.Get<VBFCompound>("Bs"));
+                    storage.RefsCount[i] = PaletteElement.GetInt("RC").Value;
                 }
                 return storage;
             }

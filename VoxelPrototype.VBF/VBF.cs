@@ -144,11 +144,19 @@ namespace VoxelPrototype.VBF
         }
         public T Get<T>(string Name) where T : VBFTag
         {
-            return (T)Tags[Name];
+            if(Tags.TryGetValue(Name ,out VBFTag result))
+            {
+                return (T)result;
+            }
+            return null;
         }
         public void Add(string Name, VBFTag tag)
         {
             Tags.Add(Name, tag);
+        }
+        public void AddCompound(string Name, VBFCompound Value)
+        {
+            Add(Name, Value);
         }
         public void AddBool(string Name, bool Value)
         {
@@ -197,6 +205,10 @@ namespace VoxelPrototype.VBF
         public VBFLongArray GetLongArray(string Name)
         {
             return Get<VBFLongArray>(Name);
+        }
+        public VBFCompound GetCompound(string Name)
+        {
+            return Get<VBFCompound>(Name);
         }
         public VBFBool GetBool(string Name)
         {

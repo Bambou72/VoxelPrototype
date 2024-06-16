@@ -1,5 +1,4 @@
 ﻿using ImGuiNET;
-using VoxelPrototype.common;
 using VoxelPrototype.server.World.Level;
 using VoxelPrototype.VBF;
 
@@ -203,10 +202,15 @@ namespace VBFViewer
                         {
                             if (LoadedRegion != null)
                             {
-                                LoadedRegion.Close();
+                                LoadedRegion = null; ;
                             }
                             LoadedRegion = new RegionFile(Result.Path);
-                            Chunks = LoadedRegion.ReadAllChunkAsVBF();
+                            List<VBFCompound> temp = new();
+                            foreach (VBFCompound ch in LoadedRegion.root.Tags.Values.ToArray().Cast<VBFCompound>())
+                            {
+                                temp.Add(ch);
+                            }
+                            Chunks = temp.ToArray();
 
                         }
                     }
@@ -214,15 +218,10 @@ namespace VBFViewer
                     {
                         if (LoadedRegion != null)
                         {
-                            LoadedRegion.Close();
                             LoadedRegion = null;
                             Chunks = null;
                         }
                     }
-                    /*
-                    if (ImGui.MenuItem("Save"))
-                    {
-                    }*/
                     if (ImGui.MenuItem("Exit"))
                     {
                         Program.window.Close(); // Quitter la boucle
@@ -251,7 +250,7 @@ namespace VBFViewer
                     {
                         foreach (var chunk in Chunks)
                         {
-                            RenderTag(chunk.GetInt("PosX").Value.ToString() + ":" + chunk.GetInt("PosZ").Value.ToString(), chunk);
+                            RenderTag(chunk.GetInt("X").Value.ToString() + ":" + chunk.GetInt("Z").Value.ToString(), chunk);
                         }
                         ImGui.TreePop();
                     }

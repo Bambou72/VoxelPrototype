@@ -13,6 +13,8 @@ using VoxelPrototype.common.Blocks.State;
 using OpenTK.Graphics.OpenGL4;
 using VoxelPrototype.client.World.Level.Chunk;
 using VoxelPrototype.game.Commands;
+using K4os.Compression.LZ4;
+using VoxelPrototype.VBF;
 namespace VoxelPrototype.client.World.Level
 {
     public  class ClientChunkManager
@@ -46,7 +48,7 @@ namespace VoxelPrototype.client.World.Level
             Vector2i pos = data.Pos;
             if (!Clist.TryGetValue(pos, out Chunk.Chunk _))
             {
-                AddChunk(new Chunk.Chunk().Deserialize(Deflate.Decompress(data.Data)));
+                AddChunk(new Chunk.Chunk().Deserialize((VBFCompound)VBFSerializer.Deserialize(LZ4Pickler.Unpickle(data.Data))));
                 Clist[pos].State |= Chunk.ChunkSate.Changed;
                 foreach (Section section in Clist[pos].Sections)
                 {

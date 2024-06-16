@@ -122,7 +122,7 @@ namespace VoxelPrototype.common.Blocks.State
                     Properties.Add(prop.Name, EnumProperty);
                 }
             }
-            BlockState.Add("Properties", Properties);
+            BlockState.Add("Prop", Properties);
             return BlockState;
         }
         public BlockState Deserialize(VBFCompound compound)
@@ -130,7 +130,7 @@ namespace VoxelPrototype.common.Blocks.State
             var Block = Client.TheClient.ModManager.BlockRegister.GetBlock(compound.GetString("ID").Value);
             var CurrentBlockState = Block.GetDefaultState();
 
-            foreach (var prop in compound.Get<VBFCompound>("Properties").Tags)
+            foreach (var prop in compound.Get<VBFCompound>("Prop").Tags)
             {
                 if (prop.Value.GetType() == typeof(VBFBool))
                 {

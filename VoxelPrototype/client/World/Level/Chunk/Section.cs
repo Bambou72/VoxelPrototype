@@ -24,16 +24,16 @@ namespace VoxelPrototype.client.World.Level.Chunk
 
         public Section Deserialize(VBFCompound compound)
         {
-            Y = compound.GetInt("YPos").Value;
-            BlockPalette = BlockPalette.Deserialize(compound.Get<VBFCompound>("BlockPalette"));
+            Y = compound.GetInt("Y").Value;
+            BlockPalette = BlockPalette.Deserialize(compound.Get<VBFCompound>("BP"));
             SectionMesh = new(new Vector3i(Chunk.X, Y, Chunk.Z), this);
             return this;
         }
         public VBFCompound Serialize()
         {
             VBFCompound Section = new();
-            Section.AddInt("YPos", Y);
-            Section.Add("BlockPalette", BlockPalette.Serialize());
+            Section.AddInt("Y", Y);
+            Section.Add("BP", BlockPalette.Serialize());
             return Section;
         }
         public void SetBlock(Vector3i pos, BlockState id)

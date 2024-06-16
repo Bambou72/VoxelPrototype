@@ -14,6 +14,7 @@ using VoxelPrototype.common.Network.packets;
 using VoxelPrototype.common.Network.server;
 using VoxelPrototype.common.Utils;
 using VoxelPrototype.server.World.Level.Chunk;
+using VoxelPrototype.VBF;
 namespace VoxelPrototype.server.World.Level
 {
     public partial class ServerChunkManager
@@ -36,7 +37,7 @@ namespace VoxelPrototype.server.World.Level
             LoadedChunks.Clear();
             foreach (RegionFile region in TempRegions.Values)
             {
-                region.Close();
+                region.Save();
             }
             TempRegions.Clear();
             ChunkToBeSend.Clear();
@@ -57,11 +58,7 @@ namespace VoxelPrototype.server.World.Level
                 Region = new(path);
                 TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
             }
-            int LocalChunkX = Math.Abs(Chunk.X % RegionFile.Size);
-            int LocalChunkZ = Math.Abs(Chunk.Z % RegionFile.Size);
-            byte[] SerializedChunk = Chunk.Serialize();
-            byte[] CompressedChunk = LZ4Pickler.Pickle(SerializedChunk, LZ4Level.L11_OPT);
-            Region.WriteChunk(LocalChunkX, LocalChunkZ, CompressedChunk, CompressionType.LZ4);
+            Region.SetChunk(Chunk.Position ,Chunk.Serialize());
         }
         internal Chunk.Chunk LoadChunk(int X, int Z)
         {
@@ -78,29 +75,12 @@ namespace VoxelPrototype.server.World.Level
                 Region = new(path);
                 TempRegions.Add(new Vector2i(RegionX, RegionZ), Region);
             }
-            int LocalChunkX = Math.Abs(X % RegionFile.Size);
-            int LocalChunkZ = Math.Abs(Z % RegionFile.Size);
-            (byte[] CompressedData, CompressionType CompressionType) = Region.ReadChunk(LocalChunkX, LocalChunkZ);
-            if (CompressedData.Length != 0)
+            var d = Region.GetChunk(new Vector2i(X,Z));
+            if (d != null)
             {
-                byte[] ChunkData;
-                switch (CompressionType)
-                {
-
-                    case CompressionType.Deflate:
-                        ChunkData = Deflate.Decompress(CompressedData);
-                        break;
-                    case CompressionType.LZ4:
-                        ChunkData = LZ4Pickler.Unpickle(CompressedData);
-                        break;
-                    default:
-                        ChunkData = CompressedData;
-                        break;
-                }
-                return new Chunk.Chunk().Deserialize(ChunkData);
+                return new Chunk.Chunk().Deserialize(d);
             }
             return null;
-
         }
         internal Chunk.Chunk? LoadChunk(Vector2i Position)
         {
@@ -117,26 +97,10 @@ namespace VoxelPrototype.server.World.Level
                 Region = new(path);
                 TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
             }
-            int LocalChunkX = Math.Abs(Position.X % RegionFile.Size);
-            int LocalChunkZ = Math.Abs(Position.Y % RegionFile.Size);
-            (byte[] CompressedData, CompressionType CompressionType) = Region.ReadChunk(LocalChunkX, LocalChunkZ);
-            if (CompressedData.Length != 0)
+            var d = Region.GetChunk(Position);
+            if (d != null)
             {
-                byte[] ChunkData;
-                switch (CompressionType)
-                {
-
-                    case CompressionType.Deflate:
-                        ChunkData = Deflate.Decompress(CompressedData);
-                        break;
-                    case CompressionType.LZ4:
-                        ChunkData = LZ4Pickler.Unpickle(CompressedData);
-                        break;
-                    default:
-                        ChunkData = CompressedData;
-                        break;
-                }
-                return new Chunk.Chunk().Deserialize(ChunkData);
+                return new Chunk.Chunk().Deserialize(d);
             }
             return null;
         }
@@ -188,7 +152,7 @@ namespace VoxelPrototype.server.World.Level
                 ChunkData chunkData = new ChunkData();
                 chunkData.importance = (int)Vector2.Distance(RelatPos.Xz, chunkPos);
                 chunkData.Pos = chunkPos;
-                chunkData.Data = Deflate.Compress(ch.Serialize());
+                chunkData.Data = LZ4Pickler.Pickle(VBFSerializer.Serialize(ch.Serialize()));
                 chunkData.peer = ServerNetwork.server.GetPeerById(play.ClientID);
                 ChunkToBeSend.Add(chunkData);
             }
@@ -199,7 +163,7 @@ namespace VoxelPrototype.server.World.Level
                 ChunkData chunkData = new ChunkData();
                 chunkData.importance = (int)Vector2.Distance(RelatPos.Xz, chunkPos);
                 chunkData.Pos = chunkPos;
-                chunkData.Data = Deflate.Compress(CH.Serialize());
+                chunkData.Data = LZ4Pickler.Pickle(VBFSerializer.Serialize(CH.Serialize()));
                 chunkData.peer = ServerNetwork.server.GetPeerById(play.ClientID);
                 ChunkToBeSend.Add(chunkData);
             }
@@ -252,7 +216,7 @@ namespace VoxelPrototype.server.World.Level
         {
             foreach (RegionFile Region in TempRegions.Values)
             {
-                Region.Close();
+                Region.Save();
             }
             TempRegions.Clear();
             foreach (Chunk.Chunk chunk in LoadedChunks.Values)

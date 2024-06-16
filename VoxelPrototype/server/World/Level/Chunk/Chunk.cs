@@ -21,7 +21,7 @@ namespace VoxelPrototype.server.World.Level.Chunk
         Dirty,
     }
 
-    public class Chunk : IVBFSerializableBinary<Chunk>
+    public class Chunk : IVBFSerializable<Chunk>
     {
         //Chunk state for meshing
         internal ChunkSate State = ChunkSate.Changed;
@@ -33,35 +33,41 @@ namespace VoxelPrototype.server.World.Level.Chunk
 
         internal Section[] Sections;
         //Chunk coordinates
-        public byte[] Serialize()
+        public VBFCompound Serialize()
         {
             VBFCompound Chunk = new();
-            Chunk.AddInt("PosX", X);
-            Chunk.AddInt("PosZ", Z);
-            Chunk.AddInt("SectionsCount", Sections.Length);
+            Chunk.AddInt("X", X);
+            Chunk.AddInt("Z", Z);
+            Chunk.AddInt("SC", Sections.Length);
             VBFList SeSections = new();
             SeSections.ListType = VBFTag.DataType.Compound;
             for (int i = 0; i < Sections.Length; i++)
             {
                 SeSections.Tags.Add(Sections[i].Serialize());
             }
-            Chunk.Add("Sections", SeSections);
-            return VBFSerializer.Serialize(Chunk);
+            Chunk.Add("Sec", SeSections);
+            return Chunk;
         }
-        public Chunk Deserialize(byte[] data)
+        public Chunk Deserialize(VBFCompound data)
         {
-            VBFCompound compound = (VBFCompound)VBFSerializer.Deserialize(data);
-            X = compound.GetInt("PosX").Value;
-            Z = compound.GetInt("PosZ").Value;
-            int SectionsCount = compound.GetInt("SectionsCount").Value;
-            Sections = new Section[SectionsCount];
-            VBFList DeSections = compound.Get<VBFList>("Sections");
-            for (int i = 0; i < SectionsCount; i++)
+            try
             {
-                Sections[i] = new Section().Deserialize((VBFCompound)DeSections.Tags[i]);
-                Sections[i].Chunk = this;
+                X = data.GetInt("X").Value;
+                Z = data.GetInt("Z").Value;
+                int SectionsCount = data.GetInt("SC").Value;
+                Sections = new Section[SectionsCount];
+                VBFList DeSections = data.Get<VBFList>("Sec");
+                for (int i = 0; i < SectionsCount; i++)
+                {
+                    Sections[i] = new Section().Deserialize((VBFCompound)DeSections.Tags[i]);
+                    Sections[i].Chunk = this;
+                }
+                return this;
+            }catch
+            {
+                return null;
             }
-            return this;
+            
         }
         internal Chunk()
         {

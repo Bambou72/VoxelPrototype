@@ -13,7 +13,7 @@ namespace VoxelPrototype.client.World.Level.Chunk
         Changed = 2,
         Unsaved = 4,
     }
-    public class Chunk : IVBFSerializableBinary<Chunk>
+    public class Chunk : IVBFSerializable<Chunk>
     {
         //Chunk state for meshing
         internal ChunkSate State = ChunkSate.Changed;
@@ -22,21 +22,6 @@ namespace VoxelPrototype.client.World.Level.Chunk
         public int X { get; set; }
         public int Z { get; set; }
         public Vector2i Position { get { return new Vector2i(X, Z); } set { X = value.X; Z = value.Y; } }
-        public byte[] Serialize()
-        {
-            VBFCompound Chunk = new();
-            Chunk.AddInt("PosX", X);
-            Chunk.AddInt("PosZ", Z);
-            Chunk.AddInt("SectionsCount", Sections.Length);
-            VBFList SeSections = new();
-            SeSections.ListType = VBFTag.DataType.Compound;
-            for (int i = 0; i < Sections.Length; i++)
-            {
-                SeSections.Tags.Add(Sections[i].Serialize());
-            }
-            Chunk.Add("Sections", SeSections);
-            return VBFSerializer.Serialize(Chunk);
-        }
         public bool IsSurrendedClient()
         {
             if (Client.TheClient.World.ChunkManager.GetChunk(X + 1, Z) == null) return false;
@@ -49,14 +34,29 @@ namespace VoxelPrototype.client.World.Level.Chunk
             if (Client.TheClient.World.ChunkManager.GetChunk(X + 1, Z + 1) == null) return false;
             return true;
         }
-        public Chunk Deserialize(byte[] data)
+        public VBFCompound Serialize()
         {
-            VBFCompound compound = (VBFCompound)VBFSerializer.Deserialize(data);
-            X = compound.GetInt("PosX").Value;
-            Z = compound.GetInt("PosZ").Value;
-            int SectionsCount = compound.GetInt("SectionsCount").Value;
+            VBFCompound Chunk = new();
+            Chunk.AddInt("X", X);
+            Chunk.AddInt("Z", Z);
+            Chunk.AddInt("SC", Sections.Length);
+            VBFList SeSections = new();
+            SeSections.ListType = VBFTag.DataType.Compound;
+            for (int i = 0; i < Sections.Length; i++)
+            {
+                SeSections.Tags.Add(Sections[i].Serialize());
+            }
+            Chunk.Add("Sec", SeSections);
+            return Chunk;
+        }
+
+        public Chunk Deserialize(VBFCompound data)
+        {
+            X = data.GetInt("X").Value;
+            Z = data.GetInt("Z").Value;
+            int SectionsCount = data.GetInt("SC").Value;
             Sections = new Section[SectionsCount];
-            VBFList DeSections = compound.Get<VBFList>("Sections");
+            VBFList DeSections = data.Get<VBFList>("Sec");
             for (int i = 0; i < SectionsCount; i++)
             {
                 Sections[i] = new Section(this).Deserialize((VBFCompound)DeSections.Tags[i]);

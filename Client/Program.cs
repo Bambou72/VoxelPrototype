@@ -9,7 +9,9 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
 using StbImageSharp;
+using System.Runtime.InteropServices;
 using VoxelPrototype.client;
+using VoxelPrototype.client.Utils;
 namespace VoxelPrototypeClient
 {
 

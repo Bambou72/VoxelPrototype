@@ -29,7 +29,8 @@ namespace VoxelPrototype.client.Render.GUI
             ImGui.SeparatorText("Client");
             if (Client.TheClient.World.Initialized)
             {
-                ImGui.TextColored(Black, "Player position" + Client.TheClient.World.PlayerFactory.LocalPlayer.Position);
+                ImGui.TextColored(Black, "Player position :" + Client.TheClient.World.PlayerFactory.LocalPlayer.Position);
+                ImGui.TextColored(Black, "Number of section to be mesh :" + Client.TheClient.World.RenderThread.SectionToBeMeshCount);
             }
             ImGui.TextColored(Black, $"Number of client loaded chunks: {Client.TheClient.World.GetChunkCount()}");
             ImGui.TextColored(Black, $"Number of rendered chunks: {Client.TheClient.World.ChunkManager.RenderedChunksCount}");

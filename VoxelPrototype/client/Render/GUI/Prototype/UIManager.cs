@@ -1,4 +1,4 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.UI;
 namespace VoxelPrototype.client.Render.GUI.Prototype
@@ -15,15 +15,15 @@ namespace VoxelPrototype.client.Render.GUI.Prototype
             Screen = screen;
             if (screen != null)
             {
-                Vector2i ScreenSize = Client.TheClient.ClientSize;
+                Vector2i ScreenSize = Client.TheClient.ClientInterface.GetFramebufferSize();
                 Screen.Compose(ScreenSize);
             }
         }
 
         public void Update()
         {
-            Vector2i ScreenSize = Client.TheClient.ClientSize;
-            Vector2 MousePos = Client.TheClient.MousePosition;
+            Vector2i ScreenSize = Client.TheClient.ClientInterface.GetFramebufferSize();
+            Vector2 MousePos = (Vector2)Client.TheClient.ClientInterface.GetMousePosition();
             if (Screen != null)
             {
                 Screen.Compose(ScreenSize);

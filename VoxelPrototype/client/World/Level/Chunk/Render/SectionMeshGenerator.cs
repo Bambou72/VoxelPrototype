@@ -1,4 +1,7 @@
-﻿using OpenTK.Mathematics;
+﻿using MethodTimer;
+using NLog.LayoutRenderers;
+using OpenTK.Mathematics;
+using System.Net.Http.Json;
 using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks;
 using VoxelPrototype.common.Blocks.State;
@@ -6,89 +9,72 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
 {
     internal class SectionMeshGenerator
     {
-        Section Section;
+
+        internal Section Section;
         Vector3i Position;
         internal List<SectionVertex> OpaqueVertices;
         internal List<uint> OpaqueIndices;
         uint IndexCounter;
+        public const byte ADJACENT_BITMASK_POS_Y = 1 << 0;      // 000001
+        public const byte ADJACENT_BITMASK_NEG_Y = 1 << 1;   // 000010
+        public const byte ADJACENT_BITMASK_NEG_X = 1 << 2;     // 000100
+        public const byte ADJACENT_BITMASK_POS_X = 1 << 3;    // 001000
+        public const byte ADJACENT_BITMASK_POS_Z = 1 << 4;    // 010000
+        public const byte ADJACENT_BITMASK_NEG_Z = 1 << 5;     // 100000
 
-        public SectionMeshGenerator(Section section, Vector3i position)
+        public const byte ADJACENT_BITMASK_FULL = ADJACENT_BITMASK_POS_Y | ADJACENT_BITMASK_NEG_Y | ADJACENT_BITMASK_NEG_X | ADJACENT_BITMASK_POS_X | ADJACENT_BITMASK_POS_Z | ADJACENT_BITMASK_NEG_Z; // 111111
+
+        
+
+        public SectionMeshGenerator(Section section)
         {
             Section = section;
-            Position = position;
+            Position = new Vector3i(section.Chunk.X,section.Y,section.Chunk.Z);
         }
 
-        public Block[] GetNeigbours(Vector3i position)
+        public byte GetNeigbours(Vector3i position,Block CurrentBlock)
         {
-            Block[] Neighbours = new Block[6];
-            int chunkSizeMinusOne = Section.Size - 1;
-
-            // Up
-            if (position.Y < Section.Size - 1)
+            Vector3i GlobalPos = new Vector3i(Position.X * Const.ChunkSize,Position.Y *Section.Size,Position.Z * Const.ChunkSize) + position;
+            byte BitMask= 0;
+            //UP
+            var BlockUp = Client.TheClient.World.GetBlock(GlobalPos+new Vector3i(0,1,0)).Block;
+            if( !BlockUp.Transparent ||(CurrentBlock.Cullself&& BlockUp.ID == CurrentBlock.ID))
             {
-                Neighbours[0] = Section.BlockPalette.Get(new Vector3i(position.X, position.Y + 1, position.Z)).Block;
+                BitMask |= ADJACENT_BITMASK_POS_Y;
             }
-            else if (Position.Y < Const.ChunkHeight - 1)
+            //DOWN
+            var BlockDown = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(0, -1, 0)).Block;
+            if (!BlockDown.Transparent || (CurrentBlock.Cullself && BlockDown.ID == CurrentBlock.ID))
             {
-                Neighbours[0] = Section.Chunk.Sections[Position.Y + 1].BlockPalette.Get(new Vector3i(position.X, 0, position.Z)).Block;
+                BitMask |= ADJACENT_BITMASK_NEG_Y;
             }
-
-            // Down
-            if (position.Y > 0)
+            //RIGHT
+            var BlockRight = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(1, 0, 0)).Block;
+            if (!BlockRight.Transparent || (CurrentBlock.Cullself && BlockRight.ID == CurrentBlock.ID))
             {
-                Neighbours[1] = Section.BlockPalette.Get(new Vector3i(position.X, position.Y - 1, position.Z)).Block;
+                BitMask |= ADJACENT_BITMASK_POS_X;
             }
-            else if (Position.Y > 0)
+            //LEFT
+            var BlockLeft = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(-1, 0, 0)).Block;
+            if (!BlockLeft.Transparent || (CurrentBlock.Cullself && BlockLeft.ID == CurrentBlock.ID))
             {
-                Neighbours[1] = Section.Chunk.Sections[Position.Y - 1].BlockPalette.Get(new Vector3i(position.X, Section.Size - 1, position.Z)).Block;
+                BitMask |= ADJACENT_BITMASK_NEG_X;
             }
-
-            // Right
-            if (position.X < chunkSizeMinusOne)
+            //FRONT
+            var BlockFront = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(0, 0, -1)).Block;
+            if (!BlockFront.Transparent || (CurrentBlock.Cullself && BlockFront.ID == CurrentBlock.ID))
             {
-                Neighbours[2] = Section.BlockPalette.Get(new Vector3i(position.X + 1, position.Y, position.Z)).Block;
+                BitMask |= ADJACENT_BITMASK_POS_Z;
             }
-            else
+            //BACK
+            var BlockBack = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(0, 0,1)).Block;
+            if (!BlockBack.Transparent || (CurrentBlock.Cullself && BlockBack.ID == CurrentBlock.ID))
             {
-                Chunk rightChunk = Client.TheClient.World.GetChunk(Position.X + 1, Position.Z);
-                Neighbours[2] = rightChunk.Sections[Position.Y].BlockPalette.Get(new Vector3i(0, position.Y , position.Z)).Block;
+                BitMask |= ADJACENT_BITMASK_NEG_Z;
             }
-
-            // Left
-            if (position.X > 0)
-            {
-                Neighbours[3] = Section.BlockPalette.Get(new Vector3i(position.X - 1, position.Y, position.Z)).Block;
-            }
-            else
-            {
-                Chunk leftChunk = Client.TheClient.World.GetChunk(Position.X - 1, Position.Z);
-                Neighbours[3] = leftChunk.Sections[Position.Y].BlockPalette.Get(new Vector3i(chunkSizeMinusOne, position.Y , position.Z)).Block;
-            }
-
-            // Front
-            if (position.Z > 0)
-            {
-                Neighbours[4] = Section.BlockPalette.Get(new Vector3i(position.X, position.Y, position.Z - 1)).Block;
-            }
-            else
-            {
-                Chunk frontChunk = Client.TheClient.World.GetChunk(Position.X, Position.Z - 1);
-                Neighbours[4] = frontChunk.Sections[Position.Y].BlockPalette.Get(new Vector3i(position.X, position.Y , chunkSizeMinusOne)).Block;
-            }
-
-            // Back
-            if (position.Z < chunkSizeMinusOne)
-            {
-                Neighbours[5] = Section.BlockPalette.Get(new Vector3i(position.X, position.Y, position.Z + 1)).Block;
-            }
-            else
-            {
-                Chunk backChunk = Client.TheClient.World.GetChunk(Position.X, Position.Z + 1);
-                Neighbours[5] = backChunk.Sections[Position.Y].BlockPalette.Get(new Vector3i(position.X, position.Y, 0)).Block;
-            }
-
-            return Neighbours;
+            return BitMask;
         }
+        //[Time]
         internal void Generate()
         {
             OpaqueVertices = new();
@@ -105,10 +91,16 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
                         var block = Section.BlockPalette.Get(BPosition);
                         if (block != Client.TheClient.ModManager.BlockRegister.Air)
                         {
-                            Block[] Neighbours = GetNeigbours(BPosition);
+                            byte BitMask = GetNeigbours(BPosition,block.Block);
+                            if(BitMask == ADJACENT_BITMASK_FULL)
+                            {
+                                continue;
+                            }
+
+
                             if (block.Block.RenderType == BlockRenderType.Cube)
                             {
-                                GenerateDirection(Neighbours, BPosition, block);
+                                GenerateDirection(BitMask, BPosition, block);
                             }
                             else
                             {
@@ -124,88 +116,37 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
                 }
             }
         }
-        private void GenerateDirection(Block[] Neighboor, Vector3i BlockPos, BlockState Current)
+        private void GenerateDirection(byte BitMask, Vector3i BlockPos, BlockState Current)
         {
             //Up
-            if (Neighboor[0] != null)
-            {
-                if (Neighboor[0].Transparent)
-                {
-                    AddMeshFace(Current, BlockPos, 0, true);
-
-                }
-            }
-            else
+            if ((BitMask & ADJACENT_BITMASK_POS_Y) == 0)
             {
                 AddMeshFace(Current, BlockPos, 0, true);
-
             }
             //Bottom
-            if (Neighboor[1] != null)
+            if ((BitMask & ADJACENT_BITMASK_NEG_Y) == 0)
             {
-                if (Neighboor[1].Transparent)
-                {
-                    AddMeshFace(Current, BlockPos, 1, true);
-                }
-            }
-            else
-            {
-                if (Position.Y > 0)
-                {
-                    AddMeshFace(Current, BlockPos, 1, true);
-                }
+                AddMeshFace(Current, BlockPos, 1, true);
             }
             //Right
-            if (Neighboor[2] != null)
-            {
-                if (Neighboor[2].Transparent)
-                {
-                    AddMeshFace(Current, BlockPos, 4, true);
-                }
-            }
-            else
+            if ((BitMask & ADJACENT_BITMASK_POS_X) == 0)
             {
                 AddMeshFace(Current, BlockPos, 4, true);
-
             }
             //Left
-            if (Neighboor[3] != null)
-            {
-                if (Neighboor[3].Transparent)
-                {
-                    AddMeshFace(Current, BlockPos, 5, true);
-                }
-            }
-            else
+            if ((BitMask & ADJACENT_BITMASK_NEG_X) == 0)
             {
                 AddMeshFace(Current, BlockPos, 5, true);
-
             }
             //Front
-            if (Neighboor[4] != null)
-            {
-                if (Neighboor[4].Transparent)
-                {
-                    AddMeshFace(Current, BlockPos, 3, true);
-                }
-            }
-            else
+            if ((BitMask & ADJACENT_BITMASK_POS_Z) == 0)
             {
                 AddMeshFace(Current, BlockPos, 3, true);
-
             }
             //Back
-            if (Neighboor[5] != null)
-            {
-                if (Neighboor[5].Transparent)
-                {
-                    AddMeshFace(Current, BlockPos, 2, true);
-                }
-            }
-            else
+            if ((BitMask & ADJACENT_BITMASK_NEG_Z) == 0)
             {
                 AddMeshFace(Current, BlockPos, 2, true);
-
             }
         }
         private void AddMeshFace(BlockState Block, Vector3i BlockPos, int BF, bool ao)
@@ -214,16 +155,22 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
             float[] Uv = Block.Block.GetMeshTextureCoordinates(BF);
             float[] Tex = Block.Block.GetTextureCoordinates(BF, Block);
             Vector3i AOBlockPos = BlockPos + new Vector3i(0, Section.Y * Section.Size, 0);
-            int[] AO = BF switch
+            byte[] AO = { 0, 0, 0, 0 };
+            bool flip_id = false;
+            if (ao)
             {
-                0 => CalculateAO(AOBlockPos + new Vector3i(0, 1, 0), 1),
-                1 => CalculateAO(AOBlockPos + new Vector3i(0, -1, 0), 1),
-                2 => CalculateAO(AOBlockPos + new Vector3i(0, 0, 1), 2),
-                3 => CalculateAO(AOBlockPos + new Vector3i(0, 0, -1), 2),
-                4 => CalculateAO(AOBlockPos + new Vector3i(1, 0, 0), 0),
-                _ => CalculateAO(AOBlockPos + new Vector3i(-1, 0, 0), 0),
-            };
-            bool flip_id = AO[1] + AO[3] > AO[0] + AO[2];
+                AO = BF switch
+                {
+                    0 => AOBlockPos.Y < Section.Size * Const.ChunkHeight ? CalculateAO(AOBlockPos + new Vector3i(0, 1, 0), 1) : new byte[] { 0, 0, 0, 0 },
+                    1 => AOBlockPos.Y > 0 ?  CalculateAO(AOBlockPos + new Vector3i(0, -1, 0), 1) :new byte[]{ 0, 0, 0, 0 } ,
+                    2 => CalculateAO(AOBlockPos + new Vector3i(0, 0, 1), 2),
+                    3 => CalculateAO(AOBlockPos + new Vector3i(0, 0, -1), 2),
+                    4 => CalculateAO(AOBlockPos + new Vector3i(1, 0, 0), 0),
+                    _ => CalculateAO(AOBlockPos + new Vector3i(-1, 0, 0), 0),
+                };
+                flip_id = AO[1] + AO[3] > AO[0] + AO[2];
+
+            }
             SectionVertex SVert;
             for (int i = flip_id ? 1 : 0; i < 4; i++)
             {
@@ -254,9 +201,9 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
             IndexCounter += 4;
 
         }
-        private int[] CalculateAO(Vector3i bpos, int plane)
+        private byte[] CalculateAO(Vector3i bpos, int plane)
         {
-            int a, b, c, d, e, f, g, h;
+            byte a, b, c, d, e, f, g, h;
             if (plane == 1)
             {
                 a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1), Position.Xz));
@@ -290,16 +237,16 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
                 g = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z), Position.Xz));
                 h = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y + 1, bpos.Z), Position.Xz));
             }
-            int[] AO = new int[4]
+            byte[] AO =
             { 
                 //BL
-                a == 0 && c == 0 ? 0 : a+b+c,
+                (byte)(a == 0 && c == 0 ? 0 : a+b+c),
                 //BR
-                a == 0 && g == 0 ? 0 : g+h+a,
+                (byte)( a == 0 && g == 0 ? 0 : g+h+a),
                 //BR
-                e == 0 && g == 0 ? 0 :e+f+g,
+                 (byte)(e == 0 && g == 0 ? 0 :e+f+g),
                 //BL
-                c == 0 && e == 0 ? 0 :c+d+e
+                 (byte)(c == 0 && e == 0 ? 0 :c+d+e)
             };
             return AO;
         }

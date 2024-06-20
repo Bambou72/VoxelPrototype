@@ -91,7 +91,7 @@ namespace VoxelPrototype.common.Entities
                     {
                         for (int k = z - step_z * (steps_xz + 1); vz > 0 ? k < cz + step_z * (steps_xz + 2) : k > cz + step_z * (steps_xz + 2); k += step_z)
                         {
-                            var State = Client.TheClient.World.GetBlock(i, j, k);
+                            var State = Client.TheClient.World.GetBlock(new Vector3i(i, j, k));
                             if (State != Client.TheClient.ModManager.BlockRegister.Air)
                             {
                                 foreach (Collider collider in State.Block.GetColliders())

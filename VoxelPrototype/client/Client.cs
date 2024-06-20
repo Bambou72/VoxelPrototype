@@ -3,11 +3,13 @@
  * Copyrights Florian Pfeiffer
  * Author Florian Pfeiffer
  **/
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using System;
+using System.Diagnostics;
 using VoxelPrototype.client.Render;
 using VoxelPrototype.client.Render.Debug;
 using VoxelPrototype.client.Render.GUI;
@@ -18,9 +20,10 @@ using VoxelPrototype.common;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.World;
 using VoxelPrototype.server;
+using static OpenTK.Graphics.OpenGL.GL;
 namespace VoxelPrototype.client
 {
-    public class Client : GameWindow
+    public class Client 
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         public World.World World;
@@ -29,6 +32,7 @@ namespace VoxelPrototype.client
         internal Config ClientConfig;
         // internal UIManager UIManager;
         //internal UIMaster UIMaster;
+        internal IClientInterface ClientInterface;
         internal ModManager ModManager;
         internal Resources.ResourcesManager ResourceManager;
         internal Renderer Renderer;
@@ -40,8 +44,40 @@ namespace VoxelPrototype.client
         internal ShaderManager ShaderManager;
         //temp
         string[] ResourcesPacksPaths;
-        public Client(string[]? ResourcesPacksPaths, GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
+        bool Running = true;
+        private const double MaxFrequency = 500.0;
+
+        private readonly Stopwatch _watchUpdate = new Stopwatch();
+        private int _slowUpdates = 0;
+        protected bool IsRunningSlowly { get; private set; }
+        private double _updateFrequency;
+        public double UpdateFrequency
         {
+            get => _updateFrequency;
+
+            set
+            {
+                if (value < 1.0)
+                {
+                    _updateFrequency = 0.0;
+                }
+                else if (value <= MaxFrequency)
+                {
+                    _updateFrequency = value;
+                }
+                else
+                {
+                    Debug.Print("Target render frequency clamped to {0}Hz.", MaxFrequency);
+                    _updateFrequency = MaxFrequency;
+                }
+            }
+        }
+        public double UpdateTime { get; protected set; }
+        public Client(IClientInterface clientInterface, string[]? ResourcesPacksPaths) 
+        {
+            ClientInterface = clientInterface;
+            clientInterface.RegisterOnResize(OnResize);
+            clientInterface.RegisterOnChar(OnTextInput);
             if (TheClient == null)
             {
                 TheClient = this;
@@ -49,9 +85,10 @@ namespace VoxelPrototype.client
             this.ResourcesPacksPaths = ResourcesPacksPaths;
             ClientConfig = new();
         }
-        protected override void OnLoad()
+
+        public void Run()
         {
-            base.OnLoad();
+            //Load
             //Renderer
             Renderer = new Renderer();
             Renderer.Init();
@@ -76,13 +113,12 @@ namespace VoxelPrototype.client
             //Mod
             ModManager.Init();
             //GUi
-            GUIVar.Init(ClientSize);
+            GUIVar.Init(ClientInterface.GetFramebufferSize());
             GUIVar.Load();
             //Input
             InputEventManager = new InputEventManager();
             //World
             World = new World.World();
-            LoadWorld();
             //OnResize(new());
             //UIManager = new();
             //InputEventManager.RegisterOnKeyDownCallback(UIManager.OnKeyDown);
@@ -94,31 +130,102 @@ namespace VoxelPrototype.client
             //InputEventManager.RegisterOnMouseClickedCallback(UIManager.OnMouseClicked);
             //InputEventManager.RegisterOnMouseWheelCallback(UIManager.OnMouseWheel);
             //UIMaster = new();
+            _watchUpdate.Start();
+            while (Running && !ClientInterface.ShouldEnd())
+            {
+
+                double updatePeriod = UpdateFrequency == 0 ? 0 : 1 / UpdateFrequency;
+                double elapsed = _watchUpdate.Elapsed.TotalSeconds;
+                if (elapsed > updatePeriod)
+                {
+                    _watchUpdate.Restart();
+                    ClientInterface.PollInputs();
+                    UpdateTime = elapsed;
+                    Update(elapsed);
+                    Render();
+                    const int MaxSlowUpdates = 80;
+                    const int SlowUpdatesThreshold = 45;
+
+                    double time = _watchUpdate.Elapsed.TotalSeconds;
+                    if (updatePeriod < time)
+                    {
+                        _slowUpdates++;
+                        if (_slowUpdates > MaxSlowUpdates)
+                        {
+                            _slowUpdates = MaxSlowUpdates;
+                        }
+                    }
+                    else
+                    {
+                        _slowUpdates--;
+                        if (_slowUpdates < 0)
+                        {
+                            _slowUpdates = 0;
+                        }
+                    }
+                    IsRunningSlowly = _slowUpdates > SlowUpdatesThreshold;
+                }
+                // The time we have left to the next update.
+                double timeToNextUpdate = updatePeriod - _watchUpdate.Elapsed.TotalSeconds;
+
+                if (timeToNextUpdate > 0)
+                {
+                    AccurateSleep(timeToNextUpdate, 8);
+                }
+            }
+            //Unload
+            GUIVar.DeLoad();
+            ClientConfig.SaveProperties();
+
         }
-        protected override void OnUpdateFrame(FrameEventArgs args)
+        public static void AccurateSleep(double seconds, int expectedSchedulerPeriod)
         {
-            
+            // FIXME: Make this a parameter?
+            const double TOLERANCE = 0.02;
+
+            long t0 = Stopwatch.GetTimestamp();
+            long target = t0 + (long)(seconds * Stopwatch.Frequency);
+
+            double ms = (seconds * 1000) - (expectedSchedulerPeriod * TOLERANCE);
+            int ticks = (int)(ms / expectedSchedulerPeriod);
+            if (ticks > 0)
+            {
+                Thread.Sleep(ticks * expectedSchedulerPeriod);
+            }
+
+            while (Stopwatch.GetTimestamp() < target)
+            {
+                Thread.Yield();
+            }
+        }
+        public void Update(double DT)
+        {
+            //Update
             ClientNetwork.Update();
-            GUIVar.Update(this, args.Time);
+            GUIVar.Update(ClientInterface, DT);
             GUIVar.Update();
             //UIManager.Update();
             if (World.Initialized)
             {
-                World.Tick((float)args.Time);
+                World.Tick((float)DT);
             }
-            InputEventManager.Update();
+            //InputEventManager.Update();
             World.UpdateRender();
-        }
 
-        protected override void OnRenderFrame(FrameEventArgs args)
+
+        }
+        public void Render()
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
+
             //Render
             //
             //World
             if (World.Initialized)
             {
+                GL.Disable(EnableCap.Multisample);
                 World.Render();
+                GL.Enable(EnableCap.Multisample);
                 if (World.IsLocalPlayerExist())
                 {
                     //Player.Draw(Subsystems.RessourceManager.RessourceManager.GetShader("Nentity"), PlayerAnimator);
@@ -136,96 +243,32 @@ namespace VoxelPrototype.client
             //
             //ImGui.ShowDemoWindow();
             //UIManager.Render();
-            
+
             GUIVar.RenderI();
             GUIVar.Render();
             ImGuiController.CheckGLError("End of frame");
-            SwapBuffers();
+            ClientInterface.SwapBuffers();
         }
-        protected override void OnUnload()
+        public void Close()
         {
-            base.OnUnload();
-            GUIVar.DeLoad();
-            ClientConfig.SaveProperties();
-        }
-        internal List<string> Worlds = new();
-        internal List<WorldInfo> WorldsInfo = new();
-        public void LoadWorld()
-        {
-            string[] WorldFolders = Directory.GetDirectories("worlds");
-            foreach (string world in WorldFolders)
-            {
-                if (File.Exists(world + "/world.vpw"))
-                {
-                    try
-                    {
-                        WorldInfo worldInfo = new WorldInfo().Deserialize(File.ReadAllBytes(world + "/world.vpw"));
-                        worldInfo.Path = world;
-                        worldInfo.Name = world.Split("\\").Last();
-                        WorldsInfo.Add(worldInfo);
-                        Worlds.Add(worldInfo.Name);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error(ex, "A world can't be load , possibly due to corrupted data.");
-                    }
-                }
-                else
-                {
-                }
-            }
-        }
-        
-        protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            base.OnMouseDown(e);
-            InputEventManager.OnMouseDown(e.Button, (Vector2i)MousePosition);
-        }
-
-        protected override void OnMouseUp(MouseButtonEventArgs e)
-        {
-            
-           
-            base.OnMouseUp(e);
-            InputEventManager.OnMouseUp(e.Button, (Vector2i)MousePosition);
-
-
-        }
-        protected override void OnMouseMove(MouseMoveEventArgs e)
-        {
-            InputEventManager.OnMouseMove((Vector2i)e.Position, (Vector2i)e.Delta);
-        }
-        protected override void OnKeyDown(KeyboardKeyEventArgs e)
-        {
-
-            InputEventManager.OnKeyDown(e.Key, e.Modifiers);
-        }
-        protected override void OnKeyUp(KeyboardKeyEventArgs e)
-        {
-            InputEventManager.OnKeyUp(e.Key, e.Modifiers);
-        }
-        protected override void OnMouseWheel(MouseWheelEventArgs e)
-        {
-            InputEventManager.OnMouseWheel((Vector2i)e.Offset);
+            Running = false;
         }
         public void DeInitWorld()
         {
             World.Dispose();
         }
-        protected override void OnResize(ResizeEventArgs e)
+        protected void OnResize(Vector2i Size, Vector2i FramebufferSize)
         {
-            base.OnResize(e);
-            GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
+            GL.Viewport(0, 0, FramebufferSize.X, FramebufferSize.Y);
             if (World.IsLocalPlayerExist())
             {
-                World.GetLocalPlayerCamera().AspectRatio = ClientSize.X / (float)ClientSize.Y;
+                World.GetLocalPlayerCamera().AspectRatio = FramebufferSize.X / (float)FramebufferSize.Y;
             }
-            GUIVar.Resize(ClientSize);
+            GUIVar.Resize(FramebufferSize);
         }
-        protected override void OnTextInput(TextInputEventArgs e)
+        protected void OnTextInput(uint code)
         {
-            base.OnTextInput(e);
-            GUIVar.Char((char)(e.Unicode));
+            GUIVar.Char((char)(code));
 
         }
     }

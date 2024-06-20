@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Bson;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,17 +48,17 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
         {
             return indicesCount;
         }
-        public void SetupData(List<SectionVertex> vertices, List<uint> indices)
+        public void SetupData(SectionVertex[] vertices, uint[] indices)
         {
-            verticesCount = vertices.Count;
-            indicesCount = indices.Count;
+            verticesCount = vertices.Length;
+            indicesCount = indices.Length;
             //VBO
             GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
 
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Count * Marshal.SizeOf<SectionVertex>(), vertices.ToArray(), BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, verticesCount * Marshal.SizeOf<SectionVertex>(), vertices.ToArray(), BufferUsageHint.StaticDraw);
             //EBO
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, EBO);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Count * sizeof(uint), indices.ToArray(), BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, indicesCount * sizeof(uint), indices.ToArray(), BufferUsageHint.StaticDraw);
             //Clean
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);

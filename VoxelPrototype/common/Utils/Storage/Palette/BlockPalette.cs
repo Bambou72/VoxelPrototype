@@ -9,7 +9,7 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
     internal class BlockPalette : IVBFSerializable<BlockPalette>
     {
         public BlockState[] Palette { get; set; }
-        public int PaletteCount { get; set; }
+        public ushort PaletteCount { get; set; }
         public int BitCount { get; set; }
         public bool Full => PaletteCount == Palette.Length;
         public int[] RefsCount { get; set; }
@@ -24,9 +24,9 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
             RefsCount[0] = Const.SectionVolume;
             PaletteCount = 1;
         }
-        public int GetOrAdd(BlockState State)
+        public ushort GetOrAdd(BlockState State)
         {
-            for (int i = 0; i < Palette.Length; i++)
+            for (ushort i = 0; i < Palette.Length; i++)
             {
                 if (Palette[i] != null && Palette[i].Equals(State))
                 {
@@ -36,7 +36,7 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
             }
             if (Full)
             {
-                for (int i = 0; i < Palette.Length; i++)
+                for (ushort i = 0; i < Palette.Length; i++)
                 {
                     if (Palette[i] == null || RefsCount[i] == 0 && !Palette[i].Equals(Client.TheClient.ModManager.BlockRegister.Air))
                     {
@@ -53,7 +53,7 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
                 Palette = newpa;
                 RefsCount = newrc;
             }
-            int NewID = PaletteCount++;
+            ushort NewID = PaletteCount++;
             Palette[NewID] = State;
             RefsCount[NewID] = 1;
             return NewID;
@@ -64,9 +64,9 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
         }
         public void Set(Vector3i Position, BlockState State)
         {
-            int previousId = Data.Get(Utils.TreetoOne(Position));
+            ushort previousId = Data.Get(Utils.TreetoOne(Position));
             RefsCount[previousId]--;
-            int indexid = GetOrAdd(State);
+            ushort indexid = GetOrAdd(State);
             if (BitCount > Data.BitPerEntry)
             {
                 Data = Data.Grow(BitCount);
@@ -89,27 +89,12 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
                 if (this.Palette[i] != null)
                 {
                     PaletteElement.Add("Bs", this.Palette[i].Serialize());
-
-
-                    /*
-                     *                 PaletteElement.Add(", this.Palette[i].GetBlock().Id);
-
-                    if (this.Palette[i] != null)
-                    {
-                        PaletteElement.AddString("ID", this.Palette[i].GetBlock().Id);
-                    }
-                    else
-                    {
-                        PaletteElement.AddString("ID", "null");
-                    }*/
                     PaletteElement.AddInt("RC", RefsCount[i]);
                     Palette.Tags.Add(PaletteElement);
-
                 }
             }
             BlockPalette.Add("Palette", Palette);
             return BlockPalette;
-
         }
 
         public BlockPalette Deserialize(VBFCompound compound)
@@ -118,21 +103,11 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
             {
                 BlockPalette storage = new BlockPalette(compound.GetInt("BC").Value);
                 storage.Data = new BitStorage(compound.GetIntArray("Data").Value, 4096, compound.GetInt("BPE").Value);
-                storage.PaletteCount = compound.GetInt("PC").Value;
+                storage.PaletteCount = (ushort)compound.GetInt("PC").Value;
                 VBFList paletteList = compound.Get<VBFList>("Palette");
                 for (int i = 0; i < paletteList.Tags.Count; i++)
                 {
                     VBFCompound PaletteElement = (VBFCompound)paletteList.Tags[i];
-                    /*
-                    string ID = PaletteElement.GetString("ID").Value;
-                    if (ID == "null")
-                    {
-                        storage.Palette[i] = null;
-                    }
-                    else
-                    {
-                        storage.Palette[i] = BlockRegister.GetBlock(ID).GetDefaultState();
-                    }*/
                     storage.Palette[i] = new BlockState().Deserialize(PaletteElement.Get<VBFCompound>("Bs"));
                     storage.RefsCount[i] = PaletteElement.GetInt("RC").Value;
                 }
@@ -140,7 +115,6 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
             }
             catch (Exception ex)
             {
-                // Gérer les erreurs de désérialisation ici (par exemple, enregistrer un avertissement ou renvoyer une valeur par défaut)
                 LogManager.GetCurrentClassLogger().Error(ex, "Failed to deserialize block storage.");
                 return this;
             }

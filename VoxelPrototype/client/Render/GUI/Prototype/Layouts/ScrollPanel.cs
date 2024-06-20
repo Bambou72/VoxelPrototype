@@ -1,5 +1,5 @@
 ﻿using OpenTK.Compute.OpenCL;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.GUI.Prototype;
 using VoxelPrototype.client.Render.GUI.Prototype.Utils;
@@ -99,7 +99,7 @@ namespace VoxelPrototype.client.Render.GUI.Prototype.Layouts
         public override bool OnWheel(MouseWheelEvent Event)
         {
             base.OnWheel(Event);
-            if (contentHeight > Size.Y && MouseCheck.IsHovering(Client.TheClient.MousePosition, Position, Position + Size))
+            if (contentHeight > Size.Y && MouseCheck.IsHovering((Vector2)Client.TheClient.ClientInterface.GetMousePosition(), Position, Position + Size))
             {
                 scrollOffset -= Event.Delta.Y * 30;
                 scrollOffset = Math.Max(0, Math.Min(scrollOffset, contentHeight - Size.Y));

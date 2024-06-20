@@ -20,6 +20,7 @@ namespace VoxelPrototype.common.Blocks
         public int BreakingTime = 20;
         public BlockRenderType RenderType;
         public bool Transparent = false;
+        public bool Cullself = false;
         internal void Gernerate()
         {
             BlockStateBuilder Builder = new BlockStateBuilder(this);

@@ -5,14 +5,14 @@
  **/
 using CommandLine;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using StbImageSharp;
+using System.Collections;
 using System.Runtime.InteropServices;
 using VoxelPrototype.client;
 using VoxelPrototype.client.Utils;
-namespace VoxelPrototypeClient
+namespace Client
 {
 
     public class Options
@@ -26,6 +26,7 @@ namespace VoxelPrototypeClient
 
         private static void Main(string[] args)
         {
+            ThreadPool.SetMaxThreads(0, 0);
             Options options = new Options();
             Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(opts => options = opts)
@@ -43,25 +44,23 @@ namespace VoxelPrototypeClient
             {
                 image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
             }
-            Image[] iconImages = { new Image(image.Width, image.Height, image.Data) };
+            Image[] iconImages;
+            unsafe
+            {
+                fixed (byte* bytePointer = image.Data)
+                iconImages = new Image[]{ new Image(image.Width, image.Height,bytePointer ) };
 
+            }
             Config conf = new Config();
-            var Client = new Client(
-                options.RessourcesPaths.ToArray(),
-                new GameWindowSettings()
-                {
-                    UpdateFrequency = 60,
-                }, new NativeWindowSettings()
-                {
-                    Flags = ContextFlags.ForwardCompatible,
-                    API = ContextAPI.OpenGL,
-                    DepthBits = 32,
-                    Title = "Voxel Prototype",
-                    ClientSize = new Vector2i((int)(long)conf.GetProperty("width"), (int)(long)conf.GetProperty("height")),
-                    WindowState = conf.GetProperty("mode") == "fullscreen" ? WindowState.Fullscreen : WindowState.Normal,
-                    Icon = new(iconImages),
-                    Vsync = VSyncMode.Off
-                });
+            var ClientInter = new ClientInterface(
+                new ClientWindow((int)(long)conf.GetProperty("width"),
+                (int)(long)conf.GetProperty("height"),
+                "Voxel Prototype",
+                Fullscreen : conf.GetProperty("mode") == "fullscreen"
+                ));
+            ClientInter.window.SetIcon( iconImages);
+
+            var Client = new VoxelPrototype.client.Client(ClientInter, options.RessourcesPaths.ToArray());
             Client.Run();
             NLog.LogManager.Shutdown();
         }

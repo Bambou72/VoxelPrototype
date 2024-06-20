@@ -28,13 +28,14 @@ namespace VoxelPrototype.client.Resources.Managers
         }
         public void Reload(ResourcesManager Manager)
         {
+            /*
             Clean();
             var fonts = Manager.ListResources("font", path => path.EndsWith(".ttf"));
             foreach (var font in fonts)
             {
                 Fonts.Add(font.Key, new Font(font.Value.GetPath()));
                 font.Value.Close();
-            }
+            }*/
         }
     }
 }

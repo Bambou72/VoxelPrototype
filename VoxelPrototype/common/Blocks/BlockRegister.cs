@@ -42,7 +42,7 @@ namespace VoxelPrototype.common.Blocks
         {
             return Blocks[Id];
         }
-        internal int GetTransForAO(BlockState ID)
+        internal byte GetTransForAO(BlockState ID)
         {
             if (ID == Air)
             {

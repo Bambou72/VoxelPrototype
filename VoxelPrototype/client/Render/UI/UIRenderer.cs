@@ -1,4 +1,4 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Render.GUI.Prototype.Text;

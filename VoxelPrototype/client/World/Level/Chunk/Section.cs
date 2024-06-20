@@ -29,6 +29,19 @@ namespace VoxelPrototype.client.World.Level.Chunk
             SectionMesh = new(new Vector3i(Chunk.X, Y, Chunk.Z), this);
             return this;
         }
+        public int GetLinearIndex(int x, int y, int z)
+        {
+            const int sectionSize = 16;
+            const int extendedSize = sectionSize + 2; // 18 (16 for the section plus 1 layer on each side)
+
+            // Transform coordinates to the 0-based extended space
+            int transformedX = x + 1;
+            int transformedY = y + 1;
+            int transformedZ = z + 1;
+
+            // Calculate the linear index
+            return transformedX * extendedSize * extendedSize + transformedY * extendedSize + transformedZ;
+        }
         public VBFCompound Serialize()
         {
             VBFCompound Section = new();

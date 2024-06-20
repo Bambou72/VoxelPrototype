@@ -70,11 +70,11 @@ namespace VoxelPrototype.common.Entities.Player
             ViewedBlockPos = CurrentBlock;
             Vector3i BlockBefore = new Vector3i(CurrentBlock.X + Normal.X, CurrentBlock.Y + Normal.Y, CurrentBlock.Z + Normal.Z);
 
-            if (Client.TheClient.InputEventManager.IsMouseButtonPressed(MouseButton.Left) && Client.TheClient.InputEventManager.Grab)
+            if (Client.TheClient.ClientInterface.IsMouseButtonPressed(MouseButton.Left) && Client.TheClient.InputEventManager.Grab)
             {
                 Client.TheClient.World.ChunkManager.ChangeChunk(CurrentBlock, Client.TheClient.ModManager.BlockRegister.Air);
             }
-            else if (Client.TheClient.InputEventManager.IsMouseButtonPressed(MouseButton.Right) && Client.TheClient.InputEventManager.Grab)
+            else if (Client.TheClient.ClientInterface.IsMouseButtonPressed(MouseButton.Right) && Client.TheClient.InputEventManager.Grab)
             {
                 if(SelectedBlock == null)
                 {
@@ -82,9 +82,9 @@ namespace VoxelPrototype.common.Entities.Player
                 }
                 Client.TheClient.World.ChunkManager.ChangeChunk(CurrentBlock+Normal, SelectedBlock.GetDefaultState());
             }
-            else if (Client.TheClient.InputEventManager.IsMouseButtonPressed(MouseButton.Middle))
+            else if (Client.TheClient.ClientInterface.IsMouseButtonPressed(MouseButton.Middle))
             {
-                SelectedBlock = Client.TheClient.World.GetBlock(CurrentBlock.X, CurrentBlock.Y, CurrentBlock.Z).Block;
+                SelectedBlock = Client.TheClient.World.GetBlock(new Vector3i(CurrentBlock.X, CurrentBlock.Y, CurrentBlock.Z)).Block;
             }
         }
         internal void SendControl(InputState st)
@@ -106,13 +106,13 @@ namespace VoxelPrototype.common.Entities.Player
             };
             ClientNetwork.SendPacket(message, DeliveryMethod.ReliableOrdered);
         }
-        internal InputState GetInput(double DT, InputEventManager Manager)
+        internal InputState GetInput(double DT)
         {
             PlayerControls Controls = new PlayerControls();
 
             if (Client.TheClient.InputEventManager.GetNoInput() == false)
             {
-                if (Manager.IsKeyDown(Keys.LeftControl))
+                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.LeftControl))
                 {
                     Controls.control = true;
                 }
@@ -120,7 +120,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.control = false;
                 }
-                if (Manager.IsKeyDown(Keys.W))
+                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.W))
                 {
                     Controls.forward = true;
                 }
@@ -128,7 +128,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.forward = false;
                 }
-                if (Manager.IsKeyDown(Keys.S))
+                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.S))
                 {
                     Controls.backward = true;
                 }
@@ -136,7 +136,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.backward = false;
                 }
-                if (Manager.IsKeyDown(Keys.A))
+                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.A))
                 {
                     Controls.left = true;
                 }
@@ -144,7 +144,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.left = false;
                 }
-                if (Manager.IsKeyDown(Keys.D))
+                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.D))
                 {
                     Controls.right = true;
                 }
@@ -152,7 +152,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.right = false;
                 }
-                if (Manager.IsKeyDown(Keys.Space))
+                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.Space))
                 {
                     Controls.space = true;
                 }
@@ -160,7 +160,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.space = false;
                 }
-                if (Manager.IsKeyDown(Keys.LeftShift))
+                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.LeftShift))
                 {
                     Controls.shift = true;
                 }
@@ -172,12 +172,12 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     if (_firstMove) // This bool variable is initially set to true.
                     {
-                        _lastPos = new Vector2(Client.TheClient.MousePosition.X, Client.TheClient.MousePosition.Y);
+                        _lastPos =(Vector2)Client.TheClient.ClientInterface.GetMousePosition();
                         _firstMove = false;
                     }
                     else
                     {
-                        var change = Client.TheClient.MouseState.Delta;
+                        var change = (Vector2)Client.TheClient.ClientInterface.GetMouseDelta();
                         Rotation.X -= change.Y * sensitivity;
                         Rotation.Y += change.X * sensitivity;
                         if (Rotation.X > 89)
@@ -190,7 +190,7 @@ namespace VoxelPrototype.common.Entities.Player
                             Rotation.Y = 360;
                         _Camera.Yaw = Rotation.Y;
                         _Camera.Pitch = Rotation.X;
-                        _lastPos = new Vector2(Client.TheClient.MouseState.X, Client.TheClient.MouseState.Y);
+                        _lastPos = (Vector2)Client.TheClient.ClientInterface.GetMousePosition();
                     }
                     Controls.Front = new Vector3(_Camera.Front.X, 0, _Camera.Front.Z).Normalized();
                     Controls.Right = new Vector3(_Camera.Right.X, 0, _Camera.Right.Z);

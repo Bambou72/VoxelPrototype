@@ -46,7 +46,7 @@ namespace VoxelPrototype.common.Entities.Player.PlayerManager
         {
             if (LocalPlayerExist)
             {
-                InputState input = LocalPlayer.GetInput(DT, Client.TheClient.InputEventManager);
+                InputState input = LocalPlayer.GetInput(DT);
                 LocalPlayer.SendControl(input);
                 LocalPlayer.UpdateClient(input);
                 uint bufferindex = (uint)(CurrentTick % BufSize);

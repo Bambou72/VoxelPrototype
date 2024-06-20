@@ -1,4 +1,5 @@
 ﻿using ImGuiNET;
+using NLog;
 using System.Numerics;
 using VoxelPrototype.common.Network.client;
 using VoxelPrototype.common.World;
@@ -6,6 +7,8 @@ namespace VoxelPrototype.client.Render.GUI
 {
     internal static class SingleplayerGUI
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         static string WorldName = "";
         static string WorldSeed = "";
         static int CurrentWorldGenerator = 0;
@@ -57,19 +60,20 @@ namespace VoxelPrototype.client.Render.GUI
         }
         private static void RenderWorldSelector()
         {
-            for (int i = 0; i < Client.TheClient.Worlds.Count; i++)
+            var Worlds = LoadWorld();
+            for (int i = 0; i < Worlds.Count; i++)
             {
                 ImGui.SetWindowFontScale(1.75f);
-                if (ImGui.Button("Play##" + Client.TheClient.Worlds[i]))
+                if (ImGui.Button("Play##" +Worlds[i].Name))
                 {
-                    Client.TheClient.EmbedderServer = new(new WorldSettings(Client.TheClient.WorldsInfo[i].Seed, Client.TheClient.WorldsInfo[i].GetWorldGenerator(), Client.TheClient.WorldsInfo[i].Name), Client.TheClient.WorldsInfo[i].Path + "/");
+                    Client.TheClient.EmbedderServer = new(new WorldSettings(Worlds[i].Seed, Worlds[i].GetWorldGenerator(), Worlds[i].Name), Worlds[i].Path + "/");
                     Client.TheClient.EmbedderServer.Run();
                     ClientNetwork.Connect("localhost", 23482);
                     GUIVar.MainMenu = false;
                 }
                 ImGui.SameLine();
                 ImGui.SetWindowFontScale(2f);
-                if (ImGui.Selectable(Client.TheClient.Worlds[i], SelectedWorld == i))
+                if (ImGui.Selectable(Worlds[i].Name, SelectedWorld == i))
                 {
                     // La sélection a changé, mettre à jour l'indice de l'élément sélectionné
                     SelectedWorld = i;
@@ -77,21 +81,50 @@ namespace VoxelPrototype.client.Render.GUI
                 // Vérifier si l'élément est sélectionné et afficher les détails
                 if (SelectedWorld == i)
                 {
-                    RenderWorldInfo(i);
+                    RenderWorldInfo(Worlds,i);
                 }
             }
             ImGui.SetWindowFontScale(1f);
         }
-        private static void RenderWorldInfo(int i)
+        private static void RenderWorldInfo(List<WorldInfo> Worlds, int i)
         {
             ImGui.SetWindowFontScale(1.75f);
             ImGui.Indent(); // Indenter les détails pour les distinguer visuellement
-            var info = Client.TheClient.WorldsInfo[i];
+            var info = Worlds[i];
             ImGui.TextColored(new Vector4(0.18f, 0.55f, 0.97f, 1), "Name: ");
             ImGui.SameLine(0, 0);
             ImGui.TextColored(new Vector4(0.06f, 0.74f, 0.16f, 1), info.Name);
             ImGui.TextColored(new Vector4(0.18f, 0.55f, 0.97f, 1), "Seed: ");
             ImGui.Unindent();
         }
+
+
+        public static List<WorldInfo> LoadWorld()
+        {
+            List<WorldInfo> Worlds = new();
+            string[] WorldFolders = Directory.GetDirectories("worlds");
+            foreach (string world in WorldFolders)
+            {
+                if (File.Exists(world + "/world.vpw"))
+                {
+                    try
+                    {
+                        WorldInfo worldInfo = new WorldInfo().Deserialize(File.ReadAllBytes(world + "/world.vpw"));
+                        worldInfo.Path = world;
+                        worldInfo.Name = world.Split("\\").Last();
+                        Worlds.Add(worldInfo);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex, "Worldinfo can't be load , possibly due to corrupted data.");
+                    }
+                }
+                else
+                {
+                }
+            }
+            return Worlds;
+        }
+
     }
 }

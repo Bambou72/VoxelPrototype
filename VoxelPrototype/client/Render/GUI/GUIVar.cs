@@ -117,7 +117,7 @@ namespace VoxelPrototype.client.Render.GUI
         }
         internal static void Update()
         {
-            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.T) && !InInputText)
+            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.T) && !InInputText)
             {
                 if (!ConsoleMenu)
                 {
@@ -134,14 +134,14 @@ namespace VoxelPrototype.client.Render.GUI
                     Client.TheClient.InputEventManager.Grab = true;
                 }
             }
-            if (ConsoleMenu == true && Client.TheClient.InputEventManager.IsKeyPressed(Keys.Escape))
+            if (ConsoleMenu == true && Client.TheClient.ClientInterface.IsKeyPressed(Keys.Escape))
             {
                 ConsoleMenu = false;
                 Client.TheClient.InputEventManager.NoInput = false;
                 ClientAPI.SetCursorState(CursorState.Grabbed);
                 Client.TheClient.InputEventManager.Grab = true;
             }
-            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.Escape) && !ConsoleMenu && Client.TheClient.World.Initialized)
+            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.Escape) && !ConsoleMenu && Client.TheClient.World.Initialized)
             {
                 if (IngameMenu)
                 {
@@ -156,7 +156,7 @@ namespace VoxelPrototype.client.Render.GUI
                     Client.TheClient.InputEventManager.Grab = false;
                 }
             }
-            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.F2))
+            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.F2))
             {
                 if (Client.TheClient.InputEventManager.Grab == false)
                 {
@@ -169,7 +169,7 @@ namespace VoxelPrototype.client.Render.GUI
                     Client.TheClient.InputEventManager.Grab = false;
                 }
             }
-            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.F1))
+            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.F1))
             {
                 if (DebugMenu == false)
                 {
@@ -180,7 +180,7 @@ namespace VoxelPrototype.client.Render.GUI
                     DebugMenu = false;
                 }
             }
-            if (Client.TheClient.InputEventManager.IsKeyPressed(Keys.F3))
+            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.F3))
             {
                 Client.TheClient.ResourceManager.Reload();
             }
@@ -234,7 +234,7 @@ namespace VoxelPrototype.client.Render.GUI
         /// </summary>
         /// <param name="window">Main window</param>
         /// <param name="deltaSecond"> delta time</param>
-        internal static void Update(GameWindow window, double deltaSecond)
+        internal static void Update(IClientInterface window, double deltaSecond)
         {
             Controller.Update(window, deltaSecond);
         }

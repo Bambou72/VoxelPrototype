@@ -22,18 +22,6 @@ namespace VoxelPrototype.client.World.Level.Chunk
         public int X { get; set; }
         public int Z { get; set; }
         public Vector2i Position { get { return new Vector2i(X, Z); } set { X = value.X; Z = value.Y; } }
-        public bool IsSurrendedClient()
-        {
-            if (Client.TheClient.World.ChunkManager.GetChunk(X + 1, Z) == null) return false;
-            if (Client.TheClient.World.ChunkManager.GetChunk(X - 1, Z) == null) return false;
-            if (Client.TheClient.World.ChunkManager.GetChunk(X, Z + 1) == null) return false;
-            if (Client.TheClient.World.ChunkManager.GetChunk(X, Z - 1) == null) return false;
-            if (Client.TheClient.World.ChunkManager.GetChunk(X - 1, Z - 1) == null) return false;
-            if (Client.TheClient.World.ChunkManager.GetChunk(X + 1, Z - 1) == null) return false;
-            if (Client.TheClient.World.ChunkManager.GetChunk(X - 1, Z + 1) == null) return false;
-            if (Client.TheClient.World.ChunkManager.GetChunk(X + 1, Z + 1) == null) return false;
-            return true;
-        }
         public VBFCompound Serialize()
         {
             VBFCompound Chunk = new();
@@ -81,16 +69,11 @@ namespace VoxelPrototype.client.World.Level.Chunk
         {
             if (pos.Y < Const.ChunkHeight * Section.Size && pos.Y >= 0)
             {
-                //int sectionIndex = pos.Y / 16;
                 int sectionIndex = pos.Y >> 4;
-                //int sectionOffset = pos.Y % 16; 
-                pos.Y = pos.Y & 15;
+                pos.Y &=  15;
                 return Sections[sectionIndex].BlockPalette.Get(pos);
             }
-            else
-            {
-                return Client.TheClient.ModManager.BlockRegister.Air;
-            }
+            return Client.TheClient.ModManager.BlockRegister.Air;            
         }
         public void SetBlock(Vector3i pos, BlockState id)
         {

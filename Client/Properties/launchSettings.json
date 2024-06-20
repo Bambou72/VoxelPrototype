@@ -3,7 +3,7 @@
     "Client": {
       "commandName": "Project",
       "commandLineArgs": "--resources-paths ../../../../Assets ",
-      "nativeDebugging": true
+      "nativeDebugging": false
     }
   }
 }

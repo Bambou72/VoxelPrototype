@@ -2,7 +2,7 @@
  * Texture class
  * Authors Opentk
  **/
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 namespace VoxelPrototype.client.Render.Components
 {
     // A helper class, much like Shader, meant to simplify loading textures.

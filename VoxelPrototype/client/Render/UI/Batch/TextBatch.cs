@@ -1,4 +1,4 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.Text;
 
@@ -51,7 +51,7 @@ namespace VoxelPrototype.client.Render.UI.Batch
         {
             Scale = Scale / Font.FontSize;
             float xcopy = Position.X;
-            Position.Y = Client.TheClient.ClientSize.Y - Position.Y;
+            Position.Y = Client.TheClient.ClientInterface.GetFramebufferSize().Y - Position.Y;
             for (int i = 0; i < Text.Length; i++)
             {
                 char c = Text[i];

@@ -2,7 +2,7 @@
  * Shader class
  * Author Opentk
  **/
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 namespace VoxelPrototype.client.Render.Components
 {

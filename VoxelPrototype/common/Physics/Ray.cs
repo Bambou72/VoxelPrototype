@@ -41,21 +41,19 @@ namespace VoxelPrototype.common.Physics
                 {
                     for (int k = z - step_z; vz > 0 ? k < cz + step_z : k > cz + step_z; k += step_z)
                     {
-                        if (Client.TheClient.World.ChunkManager.GetBlock(i, j, k, out BlockState State))
+                        var State = Client.TheClient.World.ChunkManager.GetBlock(new Vector3i(i, j, k));
+                        if (State != Client.TheClient.ModManager.BlockRegister.Air)
                         {
-                            if (State != Client.TheClient.ModManager.BlockRegister.Air)
+                            foreach (Collider collider in State.Block.GetColliders())
                             {
-                                foreach (Collider collider in State.Block.GetColliders())
+                                (double? entry_time, Vector3i normal) = RayVSAABB(collider.Move(new Vector3i(i, j, k)));
+                                if (entry_time == null)
                                 {
-                                    (double? entry_time, Vector3i normal) = RayVSAABB(collider.Move(new Vector3i(i, j, k)));
-                                    if (entry_time == null)
-                                    {
-                                        continue;
-                                    }
-                                    PossibleCollision.Add(new Tuple<double?, Vector3i, Vector3i, BlockState>(entry_time, normal, new Vector3i(i, j, k), State));
+                                    continue;
                                 }
+                                PossibleCollision.Add(new Tuple<double?, Vector3i, Vector3i, BlockState>(entry_time, normal, new Vector3i(i, j, k), State));
                             }
-                        }
+                        }                    
                     }
                 }
             }

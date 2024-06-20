@@ -1,4 +1,4 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL;
 namespace VoxelPrototype.client.Render
 {
     internal class Renderer
@@ -8,10 +8,11 @@ namespace VoxelPrototype.client.Render
         private int MaxTextureLayers;
         internal void Init()
         {
+            GL.Enable(EnableCap.Multisample);
             GL.Enable(EnableCap.DepthTest);
-            //GL.Enable(EnableCap.Multisample);
+            /*
             MaxTextureSize = GL.GetInteger(GetPName.MaxTextureSize);
-            MaxTextureLayers = GL.GetInteger(GetPName.MaxArrayTextureLayers);
+            MaxTextureLayers = GL.GetInteger(GetPName.MaxArrayTextureLayers);*/
             Logger.Info($"Max texture size is {MaxTextureSize}");
             Logger.Info($"Max texture array layer size is {MaxTextureLayers}");
         }

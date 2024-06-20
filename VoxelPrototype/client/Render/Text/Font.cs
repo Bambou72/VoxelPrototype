@@ -48,7 +48,7 @@ namespace VoxelPrototype.client.Render.Text
             };
 
 
-            FontAtlas = TextureLoader.LoadFromDataFont(OpenGLAtlas, OpenTK.Graphics.OpenGL4.TextureMinFilter.Linear, false);
+            FontAtlas = TextureLoader.LoadFromDataFont(OpenGLAtlas, OpenTK.Graphics.OpenGL.TextureMinFilter.Linear, false);
             if (!Directory.Exists("debug/atlas/fonts"))
             {
                 Directory.CreateDirectory("debug/atlas/fonts");
@@ -142,7 +142,7 @@ namespace VoxelPrototype.client.Render.Text
         //    FontSize = 50;
         //    CharacterMap = new Dictionary<char, Character>();
         //    Image<Rgba32> Atlas = GenerateAtlas(1024);
-        //    FontAtlas = Texture.LoadFromData(Atlas, OpenTK.Graphics.OpenGL4.TextureMinFilter.Linear);
+        //    FontAtlas = Texture.LoadFromData(Atlas, OpenTK.Graphics.OpenGL.TextureMinFilter.Linear);
         //    if (!Directory.Exists("debug/atlas/fonts"))
         //    {
         //        Directory.CreateDirectory("debug/atlas/fonts");

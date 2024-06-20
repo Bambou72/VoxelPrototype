@@ -1,9 +1,10 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections;
+using System.Runtime.CompilerServices;
 
 namespace VoxelPrototype.common.Utils
 {
 
-    internal sealed class BitStorage
+    internal sealed class BitStorage 
     {
         internal int[] Data;
         private int Size;
@@ -66,6 +67,7 @@ namespace VoxelPrototype.common.Utils
                 }
             }
         }
+        /*
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int Get(int index)
         {
@@ -97,7 +99,39 @@ namespace VoxelPrototype.common.Utils
                     Data[intIndex + 1] = Data[intIndex + 1] & ~mask2 | value >> bitsRemaining;
                 }
             }
+        
+        }*/
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ushort Get(int index)
+        {
+            return (ushort)((Data[(index * BitPerEntry) >> 5] >> ((index * BitPerEntry) & 31)) & EntryMask);
+        }
 
+        public void Set(int index, ushort value)
+        {
+            if (value > EntryMask)
+            {
+                throw new ArgumentException($"Value should be in the range (0, {EntryMask}].", nameof(value));
+            }
+            int intIndex = index * BitPerEntry / 32;
+            int offsetWithinInt = index * BitPerEntry % 32;
+            ushort oldValue = Get(index); // Get the existing entry value
+            if (oldValue != value)
+            {
+                if (offsetWithinInt + BitPerEntry <= 32)
+                {
+                    int mask = EntryMask << offsetWithinInt;
+                    Data[intIndex] = Data[intIndex] & ~mask | value << offsetWithinInt;
+                }
+                else
+                {
+                    int bitsRemaining = 32 - offsetWithinInt;
+                    int mask1 = EntryMask << offsetWithinInt;
+                    int mask2 = (1 << (BitPerEntry - bitsRemaining)) - 1;
+                    Data[intIndex] = Data[intIndex] & ~mask1 | value << offsetWithinInt;
+                    Data[intIndex + 1] = Data[intIndex + 1] & ~mask2 | value >> bitsRemaining;
+                }
+            }
         }
 
         public BitStorage Grow(int NewBitPerEntry)

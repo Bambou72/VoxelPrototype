@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace VoxelPrototype.client.World
 
     public class World :   ITickable
     {
+        internal RenderThread RenderThread;
         internal int LoadDistance = 12;
         //Tick
         internal ulong CurrentTick;
@@ -34,6 +36,7 @@ namespace VoxelPrototype.client.World
         }
         public  void Dispose()
         {
+            RenderThread.Stop();
             Initialized = false;
             ChunkManager.Dispose();
             PlayerFactory.Dispose();
@@ -43,6 +46,8 @@ namespace VoxelPrototype.client.World
         public void Init()
         {
             Initialized = true;
+            RenderThread = new();
+            RenderThread.Start();
         }
         public  void Tick(float DT)
         {
@@ -67,20 +72,16 @@ namespace VoxelPrototype.client.World
                 PlayerRenderer.RenderPlayers();
             }
         }
-        public  BlockState GetBlock(int x, int y, int z)
-        {
-            ChunkManager.GetBlock(x, y, z, out var id);
-            return id;
-        }
+       
         public  Chunk GetChunk(int x, int z)
         {
             return ChunkManager.GetChunk(x, z);
         }
-        public  bool IsChunkExist(int x, int z)
+        public  bool IsChunkExist(Vector2i Pos)
         {
             lock (ChunkManager.Clist)
             {
-                return ChunkManager.Clist.ContainsKey(new OpenTK.Mathematics.Vector2i(x, z));
+                return ChunkManager.Clist.ContainsKey(Pos);
             }
         }
         public int GetChunkCount()
@@ -95,6 +96,22 @@ namespace VoxelPrototype.client.World
         {
             return PlayerFactory.LocalPlayer._Camera;
         }
+        public bool IsChunkSurrended(Vector2i ChunkPos)
+        {
+            if (!IsChunkExist(new Vector2i(ChunkPos.X + 1, ChunkPos.Y))) return false;
+            if (!IsChunkExist(new Vector2i(ChunkPos.X - 1, ChunkPos.Y))) return false;
+            if (!IsChunkExist(new Vector2i(ChunkPos.X, ChunkPos.Y + 1))) return false;
+            if (!IsChunkExist(new Vector2i(ChunkPos.X, ChunkPos.Y - 1))) return false;
+            if (!IsChunkExist(new Vector2i(ChunkPos.X - 1, ChunkPos.Y - 1))) return false;
+            if (!IsChunkExist(new Vector2i(ChunkPos.X + 1, ChunkPos.Y - 1))) return false;
+            if (!IsChunkExist(new Vector2i(ChunkPos.X - 1, ChunkPos.Y + 1))) return false;
+            if (!IsChunkExist(new Vector2i(ChunkPos.X + 1, ChunkPos.Y + 1))) return false;
+            return true;
+        }
+        public BlockState GetBlock(Vector3i BlockPos)
+        {
+            return ChunkManager.GetBlock(BlockPos);
+        }
     }
-    
+
 }

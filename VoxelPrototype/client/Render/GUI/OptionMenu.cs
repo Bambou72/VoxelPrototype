@@ -1,5 +1,5 @@
 ﻿using ImGuiNET;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using System.Numerics;
 using VoxelPrototype.server;
 namespace VoxelPrototype.client.Render.GUI

@@ -1,4 +1,4 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL;
 using StbImageSharp;
 namespace VoxelPrototype.client.Render.Components
 {

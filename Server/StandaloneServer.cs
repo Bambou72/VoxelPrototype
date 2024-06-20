@@ -1,7 +1,7 @@
 ﻿using VoxelPrototype.client.Resources.temp;
 using VoxelPrototype.common.World;
 
-namespace VoxelPrototypeServer
+namespace Server
 {
     internal class StandaloneServer
     {

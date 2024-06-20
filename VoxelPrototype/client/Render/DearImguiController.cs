@@ -2,7 +2,7 @@
  * Author NogginBops
  * */
 using ImGuiNET;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -158,7 +158,7 @@ void main()
         /// <summary>
         /// Updates ImGui InputSystem and IO configuration state.
         /// </summary>
-        public void Update(GameWindow wnd, double deltaSeconds)
+        public void Update(IClientInterface wnd, double deltaSeconds)
         {
             if (_frameBegun)
             {
@@ -230,21 +230,15 @@ void main()
             }
             return result;
         }
-        private void UpdateImGuiInputSystem(GameWindow wnd)
+        private void UpdateImGuiInputSystem(IClientInterface wnd)
         {
             ImGuiIOPtr io = ImGui.GetIO();
-            MouseState MouseState = wnd.MouseState;
-            KeyboardState KeyboardState = wnd.KeyboardState;
-            io.MouseDown[0] = MouseState[MouseButton.Left];
-            io.MouseDown[1] = MouseState[MouseButton.Right];
-            io.MouseDown[2] = MouseState[MouseButton.Middle];
-            io.MouseDown[3] = MouseState[MouseButton.Button4];
-            io.MouseDown[4] = MouseState[MouseButton.Button5];
-            var screenPoint = new Vector2i((int)MouseState.X, (int)MouseState.Y);
-            var point = screenPoint;//wnd.PointToClient(screenPoint);
-            io.MousePos = new System.Numerics.Vector2(point.X, point.Y);
-            io.AddMouseWheelEvent(MouseState.ScrollDelta.X, MouseState.ScrollDelta.Y);
-            var test = KeyboardState[Keys.E];
+            io.MouseDown[0] = wnd.IsMouseButtonDown(MouseButton.Left);
+            io.MouseDown[1] = wnd.IsMouseButtonDown(MouseButton.Right);
+            io.MouseDown[2] = wnd.IsMouseButtonDown(MouseButton.Middle);
+            io.MousePos = new System.Numerics.Vector2((float)wnd.GetMousePosition().X, (float)wnd.GetMousePosition().Y);
+            io.AddMouseWheelEvent((float)wnd.GetMouseScroll().X, (float)wnd.GetMouseScroll().Y);
+            var test = wnd.IsKeyDown(Keys.E);
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {
                 if (key == Keys.Unknown)
@@ -254,7 +248,7 @@ void main()
                 var ImKey = TryMapKey(key);
                 if (ImKey != ImGuiKey.None)
                 {
-                    if (KeyboardState[key])
+                    if (wnd.IsKeyDown(key))
                     {
                         io.AddKeyEvent(ImKey, true);
                     }
@@ -269,10 +263,10 @@ void main()
                 io.AddInputCharacter(c);
             }
             PressedChars.Clear();
-            io.KeyCtrl = KeyboardState.IsKeyDown(Keys.LeftControl) || KeyboardState.IsKeyDown(Keys.RightControl);
-            io.KeyAlt = KeyboardState.IsKeyDown(Keys.LeftAlt) || KeyboardState.IsKeyDown(Keys.RightAlt);
-            io.KeyShift = KeyboardState.IsKeyDown(Keys.LeftShift) || KeyboardState.IsKeyDown(Keys.RightShift);
-            io.KeySuper = KeyboardState.IsKeyDown(Keys.LeftSuper) || KeyboardState.IsKeyDown(Keys.RightSuper);
+            io.KeyCtrl = wnd.IsKeyDown(Keys.LeftControl) || wnd.IsKeyDown(Keys.RightControl);
+            io.KeyAlt = wnd.IsKeyDown(Keys.LeftAlt) || wnd.IsKeyDown(Keys.RightAlt);
+            io.KeyShift = wnd.IsKeyDown(Keys.LeftShift) || wnd.IsKeyDown(Keys.RightShift);
+            io.KeySuper = wnd.IsKeyDown(Keys.LeftSuper) || wnd.IsKeyDown(Keys.RightSuper);
         }
         public void PressChar(char keyChar)
         {

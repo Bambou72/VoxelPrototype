@@ -4,37 +4,26 @@ namespace VoxelPrototype.client
 {
     internal class ClientAPI
     {
+        //TODO fix
         public static void SetFullscreen(bool fullscreen)
         {
-            if (fullscreen)
-            {
-                Client.TheClient.WindowState = WindowState.Fullscreen;
-            }
-            else
-            {
-                Client.TheClient.WindowState = WindowState.Normal;
-            }
+            Client.TheClient.ClientInterface.SetFullscreen(fullscreen);
         }
         public static void SetCursorState(CursorState state)
         {
-            Client.TheClient.CursorState = state;
+            Client.TheClient.ClientInterface.SetGrab(state == CursorState.Grabbed);
         }
-        public static Vector2 GetCursorPos()
-        {
-            return Client.TheClient.MouseState.Position;
-        }
-
         public static int WindowWidth()
         {
-            return Client.TheClient.ClientSize.X;
+            return Client.TheClient.ClientInterface.GetFramebufferSize().X;
         }
         public static int WindowHeight()
         {
-            return Client.TheClient.ClientSize.Y;
+            return Client.TheClient.ClientInterface.GetFramebufferSize().Y;
         }
         public static float AspectRatio()
         {
-            return Client.TheClient.ClientSize.X / Client.TheClient.ClientSize.Y;
+            return WindowWidth() / (float)WindowHeight();
         }
     }
 }

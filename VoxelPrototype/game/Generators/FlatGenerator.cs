@@ -8,6 +8,12 @@ namespace VoxelPrototype.game.Generators
 {
     internal class FlatGenerator : WorldGenerator
     {
+        public FlatGenerator()
+        {
+            Name = "Flat";
+
+        }
+
         public int GetOriginHeigh()
         {
             throw new NotImplementedException();
@@ -22,7 +28,7 @@ namespace VoxelPrototype.game.Generators
             {
                 for (int z = 0; z < Const.ChunkSize; z++)
                 {
-                    for (int y = 0; y < Const.ChunkHeight * Section.Size; y++)
+                    for (int y = 0; y < Const.ChunkRHeight; y++)
                     {
                         if (y == 0)
                         {

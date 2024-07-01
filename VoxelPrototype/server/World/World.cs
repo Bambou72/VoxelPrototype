@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VoxelPrototype.client;
+using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.Entities.Player.PlayerManager;
 using VoxelPrototype.common.Utils;
@@ -12,59 +12,76 @@ using VoxelPrototype.common.World;
 using VoxelPrototype.common.WorldGenerator;
 using VoxelPrototype.server.World.Level;
 using VoxelPrototype.server.World.Level.Chunk;
+using VoxelPrototype.VBF;
 
 namespace VoxelPrototype.server.World
 {
-    public class World : IBlockAcessor, ITickable
+    public class World : IWorld
     {
         internal Random RNG;
-        //WorldInfo
-        internal WorldInfo WorldInfo;
+        //param
+        internal string Name;
+        internal long Seed;
         //Distance
         internal int LoadDistance = 12;
         //Tick
         internal ulong CurrentTick;
-
-        string Path;
+        internal string path;
         //Voxel
         internal WorldGenerator WorldGenerator;
         public ServerChunkManager ChunkManager;
         //Players
         public ServerPlayerFactory PlayerFactory;
+        public ModManager ModManager;
 
-        public World(WorldSettings Settings, string Path)
+        public World(ModManager ModManager, string path, WorldSettings Settings =null)
         {
-            this.Path = Path;
-            if (!Directory.Exists(Path))
+            this.ModManager = ModManager;
+            this.path = path;
+            if(path == null )
             {
-                Directory.CreateDirectory("worlds/" + Settings.GetName());
-                Directory.CreateDirectory("worlds/" + Settings.GetName() + "/terrain");
-                Directory.CreateDirectory("worlds/" + Settings.GetName() + "/terrain/dim0");
-                WorldInfo = new WorldInfo();
-                WorldInfo.Path = Path;
-                WorldInfo.SetSeed(Settings.GetSeed());
-                WorldInfo.SetWorldGenerator(Settings.GetGenerator());
-                using var fs = new FileStream(Path + "world.vpw", FileMode.OpenOrCreate, FileAccess.Write);
-                fs.Write(WorldInfo.Serialize());
-                fs.Close();
+                path = "";
+            }
+            if(Settings != null)
+            {
+                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(path + "/terrain");
+                Directory.CreateDirectory(path + "/terrain/dim0");
+                Seed= Settings.GetSeed();
+                WorldGenerator = ModManager.WorldGeneratorRegistry.CreateWorldGenerator(Settings.GetGenerator());
+                File.WriteAllBytes(path + "world.vpw", SerializeWorldData());
             }
             else
             {
-                WorldInfo = new WorldInfo().Deserialize(File.ReadAllBytes(Path + "world.vpw"));
-                WorldInfo.Path = Path;
+                DeserializeWorldData(File.ReadAllBytes(path + "world.vpw"));
             }
-            WorldGenerator = Client.TheClient.ModManager.WorldGeneratorRegistry.CreateWorldGenerator(WorldInfo.GetWorldGenerator());
-            WorldGenerator.SetData(WorldInfo.GetSeed());
+            WorldGenerator.SetData(Seed);
             ChunkManager = new ServerChunkManager();
             PlayerFactory = new ServerPlayerFactory();
+
+        }
+        public byte[] SerializeWorldData()
+        {
+            VBFCompound root  = new VBFCompound();
+            root.AddLong("Seed", Seed);
+            root.AddString("Generator", WorldGenerator.Name);
+            return VBFSerializer.Serialize(root);
+        }
+        public void DeserializeWorldData(byte[] data)
+        {
+            VBFCompound root = (VBFCompound)VBFSerializer.Deserialize(data);
+            Seed =  root.GetLong("Seed").Value;
+            WorldGenerator =  client.Client.TheClient.ModManager.WorldGeneratorRegistry.CreateWorldGenerator(root.GetString("Generator").Value);
+        }
+        public void GetParam()
+        {
 
         }
         public void Dispose()
         {
             ChunkManager.Dispose();
             PlayerFactory.Dispose();
-            using var fs = new FileStream(Path + "world.vpw", FileMode.OpenOrCreate, FileAccess.Write);
-            fs.Write(WorldInfo.Serialize());
+            File.WriteAllBytes(path + "world.vpw", SerializeWorldData());
         }
         public void Tick(float DT)
         {
@@ -89,7 +106,7 @@ namespace VoxelPrototype.server.World
         }
         public bool IsAir(int x, int y, int z)
         {
-            return ChunkManager.GetBlock(x, y, z) == Client.TheClient.ModManager.BlockRegister.Air;
+            return ChunkManager.GetBlock(x, y, z) == ModManager.BlockRegister.Air;
         }
         public bool IsTransparent(int x, int y, int z)
         {

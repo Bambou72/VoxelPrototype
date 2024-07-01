@@ -9,16 +9,17 @@ using VoxelPrototype.client.Render.Entities;
 using VoxelPrototype.client.Render.World;
 using VoxelPrototype.client.World.Level;
 using VoxelPrototype.client.World.Level.Chunk;
+using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.Entities.Player.PlayerManager;
 using VoxelPrototype.common.Utils;
+using VoxelPrototype.common.World;
 
 namespace VoxelPrototype.client.World
 {
 
-    public class World :   ITickable
+    public class World : IWorld
     {
-        internal RenderThread RenderThread;
         internal int LoadDistance = 12;
         //Tick
         internal ulong CurrentTick;
@@ -27,27 +28,27 @@ namespace VoxelPrototype.client.World
         internal ClientPlayerFactory PlayerFactory;
         internal PlayersRenderer PlayerRenderer;
         internal bool Initialized = false;
-        internal int RenderDistance = 12;
+        internal int RenderDistance = 6;
         public World()
         {
-            ChunkManager = new ClientChunkManager();
-            PlayerFactory = new ClientPlayerFactory();
-            PlayerRenderer = new PlayersRenderer();
         }
         public  void Dispose()
         {
-            RenderThread.Stop();
             Initialized = false;
+            
             ChunkManager.Dispose();
+            ChunkManager = null;
             PlayerFactory.Dispose();
+            PlayerFactory = null ;
         }
 
 
         public void Init()
         {
+            ChunkManager = new ClientChunkManager(this);
+            PlayerFactory = new ClientPlayerFactory();
+            PlayerRenderer = new PlayersRenderer();
             Initialized = true;
-            RenderThread = new();
-            RenderThread.Start();
         }
         public  void Tick(float DT)
         {
@@ -73,9 +74,9 @@ namespace VoxelPrototype.client.World
             }
         }
        
-        public  Chunk GetChunk(int x, int z)
+        public  Chunk GetChunk(Vector2i Pos)
         {
-            return ChunkManager.GetChunk(x, z);
+            return ChunkManager.GetChunk(Pos);
         }
         public  bool IsChunkExist(Vector2i Pos)
         {
@@ -90,6 +91,10 @@ namespace VoxelPrototype.client.World
         }
         public bool IsLocalPlayerExist()
         {
+            if(Initialized == false)
+            {
+                return false;
+            }
             return PlayerFactory.LocalPlayerExist;
         }
         public FrustumCamera GetLocalPlayerCamera()
@@ -110,7 +115,41 @@ namespace VoxelPrototype.client.World
         }
         public BlockState GetBlock(Vector3i BlockPos)
         {
-            return ChunkManager.GetBlock(BlockPos);
+            if(BlockPos.Y >=0 && BlockPos.Y < Const.ChunkRHeight)
+            {
+                return ChunkManager.GetBlock(BlockPos);
+            }
+            return Client.TheClient.ModManager.BlockRegister.Air;
+        }
+        public BlockState GetBlock(Vector2i CPosition ,Vector3i BlockPosition)
+        {
+            return ChunkManager.GetBlock(CPosition, BlockPosition);
+        }
+
+        public BlockState GetBlock(int x, int y, int z)
+        {
+            if (y >= 0 && y < Const.ChunkRHeight)
+            {
+                return ChunkManager.GetBlock(new Vector3i(x,y,z));
+            }
+            return Client.TheClient.ModManager.BlockRegister.Air;
+
+        }
+
+        public void SetBlock(int x, int y, int z, BlockState State)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsTransparent(int x, int y, int z)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsAir(int x, int y, int z)
+        {
+            if(GetBlock(x, y, z) == Client.TheClient.ModManager.BlockRegister.Air) { return true; }
+            return false;
         }
     }
 

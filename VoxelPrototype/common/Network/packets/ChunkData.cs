@@ -3,7 +3,7 @@ using LiteNetLib.Utils;
 using OpenTK.Mathematics;
 namespace VoxelPrototype.common.Network.packets
 {
-    internal struct ChunkData : INetSerializable
+    public struct ChunkData : INetSerializable
     {
         public int importance;
         public Vector2i Pos;

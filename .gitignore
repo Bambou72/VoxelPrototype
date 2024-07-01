@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 Test/
 /VoxelPrototype/CommitInfo.cs
+/.metadata/

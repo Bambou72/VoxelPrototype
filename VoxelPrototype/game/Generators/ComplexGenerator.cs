@@ -11,6 +11,12 @@ namespace VoxelPrototype.game.Generators
     internal class ComplexGenerator : WorldGenerator
     {
         FastNoise lib;
+
+        public ComplexGenerator()
+        {
+            Name = "Complex";
+        }
+
         public override int GetOriginHeight()
         {
             return GetHeight(0, 0);
@@ -21,10 +27,10 @@ namespace VoxelPrototype.game.Generators
             {
                 for (int z = 0; z < Const.ChunkSize; z++)
                 {
-                    int GlobalX = x + chunk.X * Const.ChunkSize;
-                    int GlobalZ = z + chunk.Z * Const.ChunkSize;
+                    int GlobalX = x + (chunk.X * Const.ChunkSize);
+                    int GlobalZ = z + (chunk.Z * Const.ChunkSize);
                     int Height = GetHeight(GlobalX, GlobalZ);
-                    for (int y = 0; y < Const.ChunkHeight * Section.Size; y++)
+                    for (int y = 0; y < Const.ChunkRHeight; y++)
                     {
 
                         if (y == Height)
@@ -44,7 +50,7 @@ namespace VoxelPrototype.game.Generators
         }
         internal int GetHeight(int x, int z)
         {
-            return (int)(lib.GetNoise(x, z) * 100 + (Const.ChunkHeight * Section.Size)/2);
+            return (int)(lib.GetNoise(x, z) * 100 + (Const.ChunkRHeight)/2);
         }
         public override void SetData(long seed)
         {

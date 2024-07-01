@@ -158,14 +158,14 @@ void main()
         /// <summary>
         /// Updates ImGui InputSystem and IO configuration state.
         /// </summary>
-        public void Update(IClientInterface wnd, double deltaSeconds)
+        public void Update( double deltaSeconds)
         {
             if (_frameBegun)
             {
                 ImGui.Render();
             }
             SetPerFrameImGuiData(deltaSeconds);
-            UpdateImGuiInputSystem(wnd);
+            UpdateImGuiInputSystem(Client.TheClient);
             _frameBegun = true;
             ImGui.NewFrame();
         }
@@ -230,14 +230,14 @@ void main()
             }
             return result;
         }
-        private void UpdateImGuiInputSystem(IClientInterface wnd)
+        private void UpdateImGuiInputSystem(GameWindow wnd)
         {
             ImGuiIOPtr io = ImGui.GetIO();
             io.MouseDown[0] = wnd.IsMouseButtonDown(MouseButton.Left);
             io.MouseDown[1] = wnd.IsMouseButtonDown(MouseButton.Right);
             io.MouseDown[2] = wnd.IsMouseButtonDown(MouseButton.Middle);
-            io.MousePos = new System.Numerics.Vector2((float)wnd.GetMousePosition().X, (float)wnd.GetMousePosition().Y);
-            io.AddMouseWheelEvent((float)wnd.GetMouseScroll().X, (float)wnd.GetMouseScroll().Y);
+            io.MousePos = new System.Numerics.Vector2((float)wnd.MousePosition.X, (float)wnd.MousePosition.Y);
+            io.AddMouseWheelEvent((float)wnd.MouseState.Scroll.X, (float)wnd.MouseState.Scroll.Y);
             var test = wnd.IsKeyDown(Keys.E);
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {

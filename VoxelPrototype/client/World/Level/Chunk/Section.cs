@@ -3,16 +3,32 @@ using VoxelPrototype.VBF;
 using VoxelPrototype.common.Utils.Storage.Palette;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.client.World.Level.Chunk.Render;
+using VoxelPrototype.common;
 
 namespace VoxelPrototype.client.World.Level.Chunk
 {
+    public enum MeshState
+    {
+        Dirty,
+        Generating,
+        Ready
+    }
     public class Section : IVBFSerializable<Section>
     {
-        public const int Size = 16;
-        public readonly static float SphereRadius = Size * MathF.Sqrt(3) / 2;
+        public readonly static float SphereRadius = Const.SectionSize * MathF.Sqrt(3) / 2;
         internal BlockPalette BlockPalette;
         internal SectionMesh SectionMesh;
         internal int Y;
+        internal ReaderWriterLockSlim Lock = new();
+        internal MeshState MeshState = MeshState.Dirty;
+        internal Vector3i Position
+        {
+            get
+            {
+                return new Vector3i(Chunk.X, Y, Chunk.Z);
+            }
+        }
+
         internal Chunk Chunk;
         public Section(Chunk chunk)
         {
@@ -20,7 +36,7 @@ namespace VoxelPrototype.client.World.Level.Chunk
             BlockPalette = new(1);
         }
 
-        public bool Empty { get { return BlockPalette.RefsCount[0] == Math.Pow(Size, 3); } }
+        public bool Empty { get { return BlockPalette.Palette[0].RefCount == Const.SectionVolume; } }
 
         public Section Deserialize(VBFCompound compound)
         {
@@ -28,19 +44,6 @@ namespace VoxelPrototype.client.World.Level.Chunk
             BlockPalette = BlockPalette.Deserialize(compound.Get<VBFCompound>("BP"));
             SectionMesh = new(new Vector3i(Chunk.X, Y, Chunk.Z), this);
             return this;
-        }
-        public int GetLinearIndex(int x, int y, int z)
-        {
-            const int sectionSize = 16;
-            const int extendedSize = sectionSize + 2; // 18 (16 for the section plus 1 layer on each side)
-
-            // Transform coordinates to the 0-based extended space
-            int transformedX = x + 1;
-            int transformedY = y + 1;
-            int transformedZ = z + 1;
-
-            // Calculate the linear index
-            return transformedX * extendedSize * extendedSize + transformedY * extendedSize + transformedZ;
         }
         public VBFCompound Serialize()
         {
@@ -51,7 +54,7 @@ namespace VoxelPrototype.client.World.Level.Chunk
         }
         public void SetBlock(Vector3i pos, BlockState id)
         {
-            if (pos.Y > 15 || pos.Y < 0)
+            if (pos.Y > Const.ChunkSizeM1 || pos.Y < 0)
             {
                 throw new Exception("Error");
             }

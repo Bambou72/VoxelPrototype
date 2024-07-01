@@ -1,12 +1,11 @@
-﻿/**
- * Dear Imgui Implemtation for Opentk
+﻿/*Dear Imgui Implemtation for Opentk
  * Author NogginBops
  * */
 using ImGuiNET;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 namespace VBFViewer
 {
@@ -24,7 +23,7 @@ namespace VBFViewer
         private int _shaderProjectionMatrixLocation;
         private int _windowWidth;
         private int _windowHeight;
-        private Vector2 _scaleFactor = Vector2.One;
+        internal Vector2 _scaleFactor = Vector2.One;
         private static bool KHRDebugAvailable = false;
         private int GLVersion;
         private bool CompatibilityProfile;
@@ -79,7 +78,6 @@ namespace VBFViewer
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, _indexBuffer);
             LabelObject(ObjectLabelIdentifier.Buffer, _indexBuffer, "EBO: ImGui");
             GL.BufferData(BufferTarget.ElementArrayBuffer, _indexBufferSize, nint.Zero, BufferUsageHint.DynamicDraw);
-            RecreateFontDeviceTexture();
             string VertexSource = @"#version 330 core
 uniform mat4 projection_matrix;
 layout(location = 0) in vec2 in_position;
@@ -159,7 +157,7 @@ void main()
         /// <summary>
         /// Updates ImGui InputSystem and IO configuration state.
         /// </summary>
-        public void Update(GameWindow wnd, float deltaSeconds)
+        public void Update(NativeWindow wnd ,double deltaSeconds)
         {
             if (_frameBegun)
             {
@@ -174,14 +172,14 @@ void main()
         /// Sets per-frame data based on the associated window.
         /// This is called by Update(float).
         /// </summary>
-        private void SetPerFrameImGuiData(float deltaSeconds)
+        private void SetPerFrameImGuiData(double deltaSeconds)
         {
             ImGuiIOPtr io = ImGui.GetIO();
-            io.DisplaySize = new Vector2(
+            io.DisplaySize = new System.Numerics.Vector2(
                 _windowWidth / _scaleFactor.X,
                 _windowHeight / _scaleFactor.Y);
-            io.DisplayFramebufferScale = _scaleFactor;
-            io.DeltaTime = deltaSeconds; // DeltaTime is in seconds.
+            io.DisplayFramebufferScale = new System.Numerics.Vector2(_scaleFactor.X, _scaleFactor.Y);
+            io.DeltaTime = (float)deltaSeconds; // DeltaTime is in seconds.
         }
         readonly List<char> PressedChars = new List<char>();
         private ImGuiKey TryMapKey(Keys key)
@@ -231,21 +229,15 @@ void main()
             }
             return result;
         }
-        private void UpdateImGuiInputSystem(GameWindow wnd)
+        private void UpdateImGuiInputSystem(NativeWindow wnd)
         {
             ImGuiIOPtr io = ImGui.GetIO();
-            MouseState MouseState = wnd.MouseState;
-            KeyboardState KeyboardState = wnd.KeyboardState;
-            io.MouseDown[0] = MouseState[MouseButton.Left];
-            io.MouseDown[1] = MouseState[MouseButton.Right];
-            io.MouseDown[2] = MouseState[MouseButton.Middle];
-            io.MouseDown[3] = MouseState[MouseButton.Button4];
-            io.MouseDown[4] = MouseState[MouseButton.Button5];
-            var screenPoint = new OpenTK.Mathematics.Vector2i((int)MouseState.X, (int)MouseState.Y);
-            var point = screenPoint;//wnd.PointToClient(screenPoint);
-            io.MousePos = new Vector2(point.X, point.Y);
-            io.AddMouseWheelEvent(MouseState.ScrollDelta.X, MouseState.ScrollDelta.Y);
-            var test = KeyboardState[Keys.E];
+            io.MouseDown[0] = wnd.IsMouseButtonDown(MouseButton.Left);
+            io.MouseDown[1] = wnd.IsMouseButtonDown(MouseButton.Right);
+            io.MouseDown[2] = wnd.IsMouseButtonDown(MouseButton.Middle);
+            io.MousePos = new System.Numerics.Vector2(wnd.MousePosition.X, wnd.MousePosition.Y);
+            io.AddMouseWheelEvent(wnd.MouseState.Scroll.X, wnd.MouseState.Scroll.Y);
+            var test = wnd.IsKeyDown(Keys.E);
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {
                 if (key == Keys.Unknown)
@@ -255,7 +247,7 @@ void main()
                 var ImKey = TryMapKey(key);
                 if (ImKey != ImGuiKey.None)
                 {
-                    if (KeyboardState[key])
+                    if (wnd.IsKeyDown(key))
                     {
                         io.AddKeyEvent(ImKey, true);
                     }
@@ -270,10 +262,10 @@ void main()
                 io.AddInputCharacter(c);
             }
             PressedChars.Clear();
-            io.KeyCtrl = KeyboardState.IsKeyDown(Keys.LeftControl) || KeyboardState.IsKeyDown(Keys.RightControl);
-            io.KeyAlt = KeyboardState.IsKeyDown(Keys.LeftAlt) || KeyboardState.IsKeyDown(Keys.RightAlt);
-            io.KeyShift = KeyboardState.IsKeyDown(Keys.LeftShift) || KeyboardState.IsKeyDown(Keys.RightShift);
-            io.KeySuper = KeyboardState.IsKeyDown(Keys.LeftSuper) || KeyboardState.IsKeyDown(Keys.RightSuper);
+            io.KeyCtrl = wnd.IsKeyDown(Keys.LeftControl) || wnd.IsKeyDown(Keys.RightControl);
+            io.KeyAlt = wnd.IsKeyDown(Keys.LeftAlt) || wnd.IsKeyDown(Keys.RightAlt);
+            io.KeyShift = wnd.IsKeyDown(Keys.LeftShift) || wnd.IsKeyDown(Keys.RightShift);
+            io.KeySuper = wnd.IsKeyDown(Keys.LeftSuper) || wnd.IsKeyDown(Keys.RightSuper);
         }
         public void PressChar(char keyChar)
         {
@@ -347,7 +339,7 @@ void main()
                     int newSize = (int)Math.Max(_vertexBufferSize * 1.5f, vertexSize);
                     GL.BufferData(BufferTarget.ArrayBuffer, newSize, nint.Zero, BufferUsageHint.DynamicDraw);
                     _vertexBufferSize = newSize;
-                    Console.WriteLine($"Resized dear imgui vertex buffer to new size {_vertexBufferSize}");
+                    //Console.WriteLine($"Resized dear imgui vertex buffer to new size {_vertexBufferSize}");
                 }
                 int indexSize = cmd_list.IdxBuffer.Size * sizeof(ushort);
                 if (indexSize > _indexBufferSize)
@@ -355,12 +347,12 @@ void main()
                     int newSize = (int)Math.Max(_indexBufferSize * 1.5f, indexSize);
                     GL.BufferData(BufferTarget.ElementArrayBuffer, newSize, nint.Zero, BufferUsageHint.DynamicDraw);
                     _indexBufferSize = newSize;
-                    Console.WriteLine($"Resized dear imgui index buffer to new size {_indexBufferSize}");
+                    //Console.WriteLine($"Resized dear imgui index buffer to new size {_indexBufferSize}");
                 }
             }
             // Setup orthographic projection matrix into our constant buffer
             ImGuiIOPtr io = ImGui.GetIO();
-            OpenTK.Mathematics.Matrix4 mvp = OpenTK.Mathematics.Matrix4.CreateOrthographicOffCenter(
+            Matrix4 mvp = Matrix4.CreateOrthographicOffCenter(
                 0.0f,
                 io.DisplaySize.X,
                 io.DisplaySize.Y,

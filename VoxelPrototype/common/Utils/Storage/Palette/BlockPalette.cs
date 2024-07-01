@@ -1,36 +1,43 @@
 ﻿using NLog;
 using OpenTK.Mathematics;
+using System.Runtime.CompilerServices;
 using VoxelPrototype.client;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.Utils;
 using VoxelPrototype.VBF;
 namespace VoxelPrototype.common.Utils.Storage.Palette
 {
+    public struct BlockPaletteEntry
+    {
+        public ushort RefCount;
+        public BlockState State;
+    }
     internal class BlockPalette : IVBFSerializable<BlockPalette>
     {
-        public BlockState[] Palette { get; set; }
+        public BlockPaletteEntry[] Palette { get; set; }
         public ushort PaletteCount { get; set; }
         public int BitCount { get; set; }
         public bool Full => PaletteCount == Palette.Length;
-        public int[] RefsCount { get; set; }
         BitStorage Data;
         public BlockPalette(int bitCount)
         {
             Data = new(Const.SectionVolume, 1);
             BitCount = bitCount;
-            Palette = new BlockState[(int)Math.Pow(2, BitCount)];
-            RefsCount = new int[(int)Math.Pow(2, BitCount)];
-            Palette[0] = Client.TheClient.ModManager.BlockRegister.Air;
-            RefsCount[0] = Const.SectionVolume;
+            Palette = new BlockPaletteEntry[(int)Math.Pow(2, BitCount)];
+            Palette[0] = new()
+            {
+                RefCount = Const.SectionVolume,
+                State = Client.TheClient.ModManager.BlockRegister.Air
+            };
             PaletteCount = 1;
         }
         public ushort GetOrAdd(BlockState State)
         {
             for (ushort i = 0; i < Palette.Length; i++)
             {
-                if (Palette[i] != null && Palette[i].Equals(State))
+                if (Palette[i].State != null && Palette[i].RefCount.Equals(State))
                 {
-                    RefsCount[i]++;
+                    Palette[i].RefCount++;
                     return i;
                 }
             }
@@ -38,34 +45,32 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
             {
                 for (ushort i = 0; i < Palette.Length; i++)
                 {
-                    if (Palette[i] == null || RefsCount[i] == 0 && !Palette[i].Equals(Client.TheClient.ModManager.BlockRegister.Air))
+                    if (Palette[i].State == null || Palette[i].RefCount == 0 && !Palette[i].Equals(Client.TheClient.ModManager.BlockRegister.Air))
                     {
-                        Palette[i] = State;
-                        RefsCount[i] = 1;
+                        Palette[i].State = State;
+                        Palette[i].RefCount = 1;
                         return i;
                     }
                 }
                 BitCount *= 2;
-                BlockState[] newpa = new BlockState[(int)Math.Pow(2, BitCount)];
-                int[] newrc = new int[(int)Math.Pow(2, BitCount)];
+                BlockPaletteEntry[] newpa = new BlockPaletteEntry[(int)Math.Pow(2, BitCount)];
                 Array.Copy(Palette, newpa, Palette.Length);
-                Array.Copy(RefsCount, newrc, RefsCount.Length);
                 Palette = newpa;
-                RefsCount = newrc;
             }
             ushort NewID = PaletteCount++;
-            Palette[NewID] = State;
-            RefsCount[NewID] = 1;
+            Palette[NewID].State = State;
+            Palette[NewID].RefCount = 1;
             return NewID;
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public BlockState Get(Vector3i Position)
         {
-            return Palette[Data.Get(Utils.TreetoOne(Position))];
+            return Palette[Data.Get(Utils.TreetoOne(Position))].State;
         }
         public void Set(Vector3i Position, BlockState State)
         {
             ushort previousId = Data.Get(Utils.TreetoOne(Position));
-            RefsCount[previousId]--;
+            Palette[previousId].RefCount--;
             ushort indexid = GetOrAdd(State);
             if (BitCount > Data.BitPerEntry)
             {
@@ -73,7 +78,6 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
             }
             Data.Set(Utils.TreetoOne(Position), indexid);
         }
-
         public VBFCompound Serialize()
         {
             VBFCompound BlockPalette = new VBFCompound();
@@ -86,10 +90,10 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
             for (int i = 0; i < this.Palette.Length; i++)
             {
                 VBFCompound PaletteElement = new VBFCompound();
-                if (this.Palette[i] != null)
+                if (this.Palette[i].State != null)
                 {
-                    PaletteElement.Add("Bs", this.Palette[i].Serialize());
-                    PaletteElement.AddInt("RC", RefsCount[i]);
+                    PaletteElement.Add("Bs", this.Palette[i].State.Serialize());
+                    PaletteElement.AddInt("RC", this.Palette[i].RefCount);
                     Palette.Tags.Add(PaletteElement);
                 }
             }
@@ -102,14 +106,14 @@ namespace VoxelPrototype.common.Utils.Storage.Palette
             try
             {
                 BlockPalette storage = new BlockPalette(compound.GetInt("BC").Value);
-                storage.Data = new BitStorage(compound.GetIntArray("Data").Value, 4096, compound.GetInt("BPE").Value);
+                storage.Data = new BitStorage(compound.GetIntArray("Data").Value, Const.SectionVolume, compound.GetInt("BPE").Value);
                 storage.PaletteCount = (ushort)compound.GetInt("PC").Value;
                 VBFList paletteList = compound.Get<VBFList>("Palette");
                 for (int i = 0; i < paletteList.Tags.Count; i++)
                 {
                     VBFCompound PaletteElement = (VBFCompound)paletteList.Tags[i];
-                    storage.Palette[i] = new BlockState().Deserialize(PaletteElement.Get<VBFCompound>("Bs"));
-                    storage.RefsCount[i] = PaletteElement.GetInt("RC").Value;
+                    storage.Palette[i].State = new BlockState().Deserialize(PaletteElement.Get<VBFCompound>("Bs"));
+                    storage.Palette[i].RefCount = (ushort)PaletteElement.GetInt("RC").Value;
                 }
                 return storage;
             }

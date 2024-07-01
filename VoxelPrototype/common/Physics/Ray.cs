@@ -1,6 +1,7 @@
 ﻿using OpenTK.Mathematics;
 using VoxelPrototype.client;
 using VoxelPrototype.common.Blocks.State;
+using VoxelPrototype.common.World;
 namespace VoxelPrototype.common.Physics
 {
     public class Ray
@@ -41,7 +42,7 @@ namespace VoxelPrototype.common.Physics
                 {
                     for (int k = z - step_z; vz > 0 ? k < cz + step_z : k > cz + step_z; k += step_z)
                     {
-                        var State = Client.TheClient.World.ChunkManager.GetBlock(new Vector3i(i, j, k));
+                        var State = Client.TheClient.World.GetBlock(i, j, k);
                         if (State != Client.TheClient.ModManager.BlockRegister.Air)
                         {
                             foreach (Collider collider in State.Block.GetColliders())

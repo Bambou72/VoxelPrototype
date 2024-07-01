@@ -1,6 +1,7 @@
 ﻿using LiteNetLib;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using System;
 using VoxelPrototype.client;
 using VoxelPrototype.client.Render.Components;
 using VoxelPrototype.client.Resources;
@@ -29,7 +30,6 @@ namespace VoxelPrototype.common.Entities.Player
         public bool Ghost = false;
 
         //Client
-        internal Vector2 _lastPos;
         internal FrustumCamera? _Camera;
         internal bool Local = false;
         internal bool ServerSide = false;
@@ -40,8 +40,7 @@ namespace VoxelPrototype.common.Entities.Player
         internal Block SelectedBlock = null;
         //BlockBreaking
         internal Vector3i BlockCurrentBreaking;
-        internal float sensitivity = 0.2f;
-        internal bool _firstMove = true;
+        internal float sensitivity = 0.5f;
         internal ulong LastServerTick = 0;
 
         public Player(Vector3d _Position, ushort _ClientID, bool Local, bool Client)
@@ -70,11 +69,11 @@ namespace VoxelPrototype.common.Entities.Player
             ViewedBlockPos = CurrentBlock;
             Vector3i BlockBefore = new Vector3i(CurrentBlock.X + Normal.X, CurrentBlock.Y + Normal.Y, CurrentBlock.Z + Normal.Z);
 
-            if (Client.TheClient.ClientInterface.IsMouseButtonPressed(MouseButton.Left) && Client.TheClient.InputEventManager.Grab)
+            if (Client.TheClient.MouseState.IsButtonDown(MouseButton.Left) && Client.TheClient.InputEventManager.Grab)
             {
                 Client.TheClient.World.ChunkManager.ChangeChunk(CurrentBlock, Client.TheClient.ModManager.BlockRegister.Air);
             }
-            else if (Client.TheClient.ClientInterface.IsMouseButtonPressed(MouseButton.Right) && Client.TheClient.InputEventManager.Grab)
+            else if (Client.TheClient.MouseState.IsButtonPressed(MouseButton.Right) && Client.TheClient.InputEventManager.Grab)
             {
                 if(SelectedBlock == null)
                 {
@@ -82,7 +81,7 @@ namespace VoxelPrototype.common.Entities.Player
                 }
                 Client.TheClient.World.ChunkManager.ChangeChunk(CurrentBlock+Normal, SelectedBlock.GetDefaultState());
             }
-            else if (Client.TheClient.ClientInterface.IsMouseButtonPressed(MouseButton.Middle))
+            else if (Client.TheClient.MouseState.IsButtonPressed(MouseButton.Middle))
             {
                 SelectedBlock = Client.TheClient.World.GetBlock(new Vector3i(CurrentBlock.X, CurrentBlock.Y, CurrentBlock.Z)).Block;
             }
@@ -112,7 +111,7 @@ namespace VoxelPrototype.common.Entities.Player
 
             if (Client.TheClient.InputEventManager.GetNoInput() == false)
             {
-                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.LeftControl))
+                if (Client.TheClient.KeyboardState.IsKeyDown(Keys.LeftControl))
                 {
                     Controls.control = true;
                 }
@@ -120,7 +119,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.control = false;
                 }
-                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.W))
+                if (Client.TheClient.KeyboardState.IsKeyDown(Keys.W))
                 {
                     Controls.forward = true;
                 }
@@ -128,7 +127,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.forward = false;
                 }
-                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.S))
+                if (Client.TheClient.KeyboardState.IsKeyDown(Keys.S))
                 {
                     Controls.backward = true;
                 }
@@ -136,7 +135,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.backward = false;
                 }
-                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.A))
+                if (Client.TheClient.KeyboardState.IsKeyDown(Keys.A))
                 {
                     Controls.left = true;
                 }
@@ -144,7 +143,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.left = false;
                 }
-                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.D))
+                if (Client.TheClient.KeyboardState.IsKeyDown(Keys.D))
                 {
                     Controls.right = true;
                 }
@@ -152,7 +151,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.right = false;
                 }
-                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.Space))
+                if (Client.TheClient.KeyboardState.IsKeyDown(Keys.Space))
                 {
                     Controls.space = true;
                 }
@@ -160,7 +159,7 @@ namespace VoxelPrototype.common.Entities.Player
                 {
                     Controls.space = false;
                 }
-                if (Client.TheClient.ClientInterface.IsKeyDown(Keys.LeftShift))
+                if (Client.TheClient.KeyboardState.IsKeyDown(Keys.LeftShift))
                 {
                     Controls.shift = true;
                 }
@@ -170,28 +169,20 @@ namespace VoxelPrototype.common.Entities.Player
                 }
                 if (Client.TheClient.InputEventManager.GetGrab())
                 {
-                    if (_firstMove) // This bool variable is initially set to true.
-                    {
-                        _lastPos =(Vector2)Client.TheClient.ClientInterface.GetMousePosition();
-                        _firstMove = false;
-                    }
-                    else
-                    {
-                        var change = (Vector2)Client.TheClient.ClientInterface.GetMouseDelta();
-                        Rotation.X -= change.Y * sensitivity;
-                        Rotation.Y += change.X * sensitivity;
-                        if (Rotation.X > 89)
-                            Rotation.X = 89;
-                        else if (Rotation.X < -89)
-                            Rotation.X = -89;
-                        if (Rotation.Y > 360)
-                            Rotation.Y = 0;
-                        else if (Rotation.Y < 0)
-                            Rotation.Y = 360;
-                        _Camera.Yaw = Rotation.Y;
-                        _Camera.Pitch = Rotation.X;
-                        _lastPos = (Vector2)Client.TheClient.ClientInterface.GetMousePosition();
-                    }
+                    Vector2 change = Client.TheClient.MouseState.Delta;
+                    float s = MathF.Pow(0.6f * sensitivity + 0.2f,3) * 8.0f;
+                    Rotation.X -= change.Y * sensitivity * 0.15f;
+                    Rotation.Y += change.X * sensitivity *0.15f;
+                    if (Rotation.X > 90)
+                        Rotation.X = 90;
+                    else if (Rotation.X < -90)
+                        Rotation.X = -90;
+                    if (Rotation.Y > 360)
+                        Rotation.Y = 0;
+                    else if (Rotation.Y < 0)
+                        Rotation.Y = 360;
+                    _Camera.Yaw = Rotation.Y;
+                    _Camera.Pitch = Rotation.X;
                     Controls.Front = new Vector3(_Camera.Front.X, 0, _Camera.Front.Z).Normalized();
                     Controls.Right = new Vector3(_Camera.Right.X, 0, _Camera.Right.Z);
                     Controls.Rotation = Rotation;
@@ -204,7 +195,7 @@ namespace VoxelPrototype.common.Entities.Player
             base.UpdateClient(st.dt);
             ViewBlock = false;
             ViewRay.Update(new Vector3d(Position.X, Position.Y + EntityEYEHeight, Position.Z), _Camera.Front, Reach);
-            ViewRay.TestWithTerrain(HitCallBack);
+            ViewRay.TestWithTerrain( HitCallBack);
             float Speed = NormalSpeed;
             if (st.controls.control)
             {

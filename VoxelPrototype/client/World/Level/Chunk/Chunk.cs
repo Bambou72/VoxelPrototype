@@ -5,20 +5,25 @@ using VoxelPrototype.VBF;
 
 namespace VoxelPrototype.client.World.Level.Chunk
 {
-    [Flags]
-    internal enum ChunkSate
-    {
-        None = 0,
-        Ready = 1,
-        Changed = 2,
-        Unsaved = 4,
-    }
+
+
+
     public class Chunk : IVBFSerializable<Chunk>
     {
+        public readonly static float CircleRadius = (Const.ChunkSize * MathF.Sqrt(2)) / 2;
+
         //Chunk state for meshing
-        internal ChunkSate State = ChunkSate.Changed;
+        internal ClientChunkManager Manager;
+        //internal ChunkSate State = ChunkSate.Changed;
         internal Section[] Sections;
         //Chunk coordinates
+        public Vector2 Center 
+        { 
+            get 
+            {
+                return (Position + new Vector2(0.5f)) * Const.ChunkSize;
+            } 
+        }
         public int X { get; set; }
         public int Z { get; set; }
         public Vector2i Position { get { return new Vector2i(X, Z); } set { X = value.X; Z = value.Y; } }
@@ -54,9 +59,9 @@ namespace VoxelPrototype.client.World.Level.Chunk
         }
         public Section GetSection(int Y)
         {
-            if (Y < Const.ChunkHeight * Section.Size && Y >= 0)
+            if (Y < Const.ChunkHeight * Const.SectionSize && Y >= 0)
             {
-                return Sections[Y >> 4];
+                return Sections[Y >> Const.BitShifting];
             }
             return null;
         }
@@ -67,19 +72,19 @@ namespace VoxelPrototype.client.World.Level.Chunk
         }
         public BlockState GetBlock(Vector3i pos)
         {
-            if (pos.Y < Const.ChunkHeight * Section.Size && pos.Y >= 0)
+            if (pos.Y < Const.ChunkHeight * Const.SectionSize && pos.Y >= 0)
             {
-                int sectionIndex = pos.Y >> 4;
-                pos.Y &=  15;
+                int sectionIndex = pos.Y >> Const.BitShifting;
+                pos.Y &= Const.And;
                 return Sections[sectionIndex].BlockPalette.Get(pos);
             }
             return Client.TheClient.ModManager.BlockRegister.Air;            
         }
         public void SetBlock(Vector3i pos, BlockState id)
         {
-            int YValue = pos.Y / Section.Size;
+            int YValue = pos.Y >> Const.BitShifting;
             var section = Sections[YValue];
-            int y = pos.Y - YValue * 16;
+            int y = pos.Y & Const.And;
             section.SetBlock(new Vector3i(pos.X, y, pos.Z), id);
         }
         public void Dispose()
@@ -90,5 +95,4 @@ namespace VoxelPrototype.client.World.Level.Chunk
             }
         }
     }
-
 }

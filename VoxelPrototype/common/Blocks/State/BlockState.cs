@@ -1,9 +1,6 @@
 ﻿using VoxelPrototype.client;
-using VoxelPrototype.common;
-using VoxelPrototype.common.Blocks;
 using VoxelPrototype.common.Blocks.Properties;
 using VoxelPrototype.VBF;
-
 namespace VoxelPrototype.common.Blocks.State
 {
     public class BlockState : IVBFSerializable<BlockState>, IEquatable<BlockState>

@@ -28,6 +28,7 @@ namespace VoxelPrototype.VBF
             ByteArray = 0x06,
             IntArray = 0x08,
             LongArray = 0x12,
+            UShortArray = 0x13,
             List = 0x04,
             Compound = 0x03,
             End = 0x00,
@@ -58,6 +59,15 @@ namespace VoxelPrototype.VBF
         public VBFLongArray(long[] value)
         {
             Type = DataType.LongArray;
+            Value = value;
+        }
+    }
+    public class VBFUShortArray : VBFTag
+    {
+        public ushort[] Value { get; set; }
+        public VBFUShortArray(ushort[] value)
+        {
+            Type = DataType.UShortArray;
             Value = value;
         }
     }
@@ -190,6 +200,10 @@ namespace VoxelPrototype.VBF
         {
             Add(Name, new VBFLongArray(Value));
         }
+        public void AddUShortArray(string Name, ushort[] Value)
+        {
+            Add(Name, new VBFUShortArray(Value));
+        }
         public void AddString(string Name, string Value)
         {
             Add(Name, new VBFString(Value));
@@ -205,6 +219,10 @@ namespace VoxelPrototype.VBF
         public VBFLongArray GetLongArray(string Name)
         {
             return Get<VBFLongArray>(Name);
+        }
+        public VBFUShortArray GetUShortArray(string Name)
+        {
+            return Get<VBFUShortArray>(Name);
         }
         public VBFCompound GetCompound(string Name)
         {
@@ -305,6 +323,9 @@ namespace VoxelPrototype.VBF
                 case VBFTag.DataType.LongArray:
                     SerializeLongArray((VBFLongArray)tag, writer);
                     break;
+                case VBFTag.DataType.UShortArray:
+                    SerializeUShortArray((VBFUShortArray)tag, writer);
+                    break;
                 default:
                     throw new Exception("Unknown VBF tag type.");
             }
@@ -324,6 +345,13 @@ namespace VoxelPrototype.VBF
         private static void SerializeLongArray(VBFLongArray Tag, BinaryWriter writer)
         {
             byte[] byteArray = new byte[Tag.Value.Length * sizeof(long)];
+            Buffer.BlockCopy(Tag.Value, 0, byteArray, 0, byteArray.Length);
+            writer.Write(byteArray.Length); // Array length
+            writer.Write(byteArray); // Array data
+        }
+        private static void SerializeUShortArray(VBFUShortArray Tag, BinaryWriter writer)
+        {
+            byte[] byteArray = new byte[Tag.Value.Length * sizeof(ushort)];
             Buffer.BlockCopy(Tag.Value, 0, byteArray, 0, byteArray.Length);
             writer.Write(byteArray.Length); // Array length
             writer.Write(byteArray); // Array data
@@ -392,6 +420,8 @@ namespace VoxelPrototype.VBF
                     return DeserializeIntArray(reader);
                 case VBFTag.DataType.LongArray:
                     return DeserializeLongArray(reader);
+                case VBFTag.DataType.UShortArray:
+                    return DeserializeUShortArray(reader);
                 case VBFTag.DataType.End:
                     return null; // End of data
                 default:
@@ -419,6 +449,14 @@ namespace VoxelPrototype.VBF
             long[] longArray = new long[longbyteArray.Length / sizeof(long)];
             Buffer.BlockCopy(longbyteArray, 0, longArray, 0, longbyteArray.Length);
             return new VBFLongArray(longArray);
+        }
+        private static VBFUShortArray DeserializeUShortArray(BinaryReader reader)
+        {
+            int intarrayLength = reader.ReadInt32(); // Array length
+            byte[] ushortbyteArray = reader.ReadBytes(intarrayLength); // Array data
+            ushort[] ushortArray = new ushort[ushortbyteArray.Length / sizeof(ushort)];
+            Buffer.BlockCopy(ushortbyteArray, 0, ushortArray, 0, ushortbyteArray.Length);
+            return new VBFUShortArray(ushortArray);
         }
         private static VBFCompound DeserializeCompound(BinaryReader reader)
         {

@@ -25,19 +25,21 @@ namespace VoxelPrototype.client.Render.GUI
             ImGui.SetWindowPos(new System.Numerics.Vector2(0, 0));
             System.Numerics.Vector4 Black = new System.Numerics.Vector4(1, 0f, 0f, 1);
             ImGui.TextColored(Black, "Profiling:");
-            ImGui.TextColored(Black, $"Fps average {1000.0f / ImGui.GetIO().Framerate:0.##} ms/frame ({ImGui.GetIO().Framerate:0.#} FPS)");
+            ImGui.TextColored(Black, $"Fps average {1000.0f / ImGui.GetIO().Framerate:0.##} ms/frame ({ImGui.GetIO().Framerate:0} FPS)");
             ImGui.SeparatorText("Client");
             if (Client.TheClient.World.Initialized)
             {
-                ImGui.TextColored(Black, "Player position :" + Client.TheClient.World.PlayerFactory.LocalPlayer.Position);
-                ImGui.TextColored(Black, "Number of section to be mesh :" + Client.TheClient.World.RenderThread.SectionToBeMeshCount);
+                ImGui.TextColored(Black, $"Player position : {Client.TheClient.World.PlayerFactory.LocalPlayer.Position:0.##}");
+                ImGui.TextColored(Black, $"Player  Pitch  And Yaw  :{ Client.TheClient.World.PlayerFactory.LocalPlayer.Rotation.X :0}: {Client.TheClient.World.PlayerFactory.LocalPlayer.Rotation.Y:0}");
+                ImGui.TextColored(Black, "Number of section to be mesh :" + Client.TheClient.World.ChunkManager.MeshingThread.SectionToBeMeshCount);
+                ImGui.TextColored(Black, $"Number of client loaded chunks: {Client.TheClient.World.GetChunkCount()}");
+                ImGui.TextColored(Black, $"Number of rendered chunks: {Client.TheClient.World.ChunkManager.RenderedChunksCount}");
+
             }
-            ImGui.TextColored(Black, $"Number of client loaded chunks: {Client.TheClient.World.GetChunkCount()}");
-            ImGui.TextColored(Black, $"Number of rendered chunks: {Client.TheClient.World.ChunkManager.RenderedChunksCount}");
             if (Client.TheClient.EmbedderServer != null && Client.TheClient.EmbedderServer.IsRunning())
             {
                 ImGui.SeparatorText("Embedded Server");
-                ImGui.TextColored(Black, $"TPS: {Server.TheServer.ServerTimer.GetTPS()}");
+                ImGui.TextColored(Black, $"TPS: {Server.TheServer.GetTPS()}");
                 ImGui.TextColored(Black, $"Number of server loaded chunks: {Server.TheServer.World.ChunkManager.LoadedChunkCount}");
                 ImGui.TextColored(Black, $"Number of chunks to be send: {Server.TheServer.World.ChunkManager.ChunkToBeSend.Count}");
                 ImGui.TextColored(Black, $"Number of sended packet: {ServerNetwork.NumberOfSendedPacket}");
@@ -73,7 +75,7 @@ namespace VoxelPrototype.client.Render.GUI
                     {
                         DebugShapeRenderer.RenderDebugBox(new DebugBox()
                         {
-                            Size = new Vector3d(Const.ChunkSize, Const.ChunkHeight * Section.Size, Const.ChunkSize),
+                            Size = new Vector3d(Const.ChunkSize, Const.ChunkHeight * Const.SectionSize, Const.ChunkSize),
                             Color = new Vector4(1f, 0f, 0f, 1f),
                             Position = new Vector3(pos.X, 0, pos.Y) * Const.ChunkSize,
                             Rotation = Quaternion.Identity,

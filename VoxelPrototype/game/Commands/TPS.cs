@@ -9,7 +9,7 @@ namespace VoxelPrototype.game.Commands
         public string Name { get => "tps"; }
         public void Execute(string[] Arguments, NetPeer peer)
         {
-            ServerChat.SendServerMessage($"TPS:{Server.TheServer.ServerTimer.GetTPS().ToString("0.00")}", peer);
+            ServerChat.SendServerMessage($"TPS:{Server.TheServer.GetTPS().ToString("0.00")}", peer);
         }
     }
 }

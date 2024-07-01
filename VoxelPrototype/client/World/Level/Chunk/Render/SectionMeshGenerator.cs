@@ -1,7 +1,5 @@
 ﻿using MethodTimer;
-using NLog.LayoutRenderers;
 using OpenTK.Mathematics;
-using System.Net.Http.Json;
 using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks;
 using VoxelPrototype.common.Blocks.State;
@@ -9,89 +7,155 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
 {
     internal class SectionMeshGenerator
     {
-
-        internal Section Section;
-        Vector3i Position;
         internal List<SectionVertex> OpaqueVertices;
         internal List<uint> OpaqueIndices;
+        SectionMeshDataCache Data;
         uint IndexCounter;
-        public const byte ADJACENT_BITMASK_POS_Y = 1 << 0;      // 000001
-        public const byte ADJACENT_BITMASK_NEG_Y = 1 << 1;   // 000010
-        public const byte ADJACENT_BITMASK_NEG_X = 1 << 2;     // 000100
-        public const byte ADJACENT_BITMASK_POS_X = 1 << 3;    // 001000
-        public const byte ADJACENT_BITMASK_POS_Z = 1 << 4;    // 010000
-        public const byte ADJACENT_BITMASK_NEG_Z = 1 << 5;     // 100000
+        // Constants representing the bit positions of adjacent blocks
+        public const uint ADJACENT_BITMASK_POS_Y = 1 << 0;      // 00000000000000000000000001
+        public const uint ADJACENT_BITMASK_NEG_Y = 1 << 1;      // 00000000000000000000000010
+        public const uint ADJACENT_BITMASK_NEG_X = 1 << 2;      // 00000000000000000000000100
+        public const uint ADJACENT_BITMASK_POS_X = 1 << 3;      // 00000000000000000000001000
+        public const uint ADJACENT_BITMASK_POS_Z = 1 << 4;      // 00000000000000000000010000
+        public const uint ADJACENT_BITMASK_NEG_Z = 1 << 5;      // 00000000000000000000100000
 
-        public const byte ADJACENT_BITMASK_FULL = ADJACENT_BITMASK_POS_Y | ADJACENT_BITMASK_NEG_Y | ADJACENT_BITMASK_NEG_X | ADJACENT_BITMASK_POS_X | ADJACENT_BITMASK_POS_Z | ADJACENT_BITMASK_NEG_Z; // 111111
+        // Constants representing edge adjacent blocks
+        public const uint ADJACENT_BITMASK_POS_Y_NEG_X = 1 << 6;   // 00000000000000000001000000
+        public const uint ADJACENT_BITMASK_POS_Y_POS_X = 1 << 7;   // 00000000000000000010000000
+        public const uint ADJACENT_BITMASK_POS_Y_NEG_Z = 1 << 8;   // 00000000000000000100000000
+        public const uint ADJACENT_BITMASK_POS_Y_POS_Z = 1 << 9;   // 00000000000000001000000000
+        public const uint ADJACENT_BITMASK_NEG_Y_NEG_X = 1 << 10;  // 00000000000000010000000000
+        public const uint ADJACENT_BITMASK_NEG_Y_POS_X = 1 << 11;  // 00000000000000100000000000
+        public const uint ADJACENT_BITMASK_NEG_Y_NEG_Z = 1 << 12;  // 00000000000001000000000000
+        public const uint ADJACENT_BITMASK_NEG_Y_POS_Z = 1 << 13;  // 00000000000010000000000000
+        public const uint ADJACENT_BITMASK_POS_X_NEG_Z = 1 << 14;  // 00000000000100000000000000
+        public const uint ADJACENT_BITMASK_POS_X_POS_Z = 1 << 15;  // 00000000001000000000000000
+        public const uint ADJACENT_BITMASK_NEG_X_NEG_Z = 1 << 16;  // 00000000010000000000000000
+        public const uint ADJACENT_BITMASK_NEG_X_POS_Z = 1 << 17;  // 00000000100000000000000000
+
+        // Constants representing corner adjacent blocks
+        public const uint ADJACENT_BITMASK_POS_Y_NEG_X_NEG_Z = 1 << 18; // 00000001000000000000000000
+        public const uint ADJACENT_BITMASK_POS_Y_NEG_X_POS_Z = 1 << 19; // 00000010000000000000000000
+        public const uint ADJACENT_BITMASK_POS_Y_POS_X_NEG_Z = 1 << 20; // 00000100000000000000000000
+        public const uint ADJACENT_BITMASK_POS_Y_POS_X_POS_Z = 1 << 21; // 00001000000000000000000000
+        public const uint ADJACENT_BITMASK_NEG_Y_NEG_X_NEG_Z = 1 << 22; // 00010000000000000000000000
+        public const uint ADJACENT_BITMASK_NEG_Y_NEG_X_POS_Z = 1 << 23; // 00100000000000000000000000
+        public const uint ADJACENT_BITMASK_NEG_Y_POS_X_NEG_Z = 1 << 24; // 01000000000000000000000000
+        public const uint ADJACENT_BITMASK_NEG_Y_POS_X_POS_Z = 1 << 25; // 10000000000000000000000000
+
+        public const uint ADJACENT_BITMASK_FULL = ADJACENT_BITMASK_POS_Y | ADJACENT_BITMASK_NEG_Y | ADJACENT_BITMASK_NEG_X | ADJACENT_BITMASK_POS_X | ADJACENT_BITMASK_POS_Z | ADJACENT_BITMASK_NEG_Z; // 111111
 
         
 
-        public SectionMeshGenerator(Section section)
-        {
-            Section = section;
-            Position = new Vector3i(section.Chunk.X,section.Y,section.Chunk.Z);
-        }
 
-        public byte GetNeigbours(Vector3i position,Block CurrentBlock)
+
+        public uint GetNeighbours(Vector3i position,Block CurrentBlock,bool AO)
         {
-            Vector3i GlobalPos = new Vector3i(Position.X * Const.ChunkSize,Position.Y *Section.Size,Position.Z * Const.ChunkSize) + position;
-            byte BitMask= 0;
+            uint BitMask = 0;
             //UP
-            var BlockUp = Client.TheClient.World.GetBlock(GlobalPos+new Vector3i(0,1,0)).Block;
+            var BlockUp = Data.GetBlock(position+new Vector3i(0,1,0)).Block;
             if( !BlockUp.Transparent ||(CurrentBlock.Cullself&& BlockUp.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_POS_Y;
             }
             //DOWN
-            var BlockDown = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(0, -1, 0)).Block;
+            var BlockDown = Data.GetBlock(position + new Vector3i(0, -1, 0)).Block;
             if (!BlockDown.Transparent || (CurrentBlock.Cullself && BlockDown.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_NEG_Y;
             }
             //RIGHT
-            var BlockRight = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(1, 0, 0)).Block;
+            var BlockRight = Data.GetBlock(position + new Vector3i(1, 0, 0)).Block;
             if (!BlockRight.Transparent || (CurrentBlock.Cullself && BlockRight.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_POS_X;
             }
             //LEFT
-            var BlockLeft = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(-1, 0, 0)).Block;
+            var BlockLeft = Data.GetBlock(position + new Vector3i(-1, 0, 0)).Block;
             if (!BlockLeft.Transparent || (CurrentBlock.Cullself && BlockLeft.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_NEG_X;
             }
             //FRONT
-            var BlockFront = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(0, 0, -1)).Block;
+            var BlockFront = Data.GetBlock(position + new Vector3i(0, 0, -1)).Block;
             if (!BlockFront.Transparent || (CurrentBlock.Cullself && BlockFront.ID == CurrentBlock.ID))
-            {
-                BitMask |= ADJACENT_BITMASK_POS_Z;
-            }
-            //BACK
-            var BlockBack = Client.TheClient.World.GetBlock(GlobalPos + new Vector3i(0, 0,1)).Block;
-            if (!BlockBack.Transparent || (CurrentBlock.Cullself && BlockBack.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_NEG_Z;
             }
+            //BACK
+            var BlockBack = Data.GetBlock(position + new Vector3i(0, 0,1)).Block;
+            if (!BlockBack.Transparent || (CurrentBlock.Cullself && BlockBack.ID == CurrentBlock.ID))
+            {
+                BitMask |= ADJACENT_BITMASK_POS_Z;
+            }
+            // If AO is true, check edge and corner adjacent blocks
+            if (!(BitMask == ADJACENT_BITMASK_FULL) && AO)
+            {
+                // Edge adjacent blocks
+                if (!Data.GetBlock(position + new Vector3i(1, 1, 0)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_Y_POS_X;
+                if (!Data.GetBlock(position + new Vector3i(-1, 1, 0)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_Y_NEG_X;
+                if (!Data.GetBlock(position + new Vector3i(0, 1, 1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_Y_POS_Z;
+                if (!Data.GetBlock(position + new Vector3i(0, 1, -1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_Y_NEG_Z;
+                if (!Data.GetBlock(position + new Vector3i(1, -1, 0)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_Y_POS_X;
+                if (!Data.GetBlock(position + new Vector3i(-1, -1, 0)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_Y_NEG_X;
+                if (!Data.GetBlock(position + new Vector3i(0, -1, 1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_Y_POS_Z;
+                if (!Data.GetBlock(position + new Vector3i(0, -1, -1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_Y_NEG_Z;
+                if (!Data.GetBlock(position + new Vector3i(1, 0, -1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_X_NEG_Z;
+                if (!Data.GetBlock(position + new Vector3i(1, 0, 1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_X_POS_Z;
+                if (!Data.GetBlock(position + new Vector3i(-1, 0, -1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_X_NEG_Z;
+                if (!Data.GetBlock(position + new Vector3i(-1, 0, 1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_X_POS_Z;
+                // Corner adjacent blocks
+                if (!Data.GetBlock(position + new Vector3i(1, 1, 1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_Y_POS_X_POS_Z;
+                if (!Data.GetBlock(position + new Vector3i(1, 1, -1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_Y_POS_X_NEG_Z;
+                if (!Data.GetBlock(position + new Vector3i(-1, 1, 1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_Y_NEG_X_POS_Z;
+                if (!Data.GetBlock(position + new Vector3i(-1, 1, -1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_POS_Y_NEG_X_NEG_Z;
+                if (!Data.GetBlock(position + new Vector3i(1, -1, 1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_Y_POS_X_POS_Z;
+                if (!Data.GetBlock(position + new Vector3i(1, -1, -1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_Y_POS_X_NEG_Z;
+                if (!Data.GetBlock(position + new Vector3i(-1, -1, 1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_Y_NEG_X_POS_Z;
+                if (!Data.GetBlock(position + new Vector3i(-1, -1, -1)).Block.Transparent)
+                    BitMask |= ADJACENT_BITMASK_NEG_Y_NEG_X_NEG_Z;
+            }
             return BitMask;
         }
-        //[Time]
-        internal void Generate()
+        [Time]
+        internal void Generate(SectionMeshDataCache Data)
         {
+            this.Data = Data;
+            //Data.LockChunk();
             OpaqueVertices = new();
             OpaqueIndices = new();
             IndexCounter = 0;
-            for (int x = 0; x < Section.Size; x++)
+            for (int x = 0; x < Const.SectionSize; x++)
             {
-                for (int y = 0; y < Section.Size; y++)
+                for (int y = 0; y < Const.SectionSize; y++)
                 {
-                    for (int z = 0; z < Section.Size; z++)
+                    for (int z = 0; z < Const.SectionSize; z++)
                     {
 
                         Vector3i BPosition = new Vector3i(x, y, z);
-                        var block = Section.BlockPalette.Get(BPosition);
+                        var block = Data.GetBlock(BPosition);
                         if (block != Client.TheClient.ModManager.BlockRegister.Air)
                         {
-                            byte BitMask = GetNeigbours(BPosition,block.Block);
+                            uint BitMask = GetNeighbours(BPosition,block.Block,true);
                             if(BitMask == ADJACENT_BITMASK_FULL)
                             {
                                 continue;
@@ -107,7 +171,7 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
                                 var blockMesh = Client.TheClient.ModelManager.GetBlockMesh(block.Block.Model);
                                 for (int i = 0; i < blockMesh.GetMesh().Length; i++)
                                 {
-                                    AddMeshFace(block, BPosition, i, false);
+                                    AddMeshFace(BitMask,block, BPosition, i, false);
                                 }
                             }
                         }
@@ -115,58 +179,59 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
                     }
                 }
             }
+            //Data.UnLockChunk();
         }
-        private void GenerateDirection(byte BitMask, Vector3i BlockPos, BlockState Current)
+        private void GenerateDirection(uint BitMask, Vector3i BlockPos, BlockState Current)
         {
             //Up
             if ((BitMask & ADJACENT_BITMASK_POS_Y) == 0)
             {
-                AddMeshFace(Current, BlockPos, 0, true);
+                AddMeshFace(BitMask,Current, BlockPos, 0, true);
             }
             //Bottom
             if ((BitMask & ADJACENT_BITMASK_NEG_Y) == 0)
             {
-                AddMeshFace(Current, BlockPos, 1, true);
+                AddMeshFace(BitMask, Current, BlockPos, 1, true);
             }
             //Right
             if ((BitMask & ADJACENT_BITMASK_POS_X) == 0)
             {
-                AddMeshFace(Current, BlockPos, 4, true);
+                AddMeshFace(BitMask, Current, BlockPos, 4, true);
             }
             //Left
             if ((BitMask & ADJACENT_BITMASK_NEG_X) == 0)
             {
-                AddMeshFace(Current, BlockPos, 5, true);
+                AddMeshFace(BitMask, Current, BlockPos, 5, true);
             }
             //Front
-            if ((BitMask & ADJACENT_BITMASK_POS_Z) == 0)
-            {
-                AddMeshFace(Current, BlockPos, 3, true);
-            }
-            //Back
             if ((BitMask & ADJACENT_BITMASK_NEG_Z) == 0)
             {
-                AddMeshFace(Current, BlockPos, 2, true);
+                AddMeshFace(BitMask, Current, BlockPos, 3, true);
+            }
+            //Back
+            if ((BitMask & ADJACENT_BITMASK_POS_Z) == 0)
+            {
+                AddMeshFace(BitMask, Current, BlockPos, 2, true);
             }
         }
-        private void AddMeshFace(BlockState Block, Vector3i BlockPos, int BF, bool ao)
+        private void AddMeshFace(uint BitMask ,BlockState Block, Vector3i BlockPos, int BF, bool ao)
         {
             float[] Vert = Block.Block.GetMesh(BF);
             float[] Uv = Block.Block.GetMeshTextureCoordinates(BF);
             float[] Tex = Block.Block.GetTextureCoordinates(BF, Block);
-            Vector3i AOBlockPos = BlockPos + new Vector3i(0, Section.Y * Section.Size, 0);
+            Vector3i AOBlockPos = BlockPos + new Vector3i(0,Data.CurrentSection.Y * Const.SectionSize, 0);
             byte[] AO = { 0, 0, 0, 0 };
             bool flip_id = false;
             if (ao)
             {
                 AO = BF switch
                 {
-                    0 => AOBlockPos.Y < Section.Size * Const.ChunkHeight ? CalculateAO(AOBlockPos + new Vector3i(0, 1, 0), 1) : new byte[] { 0, 0, 0, 0 },
-                    1 => AOBlockPos.Y > 0 ?  CalculateAO(AOBlockPos + new Vector3i(0, -1, 0), 1) :new byte[]{ 0, 0, 0, 0 } ,
-                    2 => CalculateAO(AOBlockPos + new Vector3i(0, 0, 1), 2),
-                    3 => CalculateAO(AOBlockPos + new Vector3i(0, 0, -1), 2),
-                    4 => CalculateAO(AOBlockPos + new Vector3i(1, 0, 0), 0),
-                    _ => CalculateAO(AOBlockPos + new Vector3i(-1, 0, 0), 0),
+                    0 => AOBlockPos.Y < Const.SectionSize * Const.ChunkHeight ? CalculateAO(1, 1,BitMask) : new byte[] { 0, 0, 0, 0 },
+                    1 => AOBlockPos.Y > 0 ?  CalculateAO(  -1, 1,BitMask) :new byte[]{ 0, 0, 0, 0 } ,
+                    2 => CalculateAO(1, 2,BitMask),
+                    3 => CalculateAO( -1, 2,BitMask),
+                    4 => CalculateAO(1, 0,BitMask),
+                    _ => CalculateAO(-1, 0,BitMask),
                 };
                 flip_id = AO[1] + AO[3] > AO[0] + AO[2];
 
@@ -201,41 +266,87 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
             IndexCounter += 4;
 
         }
-        private byte[] CalculateAO(Vector3i bpos, int plane)
+        private byte[] CalculateAO(int offset, int plane,uint BitMask)
         {
-            byte a, b, c, d, e, f, g, h;
+            int a, b, c, d, e, f, g, h;
             if (plane == 1)
             {
-                a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1), Position.Xz));
-                b = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z - 1), Position.Xz));
-                c = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z), Position.Xz));
-                d = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z + 1), Position.Xz));
-                e = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z + 1), Position.Xz));
-                f = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z + 1), Position.Xz));
-                g = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z), Position.Xz));
-                h = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z - 1), Position.Xz));
+                if(offset ==1)
+                {
+                    a =( BitMask & ADJACENT_BITMASK_POS_Y_NEG_Z )!= 0 ? 0 : 1;
+                    b = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_X_NEG_Z) != 0 ? 0 : 1;
+                    c = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_X) != 0 ? 0 : 1;
+                    d = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_X_POS_Z) != 0 ? 0 : 1;
+                    e = (BitMask & ADJACENT_BITMASK_POS_Y_POS_Z) != 0 ? 0 : 1;
+                    f = (BitMask & ADJACENT_BITMASK_POS_Y_POS_X_POS_Z) != 0 ? 0 : 1;
+                    g = (BitMask & ADJACENT_BITMASK_POS_Y_POS_X) != 0 ? 0 : 1;
+                    h = (BitMask & ADJACENT_BITMASK_POS_Y_POS_X_NEG_Z) != 0 ? 0 : 1;
+
+                }
+                else
+                {
+                    a = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_Z) != 0 ? 0 : 1;
+                    b = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_X_NEG_Z) != 0 ? 0 : 1;
+                    c = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_X) != 0 ? 0 : 1;
+                    d = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_X_POS_Z) != 0 ? 0 : 1;
+                    e = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_Z) != 0 ? 0 : 1;
+                    f = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_X_POS_Z) != 0 ? 0 : 1;
+                    g = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_X) != 0 ? 0 : 1;
+                    h = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_X_NEG_Z) != 0 ? 0 : 1;
+
+                }
             }
             else if (plane == 0)
             {
-                a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z - 1), Position.Xz));
-                b = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z - 1), Position.Xz));
-                c = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z), Position.Xz));
-                d = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z + 1), Position.Xz));
-                e = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y, bpos.Z + 1), Position.Xz));
-                f = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z + 1), Position.Xz));
-                g = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z), Position.Xz));
-                h = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z - 1), Position.Xz));
+                if (offset == 1)
+                {
+                    a = (BitMask & ADJACENT_BITMASK_POS_X_NEG_Z) != 0 ? 0 : 1;
+                    b = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_X_NEG_Z) != 0 ? 0 : 1;
+                    c = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_X) != 0 ? 0 : 1;
+                    d = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_X_POS_Z) != 0 ? 0 : 1;
+                    e = (BitMask & ADJACENT_BITMASK_POS_X_POS_Z) != 0 ? 0 : 1;
+                    f = (BitMask & ADJACENT_BITMASK_POS_Y_POS_X_POS_Z) != 0 ? 0 : 1;
+                    g = (BitMask & ADJACENT_BITMASK_POS_Y_POS_X) != 0 ? 0 : 1;
+                    h = (BitMask & ADJACENT_BITMASK_POS_Y_POS_X_NEG_Z) != 0 ? 0 : 1;
+                }
+                else
+                {
+                    a = (BitMask & ADJACENT_BITMASK_NEG_X_NEG_Z) != 0 ? 0 : 1;
+                    b = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_X_NEG_Z) != 0 ? 0 : 1;
+                    c = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_X) != 0 ? 0 : 1;
+                    d = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_X_POS_Z) != 0 ? 0 : 1;
+                    e = (BitMask & ADJACENT_BITMASK_NEG_X_POS_Z) != 0 ? 0 : 1;
+                    f = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_X_POS_Z) != 0 ? 0 : 1;
+                    g = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_X) != 0 ? 0 : 1;
+                    h = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_X_NEG_Z) != 0 ? 0 : 1;
+
+                }
             }
             else
             {
-                a = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y, bpos.Z), Position.Xz));
-                b = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y - 1, bpos.Z), Position.Xz));
-                c = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y - 1, bpos.Z), Position.Xz));
-                d = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y - 1, bpos.Z), Position.Xz));
-                e = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y, bpos.Z), Position.Xz));
-                f = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X + 1, bpos.Y + 1, bpos.Z), Position.Xz));
-                g = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X, bpos.Y + 1, bpos.Z), Position.Xz));
-                h = Client.TheClient.ModManager.BlockRegister.GetTransForAO(Client.TheClient.World.ChunkManager.GetBlockForMesh(new Vector3i(bpos.X - 1, bpos.Y + 1, bpos.Z), Position.Xz));
+                if (offset == 1)
+                {
+                    a = (BitMask & ADJACENT_BITMASK_NEG_X_POS_Z) != 0 ? 0 : 1;
+                    b = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_X_POS_Z) != 0 ? 0 : 1;
+                    c = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_Z) != 0 ? 0 : 1;
+                    d = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_X_POS_Z) != 0 ? 0 : 1;
+                    e = (BitMask & ADJACENT_BITMASK_POS_X_POS_Z) != 0 ? 0 : 1;
+                    f = (BitMask & ADJACENT_BITMASK_POS_Y_POS_X_POS_Z) != 0 ? 0 : 1;
+                    g = (BitMask & ADJACENT_BITMASK_POS_Y_POS_Z) != 0 ? 0 : 1;
+                    h = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_X_POS_Z) != 0 ? 0 : 1;
+                }
+                else
+                {
+                    a = (BitMask & ADJACENT_BITMASK_NEG_X_NEG_Z) != 0 ? 0 : 1;
+                    b = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_X_NEG_Z) != 0 ? 0 : 1;
+                    c = (BitMask & ADJACENT_BITMASK_NEG_Y_NEG_Z) != 0 ? 0 : 1;
+                    d = (BitMask & ADJACENT_BITMASK_NEG_Y_POS_X_NEG_Z) != 0 ? 0 : 1;
+                    e = (BitMask & ADJACENT_BITMASK_POS_X_NEG_Z) != 0 ? 0 : 1;
+                    f = (BitMask & ADJACENT_BITMASK_POS_Y_POS_X_NEG_Z) != 0 ? 0 : 1;
+                    g = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_Z) != 0 ? 0 : 1;
+                    h = (BitMask & ADJACENT_BITMASK_POS_Y_NEG_X_NEG_Z) != 0 ? 0 : 1;
+
+                }
             }
             byte[] AO =
             { 
@@ -250,12 +361,10 @@ namespace VoxelPrototype.client.World.Level.Chunk.Render
             };
             return AO;
         }
-        internal void Clear()
+        public void Clean()
         {
-            OpaqueIndices.Clear();
-            OpaqueIndices = null;
             OpaqueVertices.Clear();
-            OpaqueVertices = null;
+            OpaqueIndices.Clear();
         }
     }
 }

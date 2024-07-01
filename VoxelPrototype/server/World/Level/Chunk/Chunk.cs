@@ -95,9 +95,9 @@ namespace VoxelPrototype.server.World.Level.Chunk
         }
         public Section GetSection(int Y)
         {
-            if (Y < Const.ChunkHeight * Section.Size && Y >= 0)
+            if (Y < Const.ChunkRHeight && Y >= 0)
             {
-                return Sections[Y >> 4];
+                return Sections[Y >> Const.BitShifting];
             }
             return null;
         }
@@ -108,12 +108,12 @@ namespace VoxelPrototype.server.World.Level.Chunk
         }
         public BlockState GetBlock(Vector3i pos)
         {
-            if (pos.Y < Const.ChunkHeight * Section.Size && pos.Y >= 0)
+            if (pos.Y < Const.ChunkRHeight && pos.Y >= 0)
             {
                 //int sectionIndex = pos.Y / 16;
-                int sectionIndex = pos.Y >> 4;
+                int sectionIndex = pos.Y >> Const.BitShifting;
                 //int sectionOffset = pos.Y % 16; 
-                pos.Y = pos.Y & 15;
+                pos.Y  &= Const.And;
                 return Sections[sectionIndex].BlockPalette.Get(pos);
             }
             else
@@ -123,10 +123,10 @@ namespace VoxelPrototype.server.World.Level.Chunk
         }
         public void SetBlock(Vector3i pos, BlockState id)
         {
-            int YValue = pos.Y / Section.Size;
+            int YValue = pos.Y >> Const.BitShifting;
             var section = Sections[YValue];
-            int y = pos.Y - YValue * 16;
-            section.SetBlock(new Vector3i(pos.X, y, pos.Z), id);
+            pos.Y &= Const.And;
+            section.SetBlock(pos, id);
             ServerState = ServerChunkSate.Dirty;
         }
     }

@@ -5,7 +5,7 @@ using VoxelPrototype.VBF;
 
 namespace VoxelPrototype.common.Network.packets
 {
-    internal struct OneBlockChangeDemand : INetSerializable
+    public struct OneBlockChangeDemand : INetSerializable
     {
         public Vector2i ChunkPos;
         public Vector3i BlockPos;

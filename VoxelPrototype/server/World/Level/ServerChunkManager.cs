@@ -54,7 +54,7 @@ namespace VoxelPrototype.server.World.Level
             }
             else
             {
-                string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
+                string path = Server.TheServer.World.path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
                 Region = new(path);
                 TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
             }
@@ -71,7 +71,7 @@ namespace VoxelPrototype.server.World.Level
             }
             else
             {
-                string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RegionZ + ".vpr";
+                string path = Server.TheServer.World.path + "terrain/dim0/" + RegionX + "." + RegionZ + ".vpr";
                 Region = new(path);
                 TempRegions.Add(new Vector2i(RegionX, RegionZ), Region);
             }
@@ -93,7 +93,7 @@ namespace VoxelPrototype.server.World.Level
             }
             else
             {
-                string path = Server.TheServer.World.WorldInfo.Path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
+                string path = Server.TheServer.World.path + "terrain/dim0/" + RegionX + "." + RehionZ + ".vpr";
                 Region = new(path);
                 TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
             }
@@ -238,11 +238,10 @@ namespace VoxelPrototype.server.World.Level
         }
         internal BlockState GetBlock(int x, int y, int z)
         {
-            (Vector2i cpos, Vector3i bpos) = Coord.GetVoxelCoord(x, y, z);
-            Chunk.Chunk ch = GetChunk(cpos);
+            Chunk.Chunk ch = GetChunk(Coord.GetChunkCoord(x, y, z));
             if (ch != null)
             {
-                return ch.GetBlock(new Vector3i(bpos.X, bpos.Y, bpos.Z));
+                return ch.GetBlock(Coord.GetBlockLocalCoord(x, y, z));
             }
             else
             {
@@ -251,11 +250,10 @@ namespace VoxelPrototype.server.World.Level
         }
         internal void SetBlock(int x, int y, int z, BlockState State)
         {
-            (Vector2i cpos, Vector3i bpos) = Coord.GetVoxelCoord(x, y, z);
-            Chunk.Chunk ch = GetChunk(cpos);
+            Chunk.Chunk ch = GetChunk(Coord.GetChunkCoord(x, y, z));
             if (ch != null)
             {
-                ch.SetBlock(new Vector3i(bpos.X, bpos.Y, bpos.Z), State);
+                ch.SetBlock(Coord.GetBlockLocalCoord(x, y, z), State);
             }
         }
         internal void ChangeBlock(Vector2i cp, Vector3i bp, BlockState State)

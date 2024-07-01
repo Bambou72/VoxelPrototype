@@ -2,7 +2,7 @@
 using OpenTK.Mathematics;
 namespace VoxelPrototype.common.Network.packets
 {
-    internal struct UnloadChunk : INetSerializable
+    public struct UnloadChunk : INetSerializable
     {
         public Vector2i[] Positions;
         public void Serialize(NetDataWriter writer)

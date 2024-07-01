@@ -5,14 +5,14 @@
  **/
 using CommandLine;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 using StbImageSharp;
 using System.Collections;
 using System.Runtime.InteropServices;
 using VoxelPrototype.client;
 using VoxelPrototype.client.Utils;
-namespace Client
+namespace DesktopClient
 {
 
     public class Options
@@ -26,7 +26,6 @@ namespace Client
 
         private static void Main(string[] args)
         {
-            ThreadPool.SetMaxThreads(0, 0);
             Options options = new Options();
             Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(opts => options = opts)
@@ -44,23 +43,16 @@ namespace Client
             {
                 image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
             }
-            Image[] iconImages;
-            unsafe
-            {
-                fixed (byte* bytePointer = image.Data)
-                iconImages = new Image[]{ new Image(image.Width, image.Height,bytePointer ) };
-
-            }
+            Image[] iconImages = { new Image(image.Width, image.Height, image.Data) };
             Config conf = new Config();
-            var ClientInter = new ClientInterface(
-                new ClientWindow((int)(long)conf.GetProperty("width"),
-                (int)(long)conf.GetProperty("height"),
-                "Voxel Prototype",
-                Fullscreen : conf.GetProperty("mode") == "fullscreen"
-                ));
-            ClientInter.window.SetIcon( iconImages);
-
-            var Client = new VoxelPrototype.client.Client(ClientInter, options.RessourcesPaths.ToArray());
+            NativeWindowSettings Settings = new NativeWindowSettings()
+            {
+                ClientSize = new((int)(long)conf.GetProperty("width"), (int)(long)conf.GetProperty("height")),
+                Title = "Voxel Prototype",
+                WindowState =  conf.GetProperty("mode") == "fullscreen" ? OpenTK.Windowing.Common.WindowState.Fullscreen : OpenTK.Windowing.Common.WindowState.Normal,
+                Icon = new( iconImages),
+            };
+            var Client = new Client( options.RessourcesPaths.ToArray(),GameWindowSettings.Default,Settings);
             Client.Run();
             NLog.LogManager.Shutdown();
         }

@@ -1,9 +1,10 @@
 ﻿using OpenTK.Mathematics;
+using System.Runtime.CompilerServices;
 using VoxelPrototype.common.Blocks;
 
 namespace VoxelPrototype.common.Utils
 {
-    internal static class Coord
+    public static class Coord
     {
         /*
         internal static (Vector2i, Vector3i) GetVoxelCoord(int x, int y, int z)
@@ -35,16 +36,15 @@ namespace VoxelPrototype.common.Utils
             }
             return (cpos, bpos);
         }*/
-        internal static Vector2i GetVoxelChunkCoord(int x, int y, int z)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Vector2i GetChunkCoord(int x, int y, int z)
         {
-            int chunkX = x / Const.ChunkSize;
-            int chunkZ = z / Const.ChunkSize;
-            int chunkModX = x % Const.ChunkSize;
-            int chunkModZ = z % Const.ChunkSize;
-            return new Vector2i(
-                x < 0 ? chunkX - (chunkModX == 0 ? 0 : 1) : chunkX,
-                z < 0 ? chunkZ - (chunkModZ == 0 ? 0 : 1) : chunkZ
-            );
+            return new Vector2i(x >> Const.BitShifting , z >> Const.BitShifting);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Vector3i GetBlockLocalCoord(int x, int y, int z)
+        {
+            return new Vector3i(x & Const.And,y, z & Const.And);
         }
         /*
         internal static (Vector2i, Vector3i) GetVoxelCoord(int x, int y, int z)
@@ -69,25 +69,26 @@ namespace VoxelPrototype.common.Utils
 
             return (cpos, bpos);
         }*/
+        /*
         internal static (Vector2i, Vector3i) GetVoxelCoord(int x, int y, int z)
         {
-            int chunkX = x / Const.ChunkSize;
-            int chunkZ = z / Const.ChunkSize;
-            int chunkModX = x % Const.ChunkSize;
-            int chunkModZ = z % Const.ChunkSize;
-
-            // Calculate cpos (chunk position)
-            int cposX = x < 0 ? chunkX - ((chunkModX != 0) ? 1 : 0) : chunkX;
-            int cposZ = z < 0 ? chunkZ - ((chunkModZ != 0) ? 1 : 0) : chunkZ;
-            Vector2i cpos = new Vector2i(cposX, cposZ);
-
-            // Calculate bpos (block position)
-            int blockPosX = x < 0 ? ((chunkModX != 0) ? Const.ChunkSize - Math.Abs(chunkModX) : 0) : Math.Abs(chunkModX);
-            int blockPosZ = z < 0 ? ((chunkModZ != 0) ? Const.ChunkSize - Math.Abs(chunkModZ) : 0) : Math.Abs(chunkModZ);
-            Vector3i bpos = new Vector3i(blockPosX, y, blockPosZ);
+            int chunkX = x>=0 ?  x / Const.ChunkSize : (x - Const.ChunkSize + 1) / Const.ChunkSize;
+            int chunkZ = x >= 0 ? z / Const.ChunkSize : (z - Const.ChunkSize + 1) / Const.ChunkSize;
+            Vector2i cpos = new Vector2i(chunkX, chunkZ);
+            int bx = (x % Const.ChunkSize + Const.ChunkSize) % Const.ChunkSize;
+            int bz = (z % Const.ChunkSize + Const.ChunkSize) % Const.ChunkSize;
+            if(x <0)
+            {
+                bx = 16 - bx;
+            }
+            if (z < 0)
+            {
+                bz = 16 - bz;
+            }
+            Vector3i bpos = new Vector3i(bx, y, bz);
 
             return (cpos, bpos);
-        }
+        }*/
 
     }
 }

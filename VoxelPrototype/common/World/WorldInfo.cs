@@ -16,7 +16,7 @@ namespace VoxelPrototype.common.World
         {
             VBFCompound deserializedRoot = (VBFCompound)VBFSerializer.Deserialize(data);
             Seed = deserializedRoot.GetLong("Seed").Value;
-            WorldGenerator = deserializedRoot.GetString("WorldGenerator").Value;
+            WorldGenerator = deserializedRoot.GetString("Generator").Value;
             return this;
         }
 
@@ -24,7 +24,7 @@ namespace VoxelPrototype.common.World
         {
             VBFCompound root = new VBFCompound();
             root.AddLong("Seed", Seed);
-            root.AddString("WorldGenerator", WorldGenerator);
+            root.AddString("Generator", WorldGenerator);
             return VBFSerializer.Serialize(root);
         }
         public long GetSeed()

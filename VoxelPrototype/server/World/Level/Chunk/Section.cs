@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VoxelPrototype.common;
 using VoxelPrototype.common.Blocks.State;
 using VoxelPrototype.common.Utils.Storage.Palette;
 using VoxelPrototype.VBF;
@@ -12,8 +13,6 @@ namespace VoxelPrototype.server.World.Level.Chunk
 {
     public class Section : IVBFSerializable<Section>
     {
-        public const int Size = 16;
-        public readonly static float SphereRadius = Size * MathF.Sqrt(3) / 2;
         internal BlockPalette BlockPalette;
         internal int Y;
         internal Chunk Chunk;
@@ -22,7 +21,7 @@ namespace VoxelPrototype.server.World.Level.Chunk
             BlockPalette = new(1);
         }
 
-        public bool Empty { get { return BlockPalette.RefsCount[0] == Math.Pow(Size, 3); } }
+        public bool Empty { get { return BlockPalette.Palette[0].RefCount ==Const.SectionVolume; } }
 
         public Section Deserialize(VBFCompound compound)
         {
@@ -39,11 +38,11 @@ namespace VoxelPrototype.server.World.Level.Chunk
         }
         public void SetBlock(Vector3i pos, BlockState id)
         {
-            if (pos.Y > 15 || pos.Y < 0)
+            if (pos.Y >= Const.SectionSize || pos.Y < 0)
             {
                 throw new Exception("Error");
             }
-            BlockPalette.Set(new Vector3i(pos.X, pos.Y, pos.Z), id);
+            BlockPalette.Set(pos, id);
         }
     }
 

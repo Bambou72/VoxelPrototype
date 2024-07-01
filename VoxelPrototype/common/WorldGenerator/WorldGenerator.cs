@@ -5,6 +5,7 @@ namespace VoxelPrototype.common.WorldGenerator
     public class WorldGenerator
     {
         long Seed;
+        public string Name;
         public virtual void SetData(long seed)
         {
             Seed = seed;

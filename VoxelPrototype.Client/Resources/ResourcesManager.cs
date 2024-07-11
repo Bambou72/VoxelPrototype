@@ -1,8 +1,11 @@
 ﻿using Tomlyn.Model;
 using Tomlyn;
 using System.IO.Compression;
-using VoxelPrototype.common.Utils;
 using VoxelPrototype.client.Resources.Managers;
+using VoxelPrototype.utils.collections;
+using VoxelPrototype.utils.io;
+using VoxelPrototype.utils;
+using VoxelPrototype.api;
 
 namespace VoxelPrototype.client.Resources
 {
@@ -122,7 +125,7 @@ namespace VoxelPrototype.client.Resources
                 }
             }
             //Mods
-            foreach(string Mod in Client.TheClient.ModManager.ModPath.Values)
+            foreach(string Mod in ModManager.GetInstance().ModPath.Values)
             {
                 try
                 {
@@ -180,7 +183,7 @@ namespace VoxelPrototype.client.Resources
                 Active.Add(BasePack);
                 Active.MoveToFirstPosition(BasePack);
             }
-            foreach(string ModName in Client.TheClient.ModManager.ModList.Keys)
+            foreach(string ModName in ModManager.GetInstance().ModList.Keys)
             {
                 if(Active.Find(x => x.Name == "Core") == null)
                 {

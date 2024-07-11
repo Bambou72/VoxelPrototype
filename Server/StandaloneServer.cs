@@ -1,5 +1,5 @@
 ﻿using VoxelPrototype.client.Resources.temp;
-using VoxelPrototype.common.World;
+using VoxelPrototype.game;
 
 namespace Server
 {

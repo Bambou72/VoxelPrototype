@@ -6,6 +6,7 @@ using VoxelPrototype.client.Render.GUI.Prototype.Elements;
 using VoxelPrototype.client.Render.GUI.Prototype.Layouts;
 using VoxelPrototype.client.Render.GUI.Prototype.Utils;
 using VoxelPrototype.client.Render.UI;
+using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.Render.GUI.Prototype.Screens.Options
 {
@@ -20,8 +21,8 @@ namespace VoxelPrototype.client.Render.GUI.Prototype.Screens.Options
         {
             base.Render(Renderer);
             string Version = "V" + EngineVersion.Version.ToString();
-            Renderer.RenderText(new Resources.ResourceID("font/opensans"), Version
-    , new Vector2(Size.X / 2 - TextSizeCalculator.CalculateSize(new Resources.ResourceID("font/opensans"), 20, Version) / 2, Size.Y - 10), 20);
+            Renderer.RenderText(new ResourceID("font/opensans"), Version
+    , new Vector2(Size.X / 2 - TextSizeCalculator.CalculateSize(new ResourceID("font/opensans"), 20, Version) / 2, Size.Y - 10), 20);
 
         }
         public OptionScreen()

@@ -10,7 +10,7 @@
     <Authors>OutlawTeam</Authors>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <Platforms>AnyCPU;x64</Platforms>
-    <Configurations>Debug;Release</Configurations>
+    <Configurations>Debug;Release;Profile</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>embedded</DebugType>
@@ -26,16 +26,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DotnetNoise" Version="1.0.0" />
-    <PackageReference Include="ImGui.NET" Version="1.90.8.1" />
     <PackageReference Include="K4os.Compression.LZ4" Version="1.3.8" />
     <PackageReference Include="LiteNetLib" Version="1.2.0" />
     <PackageReference Include="MethodTimer.Fody" Version="3.2.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.3.2" />
-    <PackageReference Include="OpenTK" Version="4.8.2" />
-    <PackageReference Include="SpaceWizards.SharpFont" Version="1.0.2" />
-    <PackageReference Include="StbImageSharp" Version="2.27.14" />
-    <PackageReference Include="StbImageWriteSharp" Version="1.16.7" />
+    <PackageReference Include="OpenTK.Mathematics" Version="4.8.2" />
     <PackageReference Include="Tomlyn" Version="0.17.0" />
   </ItemGroup>
   <ItemGroup>

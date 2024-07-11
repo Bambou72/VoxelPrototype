@@ -1,13 +1,7 @@
 ﻿using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using VoxelPrototype.client.game.world.Level.Chunk;
+using VoxelPrototype.client.game.world.Level.Chunk.Render;
 using VoxelPrototype.client.Render.Components;
-using VoxelPrototype.client.World.Level.Chunk;
-using VoxelPrototype.client.World.Level.Chunk.Render;
-using VoxelPrototype.common.World;
 
 namespace VoxelPrototype.client.Utils.Math
 {
@@ -38,20 +32,20 @@ namespace VoxelPrototype.client.Utils.Math
             Vector3 sphere_vec = Section.Center - Camera.Position;
             //Near and Far
             float SZ = Vector3.Dot(sphere_vec, Camera.Front);
-            if(!(Camera.Near - World.Level.Chunk.Section.SphereRadius <= SZ && SZ <= Camera.Far + World.Level.Chunk.Section.SphereRadius))
+            if(!(Camera.Near - game.world.Level.Chunk.Section.SphereRadius <= SZ && SZ <= Camera.Far + game.world.Level.Chunk.Section.SphereRadius))
             {
                 return false;
             }
             //Top and Bottom
             float SY  = Vector3.Dot(sphere_vec, Camera.Up);
-            float Dist = FactorY * World.Level.Chunk.Section.SphereRadius +SZ * TanY;
+            float Dist = FactorY * game.world.Level.Chunk.Section.SphereRadius +SZ * TanY;
             if (!(-Dist<= SY && SY <= Dist))
             {
                 return false;
             }
             //Right and Left
             float SX = Vector3.Dot(sphere_vec, Camera.Right);
-            Dist = FactorX * World.Level.Chunk.Section.SphereRadius + SZ * TanX;
+            Dist = FactorX * game.world.Level.Chunk.Section.SphereRadius + SZ * TanX;
             if (!(-Dist <= SX && SX <= Dist))
             {
                 return false;
@@ -66,7 +60,7 @@ namespace VoxelPrototype.client.Utils.Math
             float SZ = Vector3.Dot(sphere_vec, Camera.Front);
             //Top and Bottom
             float SY = Vector3.Dot(sphere_vec, Camera.Up);
-            float Dist = FactorY * World.Level.Chunk.Section.SphereRadius + SZ * TanY;
+            float Dist = FactorY * game.world.Level.Chunk.Section.SphereRadius + SZ * TanY;
             if (!(-Dist <= SY && SY <= Dist))
             {
                 return false;

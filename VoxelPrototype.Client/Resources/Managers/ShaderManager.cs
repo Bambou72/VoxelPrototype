@@ -9,6 +9,7 @@ using VoxelPrototype.client.Render.Components;
 using Newtonsoft.Json;
 using static OpenTK.Graphics.OpenGL.GL;
 using System.Runtime.InteropServices;
+using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.Resources.Managers
 {

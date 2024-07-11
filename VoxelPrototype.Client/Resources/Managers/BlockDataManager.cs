@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Resources.Managers
 {
     internal class BlockDataManager : IReloadableResourceManager
@@ -38,10 +34,24 @@ namespace VoxelPrototype.client.Resources.Managers
     public class BlockStateData
     {
         public Dictionary<string, BlockData> variants = new();
+        public BlockData GetBlockData(BlockState State)
+        {
+            if(State == State.Block.GetDefaultState())
+            {
+                return variants[""];
+            }else if(variants.TryGetValue(State.ToString(),out BlockData Data))
+            {
+                return Data;
+            }
+            return default;
+        }
     }
     public struct BlockData
     {
+        public string model { get; set; }
         public TextureData textures { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
     }
     public struct TextureData
     {

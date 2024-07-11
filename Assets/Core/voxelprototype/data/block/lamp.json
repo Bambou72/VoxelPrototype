@@ -3,6 +3,7 @@
     {
         "":
         {
+            "model" : "voxelprototype:models/block/cube",
             "textures":
             {
                 "all":"voxelprototype:textures/block/lamp_off"
@@ -10,6 +11,7 @@
         },
         "Lit:True":
         {
+            "model" : "voxelprototype:models/block/cube",
             "textures":
             {
                 "all":"voxelprototype:textures/block/lamp_on"

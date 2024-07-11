@@ -158,14 +158,14 @@ void main()
         /// <summary>
         /// Updates ImGui InputSystem and IO configuration state.
         /// </summary>
-        public void Update(IClientInterface wnd, double deltaSeconds)
+        public void Update( double deltaSeconds)
         {
             if (_frameBegun)
             {
                 ImGui.Render();
             }
             SetPerFrameImGuiData(deltaSeconds);
-            UpdateImGuiInputSystem(wnd);
+            UpdateImGuiInputSystem(Client.TheClient);
             _frameBegun = true;
             ImGui.NewFrame();
         }
@@ -230,14 +230,14 @@ void main()
             }
             return result;
         }
-        private void UpdateImGuiInputSystem(IClientInterface wnd)
+        private void UpdateImGuiInputSystem(GameWindow wnd)
         {
             ImGuiIOPtr io = ImGui.GetIO();
             io.MouseDown[0] = wnd.IsMouseButtonDown(MouseButton.Left);
             io.MouseDown[1] = wnd.IsMouseButtonDown(MouseButton.Right);
             io.MouseDown[2] = wnd.IsMouseButtonDown(MouseButton.Middle);
-            io.MousePos = new System.Numerics.Vector2((float)wnd.GetMousePosition().X, (float)wnd.GetMousePosition().Y);
-            io.AddMouseWheelEvent((float)wnd.GetMouseScroll().X, (float)wnd.GetMouseScroll().Y);
+            io.MousePos = new System.Numerics.Vector2((float)wnd.MousePosition.X, (float)wnd.MousePosition.Y);
+            io.AddMouseWheelEvent((float)wnd.MouseState.Scroll.X, (float)wnd.MouseState.Scroll.Y);
             var test = wnd.IsKeyDown(Keys.E);
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {
@@ -285,47 +285,8 @@ void main()
                 return;
             }
             // Get intial state.
-            int prevVAO = GL.GetInteger(GetPName.VertexArrayBinding);
-            int prevArrayBuffer = GL.GetInteger(GetPName.ArrayBufferBinding);
-            int prevProgram = GL.GetInteger(GetPName.CurrentProgram);
-            bool prevBlendEnabled = GL.GetBoolean(GetPName.Blend);
-            bool prevScissorTestEnabled = GL.GetBoolean(GetPName.ScissorTest);
-            int prevBlendEquationRgb = GL.GetInteger(GetPName.BlendEquationRgb);
-            int prevBlendEquationAlpha = GL.GetInteger(GetPName.BlendEquationAlpha);
-            int prevBlendFuncSrcRgb = GL.GetInteger(GetPName.BlendSrcRgb);
-            int prevBlendFuncSrcAlpha = GL.GetInteger(GetPName.BlendSrcAlpha);
-            int prevBlendFuncDstRgb = GL.GetInteger(GetPName.BlendDstRgb);
-            int prevBlendFuncDstAlpha = GL.GetInteger(GetPName.BlendDstAlpha);
             bool prevCullFaceEnabled = GL.GetBoolean(GetPName.CullFace);
             bool prevDepthTestEnabled = GL.GetBoolean(GetPName.DepthTest);
-            int prevActiveTexture = GL.GetInteger(GetPName.ActiveTexture);
-            GL.ActiveTexture(TextureUnit.Texture0);
-            int prevTexture2D = GL.GetInteger(GetPName.TextureBinding2D);
-            Span<int> prevScissorBox = stackalloc int[4];
-            unsafe
-            {
-                fixed (int* iptr = &prevScissorBox[0])
-                {
-                    GL.GetInteger(GetPName.ScissorBox, iptr);
-                }
-            }
-            Span<int> prevPolygonMode = stackalloc int[2];
-            unsafe
-            {
-                fixed (int* iptr = &prevPolygonMode[0])
-                {
-                    GL.GetInteger(GetPName.PolygonMode, iptr);
-                }
-            }
-            if (GLVersion <= 310 || CompatibilityProfile)
-            {
-                GL.PolygonMode(MaterialFace.Front, PolygonMode.Fill);
-                GL.PolygonMode(MaterialFace.Back, PolygonMode.Fill);
-            }
-            else
-            {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            }
             // Bind the element buffer (thru the VAO) so that we can resize it.
             GL.BindVertexArray(_vertexArray);
             // Bind the vertex buffer so that we can resize it.
@@ -412,32 +373,11 @@ void main()
             }
             GL.Disable(EnableCap.Blend);
             GL.Disable(EnableCap.ScissorTest);
+            GL.BindVertexArray(0);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             // Reset state
-            GL.BindTexture(TextureTarget.Texture2D, prevTexture2D);
-            GL.ActiveTexture((TextureUnit)prevActiveTexture);
-            GL.UseProgram(prevProgram);
-            GL.BindVertexArray(prevVAO);
-            GL.Scissor(prevScissorBox[0], prevScissorBox[1], prevScissorBox[2], prevScissorBox[3]);
-            GL.BindBuffer(BufferTarget.ArrayBuffer, prevArrayBuffer);
-            GL.BlendEquationSeparate((BlendEquationMode)prevBlendEquationRgb, (BlendEquationMode)prevBlendEquationAlpha);
-            GL.BlendFuncSeparate(
-                (BlendingFactorSrc)prevBlendFuncSrcRgb,
-                (BlendingFactorDest)prevBlendFuncDstRgb,
-                (BlendingFactorSrc)prevBlendFuncSrcAlpha,
-                (BlendingFactorDest)prevBlendFuncDstAlpha);
-            if (prevBlendEnabled) GL.Enable(EnableCap.Blend); else GL.Disable(EnableCap.Blend);
             if (prevDepthTestEnabled) GL.Enable(EnableCap.DepthTest); else GL.Disable(EnableCap.DepthTest);
             if (prevCullFaceEnabled) GL.Enable(EnableCap.CullFace); else GL.Disable(EnableCap.CullFace);
-            if (prevScissorTestEnabled) GL.Enable(EnableCap.ScissorTest); else GL.Disable(EnableCap.ScissorTest);
-            if (GLVersion <= 310 || CompatibilityProfile)
-            {
-                GL.PolygonMode(MaterialFace.Front, (PolygonMode)prevPolygonMode[0]);
-                GL.PolygonMode(MaterialFace.Back, (PolygonMode)prevPolygonMode[1]);
-            }
-            else
-            {
-                GL.PolygonMode(MaterialFace.FrontAndBack, (PolygonMode)prevPolygonMode[0]);
-            }
         }
         /// <summary>
         /// Frees all graphics resources used by the Luxon.

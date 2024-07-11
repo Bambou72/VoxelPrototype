@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.Components;
+using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Render.World
 {
     internal static class SkyboxRender
@@ -9,7 +10,7 @@ namespace VoxelPrototype.client.Render.World
         internal static void RenderSkyBox(Matrix4 View, Matrix4 Projection)
         {
             GL.Disable(EnableCap.DepthTest);
-            var Shader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/cubemap"));
+            var Shader = Client.TheClient.ShaderManager.GetShader(new ResourceID("shaders/cubemap"));
             Shader.Use();
             Shader.SetMatrix4("projection", Projection);
             Shader.SetMatrix4("view", View);

@@ -1,7 +1,9 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using VoxelPrototype.client.game.entity;
 using VoxelPrototype.client.Render.Components;
-using VoxelPrototype.common.Entities.Player;
+using VoxelPrototype.game.entity.player;
+using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.Render.Entities
 {
@@ -22,18 +24,18 @@ namespace VoxelPrototype.client.Render.Entities
                 }
             }
         }
-        internal void RenderSelectedBlock(Player play)
+        internal void RenderSelectedBlock(ClientPlayer play)
         {
             if (play.ViewBlock)
             {
                 //RenderSystem.RenderDebugBox(BlockBox, play.ViewedBlockPos - new Vector3(0.015625f));
             }
         }
-        internal void RenderPlayer(Player play)
+        internal void RenderPlayer(ClientPlayer play)
         {
             GL.BindVertexArray(play._Model.Vao);
-            var Shader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/entity"));
-            Client.TheClient.TextureManager.GetTexture(new Resources.ResourceID("textures/entity/player")).Use(TextureUnit.Texture0);
+            var Shader = Client.TheClient.ShaderManager.GetShader(new ResourceID("shaders/entity"));
+            Client.TheClient.TextureManager.GetTexture(new ResourceID("textures/entity/player")).Use(TextureUnit.Texture0);
             Shader.Use();
             var model = Matrix4.Identity * Matrix4.CreateTranslation(new Vector3((float)play.Position.X, (float)(play.Position.Y + play.EntityEYEHeight), (float)play.Position.Z)) /** Matrix4.CreateRotationY(Rotation.Y)*/;
             Shader.SetMatrix4("model", model);

@@ -1,28 +1,25 @@
-﻿using System;
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
-using VoxelPrototype.client;
-using VoxelPrototype.common.Network.server;
-using VoxelPrototype.common.Utils;
-using VoxelPrototype.common.World;
+﻿using System.Diagnostics;
+using VoxelPrototype.game;
+using VoxelPrototype.network;
 
 namespace VoxelPrototype.server
 {
-    public class Server : IRunnable
+    public class Server 
     {
         //Singleton
         public static Server TheServer;
         //Param
-        internal static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        internal string ServerName;
-        internal int ServerPort = 23482;
+        public static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        public string ServerName;
+        public int ServerPort = 23482;
         //Data
-        internal volatile bool Running = false;
-        internal World.World World;
+        public volatile bool Running = false;
+        public game.world.World World;
+        public ServerNetworkManager NetworkManager;
         //TIMING
-        private readonly Stopwatch _watchUpdate = new Stopwatch();
-        private int _slowUpdates = 0;
-        protected bool IsRunningSlowly;
+        public readonly Stopwatch _watchUpdate = new Stopwatch();
+        public int _slowUpdates = 0;
+        public bool IsRunningSlowly;
         public double UpdateFrequency = 20;
         public int Counter;
         public float DeltaSum;
@@ -30,6 +27,7 @@ namespace VoxelPrototype.server
 
         public Server(string path,WorldSettings Settings = null)
         {
+            NetworkManager = new();
             if (TheServer == null)
             {
                 TheServer = this;
@@ -37,9 +35,9 @@ namespace VoxelPrototype.server
             {
                 throw new Exception("Two servers can't run in the same process");
             }
-            World = new(null,path,Settings);
+            World = new(path,Settings);
         }
-        public World.World GetWorld()
+        public game.world.World GetWorld()
         {
             return World;
         }
@@ -59,64 +57,68 @@ namespace VoxelPrototype.server
         }
         public  void Run()
         {
-          
-            ServerNetwork.StartServer(ServerPort);
-            Logger.Info("The server has finished initializing, it is now ready at: " + ServerNetwork.server.LocalPort);
-            Logger.Info("Server engine version: " + EngineVersion.Version);
-            _watchUpdate.Start();
-            while (Running )
+            try
             {
-                ServerNetwork.Update();
-                if (DeltaSum >= 1)
+                NetworkManager.StartServer(ServerPort);
+                Logger.Info("The server has finished initializing, it is now ready at: " + NetworkManager.NetManager.LocalPort);
+                Logger.Info("Server engine version: " + EngineVersion.Version);
+                _watchUpdate.Start();
+                while (Running)
                 {
-                    DeltaSum = 0;
-                    TPS =Counter;
-                    Counter = 0;
-                }
-
-                double updatePeriod = 1 / UpdateFrequency;
-                double elapsed = _watchUpdate.Elapsed.TotalSeconds;
-                if (elapsed > updatePeriod)
-                {
-                    _watchUpdate.Restart();
-                    Counter++;
-                    DeltaSum += (float)elapsed;
-
-                    World.Tick((float)elapsed);
-                    const int MaxSlowUpdates = 80;
-                    const int SlowUpdatesThreshold = 45;
-
-                    double time = _watchUpdate.Elapsed.TotalSeconds;
-                    if (updatePeriod < time)
+                    NetworkManager.Update();
+                    if (DeltaSum >= 1)
                     {
-                        _slowUpdates++;
-                        if (_slowUpdates > MaxSlowUpdates)
-                        {
-                            _slowUpdates = MaxSlowUpdates;
-                        }
+                        DeltaSum = 0;
+                        TPS = Counter;
+                        Counter = 0;
                     }
-                    else
+                    double updatePeriod = 1 / UpdateFrequency;
+                    double elapsed = _watchUpdate.Elapsed.TotalSeconds;
+                    if (elapsed > updatePeriod)
                     {
-                        _slowUpdates--;
-                        if (_slowUpdates < 0)
-                        {
-                            _slowUpdates = 0;
-                        }
-                    }
-                    IsRunningSlowly = _slowUpdates > SlowUpdatesThreshold;
-                }
-                // The time we have left to the next update.
-                double timeToNextUpdate = updatePeriod - _watchUpdate.Elapsed.TotalSeconds;
+                        _watchUpdate.Restart();
+                        Counter++;
+                        DeltaSum += (float)elapsed;
 
-                if (timeToNextUpdate > 0)
-                {
-                    AccurateSleep(timeToNextUpdate, 1);
+                        World.Tick((float)elapsed);
+                        const int MaxSlowUpdates = 80;
+                        const int SlowUpdatesThreshold = 45;
+
+                        double time = _watchUpdate.Elapsed.TotalSeconds;
+                        if (updatePeriod < time)
+                        {
+                            _slowUpdates++;
+                            if (_slowUpdates > MaxSlowUpdates)
+                            {
+                                _slowUpdates = MaxSlowUpdates;
+                            }
+                        }
+                        else
+                        {
+                            _slowUpdates--;
+                            if (_slowUpdates < 0)
+                            {
+                                _slowUpdates = 0;
+                            }
+                        }
+                        IsRunningSlowly = _slowUpdates > SlowUpdatesThreshold;
+                    }
+                    // The time we have left to the next update.
+                    double timeToNextUpdate = updatePeriod - _watchUpdate.Elapsed.TotalSeconds;
+
+                    if (timeToNextUpdate > 0)
+                    {
+                        AccurateSleep(timeToNextUpdate, 1);
+                    }
                 }
+                World.Dispose();
+                NetworkManager.Stop();
+                TheServer = null;
+                Logger.Info("Server closed");
+            }catch(Exception ex)
+            {
+                Logger.Fatal(ex);
             }
-            World.Dispose();
-            ServerNetwork.StopServer();
-            TheServer = null;
-            Logger.Info("Server closed");
         }
         public static void AccurateSleep(double seconds, int expectedSchedulerPeriod)
         {

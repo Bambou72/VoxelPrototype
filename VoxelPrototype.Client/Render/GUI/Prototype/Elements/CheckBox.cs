@@ -1,13 +1,9 @@
 ﻿using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using OpenTK.Mathematics;
-using System.Text;
-using System.Threading.Tasks;
 using VoxelPrototype.client.Render.UI;
-using VoxelPrototype.client.Render.GUI.Prototype;
 using VoxelPrototype.client.Render.GUI.Prototype.Utils;
+using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.Render.GUI.Prototype.Elements
 {
@@ -24,7 +20,7 @@ namespace VoxelPrototype.client.Render.GUI.Prototype.Elements
         {
             if (Value)
             {
-                Renderer.RenderTextureQuad(Position, Size, Vector4.One, new Resources.ResourceID("textures/gui/icons"), new Vector2(0f, 1f), new Vector2(0.5f, 0.5f));
+                Renderer.RenderTextureQuad(Position, Size, Vector4.One, new ResourceID("textures/gui/icons"), new Vector2(0f, 1f), new Vector2(0.5f, 0.5f));
             }
             Renderer.RenderTextureQuad(Position, Size, UIStyle.ButtonColor);
         }

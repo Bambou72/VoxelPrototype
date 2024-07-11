@@ -1,7 +1,6 @@
-﻿using ModelEditor.ModelEditor;
-using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-namespace ModelEditor
+namespace ModelEditor.ModelEditor
 {
     internal static class ModelRenderer
     {
@@ -101,7 +100,7 @@ namespace ModelEditor
             GridRenderer.Render(View, Projection);
             shader.Use();
             GL.BindVertexArray(vao);
-            TextureManager.VoxelAtlas.Use(TextureUnit.Texture0);
+            //TextureManager.VoxelAtlas.Use(TextureUnit.Texture0);
             shader.SetMatrix4("view", View);
             shader.SetMatrix4("projection", Projection);
             shader.SetMatrix4("model", Matrix4.CreateTranslation(0, 0, 0));

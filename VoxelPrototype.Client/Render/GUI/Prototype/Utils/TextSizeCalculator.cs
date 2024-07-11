@@ -1,5 +1,5 @@
 ﻿using VoxelPrototype.client.Render.Text;
-using VoxelPrototype.client.Resources;
+using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Render.GUI.Prototype.Utils
 {
     public static class TextSizeCalculator

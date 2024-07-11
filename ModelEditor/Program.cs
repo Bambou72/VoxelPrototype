@@ -6,7 +6,6 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using VoxPopuliLibrary.Engine.Render.Debug;
 public static class Program
 {
     public static Window? window;
@@ -127,7 +126,7 @@ public class Window : GameWindow
         style.Colors[(int)ImGuiCol.NavWindowingDimBg] = new System.Numerics.Vector4(0.800000011920929f, 0.800000011920929f, 0.800000011920929f, 0.2000000029802322f);
         style.Colors[(int)ImGuiCol.ModalWindowDimBg] = new System.Numerics.Vector4(0.800000011920929f, 0.800000011920929f, 0.800000011920929f, 0.3499999940395355f);
         ModelRenderer.Initialize();
-        TextureManager.LoadTextures();
+       // TextureManager.LoadTextures();
     }
     protected override void OnUnload()
     {
@@ -139,7 +138,7 @@ public class Window : GameWindow
         //Clear buffer
         GL.ClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
-        Controller.Update(this, (float)e.Time);
+        Controller.Update( (float)e.Time);
         ModelEditorGUI.Render();
         Controller.Render();
         //

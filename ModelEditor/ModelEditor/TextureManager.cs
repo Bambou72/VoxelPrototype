@@ -1,4 +1,7 @@
-﻿namespace ModelEditor.ModelEditor
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+
+namespace ModelEditor.ModelEditor
 {
     internal static class TextureManager
     {
@@ -22,8 +25,8 @@
             BlockAtlasTexture.Clear();
             List<Image<Rgba32>> loadedTextures = new List<Image<Rgba32>>();
             List<string> textureNames = new List<string>();
-            string[] blockTextures = Directory.GetFiles("textures/", "*.png");
-            foreach (string filePath in blockTextures)
+            ///string[] blockTextures = Directory.GetFiles("textures/", "*.png");
+            /*foreach (string filePath in blockTextures)
             {
                 if (Path.GetFileNameWithoutExtension(filePath) != "atlas")
                 {
@@ -32,7 +35,7 @@
                     loadedTextures.Add(texture);
                     textureNames.Add(Path.GetFileNameWithoutExtension(filePath));
                 }
-            }
+            }*/
             int numTextures = loadedTextures.Count;
             int maxTextureWidth = loadedTextures.Max(t => t.Width);
             int maxTextureHeight = loadedTextures.Max(t => t.Height);

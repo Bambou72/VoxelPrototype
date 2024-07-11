@@ -4,36 +4,27 @@
  * Author Florian Pfeiffer
  **/
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using System;
-using System.Diagnostics;
+using VoxelPrototype.api;
+using VoxelPrototype.client.game.world;
 using VoxelPrototype.client.Render;
 using VoxelPrototype.client.Render.Debug;
 using VoxelPrototype.client.Render.GUI;
-using VoxelPrototype.client.Render.UI;
 using VoxelPrototype.client.Resources.Managers;
-using VoxelPrototype.client.World;
-using VoxelPrototype.common;
-using VoxelPrototype.common.Network.client;
-using VoxelPrototype.common.World;
-using VoxelPrototype.server;
-using static OpenTK.Graphics.OpenGL.GL;
+using VoxelPrototype.network;
 namespace VoxelPrototype.client
 {
-    public class Client 
+    public class Client : GameWindow
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        public World.World World;
+        public game.world.World World;
+        public ClientNetworkManager NetworkManager;
         public static Client TheClient;
         internal EmbeddedServer EmbedderServer;
         internal Config ClientConfig;
         // internal UIManager UIManager;
         //internal UIMaster UIMaster;
-        internal IClientInterface ClientInterface;
-        internal ModManager ModManager;
         internal Resources.ResourcesManager ResourceManager;
         internal Renderer Renderer;
         internal InputEventManager InputEventManager;
@@ -44,23 +35,8 @@ namespace VoxelPrototype.client
         internal ShaderManager ShaderManager;
         //temp
         string[] ResourcesPacksPaths;
-        bool Running = true;
-
-        private readonly Stopwatch _watchUpdate = new Stopwatch();
-        private int _slowUpdates = 0;
-        protected bool IsRunningSlowly { get; private set; }
-        private double _updateFrequency = 60;
-        public double UpdateFrequency
+        public Client( string[]? ResourcesPacksPaths, GameWindowSettings GS , NativeWindowSettings NS) : base(GS, NS) 
         {
-            get => _updateFrequency;
-
-        }
-        public double UpdateTime { get; protected set; }
-        public Client(IClientInterface clientInterface, string[]? ResourcesPacksPaths) 
-        {
-            ClientInterface = clientInterface;
-            clientInterface.RegisterOnResize(OnResize);
-            clientInterface.RegisterOnChar(OnTextInput);
             if (TheClient == null)
             {
                 TheClient = this;
@@ -68,18 +44,18 @@ namespace VoxelPrototype.client
             this.ResourcesPacksPaths = ResourcesPacksPaths;
             ClientConfig = new();
         }
-
-        public void Run()
+        protected override void OnLoad()
         {
+            base.OnLoad();
             //Load
             //Renderer
             Renderer = new Renderer();
             Renderer.Init();
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             //Mod
-            ModManager = new();
-            ModManager.LoadMods();
-            ModManager.PreInit();
+            new ModManager();
+            ModManager.GetInstance().LoadMods();
+            ModManager.GetInstance().PreInit();
             //Resources
             ResourceManager = new(ResourcesPacksPaths);
             ShaderManager = new ShaderManager();
@@ -93,15 +69,16 @@ namespace VoxelPrototype.client
             BlockDataManager = new BlockDataManager();
             ResourceManager.RegisterManager(BlockDataManager);
             ResourceManager.Init();
+            NetworkManager = new();
             //Mod
-            ModManager.Init();
+            ModManager.GetInstance().Init();
             //GUi
-            GUIVar.Init(ClientInterface.GetFramebufferSize());
+            GUIVar.Init(FramebufferSize);
             GUIVar.Load();
             //Input
             InputEventManager = new InputEventManager();
             //World
-            World = new World.World();
+            World = new World();
             //OnResize(new());
             //UIManager = new();
             //InputEventManager.RegisterOnKeyDownCallback(UIManager.OnKeyDown);
@@ -113,91 +90,48 @@ namespace VoxelPrototype.client
             //InputEventManager.RegisterOnMouseClickedCallback(UIManager.OnMouseClicked);
             //InputEventManager.RegisterOnMouseWheelCallback(UIManager.OnMouseWheel);
             //UIMaster = new();
-            _watchUpdate.Start();
-            while (Running && !ClientInterface.ShouldEnd())
-            {
 
-                double updatePeriod = UpdateFrequency == 0 ? 0 : 1 / UpdateFrequency;
-                double elapsed = _watchUpdate.Elapsed.TotalSeconds;
-                if (elapsed > updatePeriod)
-                {
-                    _watchUpdate.Restart();
-                    ClientInterface.PollInputs();
-                    UpdateTime = elapsed;
-                    Update(elapsed);
-                    Render();
-                    const int MaxSlowUpdates = 80;
-                    const int SlowUpdatesThreshold = 45;
-
-                    double time = _watchUpdate.Elapsed.TotalSeconds;
-                    if (updatePeriod < time)
-                    {
-                        _slowUpdates++;
-                        if (_slowUpdates > MaxSlowUpdates)
-                        {
-                            _slowUpdates = MaxSlowUpdates;
-                        }
-                    }
-                    else
-                    {
-                        _slowUpdates--;
-                        if (_slowUpdates < 0)
-                        {
-                            _slowUpdates = 0;
-                        }
-                    }
-                    IsRunningSlowly = _slowUpdates > SlowUpdatesThreshold;
-                }
-                // The time we have left to the next update.
-                double timeToNextUpdate = updatePeriod - _watchUpdate.Elapsed.TotalSeconds;
-
-                if (timeToNextUpdate > 0)
-                {
-                    AccurateSleep(timeToNextUpdate, 8);
-                }
-            }
+        }
+        protected override void OnUnload()
+        {
+            base.OnUnload();
             //Unload
             GUIVar.DeLoad();
             ClientConfig.SaveProperties();
-
-        }
-        public static void AccurateSleep(double seconds, int expectedSchedulerPeriod)
-        {
-            // FIXME: Make this a parameter?
-            const double TOLERANCE = 0.02;
-
-            long t0 = Stopwatch.GetTimestamp();
-            long target = t0 + (long)(seconds * Stopwatch.Frequency);
-
-            double ms = (seconds * 1000) - (expectedSchedulerPeriod * TOLERANCE);
-            int ticks = (int)(ms / expectedSchedulerPeriod);
-            if (ticks > 0)
+            if(EmbedderServer != null)
             {
-                Thread.Sleep(ticks * expectedSchedulerPeriod);
+                EmbedderServer.Stop();
             }
-
-            while (Stopwatch.GetTimestamp() < target)
-            {
-                Thread.Yield();
-            }
+#if PROFILE
+            Profiler.Dispose();
+#endif
         }
-        public void Update(double DT)
+        protected override void OnUpdateFrame(FrameEventArgs e)
         {
             //Update
-            ClientNetwork.Update();
-            GUIVar.Update(ClientInterface, DT);
-            GUIVar.Update();
+            NetworkManager.Update();
+
+#if PROFILE
+            using (Profiler.BeginEvent("GUI Update"))
+#endif
+            {
+                GUIVar.Update((float)e.Time);
+                GUIVar.Update();
+            }
+
             //UIManager.Update();
             if (World.Initialized)
             {
-                World.Tick((float)DT);
+#if PROFILE
+                using(Profiler.BeginEvent("World Tick"))
+#endif
+                {
+                    World.Tick((float)e.Time);
+                }
             }
             //InputEventManager.Update();
-            World.UpdateRender();
-
-
         }
-        public void Render()
+        protected override void  OnRenderFrame(FrameEventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
@@ -207,16 +141,21 @@ namespace VoxelPrototype.client
             if (World.Initialized)
             {
                 GL.Disable(EnableCap.Multisample);
-                World.Render();
+#if PROFILE
+                using (Profiler.BeginEvent("World Render"))
+#endif
+                {
+                    World.Render();
+                }
                 GL.Enable(EnableCap.Multisample);
                 if (World.IsLocalPlayerExist())
                 {
                     //Player.Draw(Subsystems.RessourceManager.RessourceManager.GetShader("Nentity"), PlayerAnimator);
-                }
+                }/*
                 if (World.IsLocalPlayerExist())
                 {
                     DebugShapeRenderer.Render(World.GetLocalPlayerCamera().GetViewMatrix(), World.GetLocalPlayerCamera().GetProjectionMatrix());
-                }
+                }*/
             }
             //
             //Debug
@@ -226,32 +165,41 @@ namespace VoxelPrototype.client
             //
             //ImGui.ShowDemoWindow();
             //UIManager.Render();
+#if PROFILE
+            using (Profiler.BeginEvent("GUI Render"))
+#endif
+            {
+                GUIVar.RenderI();
+                GUIVar.Render();
+            }
+            SwapBuffers();
+#if PROFILE
+            Profiler.ProfileFrame("Main");
+#endif
+        }
 
-            GUIVar.RenderI();
-            GUIVar.Render();
-            ImGuiController.CheckGLError("End of frame");
-            ClientInterface.SwapBuffers();
-        }
-        public void Close()
-        {
-            Running = false;
-        }
         public void DeInitWorld()
         {
             World.Dispose();
         }
-        protected void OnResize(Vector2i Size, Vector2i FramebufferSize)
+        protected override void OnFramebufferResize(FramebufferResizeEventArgs e)
         {
-            GL.Viewport(0, 0, FramebufferSize.X, FramebufferSize.Y);
+            base.OnFramebufferResize(e);
+            GL.Viewport(0, 0, e.Width, e.Height);
             if (World.IsLocalPlayerExist())
             {
                 World.GetLocalPlayerCamera().AspectRatio = FramebufferSize.X / (float)FramebufferSize.Y;
             }
+
+
+        }
+        protected override void OnResize(ResizeEventArgs e)
+        { 
             GUIVar.Resize(FramebufferSize);
         }
-        protected void OnTextInput(uint code)
+        protected override void OnTextInput(TextInputEventArgs e)
         {
-            GUIVar.Char((char)(code));
+            GUIVar.Char((char)(e.Unicode));
 
         }
     }

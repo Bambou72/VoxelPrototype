@@ -10,7 +10,7 @@ out float frag_lighting;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
-const float AOcurve[] = float[](0.25, 0.5, 0.75, 1.0);
+const float AOcurve[] = float[](0.3, 0.50, 0.75, 1.0);
 void main(void)
 {
     texCoord = Texture;

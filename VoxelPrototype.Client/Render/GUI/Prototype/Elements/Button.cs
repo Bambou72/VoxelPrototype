@@ -6,6 +6,7 @@ using VoxelPrototype.client.Render.GUI.Prototype;
 using VoxelPrototype.client.Render.GUI.Prototype.Text;
 using VoxelPrototype.client.Render.GUI.Prototype.Utils;
 using VoxelPrototype.client.Render.UI;
+using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Render.GUI.Prototype.Elements
 {
     internal class Button : UIElement
@@ -24,8 +25,8 @@ namespace VoxelPrototype.client.Render.GUI.Prototype.Elements
         public override void Render(UIRenderer Renderer)
         {
             Renderer.RenderTextureQuad(Position, Size, Active ? Color : UIStyle.ButtonColor);
-            Renderer.RenderText(new Resources.ResourceID("font/opensans"), Text, Position +
-                new Vector2(Size.X / 2, Size.Y / 2 + TextSizeCalculator.CalculateVerticalSize(new Resources.ResourceID("font/opensans"), 24, Text) / 2),
+            Renderer.RenderText(new ResourceID("font/opensans"), Text, Position +
+                new Vector2(Size.X / 2, Size.Y / 2 + TextSizeCalculator.CalculateVerticalSize(new ResourceID("font/opensans"), 24, Text) / 2),
                 24, AlignType: AlignementType.Center);
         }
         public override bool OnMouseClicked(MouseClickedEvent Event)

@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.Render.Text;
+using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.Render.UI.Batch
 {
@@ -51,7 +52,7 @@ namespace VoxelPrototype.client.Render.UI.Batch
         {
             Scale = Scale / Font.FontSize;
             float xcopy = Position.X;
-            Position.Y = Client.TheClient.ClientInterface.GetFramebufferSize().Y - Position.Y;
+            Position.Y = Client.TheClient.ClientSize.Y - Position.Y;
             for (int i = 0; i < Text.Length; i++)
             {
                 char c = Text[i];
@@ -79,36 +80,24 @@ namespace VoxelPrototype.client.Render.UI.Batch
             {
                 FlushBatch();
             }
-            float r = Color.X;
-            float g = Color.Y;
-            float b = Color.Z;
-            float a = Color.W;
-            float x0 = x;
-            float y0 = y;
-            float x1 = x + Scale * Character.Size.X;
-            float y1 = y + Scale * Character.Size.Y;
-            float ux0 = Character.AtlasStart.X;
-            float uy0 = Character.AtlasStart.Y;
-            float ux1 = Character.AtlasEnd.X;
-            float uy1 = Character.AtlasEnd.Y;
             int index = Size * VERTEX_SIZE;
-            Vertices[index] = x1; Vertices[index + 1] = y0;
-            Vertices[index + 2] = r; Vertices[index + 3] = g; Vertices[index + 4] = b; Vertices[index + 5] = a;
-            Vertices[index + 6] = ux1; Vertices[index + 7] = uy1;
+            Vertices[index] = x + Scale * Character.Size.X; Vertices[index + 1] = y;
+            Vertices[index + 2] = Color.X; Vertices[index + 3] = Color.Y; Vertices[index + 4] = Color.Z; Vertices[index + 5] = Color.W;
+            Vertices[index + 6] = Character.AtlasEnd.X; Vertices[index + 7] = Character.AtlasEnd.Y;
             index += VERTEX_SIZE;
-            Vertices[index] = x1; Vertices[index + 1] = y1; 
-            Vertices[index + 2] = r; Vertices[index + 3] = g; Vertices[index + 4] = b; Vertices[index + 5] = a;
-            Vertices[index + 6] = ux1; Vertices[index + 7] = uy0;
+            Vertices[index] = x + Scale * Character.Size.X; Vertices[index + 1] = y + Scale * Character.Size.Y; 
+            Vertices[index + 2] = Color.X; Vertices[index + 3] = Color.Y; Vertices[index + 4] = Color.Z; Vertices[index + 5] = Color.W;
+            Vertices[index + 6] = Character.AtlasEnd.X; Vertices[index + 7] = Character.AtlasStart.Y;
 
             index += VERTEX_SIZE;
-            Vertices[index] = x0; Vertices[index + 1] = y1;
-            Vertices[index + 2] = r; Vertices[index + 3] = g; Vertices[index + 4] = b; Vertices[index + 5] = b;
-            Vertices[index + 6] = ux0; Vertices[index + 7] = uy0;
+            Vertices[index] = x; Vertices[index + 1] = y + Scale * Character.Size.Y;
+            Vertices[index + 2] = Color.X; Vertices[index + 3] = Color.Y; Vertices[index + 4] = Color.Z; Vertices[index + 5] = Color.W;
+            Vertices[index + 6] = Character.AtlasStart.X; ; Vertices[index + 7] = Character.AtlasStart.Y;
 
             index += VERTEX_SIZE;
-            Vertices[index] = x0; Vertices[index + 1] = y0;
-            Vertices[index + 2] = r; Vertices[index + 3] = g; Vertices[index + 4] = b; Vertices[index + 5] = b;
-            Vertices[index + 6] = ux0; Vertices[index + 7] = uy1;
+            Vertices[index] = x; Vertices[index + 1] = y;
+            Vertices[index + 2] = Color.X; Vertices[index + 3] = Color.Y; Vertices[index + 4] = Color.Z; Vertices[index + 5] = Color.W;
+            Vertices[index + 6] = Character.AtlasStart.X; ; Vertices[index + 7] = Character.AtlasEnd.Y;
             Size += 4;
         }
         public void FlushBatch()
@@ -120,7 +109,7 @@ namespace VoxelPrototype.client.Render.UI.Batch
                 GL.BufferData(BufferTarget.ArrayBuffer, sizeof(float) * BATCH_SIZE * VERTEX_SIZE, nint.Zero, BufferUsageHint.DynamicDraw);
                 GL.BufferSubData(BufferTarget.ArrayBuffer, 0, sizeof(float) * Vertices.Length, Vertices);
                 GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-                var shader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/text"));
+                var shader = Client.TheClient.ShaderManager.GetShader(new ResourceID("shaders/text"));
                 shader.Use();
                 GL.Enable(EnableCap.Blend);
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);

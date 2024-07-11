@@ -15,15 +15,15 @@ namespace VoxelPrototype.client.Render.GUI.Prototype
             Screen = screen;
             if (screen != null)
             {
-                Vector2i ScreenSize = Client.TheClient.ClientInterface.GetFramebufferSize();
+                Vector2i ScreenSize = Client.TheClient.ClientSize;
                 Screen.Compose(ScreenSize);
             }
         }
 
         public void Update()
         {
-            Vector2i ScreenSize = Client.TheClient.ClientInterface.GetFramebufferSize();
-            Vector2 MousePos = (Vector2)Client.TheClient.ClientInterface.GetMousePosition();
+            Vector2i ScreenSize = Client.TheClient.ClientSize;
+            Vector2 MousePos = (Vector2)Client.TheClient.ClientSize;
             if (Screen != null)
             {
                 Screen.Compose(ScreenSize);

@@ -1,6 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using StbImageSharp;
-using VoxelPrototype.client.Resources;
+using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.Render.Components
 {

@@ -3,8 +3,9 @@
  * Authors Opentk
  * */
 using OpenTK.Graphics.OpenGL4;
+using SixLabors.ImageSharp;
 using StbImageSharp;
-namespace ModelEditor
+namespace ModelEditor.ModelEditor
 {
     // A helper class, much like Shader, meant to simplify loading textures.
     public class Texture
@@ -50,7 +51,7 @@ namespace ModelEditor
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
             return new Texture(handle);
         }
-        internal static Texture LoadFromData(Image<Rgba32> image)
+        internal static Texture LoadFromData(Image<SixLabors.ImageSharp.PixelFormats.Rgba32> image)
         {
             // Generate handle
             int handle = GL.GenTexture();

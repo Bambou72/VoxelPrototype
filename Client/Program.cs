@@ -51,6 +51,7 @@ namespace DesktopClient
                 Title = "Voxel Prototype",
                 WindowState =  conf.GetProperty("mode") == "fullscreen" ? OpenTK.Windowing.Common.WindowState.Fullscreen : OpenTK.Windowing.Common.WindowState.Normal,
                 Icon = new( iconImages),
+                Vsync = OpenTK.Windowing.Common.VSyncMode.On
             };
             var Client = new Client( options.RessourcesPaths.ToArray(),GameWindowSettings.Default,Settings);
             Client.Run();

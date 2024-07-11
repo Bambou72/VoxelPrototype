@@ -1,8 +1,8 @@
 ﻿using ImGuiNET;
 using NLog;
 using System.Numerics;
-using VoxelPrototype.common.Network.client;
-using VoxelPrototype.common.World;
+using VoxelPrototype.api.WorldGenerator;
+using VoxelPrototype.game;
 namespace VoxelPrototype.client.Render.GUI
 {
     internal static class SingleplayerGUI
@@ -48,13 +48,14 @@ namespace VoxelPrototype.client.Render.GUI
         {
             ImGui.Text("World Name: "); ImGui.SameLine(); ImGui.InputText("## wc1", ref WorldName, 100);
             ImGui.Text("World Seed: "); ImGui.SameLine(); ImGui.InputText("## wc3", ref WorldSeed, 10);
-            ImGui.Combo("World Generators", ref CurrentWorldGenerator, Client.TheClient.ModManager.WorldGeneratorRegistry.AllGeneratorsName(), Client.TheClient.ModManager.WorldGeneratorRegistry.AllGeneratorsName().Length);
+            ImGui.Combo("World Generators", ref CurrentWorldGenerator, WorldGeneratorRegistry.GetInstance().AllGeneratorsName(), WorldGeneratorRegistry.GetInstance().AllGeneratorsName().Length);
             if (ImGui.Button("Create", new Vector2(200, 75)))
             {
-                var param = new WorldSettings(WorldSeed == "" ? new Random().Next() : int.Parse(WorldSeed), Client.TheClient.ModManager.WorldGeneratorRegistry.AllGeneratorsName()[CurrentWorldGenerator], WorldName);
+                var param = new WorldSettings(WorldSeed == "" ? new Random().Next() : int.Parse(WorldSeed), WorldGeneratorRegistry.GetInstance().AllGeneratorsName()[CurrentWorldGenerator], WorldName);
                 Client.TheClient.EmbedderServer = new("worlds/" + WorldName + "/",param);
                 Client.TheClient.EmbedderServer.Start();
-                ClientNetwork.Connect("localhost", 23482);
+                Client.TheClient.NetworkManager.Connect("localhost", 23482);
+                Client.TheClient.World.Init();
                 GUIVar.MainMenu = false;
             }
         }
@@ -68,7 +69,8 @@ namespace VoxelPrototype.client.Render.GUI
                 {
                     Client.TheClient.EmbedderServer = new( Worlds[i].Path + "/");
                     Client.TheClient.EmbedderServer.Start();
-                    ClientNetwork.Connect("localhost", 23482);
+                    Client.TheClient.NetworkManager.Connect("localhost", 23482);
+                    Client.TheClient.World.Init();
                     GUIVar.MainMenu = false;
                 }
                 ImGui.SameLine();

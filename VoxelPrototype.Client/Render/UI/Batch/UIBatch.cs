@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using VoxelPrototype.client.Render.Components;
+using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Render.UI.Batch
 {
     internal class UIBatch
@@ -92,7 +93,7 @@ namespace VoxelPrototype.client.Render.UI.Batch
                     GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
                     GL.BufferSubData(BufferTarget.ArrayBuffer, 0, Unsafe.SizeOf<Vertex>() * Vertices.Length, Vertices);
                     GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-                    var shader = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/ui"));
+                    var shader = Client.TheClient.ShaderManager.GetShader(new ResourceID("shaders/ui"));
                     shader.Use();
                     shader.SetMatrix4("projection", Matrix4.CreateOrthographicOffCenter(0, ClientAPI.WindowWidth(), ClientAPI.WindowHeight(), 0, 0, 100));
                     CurrentTexture.Use(TextureUnit.Texture0);

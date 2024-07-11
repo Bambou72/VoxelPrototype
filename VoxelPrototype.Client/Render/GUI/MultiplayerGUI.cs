@@ -1,7 +1,8 @@
 ﻿using ImGuiNET;
 using Newtonsoft.Json;
 using System.Numerics;
-using VoxelPrototype.common.Network.client;
+using VoxelPrototype.network;
+
 namespace VoxelPrototype.client.Render.GUI
 {
     [Serializable]
@@ -37,7 +38,8 @@ namespace VoxelPrototype.client.Render.GUI
                 ImGui.SetWindowFontScale(1.75f);
                 if (ImGui.Button("Connect"))
                 {
-                    ClientNetwork.Connect(Servers[i].Ip, Servers[i].Port);
+                    Client.TheClient.NetworkManager.Connect(Servers[i].Ip, Servers[i].Port);
+                    Client.TheClient.World.Init();
                     //GUIVar.MainMenu = false;
                 }
                 ImGui.SameLine();

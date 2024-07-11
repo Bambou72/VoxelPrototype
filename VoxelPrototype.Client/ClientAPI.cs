@@ -7,19 +7,19 @@ namespace VoxelPrototype.client
         //TODO fix
         public static void SetFullscreen(bool fullscreen)
         {
-            Client.TheClient.ClientInterface.SetFullscreen(fullscreen);
+            Client.TheClient.WindowState = fullscreen == true ? WindowState.Fullscreen : WindowState.Normal;
         }
         public static void SetCursorState(CursorState state)
         {
-            Client.TheClient.ClientInterface.SetGrab(state == CursorState.Grabbed);
+            Client.TheClient.CursorState= state;
         }
         public static int WindowWidth()
         {
-            return Client.TheClient.ClientInterface.GetFramebufferSize().X;
+            return Client.TheClient.ClientSize.X;
         }
         public static int WindowHeight()
         {
-            return Client.TheClient.ClientInterface.GetFramebufferSize().Y;
+            return Client.TheClient.ClientSize.Y;
         }
         public static float AspectRatio()
         {

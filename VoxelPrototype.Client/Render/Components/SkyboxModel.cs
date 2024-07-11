@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL;
+using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Render.Components
 {
     internal struct SkyBoxModel
@@ -13,7 +14,7 @@ namespace VoxelPrototype.client.Render.Components
             GL.BindBuffer(BufferTarget.ArrayBuffer, Vbo);
             GL.BufferData(BufferTarget.ArrayBuffer, Vertices.Length * sizeof(float), Vertices, BufferUsageHint.StaticDraw);
             GL.BindVertexArray(Vao);
-            var vertexLocation = Client.TheClient.ShaderManager.GetShader(new Resources.ResourceID("shaders/cubemap")).GetAttribLocation("aPos");
+            var vertexLocation = Client.TheClient.ShaderManager.GetShader(new ResourceID("shaders/cubemap")).GetAttribLocation("aPos");
             GL.EnableVertexAttribArray(vertexLocation);
             GL.VertexAttribPointer(vertexLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
         }

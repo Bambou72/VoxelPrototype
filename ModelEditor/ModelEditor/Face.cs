@@ -1,5 +1,5 @@
 ﻿using System.Numerics;
-namespace ModelEditor
+namespace ModelEditor.ModelEditor
 {
     internal class Face
     {

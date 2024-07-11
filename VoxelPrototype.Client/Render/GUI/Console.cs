@@ -1,5 +1,7 @@
 ﻿using ImGuiNET;
 using System.Numerics;
+using VoxelPrototype.api.Commands;
+using VoxelPrototype.client.game;
 namespace VoxelPrototype.client.Render.GUI
 {
     internal static class Console
@@ -55,8 +57,8 @@ namespace VoxelPrototype.client.Render.GUI
                 {
                     ImGui.SetKeyboardFocusHere(-1);
 
-                    ClientChat.SendMessage(inputText);
-                    if (inputText.Length > 0 && inputText[0] == Client.TheClient.ModManager.CommandRegister.commandPrefix)
+                    Client.TheClient.World.Chat.SendMessage(inputText);
+                    if (inputText.Length > 0 && inputText[0] == CommandRegistry.GetInstance().commandPrefix)
                     {
                         AddToConsoleHistory(inputText);
                     }
@@ -88,6 +90,10 @@ namespace VoxelPrototype.client.Render.GUI
                 }
             }
         }
+        internal static void ClearConsoleHistory()
+        {
+            consoleHistory.Clear();
+        }
         internal static void AddToConsoleHistory(string message)
         {
             consoleHistory.Add(message);
@@ -103,7 +109,7 @@ namespace VoxelPrototype.client.Render.GUI
             {
                 return;
             }
-            suggestions = Client.TheClient.ModManager.CommandRegister.autocommands.Where(cmd => cmd.StartsWith(inputText)).ToList();
+            suggestions = CommandRegistry.GetInstance().autocommands.Where(cmd => cmd.StartsWith(inputText)).ToList();
             if (suggestions.Count > 0)
             {
                 showAutoComplete = true;

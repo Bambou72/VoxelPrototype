@@ -88,9 +88,6 @@ namespace VoxelPrototype.client.Render.GUI
             style.Colors[(int)ImGuiCol.ResizeGripActive] = new System.Numerics.Vector4(0.1921568661928177f, 0.196078434586525f, 0.196078434586525f, 0.9490196108818054f);
             style.Colors[(int)ImGuiCol.Tab] = new System.Numerics.Vector4(0.407843142747879f, 0.4156862795352936f, 0.4274509847164154f, 0.8627451062202454f);
             style.Colors[(int)ImGuiCol.TabHovered] = new System.Numerics.Vector4(0.250980406999588f, 0.2549019753932953f, 0.2627451121807098f, 0.800000011920929f);
-            style.Colors[(int)ImGuiCol.TabActive] = new System.Numerics.Vector4(0.1921568661928177f, 0.196078434586525f, 0.196078434586525f, 1.0f);
-            style.Colors[(int)ImGuiCol.TabUnfocused] = new System.Numerics.Vector4(0.06666667014360428f, 0.1019607856869698f, 0.1450980454683304f, 0.9724000096321106f);
-            style.Colors[(int)ImGuiCol.TabUnfocusedActive] = new System.Numerics.Vector4(0.1921568661928177f, 0.196078434586525f, 0.196078434586525f, 1.0f);
             style.Colors[(int)ImGuiCol.PlotLines] = new System.Numerics.Vector4(0.6078431606292725f, 0.6078431606292725f, 0.6078431606292725f, 1.0f);
             style.Colors[(int)ImGuiCol.PlotLinesHovered] = new System.Numerics.Vector4(1.0f, 0.4274509847164154f, 0.3490196168422699f, 1.0f);
             style.Colors[(int)ImGuiCol.PlotHistogram] = new System.Numerics.Vector4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -117,7 +114,7 @@ namespace VoxelPrototype.client.Render.GUI
         }
         internal static void Update()
         {
-            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.T) && !InInputText)
+            if (Client.TheClient.KeyboardState.IsKeyPressed(Keys.T) && !InInputText)
             {
                 if (!ConsoleMenu)
                 {
@@ -134,14 +131,14 @@ namespace VoxelPrototype.client.Render.GUI
                     Client.TheClient.InputEventManager.Grab = true;
                 }
             }
-            if (ConsoleMenu == true && Client.TheClient.ClientInterface.IsKeyPressed(Keys.Escape))
+            if (ConsoleMenu == true && Client.TheClient.KeyboardState.IsKeyPressed(Keys.Escape))
             {
                 ConsoleMenu = false;
                 Client.TheClient.InputEventManager.NoInput = false;
                 ClientAPI.SetCursorState(CursorState.Grabbed);
                 Client.TheClient.InputEventManager.Grab = true;
             }
-            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.Escape) && !ConsoleMenu && Client.TheClient.World.Initialized)
+            if (Client.TheClient.KeyboardState.IsKeyPressed(Keys.Escape) && !ConsoleMenu && Client.TheClient.World.Initialized)
             {
                 if (IngameMenu)
                 {
@@ -156,7 +153,7 @@ namespace VoxelPrototype.client.Render.GUI
                     Client.TheClient.InputEventManager.Grab = false;
                 }
             }
-            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.F2))
+            if (Client.TheClient.KeyboardState.IsKeyPressed(Keys.F2))
             {
                 if (Client.TheClient.InputEventManager.Grab == false)
                 {
@@ -169,7 +166,7 @@ namespace VoxelPrototype.client.Render.GUI
                     Client.TheClient.InputEventManager.Grab = false;
                 }
             }
-            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.F1))
+            if (Client.TheClient.KeyboardState.IsKeyPressed(Keys.F1))
             {
                 if (DebugMenu == false)
                 {
@@ -180,7 +177,7 @@ namespace VoxelPrototype.client.Render.GUI
                     DebugMenu = false;
                 }
             }
-            if (Client.TheClient.ClientInterface.IsKeyPressed(Keys.F3))
+            if (Client.TheClient.KeyboardState.IsKeyPressed(Keys.F3))
             {
                 Client.TheClient.ResourceManager.Reload();
             }
@@ -234,9 +231,9 @@ namespace VoxelPrototype.client.Render.GUI
         /// </summary>
         /// <param name="window">Main window</param>
         /// <param name="deltaSecond"> delta time</param>
-        internal static void Update(IClientInterface window, double deltaSecond)
+        internal static void Update( double deltaSecond)
         {
-            Controller.Update(window, deltaSecond);
+            Controller.Update( deltaSecond);
         }
         /// <summary>
         /// Render Imgui

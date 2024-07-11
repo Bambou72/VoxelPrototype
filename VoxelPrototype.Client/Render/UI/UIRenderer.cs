@@ -5,7 +5,7 @@ using VoxelPrototype.client.Render.GUI.Prototype.Text;
 using VoxelPrototype.client.Render.GUI.Prototype.Utils;
 using VoxelPrototype.client.Render.Text;
 using VoxelPrototype.client.Render.UI.Batch;
-using VoxelPrototype.client.Resources;
+using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Render.UI
 {
     public class UIRenderer

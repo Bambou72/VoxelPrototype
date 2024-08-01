@@ -4,9 +4,8 @@
     {
         Stream Stream;
         string path;
-        public Resource(Stream stream,string path)
+        public Resource( string path)
         {
-            Stream = stream;
             this.path = path;
         }
 
@@ -17,6 +16,10 @@
         public string GetPath()
         {
             return path;
+        }
+        public void Open()
+        {
+            Stream = new FileStream(path, FileMode.Open, FileAccess.Read);
         }
         public void Close()
         {

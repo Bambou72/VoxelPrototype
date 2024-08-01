@@ -1,11 +1,11 @@
-﻿using Tomlyn.Model;
-using Tomlyn;
-using System.IO.Compression;
+﻿using System.IO.Compression;
 using VoxelPrototype.client.Resources.Managers;
 using VoxelPrototype.utils.collections;
 using VoxelPrototype.utils.io;
 using VoxelPrototype.utils;
 using VoxelPrototype.api;
+using System.Text.Json;
+using System.IO;
 
 namespace VoxelPrototype.client.Resources
 {
@@ -82,15 +82,15 @@ namespace VoxelPrototype.client.Resources
                 string[] ResourceDirect = Directory.GetDirectories(resourcespacksfolder);
                 foreach (string directory in ResourceDirect)
                 {
-                    if (File.Exists(directory + "/pack.toml"))
+                    if (File.Exists(directory + "/pack.json"))
                     {
-                        TomlTable PackData = Toml.ToModel(File.ReadAllText(directory + "/pack.toml"));
+                        PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(directory + "/pack.json"));
                         string[] NameSpaces = RelativePath.GetRelativePathsDirectories(directory);
                         ResourcesPack Pack = new()
                         {
-                            Name = (string)PackData["Name"],
-                            Version = (string)PackData["Version"],
-                            Description = (string)PackData["Description"],
+                            Name = PackData.name,
+                            Version = PackData.version,
+                            Description = PackData.description,
                             Namespaces = NameSpaces,
                             Path = directory
                         };
@@ -106,13 +106,13 @@ namespace VoxelPrototype.client.Resources
                         zip.ExtractToDirectory("temp/resourcespacks");
                         zip = null;
                         string path = "temp/resourcespacks" + "/" + Path.GetFileNameWithoutExtension(Zip);
-                        TomlTable PackData = Toml.ToModel(File.ReadAllText(path + "/pack.toml"));
+                        PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(path + "/pack.json"));
                         string[] NameSpaces = RelativePath.GetRelativePathsDirectories(path);
                         ResourcesPack Pack = new()
                         {
-                            Name = (string)PackData["Name"],
-                            Version = (string)PackData["Version"],
-                            Description = (string)PackData["Description"],
+                            Name = PackData.name,
+                            Version = PackData.version,
+                            Description = PackData.description,
                             Namespaces = NameSpaces,
                             Path = path
                         };
@@ -130,13 +130,13 @@ namespace VoxelPrototype.client.Resources
                 try
                 {
                     string path = Mod + "/resources";
-                    TomlTable PackData = Toml.ToModel(File.ReadAllText(path + "/pack.toml"));
+                    PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(path + "/pack.json"));
                     string[] NameSpaces =  RelativePath.GetRelativePathsDirectories(path);
                     ResourcesPack Pack = new()
                     {
-                        Name = (string)PackData["Name"],
-                        Version = (string)PackData["Version"],
-                        Description = (string)PackData["Description"],
+                        Name = PackData.name,
+                        Version = PackData.version,
+                        Description = PackData.description,
                         Namespaces = NameSpaces,
                         Path = path
                     };
@@ -203,13 +203,61 @@ namespace VoxelPrototype.client.Resources
                 manager.Reload(this);
             }
         }
-        public Resource GetResource(ResourceID ID)
+        public Resource? GetResource(string Location)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Active.Count; i++)
+            {
+                ResourcesPack pack = Active[i];
+                if(pack.Namespaces.Contains(ResourceLocationHelper.GetNamespace(Location)))
+                {
+                    string CurrentPath = pack.Path + "/" + ResourceLocationHelper.GetPath(Location)+ "/" + ResourceLocationHelper.GetPathWithoutLast(Location);
+                    foreach (string @namespace in pack.Namespaces)
+                    {
+
+                        string[] ResourcesList = Directory.GetFiles(CurrentPath);
+                        foreach (string Resource in ResourcesList)
+                        {
+                            if(ResourceLocationHelper.GetPath(Location) == RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource))
+                            {
+                                return  new( Resource);
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
         }
-        public Dictionary<ResourceID,Resource> ListResources(string path,Func<string,bool> Predicate)
+        //
+        //First First
+        //
+        public List<Resource> GetAllResource(string Location)
         {
-            Dictionary<ResourceID,Resource> temp = new();
+            List<Resource> resources = new List<Resource>();
+            for (int i = 0; i < Active.Count; i++)
+            {
+                ResourcesPack pack = Active[i];
+                if (pack.Namespaces.Contains(ResourceLocationHelper.GetNamespace(Location)))
+                {
+                    string CurrentPath = pack.Path + "/" + ResourceLocationHelper.GetPath(Location) + "/" + ResourceLocationHelper.GetPathWithoutLast(Location);
+                    foreach (string @namespace in pack.Namespaces)
+                    {
+
+                        string[] ResourcesList = Directory.GetFiles(CurrentPath);
+                        foreach (string Resource in ResourcesList)
+                        {
+                            if (ResourceLocationHelper.GetPath(Location) == RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource))
+                            {
+                                resources.Add(new(Resource));
+                            }
+                        }
+                    }
+                }
+            }
+            return resources;
+        }
+        public Dictionary<string,Resource> ListResources(string path,Func<string,bool> Predicate)
+        {
+            Dictionary<string,Resource> temp = new();
             for(int i = Active.Count - 1; i >= 0; i--)
             {
                 ResourcesPack pack = Active[i];
@@ -219,13 +267,44 @@ namespace VoxelPrototype.client.Resources
                     string[] ResourcesList = Directory.GetFiles(CurrentPath).Where(Predicate).ToArray();
                     foreach (string Resource in ResourcesList)
                     {
-                        ResourceID ID = new ResourceID(@namespace,RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource));
-                        Resource Res = new(new FileStream(Resource,FileMode.Open, FileAccess.Read), Resource);
-                        temp[ID] = Res;
+                        string Location = @namespace+":"+RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource);
+                        Resource Res = new( Resource);
+                        temp[Location] = Res;
                     }
                 }
             }
             return temp;
         }
+        // First Last
+        public Dictionary<string, List<Resource>> ListAllResources(string path, Func<string, bool> Predicate)
+        {
+            Dictionary<string, List<Resource>> temp = new();
+            for (int i = Active.Count - 1; i >= 0; i--)
+            {
+                ResourcesPack pack = Active[i];
+                foreach (string @namespace in pack.Namespaces)
+                {
+                    string CurrentPath = pack.Path + "/" + @namespace + "/" + path;
+                    string[] ResourcesList = Directory.GetFiles(CurrentPath).Where(Predicate).ToArray();
+                    foreach (string Resource in ResourcesList)
+                    {
+                        string Location =@namespace+":"+ RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource);
+                        Resource Res = new( Resource);
+                        if(!temp.ContainsKey(Location))
+                        {
+                            temp[Location] = new List<Resource>();
+                        }
+                        temp[Location].Add(Res);
+                    }
+                }
+            }
+            return temp;
+        }
+    }
+    public class PackMetadata
+    {
+        public string name { get; set; }
+        public string version { get; set; }
+        public string description { get; set; }
     }
 }

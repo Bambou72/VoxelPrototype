@@ -1,13 +1,12 @@
-﻿using StbImageSharp;
-using VoxelPrototype.client.Render.Components;
+﻿using VoxelPrototype.client.rendering.texture;
+using VoxelPrototype.client.utils.StbImageSharp;
 using VoxelPrototype.client.Utils;
-using VoxelPrototype.utils;
-
 namespace VoxelPrototype.client.Resources.Managers
 {
     internal class TextureManager : IReloadableResourceManager
     {
-        Dictionary<ResourceID, ITexture> Textures = new Dictionary<ResourceID, ITexture>();
+        Dictionary<string, ITexture> Textures = new Dictionary<string, ITexture>();
+        static string BlockAltasResourceID = "voxelprototype:textures/block/atlas";
         public void Clean()
         {
             foreach (var texture in Textures.Values)
@@ -16,9 +15,9 @@ namespace VoxelPrototype.client.Resources.Managers
             }
             Textures.Clear();
         }
-        public ITexture GetTexture(ResourceID resourceID)
+        public ITexture GetTexture(string resourceLocation)
         {
-            if (Textures.TryGetValue(resourceID, out var texture))
+            if (Textures.TryGetValue(resourceLocation, out var texture))
             {
                 return texture;
             }
@@ -31,6 +30,7 @@ namespace VoxelPrototype.client.Resources.Managers
             var UITextures = Manager.ListResources("textures/gui", path => path.EndsWith(".png"));
             foreach (var texture in UITextures)
             {
+                texture.Value.Open();
                 Textures.Add(texture.Key, TextureLoader.LoadFromStream(texture.Value.GetStream()));
                 texture.Value.Close();
             }
@@ -38,22 +38,34 @@ namespace VoxelPrototype.client.Resources.Managers
             var EntitiesTextures = Manager.ListResources("textures/entity", path => path.EndsWith(".png"));
             foreach (var texture in EntitiesTextures)
             {
+                texture.Value.Open();
                 Textures.Add(texture.Key, TextureLoader.LoadFromStream(texture.Value.GetStream()));
                 texture.Value.Close();
             }
             //Block textures
-            Dictionary< ResourceID, ImageResult> TempLoadedTextures = new();
+            Dictionary<string, ImageResult> TempLoadedTextures = new();
             var BlockTextures = Manager.ListResources("textures/block", path => path.EndsWith(".png"));
             foreach (var texture in BlockTextures)
             {
+                texture.Value.Open();
                 StbImage.stbi_set_flip_vertically_on_load(0);
                 ImageResult Texture = ImageResult.FromStream(texture.Value.GetStream(), ColorComponents.RedGreenBlueAlpha);
                 TempLoadedTextures.Add(texture.Key, Texture);
                 texture.Value.Close();
             }
             BuildBlockAtlas(TempLoadedTextures);
+            //Font Texture
+            var FontTexture = Manager.ListResources("textures/font", path => path.EndsWith(".png"));
+            foreach (var texture in FontTexture)
+            {
+                texture.Value.Open();
+                StbImage.stbi_set_flip_vertically_on_load(0);
+                ImageResult Texture = ImageResult.FromStream(texture.Value.GetStream(), ColorComponents.RedGreenBlueAlpha);
+                Textures.Add(texture.Key,new StoreTexture(Texture));
+                texture.Value.Close();
+            }
         }
-        public void BuildBlockAtlas(Dictionary<ResourceID, ImageResult> LoadedTextures)
+        public void BuildBlockAtlas(Dictionary<string, ImageResult> LoadedTextures)
         {
             int numTextures = LoadedTextures.Count;
             int maxTextureWidth = LoadedTextures.Values.Max(t => t.Width);
@@ -63,7 +75,7 @@ namespace VoxelPrototype.client.Resources.Managers
             int currentX = 0;
             int currentY = 0;
             TextureAtlas Atlas = new();
-            foreach (ResourceID key in LoadedTextures.Keys)
+            foreach (string key in LoadedTextures.Keys)
             {
                 var texture = LoadedTextures[key];
                 if (currentX + texture.Width > atlasSize)
@@ -102,9 +114,9 @@ namespace VoxelPrototype.client.Resources.Managers
                 }
                 currentX += maxTextureWidth;
             }
-            if (!Directory.Exists("debug/atlas"))
+            if (!Directory.Exists("temp/debug/atlas"))
             {
-                Directory.CreateDirectory("debug/atlas");
+                Directory.CreateDirectory("temp/debug/atlas");
             }
             var AtlasImage = new ImageResult
             {
@@ -114,9 +126,13 @@ namespace VoxelPrototype.client.Resources.Managers
                 Comp = ColorComponents.RedGreenBlueAlpha,
             };
 
-            ImageSaver.SaveAsPNG("debug/atlas/block.png", AtlasImage);
+            ImageSaver.SaveAsPNG("temp/debug/atlas/block.png", AtlasImage);
             Atlas.SetTexture(AtlasImage);
-            Textures.Add(new ResourceID("voxelprototype", "textures/block/atlas"),Atlas);
+            Textures.Add(BlockAltasResourceID, Atlas);
+        }
+        public ITexture GetBlockAtlasTexture()
+        {
+            return Textures[BlockAltasResourceID];
         }
     }
 }

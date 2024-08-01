@@ -1,0 +1,4 @@
+{
+    "vertex": "chunk.vert",
+    "fragment": "chunk.frag"
+}

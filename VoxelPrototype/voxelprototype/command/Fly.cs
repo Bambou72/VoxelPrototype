@@ -22,12 +22,12 @@ namespace VoxelPrototype.voxelprototype.command
                             if (fly)
                             {
                                 play.Fly = true;
-                                ServerChat.SendServerMessage("Fly on", peer);
+                                Server.TheServer.World.Chat.SendServerMessage("Fly on", peer);
                             }
                             else
                             {
                                 play.Fly = false;
-                                ServerChat.SendServerMessage("Fly off", peer);
+                                Server.TheServer.World.Chat.SendServerMessage("Fly off", peer);
                             }
                         }
 

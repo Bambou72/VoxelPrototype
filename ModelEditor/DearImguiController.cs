@@ -2,7 +2,7 @@
  * Author NogginBops
  * */
 using ImGuiNET;
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -128,7 +128,7 @@ void main()
             int prevTexture2D = GL.GetInteger(GetPName.TextureBinding2D);
             _fontTexture = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, _fontTexture);
-            GL.TexStorage2D(TextureTarget2d.Texture2D, mips, SizedInternalFormat.Rgba8, width, height);
+            GL.TexStorage2D(TextureTarget2d.Texture2D, mips, SizedPixelInternalFormat.Rgba8, width, height);
             LabelObject(ObjectLabelIdentifier.Texture, _fontTexture, "ImGui Text Atlas");
             GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, width, height, PixelFormat.Bgra, PixelType.UnsignedByte, pixels);
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);

@@ -5,22 +5,22 @@
 using LiteNetLib;
 using OpenTK.Mathematics;
 using System.Collections.Concurrent;
-using OpenTK.Graphics.OpenGL;
 using K4os.Compression.LZ4;
-using VoxelPrototype.VBF;
 using VoxelPrototype.utils;
 using VoxelPrototype.network.packets;
-using VoxelPrototype.network;
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client.game.world.Level.Chunk;
 using VoxelPrototype.client.game.world.Level.Chunk.Render;
 using VoxelPrototype.api.Blocks;
+using OpenTK.Graphics.OpenGL4;
 
 namespace VoxelPrototype.client.game.world.Level
 {
     public class ClientChunkManager
     {
         internal World World;
+        static string ChunkShaderResourceID = "shaders/chunk";
+        static string BlockAtlasResourceID = "textures/block/atlas";
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         internal ReaderWriterLockSlim ChunkByCoordinateLock = new ReaderWriterLockSlim();
         internal Dictionary<Vector2i, Chunk.Chunk> ChunkByCoordinate = new();
@@ -205,9 +205,6 @@ namespace VoxelPrototype.client.game.world.Level
         }
         internal BlockState GetBlock(Vector3i BlockPos)
         {
-#if PROFILE
-            using (Profiler.BeginEvent("GetBlock", Profiler.ColorType.Green))
-#endif
             {
                 if (BlockPos.Y > 0 && BlockPos.Y < Const.ChunkRHeight)
                 {
@@ -238,12 +235,12 @@ namespace VoxelPrototype.client.game.world.Level
         internal void Render()
         {
             RenderedChunksCount = 0;
-            var Shader = Client.TheClient.ShaderManager.GetShader(new ResourceID("shaders/chunk"));
+            var Shader = Client.TheClient.ShaderManager.GetShader(ChunkShaderResourceID);
             var Camera = Client.TheClient.World.GetLocalPlayerCamera();
             Camera.Update();
             Shader.SetMatrix4("view", Camera.GetViewMatrix());
             Shader.SetMatrix4("projection", Camera.GetProjectionMatrix());
-            Client.TheClient.TextureManager.GetTexture(new ResourceID("textures/block/atlas")).Use(TextureUnit.Texture0);
+            Client.TheClient.TextureManager.GetTexture(BlockAtlasResourceID).Use(TextureUnit.Texture0);
             Vector3d PlayPos = Client.TheClient.World.PlayerFactory.LocalPlayer.Position;
             int minx = (int)(PlayPos.X / Const.ChunkSize) - Client.TheClient.World.RenderDistance;
             int minz = (int)(PlayPos.Z / Const.ChunkSize) - Client.TheClient.World.RenderDistance;
@@ -256,18 +253,12 @@ namespace VoxelPrototype.client.game.world.Level
                 {
                     ushort Distance = (ushort)Vector2d.Distance(chunk.Position, PlayPos.Xz);
                     bool Surrended;
-#if PROFILE
-                    using (Profiler.BeginEvent("Test Chunk Is Surrended", Profiler.ColorType.Purple))
-#endif
                     {
                         Surrended = IsChunkSurrended(chunk.Position, true);
                     }
                     foreach (var section in chunk.Sections)
                     {
                         bool IsSecInFrust;
-#if PROFILE
-                        using (Profiler.BeginEvent("Test Section Is In Frustum", Profiler.ColorType.Brown))
-#endif
                         {
                             IsSecInFrust = Camera.Frustum.IsSectionInFrustum(section.SectionMesh);
                         }
@@ -279,9 +270,6 @@ namespace VoxelPrototype.client.game.world.Level
                             }
                             if (section.SectionMesh.GetOpaqueMesh().GetVerticesCount() != 0)
                             {
-#if PROFILE
-                                using (Profiler.BeginEvent("Render Section", Profiler.ColorType.Yellow))
-#endif
                                 {
                                     RenderedChunksCount++;
                                     Matrix4 model = Matrix4.CreateTranslation(new Vector3(chunk.X * Const.ChunkSize, section.Y * Const.SectionSize, chunk.Z * Const.ChunkSize));

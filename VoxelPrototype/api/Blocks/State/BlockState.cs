@@ -1,7 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 using VoxelPrototype.api.Blocks.Properties;
-using VoxelPrototype.VBF;
 namespace VoxelPrototype.api.Blocks.State
 {
     public class BlockState : IVBFSerializable<BlockState>

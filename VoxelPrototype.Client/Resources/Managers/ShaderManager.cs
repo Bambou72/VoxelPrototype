@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tomlyn.Model;
-using Tomlyn;
-using VoxelPrototype.client.Render.Components;
-using Newtonsoft.Json;
-using static OpenTK.Graphics.OpenGL.GL;
-using System.Runtime.InteropServices;
-using VoxelPrototype.utils;
-
+﻿using System.Text.Json;
+using VoxelPrototype.client.rendering;
 namespace VoxelPrototype.client.Resources.Managers
 {
     internal class ShaderManager : IReloadableResourceManager
     {
-        Dictionary<ResourceID, Shader> Shaders = new Dictionary<ResourceID, Shader>();
+        Dictionary<string, Shader> Shaders = new Dictionary<string, Shader>();
         public void Clean()
         {
             foreach (var shader in Shaders.Values)
@@ -24,7 +13,7 @@ namespace VoxelPrototype.client.Resources.Managers
             }
             Shaders.Clear();
         }
-        public Shader GetShader(ResourceID shaderID)
+        public Shader GetShader(string shaderID)
         {
             if(Shaders.TryGetValue(shaderID, out Shader shader))
             {
@@ -36,14 +25,20 @@ namespace VoxelPrototype.client.Resources.Managers
         {
             Clean();
             //Block Mesh
-            var shaders = Manager.ListResources("shaders", path => path.EndsWith(".toml"));
+            var shaders = Manager.ListResources("shaders", path => path.EndsWith(".json"));
             foreach (var shader in shaders)
             {
+                shader.Value.Open();
                 TextReader TempTextReader = new StreamReader(shader.Value.GetStream());
-                TomlTable ShaderData = Toml.ToModel(TempTextReader.ReadToEnd());
+                ShaderJson ShadJson = JsonSerializer.Deserialize<ShaderJson>(TempTextReader.ReadToEnd());
                 shader.Value.Close();
-                Shaders.Add(shader.Key, new Shader(Path.GetDirectoryName(shader.Value.GetPath())+"/"+ShaderData["Vertex"], Path.GetDirectoryName(shader.Value.GetPath()) + "/" + ShaderData["Frag"]));
+                Shaders.Add(shader.Key, new Shader(Path.GetDirectoryName(shader.Value.GetPath())+"/"+ ShadJson.vertex, Path.GetDirectoryName(shader.Value.GetPath()) + "/" + ShadJson.fragment));
             }
         }
+    }
+    public class ShaderJson
+    {
+        public string vertex { get; set; }
+        public string fragment { get; set; }
     }
 }

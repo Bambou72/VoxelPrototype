@@ -1,7 +1,7 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.rendering;
-namespace VoxelPrototype.client.Render.Debug
+namespace VoxelPrototype.client.debug
 {
     public static class DebugShapeRenderer
     {
@@ -51,13 +51,13 @@ namespace VoxelPrototype.client.Render.Debug
             float[] vertices = new float[]
             {
                         0,0,0,
-                        (float)(Box.Size.X),0, 0,
-                        (float)(Box.Size.X),(float)(Box.Size.Y), 0,
-                        0,(float)(Box.Size.Y), 0,
-                        0,0,(float)(Box.Size.Z),
-                        (float)(Box.Size.X),0,(float)(Box.Size.Z),
-                        (float)(Box.Size.X),(float)(Box.Size.Y),(float)(Box.Size.Z),
-                        0,(float)(Box.Size.Y),(float)(Box.Size.Z)
+                        (float)Box.Size.X,0, 0,
+                        (float)Box.Size.X,(float)Box.Size.Y, 0,
+                        0,(float)Box.Size.Y, 0,
+                        0,0,(float)Box.Size.Z,
+                        (float)Box.Size.X,0,(float)Box.Size.Z,
+                        (float)Box.Size.X,(float)Box.Size.Y,(float)Box.Size.Z,
+                        0,(float)Box.Size.Y,(float)Box.Size.Z
             };
             uint[] indices = new uint[] {
                         0, 1, 1, 2, 2, 3, 3, 0, // Lignes du plan z = aabb.Min.Z

@@ -22,12 +22,12 @@ namespace VoxelPrototype.voxelprototype.command
                             if (ghost)
                             {
                                 play.NoClip = true;
-                                ServerChat.SendServerMessage("Ghost on", peer);
+                                Server.TheServer.World.Chat.SendServerMessage("Ghost on", peer);
                             }
                             else
                             {
                                 play.NoClip = false;
-                                ServerChat.SendServerMessage("Ghost off", peer);
+                                Server.TheServer.World.Chat.SendServerMessage("Ghost off", peer);
                             }
                         }
                     }

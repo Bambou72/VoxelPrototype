@@ -1,9 +1,7 @@
 ﻿using K4os.Compression.LZ4;
 using OpenTK.Mathematics;
-using VoxelPrototype.VBF;
 namespace VoxelPrototype.server.game.world.Level
 {
-    // TODO : Add a defragmentation algorithm
     public class RegionFile
     {
         public VBFCompound root;
@@ -21,7 +19,7 @@ namespace VoxelPrototype.server.game.world.Level
                 File.WriteAllBytes(Path, VBFSerializer.Serialize(root));
             }
         }
-        internal VBFCompound? GetChunk(Vector2i pos)
+        internal VBFCompound GetChunk(Vector2i pos)
         {
             return root.GetCompound(pos.X + ":" + pos.Y);
         }
@@ -33,6 +31,11 @@ namespace VoxelPrototype.server.game.world.Level
         internal void Save()
         {
             File.WriteAllBytes(path, LZ4Pickler.Pickle(VBFSerializer.Serialize(root), LZ4Level.L06_HC));
+        }
+        internal void Dispose()
+        {
+            root.Dispose();
+            root = null;
         }
     }
 }

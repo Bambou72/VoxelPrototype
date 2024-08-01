@@ -1,0 +1,4 @@
+{
+    "vertex": "cubemap.vert",
+    "fragment": "cubemap.frag"
+}

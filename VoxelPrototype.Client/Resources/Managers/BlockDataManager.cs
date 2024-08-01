@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Resources.Managers
 {
     internal class BlockDataManager : IReloadableResourceManager
     {
-        private  Dictionary<ResourceID, BlockStateData> BlocksStateData = new Dictionary<ResourceID, BlockStateData>();
-        public BlockStateData GetBlockStateData(ResourceID id)
+        private  Dictionary<string, BlockStateData> BlocksStateData = new Dictionary<string, BlockStateData>();
+        public BlockStateData GetBlockStateData(string Location)
         {
-            if (BlocksStateData.TryGetValue(id, out BlockStateData blockStateData))
+            if (BlocksStateData.TryGetValue(Location, out BlockStateData blockStateData))
             {
                 return blockStateData;
             }
@@ -20,8 +20,9 @@ namespace VoxelPrototype.client.Resources.Managers
             var blocksdata= Manager.ListResources("data/block", path => path.EndsWith(".json"));
             foreach (var blockdata in blocksdata)
             {
+                blockdata.Value.Open();
                 TextReader TempTextReader = new StreamReader(blockdata.Value.GetStream());
-                var data = JsonConvert.DeserializeObject<BlockStateData>(TempTextReader.ReadToEnd());
+                var data = JsonSerializer.Deserialize<BlockStateData>(TempTextReader.ReadToEnd());
                 blockdata.Value.Close();
                 BlocksStateData.Add(blockdata.Key, data);
             }
@@ -33,7 +34,7 @@ namespace VoxelPrototype.client.Resources.Managers
     }
     public class BlockStateData
     {
-        public Dictionary<string, BlockData> variants = new();
+        public Dictionary<string, BlockData> variants { get; set; } = new();
         public BlockData GetBlockData(BlockState State)
         {
             if(State == State.Block.GetDefaultState())

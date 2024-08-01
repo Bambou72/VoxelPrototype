@@ -3,10 +3,17 @@ using VoxelPrototype.api.Commands;
 using VoxelPrototype.network.packets;
 namespace VoxelPrototype.server
 {
-    public static class ServerChat
+    public  class ServerChat
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        internal static void HandleMessage( NetPeer peer, ClientChatMessage data)
+
+        public ServerChat()
+        {
+            Server.TheServer.NetworkManager.RegisterHandler<ClientChatMessage>(HandleMessage);
+
+        }
+
+        internal void HandleMessage( NetPeer peer, ClientChatMessage data)
         {
             if (data.Message[0] == CommandRegistry.GetInstance().commandPrefix)
             {
@@ -19,12 +26,12 @@ namespace VoxelPrototype.server
                 Server.TheServer.NetworkManager.SendPacketToAll(packet, DeliveryMethod.ReliableOrdered);
             }
         }
-        public static void SendServerMessage(string message, NetPeer peer)
+        public void SendServerMessage(string message, NetPeer peer)
         {
             ServerChatMessage packet = new() { Message = "Server:" + message };
             Server.TheServer.NetworkManager.SendPacket(peer,packet,  DeliveryMethod.ReliableOrdered);
         }
-        public static void SendMessage(string message, NetPeer peer)
+        public void SendMessage(string message, NetPeer peer)
         {
             ServerChatMessage packet = new() { Message = message };
             Server.TheServer.NetworkManager.SendPacket(peer,packet, DeliveryMethod.ReliableOrdered);

@@ -1,6 +1,4 @@
-﻿using VoxelPrototype.VBF;
-
-namespace VoxelPrototype.game
+﻿namespace VoxelPrototype.game
 {
     public class WorldInfo : IVBFSerializableBinary<WorldInfo>
     {
@@ -25,7 +23,9 @@ namespace VoxelPrototype.game
             VBFCompound root = new VBFCompound();
             root.AddLong("Seed", Seed);
             root.AddString("Generator", WorldGenerator);
-            return VBFSerializer.Serialize(root);
+            byte[] data = VBFSerializer.Serialize(root);
+            root = default;
+            return data;
         }
         public long GetSeed()
         {

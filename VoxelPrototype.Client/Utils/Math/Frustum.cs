@@ -1,9 +1,9 @@
 ﻿using OpenTK.Mathematics;
 using VoxelPrototype.client.game.world.Level.Chunk;
 using VoxelPrototype.client.game.world.Level.Chunk.Render;
-using VoxelPrototype.client.Render.Components;
+using VoxelPrototype.client.rendering.camera;
 
-namespace VoxelPrototype.client.Utils.Math
+namespace VoxelPrototype.client.utils.math
 {
     internal class Frustum
     {

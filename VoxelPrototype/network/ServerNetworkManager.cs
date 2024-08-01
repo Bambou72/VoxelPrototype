@@ -21,7 +21,6 @@ namespace VoxelPrototype.network
         public void InitPackets()
         {
             RegisterHandler<ClientInitialPacket>(ClientInitialPacket);
-            RegisterHandler<ClientChatMessage>(ServerChat.HandleMessage);
         }
         internal void StartServer(int Port)
         {

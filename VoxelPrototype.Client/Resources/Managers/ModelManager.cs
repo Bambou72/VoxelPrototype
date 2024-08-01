@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using VoxelPrototype.client.Render.Components;
+﻿using System.Text.Json;
+using VoxelPrototype.client.rendering.model;
 using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.Resources.Managers
@@ -7,20 +7,20 @@ namespace VoxelPrototype.client.Resources.Managers
     internal class ModelManager : IReloadableResourceManager
     {
         //
-        private Dictionary<ResourceID, BlockMesh> BlockMeshs = new Dictionary<ResourceID, BlockMesh>();
-        private  Dictionary<ResourceID, Model> EntitiesMesh = new Dictionary<ResourceID, Model>();
+        private Dictionary<string, BlockMesh> BlockMeshs = new Dictionary<string, BlockMesh>();
+        private  Dictionary<string, Model> EntitiesMesh = new Dictionary<string, Model>();
 
-        public BlockMesh GetBlockMesh(ResourceID resourceID)
+        public BlockMesh GetBlockMesh(string resourceLocation)
         {
-            if(BlockMeshs.TryGetValue(resourceID, out BlockMesh blockMesh))
+            if(BlockMeshs.TryGetValue(resourceLocation, out BlockMesh blockMesh))
             {
                 return blockMesh;
             }
             throw new Exception("Can't find block mesh");
         }
-        public Model GetEntityModel(ResourceID resourceID)
+        public Model GetEntityModel(string resourceLocation)
         {
-            if (EntitiesMesh.TryGetValue(resourceID, out Model blockMesh))
+            if (EntitiesMesh.TryGetValue(resourceLocation, out Model blockMesh))
             {
                 return blockMesh;
             }
@@ -42,8 +42,9 @@ namespace VoxelPrototype.client.Resources.Managers
             var BlocksMesh = Manager.ListResources("models/block", path => path.EndsWith(".json"));
             foreach (var mesh in BlocksMesh)
             {
+                mesh.Value.Open();
                 TextReader TempTextReader = new StreamReader(mesh.Value.GetStream());
-                var data = JsonConvert.DeserializeObject<BlockMeshData>(TempTextReader.ReadToEnd());
+                var data = JsonSerializer.Deserialize<BlockMeshData>(TempTextReader.ReadToEnd());
                 mesh.Value.Close();
 
                 BlockMeshs.Add(mesh.Key, new BlockMesh(data.Vertex, data.Uv));
@@ -52,8 +53,10 @@ namespace VoxelPrototype.client.Resources.Managers
             var EntitiesMeshs = Manager.ListResources("models/entity", path => path.EndsWith(".json"));
             foreach (var mesh in EntitiesMeshs)
             {
+                mesh.Value.Open();
+
                 TextReader TempTextReader = new StreamReader(mesh.Value.GetStream());
-                var data = JsonConvert.DeserializeObject<MeshData>(TempTextReader.ReadToEnd());
+                var data = JsonSerializer.Deserialize<MeshData>(TempTextReader.ReadToEnd());
                 mesh.Value.Close();
                 EntitiesMesh.Add(mesh.Key, new Model(data.Model));
             }

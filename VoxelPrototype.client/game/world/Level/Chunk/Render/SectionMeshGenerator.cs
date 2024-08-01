@@ -1,15 +1,15 @@
-﻿using MethodTimer;
-using NLog;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 using VoxelPrototype.api.Blocks;
 using VoxelPrototype.api.Blocks.State;
-using VoxelPrototype.client.Render.Components;
+using VoxelPrototype.client.rendering.model;
+using VoxelPrototype.client.rendering.texture;
 using VoxelPrototype.client.Resources.Managers;
 using VoxelPrototype.utils;
 namespace VoxelPrototype.client.game.world.Level.Chunk.Render
 {
     internal class SectionMeshGenerator
     {
+        static string Unknown = "textures/block/unknow";
         internal List<SectionVertex> OpaqueVertices;
         internal List<uint> OpaqueIndices;
         uint IndexCounter;
@@ -135,9 +135,6 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
         // [Time]
         internal void Generate(Vector3i Position)
         {
-#if PROFILE
-            using(Profiler.BeginEvent("GenerateMesh"))
-#endif
             {
                 OpaqueVertices = new();
                 OpaqueIndices = new();
@@ -158,8 +155,7 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
                                 {
                                     continue;
                                 }
-                                var mesh = Client.TheClient.ModelManager.GetBlockMesh(ResourceID.FromString(
-                                Client.TheClient.BlockDataManager.GetBlockStateData(block.Block.Data).GetBlockData(block).model));
+                                var mesh = Client.TheClient.ModelManager.GetBlockMesh(Client.TheClient.BlockDataManager.GetBlockStateData(block.Block.Data).GetBlockData(block).model);
 
 
                                 if (block.Block.RenderType == BlockRenderType.Cube)
@@ -238,22 +234,22 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
         }
         internal float[] GetTextureCoordinates(int Face, BlockState State)
         {
-            var Atlas = (TextureAtlas)Client.TheClient.TextureManager.GetTexture(new ResourceID("textures/block/atlas"));
+            var Atlas = (TextureAtlas)Client.TheClient.TextureManager.GetTexture("textures/block/atlas");
             try
             {
                 BlockData Data = Client.TheClient.BlockDataManager.GetBlockStateData(State.Block.Data).GetBlockData(State);
                 if (Data.textures.all != null)
                 {
-                    return Atlas.GetCoordinates(ResourceID.FromString(Data.textures.all));
+                    return Atlas.GetCoordinates(Data.textures.all);
                 }
                 else
                 {
-                    return Atlas.GetCoordinates(ResourceID.FromString(Data.textures.textures[Face]));
+                    return Atlas.GetCoordinates(Data.textures.textures[Face]);
                 }
             }
             catch (Exception e)
             {
-                return Atlas.GetCoordinates(ResourceID.FromString("voxelprototype:textures/block/unknow"));
+                return Atlas.GetCoordinates(Unknown);
             }
         }
         private void AddMeshFace(BlockMesh Mesh, Vector3i Position, uint BitMask, BlockState Block, Vector3i BlockPos, int BF, bool ao)

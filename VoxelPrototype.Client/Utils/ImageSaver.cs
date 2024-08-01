@@ -1,5 +1,4 @@
-﻿using StbImageSharp;
-using StbImageWriteSharp;
+﻿using VoxelPrototype.client.utils.StbImageSharp;
 namespace VoxelPrototype.client.Utils
 {
     public static class ImageSaver
@@ -9,7 +8,7 @@ namespace VoxelPrototype.client.Utils
         {
             using (var outputStream = File.OpenWrite(Path))
             {
-                Writer.WritePng(Image.Data, Image.Width, Image.Height, (StbImageWriteSharp.ColorComponents)Image.Comp, outputStream);
+                Writer.WritePng(Image.Data, Image.Width, Image.Height,Image.Comp, outputStream);
                 outputStream.Close();
             }
         }

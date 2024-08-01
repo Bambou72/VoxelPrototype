@@ -62,10 +62,7 @@ namespace VoxelPrototype.server.game.entity
             }
             if (Control.shift)
             {
-                if (!Fly && !NoClip)
-                {
-                }
-                else
+                if (Fly || NoClip)
                 {
                     Acceleration.Y = -Speed; // Down
                 }

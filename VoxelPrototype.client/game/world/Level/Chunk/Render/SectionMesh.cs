@@ -19,9 +19,6 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
         }
         internal void Upload(SectionVertex[] OpaqueVertices, uint[] OpaqueIndices)
         {
-#if PROFILE
-            using (Profiler.BeginEvent("Section Mesh Upload",Profiler.ColorType.Red))
-#endif
             {
                 OpaqueMesh.SetupData(OpaqueVertices, OpaqueIndices);
             }

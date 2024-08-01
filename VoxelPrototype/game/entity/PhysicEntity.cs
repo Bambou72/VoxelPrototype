@@ -17,12 +17,12 @@ namespace VoxelPrototype.game.entity
         public Vector3d Velocity;
         public Vector3d Acceleration;
         public bool Fly;
-        public bool NoClip;
+        public bool NoClip {  get; set; }
         public Vector3d Friction
         {
             get
             {
-                if (Fly)
+                if (Fly || NoClip)
                 {
                     return PhysicConst.DragFly;
                 }
@@ -135,7 +135,7 @@ namespace VoxelPrototype.game.entity
             }
             Position += Velocity * DT;
             Vector3d gravity;
-            if (Fly)
+            if (Fly || NoClip)
             {
                 gravity = PhysicConst.Zero;
             }
@@ -144,20 +144,23 @@ namespace VoxelPrototype.game.entity
                 gravity = PhysicConst.Gravity;
             }
             Velocity += gravity * DT;
-            Velocity -= MinAbs(Velocity * Friction * DT, Velocity);
+           
         }
         public override void Update(IWorld World, double DT)
         {
-            Velocity += Acceleration * DT * Friction;
-            Acceleration = Vector3.Zero;
-            UpdateCollider();
-            if(!NoClip)
+            if (!NoClip)
             {
-                TestCollisionWithTerrain(World,DT);
-            }else
+                TestCollisionWithTerrain(World, DT);
+            }
+            else
             {
                 Position += Acceleration * DT;
             }
+            Velocity -= MinAbs(Velocity * Friction * DT, Velocity);
+            Velocity += Acceleration * DT * Friction;
+            Acceleration = Vector3.Zero;
+            UpdateCollider();
+            
         }
         public static Vector3d MinAbs(Vector3d a, Vector3d b)
         {

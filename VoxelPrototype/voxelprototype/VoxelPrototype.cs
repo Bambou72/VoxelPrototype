@@ -22,31 +22,31 @@ namespace VoxelPrototype.voxelprototype
             string DirtID = BRegistry.GetBlockID(Name, "dirt");
             var Dirt = new Block()
             {
-                Data = new ResourceID("data/block/dirt")
+                Data = "data/block/dirt"
             };
             BRegistry.RegisterBlock(DirtID, Dirt);
             string GrassID = BRegistry.GetBlockID(Name, "grass");
             var Grass = new Block()
             {
-                Data = new ResourceID("data/block/grass")
+                Data = "data/block/grass"
             };
             BRegistry.RegisterBlock(GrassID, Grass);
             string StoneID = BRegistry.GetBlockID(Name, "stone");
             var Stone = new Block()
             {
-                Data = new ResourceID("data/block/stone")
+                Data = "data/block/stone"
             };
             BRegistry.RegisterBlock(StoneID, Stone);
             string CobblestoneID = BRegistry.GetBlockID(Name, "cobblestone");
             var Cobblestone = new Block()
             {
-                Data = new ResourceID("data/block/cobblestone")
+                Data = "data/block/cobblestone"
             };
             BRegistry.RegisterBlock(CobblestoneID, Cobblestone);
             string LampID = BRegistry.GetBlockID(Name, "lamp");
             var Lamp = new block.Lamp()
             {
-                Data = new ResourceID("data/block/lamp")
+                Data ="data/block/lamp"
             };
             BRegistry.RegisterBlock(LampID, Lamp);
             //

@@ -1,10 +1,12 @@
-﻿using Tomlyn;
-using Tomlyn.Model;
+﻿
+
 
 namespace VoxelPrototype.client
 {
+    /*
     public class Config
     {
+
         private TomlTable Data;
         public Config()
         {
@@ -41,5 +43,5 @@ namespace VoxelPrototype.client
         {
             Data[Name] = Value;
         }
-    }
+    }*/
 }

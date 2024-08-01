@@ -3,31 +3,31 @@
  * Copyrights Florian Pfeiffer
  * Author Florian Pfeiffer
  **/
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using VoxelPrototype.api;
 using VoxelPrototype.client.game.world;
-using VoxelPrototype.client.Render;
-using VoxelPrototype.client.Render.Debug;
-using VoxelPrototype.client.Render.GUI;
 using VoxelPrototype.client.Resources.Managers;
+using VoxelPrototype.client.server;
+using VoxelPrototype.client.ui;
+using VoxelPrototype.client.ui.screens;
+using VoxelPrototype.client.ui.utils;
 using VoxelPrototype.network;
 namespace VoxelPrototype.client
 {
     public class Client : GameWindow
     {
+        public static Client TheClient; 
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        public game.world.World World;
+        public World World;
         public ClientNetworkManager NetworkManager;
-        public static Client TheClient;
         internal EmbeddedServer EmbedderServer;
-        internal Config ClientConfig;
-        // internal UIManager UIManager;
-        //internal UIMaster UIMaster;
+        //internal Config ClientConfig;
+        internal UIManager UIManager;
         internal Resources.ResourcesManager ResourceManager;
-        internal Renderer Renderer;
-        internal InputEventManager InputEventManager;
         internal TextureManager TextureManager;
         internal FontManager FontManager;
         internal ModelManager ModelManager;
@@ -35,6 +35,14 @@ namespace VoxelPrototype.client
         internal ShaderManager ShaderManager;
         //temp
         string[] ResourcesPacksPaths;
+        //OpenGL
+        private static int MaxTextureSize;
+        private static int MaxTextureLayers;
+        //
+        public bool Grab = false;
+        public bool NoInput = false;
+        public bool DebugFPS = false;
+
         public Client( string[]? ResourcesPacksPaths, GameWindowSettings GS , NativeWindowSettings NS) : base(GS, NS) 
         {
             if (TheClient == null)
@@ -42,98 +50,94 @@ namespace VoxelPrototype.client
                 TheClient = this;
             }
             this.ResourcesPacksPaths = ResourcesPacksPaths;
-            ClientConfig = new();
+            //ClientConfig = new();
         }
         protected override void OnLoad()
         {
             base.OnLoad();
             //Load
             //Renderer
-            Renderer = new Renderer();
-            Renderer.Init();
+            GL.Enable(EnableCap.Multisample);
+            GL.Enable(EnableCap.DepthTest);
+            MaxTextureSize = GL.GetInteger(GetPName.MaxTextureSize);
+            MaxTextureLayers = GL.GetInteger(GetPName.MaxArrayTextureLayers);
+            Logger.Info($"Max texture size is {MaxTextureSize}");
+            Logger.Info($"Max texture array layer size is {MaxTextureLayers}");
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             //Mod
             new ModManager();
             ModManager.GetInstance().LoadMods();
             ModManager.GetInstance().PreInit();
             //Resources
+            InitResources();
+            NetworkManager = new();
+            //Mod
+            ModManager.GetInstance().Init();
+            //World
+            World = new World();
+            UIManager = new();
+            UIManager.SetCurrentScreen(new MainScreen());
+        }
+        public void InitResources()
+        {
             ResourceManager = new(ResourcesPacksPaths);
+            TextureManager = new TextureManager();
+            ResourceManager.RegisterManager(TextureManager);
             ShaderManager = new ShaderManager();
             ResourceManager.RegisterManager(ShaderManager);
             FontManager = new FontManager();
             ResourceManager.RegisterManager(FontManager);
-            TextureManager = new TextureManager();
-            ResourceManager.RegisterManager(TextureManager);
             ModelManager = new ModelManager();
             ResourceManager.RegisterManager(ModelManager);
             BlockDataManager = new BlockDataManager();
             ResourceManager.RegisterManager(BlockDataManager);
             ResourceManager.Init();
-            NetworkManager = new();
-            //Mod
-            ModManager.GetInstance().Init();
-            //GUi
-            GUIVar.Init(FramebufferSize);
-            GUIVar.Load();
-            //Input
-            InputEventManager = new InputEventManager();
-            //World
-            World = new World();
-            //OnResize(new());
-            //UIManager = new();
-            //InputEventManager.RegisterOnKeyDownCallback(UIManager.OnKeyDown);
-            //InputEventManager.RegisterOnMouseUpCallback(UIManager.OnMouseUp);
-            // InputEventManager.RegisterOnKeyPressedCallback(UIManager.OnKeyPressed);
-            //InputEventManager.RegisterOnMouseMoveCallback(UIManager.OnMouseMove);
-            //InputEventManager.RegisterOnMouseWheelCallback(UIManager.OnMouseWheel);
-            //InputEventManager.RegisterOnMouseDownCallback(UIManager.OnMouseDown);
-            //InputEventManager.RegisterOnMouseClickedCallback(UIManager.OnMouseClicked);
-            //InputEventManager.RegisterOnMouseWheelCallback(UIManager.OnMouseWheel);
-            //UIMaster = new();
-
         }
         protected override void OnUnload()
         {
             base.OnUnload();
             //Unload
-            GUIVar.DeLoad();
-            ClientConfig.SaveProperties();
+            //ClientConfig.SaveProperties();
             if(EmbedderServer != null)
             {
                 EmbedderServer.Stop();
             }
-#if PROFILE
-            Profiler.Dispose();
-#endif
         }
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             //Update
-            NetworkManager.Update();
-
-#if PROFILE
-            using (Profiler.BeginEvent("GUI Update"))
-#endif
+            //Debug FPS
+            if (KeyboardState.IsKeyPressed(Keys.F1))
             {
-                GUIVar.Update((float)e.Time);
-                GUIVar.Update();
+                DebugFPS = !DebugFPS;
             }
-
-            //UIManager.Update();
+            //Debug Grab
+            if (KeyboardState.IsKeyPressed(Keys.F3))
+            {
+                if (Grab == false)
+                {
+                    SetCursorState(CursorState.Grabbed);
+                    Grab = true;
+                }
+                else
+                {
+                    SetCursorState(CursorState.Normal);
+                    Grab = false;
+                }
+            }
+            //
+            NetworkManager.Update();
+            UIManager.Update();
             if (World.Initialized)
             {
-#if PROFILE
-                using(Profiler.BeginEvent("World Tick"))
-#endif
                 {
                     World.Tick((float)e.Time);
                 }
             }
-            //InputEventManager.Update();
         }
-        protected override void  OnRenderFrame(FrameEventArgs e)
+        protected override void OnRenderFrame(FrameEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit );
 
             //Render
             //
@@ -141,21 +145,11 @@ namespace VoxelPrototype.client
             if (World.Initialized)
             {
                 GL.Disable(EnableCap.Multisample);
-#if PROFILE
-                using (Profiler.BeginEvent("World Render"))
-#endif
                 {
                     World.Render();
                 }
                 GL.Enable(EnableCap.Multisample);
-                if (World.IsLocalPlayerExist())
-                {
-                    //Player.Draw(Subsystems.RessourceManager.RessourceManager.GetShader("Nentity"), PlayerAnimator);
-                }/*
-                if (World.IsLocalPlayerExist())
-                {
-                    DebugShapeRenderer.Render(World.GetLocalPlayerCamera().GetViewMatrix(), World.GetLocalPlayerCamera().GetProjectionMatrix());
-                }*/
+
             }
             //
             //Debug
@@ -164,18 +158,12 @@ namespace VoxelPrototype.client
             //Debug UI
             //
             //ImGui.ShowDemoWindow();
-            //UIManager.Render();
-#if PROFILE
-            using (Profiler.BeginEvent("GUI Render"))
-#endif
+            UIManager.Render();
+            if(DebugFPS)
             {
-                GUIVar.RenderI();
-                GUIVar.Render();
+                UIManager.Renderer.RenderText("FPS:"+ (1 / e.Time).ToString("0") +" ms:"+(e.Time*1000).ToString("0.00"),new Vector2i(0,TextSizeCalculator.CalculateVerticalSize((1 / e.Time).ToString("0"))),Shadow:false);
             }
             SwapBuffers();
-#if PROFILE
-            Profiler.ProfileFrame("Main");
-#endif
         }
 
         public void DeInitWorld()
@@ -190,17 +178,37 @@ namespace VoxelPrototype.client
             {
                 World.GetLocalPlayerCamera().AspectRatio = FramebufferSize.X / (float)FramebufferSize.Y;
             }
-
-
         }
         protected override void OnResize(ResizeEventArgs e)
-        { 
-            GUIVar.Resize(FramebufferSize);
+        {
+            UIManager.OnResize();
         }
         protected override void OnTextInput(TextInputEventArgs e)
         {
-            GUIVar.Char((char)(e.Unicode));
-
+        }
+        Vector2i SavedSize;
+        Vector2i SavedLocation;
+        public  void SetFullscreen(bool fullscreen)
+        {
+            if(fullscreen)
+            {
+                SavedSize = Size;
+                SavedLocation = Location;
+                WindowState = WindowState.Fullscreen;
+            }else
+            { 
+                WindowState = WindowState.Normal;
+                Size =  SavedSize;
+                Location = SavedLocation;
+            }
+        }
+        public  bool GetFullscreen()
+        {
+            return WindowState == WindowState.Fullscreen;
+        }
+        public  void SetCursorState(CursorState state)
+        {
+           CursorState = state;
         }
     }
 }

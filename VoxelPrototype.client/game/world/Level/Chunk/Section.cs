@@ -1,5 +1,4 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.VBF;
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.game.world.storage;
 using VoxelPrototype.client.game.world.Level.Chunk.Render;
@@ -18,7 +17,6 @@ namespace VoxelPrototype.client.game.world.Level.Chunk
         internal BlockPalette BlockPalette;
         internal SectionMesh SectionMesh;
         internal int Y;
-        internal ReaderWriterLockSlim Lock = new();
         internal MeshState MeshState = MeshState.Dirty;
         internal Vector3i Position
         {

@@ -5,8 +5,6 @@
  */
 using LiteNetLib;
 using OpenTK.Mathematics;
-using SharpFont;
-using VoxelPrototype.client;
 using VoxelPrototype.network.packets;
 namespace VoxelPrototype.client.game.entity
 {

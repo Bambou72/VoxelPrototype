@@ -5,8 +5,7 @@ using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client.game.entity;
 using VoxelPrototype.client.game.world.Level;
 using VoxelPrototype.client.game.world.Level.Chunk;
-using VoxelPrototype.client.Render.Components;
-using VoxelPrototype.client.Render.Entities;
+using VoxelPrototype.client.rendering.camera;
 using VoxelPrototype.game;
 
 namespace VoxelPrototype.client.game.world
@@ -51,17 +50,11 @@ namespace VoxelPrototype.client.game.world
         public void Tick(float DT)
         {
             CurrentTick++;
-#if PROFILE
-            using (Profiler.BeginEvent("Player Manager Tick"))
-#endif
             {
                 PlayerFactory.Update(DT);
             }
             if (PlayerFactory.LocalPlayerExist)
             {
-#if PROFILE
-                using (Profiler.BeginEvent("Chunk Manager Tick"))
-#endif
                 {
                     ChunkManager.Update();
                 }
@@ -128,7 +121,7 @@ namespace VoxelPrototype.client.game.world
         }
         public void SetBlock(int x, int y, int z, BlockState State)
         {
-            throw new NotImplementedException();
+            ChunkManager.SetBlock(new Vector3i(x, y, z), State);
         }
 
         public bool IsTransparent(int x, int y, int z)

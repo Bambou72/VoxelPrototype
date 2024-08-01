@@ -3,7 +3,6 @@ using OpenTK.Mathematics;
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.network;
 using VoxelPrototype.utils;
-using VoxelPrototype.VBF;
 
 namespace VoxelPrototype.network.packets
 {

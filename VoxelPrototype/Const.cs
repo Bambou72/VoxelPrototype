@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VoxelPrototype
+﻿namespace VoxelPrototype
 {
     public static class Const
     {

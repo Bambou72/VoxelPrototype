@@ -2,7 +2,6 @@
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.game;
 using VoxelPrototype.physics;
-using VoxelPrototype.utils;
 namespace VoxelPrototype.api.Blocks
 {
     public class Block
@@ -12,7 +11,7 @@ namespace VoxelPrototype.api.Blocks
         public BlockStateHolder StateHolder;
         private BlockState Default;
         public string ID;
-        public ResourceID Data;
+        public string Data;
         public float Friction = 8;
         public int BreakingTime = 20;
         public BlockRenderType RenderType;

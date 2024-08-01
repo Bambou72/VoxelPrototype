@@ -1,11 +1,10 @@
 ﻿using LiteNetLib;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using System.Runtime.InteropServices.JavaScript;
 using VoxelPrototype.api.Blocks;
 using VoxelPrototype.api.Blocks.State;
-using VoxelPrototype.client.Render.Components;
-using VoxelPrototype.client.Resources;
+using VoxelPrototype.client.rendering.camera;
+using VoxelPrototype.client.rendering.model;
 using VoxelPrototype.game;
 using VoxelPrototype.game.entity.player;
 using VoxelPrototype.network.packets;
@@ -16,6 +15,7 @@ namespace VoxelPrototype.client.game.entity
 {
     internal class ClientPlayer : Player
     {
+        static string PlayerModelResourceID = "models/entity/player";
         internal FrustumCamera? _Camera;
         internal bool Local = false;
         internal bool ServerSide = false;
@@ -37,9 +37,9 @@ namespace VoxelPrototype.client.game.entity
                 {
                     ViewRay = new Ray(Vector3d.Zero, Vector3.Zero, Reach);
 
-                    _Camera = new FrustumCamera((Vector3)_Position, (float)ClientAPI.WindowWidth() / ClientAPI.WindowHeight());
+                    _Camera = new FrustumCamera((Vector3)_Position, (float) client.Client.TheClient.ClientSize.X / client.Client.TheClient.ClientSize.Y);
                 }
-                _Model = client.Client.TheClient.ModelManager.GetEntityModel(new ResourceID("models/entity/player"));
+                _Model = client.Client.TheClient.ModelManager.GetEntityModel(PlayerModelResourceID);
             }
             else
             {
@@ -54,11 +54,11 @@ namespace VoxelPrototype.client.game.entity
             ViewedBlockPos = CurrentBlock;
             Vector3i BlockBefore = new Vector3i(CurrentBlock.X + Normal.X, CurrentBlock.Y + Normal.Y, CurrentBlock.Z + Normal.Z);
 
-            if (Client.TheClient.MouseState.IsButtonDown(MouseButton.Left) && Client.TheClient.InputEventManager.Grab)
+            if (Client.TheClient.MouseState.IsButtonDown(MouseButton.Left) && Client.TheClient.Grab)
             {
                 Client.TheClient.World.ChunkManager.ChangeChunk(CurrentBlock, BlockRegistry.GetInstance().Air);
             }
-            else if (Client.TheClient.MouseState.IsButtonPressed(MouseButton.Right) && Client.TheClient.InputEventManager.Grab)
+            else if (Client.TheClient.MouseState.IsButtonPressed(MouseButton.Right) && Client.TheClient.Grab)
             {
                 /*if(SelectedBlock == null)
                 {
@@ -96,7 +96,7 @@ namespace VoxelPrototype.client.game.entity
         {
             PlayerControls Controls = new PlayerControls();
 
-            if (Client.TheClient.InputEventManager.GetNoInput() == false)
+            if (Client.TheClient.NoInput == false)
             {
                 if (Client.TheClient.KeyboardState.IsKeyDown(Keys.LeftControl))
                 {
@@ -154,7 +154,7 @@ namespace VoxelPrototype.client.game.entity
                 {
                     Controls.shift = false;
                 }
-                if (Client.TheClient.InputEventManager.GetGrab())
+                if (Client.TheClient.Grab)
                 {
                     Vector2 change = Client.TheClient.MouseState.Delta;
                     float s = MathF.Pow(0.6f * sensitivity + 0.2f, 3) * 8.0f;
@@ -223,9 +223,7 @@ namespace VoxelPrototype.client.game.entity
                 }
             }
             _Camera.Position = new Vector3((float)Position.X, (float)Position.Y + EntityEYEHeight, (float)Position.Z);
-
         }
     }
-
 }
 

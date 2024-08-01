@@ -1,0 +1,4 @@
+{
+    "vertex": "ui.vert",
+    "fragment": "ui.frag"
+}

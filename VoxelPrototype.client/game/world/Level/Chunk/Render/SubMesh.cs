@@ -1,13 +1,6 @@
-﻿using Newtonsoft.Json.Bson;
-using OpenTK.Graphics.OpenGL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using OpenTK.Graphics.OpenGL4;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.game.world.Level.Chunk.Render
 {

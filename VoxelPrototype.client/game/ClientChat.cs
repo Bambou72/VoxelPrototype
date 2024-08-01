@@ -16,11 +16,11 @@ namespace VoxelPrototype.client.game
         }
         internal void HandleMessage(NetPeer peer, ServerChatMessage data)
         {
-            Render.GUI.Console.AddToConsoleHistory(data.Message);
+            //ui.Console.AddToConsoleHistory(data.Message);
         }
         internal void Dispose()
         {
-            Render.GUI.Console.ClearConsoleHistory();
+            //ui.Console.ClearConsoleHistory();
         }
     }
 }

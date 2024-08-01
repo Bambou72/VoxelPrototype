@@ -2,7 +2,7 @@
  * Texture class
  * Authors Opentk
  **/
-using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
 namespace VBFViewer
 {
     // A helper class, much like Shader, meant to simplify loading textures.

@@ -1,7 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using VoxelPrototype.api.Blocks;
 using VoxelPrototype.api.Blocks.State;
-using VoxelPrototype.VBF;
 
 namespace VoxelPrototype.client.game.world.Level.Chunk
 {

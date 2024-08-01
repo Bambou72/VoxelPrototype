@@ -9,12 +9,11 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <ErrorReport>prompt</ErrorReport>
-    <Authors>OutlawTeam</Authors>
     <RepositoryUrl>https://github.com/OutlawTeam/VoxPopuli</RepositoryUrl>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>vp.ico</ApplicationIcon>
-    <Configurations>Debug;Release;Profile</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>
@@ -29,21 +28,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="OpenTK.Windowing.GraphicsLibraryFramework" Version="4.8.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\build\Build.csproj" />
     <ProjectReference Include="..\VoxelPrototype.client\VoxelPrototype.client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="freetype6.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-	<PropertyGroup>
-		<PublishAot>true</PublishAot>
-	</PropertyGroup>
 </Project>

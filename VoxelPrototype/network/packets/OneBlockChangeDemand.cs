@@ -2,7 +2,6 @@
 using OpenTK.Mathematics;
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.utils;
-using VoxelPrototype.VBF;
 
 namespace VoxelPrototype.network.packets
 {

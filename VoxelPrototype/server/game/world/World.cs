@@ -6,7 +6,6 @@ using VoxelPrototype.game;
 using VoxelPrototype.server.game.entity;
 using VoxelPrototype.server.game.world.Level;
 using VoxelPrototype.server.game.world.Level.Chunk;
-using VoxelPrototype.VBF;
 
 namespace VoxelPrototype.server.game.world
 {
@@ -26,7 +25,7 @@ namespace VoxelPrototype.server.game.world
         public ServerChunkManager ChunkManager;
         //Players
         public PlayerManager PlayerFactory;
-
+        public ServerChat Chat;
         public World(string path, WorldSettings Settings = null)
         {
             this.path = path;
@@ -50,6 +49,7 @@ namespace VoxelPrototype.server.game.world
             WorldGenerator.SetData(Seed);
             ChunkManager = new ServerChunkManager();
             PlayerFactory = new PlayerManager();
+            Chat = new();
 
         }
         public byte[] SerializeWorldData()

@@ -13,7 +13,6 @@ using VoxelPrototype.network.packets;
 using VoxelPrototype.server.game.entity;
 using VoxelPrototype.server.game.world.Level.Chunk;
 using VoxelPrototype.utils;
-using VoxelPrototype.VBF;
 
 namespace VoxelPrototype.server.game.world.Level
 {
@@ -47,6 +46,7 @@ namespace VoxelPrototype.server.game.world.Level
             foreach (RegionFile region in TempRegions.Values)
             {
                 region.Save();
+                region.Dispose();
             }
             TempRegions.Clear();
             ChunkToBeSend.Clear();
@@ -86,7 +86,7 @@ namespace VoxelPrototype.server.game.world.Level
                 TempRegions.Add(new Vector2i(RegionX, RegionZ), Region);
             }
             var d = Region.GetChunk(new Vector2i(X, Z));
-            if (d != null)
+            if (d != default(VBFCompound))
             {
                 return new Chunk.Chunk().Deserialize(d);
             }
@@ -107,7 +107,7 @@ namespace VoxelPrototype.server.game.world.Level
                 Region = new(path);
                 TempRegions.Add(new Vector2i(RegionX, RehionZ), Region);
             }
-            var d = Region.GetChunk(Position);
+            VBFCompound d = Region.GetChunk(Position);
             if (d != null)
             {
                 return new Chunk.Chunk().Deserialize(d);
@@ -227,6 +227,7 @@ namespace VoxelPrototype.server.game.world.Level
             foreach (RegionFile Region in TempRegions.Values)
             {
                 Region.Save();
+                Region.Dispose();
             }
             TempRegions.Clear();
             foreach (Chunk.Chunk chunk in LoadedChunks.Values)

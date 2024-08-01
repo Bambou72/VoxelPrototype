@@ -71,7 +71,7 @@ namespace VoxelPrototype.client
             //Resources
             InitResources();
             NetworkManager = new();
-            //Mod
+            //Mods
             ModManager.GetInstance().Init();
             //World
             World = new World();

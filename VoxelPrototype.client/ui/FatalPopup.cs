@@ -1,6 +1,8 @@
-﻿namespace VoxelPrototype.client.ui
+﻿using ImGuiNET;
+
+namespace VoxelPrototype.client.ui
 {
-    /*
+    
     internal static class FatalPopup
     {
         internal static void ShowFatal(Exception ex)
@@ -22,5 +24,5 @@
                 ImGui.EndPopup();
             }
         }
-    }*/
+    }
 }

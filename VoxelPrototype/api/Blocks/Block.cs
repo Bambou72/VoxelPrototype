@@ -6,7 +6,7 @@ namespace VoxelPrototype.api.Blocks
 {
     public class Block
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("Block");
 
         public BlockStateHolder StateHolder;
         private BlockState Default;

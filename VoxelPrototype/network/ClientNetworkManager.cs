@@ -15,7 +15,7 @@ namespace VoxelPrototype.network
     /// </summary>
     public class ClientNetworkManager : NetworkManager
     {
-        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ClientNetworkManager");
 
         internal NetPeer Server;
         public ClientNetworkManager() : base()

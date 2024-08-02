@@ -7,7 +7,6 @@ namespace VoxelPrototype.client.ui.renderer.batch
 {
     internal class UIBatch
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
         private static uint[] Indices = [
             0,1,2,
             1,2,3

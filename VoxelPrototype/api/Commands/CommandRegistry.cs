@@ -10,7 +10,7 @@ namespace VoxelPrototype.api.Commands
         {
             return Instance;
         }
-        public static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        public static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("CommandRegistry");
         public Dictionary<string, ICommand> Commands = new Dictionary<string, ICommand>();
         public char commandPrefix = '#'; // Le préfixe spécial pour les commandes
         public List<string> autocommands = new();

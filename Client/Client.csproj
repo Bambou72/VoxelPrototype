@@ -14,6 +14,9 @@
     <OutputType>Exe</OutputType>
     <ApplicationIcon>vp.ico</ApplicationIcon>
     <Configurations>Debug;Release</Configurations>
+	<PublishAot>true</PublishAot>
+	<PublishTrimmed>true</PublishTrimmed>
+	<TrimMode>full</TrimMode>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>
@@ -27,7 +30,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VoxelPrototype.client\VoxelPrototype.client.csproj" />

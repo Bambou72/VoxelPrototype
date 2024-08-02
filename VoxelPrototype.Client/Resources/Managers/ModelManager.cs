@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using VoxelPrototype.client.rendering.model;
 using VoxelPrototype.client.resources.managers;
 using VoxelPrototype.utils;
@@ -45,7 +46,7 @@ namespace VoxelPrototype.client.Resources.Managers
             {
                 mesh.Value.Open();
                 TextReader TempTextReader = new StreamReader(mesh.Value.GetStream());
-                var data = JsonSerializer.Deserialize<BlockMeshData>(TempTextReader.ReadToEnd());
+                var data = JsonSerializer.Deserialize<BlockMeshData>(TempTextReader.ReadToEnd(),ModelJsonSerializerContext.Default.BlockMeshData);
                 mesh.Value.Close();
 
                 BlockMeshs.Add(mesh.Key, new BlockMesh(data.Vertex, data.Uv));
@@ -57,12 +58,19 @@ namespace VoxelPrototype.client.Resources.Managers
                 mesh.Value.Open();
 
                 TextReader TempTextReader = new StreamReader(mesh.Value.GetStream());
-                var data = JsonSerializer.Deserialize<MeshData>(TempTextReader.ReadToEnd());
+                var data = JsonSerializer.Deserialize<MeshData>(TempTextReader.ReadToEnd(),ModelJsonSerializerContext.Default.MeshData);
                 mesh.Value.Close();
                 EntitiesMesh.Add(mesh.Key, new Model(data.Model));
             }
         }
     }
+    [JsonSourceGenerationOptions(WriteIndented = true)]
+    [JsonSerializable(typeof(BlockMeshData))]
+    [JsonSerializable(typeof(MeshData))]
+    internal partial class ModelJsonSerializerContext : JsonSerializerContext
+    {
+    }
+
     internal class BlockMeshData
     {
         public float[][] Vertex { get; set; }

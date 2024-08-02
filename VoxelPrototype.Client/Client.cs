@@ -13,6 +13,7 @@ using VoxelPrototype.client.game.world;
 using VoxelPrototype.client.Resources.Managers;
 using VoxelPrototype.client.server;
 using VoxelPrototype.client.ui;
+using VoxelPrototype.client.ui.renderer;
 using VoxelPrototype.client.ui.screens;
 using VoxelPrototype.client.ui.utils;
 using VoxelPrototype.network;
@@ -21,12 +22,13 @@ namespace VoxelPrototype.client
     public class Client : GameWindow
     {
         public static Client TheClient; 
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("Client");
         public World World;
         public ClientNetworkManager NetworkManager;
         internal EmbeddedServer EmbedderServer;
         //internal Config ClientConfig;
-        internal UIManager UIManager;
+        //internal UIManager UIManager;
+        UIRenderer UIRenderer;
         internal Resources.ResourcesManager ResourceManager;
         internal TextureManager TextureManager;
         internal FontManager FontManager;
@@ -54,11 +56,14 @@ namespace VoxelPrototype.client
         }
         protected override void OnLoad()
         {
+            GL.LoadBindings(new GLFWBindingsContext());
             base.OnLoad();
+            GUIVar.Init(ClientSize);
             //Load
             //Renderer
             GL.Enable(EnableCap.Multisample);
             GL.Enable(EnableCap.DepthTest);
+            UIRenderer = new();
             MaxTextureSize = GL.GetInteger(GetPName.MaxTextureSize);
             MaxTextureLayers = GL.GetInteger(GetPName.MaxArrayTextureLayers);
             Logger.Info($"Max texture size is {MaxTextureSize}");
@@ -75,8 +80,8 @@ namespace VoxelPrototype.client
             ModManager.GetInstance().Init();
             //World
             World = new World();
-            UIManager = new();
-            UIManager.SetCurrentScreen(new MainScreen());
+//UIManager = new();
+            //UIManager.SetCurrentScreen(new MainScreen());
         }
         public void InitResources()
         {
@@ -127,7 +132,9 @@ namespace VoxelPrototype.client
             }
             //
             NetworkManager.Update();
-            UIManager.Update();
+            GUIVar.Update();
+            GUIVar.Update(this,e.Time);
+            //UIManager.Update();
             if (World.Initialized)
             {
                 {
@@ -158,10 +165,12 @@ namespace VoxelPrototype.client
             //Debug UI
             //
             //ImGui.ShowDemoWindow();
-            UIManager.Render();
+            GUIVar.RenderI();
+            GUIVar.Render();
+            //UIManager.Render();
             if(DebugFPS)
             {
-                UIManager.Renderer.RenderText("FPS:"+ (1 / e.Time).ToString("0") +" ms:"+(e.Time*1000).ToString("0.00"),new Vector2i(0,TextSizeCalculator.CalculateVerticalSize((1 / e.Time).ToString("0"))),Shadow:false);
+                UIRenderer.RenderText("FPS:"+ (1 / e.Time).ToString("0") +" ms:"+(e.Time*1000).ToString("0.00"),new Vector2i(0,TextSizeCalculator.CalculateVerticalSize((1 / e.Time).ToString("0"))),Shadow:false);
             }
             SwapBuffers();
         }
@@ -181,10 +190,13 @@ namespace VoxelPrototype.client
         }
         protected override void OnResize(ResizeEventArgs e)
         {
-            UIManager.OnResize();
+            //UIManager.OnResize();
+            GUIVar.Resize(ClientSize);
+
         }
         protected override void OnTextInput(TextInputEventArgs e)
         {
+            GUIVar.Char((char)e.Unicode);
         }
         Vector2i SavedSize;
         Vector2i SavedLocation;

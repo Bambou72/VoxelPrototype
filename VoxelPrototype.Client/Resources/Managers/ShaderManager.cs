@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using VoxelPrototype.client.rendering;
 using VoxelPrototype.client.resources.managers;
 namespace VoxelPrototype.client.Resources.Managers
@@ -31,11 +32,16 @@ namespace VoxelPrototype.client.Resources.Managers
             {
                 shader.Value.Open();
                 TextReader TempTextReader = new StreamReader(shader.Value.GetStream());
-                ShaderJson ShadJson = JsonSerializer.Deserialize<ShaderJson>(TempTextReader.ReadToEnd());
+                ShaderJson ShadJson = JsonSerializer.Deserialize<ShaderJson>(TempTextReader.ReadToEnd(),ShaderJsonSerializerContext.Default.ShaderJson);
                 shader.Value.Close();
                 Shaders.Add(shader.Key, new Shader(Path.GetDirectoryName(shader.Value.GetPath())+"/"+ ShadJson.vertex, Path.GetDirectoryName(shader.Value.GetPath()) + "/" + ShadJson.fragment));
             }
         }
+    }
+    [JsonSourceGenerationOptions(WriteIndented = true)]
+    [JsonSerializable(typeof(ShaderJson))]
+    internal partial class ShaderJsonSerializerContext : JsonSerializerContext
+    {
     }
     public class ShaderJson
     {

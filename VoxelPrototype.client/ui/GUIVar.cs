@@ -1,11 +1,11 @@
-﻿using OpenTK.Mathematics;
+﻿using ImGuiNET;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace VoxelPrototype.client.ui
 {
-    /*
     internal static class GUIVar
     {
         internal static bool MainMenu = true;
@@ -13,14 +13,14 @@ namespace VoxelPrototype.client.ui
         internal static bool ConsoleMenu = false;
         internal static bool DebugMenu = false;
         internal static bool InInputText = false;
-        //static ImGuiController Controller;
+        static ImGuiController Controller;
         /// <summary>
         /// Init Debug Menu system
         /// </summary>
         /// <param name="ClientSize">Client window size</param>
         internal static void Init(Vector2i ClientSize)
         {
-            //Controller = new ImGuiController(ClientSize.X, ClientSize.Y);
+            Controller = new ImGuiController(ClientSize.X, ClientSize.Y);
             // DarkModern style from ImThemes
             var style = ImGui.GetStyle();
             style.Alpha = 1.0f;
@@ -176,7 +176,7 @@ namespace VoxelPrototype.client.ui
             {
                 DebugGUI.DebugMenu();
             }
-            /*
+            
             if (MainMenu)
             {
                 MainGUI.Render();
@@ -213,7 +213,39 @@ namespace VoxelPrototype.client.ui
                     InInputText = false;
                 }
             }
-            DebugGUI.RenderDebug();*/
-        /*}
-    }*/
+            DebugGUI.RenderDebug();
+        }
+        /// <summary>
+        /// Update Controller
+        /// </summary>
+        /// <param name="window">Main window</param>
+        /// <param name="deltaSecond"> delta time</param>
+        internal static void Update(GameWindow window, double deltaSecond)
+        {
+            Controller.Update(window, deltaSecond);
+        }
+        /// <summary>
+        /// Render Imgui
+        /// </summary>
+        internal static void Render()
+        {
+            Controller.Render();
+        }
+        /// <summary>
+        /// Update Controller size
+        /// </summary>
+        /// <param name="ClientSize">Window size</param>
+        internal static void Resize(Vector2i ClientSize)
+        {
+            Controller.WindowResized(ClientSize.X, ClientSize.Y); ;
+        }
+        /// <summary>
+        /// Get Text Input
+        /// </summary>
+        /// <param name="Char">Char</param>
+        internal static void Char(char Char)
+        {
+            Controller.PressChar(Char);
+        }
+    }
 }

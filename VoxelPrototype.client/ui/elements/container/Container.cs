@@ -28,10 +28,7 @@ namespace VoxelPrototype.client.ui.elements.container
         {
             foreach (Element child in Children)
             {
-                if (child.Active)
-                {
-                    child.Update(MState, KSate);
-                }
+                 child.Update(MState, KSate);
             }
            
         }
@@ -40,10 +37,7 @@ namespace VoxelPrototype.client.ui.elements.container
         {
             foreach (Element child in Children)
             {
-                if (child.Active)
-                {
-                    child.Render(Renderer, ScreenSize, ProjectionMatrix);
-                }
+                child.Render(Renderer, ScreenSize, ProjectionMatrix);
             }
         }
     }

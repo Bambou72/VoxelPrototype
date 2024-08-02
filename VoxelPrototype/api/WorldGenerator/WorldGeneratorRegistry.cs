@@ -8,7 +8,7 @@
             return Instance;
         }
         private Dictionary<string, Type> GeneratorTypes = new();
-        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private readonly NLog.Logger Logger = NLog.LogManager.GetLogger("WorldGeneratorRegistry");
 
         public WorldGeneratorRegistry()
         {

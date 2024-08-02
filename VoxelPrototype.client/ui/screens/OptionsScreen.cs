@@ -26,7 +26,7 @@ namespace VoxelPrototype.client.ui.screens
             {
                 Name = "Video Settings"
             };
-            VideoSettingsVerticalPanel = new Panel(new(20,20));
+            VideoSettingsVerticalPanel = new Panel();
             VideoSettingsVerticalPanel.Children.Add(new SliderInt("Render Distance", SetRenderDistance, GetRenderDistance, 2, 32) { ParentSizing = false});
             VideoSettingsVerticalPanel.Children.Add(new CheckBox("Fullscreen", Client.TheClient.SetFullscreen, Client.TheClient.GetFullscreen) { ParentSizing = false });
             VideoSettingsVerticalPanel.Children.Add(new SliderFloat("Fov", SetFov, GetFov, 1, 110, 0.5f) { ParentSizing = false });

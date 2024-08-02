@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client.resources.managers;
 using VoxelPrototype.utils;
@@ -23,7 +24,7 @@ namespace VoxelPrototype.client.Resources.Managers
             {
                 blockdata.Value.Open();
                 TextReader TempTextReader = new StreamReader(blockdata.Value.GetStream());
-                var data = JsonSerializer.Deserialize<BlockStateData>(TempTextReader.ReadToEnd());
+                var data = JsonSerializer.Deserialize(TempTextReader.ReadToEnd(),BlockDataJsonSerializerContext.Default.BlockStateData);
                 blockdata.Value.Close();
                 BlocksStateData.Add(blockdata.Key, data);
             }
@@ -33,6 +34,14 @@ namespace VoxelPrototype.client.Resources.Managers
             BlocksStateData.Clear();
         }
     }
+    [JsonSourceGenerationOptions(WriteIndented = true)]
+    [JsonSerializable(typeof(BlockStateData))]
+    [JsonSerializable(typeof(BlockData))]
+    [JsonSerializable(typeof(TextureData))]
+    internal partial class BlockDataJsonSerializerContext : JsonSerializerContext
+    {
+    }
+
     public class BlockStateData
     {
         public Dictionary<string, BlockData> variants { get; set; } = new();
@@ -48,6 +57,7 @@ namespace VoxelPrototype.client.Resources.Managers
             return default;
         }
     }
+
     public struct BlockData
     {
         public string model { get; set; }

@@ -17,9 +17,9 @@
         {
             return name.ToLower() == "true";
         }
-        public override List<bool> GetAllValues()
+        public override List<object> GetAllValues()
         {
-            return new List<bool> { false, true };
+            return new List<object> { false, true };
         }
     }
 }

@@ -8,7 +8,7 @@
             return Instance;
         }
         public Dictionary<string, Item> Items = new Dictionary<string, Item>();
-        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ItemRegistry");
 
         public ItemRegistry()
         {

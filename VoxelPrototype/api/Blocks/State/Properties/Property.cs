@@ -3,6 +3,7 @@
     public interface IProperty
     {
         public string Name { get; }
+        public List<object> GetAllValues();
     }
     public class Property<T> : IProperty
     {
@@ -12,10 +13,7 @@
         {
             this.Name = Name;
         }
-        public virtual List<T> GetAllValues()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public virtual string GetValueString(T value)
         {
@@ -28,6 +26,11 @@
         }
 
         public virtual T DefaultValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual List<object> GetAllValues()
         {
             throw new NotImplementedException();
         }

@@ -234,7 +234,7 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
         }
         internal float[] GetTextureCoordinates(int Face, BlockState State)
         {
-            var Atlas = (TextureAtlas)Client.TheClient.TextureManager.GetTexture("textures/block/atlas");
+            var Atlas = (TextureAtlas)Client.TheClient.TextureManager.GetTexture("voxelprototype:textures/block/atlas");
             try
             {
                 BlockData Data = Client.TheClient.BlockDataManager.GetBlockStateData(State.Block.Data).GetBlockData(State);

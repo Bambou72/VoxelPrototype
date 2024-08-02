@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Immutable;
-using VoxelPrototype.api.Blocks;
 using VoxelPrototype.api.Blocks.Properties;
-
 namespace VoxelPrototype.api.Blocks.State
 {
     public class BlockStateHolder
@@ -17,8 +15,7 @@ namespace VoxelPrototype.api.Blocks.State
             var AllValues = new List<List<object>> { new List<object>() };
             foreach (var property in Properties.Values)
             {
-                var getAllValuesMethod = property.GetType().GetMethod("GetAllValues");
-                var values = (IEnumerable)getAllValuesMethod.Invoke(property, null);
+                var values = property.GetAllValues();
                 List<List<object>> newAllValues = new List<List<object>>();
                 foreach (var lst in AllValues)
                 {

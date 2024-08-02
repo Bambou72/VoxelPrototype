@@ -6,7 +6,6 @@ namespace VoxelPrototype.client.ui.elements.container
 {
     internal class Panel : Container
     {
-        Vector2i Padding;
         bool Scrollable;
         int ScrollOffset = 0;
         bool Drag;
@@ -20,8 +19,8 @@ namespace VoxelPrototype.client.ui.elements.container
             }
         }
         int MaxScroll => ContentHeight - Size.Y;
-        int ContentHeight => Children.Sum(Element => Element.Size.Y) + (Children.Count - 1) * Padding.Y;
-        public Panel(Vector2i Padding, bool scrollable = false)
+        int ContentHeight => Children.Sum(Element => Element.Size.Y) + (Children.Count - 1) * Padding.Top+ Padding.Bottom;
+        public Panel(bool scrollable = false)
         {
             this.Padding = Padding;
             Scrollable = scrollable;
@@ -63,19 +62,19 @@ namespace VoxelPrototype.client.ui.elements.container
         }
         public override void Render(UIRenderer Renderer, Vector2i ScreenSize, Matrix4 ProjectionMatrix)
         {
-            if(Scrollable && ThumbHeight != Size.Y)
+            if (Scrollable)
             {
                 RenderScrollBar(Renderer);
                 Renderer.StartScissor(Position, new Vector2i(Size.X - (UIStyle.ScrollbarWidth + 8), Size.Y));
             }
             foreach (Element child in Children)
             {
-                if (child.Active && DoBoxesIntersect(Position, Size, child.Position, child.Size))
+                if (DoBoxesIntersect(Position, Size, child.Position, child.Size))
                 {
                     child.Render(Renderer, ScreenSize, ProjectionMatrix);
                 }
             }
-            if (Scrollable && ThumbHeight != Size.Y)
+            if (Scrollable)
             {
                 Renderer.EndScissor();
             }
@@ -100,13 +99,14 @@ namespace VoxelPrototype.client.ui.elements.container
             int CurrentYPos = Position.Y - ScrollOffset;
             foreach (Element Element in Children)
             {
-                Element.Position.X = Position.X +Padding.X;
+                CurrentYPos += Element.Padding.Top;
+                Element.Position.X = Position.X +Element.Padding.Left;
                 Element.Position.Y = CurrentYPos;
                 if(Element.ParentSizing)
                 {
-                    Element.Size.X = Size.X - 2 * Padding.X;
+                    Element.Size.X = GetAvailableSpace().X - Element.Padding.Right -Element.Padding.Right;
                 }
-                CurrentYPos += Element.Size.Y + Padding.Y;
+                CurrentYPos += Element.Size.Y + Padding.Bottom;
             }
             base.ComputeLayout();
         }

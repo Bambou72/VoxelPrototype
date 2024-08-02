@@ -22,8 +22,8 @@ namespace VoxelPrototype.client.ui
         }
         internal void Close()
         {
-            Client.TheClient.UIManager.SetCurrentScreen(null);
-            Client.TheClient.UIManager.SetCurrentScreen(Parent);
+            //Client.TheClient.UIManager.SetCurrentScreen(null);
+            //Client.TheClient.UIManager.SetCurrentScreen(Parent);
         }
     }
 }

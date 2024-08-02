@@ -1,10 +1,11 @@
-﻿using OpenTK.Windowing.Common;
+﻿using ImGuiNET;
+using OpenTK.Windowing.Common;
 using System.Numerics;
 using VoxelPrototype.network;
 
 namespace VoxelPrototype.client.ui
 {
-    /*
+    
     internal static class InGameGUI
     {
         internal static bool Option = false;
@@ -39,5 +40,5 @@ namespace VoxelPrototype.client.ui
             }
             ImGui.End();
         }
-    }*/
+    }
 }

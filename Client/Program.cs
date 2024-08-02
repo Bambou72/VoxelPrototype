@@ -3,14 +3,13 @@
  * Copyright Florian Pfeiffer
  * Author Florian Pfeiffer
  **/
-using CommandLine;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
+using System.CommandLine;
 using System.Runtime.InteropServices;
 using VoxelPrototype.client;
 using VoxelPrototype.client.utils.StbImageSharp;
-
 namespace client
 {
     public static class ConsoleUtils
@@ -21,21 +20,11 @@ namespace client
         public static extern bool ShowWindow(nint hWnd, int nCmdShow);
         public const int SW_HIDE = 0;
     }
-    public class Options
-    {
-        [Option("resources-paths", Required = false, Default = null, HelpText = "Add folder to the to look-up for resourcespacks.")]
-        public IEnumerable<string> RessourcesPaths { get; set; }
-    }
     public static class Program
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-
+        static string[] ResourcePacksPaths;
         private static void Main(string[] args)
         {
-            Options options = new Options();
-            Parser.Default.ParseArguments<Options>(args)
-                .WithParsed(opts => options = opts)
-                .WithNotParsed((errs) => HandleParseError(errs));
 #if !DEBUG
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -44,6 +33,16 @@ namespace client
                 ConsoleUtils.ShowWindow(handle, ConsoleUtils.SW_HIDE);
             }
 #endif
+            var resourcepackOption = new Option<string[]?>(
+            name: "--resourcepacks-paths",
+            description: "Add paths to the game to search resourcepacks"); 
+            var rootCommand = new RootCommand();
+            rootCommand.AddOption(resourcepackOption);
+            rootCommand.SetHandler((packs) =>
+            {
+                ResourcePacksPaths = packs;
+            },resourcepackOption);
+            rootCommand.Invoke(args);
             ImageResult image;
             using (Stream stream = File.OpenRead("icon.png"))
             {
@@ -60,16 +59,11 @@ namespace client
                 Vsync = VSyncMode.On,
                 APIVersion = new(4, 6),
             };
-            using (var Client = new Client(options.RessourcesPaths.ToArray(), GameWindowSettings.Default, Settings))
+            using (var Client = new Client(ResourcePacksPaths, GameWindowSettings.Default, Settings))
             {
                 Client.Run();
             }
             NLog.LogManager.Shutdown();
-        }
-        static void HandleParseError(IEnumerable<Error> errs)
-        {
-            // Handle errors here
-            Logger.Error(errs);
         }
     }
 }

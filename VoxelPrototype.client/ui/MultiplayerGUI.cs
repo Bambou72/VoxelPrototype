@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using ImGuiNET;
+using System.Numerics;
 using System.Text.Json;
 namespace VoxelPrototype.client.ui
 {
@@ -9,7 +10,7 @@ namespace VoxelPrototype.client.ui
         public string Name { get; set; }
         public string Description { get; set; }
     }
-    /*
+    
     internal static class MultiplayerGUI
     {
         static List<ServerInfo> Servers = new List<ServerInfo>();
@@ -99,5 +100,5 @@ namespace VoxelPrototype.client.ui
             string json = JsonSerializer.Serialize(Servers,new JsonSerializerOptions() { WriteIndented = true});
             File.WriteAllText("config/servers.json", json);
         }
-    }*/
+    }
 }

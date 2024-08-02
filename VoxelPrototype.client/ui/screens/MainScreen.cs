@@ -4,6 +4,7 @@ using VoxelPrototype.client.ui.elements.container;
 using VoxelPrototype.client.ui.renderer;
 namespace VoxelPrototype.client.ui.screens
 {
+    /*
     internal class MainScreen : UIScreen
     {
 
@@ -18,7 +19,7 @@ namespace VoxelPrototype.client.ui.screens
         Image Logo;
         public MainScreen()
         {
-            MainPanel = new(new(0,20));
+            MainPanel = new();
             Logo = new Image(LogoResourceID,true, 3.585714f) { Size = new Vector2i(0, 100) };
             MainPanel.Children.Add(Logo);
             MainPanel.Children.Add(new Spacing(20));
@@ -61,10 +62,9 @@ namespace VoxelPrototype.client.ui.screens
         public override void ComputeLayout()
         {
             int YPosition = 60;
-            MainPanel.Position = new(Client.TheClient.ClientSize.X / 2 - (int)(Client.TheClient.ClientSize.X * 0.30f) /2, YPosition);
+            MainPanel.Position = new(Client.TheClient.ClientSize.X / 2 -( (int)(Client.TheClient.ClientSize.X * 0.30f) /2), YPosition);
             MainPanel.Size = new((int)(Client.TheClient.ClientSize.X * 0.30f), Client.TheClient.ClientSize.Y);
-            base.ComputeLayout();
-           
+            base.ComputeLayout();         
         }
-    }
+    }*/
 }

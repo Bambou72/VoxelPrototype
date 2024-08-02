@@ -17,8 +17,8 @@ using VoxelPrototype.utils;
 namespace VoxelPrototype.server.game.world.Level
 {
     public class ServerChunkManager
-    {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+    { 
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ServerChunkManager");
         public Dictionary<Vector2i, Chunk.Chunk> LoadedChunks = new();
         public int LoadedChunkCount { get { return LoadedChunks.Count; } }
         public Dictionary<Vector2i, RegionFile> TempRegions = new();

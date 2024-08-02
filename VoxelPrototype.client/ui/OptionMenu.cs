@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using ImGuiNET;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using VoxelPrototype.server;
 
 namespace VoxelPrototype.client.ui
 {
-    /*
+    
     internal static class OptionMenu
     {
         static float Fov;
@@ -69,7 +70,7 @@ namespace VoxelPrototype.client.ui
             {
                 ImGui.DragFloat("Frustum FOV", ref FrustumFov,0.5f, 1, 110);
             }*/
-        /*}
+        }
         private static void VoxelOption()
         {
             if (Client.TheClient.World.Initialized)
@@ -101,5 +102,5 @@ namespace VoxelPrototype.client.ui
                 }
             }
         }
-    }*/
+    }
 }

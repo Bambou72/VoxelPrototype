@@ -10,7 +10,8 @@
     <Authors>OutlawTeam</Authors>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <Platforms>AnyCPU;x64</Platforms>
-    <Configurations>Debug;Release;Profile</Configurations>
+    <Configurations>Debug;Release</Configurations>
+	<PublishAot>true</PublishAot>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>embedded</DebugType>

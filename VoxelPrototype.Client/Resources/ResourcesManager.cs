@@ -6,12 +6,13 @@ using VoxelPrototype.api;
 using System.Text.Json;
 using System.IO;
 using VoxelPrototype.client.resources.managers;
+using System.Text.Json.Serialization;
 
 namespace VoxelPrototype.client.Resources
 {
     public class ResourcesManager
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ResourcesManager");
 
         const string TempPath = "temp/resourcespacks";
         const string CorePackName = "core.resources";
@@ -84,7 +85,7 @@ namespace VoxelPrototype.client.Resources
                 {
                     if (File.Exists(directory + "/pack.json"))
                     {
-                        PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(directory + "/pack.json"));
+                        PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(directory + "/pack.json"),PackMetadataJsonSerializerContext.Default.PackMetadata);
                         string[] NameSpaces = RelativePath.GetRelativePathsDirectories(directory);
                         ResourcesPack Pack = new()
                         {
@@ -106,7 +107,7 @@ namespace VoxelPrototype.client.Resources
                         zip.ExtractToDirectory("temp/resourcespacks");
                         zip = null;
                         string path = "temp/resourcespacks" + "/" + Path.GetFileNameWithoutExtension(Zip);
-                        PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(path + "/pack.json"));
+                        PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(path + "/pack.json"), PackMetadataJsonSerializerContext.Default.PackMetadata);
                         string[] NameSpaces = RelativePath.GetRelativePathsDirectories(path);
                         ResourcesPack Pack = new()
                         {
@@ -130,7 +131,7 @@ namespace VoxelPrototype.client.Resources
                 try
                 {
                     string path = Mod + "/resources";
-                    PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(path + "/pack.json"));
+                    PackMetadata PackData = JsonSerializer.Deserialize<PackMetadata>(File.ReadAllText(path + "/pack.json"), PackMetadataJsonSerializerContext.Default.PackMetadata);
                     string[] NameSpaces =  RelativePath.GetRelativePathsDirectories(path);
                     ResourcesPack Pack = new()
                     {
@@ -300,6 +301,11 @@ namespace VoxelPrototype.client.Resources
             }
             return temp;
         }
+    }
+    [JsonSourceGenerationOptions(WriteIndented = true)]
+    [JsonSerializable(typeof(PackMetadata))]
+    internal partial class PackMetadataJsonSerializerContext : JsonSerializerContext
+    {
     }
     public class PackMetadata
     {

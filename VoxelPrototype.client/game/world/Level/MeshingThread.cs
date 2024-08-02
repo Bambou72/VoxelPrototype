@@ -6,7 +6,7 @@ namespace VoxelPrototype.client.game.world.Level
 {
     internal class MeshingThread
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("MeshingThread");
 
         volatile bool Running = false;
         internal volatile bool Stopped = false;

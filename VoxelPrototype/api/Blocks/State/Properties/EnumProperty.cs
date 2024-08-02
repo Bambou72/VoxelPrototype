@@ -7,9 +7,12 @@
         public EnumProperty(string name) : base(name)
         {
         }
-        public override List<T> GetAllValues()
+        public override List<object> GetAllValues()
         {
-            return new List<T>((T[])Enum.GetValues(typeof(T)));
+            var Values = Enum.GetValues(typeof(T));
+            // Convert to list
+            List<object> FinalValues = [.. Values];
+            return FinalValues;
         }
         public override T DefaultValue()
         {

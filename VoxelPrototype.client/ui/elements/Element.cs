@@ -7,7 +7,8 @@ namespace VoxelPrototype.client.ui.elements
     {
         internal Vector2i Position;
         internal Vector2i Size;
-        public bool Active = true;
+        internal Margin Padding = new(20,20,10,10);
+
         public bool ParentSizing = true;
         public bool IsHovered
         {

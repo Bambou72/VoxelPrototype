@@ -20,7 +20,7 @@ namespace VoxelPrototype.api
         }
         public Dictionary<string, IModInitializer> ModList = new Dictionary<string, IModInitializer>();
         public Dictionary<string, string> ModPath = new Dictionary<string, string>();
-        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ModManager");
         private string TempPath = "temp/mods";
         public ModManager()
         {

@@ -6,7 +6,7 @@ namespace VoxelPrototype.api.Blocks
     {
         internal static BlockRegistry Instance;
         internal  Dictionary<string, Block> Blocks = new Dictionary<string, Block>();
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("BlockRegistry");
         public  BlockState Air;
         public  int RegisteredBlockCounter;
         public BlockRegistry()

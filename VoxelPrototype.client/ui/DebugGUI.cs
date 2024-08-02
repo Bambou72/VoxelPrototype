@@ -1,10 +1,11 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using ImGuiNET;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.debug;
 using VoxelPrototype.server;
 namespace VoxelPrototype.client.ui
 {
-    /*
+    
     internal static class DebugGUI
     {
         internal static bool Opened = false;
@@ -107,5 +108,5 @@ namespace VoxelPrototype.client.ui
                 }
             }
         }
-    }*/
+    }
 }

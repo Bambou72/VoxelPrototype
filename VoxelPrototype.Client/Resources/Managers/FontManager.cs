@@ -1,5 +1,6 @@
 ﻿using OpenTK.Mathematics;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using VoxelPrototype.client.rendering.texture;
 using VoxelPrototype.client.resources.managers;
 using VoxelPrototype.client.utils.StbImageSharp;
@@ -42,7 +43,7 @@ namespace VoxelPrototype.client.Resources.Managers
                     foreach (var font2 in font.Value)
                     {
                         font2.Open();
-                        FontJson JSFont = JsonSerializer.Deserialize<FontJson>(new StreamReader(font2.GetStream()).ReadToEnd());
+                        FontJson JSFont = JsonSerializer.Deserialize(new StreamReader(font2.GetStream()).ReadToEnd(),FontJsonJsonSerializerContext.Default.FontJson);
                         foreach (var sup in JSFont.suppliers)
                         {
                             TMPFont.FontSuppliers.Add(sup);
@@ -262,6 +263,12 @@ namespace VoxelPrototype.client.Resources.Managers
     //
     //JSON
     //
+    [JsonSourceGenerationOptions(WriteIndented = true)]
+    [JsonSerializable(typeof(FontJson))]
+    [JsonSerializable(typeof(Supplier))]
+    internal partial class FontJsonJsonSerializerContext : JsonSerializerContext
+    {
+    }
     public class FontJson
     {
         public Supplier[] suppliers { get; set; }

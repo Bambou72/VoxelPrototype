@@ -15,7 +15,7 @@ namespace VoxelPrototype.client.game.entity
 {
     internal class ClientPlayer : Player
     {
-        static string PlayerModelResourceID = "models/entity/player";
+        static string PlayerModelResourceID = "voxelprototype:models/entity/player";
         internal FrustumCamera? _Camera;
         internal bool Local = false;
         internal bool ServerSide = false;

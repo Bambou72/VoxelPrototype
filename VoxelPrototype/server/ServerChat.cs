@@ -5,7 +5,7 @@ namespace VoxelPrototype.server
 {
     public  class ServerChat
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ServerChat");
 
         public ServerChat()
         {

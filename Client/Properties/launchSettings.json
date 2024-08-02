@@ -2,7 +2,7 @@
   "profiles": {
     "Client": {
       "commandName": "Project",
-      "commandLineArgs": "--resources-paths ../../../../Assets",
+      "commandLineArgs": "--resourcepacks-paths ../../../../Assets",
       "nativeDebugging": false
     }
   }

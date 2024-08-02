@@ -19,9 +19,9 @@ namespace VoxelPrototype.client.game.world.Level
     public class ClientChunkManager
     {
         internal World World;
-        static string ChunkShaderResourceID = "shaders/chunk";
-        static string BlockAtlasResourceID = "textures/block/atlas";
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        static string ChunkShaderResourceID = "voxelprototype:shaders/chunk";
+        static string BlockAtlasResourceID = "voxelprototype:textures/block/atlas";
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ClientChunkManager");
         internal ReaderWriterLockSlim ChunkByCoordinateLock = new ReaderWriterLockSlim();
         internal Dictionary<Vector2i, Chunk.Chunk> ChunkByCoordinate = new();
         internal List<Chunk.Chunk> AllChunks = new();

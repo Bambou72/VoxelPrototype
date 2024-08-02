@@ -12,7 +12,7 @@ namespace VoxelPrototype.network
     /// </summary>
     public class ServerNetworkManager : NetworkManager
     {
-        private readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ServerNetworkManager");
 
         public ServerNetworkManager() : base()
         {

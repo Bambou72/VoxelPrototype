@@ -1,10 +1,11 @@
-﻿using System.Numerics;
+﻿using ImGuiNET;
+using System.Numerics;
 using VoxelPrototype.api.Commands;
 using VoxelPrototype.client.game;
 
 namespace VoxelPrototype.client.ui
 {
-    /*
+    
     internal static class Console
     {
         //console
@@ -120,5 +121,5 @@ namespace VoxelPrototype.client.ui
                 showAutoComplete = false;
             }
         }
-    }*/
+    }
 }

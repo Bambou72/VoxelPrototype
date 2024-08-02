@@ -9,7 +9,7 @@ namespace VoxelPrototype.server
         //Singleton
         public static Server TheServer;
         //Param
-        public static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        public static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("Server");
         public string ServerName;
         public int ServerPort = 23482;
         //Data

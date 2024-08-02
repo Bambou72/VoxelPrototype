@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using VoxelPrototype.client.rendering;
+using VoxelPrototype.client.resources.managers;
 namespace VoxelPrototype.client.Resources.Managers
 {
     internal class ShaderManager : IReloadableResourceManager

@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using VoxelPrototype.client.rendering.model;
+using VoxelPrototype.client.resources.managers;
 using VoxelPrototype.utils;
 
 namespace VoxelPrototype.client.Resources.Managers

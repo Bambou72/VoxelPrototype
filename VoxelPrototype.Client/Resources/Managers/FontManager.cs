@@ -1,6 +1,7 @@
 ﻿using OpenTK.Mathematics;
 using System.Text.Json;
 using VoxelPrototype.client.rendering.texture;
+using VoxelPrototype.client.resources.managers;
 using VoxelPrototype.client.utils.StbImageSharp;
 using VoxelPrototype.client.Utils;
 using VoxelPrototype.utils;

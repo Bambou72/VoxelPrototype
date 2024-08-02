@@ -1,4 +1,5 @@
 ﻿using VoxelPrototype.client.rendering.texture;
+using VoxelPrototype.client.resources.managers;
 using VoxelPrototype.client.utils.StbImageSharp;
 using VoxelPrototype.client.Utils;
 namespace VoxelPrototype.client.Resources.Managers

@@ -1,11 +1,11 @@
 ﻿using System.IO.Compression;
-using VoxelPrototype.client.Resources.Managers;
 using VoxelPrototype.utils.collections;
 using VoxelPrototype.utils.io;
 using VoxelPrototype.utils;
 using VoxelPrototype.api;
 using System.Text.Json;
 using System.IO;
+using VoxelPrototype.client.resources.managers;
 
 namespace VoxelPrototype.client.Resources
 {

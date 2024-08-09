@@ -6,8 +6,8 @@
 using K4os.Compression.LZ4;
 using LiteNetLib;
 using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 using VoxelPrototype.game.entity.player;
 using VoxelPrototype.network.packets;
 using VoxelPrototype.server.game.entity;
@@ -133,7 +133,7 @@ namespace VoxelPrototype.server.game.world.Level
         }
         internal Chunk.Chunk CreateChunk(Vector2i pos)
         {
-            Chunk.Chunk tempChunk = new Chunk.Chunk(pos, true);
+            Chunk.Chunk tempChunk = Server.TheServer.World.WorldGenerator.GenerateChunk(pos);
             SaveChunk(tempChunk);
             LoadedChunks[pos] = tempChunk;
             return tempChunk;

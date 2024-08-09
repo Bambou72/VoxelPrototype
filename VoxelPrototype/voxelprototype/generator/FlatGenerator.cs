@@ -1,34 +1,22 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.WorldGenerator;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.worldgeneration;
 using VoxelPrototype.server.game.world.Level.Chunk;
 
 namespace VoxelPrototype.voxelprototype.generator
 {
-    internal class FlatGenerator : WorldGenerator
+    internal class FlatGenerator : IChunkGenerator
     {
-        public FlatGenerator()
+        public Chunk GenerateChunk(Vector2i Position)
         {
-            Name = "Flat";
-
-        }
-
-        public int GetOriginHeigh()
-        {
-            throw new NotImplementedException();
-        }
-        public override int GetOriginHeight()
-        {
-            return 0;
-        }
-        public override void GenerateChunk(Chunk chunk)
-        {
+            Chunk chunk = new Chunk(Position);
             for (int x = 0; x < Const.ChunkSize; x++)
             {
                 for (int z = 0; z < Const.ChunkSize; z++)
                 {
                     for (int y = 0; y < Const.ChunkRHeight; y++)
                     {
+
                         if (y == 0)
                         {
                             chunk.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:grass").GetDefaultState());
@@ -44,6 +32,7 @@ namespace VoxelPrototype.voxelprototype.generator
                     }
                 }
             }
+            return chunk;
         }
     }
 }

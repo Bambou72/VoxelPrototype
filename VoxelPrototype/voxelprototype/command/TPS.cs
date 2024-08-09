@@ -1,5 +1,5 @@
 ﻿using LiteNetLib;
-using VoxelPrototype.api.Commands;
+using VoxelPrototype.api.command;
 using VoxelPrototype.server;
 
 namespace VoxelPrototype.voxelprototype.command

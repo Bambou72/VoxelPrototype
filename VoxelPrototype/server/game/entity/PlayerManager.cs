@@ -23,7 +23,7 @@ namespace VoxelPrototype.server.game.entity
         }
         internal void AddPlayer(ushort clientId, NetPeer peer)
         {
-            ServerPlayer temp = new ServerPlayer(new Vector3d(0.5, Server.TheServer.World.WorldGenerator.GetOriginHeight() + 2, 0.5), clientId);
+            ServerPlayer temp = new ServerPlayer(new Vector3d(0.5, 300, 0.5), clientId);
             foreach (Player otherPlayer in List.Values)
             {
                 if (otherPlayer.ClientID != peer.Id)

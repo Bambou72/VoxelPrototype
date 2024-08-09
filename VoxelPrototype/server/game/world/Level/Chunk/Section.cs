@@ -1,27 +1,28 @@
-﻿using LiteNetLib.Utils;
-using OpenTK.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VoxelPrototype.api.Blocks.State;
+﻿using OpenTK.Mathematics;
+using VoxelPrototype.api.block.state;
+using VoxelPrototype.game;
 using VoxelPrototype.game.world.storage;
-
+using VoxelPrototype.game.world;
 namespace VoxelPrototype.server.game.world.Level.Chunk
 {
-    public class Section : IVBFSerializable<Section>
+    public class Section 
     {
-        internal BlockPalette BlockPalette;
-        internal int Y;
-        internal Chunk Chunk;
-        public Section()
+        public BlockPalette BlockPalette;
+        public Chunk ParentChunk;
+        public int Y;
+        public bool Empty { get { return BlockPalette.Palette[0].RefCount == Const.SectionVolume; } }
+        public Section(Chunk Chunk)
         {
+            ParentChunk = Chunk;
             BlockPalette = new(1);
         }
-
-        public bool Empty { get { return BlockPalette.Palette[0].RefCount == Const.SectionVolume; } }
-
+        public Vector3i Position
+        {
+            get
+            {
+                return new Vector3i(ParentChunk.X, Y, ParentChunk.Z);
+            }
+        }
         public Section Deserialize(VBFCompound compound)
         {
             Y = compound.GetInt("Y").Value;
@@ -43,6 +44,6 @@ namespace VoxelPrototype.server.game.world.Level.Chunk
             }
             BlockPalette.Set(pos, id);
         }
-    }
 
+    }
 }

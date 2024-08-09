@@ -9,13 +9,12 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using VoxelPrototype.api;
+using VoxelPrototype.client.debug;
 using VoxelPrototype.client.game.world;
 using VoxelPrototype.client.Resources.Managers;
 using VoxelPrototype.client.server;
 using VoxelPrototype.client.ui;
-using VoxelPrototype.client.ui.renderer;
-using VoxelPrototype.client.ui.screens;
-using VoxelPrototype.client.ui.utils;
+using VoxelPrototype.client.ui.prototype.renderer;
 using VoxelPrototype.network;
 namespace VoxelPrototype.client
 {
@@ -45,6 +44,8 @@ namespace VoxelPrototype.client
         public bool Grab = false;
         public bool NoInput = false;
         public bool DebugFPS = false;
+        internal bool DebugChunk;
+        internal bool ShowAABB;
 
         public Client( string[]? ResourcesPacksPaths, GameWindowSettings GS , NativeWindowSettings NS) : base(GS, NS) 
         {
@@ -59,7 +60,8 @@ namespace VoxelPrototype.client
         {
             GL.LoadBindings(new GLFWBindingsContext());
             base.OnLoad();
-            GUIVar.Init(ClientSize);
+            GUIManager.Init(ClientSize);
+            //VoxelGui.Init();
             //Load
             //Renderer
             GL.Enable(EnableCap.Multisample);
@@ -120,21 +122,12 @@ namespace VoxelPrototype.client
             //Debug Grab
             if (KeyboardState.IsKeyPressed(Keys.F3))
             {
-                if (Grab == false)
-                {
-                    SetCursorState(CursorState.Grabbed);
-                    Grab = true;
-                }
-                else
-                {
-                    SetCursorState(CursorState.Normal);
-                    Grab = false;
-                }
+                SetGrab(!Grab);
             }
             //
             NetworkManager.Update();
-            GUIVar.Update();
-            GUIVar.Update(this,e.Time);
+            GUIManager.Begin(this, e.Time);
+            GUIManager.Update();
             //UIManager.Update();
             if (World.Initialized)
             {
@@ -152,13 +145,39 @@ namespace VoxelPrototype.client
             //World
             if (World.Initialized)
             {
-                GL.Disable(EnableCap.Multisample);
                 {
                     World.Render();
                 }
-                GL.Enable(EnableCap.Multisample);
+                if (ShowAABB)
+                {
+                    //Show player aabb
+                    foreach (var entity in Client.TheClient.World.PlayerFactory.PlayerList.Values)
+                    {
+                        DebugShapeRenderer.RenderDebugBox(new DebugBox()
+                        {
+                            Size = new Vector3d(entity.EntityWidth, entity.EntityHeight, entity.EntityWidth),
+                            Color = new Vector4(1f, 0f, 0f, 1f),
+                            Position = (Vector3)entity.Coll.Min,
+                            Rotation = Quaternion.Identity,
+                        });
+                    }
+                }
+                if (DebugChunk)
+                {
+                    Vector3i playpos = new Vector3i((int)Math.Floor(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.X / Const.ChunkSize), (int)Math.Floor(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Y / Const.ChunkSize), (int)Math.Floor(Client.TheClient.World.PlayerFactory.LocalPlayer.Position.Z / Const.ChunkSize));
+                    foreach (Vector2i pos in Client.TheClient.World.ChunkManager.ChunkByCoordinate.Keys)
+                    {
+                        DebugShapeRenderer.RenderDebugBox(new DebugBox()
+                        {
+                            Size = new Vector3d(Const.ChunkSize, Const.ChunkHeight * Const.SectionSize, Const.ChunkSize),
+                            Color = new Vector4(1f, 0f, 0f, 1f),
+                            Position = new Vector3(pos.X, 0, pos.Y) * Const.ChunkSize,
+                            Rotation = Quaternion.Identity,
+                        });
+                    }
+                }
 
-            }
+            }            
             //
             //Debug
             //
@@ -166,13 +185,12 @@ namespace VoxelPrototype.client
             //Debug UI
             //
             //ImGui.ShowDemoWindow();
-            GUIVar.RenderI();
-            GUIVar.Render();
+            GUIManager.End();
             //UIManager.Render();
-            if(DebugFPS)
-            {
-                UIRenderer.RenderText("FPS:"+ (1 / e.Time).ToString("0") +" ms:"+(e.Time*1000).ToString("0.00"),new Vector2i(0,TextSizeCalculator.CalculateVerticalSize((1 / e.Time).ToString("0"))),Shadow:false);
-            }
+            //if(DebugFPS)
+            //{
+                //UIRenderer.RenderText("FPS:"+ (1 / e.Time).ToString("0") +" ms:"+(e.Time*1000).ToString("0.00"),new Vector2i(0,((1 / e.Time).ToString("0")).CalculateVerticalSize()),Shadow:false);
+            //}
             SwapBuffers();
         }
 
@@ -191,13 +209,11 @@ namespace VoxelPrototype.client
         }
         protected override void OnResize(ResizeEventArgs e)
         {
-            //UIManager.OnResize();
-            GUIVar.Resize(ClientSize);
-
+            GUIManager.ResizeCallback(ClientSize);
         }
         protected override void OnTextInput(TextInputEventArgs e)
         {
-            GUIVar.Char((char)e.Unicode);
+            GUIManager.CharCallback((char)e.Unicode);
         }
         Vector2i SavedSize;
         Vector2i SavedLocation;
@@ -219,9 +235,10 @@ namespace VoxelPrototype.client
         {
             return WindowState == WindowState.Fullscreen;
         }
-        public  void SetCursorState(CursorState state)
+        public void SetGrab(bool Grab)
         {
-           CursorState = state;
+            this.Grab = Grab;
+            CursorState = Grab ? CursorState.Grabbed : CursorState.Normal;
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿using System.Text.Json;
+﻿using OpenTK.Windowing.GraphicsLibraryFramework;
+using System.Text.Json;
 using System.Text.Json.Serialization;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block.state;
 using VoxelPrototype.client.resources.managers;
 using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Resources.Managers
@@ -54,7 +55,10 @@ namespace VoxelPrototype.client.Resources.Managers
             {
                 return Data;
             }
-            return default;
+            else
+            {
+                return variants[""];
+            }
         }
     }
 

@@ -4,13 +4,9 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
     internal class SectionMesh
     {
         SubMesh OpaqueMesh;
-        internal Vector3i Position;
-        internal Vector3 Center;
-        public SectionMesh(Vector3i position, Section section)
+        public SectionMesh(Section section)
         {
             OpaqueMesh = new();
-            Position = position;
-            Center = (Position + new Vector3(0.5f)) * Const.SectionSize;
         }
         public void Destroy()
         {

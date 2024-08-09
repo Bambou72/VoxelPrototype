@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 
 namespace VoxelPrototype.server.game.world.Level.Chunk
 {
@@ -18,18 +18,19 @@ namespace VoxelPrototype.server.game.world.Level.Chunk
         Dirty,
     }
 
-    public class Chunk : IVBFSerializable<Chunk>
+    public class Chunk :  IVBFSerializable<Chunk>
     {
         //Chunk state for meshing
         internal ChunkSate State = ChunkSate.Changed;
         internal ServerChunkSate ServerState = ServerChunkSate.None;
         internal List<int> PlayerInChunk { get; set; }
+
+        internal Section[] Sections;
+        //Chunk coordinates
         public int X { get; set; }
         public int Z { get; set; }
         public Vector2i Position { get { return new Vector2i(X, Z); } set { X = value.X; Z = value.Y; } }
 
-        internal Section[] Sections;
-        //Chunk coordinates
         public VBFCompound Serialize()
         {
             VBFCompound Chunk = new();
@@ -56,8 +57,7 @@ namespace VoxelPrototype.server.game.world.Level.Chunk
                 VBFList DeSections = data.Get<VBFList>("Sec");
                 for (int i = 0; i < SectionsCount; i++)
                 {
-                    Sections[i] = new Section().Deserialize((VBFCompound)DeSections.Tags[i]);
-                    Sections[i].Chunk = this;
+                    Sections[i] = new Section(this).Deserialize((VBFCompound)DeSections.Tags[i]);
                 }
                 return this;
             }
@@ -71,7 +71,7 @@ namespace VoxelPrototype.server.game.world.Level.Chunk
         {
             PlayerInChunk = new();
         }
-        internal Chunk(Vector2i Pos, bool Gen)
+        internal Chunk(Vector2i Pos)
         {
             PlayerInChunk = new List<int>();
             X = Pos.X;
@@ -81,14 +81,9 @@ namespace VoxelPrototype.server.game.world.Level.Chunk
             // Boucle for ajustée pour les coordonnées y
             for (int y = 0; y < Const.ChunkHeight; y++)
             {
-                var Temp = new Section();
+                var Temp = new Section(this);
                 Temp.Y = y;
                 Sections[y] = Temp;
-                Sections[y].Chunk = this;
-            }
-            if (Gen)
-            {
-                Server.TheServer.World.WorldGenerator.GenerateChunk(this);
             }
         }
         public Section GetSection(int Y)

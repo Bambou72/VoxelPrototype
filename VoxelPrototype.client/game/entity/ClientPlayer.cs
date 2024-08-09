@@ -1,16 +1,15 @@
 ﻿using LiteNetLib;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 using VoxelPrototype.client.rendering.camera;
 using VoxelPrototype.client.rendering.model;
 using VoxelPrototype.game;
 using VoxelPrototype.game.entity.player;
 using VoxelPrototype.network.packets;
 using VoxelPrototype.physics;
-using VoxelPrototype.utils;
-
 namespace VoxelPrototype.client.game.entity
 {
     internal class ClientPlayer : Player
@@ -62,7 +61,7 @@ namespace VoxelPrototype.client.game.entity
             {
                 /*if(SelectedBlock == null)
                 {
-                    SelectedBlock = Client.TheClient.ModManager.BlockRegister.GetBlock("voxelprototype:lamp");
+                    SelectedBlock = BlockRegistry.GetInstance().GetBlock("voxelprototype:lamp");
                 }
                 Client.TheClient.World.ChunkManager.ChangeChunk(CurrentBlock+Normal, SelectedBlock.GetDefaultState());*/
                 State.Block.OnInteract(Client.TheClient.World, CurrentBlock, State, false);

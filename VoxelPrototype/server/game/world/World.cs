@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
-using VoxelPrototype.api.WorldGenerator;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
+using VoxelPrototype.api.worldgeneration;
 using VoxelPrototype.game;
 using VoxelPrototype.server.game.entity;
 using VoxelPrototype.server.game.world.Level;
@@ -14,14 +14,15 @@ namespace VoxelPrototype.server.game.world
         public Random RNG;
         //param
         public string Name;
-        public long Seed;
+        public int Seed;
         //Distance
         public int LoadDistance = 12;
         //Tick
         public ulong CurrentTick;
         public string path;
         //Voxel
-        public WorldGenerator WorldGenerator;
+        public IWorldType WorldType;
+        public IChunkGenerator WorldGenerator;
         public ServerChunkManager ChunkManager;
         //Players
         public PlayerManager PlayerFactory;
@@ -39,14 +40,14 @@ namespace VoxelPrototype.server.game.world
                 Directory.CreateDirectory(path + "/terrain");
                 Directory.CreateDirectory(path + "/terrain/dim0");
                 Seed = Settings.GetSeed();
-                WorldGenerator = WorldGeneratorRegistry.GetInstance().CreateWorldGenerator(Settings.GetGenerator());
+                WorldType = WorldGeneratorRegistry.GetInstance().GetWorldType(Settings.GetGenerator());
+                WorldGenerator = WorldGeneratorRegistry.GetInstance().GetWorldType(Settings.GetGenerator()).GetChunkGenerator(Seed);
                 File.WriteAllBytes(path + "world.vpw", SerializeWorldData());
             }
             else
             {
                 DeserializeWorldData(File.ReadAllBytes(path + "world.vpw"));
             }
-            WorldGenerator.SetData(Seed);
             ChunkManager = new ServerChunkManager();
             PlayerFactory = new PlayerManager();
             Chat = new();
@@ -55,15 +56,16 @@ namespace VoxelPrototype.server.game.world
         public byte[] SerializeWorldData()
         {
             VBFCompound root = new VBFCompound();
-            root.AddLong("Seed", Seed);
-            root.AddString("Generator", WorldGenerator.Name);
+            root.AddInt("Seed", Seed);
+            root.AddString("Generator", WorldType.Name);
             return VBFSerializer.Serialize(root);
         }
         public void DeserializeWorldData(byte[] data)
         {
             VBFCompound root = (VBFCompound)VBFSerializer.Deserialize(data);
-            Seed = root.GetLong("Seed").Value;
-            WorldGenerator = WorldGeneratorRegistry.GetInstance().CreateWorldGenerator(root.GetString("Generator").Value);
+            Seed = root.GetInt("Seed").Value;
+            WorldType = WorldGeneratorRegistry.GetInstance().GetWorldType(root.GetString("Generator").Value);
+            WorldGenerator = WorldGeneratorRegistry.GetInstance().GetWorldType(root.GetString("Generator").Value).GetChunkGenerator(Seed);
         }
         public void GetParam()
         {
@@ -74,6 +76,14 @@ namespace VoxelPrototype.server.game.world
             ChunkManager.Dispose();
             PlayerFactory.Dispose();
             File.WriteAllBytes(path + "world.vpw", SerializeWorldData());
+        }
+        public void save()
+        {
+            foreach (Chunk chunk in ChunkManager.LoadedChunks.Values)
+            {
+                ChunkManager.SaveChunk(chunk);
+                
+            }
         }
         public void Tick(float DT)
         {

@@ -53,5 +53,10 @@ namespace VoxelPrototype.client.rendering.texture
         {
             GL.DeleteTexture(Handle);
         }
+
+        public int GetHandle()
+        {
+            return Handle;
+        }
     }
 }

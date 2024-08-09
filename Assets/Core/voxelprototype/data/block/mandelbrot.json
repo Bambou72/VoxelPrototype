@@ -1,0 +1,13 @@
+{
+    "variants":
+    {
+        "":
+        {
+            "model" : "voxelprototype:models/block/cube",
+            "textures":
+            {
+                "all":"voxelprototype:textures/block/mandelbrot"
+            }  
+        }   
+    }
+}

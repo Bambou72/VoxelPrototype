@@ -1,14 +1,4 @@
-﻿using LiteNetLib;
-using OpenTK.Mathematics;
-using System;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
-using VoxelPrototype.network.packets;
-using VoxelPrototype.physics;
-using VoxelPrototype.server;
-using VoxelPrototype.voxelprototype.command;
-
-namespace VoxelPrototype.game.entity.player
+﻿namespace VoxelPrototype.game.entity.player
 {
     public class Player : PhysicEntity
     {

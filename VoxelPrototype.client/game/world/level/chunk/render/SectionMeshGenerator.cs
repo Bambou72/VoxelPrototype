@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 using VoxelPrototype.client.rendering.model;
 using VoxelPrototype.client.rendering.texture;
 using VoxelPrototype.client.Resources.Managers;
@@ -50,37 +50,37 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
             uint BitMask = 0;
             //UP
             var BlockUp = client.World.GetBlock(Gposition + new Vector3i(0, 1, 0)).Block;
-            if (!BlockUp.Transparent || CurrentBlock.Cullself && BlockUp.ID == CurrentBlock.ID)
+            if (!BlockUp.Transparent || (CurrentBlock.Cullself && BlockUp.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_POS_Y;
             }
             //DOWN
             var BlockDown = client.World.GetBlock(Gposition + new Vector3i(0, -1, 0)).Block;
-            if (!BlockDown.Transparent || CurrentBlock.Cullself && BlockDown.ID == CurrentBlock.ID)
+            if (Gposition.Y != 0  || !BlockDown.Transparent || (CurrentBlock.Cullself && BlockDown.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_NEG_Y;
             }
             //RIGHT
             var BlockRight = client.World.GetBlock(Gposition + new Vector3i(1, 0, 0)).Block;
-            if (!BlockRight.Transparent || CurrentBlock.Cullself && BlockRight.ID == CurrentBlock.ID)
+            if (!BlockRight.Transparent || (CurrentBlock.Cullself && BlockRight.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_POS_X;
             }
             //LEFT
             var BlockLeft = client.World.GetBlock(Gposition + new Vector3i(-1, 0, 0)).Block;
-            if (!BlockLeft.Transparent || CurrentBlock.Cullself && BlockLeft.ID == CurrentBlock.ID)
+            if (!BlockLeft.Transparent || (CurrentBlock.Cullself && BlockLeft.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_NEG_X;
             }
             //FRONT
             var BlockFront = client.World.GetBlock(Gposition + new Vector3i(0, 0, -1)).Block;
-            if (!BlockFront.Transparent || CurrentBlock.Cullself && BlockFront.ID == CurrentBlock.ID)
+            if (!BlockFront.Transparent || (CurrentBlock.Cullself && BlockFront.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_NEG_Z;
             }
             //BACK
             var BlockBack = client.World.GetBlock(Gposition + new Vector3i(0, 0, 1)).Block;
-            if (!BlockBack.Transparent || CurrentBlock.Cullself && BlockBack.ID == CurrentBlock.ID)
+            if (!BlockBack.Transparent || (CurrentBlock.Cullself && BlockBack.ID == CurrentBlock.ID))
             {
                 BitMask |= ADJACENT_BITMASK_POS_Z;
             }
@@ -281,7 +281,9 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
                 {
                     Position = new Vector3(Vert[i * 3] + BlockPos.X, Vert[i * 3 + 1] + BlockPos.Y, Vert[i * 3 + 2] + BlockPos.Z),
                     Uv = new Vector2((Tex[4] - Tex[0]) * Uv[i * 2] + Tex[0], (Tex[3] - Tex[1]) * Uv[i * 2 + 1] + Tex[1]),
-                    AO = ao ? AO[i] : 3
+                    AO = ao ? AO[i] : 3,
+                    Color = Block.Block.GetColor(Block)
+
                 };
                 OpaqueVertices.Add(SVert);
             }
@@ -291,7 +293,9 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
                 {
                     Position = new Vector3(Vert[0] + BlockPos.X, Vert[1] + BlockPos.Y, Vert[2] + BlockPos.Z),
                     Uv = new Vector2((Tex[4] - Tex[0]) * Uv[0 * 2] + Tex[0], (Tex[3] - Tex[1]) * Uv[0 * 2 + 1] + Tex[1]),
-                    AO = ao ? AO[0] : 3
+                    AO = ao ? AO[0] : 3,
+                    Color = Block.Block.GetColor(Block)
+
                 };
                 OpaqueVertices.Add(SVert);
             }

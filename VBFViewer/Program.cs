@@ -24,8 +24,6 @@ public  static class Program
             API = ContextAPI.OpenGL,
             APIVersion = new Version(3, 3),
             NumberOfSamples = 0,
-            MaximumClientSize = new Vector2i(800, 600),
-            MinimumClientSize = new Vector2i(800, 600),
         };
         using (window = new NativeWindow(nativeWindowSettings))
         {

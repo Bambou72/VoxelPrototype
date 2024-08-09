@@ -1,7 +1,7 @@
 ﻿using ImGuiNET;
 using K4os.Compression.LZ4;
 using K4os.Compression.LZ4.Encoders;
-using VoxelPrototype.VBF;
+using VoxelPrototype;
 
 namespace VBFViewer
 {

@@ -1,7 +1,7 @@
 ﻿using VoxelPrototype.api;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Commands;
-using VoxelPrototype.api.WorldGenerator;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.command;
+using VoxelPrototype.api.worldgeneration;
 using VoxelPrototype.utils;
 using VoxelPrototype.voxelprototype.command;
 using VoxelPrototype.voxelprototype.generator;
@@ -49,12 +49,20 @@ namespace VoxelPrototype.voxelprototype
                 Data = "voxelprototype:data/block/lamp"
             };
             BRegistry.RegisterBlock(LampID, Lamp);
+            string mandelbrotID = BRegistry.GetBlockID(Name, "mandelbrot");
+            var mandelbrot = new block.Mandelbrot()
+            {
+                Data = "voxelprototype:data/block/mandelbrot"
+            };
+            BRegistry.RegisterBlock(mandelbrotID, mandelbrot);
+            //
             //
             //World Generators
             //
             WorldGeneratorRegistry WRegistry = WorldGeneratorRegistry.GetInstance();
-            WRegistry.RegisterWorldGenerator("Complex", typeof(ComplexGenerator));
-            WRegistry.RegisterWorldGenerator("Flat", typeof(FlatGenerator));
+            WRegistry.RegisterWorldType(new ComplexWorldType());
+            WRegistry.RegisterWorldType(new FlatWorldType());
+            WRegistry.RegisterWorldType(new MandelbrotWorldType());
             //
             //Commands
             //

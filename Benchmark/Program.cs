@@ -1,46 +1,29 @@
-﻿using System;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using System;
-public class BenchmarkArrayVsDictionary
+using Benchmark;
+public class FastNoiseVsIcaria
 {
-    private const int size = 4096;
-    private int[] array;
-    private Dictionary<int, int> dictionary;
+     FastNoiseLite Ft =new FastNoiseLite(1234);
 
     [GlobalSetup]
     public void Setup()
     {
-        array = new int[size];
-        dictionary = new Dictionary<int, int>(size);
-
-        for (int i = 0; i < size; i++)
-        {
-            array[i] = i;
-            dictionary[i] = i;
-        }
+        Ft.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
+        Ft.SetFractalOctaves(4);
+        Ft.SetFrequency(0.005f);
     }
 
     [Benchmark]
-    public long IterateArray()
+    public float FastNoiseLib()
     {
-        long sum = 0;
-        for (int i = 0; i < array.Length; i++)
-        {
-            sum += array[i];
-        }
-        return sum;
+        
+        return Ft.GetNoise(0,0);
     }
 
     [Benchmark]
-    public long IterateDictionary()
+    public float Icaria()
     {
-        long sum = 0;
-        foreach (var kvp in dictionary)
-        {
-            sum += kvp.Value;
-        }
-        return sum;
+        return IcariaNoise.GradientNoise(0,0);
     }
 }
 
@@ -48,6 +31,6 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var summary = BenchmarkRunner.Run<BenchmarkArrayVsDictionary>();
+        var summary = BenchmarkRunner.Run<FastNoiseVsIcaria>();
     }
 }

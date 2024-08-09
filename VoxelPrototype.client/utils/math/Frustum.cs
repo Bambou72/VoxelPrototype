@@ -26,7 +26,7 @@ namespace VoxelPrototype.client.utils.math
             FactorX = 1.0f / MathF.Cos(HFOV * 0.5f);
             TanX = MathF.Tan(HFOV * 0.5f);
         }
-        public bool IsSectionInFrustum(SectionMesh Section)
+        public bool IsSectionInFrustum(Section Section)
         {
             //Vector from cam to sphere
             Vector3 sphere_vec = Section.Center - Camera.Position;
@@ -52,7 +52,7 @@ namespace VoxelPrototype.client.utils.math
             }
             return true;
         }
-        public bool IsSectionInFrustumSimple(SectionMesh Section)
+        public bool IsSectionInFrustumSimple(Section Section)
         {
             //Vector from cam to sphere
             Vector3 sphere_vec = Section.Center - Camera.Position;

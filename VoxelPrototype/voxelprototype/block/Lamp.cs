@@ -1,7 +1,7 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.Properties;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
+using VoxelPrototype.api.block.state.properties;
 using VoxelPrototype.game;
 
 namespace VoxelPrototype.voxelprototype.block

@@ -1,8 +1,9 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks.State;
-using VoxelPrototype.game.world.storage;
+using VoxelPrototype.api.block.state;
 using VoxelPrototype.client.game.world.Level.Chunk.Render;
-
+using VoxelPrototype.game;
+using VoxelPrototype.game.world;
+using VoxelPrototype.game.world.storage;
 namespace VoxelPrototype.client.game.world.Level.Chunk
 {
     public enum MeshState
@@ -11,35 +12,33 @@ namespace VoxelPrototype.client.game.world.Level.Chunk
         Generating,
         Ready
     }
-    public class Section : IVBFSerializable<Section>
+    public class Section
     {
         public readonly static float SphereRadius = Const.SectionSize * MathF.Sqrt(3) / 2;
-        internal BlockPalette BlockPalette;
         internal SectionMesh SectionMesh;
-        internal int Y;
         internal MeshState MeshState = MeshState.Dirty;
-        internal Vector3i Position
+        public BlockPalette BlockPalette;
+        public Chunk ParentChunk;
+        public int Y;
+        public bool Empty { get { return BlockPalette.Palette[0].RefCount == Const.SectionVolume; } }
+        public Section(Chunk Chunk)
+        {
+            SectionMesh = new(this);
+            ParentChunk = Chunk;
+            BlockPalette = new(1);
+        }
+        public Vector3 Center => (Position + new Vector3(0.5f)) * Const.SectionSize;
+        public Vector3i Position
         {
             get
             {
-                return new Vector3i(Chunk.X, Y, Chunk.Z);
+                return new Vector3i(ParentChunk.X, Y, ParentChunk.Z);
             }
         }
-
-        internal Chunk Chunk;
-        public Section(Chunk chunk)
-        {
-            Chunk = chunk;
-            BlockPalette = new(1);
-        }
-
-        public bool Empty { get { return BlockPalette.Palette[0].RefCount == Const.SectionVolume; } }
-
         public Section Deserialize(VBFCompound compound)
         {
             Y = compound.GetInt("Y").Value;
             BlockPalette = BlockPalette.Deserialize(compound.Get<VBFCompound>("BP"));
-            SectionMesh = new(new Vector3i(Chunk.X, Y, Chunk.Z), this);
             return this;
         }
         public VBFCompound Serialize()
@@ -51,12 +50,13 @@ namespace VoxelPrototype.client.game.world.Level.Chunk
         }
         public void SetBlock(Vector3i pos, BlockState id)
         {
-            if (pos.Y > Const.ChunkSizeM1 || pos.Y < 0)
+            if (pos.Y >= Const.SectionSize || pos.Y < 0)
             {
                 throw new Exception("Error");
             }
-            BlockPalette.Set(new Vector3i(pos.X, pos.Y, pos.Z), id);
+            BlockPalette.Set(pos, id);
         }
+
         public void Dispose()
         {
             SectionMesh.Destroy();

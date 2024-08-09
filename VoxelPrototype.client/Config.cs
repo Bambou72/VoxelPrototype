@@ -1,7 +1,4 @@
-﻿
-
-
-namespace VoxelPrototype.client
+﻿namespace VoxelPrototype.client
 {
     /*
     public class Config

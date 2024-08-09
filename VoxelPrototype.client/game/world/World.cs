@@ -1,7 +1,7 @@
 ﻿using NLog.LayoutRenderers.Wrappers;
 using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 using VoxelPrototype.client.game.entity;
 using VoxelPrototype.client.game.world.Level;
 using VoxelPrototype.client.game.world.Level.Chunk;
@@ -13,7 +13,7 @@ namespace VoxelPrototype.client.game.world
 
     public class World : IWorld
     {
-        internal int LoadDistance = 12;
+        //internal int LoadDistance = 12;
         //Tick
         internal ulong CurrentTick;
 
@@ -21,7 +21,7 @@ namespace VoxelPrototype.client.game.world
         internal PlayerManager PlayerFactory;
         internal PlayersRenderer PlayerRenderer;
         internal bool Initialized = false;
-        internal int RenderDistance = 6;
+        internal int RenderDistance = 12;
         internal ClientChat Chat;
         public World()
         {
@@ -121,7 +121,8 @@ namespace VoxelPrototype.client.game.world
         }
         public void SetBlock(int x, int y, int z, BlockState State)
         {
-            ChunkManager.SetBlock(new Vector3i(x, y, z), State);
+            ChunkManager.ChangeChunk(new Vector3i(x, y, z), State);
+            //ChunkManager.SetBlock(new Vector3i(x, y, z), State);
         }
 
         public bool IsTransparent(int x, int y, int z)

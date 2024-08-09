@@ -1,5 +1,5 @@
 ﻿using LiteNetLib;
-using VoxelPrototype.api.Commands;
+using VoxelPrototype.api.command;
 using VoxelPrototype.network.packets;
 namespace VoxelPrototype.server
 {
@@ -15,15 +15,18 @@ namespace VoxelPrototype.server
 
         internal void HandleMessage( NetPeer peer, ClientChatMessage data)
         {
-            if (data.Message[0] == CommandRegistry.GetInstance().commandPrefix)
+            if(data.Message != "")
             {
-                CommandRegistry.GetInstance().ExecuteCommand(data.Message, peer);
-            }
-            else
-            {
-                Logger.Info(Server.TheServer.World.PlayerFactory.List[(ushort)peer.Id] + ":" + data.Message);
-                ServerChatMessage packet = new() { Message = Server.TheServer.World.PlayerFactory.List[(ushort)peer.Id].Name + ":" + data.Message };
-                Server.TheServer.NetworkManager.SendPacketToAll(packet, DeliveryMethod.ReliableOrdered);
+                if (data.Message[0] == CommandRegistry.GetInstance().commandPrefix)
+                {
+                    CommandRegistry.GetInstance().ExecuteCommand(data.Message, peer);
+                }
+                else
+                {
+                    Logger.Info(Server.TheServer.World.PlayerFactory.List[(ushort)peer.Id] + ":" + data.Message);
+                    ServerChatMessage packet = new() { Message = Server.TheServer.World.PlayerFactory.List[(ushort)peer.Id].Name + ":" + data.Message };
+                    Server.TheServer.NetworkManager.SendPacketToAll(packet, DeliveryMethod.ReliableOrdered);
+                }
             }
         }
         public void SendServerMessage(string message, NetPeer peer)

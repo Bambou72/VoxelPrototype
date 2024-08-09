@@ -1,8 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL4;
-using System.Reflection;
 using VoxelPrototype.client.utils.StbImageSharp;
-using VoxelPrototype.utils;
-
 namespace VoxelPrototype.client.rendering.texture
 {
     internal class TextureAtlas : ITexture
@@ -44,6 +41,11 @@ namespace VoxelPrototype.client.rendering.texture
         public void Clean()
         {
             GL.DeleteTexture(Handle);
+        }
+
+        public int GetHandle()
+        {
+            return Handle;
         }
     }
 }

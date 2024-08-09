@@ -14,9 +14,14 @@ namespace VoxelPrototype.client.rendering.texture
         {
             ImageResult = null;
         }
+
+        public int GetHandle()
+        {
+            return 0;
+        }
+
         public void Use(TextureUnit unit)
         {
-            throw new NotImplementedException();
         }
     }
 }

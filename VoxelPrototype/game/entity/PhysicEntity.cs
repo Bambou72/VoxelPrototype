@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 using VoxelPrototype.physics;
 namespace VoxelPrototype.game.entity
 {
@@ -45,12 +45,12 @@ namespace VoxelPrototype.game.entity
             double x = Position.X;
             double y = Position.Y;
             double z = Position.Z;
-            Coll.x1 = x - EntityWidth / 2;
-            Coll.x2 = x + EntityWidth / 2;
-            Coll.y1 = y;
-            Coll.y2 = y + EntityHeight;
-            Coll.z1 = z - EntityDepth / 2;
-            Coll.z2 = z + EntityDepth / 2;
+            Coll.Min.X = x - EntityWidth / 2;
+            Coll.Max.X = x + EntityWidth / 2;
+            Coll.Min.Y = y;
+            Coll.Max.Y = y + EntityHeight;
+            Coll.Min.Z = z - EntityDepth / 2;
+            Coll.Max.Z = z + EntityDepth / 2;
         }
         public void Jump(float height = default)
         {

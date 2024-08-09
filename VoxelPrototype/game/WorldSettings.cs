@@ -2,7 +2,7 @@
 {
     public class WorldSettings
     {
-        long Seed;
+        int Seed;
         string Name;
         string Generator;
         public string GetName()
@@ -13,11 +13,11 @@
         {
             return Generator;
         }
-        public long GetSeed()
+        public int GetSeed()
         {
             return Seed;
         }
-        public WorldSettings(long Seed, string Generator, string Name)
+        public WorldSettings(int Seed, string Generator, string Name)
         {
             this.Seed = Seed;
             this.Generator = Generator;

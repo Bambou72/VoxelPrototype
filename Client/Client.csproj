@@ -7,9 +7,7 @@
     <AssemblyVersion>1.2023.0402.8492</AssemblyVersion>
     <FileVersion>1.2023.0402.8492</FileVersion>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <ErrorReport>prompt</ErrorReport>
-    <RepositoryUrl>https://github.com/OutlawTeam/VoxPopuli</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Bambou72/VoxelPrototype</RepositoryUrl>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>vp.ico</ApplicationIcon>
@@ -30,12 +28,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VoxelPrototype.client\VoxelPrototype.client.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Default.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

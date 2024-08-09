@@ -24,6 +24,9 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
             GL.VertexAttribPointer(1, 2, VertexAttribPointerType.Float, false, Unsafe.SizeOf<SectionVertex>(), Marshal.OffsetOf<SectionVertex>("Uv"));
             GL.EnableVertexAttribArray(2);
             GL.VertexAttribIPointer(2, 1, VertexAttribIntegerType.Int, Unsafe.SizeOf<SectionVertex>(), Marshal.OffsetOf<SectionVertex>("AO"));
+            GL.EnableVertexAttribArray(3);
+            GL.VertexAttribIPointer(3, 1, VertexAttribIntegerType.UnsignedInt, Unsafe.SizeOf<SectionVertex>(), Marshal.OffsetOf<SectionVertex>("Color"));
+
             //EBO config
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, EBO);
             GL.BufferData(BufferTarget.ElementArrayBuffer, 0, nint.Zero, BufferUsageHint.StaticDraw);

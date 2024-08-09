@@ -1,13 +1,10 @@
 ﻿using System.IO.Compression;
-using System.Numerics;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Runtime.Loader;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Commands;
-using VoxelPrototype.api.Items;
-using VoxelPrototype.api.WorldGenerator;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.command;
+using VoxelPrototype.api.item;
+using VoxelPrototype.api.worldgeneration;
 using VoxelPrototype.game;
 namespace VoxelPrototype.api
 {
@@ -56,6 +53,9 @@ namespace VoxelPrototype.api
                     {
                         string ExctractPath = TempPath + "/" + Path.GetFileNameWithoutExtension(filePath);
                         zip.ExtractToDirectory(ExctractPath);
+
+                        //TODO : Get rid of reflection
+
                         Assembly ass = AssemblyLoadContext.Default.LoadFromAssemblyPath(ExctractPath + "/" + Path.GetFileNameWithoutExtension(filePath) + ".dll");
                         var modTypes = ass.GetTypes().Where(t => typeof(IModInitializer).IsAssignableFrom(t) && !t.IsInterface);
                         foreach (var modType in modTypes)

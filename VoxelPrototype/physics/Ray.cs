@@ -1,6 +1,6 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 using VoxelPrototype.game;
 namespace VoxelPrototype.physics
 {
@@ -76,15 +76,15 @@ namespace VoxelPrototype.physics
             {
                 if (Math.Abs(Direction.X) < 1e-8)
                 {
-                    if (StartPosition.X < col.x1 || StartPosition.X > col.x2)
+                    if (StartPosition.X < col.Min.X || StartPosition.X > col.Max.X)
                     {
                         return (null, Vector3i.Zero);
                     }
                 }
                 else
                 {
-                    double t1 = (col.x1 - StartPosition.X) / Direction.X;
-                    double t2 = (col.x2 - StartPosition.X) / Direction.X;
+                    double t1 = (col.Min.X - StartPosition.X) / Direction.X;
+                    double t2 = (col.Max.X - StartPosition.X) / Direction.X;
                     tmin = Math.Max(tmin, Math.Min(t1, t2));
                     tminx = Math.Min(t1, t2);
                     tmax = Math.Min(tmax, Math.Max(t1, t2));
@@ -92,30 +92,30 @@ namespace VoxelPrototype.physics
                 // Répéter pour les deux autres axes (Y et Z)
                 if (Math.Abs(Direction.Y) < 1e-8)
                 {
-                    if (StartPosition.Y < col.y1 || StartPosition.Y > col.y2)
+                    if (StartPosition.Y < col.Min.Y || StartPosition.Y > col.Max.Y)
                     {
                         return (null, Vector3i.Zero);
                     }
                 }
                 else
                 {
-                    double t1 = (col.y1 - StartPosition.Y) / Direction.Y;
-                    double t2 = (col.y2 - StartPosition.Y) / Direction.Y;
+                    double t1 = (col.Min.Y - StartPosition.Y) / Direction.Y;
+                    double t2 = (col.Max.Y - StartPosition.Y) / Direction.Y;
                     tmin = Math.Max(tmin, Math.Min(t1, t2));
                     tminy = Math.Min(t1, t2);
                     tmax = Math.Min(tmax, Math.Max(t1, t2));
                 }
                 if (Math.Abs(Direction.Z) < 1e-8)
                 {
-                    if (StartPosition.Z < col.z1 || StartPosition.Z > col.z2)
+                    if (StartPosition.Z < col.Min.Z || StartPosition.Z > col.Max.Z)
                     {
                         return (null, Vector3i.Zero);
                     }
                 }
                 else
                 {
-                    double t1 = (col.z1 - StartPosition.Z) / Direction.Z;
-                    double t2 = (col.z2 - StartPosition.Z) / Direction.Z;
+                    double t1 = (col.Min.Z - StartPosition.Z) / Direction.Z;
+                    double t2 = (col.Max.Z - StartPosition.Z) / Direction.Z;
                     tmin = Math.Max(tmin, Math.Min(t1, t2));
                     tminz = Math.Min(t1, t2);
                     tmax = Math.Min(tmax, Math.Max(t1, t2));

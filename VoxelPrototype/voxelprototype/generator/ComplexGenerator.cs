@@ -1,63 +1,73 @@
-﻿using DotnetNoise;
-using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.WorldGenerator;
+﻿using OpenTK.Mathematics;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.worldgeneration;
+using VoxelPrototype.server;
 using VoxelPrototype.server.game.world.Level.Chunk;
-
+using VoxelPrototype.utils;
 namespace VoxelPrototype.voxelprototype.generator
 {
-    internal class ComplexGenerator : WorldGenerator
+    internal class ComplexChunkGenerator : IChunkGenerator
     {
-        FastNoise lib;
+        FastNoiseLite lib;
+        float[] HeightMap = new float[16 * 16];
 
-        public ComplexGenerator()
+        public ComplexChunkGenerator(int Seed)
         {
-            Name = "Complex";
+            lib = new FastNoiseLite(Seed);
+            lib.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
+            lib.SetFractalOctaves(16);
+            lib.SetFrequency(0.005f);
         }
 
-        public override int GetOriginHeight()
+        internal int GetHeight(Vector2 pos)
         {
-            return GetHeight(0, 0);
+            return (int)(lib.GetNoise(pos.X, pos.Y) * 100 + Const.ChunkRHeight / 2);
         }
-        public override void GenerateChunk(Chunk chunk)
+
+        public void GenerateHeightmap(Vector2i ChunkPos)
+        {
+            for(int x = 0; x < 16; x++)
+            {
+                for(int z = 0; z < 16; z++)
+                {
+                    HeightMap[x * 16 + z] = GetHeight(new Vector2(x, z) + (ChunkPos * 16));
+                }
+            }
+        }
+        public void GenerateBlock(Chunk ch)
         {
             for (int x = 0; x < Const.ChunkSize; x++)
             {
                 for (int z = 0; z < Const.ChunkSize; z++)
                 {
-                    int GlobalX = x + chunk.X * Const.ChunkSize;
-                    int GlobalZ = z + chunk.Z * Const.ChunkSize;
-                    int Height = GetHeight(GlobalX, GlobalZ);
+                    float Height = HeightMap[x * 16 + z];
+
                     for (int y = 0; y < Const.ChunkRHeight; y++)
                     {
 
                         if (y == Height)
                         {
-                            chunk.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:grass").GetDefaultState());
+                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:grass").GetDefaultState());
                         }
                         else if (y < Height && y > Height - 4)
                         {
-                            chunk.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:dirt").GetDefaultState());
+                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:dirt").GetDefaultState());
                         }
                         else if (y <= Height - 4)
                         {
-                            chunk.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:stone").GetDefaultState());
+                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:stone").GetDefaultState());
                         }
                     }
                 }
             }
+
         }
-        internal int GetHeight(int x, int z)
+        public Chunk GenerateChunk(Vector2i Position)
         {
-            return (int)(lib.GetNoise(x, z) * 100 + Const.ChunkRHeight / 2);
-        }
-        public override void SetData(long seed)
-        {
-            base.SetData(seed);
-            lib = new FastNoise((int)seed);
-            lib.UsedNoiseType = FastNoise.NoiseType.Simplex;
-            lib.Octaves = 4;
-            lib.Frequency = 0.005f;
+            GenerateHeightmap(Position);
+            Chunk CH = new Chunk(Position);
+            GenerateBlock(CH);
+            return CH;
         }
     }
 }

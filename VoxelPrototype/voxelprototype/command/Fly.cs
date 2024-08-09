@@ -1,5 +1,5 @@
 ﻿using LiteNetLib;
-using VoxelPrototype.api.Commands;
+using VoxelPrototype.api.command;
 using VoxelPrototype.game.entity.player;
 using VoxelPrototype.server;
 using VoxelPrototype.server.game.entity;

@@ -1,7 +1,7 @@
 ﻿using LiteNetLib;
 using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Commands;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.command;
 using VoxelPrototype.server;
 
 namespace VoxelPrototype.voxelprototype.command

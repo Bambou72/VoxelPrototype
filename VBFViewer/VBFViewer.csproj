@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VoxelPrototype\VoxelPrototype.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="font.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

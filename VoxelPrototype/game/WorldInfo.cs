@@ -2,7 +2,7 @@
 {
     public class WorldInfo : IVBFSerializableBinary<WorldInfo>
     {
-        public long Seed;
+        public int Seed;
         public string WorldGenerator;
         public string Path { get; set; }
         public string Name;
@@ -13,7 +13,7 @@
         public WorldInfo Deserialize(byte[] data)
         {
             VBFCompound deserializedRoot = (VBFCompound)VBFSerializer.Deserialize(data);
-            Seed = deserializedRoot.GetLong("Seed").Value;
+            Seed = deserializedRoot.GetInt("Seed").Value;
             WorldGenerator = deserializedRoot.GetString("Generator").Value;
             return this;
         }
@@ -27,11 +27,11 @@
             root = default;
             return data;
         }
-        public long GetSeed()
+        public int GetSeed()
         {
             return Seed;
         }
-        public void SetSeed(long Seed)
+        public void SetSeed(int Seed)
         {
             this.Seed = Seed;
         }

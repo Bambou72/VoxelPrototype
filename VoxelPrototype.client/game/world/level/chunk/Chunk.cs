@@ -1,11 +1,15 @@
 ﻿using OpenTK.Mathematics;
-using VoxelPrototype.api.Blocks;
-using VoxelPrototype.api.Blocks.State;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 
 namespace VoxelPrototype.client.game.world.Level.Chunk
 {
-    public class Chunk : IVBFSerializable<Chunk>
+    public class Chunk :  IVBFSerializable<Chunk>
     {
+        public int X { get; set; }
+        public int Z { get; set; }
+        public Vector2i Position { get { return new Vector2i(X, Z); } set { X = value.X; Z = value.Y; } }
+
         public readonly static float CircleRadius = Const.ChunkSize * MathF.Sqrt(2) / 2;
         //internal ChunkSate State = ChunkSate.Changed;
         internal Section[] Sections;
@@ -17,9 +21,6 @@ namespace VoxelPrototype.client.game.world.Level.Chunk
                 return (Position + new Vector2(0.5f)) * Const.ChunkSize;
             }
         }
-        public int X { get; set; }
-        public int Z { get; set; }
-        public Vector2i Position { get { return new Vector2i(X, Z); } set { X = value.X; Z = value.Y; } }
         public VBFCompound Serialize()
         {
             VBFCompound Chunk = new();
@@ -46,7 +47,6 @@ namespace VoxelPrototype.client.game.world.Level.Chunk
             for (int i = 0; i < SectionsCount; i++)
             {
                 Sections[i] = new Section(this).Deserialize((VBFCompound)DeSections.Tags[i]);
-                Sections[i].Chunk = this;
             }
             return this;
         }

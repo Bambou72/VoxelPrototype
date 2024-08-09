@@ -8,11 +8,11 @@ using System.Collections.Concurrent;
 using K4os.Compression.LZ4;
 using VoxelPrototype.utils;
 using VoxelPrototype.network.packets;
-using VoxelPrototype.api.Blocks.State;
 using VoxelPrototype.client.game.world.Level.Chunk;
 using VoxelPrototype.client.game.world.Level.Chunk.Render;
-using VoxelPrototype.api.Blocks;
 using OpenTK.Graphics.OpenGL4;
+using VoxelPrototype.api.block;
+using VoxelPrototype.api.block.state;
 
 namespace VoxelPrototype.client.game.world.Level
 {
@@ -110,7 +110,7 @@ namespace VoxelPrototype.client.game.world.Level
             MeshingThread.AddSectionToBeMesh(new SectionToMeshing()
             {
                 Importance = importance,
-                Pos = new Vector3i(sect.Chunk.X, sect.Y, sect.Chunk.Z)
+                Pos = new Vector3i(sect.ParentChunk.X, sect.Y, sect.ParentChunk.Z)
             });
         }
         internal void AddSectionToOG(SectionToOG section)
@@ -260,7 +260,7 @@ namespace VoxelPrototype.client.game.world.Level
                     {
                         bool IsSecInFrust;
                         {
-                            IsSecInFrust = Camera.Frustum.IsSectionInFrustum(section.SectionMesh);
+                            IsSecInFrust = Camera.Frustum.IsSectionInFrustum(section);
                         }
                         if (!section.Empty && IsSecInFrust)
                         {

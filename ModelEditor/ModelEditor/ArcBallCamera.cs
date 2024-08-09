@@ -1,5 +1,5 @@
 ﻿using OpenTK.Mathematics;
-namespace ModelEditor
+namespace ModelEditor.ModelEditor
 {
     public class ArcBallCamera
     {

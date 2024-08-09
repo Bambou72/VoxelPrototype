@@ -1,13 +1,14 @@
 ﻿using ImGuiNET;
-using VoxelPrototype.common;
-using VoxelPrototype.common.World;
+using K4os.Compression.LZ4;
+using K4os.Compression.LZ4.Encoders;
+using VoxelPrototype;
 
 namespace VBFViewer
 {
     internal static class Viewer
     {
-        static RegionFile LoadedRegion;
-        static VBFCompound[] Chunks;
+        static float ScaleFactor = 1.0f;
+        static VBFCompound[] Chunks = new VBFCompound[0];
         static long Index = 0;
         internal static void RenderVBFList(VBFList list)
         {
@@ -200,28 +201,16 @@ namespace VBFViewer
                         var Result = NativeFileDialogSharp.Dialog.FileOpen("vpr");
                         if (Result.IsOk)
                         {
-                            if (LoadedRegion != null)
+                            VBFCompound root = (VBFCompound)VBFSerializer.Deserialize(LZ4Pickler.Unpickle(File.ReadAllBytes(Result.Path)));
+                            List<VBFCompound> temp = new();
+                            foreach (VBFCompound ch in root.Tags.Values.ToArray().Cast<VBFCompound>())
                             {
-                                LoadedRegion.Close();
+                                temp.Add(ch);
                             }
-                            LoadedRegion = new RegionFile(Result.Path);
-                            Chunks = LoadedRegion.ReadAllChunkAsVBF();
+                            Chunks = temp.ToArray();
 
                         }
                     }
-                    if (ImGui.MenuItem("Close Region"))
-                    {
-                        if (LoadedRegion != null)
-                        {
-                            LoadedRegion.Close();
-                            LoadedRegion = null;
-                            Chunks = null;
-                        }
-                    }
-                    /*
-                    if (ImGui.MenuItem("Save"))
-                    {
-                    }*/
                     if (ImGui.MenuItem("Exit"))
                     {
                         Program.window.Close(); // Quitter la boucle
@@ -233,6 +222,8 @@ namespace VBFViewer
                 {
                     ImGui.Text("Number of loaded chunks : " + Chunks.Length);
                 }
+                ImGui.Separator();
+                ScaleFactor = Program.Controller._scaleFactor.X;
                 ImGui.EndMainMenuBar();
             }
             ImGui.SetNextWindowSize(new System.Numerics.Vector2(Program.window.ClientSize.X, Program.window.ClientSize.Y), ImGuiCond.Always);
@@ -242,25 +233,18 @@ namespace VBFViewer
             ImGui.SetNextWindowPos(new System.Numerics.Vector2(0, ImGui.GetFrameHeightWithSpacing()), ImGuiCond.Always);
             if (ImGui.Begin("Main", windowFlags))
             {
-                if (LoadedRegion != null)
+                Index = 0;
+                // Contenu de la fenêtre ImGui
+                if (ImGui.TreeNodeEx("Chunks"))
                 {
-                    Index = 0;
-                    // Contenu de la fenêtre ImGui
-                    if (ImGui.TreeNodeEx("Chunks"))
+                    foreach (var chunk in Chunks)
                     {
-                        foreach (var chunk in Chunks)
-                        {
-                            RenderTag(chunk.GetInt("PosX").Value.ToString() + ":" + chunk.GetInt("PosZ").Value.ToString(), chunk);
-                        }
-                        ImGui.TreePop();
+                        RenderTag(chunk.GetInt("X").Value.ToString() + ":" + chunk.GetInt("Z").Value.ToString(), chunk);
                     }
-
-
+                    ImGui.TreePop();
                 }
-
                 ImGui.End();
             }
-
         }
     }
 }

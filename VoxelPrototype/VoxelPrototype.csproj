@@ -10,21 +10,9 @@
     <Authors>OutlawTeam</Authors>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <Platforms>AnyCPU;x64</Platforms>
-    <Configurations>Debug;Release;DistributeBuild</Configurations>
-	  <GeneratedCodeFile>$(IntermediateOutputPath)CommitInfo.cs</GeneratedCodeFile>
+    <Configurations>Debug;Release</Configurations>
+	<PublishAot>true</PublishAot>
   </PropertyGroup>
-	<Target Name="GenerateCommitId" BeforeTargets="BeforeBuild">
-		<!-- Run Git command to get the commit ID -->
-		<Exec Command="git rev-parse --short  HEAD" ConsoleToMSBuild="true">
-			<Output TaskParameter="ConsoleOutput" PropertyName="GitCommitId" />
-		</Exec>
-		<!-- Ensure the directory for the generated file exists -->
-		<MakeDir Directories="$(IntermediateOutputPath)" />
-		<!-- Delete the existing CommitInfo.cs file if it exists -->
-		<Exec Command="if exist $(GeneratedCodeFile) del $(GeneratedCodeFile)" />
-		<!-- Write the commit ID to a C# file -->
-		<WriteLinesToFile File="$(GeneratedCodeFile)" Lines="[assembly: System.Reflection.AssemblyMetadata(&quot;CommitId&quot;, &quot;$(GitCommitId)&quot;)]" />
-	</Target>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>embedded</DebugType>
   </PropertyGroup>
@@ -38,20 +26,12 @@
     <DebugType>embedded</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DotnetNoise" Version="1.0.0" />
-    <PackageReference Include="ImGui.NET" Version="1.90.6.1" />
     <PackageReference Include="K4os.Compression.LZ4" Version="1.3.8" />
     <PackageReference Include="LiteNetLib" Version="1.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.3.2" />
-    <PackageReference Include="OpenTK" Version="4.8.2" />
-    <PackageReference Include="StbImageSharp" Version="2.27.14" />
-    <PackageReference Include="StbImageWriteSharp" Version="1.16.7" />
-    <PackageReference Include="Tomlyn" Version="0.17.0" />
+    <PackageReference Include="OpenTK.Mathematics" Version="4.8.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpFont\SharpFont.csproj" />
-    <Compile Remove="CommitInfo.cs" />
 	  <Compile Include="$(GeneratedCodeFile)" />
   </ItemGroup>
   <ItemGroup>

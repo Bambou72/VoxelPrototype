@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Client": {
+      "commandName": "Project",
+      "commandLineArgs": "--resourcepacks-paths ../../../../Assets",
+      "nativeDebugging": false
+    }
+  }
+}

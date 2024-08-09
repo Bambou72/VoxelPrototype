@@ -1,35 +1,43 @@
 ﻿using LiteNetLib;
-using VoxelPrototype.api.Commands;
-using VoxelPrototype.client;
-using VoxelPrototype.common.Network.packets;
-using VoxelPrototype.common.Network.server;
+using VoxelPrototype.api.command;
+using VoxelPrototype.network.packets;
 namespace VoxelPrototype.server
 {
-    public static class ServerChat
+    public  class ServerChat
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-        internal static void HandleMessage(ClientChatMessage data, NetPeer peer)
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ServerChat");
+
+        public ServerChat()
         {
-            if (data.Message[0] == Client.TheClient.ModManager.CommandRegister.commandPrefix)
+            Server.TheServer.NetworkManager.RegisterHandler<ClientChatMessage>(HandleMessage);
+
+        }
+
+        internal void HandleMessage( NetPeer peer, ClientChatMessage data)
+        {
+            if(data.Message != "")
             {
-                Client.TheClient.ModManager.CommandRegister.ExecuteCommand(data.Message, peer);
-            }
-            else
-            {
-                Logger.Info(Server.TheServer.World.PlayerFactory.List[(ushort)peer.Id] + ":" + data.Message);
-                ServerChatMessage packet = new() { Message = Server.TheServer.World.PlayerFactory.List[(ushort)peer.Id].Name + ":" + data.Message };
-                ServerNetwork.SendPacketToAll(packet, DeliveryMethod.ReliableOrdered);
+                if (data.Message[0] == CommandRegistry.GetInstance().commandPrefix)
+                {
+                    CommandRegistry.GetInstance().ExecuteCommand(data.Message, peer);
+                }
+                else
+                {
+                    Logger.Info(Server.TheServer.World.PlayerFactory.List[(ushort)peer.Id] + ":" + data.Message);
+                    ServerChatMessage packet = new() { Message = Server.TheServer.World.PlayerFactory.List[(ushort)peer.Id].Name + ":" + data.Message };
+                    Server.TheServer.NetworkManager.SendPacketToAll(packet, DeliveryMethod.ReliableOrdered);
+                }
             }
         }
-        public static void SendServerMessage(string message, NetPeer peer)
+        public void SendServerMessage(string message, NetPeer peer)
         {
             ServerChatMessage packet = new() { Message = "Server:" + message };
-            ServerNetwork.SendPacket(packet, peer, DeliveryMethod.ReliableOrdered);
+            Server.TheServer.NetworkManager.SendPacket(peer,packet,  DeliveryMethod.ReliableOrdered);
         }
-        public static void SendMessage(string message, NetPeer peer)
+        public void SendMessage(string message, NetPeer peer)
         {
             ServerChatMessage packet = new() { Message = message };
-            ServerNetwork.SendPacket(packet, peer, DeliveryMethod.ReliableOrdered);
+            Server.TheServer.NetworkManager.SendPacket(peer,packet, DeliveryMethod.ReliableOrdered);
         }
     }
 }

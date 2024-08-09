@@ -1,0 +1,4 @@
+{
+    "vertex": "entity.vert",
+    "fragment":"entity.frag"
+}

@@ -1,8 +1,7 @@
 ﻿using ImGuiNET;
-using ModelEditor.ModelEditor;
 using ModelEditor.ModelEditor.Block;
 using System.Numerics;
-namespace ModelEditor
+namespace ModelEditor.ModelEditor
 {
     internal static class ModelEditorGUI
     {
@@ -167,7 +166,7 @@ namespace ModelEditor
             {
                 TextureManager.LoadTextures();
             }
-            ImGui.Image(TextureManager.VoxelAtlas.Handle, new Vector2(256, 256));
+            //ImGui.Image(TextureManager.VoxelAtlas.Handle, new Vector2(256, 256));
             ImGui.End();
         }
         static string[] GetItemIndices(List<Face> items)
@@ -185,7 +184,7 @@ namespace ModelEditor
             List<uint> Indices = new List<uint>();
             foreach (Face face in faces)
             {
-                float[] Tex = TextureManager.GetAtlasTextures(face.texture);
+                float[] Tex = {0,0,0,1,1,1};// TextureManager.GetAtlasTextures(face.texture);
                 for (int i = 0; i < 4; i++)
                 {
                     vertices.Add(face.data[i].X);

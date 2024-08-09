@@ -1,0 +1,20 @@
+{
+    "variants":
+    {
+        "":
+        {
+            "model" : "voxelprototype:models/block/cube",
+            "textures":
+            {
+                "textures":[
+                    "voxelprototype:textures/block/grass_top",
+                    "voxelprototype:textures/block/dirt",
+                    "voxelprototype:textures/block/grass",
+                    "voxelprototype:textures/block/grass",
+                    "voxelprototype:textures/block/grass",
+                    "voxelprototype:textures/block/grass"
+                ]
+            }
+        }      
+    }
+}

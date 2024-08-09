@@ -4,7 +4,7 @@
  **/
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-namespace ModelEditor
+namespace ModelEditor.ModelEditor
 {
     // A simple class meant to help create shaders.
     public class Shader

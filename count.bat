@@ -1,1 +1,1 @@
-cloc --include-lang=c#,glsl .
+cloc --include-lang=c#,glsl .\VoxelPrototype .\VoxelPrototype.client .\Assets

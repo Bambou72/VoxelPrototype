@@ -1,5 +1,5 @@
 {
-    "name":"Core",
-    "description":"Base voxel ressource pack",
-    "version":"0.1"
+    "name":"core",
+    "description":"VoxelPrototype internal pack",
+    "version":""
 }

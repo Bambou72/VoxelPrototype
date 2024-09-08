@@ -1,5 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL4;
-using VoxelPrototype.client.utils.StbImageSharp;
+using VoxelPrototype.client.utils.StbImage;
+
 namespace VoxelPrototype.client.rendering.texture
 {
     internal class TextureAtlas : ITexture

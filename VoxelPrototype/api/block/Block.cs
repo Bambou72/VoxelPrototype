@@ -7,11 +7,10 @@ namespace VoxelPrototype.api.block
     public class Block
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("Block");
-
         public BlockStateHolder StateHolder;
         private BlockState Default;
         public string ID;
-        public string Data;
+        public string DataID => ID.Split(":")[0] + ":data/block/" + ID.Split(":")[1];
         public float Friction = 8;
         public int BreakingTime = 20;
         public BlockRenderType RenderType;

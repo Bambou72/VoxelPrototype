@@ -279,6 +279,10 @@ namespace VoxelPrototype
         {
             return Get<VBFDouble>(Name);
         }
+        public bool Contains(string Name)
+        {
+            return Tags.ContainsKey(Name);
+        }
         public void Dispose()
         {
             Tags.Clear();

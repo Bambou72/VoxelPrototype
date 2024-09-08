@@ -15,8 +15,8 @@ namespace VoxelPrototype.voxelprototype.generator
         double ymin = -1.0;
         double ymax = 1.0;
         int maxIterations = 1000;
-        int Width = 384;
-        int Height = (int)(384 / 1.33f);
+        int Width = 768;
+        int Height = (int)(768 / 1.33f);
         public Chunk GenerateChunk(Vector2i Position)
         {
             Chunk chunk = new Chunk(Position);
@@ -40,7 +40,7 @@ namespace VoxelPrototype.voxelprototype.generator
                         iteration++;
                     }
                     int colorIndex = iteration == maxIterations ? 0 : iteration % 16; // Use only 16 colors
-                    chunk.SetBlock(new Vector3i(cx, 1,cz), BlockRegistry.GetInstance().GetBlock("voxelprototype:mandelbrot").GetDefaultState().With(Mandelbrot.Color,colorIndex));              
+                    chunk.SetBlock(new Vector3i(cx, 1,cz), BlockRegistry.GetInstance().GetBlock("vp:mandelbrot").GetDefaultState().With(Mandelbrot.Color,colorIndex));              
                 }
             }
             return chunk;

@@ -1,0 +1,21 @@
+{
+    "variants":
+    {
+        "":
+        {
+            "model" : "vp:models/block/cube",
+            "textures":
+            {
+                "all":"vp:textures/block/lamp_off"
+            }  
+        },
+        "Lit:True":
+        {
+            "model" : "vp:models/block/cube",
+            "textures":
+            {
+                "all":"vp:textures/block/lamp_on"
+            }  
+        }       
+    }
+}

@@ -8,14 +8,14 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using System.Text;
 using VoxelPrototype.api;
 using VoxelPrototype.client.debug;
 using VoxelPrototype.client.game.world;
 using VoxelPrototype.client.Resources.Managers;
 using VoxelPrototype.client.server;
-using VoxelPrototype.client.ui;
-using VoxelPrototype.client.ui.prototype.renderer;
 using VoxelPrototype.network;
+using VoxelPrototype.server;
 namespace VoxelPrototype.client
 {
     public class Client : GameWindow
@@ -25,9 +25,7 @@ namespace VoxelPrototype.client
         public World World;
         public ClientNetworkManager NetworkManager;
         internal EmbeddedServer EmbedderServer;
-        //internal Config ClientConfig;
-        //internal UIManager UIManager;
-        UIRenderer UIRenderer;
+        internal Config Config;
         internal Resources.ResourcesManager ResourceManager;
         internal TextureManager TextureManager;
         internal FontManager FontManager;
@@ -44,9 +42,9 @@ namespace VoxelPrototype.client
         public bool Grab = false;
         public bool NoInput = false;
         public bool DebugFPS = false;
+        public bool Debug = false;
         internal bool DebugChunk;
         internal bool ShowAABB;
-
         public Client( string[]? ResourcesPacksPaths, GameWindowSettings GS , NativeWindowSettings NS) : base(GS, NS) 
         {
             if (TheClient == null)
@@ -54,19 +52,20 @@ namespace VoxelPrototype.client
                 TheClient = this;
             }
             this.ResourcesPacksPaths = ResourcesPacksPaths;
-            //ClientConfig = new();
+            Config = Config.LoadConfig("config.json");
+            this.ClientSize = new(Config.WindowWidth, Config.WindowHeight);
+            if(Config.Fullscreen)
+            {
+                SetFullscreen(true);
+            }
         }
         protected override void OnLoad()
         {
             GL.LoadBindings(new GLFWBindingsContext());
-            base.OnLoad();
-            GUIManager.Init(ClientSize);
-            //VoxelGui.Init();
             //Load
             //Renderer
             GL.Enable(EnableCap.Multisample);
             GL.Enable(EnableCap.DepthTest);
-            UIRenderer = new();
             MaxTextureSize = GL.GetInteger(GetPName.MaxTextureSize);
             MaxTextureLayers = GL.GetInteger(GetPName.MaxArrayTextureLayers);
             Logger.Info($"Max texture size is {MaxTextureSize}");
@@ -83,8 +82,6 @@ namespace VoxelPrototype.client
             ModManager.GetInstance().Init();
             //World
             World = new World();
-//UIManager = new();
-            //UIManager.SetCurrentScreen(new MainScreen());
         }
         public void InitResources()
         {
@@ -101,15 +98,14 @@ namespace VoxelPrototype.client
             ResourceManager.RegisterManager(BlockDataManager);
             ResourceManager.Init();
         }
-        protected override void OnUnload()
+
+        public void Save()
         {
-            base.OnUnload();
-            //Unload
-            //ClientConfig.SaveProperties();
             if(EmbedderServer != null)
             {
                 EmbedderServer.Stop();
             }
+            Config.SaveProperties("config.json",Config);
         }
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
@@ -118,6 +114,12 @@ namespace VoxelPrototype.client
             if (KeyboardState.IsKeyPressed(Keys.F1))
             {
                 DebugFPS = !DebugFPS;
+                Debug = false;
+            }
+            if (KeyboardState.IsKeyPressed(Keys.F2))
+            {
+                Debug = !Debug;
+                DebugFPS = false;
             }
             //Debug Grab
             if (KeyboardState.IsKeyPressed(Keys.F3))
@@ -126,9 +128,6 @@ namespace VoxelPrototype.client
             }
             //
             NetworkManager.Update();
-            GUIManager.Begin(this, e.Time);
-            GUIManager.Update();
-            //UIManager.Update();
             if (World.Initialized)
             {
                 {
@@ -176,49 +175,33 @@ namespace VoxelPrototype.client
                         });
                     }
                 }
-
-            }            
-            //
-            //Debug
-            //
-            //
-            //Debug UI
-            //
-            //ImGui.ShowDemoWindow();
-            GUIManager.End();
-            //UIManager.Render();
-            //if(DebugFPS)
-            //{
-                //UIRenderer.RenderText("FPS:"+ (1 / e.Time).ToString("0") +" ms:"+(e.Time*1000).ToString("0.00"),new Vector2i(0,((1 / e.Time).ToString("0")).CalculateVerticalSize()),Shadow:false);
-            //}
+            }
             SwapBuffers();
         }
-
+        StringBuilder BLDTEST = new StringBuilder();
         public void DeInitWorld()
         {
             World.Dispose();
         }
         protected override void OnFramebufferResize(FramebufferResizeEventArgs e)
         {
-            base.OnFramebufferResize(e);
             GL.Viewport(0, 0, e.Width, e.Height);
-            if (World.IsLocalPlayerExist())
+        }
+        protected override void OnResize(ResizeEventArgs e)
+        {
+            if (World != null && World.IsLocalPlayerExist())
             {
                 World.GetLocalPlayerCamera().AspectRatio = FramebufferSize.X / (float)FramebufferSize.Y;
             }
         }
-        protected override void OnResize(ResizeEventArgs e)
-        {
-            GUIManager.ResizeCallback(ClientSize);
-        }
         protected override void OnTextInput(TextInputEventArgs e)
         {
-            GUIManager.CharCallback((char)e.Unicode);
         }
         Vector2i SavedSize;
         Vector2i SavedLocation;
         public  void SetFullscreen(bool fullscreen)
         {
+            Config.Fullscreen = fullscreen;
             if(fullscreen)
             {
                 SavedSize = Size;
@@ -239,6 +222,23 @@ namespace VoxelPrototype.client
         {
             this.Grab = Grab;
             CursorState = Grab ? CursorState.Grabbed : CursorState.Normal;
+        }
+        public int GetGUIScale()
+        {
+            int ConfigScale = Config.GUIScale;
+            if(ConfigScale == 4 && (ClientSize.X < 3840 || ClientSize.Y  <2160))
+            {
+                ConfigScale--;
+            }
+            if(ConfigScale == 3 &&( ClientSize.X < 1920 || ClientSize.Y < 1080))
+            {
+                ConfigScale--;
+            }
+            if(ConfigScale == 2 && (ClientSize.X < 854 || ClientSize.Y < 480))
+            {
+                ConfigScale--;
+            }
+            return ConfigScale;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace VoxelPrototype.server
             {
                 NetworkManager.StartServer(ServerPort);
                 Logger.Info("The server has finished initializing, it is now ready at: " + NetworkManager.NetManager.LocalPort);
-                Logger.Info("Server engine version: " + EngineVersion.Version);
+                Logger.Info("Server engine version: " + Versions.Version);
                 _watchUpdate.Start();
                 while (Running)
                 {

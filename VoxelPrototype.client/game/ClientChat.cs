@@ -5,6 +5,9 @@ namespace VoxelPrototype.client.game
 {
     internal class ClientChat
     {
+        internal List<string> consoleHistory = new List<string>();
+        const int maxHistorySize = 100;
+
         internal ClientChat()
         {
             Client.TheClient.NetworkManager.RegisterHandler<ServerChatMessage>(HandleMessage);
@@ -16,11 +19,20 @@ namespace VoxelPrototype.client.game
         }
         internal void HandleMessage(NetPeer peer, ServerChatMessage data)
         {
-            ui.Console.AddToConsoleHistory(data.Message);
+           AddToConsoleHistory(data.Message);
         }
         internal void Dispose()
         {
-            ui.Console.ClearConsoleHistory();
+            consoleHistory.Clear();
+        }
+        internal  void AddToConsoleHistory(string message)
+        {
+            consoleHistory.Add(message);
+            // Maintain the history size
+            if (consoleHistory.Count > maxHistorySize)
+            {
+                consoleHistory.RemoveAt(0);
+            }
         }
     }
 }

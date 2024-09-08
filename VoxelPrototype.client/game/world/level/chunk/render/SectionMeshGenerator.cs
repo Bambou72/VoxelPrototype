@@ -155,7 +155,7 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
                                 {
                                     continue;
                                 }
-                                var mesh = Client.TheClient.ModelManager.GetBlockMesh(Client.TheClient.BlockDataManager.GetBlockStateData(block.Block.Data).GetBlockData(block).model);
+                                var mesh = Client.TheClient.ModelManager.GetBlockMesh(Client.TheClient.BlockDataManager.GetBlockStateData(block.Block.DataID).GetBlockData(block).model);
 
 
                                 if (block.Block.RenderType == BlockRenderType.Cube)
@@ -234,10 +234,10 @@ namespace VoxelPrototype.client.game.world.Level.Chunk.Render
         }
         internal float[] GetTextureCoordinates(int Face, BlockState State)
         {
-            var Atlas = (TextureAtlas)Client.TheClient.TextureManager.GetTexture("voxelprototype:textures/block/atlas");
+            var Atlas = (TextureAtlas)Client.TheClient.TextureManager.GetTexture("engine:block_atlas");
             try
             {
-                BlockData Data = Client.TheClient.BlockDataManager.GetBlockStateData(State.Block.Data).GetBlockData(State);
+                BlockData Data = Client.TheClient.BlockDataManager.GetBlockStateData(State.Block.DataID).GetBlockData(State);
                 if (Data.textures.all != null)
                 {
                     return Atlas.GetCoordinates(Data.textures.all);

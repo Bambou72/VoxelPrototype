@@ -1,5 +1,6 @@
 ﻿using VoxelPrototype.client.rendering.texture;
 using VoxelPrototype.client.resources.managers;
+using VoxelPrototype.client.utils.StbImage;
 using VoxelPrototype.client.utils.StbImageSharp;
 using VoxelPrototype.client.Utils;
 namespace VoxelPrototype.client.Resources.Managers
@@ -7,7 +8,7 @@ namespace VoxelPrototype.client.Resources.Managers
     internal class TextureManager : IReloadableResourceManager
     {
         Dictionary<string, ITexture> Textures = new Dictionary<string, ITexture>();
-        static string BlockAltasResourceID = "voxelprototype:textures/block/atlas";
+        static string BlockAltasResourceID = "engine:block_atlas";
         public void Clean()
         {
             foreach (var texture in Textures.Values)

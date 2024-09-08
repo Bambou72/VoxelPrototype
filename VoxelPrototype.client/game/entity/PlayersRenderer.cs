@@ -8,8 +8,8 @@ namespace VoxelPrototype.client.game.entity
     internal class PlayersRenderer
     {
         internal static DebugBox BlockBox = new DebugBox(new Vector3d(1.03125, 1.03125, 1.03125), new Vector4(0.33f, 0.33f, 0.33f, 1));
-        internal static string EntityShader = "shaders/entity";
-        internal static string PlayerModelTexture = "textures/entity/player";
+        internal static string EntityShader = "engine:shaders/entity";
+        internal static string PlayerModelTexture = "vp:textures/entity/player";
         public void RenderPlayers()
         {
             if (Client.TheClient.World.IsLocalPlayerExist())

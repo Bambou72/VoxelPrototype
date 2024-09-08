@@ -1,4 +1,5 @@
-﻿using VoxelPrototype.client.utils.StbImageSharp;
+﻿using VoxelPrototype.client.utils.StbImage;
+
 namespace VoxelPrototype.client.Utils
 {
     public static class ImageSaver

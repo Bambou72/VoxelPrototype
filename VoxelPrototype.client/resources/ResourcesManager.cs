@@ -174,7 +174,7 @@ namespace VoxelPrototype.client.Resources
         }
         internal void EnsureCoreAndModPackArePresent()
         {
-            ResourcesPack BasePack = Available.Find(x => x.Name == "Core");
+            ResourcesPack BasePack = Available.Find(x => x.Name == "core");
             if(BasePack == null)
             {
                 throw new Exception("Hey what a big problem , why did the core ressource pack not found ?");
@@ -182,19 +182,7 @@ namespace VoxelPrototype.client.Resources
             if (!Active.Contains(BasePack))
             {
                 Active.Add(BasePack);
-                Active.MoveToFirstPosition(BasePack);
-            }
-            foreach(string ModName in ModManager.GetInstance().ModList.Keys)
-            {
-                if(Active.Find(x => x.Name == "Core") == null)
-                {
-                    var ModPack = Available.Find(x => x.Name == ModName);
-                    if(ModPack == null)
-                    {
-                        throw new Exception($"It lacks the resources of the mod {ModName} that you installed");
-                    }
-                    Active.Add(ModPack);
-                }
+                //Active.MoveToFirstPosition(BasePack);
             }
         }
         internal void ReloadResources()
@@ -212,15 +200,19 @@ namespace VoxelPrototype.client.Resources
                 if(pack.Namespaces.Contains(ResourceLocationHelper.GetNamespace(Location)))
                 {
                     string CurrentPath = pack.Path + "/" + ResourceLocationHelper.GetPath(Location)+ "/" + ResourceLocationHelper.GetPathWithoutLast(Location);
-                    foreach (string @namespace in pack.Namespaces)
+                    if (Directory.Exists(CurrentPath))
                     {
 
-                        string[] ResourcesList = Directory.GetFiles(CurrentPath);
-                        foreach (string Resource in ResourcesList)
+                        foreach (string @namespace in pack.Namespaces)
                         {
-                            if(ResourceLocationHelper.GetPath(Location) == RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource))
+
+                            string[] ResourcesList = Directory.GetFiles(CurrentPath);
+                            foreach (string Resource in ResourcesList)
                             {
-                                return  new( Resource);
+                                if (ResourceLocationHelper.GetPath(Location) == RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource))
+                                {
+                                    return new(Resource);
+                                }
                             }
                         }
                     }
@@ -264,13 +256,18 @@ namespace VoxelPrototype.client.Resources
                 ResourcesPack pack = Active[i];
                 foreach(string @namespace in pack.Namespaces)
                 {
+                    
                     string CurrentPath = pack.Path+"/"+@namespace+"/"+path;
-                    string[] ResourcesList = Directory.GetFiles(CurrentPath).Where(Predicate).ToArray();
-                    foreach (string Resource in ResourcesList)
+                    if(Directory.Exists(CurrentPath))
                     {
-                        string Location = @namespace+":"+RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource);
-                        Resource Res = new( Resource);
-                        temp[Location] = Res;
+                        string[] ResourcesList = Directory.GetFiles(CurrentPath).Where(Predicate).ToArray();
+                        foreach (string Resource in ResourcesList)
+                        {
+                            string Location = @namespace + ":" + RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource);
+                            Resource Res = new(Resource);
+                            temp[Location] = Res;
+                        }
+
                     }
                 }
             }
@@ -286,16 +283,20 @@ namespace VoxelPrototype.client.Resources
                 foreach (string @namespace in pack.Namespaces)
                 {
                     string CurrentPath = pack.Path + "/" + @namespace + "/" + path;
-                    string[] ResourcesList = Directory.GetFiles(CurrentPath).Where(Predicate).ToArray();
-                    foreach (string Resource in ResourcesList)
+                    if (Directory.Exists(CurrentPath))
                     {
-                        string Location =@namespace+":"+ RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource);
-                        Resource Res = new( Resource);
-                        if(!temp.ContainsKey(Location))
+
+                        string[] ResourcesList = Directory.GetFiles(CurrentPath).Where(Predicate).ToArray();
+                        foreach (string Resource in ResourcesList)
                         {
-                            temp[Location] = new List<Resource>();
+                            string Location = @namespace + ":" + RelativePath.GetRelativePathFile(pack.Path + "/" + @namespace, Resource);
+                            Resource Res = new(Resource);
+                            if (!temp.ContainsKey(Location))
+                            {
+                                temp[Location] = new List<Resource>();
+                            }
+                            temp[Location].Add(Res);
                         }
-                        temp[Location].Add(Res);
                     }
                 }
             }

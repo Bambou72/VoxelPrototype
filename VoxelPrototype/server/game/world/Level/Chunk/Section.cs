@@ -26,14 +26,20 @@ namespace VoxelPrototype.server.game.world.Level.Chunk
         public Section Deserialize(VBFCompound compound)
         {
             Y = compound.GetInt("Y").Value;
-            BlockPalette = BlockPalette.Deserialize(compound.Get<VBFCompound>("BP"));
+            if(compound.Contains("BP"))
+            {
+                BlockPalette = BlockPalette.Deserialize(compound.Get<VBFCompound>("BP"));
+            }
             return this;
         }
         public VBFCompound Serialize()
         {
             VBFCompound Section = new();
             Section.AddInt("Y", Y);
-            Section.Add("BP", BlockPalette.Serialize());
+            if (!Empty)
+            {
+                Section.Add("BP", BlockPalette.Serialize());
+            }
             return Section;
         }
         public void SetBlock(Vector3i pos, BlockState id)

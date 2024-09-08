@@ -1,0 +1,20 @@
+{
+    "variants":
+    {
+        "":
+        {
+            "model" : "vp:models/block/cube",
+            "textures":
+            {
+                "textures":[
+                    "vp:textures/block/grass_top",
+                    "vp:textures/block/dirt",
+                    "vp:textures/block/grass",
+                    "vp:textures/block/grass",
+                    "vp:textures/block/grass",
+                    "vp:textures/block/grass"
+                ]
+            }
+        }      
+    }
+}

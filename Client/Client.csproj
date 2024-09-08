@@ -34,9 +34,6 @@
     <ProjectReference Include="..\VoxelPrototype.client\VoxelPrototype.client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Default.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

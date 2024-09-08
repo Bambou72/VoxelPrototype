@@ -10,51 +10,28 @@ namespace VoxelPrototype.voxelprototype
 {
     public class VoxelPrototype : IModInitializer
     {
-        public const string Name = "voxelprototype";
+        public const string Name = "VoxelPrototype";
         public const string Description = "voxelprototype base game";
         public const string Version = "0.1";
+        public const string Namespace = "vp";
         public void PreInit(ModManager Manager)
         {
         }
         public void Init(ModManager Manager)
         {
             BlockRegistry BRegistry = BlockRegistry.GetInstance();
-            string DirtID = BRegistry.GetBlockID(Name, "dirt");
-            var Dirt = new Block()
-            {
-                Data = "voxelprototype:data/block/dirt"
-            };
-            BRegistry.RegisterBlock(DirtID, Dirt);
-            string GrassID = BRegistry.GetBlockID(Name, "grass");
-            var Grass = new Block()
-            {
-                Data = "voxelprototype:data/block/grass"
-            };
-            BRegistry.RegisterBlock(GrassID, Grass);
-            string StoneID = BRegistry.GetBlockID(Name, "stone");
-            var Stone = new Block()
-            {
-                Data = "voxelprototype:data/block/stone"
-            };
-            BRegistry.RegisterBlock(StoneID, Stone);
-            string CobblestoneID = BRegistry.GetBlockID(Name, "cobblestone");
-            var Cobblestone = new Block()
-            {
-                Data = "voxelprototype:data/block/cobblestone"
-            };
-            BRegistry.RegisterBlock(CobblestoneID, Cobblestone);
-            string LampID = BRegistry.GetBlockID(Name, "lamp");
-            var Lamp = new block.Lamp()
-            {
-                Data = "voxelprototype:data/block/lamp"
-            };
-            BRegistry.RegisterBlock(LampID, Lamp);
-            string mandelbrotID = BRegistry.GetBlockID(Name, "mandelbrot");
-            var mandelbrot = new block.Mandelbrot()
-            {
-                Data = "voxelprototype:data/block/mandelbrot"
-            };
-            BRegistry.RegisterBlock(mandelbrotID, mandelbrot);
+            var Dirt = new Block();
+            BRegistry.RegisterBlock(Namespace+":dirt", Dirt);
+            var Grass = new Block();
+            BRegistry.RegisterBlock(Namespace + ":grass", Grass);
+            var Stone = new Block();
+            BRegistry.RegisterBlock(Namespace + ":stone", Stone);
+            var Cobblestone = new Block();
+            BRegistry.RegisterBlock(Namespace + ":cobblestone", Cobblestone);
+            var Lamp = new block.Lamp();
+            BRegistry.RegisterBlock(Namespace + ":lamp", Lamp);
+            var mandelbrot = new block.Mandelbrot();
+            BRegistry.RegisterBlock(Namespace + ":mandelbrot", mandelbrot);
             //
             //
             //World Generators
@@ -90,6 +67,10 @@ namespace VoxelPrototype.voxelprototype
         public string GetModDescription()
         {
             return Description;
+        }
+        public string GetModNamespace()
+        {
+            return Namespace;
         }
     }
 }

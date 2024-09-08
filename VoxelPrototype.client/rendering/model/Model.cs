@@ -7,7 +7,7 @@ namespace VoxelPrototype.client.rendering.model
         internal int Vao;
         internal int Vbo;
         internal float[] _Vertices;
-        static string ModelShaderResourceID = "voxelprototype:shaders/entity";
+        static string ModelShaderResourceID = "engine:shaders/entity";
         public Model(float[] Vertices)
         {
             _Vertices = Vertices;

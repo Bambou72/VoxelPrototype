@@ -47,15 +47,15 @@ namespace VoxelPrototype.voxelprototype.generator
 
                         if (y == Height)
                         {
-                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:grass").GetDefaultState());
+                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("vp:grass").GetDefaultState());
                         }
                         else if (y < Height && y > Height - 4)
                         {
-                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:dirt").GetDefaultState());
+                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("vp:dirt").GetDefaultState());
                         }
                         else if (y <= Height - 4)
                         {
-                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("voxelprototype:stone").GetDefaultState());
+                            ch.SetBlock(new Vector3i(x, y, z), BlockRegistry.GetInstance().GetBlock("vp:stone").GetDefaultState());
                         }
                     }
                 }

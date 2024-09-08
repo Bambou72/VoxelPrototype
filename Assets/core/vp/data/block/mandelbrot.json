@@ -1,0 +1,13 @@
+{
+    "variants":
+    {
+        "":
+        {
+            "model" : "vp:models/block/cube",
+            "textures":
+            {
+                "all":"vp:textures/block/mandelbrot"
+            }  
+        }   
+    }
+}

@@ -9,7 +9,8 @@ using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
 using System.Runtime.InteropServices;
 using VoxelPrototype.client;
-using VoxelPrototype.client.utils.StbImageSharp;
+using VoxelPrototype.client.utils.StbImage;
+
 namespace client
 {
     public class Options
@@ -62,6 +63,7 @@ namespace client
 #endif
 , GameWindowSettings.Default, Settings);
             Client.Run();
+            Client.Save();
             Client.Dispose();
             NLog.LogManager.Shutdown();
         }

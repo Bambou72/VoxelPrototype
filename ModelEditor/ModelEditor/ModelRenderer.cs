@@ -63,7 +63,7 @@ namespace ModelEditor.ModelEditor
             ebo = GL.GenBuffer();
             texture = GL.GenTexture();
             GL.BindTexture(TextureTarget.Texture2D, texture);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelPixelInternalFormat.Rgb, 1920, 1080, 0, PixelFormat.Rgb, PixelType.UnsignedByte, nint.Zero);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, 1920, 1080, 0, PixelFormat.Rgb, PixelType.UnsignedByte, nint.Zero);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
             GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, texture, 0);

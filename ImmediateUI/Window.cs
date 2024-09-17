@@ -51,6 +51,7 @@ void main()
 
         public Window(GameWindowSettings GS, NativeWindowSettings NS) : base(GS, NS)
         {
+            VSync = VSyncMode.Off;
             Title = "Test UI";
             Instance = this;
             ClientSize = new(1200, 800);
@@ -64,18 +65,21 @@ void main()
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            Title = ClientSize.X +":"+ClientSize.Y;
+            Title = ClientSize.X +":"+ClientSize.Y + ":FPS:" + (1) / e.Time;
         }
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
-            Immui.BeginFrame((Vector2i)MousePosition, this);
-            /*
-            if (Immui.Button("Test", new Rect(new(400, 200), new(600, 275))))
+            UIController.Update(Instance);
+            Immui.BeginFrame();
+            Immui.BeginWindow("Test");
+            Immui.EndWindow();
+            if (Immui.Button("Test", new Rect(new(400, 200), new(100,75))))
             {
-                Console.WriteLine(Immui.GetCurrentID());
-            }*/
-            Immui.Demo2DRendering();
+                Console.WriteLine("Test is clicked");
+            }
+            Immui.TextInput("Test2", new Rect(new(400, 300), new(400, 100)),ref TestString);
+            //Immui.Demo2DRendering();
             Immui.EndFrame();
             UIController.Render();
             SwapBuffers();

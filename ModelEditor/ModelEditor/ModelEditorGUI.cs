@@ -7,9 +7,7 @@ namespace ModelEditor.ModelEditor
     {
         static List<Face> faces = new List<Face>();
         static int listBoxSelectedItem = 0;
-#pragma warning disable CS0414 // Le champ 'ModelEditorGUI.TextureSelectedItem' est assigné, mais sa valeur n'est jamais utilisée
         static int TextureSelectedItem = 0;
-#pragma warning restore CS0414 // Le champ 'ModelEditorGUI.TextureSelectedItem' est assigné, mais sa valeur n'est jamais utilisée
         static uint IndexCounter = 0;
         static bool showFilePicker = false;
         static string selectedFilePath = "";
@@ -20,10 +18,11 @@ namespace ModelEditor.ModelEditor
         static string selectedFilePathSaveTextures = "";
         static string SaveNameTextures = "";
         static string SaveNameModel = "";
+        static bool showAboutModal = false;
+        static bool showAboutModalForFix = false;
         internal static void Render()
         {
-            ImGui.DockSpaceOverViewport(ImGui.GetMainViewport());
-            ImGui.BeginMainMenuBar();
+            ImGui.DockSpaceOverViewport(0,ImGui.GetMainViewport());
             if (ImGui.BeginMainMenuBar())
             {
                 if (ImGui.BeginMenu("File"))
@@ -42,9 +41,21 @@ namespace ModelEditor.ModelEditor
                     }
                     ImGui.EndMenu();
                 }
-                // Autres éléments de menu ou onglets peuvent être ajoutés ici
+                if (ImGui.BeginMenu("Settings"))
+                {
+                    if (ImGui.MenuItem("About"))
+                    {
+                        showAboutModalForFix = true;
+                    }
+                    ImGui.EndMenu();
+                }
                 ImGui.EndMainMenuBar();
             }
+            ImGui.BeginViewportSideBar("test", ImGui.GetMainViewport(),ImGuiDir.Down,25,ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoSavedSettings);
+            ImGui.BeginMenuBar();
+            ImGui.Button("Test");
+            ImGui.EndMenuBar();
+            ImGui.End();
             if (showFilePicker)
             {
                 ImGui.OpenPopup("FilePicker");
@@ -125,7 +136,7 @@ namespace ModelEditor.ModelEditor
                 ImGui.Text("Vertex number:" + faces.Count * 4);
                 ImGui.End();
             }
-            ImGui.Begin("ModelEditorMenu");
+            ImGui.Begin("Viewport");
             (float[] vertices, uint[] indices) = GetVertices();
             ModelRenderer.BlockMesh = vertices;
             ModelRenderer.BlockIndices = indices;
@@ -161,13 +172,23 @@ namespace ModelEditor.ModelEditor
                 ImGui.InputFloat2("Uv 4", ref faces[listBoxSelectedItem].uv[3]);
             }
             ImGui.End();
-            ImGui.Begin("Textures");
-            if (ImGui.Button("Reload Textures"))
+            if(showAboutModalForFix)
             {
-                TextureManager.LoadTextures();
+                ImGui.OpenPopup("About##Modal");
+                showAboutModalForFix = false;
             }
-            //ImGui.Image(TextureManager.VoxelAtlas.Handle, new Vector2(256, 256));
-            ImGui.End();
+            if (ImGui.BeginPopupModal("About##Modal"))
+            {
+                ImGui.Text("VoxelPrototype SDK");
+                ImGui.Text("Copyright: Florian Pfeiffer");
+                
+                if (ImGui.Button("Close"))
+                {
+                  ImGui.CloseCurrentPopup(); // Ferme la popup
+                }
+
+                ImGui.EndPopup();
+            }
         }
         static string[] GetItemIndices(List<Face> items)
         {

@@ -1,20 +1,30 @@
 ﻿using OpenTK.Mathematics;
-using System.Diagnostics.Contracts;
 namespace ImmediateUI.immui.math
 {
     public struct Rect : IEquatable<Rect>
     {
-        public Vector2 Min, Max;
-        public Vector2 Size => Max - Min;
-
-        public Rect(Vector2 min, Vector2 max)
+        public Vector2 Position;
+        public Vector2 Size;
+        public Vector2 Max 
+        { 
+            get 
+            { 
+                return Position + Size; 
+            }
+            set 
+            { 
+                Size = value - Position; 
+            } 
+        }
+        public Vector2 Center => Position + Size/2;
+        public Rect(Vector2 position, Vector2 size)
         {
-            Min = min;
-            Max = max;
+            Position = position;
+            Size = size;
         }
         public bool Contains(Vector2i Point)
         {
-            if (Point.X < Min.X || Point.X > Max.X || Point.Y < Min.Y || Point.Y > Max.Y)
+            if (Point.X < Position.X || Point.X > Max.X || Point.Y < Position.Y || Point.Y > Max.Y)
             {
                 return false;
             }
@@ -22,18 +32,28 @@ namespace ImmediateUI.immui.math
         }
         public Rect Pad(Rect Pad)
         {
-            return new(Min - Pad.Min, Max - Pad.Max);
+            return new(Position - Pad.Position, Size - Pad.Size);
+        }
+        public Rect UnPad(Rect Pad)
+        {
+            return this.Pad(Pad.Scaled(-1));
+        }
+        public Rect Scaled(float Scale)
+        {
+            this = new(
+                Position * Scale, 
+                Max  * Scale
+            );
+            return this;
         }
 
         public bool Equals(Rect other)
         {
-            if (Min != other.Min || Max != other.Max) return false;
+            if (Position != other.Position || Max != other.Max) return false;
             return true;
         }
 
-        [Pure]
-        public static Rect operator *(Rect Rect, float Float) => new Rect(Rect.Min * Float, Rect.Max * Float);
-        [Pure]
-        public static Rect operator *(float Float, Rect Rect) => new Rect(Rect.Min * Float, Rect.Max * Float);
+        public static Rect operator *(Rect Rect, float Float) => new Rect(Rect.Position * Float, Rect.Size * Float);
+        public static Rect operator *(float Float, Rect Rect) => new Rect(Rect.Position * Float, Rect.Size * Float);
     }
 }

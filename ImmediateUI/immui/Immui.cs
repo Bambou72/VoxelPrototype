@@ -1,56 +1,53 @@
 ﻿using ImmediateUI.immui.drawing;
-using ImmediateUI.immui.font;
-using ImmediateUI.immui.hash;
 using ImmediateUI.immui.math;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using System.Text;
 namespace ImmediateUI.immui
 {
-    public static class Immui
+    public  static partial class Immui
     {
         static Context CurrentContext;
-        //Const
-        internal const ulong InvalidID = 0;
-        internal const int ARCFAST_SAMPLE_MAX = 48;
-        internal const int ARCFAST_TABLE_SIZE = 48;
-        internal const int CIRCLE_AUTO_SEGMENT_MIN = 4;
-        internal const int CIRCLE_AUTO_SEGMENT_MAX = 512;
-        internal const uint AlphaMask = 0x000000FF;
-
-        //
+        static IO IO =new();
         public static void SetContext(Context Ctx)
         {
             CurrentContext = Ctx;
         }
-        public static void BeginFrame(Vector2i MousePos, GameWindow Window)
+        public static void BeginFrame()
         {
+            CurrentContext.MouseCaptured = false;
             CurrentContext.DrawData.CmdList.Clear();
             CurrentContext.MainDrawList.ResetForNewFrame();
             CurrentContext.MainDrawList.PushClipRectFullScreen();
             CurrentContext.MainDrawList.PushTextureID(ImmediateUI.Window.Blank.GetHandle());
-            for (int i = 0; i < 3; i++)
+            foreach(var Wind in CurrentContext.Windows.Values)
             {
-                CurrentContext.MouseButtons[i] = Window.MouseState.IsButtonDown((MouseButton)i);
+                Wind.DrawList.ResetForNewFrame();
+                Wind.DrawList.PushClipRectFullScreen();
+                Wind.DrawList.PushTextureID(ImmediateUI.Window.Blank.GetHandle());
             }
-            CurrentContext.MousePosition = MousePos;
             CurrentContext.HotID = 0;
-            CurrentContext.LastHotID = CurrentContext.HotID;
 
         }
-
+        public static IO GetIO()
+        {
+            return IO;
+        }
         public static void EndFrame()
         {
             CurrentContext.DrawData.CmdList.Add(CurrentContext.MainDrawList);
-            CurrentContext.InputedChars.Clear();
+            foreach (var Wind in CurrentContext.Windows.Values)
+            {
+                CurrentContext.DrawData.CmdList.Add(Wind.DrawList);
+            }
+            IO.InputedChars.Clear();
         }
         //
         // Update State 
         //
         public static void OnChar(char ch)
         {
-            CurrentContext.InputedChars.Add(ch);
+            IO.InputedChars.Add(ch);
         }
         public static void OnResize(Vector2 Size)
         {
@@ -86,20 +83,28 @@ namespace ImmediateUI.immui
             CurrentContext.MainDrawList.AddEllipseFilled(new(1025, 50), new(50, 25), 0x000000FF);
             CurrentContext.MainDrawList.AddNGon(new(1125, 75), 50, 0xFF0000FF, 5);     
             CurrentContext.MainDrawList.AddNGon(new(1125, 175), 50, 0xFF0000FF, 6);
-            /*
-            for(int i = 0;i < 500 ;i++)
-            {
-                CurrentContext.MainDrawList.AddRect(new(200, 200),new(200+i,200+i), (uint)i *25102006);
-            }*/
-            CurrentContext.MainDrawList.AddText(null, 17, new(500, 400), data.LoremIpsum.LoremIpsumText, 0x00000FF,690);
+            CurrentContext.MainDrawList.AddText(new(500, 400), data.LoremIpsum.LoremIpsumText, 17, 0x00000FF,WrapWidth: 690);
         }
-
+        
         //
         //
         //
-        public static Font GetCurrentFont()
+        //TODO : Add support for window
+        public static Vector2 CalculateTextSize(float Size,string Text,int WrapWidth=0, int MaxWidth = -1)
         {
-            return CurrentContext.Style.BaseFont;
+            return CurrentContext.Style.BaseFont.CalcTextSize(Size, Text, WrapWidth, MaxWidth);
+        }
+        public static ImmuiDrawList GetCurrentDrawList()
+        {
+            if(CurrentContext.CurrentWindow != null)
+            {
+                return CurrentContext.CurrentWindow.DrawList;
+            }
+            return CurrentContext.MainDrawList;
+        }
+        public static Style GetCurrentStyle()
+        {
+            return CurrentContext.Style;
         }
         public static Vector2 GetScreenSize()
         {
@@ -111,8 +116,9 @@ namespace ImmediateUI.immui
         }
         public static bool CheckMouse(Rect Rect)
         {
-            if (Rect.Contains(CurrentContext.MousePosition))
+            if (!CurrentContext.MouseCaptured && Rect.Contains(CurrentContext.MousePosition))
             {
+                CurrentContext.MouseCaptured = true;
                 return true;
             }
             return false;
@@ -120,177 +126,6 @@ namespace ImmediateUI.immui
         public static string GetLabel(string Str)
         {
             return Str.Split("##")[0];
-        }
-        //
-        //Hash and ID
-        //
-        public static ulong Hash(string Str, ulong Seed = 0)
-        {
-            byte[] Data = Encoding.UTF8.GetBytes(Str);
-            return xxHash64.ComputeHash(Data, Data.Length, Seed);
-        }
-        public static ulong Hash(byte[] Data, ulong Seed = 0)
-        {
-            return xxHash64.ComputeHash(Data, Data.Length, Seed);
-        }
-        public static ulong GetID(string Str)
-        {
-            ulong Seed = GetSeed();
-            ulong ID = Hash(Str, Seed);
-            CurrentContext.CurrentID = ID;
-            return ID;
-        }
-        public static ulong GetID(int N)
-        {
-            ulong Seed = GetSeed();
-            return Hash(BitConverter.GetBytes(N), Seed);
-        }
-        public static ulong GetSeed()
-        {
-            if (CurrentContext.IDStack.Count > 0)
-            {
-                return CurrentContext.IDStack[^1];
-            }
-            return 0;
-        }
-        public static void PushID(string Str)
-        {
-            ulong ID = GetID(Str);
-            CurrentContext.IDStack.Add(ID);
-        }
-        public static void PushID(int N)
-        {
-            ulong ID = GetID(N);
-            CurrentContext.IDStack.Add(ID);
-        }
-        public static void PushGeneratedID(ulong ID)
-        {
-            CurrentContext.IDStack.Add(ID);
-        }
-        public static void PopID()
-        {
-            CurrentContext.IDStack.RemoveAt(CurrentContext.IDStack.Count - 1);
-        }
-        public static ulong GetCurrentStackID()
-        {
-            return CurrentContext.IDStack[^1];
-        }
-        public static ulong GetCurrentID()
-        {
-            return CurrentContext.CurrentID;
-        }
-        //
-        //Widgets
-        //
-        public static bool Button(string Label, Rect Rect)
-        {
-            bool result = false;
-            ulong ID = GetID(Label);
-            if (CheckMouse(Rect))
-            {
-                CurrentContext.HotID = ID;
-                if (CurrentContext.MouseButtons[0] && CurrentContext.ActiveID == 0)
-                {
-                    CurrentContext.ActiveID = ID;
-                }
-            }
-            else if (CurrentContext.ActiveID == ID)
-            {
-                CurrentContext.ActiveID = 0;
-            }
-
-            if (CurrentContext.ActiveID == ID && !CurrentContext.MouseButtons[0] && CurrentContext.HotID == ID)
-            {
-                result = true;
-                CurrentContext.ActiveID = 0;
-            }
-            if (CurrentContext.HotID == ID)
-            {
-                CurrentContext.MainDrawList.AddRectFilled((Vector2i)Rect.Min, (Vector2i)Rect.Max, 0x102030FF, 0);
-            }
-            else
-            {
-                CurrentContext.MainDrawList.AddRectFilled((Vector2i)Rect.Min, (Vector2i)Rect.Max, 0x051020FF, 0);
-            }
-            return result;
-        }
-        public static void TextInput(string Label, Rect Rect, ref string inputText)
-        {
-            ulong ID = GetID(Label);
-
-            if (CheckMouse(Rect))
-            {
-                CurrentContext.HotID = ID;
-
-                if (CurrentContext.MouseButtons[0] && CurrentContext.ActiveID == 0)
-                {
-                    CurrentContext.ActiveID = ID;
-                }
-            }
-
-            if (CurrentContext.ActiveID == ID)
-            {
-                foreach (char ch in CurrentContext.InputedChars)
-                {
-                    if (ch == '\b')
-                    {
-                        inputText.Remove(inputText.Length - 1);
-                    }
-                    else
-                    {
-                        inputText += ch;
-                    }
-                }
-            }
-            if (CurrentContext.ActiveID == ID)
-            {
-                CurrentContext.MainDrawList.AddRectFilled((Vector2i)Rect.Min, (Vector2i)Rect.Max, 0x204060FF, 0);
-
-            }
-            else if (CurrentContext.HotID == ID)
-            {
-                CurrentContext.MainDrawList.AddRectFilled((Vector2i)Rect.Min, (Vector2i)Rect.Max, 0x102030FF, 0);
-            }
-            else
-            {
-                CurrentContext.MainDrawList.AddRectFilled((Vector2i)Rect.Min, (Vector2i)Rect.Max, 0x051020FF, 0);
-            }
-        }
-        //
-        //Utils
-        //
-        internal static void Normalize(ref float x, ref float y)
-        {
-            float d2 = x * x + y * y;
-            if (d2 > 0.0f)
-            {
-                float inv_len = 1f / MathF.Sqrt(d2);
-                x *= inv_len;
-                y *= inv_len;
-            }
-        }
-
-        internal static void FixNormal(ref float x, ref float y)
-        {
-            float d2 = x * x + y * y;
-            if (d2 > 0.000001f)
-            {
-                float inv_len2 = 1.0f / d2; if (inv_len2 > 100.0f) inv_len2 = 100.0f;
-                x *= inv_len2;
-                y *= inv_len2;
-            }
-        }
-        internal static int CircleAutoSegmentCalc(float Radian, float MaxError)
-        {
-            return (int)Math.Clamp(RoundupToEven((int)Math.Ceiling(MathF.PI / MathF.Acos(1 - Math.Min((MaxError), (Radian)) / (Radian)))), CIRCLE_AUTO_SEGMENT_MIN, CIRCLE_AUTO_SEGMENT_MAX);
-        }
-        internal static float CircleAutoSegmentCalcR(float N, float MaxError)
-        {
-            return ((MaxError) / (1 - MathF.Cos(MathF.PI / Math.Max((float)(N), MathF.PI))));
-        }
-        internal static float RoundupToEven(float V)
-        {
-            return ((((V) + 1) / 2) * 2);
         }
     }
 }

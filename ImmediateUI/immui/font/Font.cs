@@ -1,6 +1,5 @@
 ﻿using ImmediateUI.immui.drawing;
 using ImmediateUI.immui.math;
-using ImmediateUI.immui.utils;
 using OpenTK.Mathematics;
 using VoxelPrototype.client.rendering.texture;
 namespace ImmediateUI.immui.font
@@ -12,6 +11,8 @@ namespace ImmediateUI.immui.font
         internal int Height;
         public void RenderText(ImmuiDrawList DrawList, float Size, Vector2 Position,uint Color,Rect ClipRect, string Text,float WrapWidth, bool CpuFineClip)
         {
+            var VertexBuffer = DrawList.VertexBuffer;
+            var IndexBuffer = DrawList.IndexBuffer;
             int textEnd = Text.Length;
             int textBegin = 0;
             float X = MathF.Truncate(Position.X);
@@ -26,9 +27,9 @@ namespace ImmediateUI.immui.font
             float line_height = Height * scale;
             bool word_wrap_enabled = WrapWidth > 0.0f;
             int s = textBegin;
-            if (Y + line_height < ClipRect.Min.Y)
+            if (Y + line_height < ClipRect.Position.Y)
             {
-                while (Y + line_height < ClipRect.Min.Y && s < textEnd)
+                while (Y + line_height < ClipRect.Position.Y && s < textEnd)
                 {
                     int lineEnd = Text.IndexOf('\n', s);
                     if (lineEnd == -1)
@@ -69,122 +70,190 @@ namespace ImmediateUI.immui.font
             }
             int vtxCountMax = (textEnd - s) * 4;
             int idxCountMax = (textEnd - s) * 6;
-            int idxExpectedSize = DrawList.IndexBuffer.Count + idxCountMax;
+            int idxExpectedSize = DrawList.IndexBuffer.Size + idxCountMax;
+            DrawList.PrimReserve(idxCountMax, vtxCountMax);
+            uint colUntinted = Color | ~ImmuiDrawList.AlphaMask;
+            int wordWrapEol = 0;
+            while (s < textEnd)
+            {
+                if (word_wrap_enabled)
+                {
+                    if (wordWrapEol == 0)
+                    {
+                        wordWrapEol = CalcWordWrapPositionA(scale, Text ,s,textEnd, WrapWidth - (X - start_x));
+                    }
+                    if (s >= wordWrapEol)
+                    {
+                        X = start_x;
+                        Y += line_height;
+                        if (Y > ClipRect.Max.Y)
+                        {
+                            break;
+                        }
+                        wordWrapEol = 0;
+                        s = CalcWordWrapNextLineStartA(Text, s, textEnd);
+                        continue;
+                    }
+                }
+                char c = Text[s];
+                s++;
+                if (c == '\n')
+                {
+                    X = start_x;
+                    Y += line_height;
+                    if (Y > ClipRect.Max.Y)
+                    {
+                        break;
+                    }
+                    continue;
+                }
+                if (c == '\r')
+                {
+                    continue;
+                }
+                //TODO : Make a better and more secure way to get character
+                Character glyph = Characters[c];
+                if (glyph == null)
+                {
+                    continue;
+                }
+                float charWidth = (glyph.Advance >> 6) * scale;
+                if (glyph.Rendarable)
+                {
+                    float x1 = X + glyph.Bearing.X * scale;
+                    float x2 = x1 + glyph.Size.X * scale;
+                    float y1 = Y - ( glyph.Bearing.Y )*scale;
+                    float y2 = y1 + glyph.Size.Y * scale;
+                    if (x1 <= ClipRect.Max.X && x2 >= ClipRect.Position.X)
+                    {
+                        float u1 = glyph.UV0.X;
+                        float v1 = glyph.UV0.Y;
+                        float u2 = glyph.UV1.X;
+                        float v2 = glyph.UV1.Y;
+                        if (CpuFineClip)
+                        {
+                            if (x1 < ClipRect.Position.X)
+                            {
+                                u1 += (1.0f - (x2 - ClipRect.Position.X) / (x2 - x1)) * (u2 - u1);
+                                x1 = ClipRect.Position.X;
+                            }
+                            if (y1 < ClipRect.Position.Y)
+                            {
+                                v1 += (1.0f - (y2 - ClipRect.Position.Y) / (y2 - y1)) * (v2 - v1);
+                                y1 = ClipRect.Position.Y;
+                            }
+                            if (x2 > ClipRect.Max.X)
+                            {
+                                u2 = u1 + ((ClipRect.Max.X - x1) / (x2 - x1)) * (u2 - u1);
+                                x2 = ClipRect.Max.X;
+                            }
+                            if (y2 > ClipRect.Max.Y)
+                            {
+                                v2 = v1 + ((ClipRect.Max.Y - y1) / (y2 - y1)) * (v2 - v1);
+                                y2 = ClipRect.Max.Y;
+                            }
+                            if (y1 >= y2)
+                            {
+                                X += charWidth;
+                                continue;
+                            }
+                        }
+                           
+                        VertexBuffer.PushBack(new Vertex(new Vector2(x1, y1), new Vector2(u1, v1), Color));
+                        VertexBuffer.PushBack(new Vertex(new Vector2(x2, y1), new Vector2(u2, v1), Color));
+                        VertexBuffer.PushBack(new Vertex(new Vector2(x2, y2), new Vector2(u2, v2), Color));
+                        VertexBuffer.PushBack(new Vertex(new Vector2(x1, y2), new Vector2(u1, v2), Color));
+                        IndexBuffer.PushBack(DrawList.VtxCurrentIdx);
+                        IndexBuffer.PushBack(DrawList.VtxCurrentIdx + 1);
+                        IndexBuffer.PushBack(DrawList.VtxCurrentIdx + 2);
+                        IndexBuffer.PushBack(DrawList.VtxCurrentIdx);
+                        IndexBuffer.PushBack(DrawList.VtxCurrentIdx + 2);
+                        IndexBuffer.PushBack(DrawList.VtxCurrentIdx + 3);
+                        DrawList.VtxCurrentIdx += 4;
+                    }
+                }
+                X += charWidth;
+            }
 
-           DrawList.PrimReserve(idxCountMax, vtxCountMax);
-           
-           uint colUntinted = Color | ~Immui.AlphaMask;
-           int wordWrapEol = 0;
-
-           while (s < textEnd)
-           {
-               if (word_wrap_enabled)
-               {
-                   if (wordWrapEol == 0)
-                   {
-                       wordWrapEol = CalcWordWrapPositionA(scale, Text ,s,textEnd, WrapWidth - (X - start_x));
-                   }
-                   if (s >= wordWrapEol)
-                   {
-                       X = start_x;
-                       Y += line_height;
-                       if (Y > ClipRect.Max.Y)
-                       {
-                           break;
-                       }
-                       wordWrapEol = 0;
-                       s = CalcWordWrapNextLineStartA(Text, s, textEnd);
-                       continue;
-                   }
-               }
-               char c = Text[s];
-               s++;
-               if (c == '\n')
-               {
-                   X = start_x;
-                   Y += line_height;
-                   if (Y > ClipRect.Max.Y)
-                   {
-                       break;
-                   }
-                   continue;
-               }
-               if (c == '\r')
-               {
-                   continue;
-               }
-               //TODO : Make a better and more secure way to get character
-               Character glyph = Characters[c];
-               if (glyph == null)
-               {
-                   continue;
-               }
-               float charWidth = (glyph.Advance >> 6) * scale;
-               if (glyph.Rendarable)
-               {
-                   float x1 = X + glyph.Bearing.X * scale;
-                   float x2 = x1 + glyph.Size.X * scale;
-                   float y1 = Y - glyph.Bearing.Y *scale;
-                   float y2 = y1 + glyph.Size.Y * scale;
-                   if (x1 <= ClipRect.Max.X && x2 >= ClipRect.Min.X)
-                   {
-                       float u1 = glyph.UV0.X;
-                       float v1 = glyph.UV0.Y;
-                       float u2 = glyph.UV1.X;
-                       float v2 = glyph.UV1.Y;
-                       if (CpuFineClip)
-                       {
-                           if (x1 < ClipRect.Min.X)
-                           {
-                               u1 += (1.0f - (x2 - ClipRect.Min.X) / (x2 - x1)) * (u2 - u1);
-                               x1 = ClipRect.Min.X;
-                           }
-                           if (y1 < ClipRect.Min.Y)
-                           {
-                               v1 += (1.0f - (y2 - ClipRect.Min.Y) / (y2 - y1)) * (v2 - v1);
-                               y1 = ClipRect.Min.Y;
-                           }
-                           if (x2 > ClipRect.Max.X)
-                           {
-                               u2 = u1 + ((ClipRect.Max.X - x1) / (x2 - x1)) * (u2 - u1);
-                               x2 = ClipRect.Max.X;
-                           }
-                           if (y2 > ClipRect.Max.Y)
-                           {
-                               v2 = v1 + ((ClipRect.Max.Y - y1) / (y2 - y1)) * (v2 - v1);
-                               y2 = ClipRect.Max.Y;
-                           }
-                           if (y1 >= y2)
-                           {
-                               X += charWidth;
-                               continue;
-                           }
-                       }
-
-                       DrawList.VertexBuffer[DrawList.VertexPtr] = new Vertex { Position = new Vector2(x1, y1), Color = Color, UV = new Vector2(u1, v1) };
-                       DrawList.VertexBuffer[DrawList.VertexPtr + 1] = new Vertex { Position = new Vector2(x2, y1), Color = Color, UV = new Vector2(u2, v1) };
-                       DrawList.VertexBuffer[DrawList.VertexPtr + 2] = new Vertex { Position = new Vector2(x2, y2), Color = Color, UV = new Vector2(u2, v2) };
-                       DrawList.VertexBuffer[DrawList.VertexPtr + 3] = new Vertex { Position = new Vector2(x1, y2), Color = Color, UV = new Vector2(u1, v2) };
-                       DrawList.IndexBuffer[DrawList.IndexPtr] = DrawList.VtxCurrentIdx;
-                       DrawList.IndexBuffer[DrawList.IndexPtr + 1] = DrawList.VtxCurrentIdx + 1;
-                       DrawList.IndexBuffer[DrawList.IndexPtr + 2] = DrawList.VtxCurrentIdx + 2;
-                       DrawList.IndexBuffer[DrawList.IndexPtr + 3] = DrawList.VtxCurrentIdx;
-                       DrawList.IndexBuffer[DrawList.IndexPtr + 4] = DrawList.VtxCurrentIdx + 2;
-                       DrawList.IndexBuffer[DrawList.IndexPtr + 5] = DrawList.VtxCurrentIdx + 3;
-                       DrawList.VertexPtr += 4;
-                       DrawList.VtxCurrentIdx += 4;
-                       DrawList.IndexPtr += 6;
-                   }
-               }
-               X += charWidth;
-           }
-           //DrawList.VertexBuffer.Resize(DrawList.VertexBuffer.Count - (DrawList.VertexBuffer.Count -DrawList.VertexPtr));
-           //DrawList.IndexBuffer.Resize(DrawList.IndexBuffer.Count - (DrawList.IndexBuffer.Count - DrawList.IndexPtr));
            ImmuiDrawCommand DCmd = DrawList.Commands[^1];
-           DCmd.Count -= idxExpectedSize -  DrawList.IndexBuffer.Count;
+           DCmd.Count -= idxExpectedSize -  DrawList.IndexBuffer.Size;
            DrawList.Commands[^1] = DCmd;
         }
-        //WARN : Method broken
+        public Vector2 CalcTextSize(float size, string Text, float wrap_width, float max_width = -1) 
+        {
+
+            float line_height = 0;
+            float scale = size / Height;
+
+            Vector2 text_size =Vector2.Zero;
+            float line_width = 0.0f;
+
+            bool word_wrap_enabled = (wrap_width > 0.0f);
+            int word_wrap_eol = 0;
+
+            int s = 0;
+            while (s < Text.Length)
+            {
+                if (word_wrap_enabled)
+                {
+                    if (word_wrap_eol == 0)
+                    {
+                        word_wrap_eol = CalcWordWrapPositionA(scale, Text, s, Text.Length, wrap_width - line_width);
+                    }
+
+                    if (s >= word_wrap_eol)
+                    {
+                        if (text_size.X < line_width)
+                        {
+                            text_size.X = line_width;
+                        }
+                        text_size.Y += line_height;
+                        line_width = 0.0f;
+                        word_wrap_eol = 0;
+                        s = CalcWordWrapNextLineStartA(Text, s, Text.Length);
+                        continue;
+                    }
+                }
+
+
+                int prev_s = s;
+                char c = Text[s];
+                s++;
+                if (c < 32)
+                {
+                    if (c == '\n')
+                    {
+                        text_size.X = Math.Min(text_size.X, line_width);
+                        text_size.Y += line_height;
+                        line_width = 0.0f;
+                        continue;
+                    }
+                    if (c == '\r')
+                        continue;
+                }
+                Character glyph = Characters[c];
+                float char_width = (glyph.Advance >> 6) * scale;
+                if (max_width != -1 && line_width + char_width >= max_width)
+                {
+                    s = prev_s;
+                    break;
+                }
+
+                line_width += char_width;
+                line_height = MathF.Max(line_height, glyph.Size.Y * scale);
+            }
+            if (text_size.X < line_width)
+            {
+                text_size.X = line_width;
+            }
+            if (line_width > 0 || text_size.Y == 0.0f)
+            {
+                text_size.Y += line_height;
+            }
+            
+
+            return text_size;
+        }
         public int CalcWordWrapPositionA(float Scale,string TextString, int Text,int TextEnd, float WrapWidth)
         {
             float line_width = 0.0f;
@@ -283,6 +352,6 @@ namespace ImmediateUI.immui.font
         internal uint Advance;
         internal Vector2 UV0;
         internal Vector2 UV1;
-            internal bool Rendarable = true;
+        internal bool Rendarable = true;
     }
 }

@@ -2,6 +2,8 @@
 using ImmediateUI.immui.drawing;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 namespace ImmediateUI
@@ -10,12 +12,36 @@ namespace ImmediateUI
     {
         int VAO, VBO, EBO;
         int VertexBufferSize,IndexBufferSize;
-
         public ImmuiController()
         {
             VertexBufferSize = 10000;
             IndexBufferSize = 2000;
             GenerateGraphicObjects();
+        }
+        public void Update(GameWindow GW)
+        {
+            var IO = Immui.GetIO();
+            IO.Drag = (Vector2i)GW.MousePosition- IO.MousePos;
+            IO.MousePos = (Vector2i)GW.MousePosition;
+            IO.MouseDown[0] = GW.IsMouseButtonDown(MouseButton.Left);
+            IO.MouseDown[1] = GW.IsMouseButtonDown(MouseButton.Middle);
+            IO.MouseDown[2] = GW.IsMouseButtonDown(MouseButton.Right);
+            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+            {
+                if (key == Keys.Unknown)
+                {
+                    continue;
+                }
+                if (GW.IsKeyDown(key))
+                {
+                    IO.AddKeyEvent((KeyboardKeys)key, true);
+                }
+                else
+                {
+                    IO.AddKeyEvent((KeyboardKeys)key, false);
+                }
+                
+            }
         }
         public void GenerateGraphicObjects()
         {
@@ -45,7 +71,7 @@ namespace ImmediateUI
             {
                 ImmuiDrawList cmd_list = DrawData.CmdList[i];
 
-                int vertexSize = cmd_list.VertexBuffer.Count * Unsafe.SizeOf<Vertex>();
+                int vertexSize = cmd_list.VertexBuffer.Size * Unsafe.SizeOf<Vertex>();
                 if (vertexSize > VertexBufferSize)
                 {
                     int newSize = (int)Math.Max(VertexBufferSize * 1.5f, vertexSize);
@@ -53,7 +79,7 @@ namespace ImmediateUI
                     VertexBufferSize = newSize;
                 }
 
-                int indexSize = cmd_list.IndexBuffer.Count * sizeof(uint);
+                int indexSize = cmd_list.IndexBuffer.Size * sizeof(uint);
                 if (indexSize > IndexBufferSize)
                 {
                     int newSize = (int)Math.Max(IndexBufferSize * 1.5f, indexSize);
@@ -73,15 +99,15 @@ namespace ImmediateUI
             for (int i = 0; i < DrawData.CmdList.Count; i++)
             {
                 ImmuiDrawList cmd_list = DrawData.CmdList[i];
-                GL.BufferSubData(BufferTarget.ArrayBuffer, 0, cmd_list.VertexBuffer.Count * Unsafe.SizeOf<Vertex>(), cmd_list.VertexBuffer.ToArray());
-                GL.BufferSubData(BufferTarget.ElementArrayBuffer, 0, cmd_list.IndexBuffer.Count * sizeof(uint), cmd_list.IndexBuffer.ToArray());
+                GL.BufferSubData(BufferTarget.ArrayBuffer, 0, cmd_list.VertexBuffer.Size * Unsafe.SizeOf<Vertex>(), cmd_list.VertexBuffer.Data);
+                GL.BufferSubData(BufferTarget.ElementArrayBuffer, 0, cmd_list.IndexBuffer.Size * sizeof(uint), cmd_list.IndexBuffer.Data);
                 for (int cmd_i = 0; cmd_i < cmd_list.Commands.Count; cmd_i++)
                 {
                     ImmuiDrawCommand pcmd = cmd_list.Commands[cmd_i];
                     GL.ActiveTexture(TextureUnit.Texture0);
                     GL.BindTexture(TextureTarget.Texture2D, pcmd.TextureID);
                     var clip = pcmd.ClipRect;
-                    GL.Scissor((int)clip.Min.X,(int)Immui.GetScreenSize().Y  - (int)clip.Max.Y, (int)(clip.Max.X - clip.Min.X), (int)(clip.Max.Y - clip.Min.Y));
+                    GL.Scissor((int)clip.Position.X,(int)Immui.GetScreenSize().Y  - (int)clip.Max.Y, (int)(clip.Max.X - clip.Position.X), (int)(clip.Max.Y - clip.Position.Y));
                     GL.DrawElements(BeginMode.Triangles, (int)pcmd.Count, DrawElementsType.UnsignedInt, (int)pcmd.Offset * sizeof(uint));                                
                 }
             }

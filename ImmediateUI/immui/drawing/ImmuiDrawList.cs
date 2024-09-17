@@ -2,7 +2,6 @@
 using ImmediateUI.immui.font;
 using ImmediateUI.immui.math;
 using ImmediateUI.immui.utils;
-using System.Collections.Generic;
 namespace ImmediateUI.immui.drawing
 {
     [Flags]
@@ -29,40 +28,68 @@ namespace ImmediateUI.immui.drawing
         AntiAliasedLines = 1,
         AntiAliasedFill = 2,
     };
-
+    //OPT : Reduce lag due to pushback vertex , not very important
     public class ImmuiDrawList
     {
+        public static float CircleSegmentMaxError;
+        public static float ArcFastRadiusCutoff;
+        public static float CurveTessellationTol = 1.25f;
+        public static byte[] CircleSegmentCounts = new byte[64];
+        public static Vector2[] ArcFastVtx = new Vector2[ImmuiDrawList.ARCFAST_TABLE_SIZE];
+        public static DrawListFlags InitialFlags = DrawListFlags.AntiAliasedLines | DrawListFlags.AntiAliasedFill;
+        public static void Init()
+        {
+            for (int i = 0; i < ArcFastVtx.Length; i++)
+            {
+                float a = (float)i * 2 * MathF.PI / ArcFastVtx.Length;
+                ArcFastVtx[i] = new(MathF.Cos(a), MathF.Sin(a));
+            }
+            ArcFastRadiusCutoff = ImmuiDrawList.CircleAutoSegmentCalcR(ImmuiDrawList.ARCFAST_SAMPLE_MAX, CircleSegmentMaxError);
+            SetCircleTessellationMaxError(0.30f);
+
+        }
+        static void  SetCircleTessellationMaxError(float MaxError)
+        {
+            if (CircleSegmentMaxError == MaxError)
+                return;
+            CircleSegmentMaxError = MaxError;
+            for (int i = 0; i < CircleSegmentCounts.Length; i++)
+            {
+                float radius = i;
+                CircleSegmentCounts[i] = (byte)(i > 0 ? ImmuiDrawList.CircleAutoSegmentCalc(radius, CircleSegmentMaxError) : ImmuiDrawList.ARCFAST_SAMPLE_MAX);
+            }
+            ArcFastRadiusCutoff = ImmuiDrawList.CircleAutoSegmentCalcR(ImmuiDrawList.ARCFAST_SAMPLE_MAX, CircleSegmentMaxError);
+        }
+        internal const ulong InvalidID = 0;
+        internal const int ARCFAST_SAMPLE_MAX = 48;
+        internal const int ARCFAST_TABLE_SIZE = 48;
+        internal const int CIRCLE_AUTO_SEGMENT_MIN = 4;
+        internal const int CIRCLE_AUTO_SEGMENT_MAX = 512;
+        internal const uint AlphaMask = 0x000000FF;
         public DrawListFlags DrawListFlags;
         public List<ImmuiDrawCommand> Commands = new();
-        public List<Vertex> VertexBuffer = new();
-        public List<uint> IndexBuffer = new();
+        public Vector<Vertex> VertexBuffer = new();
+        public Vector<uint> IndexBuffer = new();
         internal uint VtxCurrentIdx;
-        internal int VertexPtr = 0;
-        internal int IndexPtr = 0;
         public List<Rect> ClipStack = new();
         public List<int> TextureStack = new();
         public Vector<Vector2> Path = new();
         public ImmuiDrawCommandHeader CmdHeader = new();
-        public ImmuiDrawListSharedData Data;
         public float FringeScale = 1;
-        public ImmuiDrawList(ImmuiDrawListSharedData Data)
-        {
-            this.Data = Data;
-        }
 
         //
         //Primitives
         //
         public void AddLine(Vector2 Start, Vector2 End, uint Color, float Thickness = 1)
         {
-            if ((Color & Immui.AlphaMask) == 0) return;
+            if ((Color & AlphaMask) == 0) return;
             PathLineTo(Start + new Vector2(0.5f));
             PathLineTo(End + new Vector2(0.5f));
             PathStroke(Color, 0, Thickness);
         }
         public void AddRect(Vector2 Min, Vector2 Max, uint Color, float Rounding = 0, DrawFlags Flags = DrawFlags.None, float Thickness = 1)
         {
-            if ((Color & Immui.AlphaMask) == 0) return;
+            if ((Color & AlphaMask) == 0) return;
             if ((DrawListFlags & DrawListFlags.AntiAliasedLines) != 0)
             {
                 PathRect(Min + new Vector2(0.5f), Max - new Vector2(0.5f), Rounding, Flags);
@@ -75,7 +102,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddRectFilled(Vector2 Min, Vector2 Max, uint Color, float Rounding = 0, DrawFlags Flags = DrawFlags.None)
         {
-            if ((Color & Immui.AlphaMask) == 0) return;
+            if ((Color & AlphaMask) == 0) return;
             if (Rounding < 0.5f || (Flags & DrawFlags.RoundCornersMask) == DrawFlags.RoundCornersNone)
             {
                 PrimReserve(6, 4);
@@ -90,7 +117,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddRectFilledMultiColor(Vector2 Min, Vector2 Max, uint ColorBottomLeft, uint ColorBottomRight, uint ColorTopLeft, uint ColorTopRight, float Rounding = 0, DrawFlags Flags = DrawFlags.None)
         {
-            if (((ColorBottomLeft | ColorBottomRight | ColorTopLeft | ColorTopRight) & Immui.AlphaMask) == 0)
+            if (((ColorBottomLeft | ColorBottomRight | ColorTopLeft | ColorTopRight) & AlphaMask) == 0)
                 return;
             PrimReserve(6, 4);
             PrimWriteIdx(VtxCurrentIdx); PrimWriteIdx(VtxCurrentIdx + 1); PrimWriteIdx(VtxCurrentIdx + 2);
@@ -102,7 +129,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddQuad(Vector2 P1, Vector2 P2, Vector2 P3, Vector2 P4, uint Color, float Thickness = 1)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
                 return;
             PathLineTo(P1);
             PathLineTo(P2);
@@ -112,7 +139,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddQuadFilled(Vector2 P1, Vector2 P2, Vector2 P3, Vector2 P4, uint Color)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
                 return;
             PathLineTo(P1);
             PathLineTo(P2);
@@ -122,7 +149,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddTriangle(Vector2 P1, Vector2 P2, Vector2 P3, uint Color, float Thickness = 1)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
                 return;
 
             PathLineTo(P1);
@@ -132,7 +159,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddTriangleFilled(Vector2 P1, Vector2 P2, Vector2 P3, uint Color)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
                 return;
 
             PathLineTo(P1);
@@ -142,17 +169,17 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddCircle(Vector2 Center, float Radius, uint Color, int NumOfSegments = 0, float Thickness = 1)
         {
-            if ((Color & Immui.AlphaMask) == 0 || Radius < 0.5f)
+            if ((Color & AlphaMask) == 0 || Radius < 0.5f)
                 return;
 
             if (NumOfSegments <= 0)
             {
-                PathArcToFastEx(Center, Radius - 0.5f, 0, Immui.ARCFAST_SAMPLE_MAX, 0);
+                PathArcToFastEx(Center, Radius - 0.5f, 0, ARCFAST_SAMPLE_MAX, 0);
                 Path.Size--;
             }
             else
             {
-                NumOfSegments = Math.Clamp(NumOfSegments, 3, Immui.CIRCLE_AUTO_SEGMENT_MAX);
+                NumOfSegments = Math.Clamp(NumOfSegments, 3, CIRCLE_AUTO_SEGMENT_MAX);
                 float a_max = MathF.PI * 2.0f * (NumOfSegments - 1.0f) / NumOfSegments;
                 PathArcTo(Center, Radius - 0.5f, 0.0f, a_max, NumOfSegments - 1);
             }
@@ -161,17 +188,17 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddCircleFilled(Vector2 Center, float Radius, uint Color, int NumOfSegments = 0)
         {
-            if ((Color & Immui.AlphaMask) == 0 || Radius < 0.5f)
+            if ((Color & AlphaMask) == 0 || Radius < 0.5f)
                 return;
 
             if (NumOfSegments <= 0)
             {
-                PathArcToFastEx(Center, Radius - 0.5f, 0, Immui.ARCFAST_SAMPLE_MAX, 0);
+                PathArcToFastEx(Center, Radius - 0.5f, 0, ARCFAST_SAMPLE_MAX, 0);
                 Path.Size--;
             }
             else
             {
-                NumOfSegments = Math.Clamp(NumOfSegments, 3, Immui.CIRCLE_AUTO_SEGMENT_MAX);
+                NumOfSegments = Math.Clamp(NumOfSegments, 3, CIRCLE_AUTO_SEGMENT_MAX);
 
                 float a_max = MathF.PI * 2.0f * (NumOfSegments - 1.0f) / NumOfSegments;
                 PathArcTo(Center, Radius, 0.0f, a_max, NumOfSegments - 1);
@@ -181,7 +208,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddNGon(Vector2 Center, float Radius, uint Color, int NumOfSegments = 0, float Thickness = 1)
         {
-            if ((Color & Immui.AlphaMask) == 0 || NumOfSegments <= 2)
+            if ((Color & AlphaMask) == 0 || NumOfSegments <= 2)
                 return;
             float a_max = MathF.PI * 2.0f * (NumOfSegments - 1.0f) / NumOfSegments;
             PathArcTo(Center, Radius - 0.5f, 0.0f, a_max, NumOfSegments - 1);
@@ -189,7 +216,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddNGonFilled(Vector2 Center, float Radius, uint Color, int NumOfSegments = 0)
         {
-            if ((Color & Immui.AlphaMask) == 0 || NumOfSegments <= 2)
+            if ((Color & AlphaMask) == 0 || NumOfSegments <= 2)
                 return;
             float a_max = MathF.PI * 2.0f * (NumOfSegments - 1.0f) / NumOfSegments;
             PathArcTo(Center, Radius, 0.0f, a_max, NumOfSegments - 1);
@@ -197,7 +224,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddEllipse(Vector2 Center, Vector2 Radius, uint Color, float Rotation = 0f, int NumOfSegments = 0, float Thickness = 1)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
                 return;
 
             if (NumOfSegments <= 0)
@@ -208,7 +235,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddEllipseFilled(Vector2 Center, Vector2 Radius, uint Color, float Rotation = 0, int NumOfSegments = 0)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
                 return;
             if (NumOfSegments <= 0)
                 NumOfSegments = CalcCircleAutoSegmentCount(Math.Max(Radius.X, Radius.Y));
@@ -216,20 +243,15 @@ namespace ImmediateUI.immui.drawing
             PathEllipticalArcTo(Center, Radius, Rotation, 0.0f, a_max, NumOfSegments - 1);
             PathFillConvex(Color);
         }
-        public void AddText(Vector2 Position, string Text, uint Color)
+        public void AddText(Vector2 Position, string Text, float Scale , uint Color, Font Font = null,float WrapWidth = 0, Rect CpuClip = default)
         {
-            AddText(null , 0.0f, Position, Text, Color);
-        }
-        //BUG : Make memory leak and pressure on GC when big string 
-        public void AddText(Font Font, float Scale, Vector2 Position, string Text, uint Color, float WrapWidth = 0, Rect CpuClip = default)
-        {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
             {
                 return;
             }
             if (Font == null)
             {
-               Font = Immui.GetCurrentFont();
+               Font =Immui.GetCurrentStyle().BaseFont;
             }
             if (Scale == 0.0f)
             {
@@ -238,10 +260,9 @@ namespace ImmediateUI.immui.drawing
             Rect clip_rect = CmdHeader.ClipRect;
             if (!CpuClip.Equals(default))
             {
-                clip_rect.Min.X = Math.Max(clip_rect.Min.X, CpuClip.Min.X);
-                clip_rect.Min.Y = Math.Max(clip_rect.Min.Y, CpuClip.Min.Y);
-                clip_rect.Max.X = Math.Min(clip_rect.Max.X, CpuClip.Max.X);
-                clip_rect.Max.Y = Math.Min(clip_rect.Max.Y, CpuClip.Max.Y);
+                clip_rect. Position.X = Math.Max(clip_rect.Position.X, CpuClip.Position.X);
+                clip_rect.Position.Y = Math.Max(clip_rect.Position.Y, CpuClip.Position.Y);
+                clip_rect.Max  = Min(clip_rect.Max, CpuClip.Max);
             }
             CmdHeader.ClipRect = clip_rect;
             PushTextureID(Font.Atlas.GetHandle());
@@ -250,7 +271,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddBezierCurveCubic(Vector2 P1, Vector2 P2, Vector2 P3, Vector2 P4, uint Color, float Thickness, int NumOfSegments = 0)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
             {
                 return;
             }
@@ -260,7 +281,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddBezierCurveQuadratic(Vector2 P1, Vector2 P2, Vector2 P3, uint Color, float Thickness, int NumOfSegments = 0)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
             {
                 return;
             }
@@ -273,7 +294,7 @@ namespace ImmediateUI.immui.drawing
         //
         public void AddPolyLine(Vector2[] Points, int PointsCount, uint Color, DrawFlags Flags, float Thickness)
         {
-            if (PointsCount < 2 || (Color & Immui.AlphaMask) == 0)
+            if (PointsCount < 2 || (Color & AlphaMask) == 0)
             {
                 return;
             }
@@ -284,7 +305,7 @@ namespace ImmediateUI.immui.drawing
             if ((DrawListFlags & DrawListFlags.AntiAliasedLines) != 0)
             {
                 float AA_SIZE = FringeScale;
-                uint col_trans = Color & ~Immui.AlphaMask;
+                uint col_trans = Color & ~AlphaMask;
 
                 Thickness = Math.Max(Thickness, 1.0f);
                 int integer_thickness = (int)Thickness;
@@ -301,7 +322,7 @@ namespace ImmediateUI.immui.drawing
                     int i2 = i1 + 1 == PointsCount ? 0 : i1 + 1;
                     float dx = Points[i2].X - Points[i1].X;
                     float dy = Points[i2].Y - Points[i1].Y;
-                    Immui.Normalize(ref dx, ref dy);
+                   Normalize(ref dx, ref dy);
                     temp_normals[i1] = new(dy, -dx);
                 }
                 if (!closed)
@@ -327,34 +348,32 @@ namespace ImmediateUI.immui.drawing
 
                         float dm_x = (temp_normals[i1].X + temp_normals[i2].X) * 0.5f;
                         float dm_y = (temp_normals[i1].Y + temp_normals[i2].Y) * 0.5f;
-                        Immui.FixNormal(ref dm_x, ref dm_y);
+                       FixNormal(ref dm_x, ref dm_y);
                         dm_x *= half_draw_size;
                         dm_y *= half_draw_size;
 
                         temp_points[i2 * 2] = new(Points[i2].X + dm_x, Points[i2].Y + dm_y);
                         temp_points[i2 * 2 + 1] = new(Points[i2].X - dm_x, Points[i2].Y - dm_y);
 
-                        IndexBuffer[IndexPtr] = idx2 + 0;
-                        IndexBuffer[IndexPtr + 1] = idx1 + 0;
-                        IndexBuffer[IndexPtr + 2] = idx1 + 2;
-                        IndexBuffer[IndexPtr + 3] = idx1 + 2;
-                        IndexBuffer[IndexPtr + 4] = idx2 + 2;
-                        IndexBuffer[IndexPtr + 5] = idx2 + 0;
-                        IndexBuffer[IndexPtr + 6] = idx2 + 1;
-                        IndexBuffer[IndexPtr + 7] = idx1 + 1;
-                        IndexBuffer[IndexPtr + 8] = idx1 + 0;
-                        IndexBuffer[IndexPtr + 9] = idx1 + 0;
-                        IndexBuffer[IndexPtr + 10] = idx2 + 0;
-                        IndexBuffer[IndexPtr + 11] = idx2 + 1;
-                        IndexPtr += 12;
+                        IndexBuffer.PushBack(idx2 + 0);
+                        IndexBuffer.PushBack(idx1 + 0);
+                        IndexBuffer.PushBack(idx1 + 2);
+                        IndexBuffer.PushBack(idx1 + 2);
+                        IndexBuffer.PushBack(idx2 + 2);
+                        IndexBuffer.PushBack(idx2 + 0);
+                        IndexBuffer.PushBack(idx2 + 1);
+                        IndexBuffer.PushBack(idx1 + 1);
+                        IndexBuffer.PushBack(idx1 + 0);
+                        IndexBuffer.PushBack(idx1 + 0);
+                        IndexBuffer.PushBack(idx2 + 0);
+                        IndexBuffer.PushBack(idx2 + 1);
                         idx1 = idx2;
                     }
                     for (int i = 0; i < PointsCount; i++)
                     {
-                        VertexBuffer[VertexPtr] = new(Points[i], opaqueUv, Color);
-                        VertexBuffer[VertexPtr + 1] = new(temp_points[i * 2 + 0], opaqueUv, col_trans);
-                        VertexBuffer[VertexPtr + 2] = new(temp_points[i * 2 + 1], opaqueUv, col_trans);
-                        VertexPtr += 3;
+                        VertexBuffer.PushBack(new(Points[i], opaqueUv, Color));
+                        VertexBuffer.PushBack(new(temp_points[i * 2 + 0], opaqueUv, col_trans));
+                        VertexBuffer.PushBack(new(temp_points[i * 2 + 1], opaqueUv, col_trans));
                     }
                 }
                 else
@@ -379,7 +398,7 @@ namespace ImmediateUI.immui.drawing
                         uint idx2 = i1 + 1 == PointsCount ? VtxCurrentIdx : idx1 + 4U;
                         float dmX = (temp_normals[i1].X + temp_normals[i2].X) * 0.5f;
                         float dmY = (temp_normals[i1].Y + temp_normals[i2].Y) * 0.5f;
-                        Immui.FixNormal(ref dmX, ref dmY);
+                       FixNormal(ref dmX, ref dmY);
                         float dmOutX = dmX * (halfInnerThickness + AA_SIZE);
                         float dmOutY = dmY * (halfInnerThickness + AA_SIZE);
                         float dmInX = dmX * halfInnerThickness;
@@ -388,34 +407,32 @@ namespace ImmediateUI.immui.drawing
                         temp_points[i2 * 4 + 1] = new(Points[i2].X + dmInY, Points[i2].Y + dmInY);
                         temp_points[i2 * 4 + 2] = new(Points[i2].X - dmInX, Points[i2].Y - dmInY);
                         temp_points[i2 * 4 + 3] = new(Points[i2].X - dmOutX, Points[i2].Y - dmOutY);
-                        IndexBuffer[IndexPtr] = idx2 + 1;
-                        IndexBuffer[IndexPtr + 1] = idx1 + 1;
-                        IndexBuffer[IndexPtr + 2] = idx1 + 2;
-                        IndexBuffer[IndexPtr + 3] = idx1 + 2;
-                        IndexBuffer[IndexPtr + 4] = idx2 + 2;
-                        IndexBuffer[IndexPtr + 5] = idx2 + 1;
-                        IndexBuffer[IndexPtr + 6] = idx2 + 1;
-                        IndexBuffer[IndexPtr + 7] = idx1 + 1;
-                        IndexBuffer[IndexPtr + 8] = idx1 + 0;
-                        IndexBuffer[IndexPtr + 9] = idx1 + 0;
-                        IndexBuffer[IndexPtr + 10] = idx2 + 0;
-                        IndexBuffer[IndexPtr + 11] = idx2 + 1;
-                        IndexBuffer[IndexPtr + 12] = idx2 + 2;
-                        IndexBuffer[IndexPtr + 13] = idx1 + 2;
-                        IndexBuffer[IndexPtr + 14] = idx1 + 3;
-                        IndexBuffer[IndexPtr + 15] = idx1 + 3;
-                        IndexBuffer[IndexPtr + 16] = idx2 + 3;
-                        IndexBuffer[IndexPtr + 17] = idx2 + 2;
-                        IndexPtr += 18;
+                        IndexBuffer.PushBack(idx2 + 1);
+                        IndexBuffer.PushBack( idx1 + 1);
+                        IndexBuffer.PushBack(idx1 + 2);
+                        IndexBuffer.PushBack(idx1 + 2);
+                        IndexBuffer.PushBack(idx2 + 2);
+                        IndexBuffer.PushBack(idx2 + 1);
+                        IndexBuffer.PushBack(idx2 + 1);
+                        IndexBuffer.PushBack(idx1 + 1);
+                        IndexBuffer.PushBack(idx1 + 0);
+                        IndexBuffer.PushBack(idx1 + 0);
+                        IndexBuffer.PushBack(idx2 + 0);
+                        IndexBuffer.PushBack(idx2 + 1);
+                        IndexBuffer.PushBack(idx2 + 2);
+                        IndexBuffer.PushBack(idx1 + 2);
+                        IndexBuffer.PushBack(idx1 + 3);
+                        IndexBuffer.PushBack(idx1 + 3);
+                        IndexBuffer.PushBack(idx2 + 3);
+                        IndexBuffer.PushBack(idx2 + 2);
                         idx1 = idx2;
                     }
                     for (int i = 0; i < PointsCount; i++)
                     {
-                        VertexBuffer[VertexPtr] = new(temp_points[i * 4 + 0], opaqueUv, Color);
-                        VertexBuffer[VertexPtr + 1] = new(temp_points[i * 4 + 1], opaqueUv, Color);
-                        VertexBuffer[VertexPtr + 2] = new(temp_points[i * 4 + 2], opaqueUv, Color);
-                        VertexBuffer[VertexPtr + 3] = new(temp_points[i * 4 + 3], opaqueUv, Color);
-                        VertexPtr += 4;
+                        VertexBuffer.PushBack(new(temp_points[i * 4 + 0], opaqueUv, Color));
+                        VertexBuffer.PushBack(new(temp_points[i * 4 + 1], opaqueUv, Color));
+                        VertexBuffer.PushBack(new(temp_points[i * 4 + 2], opaqueUv, Color));
+                        VertexBuffer.PushBack(new(temp_points[i * 4 + 3], opaqueUv, Color));
                     }
                 }
                 VtxCurrentIdx += (uint)vtx_count;
@@ -434,29 +451,27 @@ namespace ImmediateUI.immui.drawing
 
                     float dx = p2.X - p1.X;
                     float dy = p2.Y - p1.Y;
-                    Immui.Normalize(ref dx, ref dy);
+                   Normalize(ref dx, ref dy);
                     dx *= Thickness * 0.5f;
                     dy *= Thickness * 0.5f;
 
-                    VertexBuffer[VertexPtr] = new Vertex { Position = new(p1.X + dy, p1.Y - dx), UV = opaqueUv, Color = Color };
-                    VertexBuffer[VertexPtr + 1] = new Vertex { Position = new(p2.X + dy, p2.Y - dx), UV = opaqueUv, Color = Color };
-                    VertexBuffer[VertexPtr + 2] = new Vertex { Position = new(p2.X - dy, p2.Y + dx), UV = opaqueUv, Color = Color };
-                    VertexBuffer[VertexPtr + 3] = new Vertex { Position = new(p1.X - dy, p1.Y + dx), UV = opaqueUv, Color = Color };
-                    VertexPtr += 4;
-                    IndexBuffer[IndexPtr] = VtxCurrentIdx;
-                    IndexBuffer[IndexPtr + 1] = VtxCurrentIdx + 1;
-                    IndexBuffer[IndexPtr + 2] = VtxCurrentIdx + 2;
-                    IndexBuffer[IndexPtr + 3] = VtxCurrentIdx;
-                    IndexBuffer[IndexPtr + 4] = VtxCurrentIdx + 2;
-                    IndexBuffer[IndexPtr + 5] = VtxCurrentIdx + 3;
-                    IndexPtr += 6;
+                    VertexBuffer.PushBack(new Vertex (new(p1.X + dy, p1.Y - dx), opaqueUv,  Color ));
+                    VertexBuffer.PushBack(new Vertex ( new(p2.X + dy, p2.Y - dx),  opaqueUv,  Color ));
+                    VertexBuffer.PushBack(new Vertex (  new(p2.X - dy, p2.Y + dx),  opaqueUv,  Color ));
+                    VertexBuffer.PushBack(new Vertex (  new(p1.X - dy, p1.Y + dx),  opaqueUv,  Color ));
+                    IndexBuffer.PushBack(VtxCurrentIdx);
+                    IndexBuffer.PushBack(VtxCurrentIdx + 1);
+                    IndexBuffer.PushBack(VtxCurrentIdx + 2);
+                    IndexBuffer.PushBack(VtxCurrentIdx);
+                    IndexBuffer.PushBack(VtxCurrentIdx + 2);
+                    IndexBuffer.PushBack(VtxCurrentIdx + 3);
                     VtxCurrentIdx += 4;
                 }
             }
         }
         public void AddConvexPolyFiled(Vector2[] Points, int PointsCount, uint Color)
         {
-            if (PointsCount < 3 || (Color & Immui.AlphaMask) == 0)
+            if (PointsCount < 3 || (Color & AlphaMask) == 0)
                 return;
 
             Vector2 uv = Vector2.Zero;
@@ -464,7 +479,7 @@ namespace ImmediateUI.immui.drawing
             if ((DrawListFlags & DrawListFlags.AntiAliasedFill) != 0)
             {
                 float AA_SIZE = FringeScale;
-                uint col_trans = Color & ~Immui.AlphaMask;
+                uint col_trans = Color & ~AlphaMask;
                 int idx_count = (PointsCount - 2) * 3 + PointsCount * 6;
                 int vtx_count = PointsCount * 2;
                 PrimReserve(idx_count, vtx_count);
@@ -473,10 +488,9 @@ namespace ImmediateUI.immui.drawing
                 uint vtx_outer_idx = VtxCurrentIdx + 1;
                 for (int i = 2; i < PointsCount; i++)
                 {
-                    IndexBuffer[IndexPtr] = vtx_inner_idx;
-                    IndexBuffer[IndexPtr + 1] = (uint)(vtx_inner_idx + (i - 1 << 1));
-                    IndexBuffer[IndexPtr + 2] = (uint)(vtx_inner_idx + (i << 1));
-                    IndexPtr += 3;
+                    IndexBuffer.PushBack(vtx_inner_idx);
+                    IndexBuffer.PushBack((uint)(vtx_inner_idx + (i - 1 << 1)));
+                    IndexBuffer.PushBack((uint)(vtx_inner_idx + (i << 1)));
                 }
                 List<Vector2> temp_normals = new();
                 temp_normals.Resize(PointsCount);
@@ -486,7 +500,7 @@ namespace ImmediateUI.immui.drawing
                     Vector2 p1 = Points[i1];
                     float dx = p1.X - p0.X;
                     float dy = p1.Y - p0.Y;
-                    Immui.Normalize(ref dx, ref dy);
+                   Normalize(ref dx, ref dy);
                     var TempVec = temp_normals[i0];
                     temp_normals[i0] = new(dy, -dx);
                 }
@@ -497,21 +511,19 @@ namespace ImmediateUI.immui.drawing
                     Vector2 n1 = temp_normals[i1];
                     float dm_x = (n0.X + n1.X) * 0.5f;
                     float dm_y = (n0.Y + n1.Y) * 0.5f;
-                    Immui.FixNormal(ref dm_x, ref dm_y);
+                   FixNormal(ref dm_x, ref dm_y);
                     dm_x *= AA_SIZE * 0.5f;
                     dm_y *= AA_SIZE * 0.5f;
                     //
-                    VertexBuffer[VertexPtr] = new Vertex { Position = new(Points[i1].X - dm_x, Points[i1].Y - dm_y), UV = uv, Color = Color };
-                    VertexBuffer[VertexPtr + 1] = new Vertex { Position = new(Points[i1].X + dm_x, Points[i1].Y + dm_y), UV = uv, Color = col_trans };
-                    VertexPtr += 2;
+                    VertexBuffer.PushBack(new Vertex (  new(Points[i1].X - dm_x, Points[i1].Y - dm_y),uv,  Color ));
+                    VertexBuffer.PushBack(new Vertex (  new(Points[i1].X + dm_x, Points[i1].Y + dm_y),  uv, col_trans ));
                     //
-                    IndexBuffer[IndexPtr] = (uint)(vtx_inner_idx + (i1 << 1));
-                    IndexBuffer[IndexPtr + 1] = (uint)(vtx_inner_idx + (i0 << 1));
-                    IndexBuffer[IndexPtr + 2] = (uint)(vtx_outer_idx + (i0 << 1));
-                    IndexBuffer[IndexPtr + 3] = (uint)(vtx_outer_idx + (i0 << 1));
-                    IndexBuffer[IndexPtr + 4] = (uint)(vtx_outer_idx + (i1 << 1));
-                    IndexBuffer[IndexPtr + 5] = (uint)(vtx_inner_idx + (i1 << 1));
-                    IndexPtr += 6;
+                    IndexBuffer.PushBack((uint)(vtx_inner_idx + (i1 << 1)));
+                    IndexBuffer.PushBack((uint)(vtx_inner_idx + (i0 << 1)));
+                    IndexBuffer.PushBack((uint)(vtx_outer_idx + (i0 << 1)));
+                    IndexBuffer.PushBack((uint)(vtx_outer_idx + (i0 << 1)));
+                    IndexBuffer.PushBack((uint)(vtx_outer_idx + (i1 << 1)));
+                    IndexBuffer.PushBack((uint)(vtx_inner_idx + (i1 << 1)));
                 }
                 VtxCurrentIdx += (uint)vtx_count;
             }
@@ -522,15 +534,13 @@ namespace ImmediateUI.immui.drawing
                 PrimReserve(idx_count, vtx_count);
                 for (int i = 0; i < vtx_count; i++)
                 {
-                    VertexBuffer[VertexPtr] = new() { Position = Points[i], UV = uv, Color = Color };
-                    VertexPtr += 1;
+                    VertexBuffer.PushBack(new( Points[i],  uv,  Color ));
                 }
                 for (int i = 2; i < PointsCount; i++)
                 {
-                    IndexBuffer[IndexPtr] = VtxCurrentIdx;
-                    IndexBuffer[IndexPtr + 1] = (uint)(VtxCurrentIdx + i - 1);
-                    IndexBuffer[IndexPtr + 2] = (uint)(VtxCurrentIdx + i);
-                    IndexPtr += 3;
+                    IndexBuffer.PushBack(VtxCurrentIdx);
+                    IndexBuffer.PushBack((uint)(VtxCurrentIdx + i - 1));
+                    IndexBuffer.PushBack((uint)(VtxCurrentIdx + i));
                 }
                 VtxCurrentIdx += (uint)vtx_count;
             }
@@ -545,7 +555,7 @@ namespace ImmediateUI.immui.drawing
                 UV0 = Vector2.Zero;
             if (UV1 == default)
                 UV1 = Vector2.One;
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
             {
                 return;
             }
@@ -567,7 +577,7 @@ namespace ImmediateUI.immui.drawing
             if (UV1 == default) UV1 = new(1, 0);
             if (UV2 == default) UV2 = Vector2.One;
             if (UV3 == default) UV3 = new(0, 1);
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
             {
                 return;
             }
@@ -585,7 +595,7 @@ namespace ImmediateUI.immui.drawing
         }
         public void AddImageRounded(int Texture, Vector2 Min, Vector2 Max, Vector2 UV0, Vector2 UV1, uint Color, float Rounding, DrawFlags Flags = 0)
         {
-            if ((Color & Immui.AlphaMask) == 0)
+            if ((Color & AlphaMask) == 0)
             {
                 return;
             }
@@ -600,10 +610,10 @@ namespace ImmediateUI.immui.drawing
             {
                 PushTextureID(Texture);
             }
-            int vert_start_idx = VertexBuffer.Count;
+            int vert_start_idx = VertexBuffer.Size;
             PathRect(Min, Max, Rounding, Flags);
             PathFillConvex(Color);
-            int vert_end_idx = VertexBuffer.Count;
+            int vert_end_idx = VertexBuffer.Size;
             ShadeVertsLinearUV(this, vert_start_idx, vert_end_idx, Min, Max, Min, Max, true);
             if (push_texture_id)
             {
@@ -632,19 +642,19 @@ namespace ImmediateUI.immui.drawing
                 return;
             }
 
-            if (Radius <= Data.ArcFastRadiusCutoff)
+            if (Radius <= ArcFastRadiusCutoff)
             {
                 bool a_is_reverse = AMax < AMin;
 
-                float a_min_sample_f = Immui.ARCFAST_SAMPLE_MAX * AMin / (MathF.PI * 2.0f);
-                float a_max_sample_f = Immui.ARCFAST_SAMPLE_MAX * AMax / (MathF.PI * 2.0f);
+                float a_min_sample_f =ARCFAST_SAMPLE_MAX * AMin / (MathF.PI * 2.0f);
+                float a_max_sample_f =ARCFAST_SAMPLE_MAX * AMax / (MathF.PI * 2.0f);
 
                 int a_min_sample = a_is_reverse ? (int)Math.Floor(a_min_sample_f) : (int)Math.Ceiling(a_min_sample_f);
                 int a_max_sample = a_is_reverse ? (int)Math.Ceiling(a_max_sample_f) : (int)Math.Floor(a_max_sample_f);
                 int a_mid_samples = a_is_reverse ? Math.Max(a_min_sample - a_max_sample, 0) : Math.Max(a_max_sample - a_min_sample, 0);
 
-                float a_min_segment_angle = a_min_sample * MathF.PI * 2.0f / Immui.ARCFAST_SAMPLE_MAX;
-                float a_max_segment_angle = a_max_sample * MathF.PI * 2.0f / Immui.ARCFAST_SAMPLE_MAX;
+                float a_min_segment_angle = a_min_sample * MathF.PI * 2.0f /ARCFAST_SAMPLE_MAX;
+                float a_max_segment_angle = a_max_sample * MathF.PI * 2.0f /ARCFAST_SAMPLE_MAX;
                 bool a_emit_start = Math.Abs(a_min_segment_angle - AMin) >= 1e-5f;
                 bool a_emit_end = Math.Abs(AMax - a_max_segment_angle) >= 1e-5f;
 
@@ -670,7 +680,7 @@ namespace ImmediateUI.immui.drawing
                 Path.PushBack(Center);
                 return;
             }
-            PathArcToFastEx(Center, Radius, (int)(AMinOf12 * Immui.ARCFAST_SAMPLE_MAX / 12), (int)(AMaxOf12 * Immui.ARCFAST_SAMPLE_MAX / 12), 0);
+            PathArcToFastEx(Center, Radius, (int)(AMinOf12 *ARCFAST_SAMPLE_MAX / 12), (int)(AMaxOf12 *ARCFAST_SAMPLE_MAX / 12), 0);
         }
         public void PathEllipticalArcTo(Vector2 Center, Vector2 Radius, float Rotation, float AMin, float AMax, int NumOfSegments = 0)
         {
@@ -698,7 +708,7 @@ namespace ImmediateUI.immui.drawing
             Vector2 p0 = Path[Path.Size - 1];
             if (NumOfSegments == 0)
             {
-                PathBezierCubicCurveToCasteljau(Path, p0.X, p0.Y, P1.X, P1.Y, P2.X, P2.Y, P3.X, P3.Y, Data.CurveTessellationTol, 0); // Auto-tessellated
+                PathBezierCubicCurveToCasteljau(Path, p0.X, p0.Y, P1.X, P1.Y, P2.X, P2.Y, P3.X, P3.Y, CurveTessellationTol, 0); // Auto-tessellated
             }
             else
             {
@@ -712,7 +722,7 @@ namespace ImmediateUI.immui.drawing
             Vector2 p0 = Path[Path.Size - 1];
             if (NumOfSegments == 0)
             {
-                PathBezierQuadraticCurveToCasteljau(Path, p0.X, p0.Y, P1.X, P1.Y, P2.X, P2.Y, Data.CurveTessellationTol, 0);// Auto-tessellated
+                PathBezierQuadraticCurveToCasteljau(Path, p0.X, p0.Y, P1.X, P1.Y, P2.X, P2.Y, CurveTessellationTol, 0);// Auto-tessellated
             }
             else
             {
@@ -759,81 +769,71 @@ namespace ImmediateUI.immui.drawing
             Command.Count += IndexCount;
             Commands[Commands.Count - 1] = Command;
             //
-            VertexBuffer.AddRange(Enumerable.Repeat(default(Vertex), VertexCount));
-            IndexBuffer.AddRange(Enumerable.Repeat(default(Vertex), VertexCount));
         }
 
         private void PrimRect(Vector2 A, Vector2 C, uint Color)
         {
             uint Index = VtxCurrentIdx;
             //Index
-            IndexBuffer[IndexPtr] = Index;
-            IndexBuffer[IndexPtr + 1] = Index + 1;
-            IndexBuffer[IndexPtr + 2] = Index + 2;
-            IndexBuffer[IndexPtr + 3] = Index;
-            IndexBuffer[IndexPtr + 4] = Index + 2;
-            IndexBuffer[IndexPtr + 5] = Index + 3;
+            IndexBuffer.PushBack(Index);
+            IndexBuffer.PushBack(Index + 1);
+            IndexBuffer.PushBack(Index + 2);
+            IndexBuffer.PushBack( Index);
+            IndexBuffer.PushBack(Index + 2);
+            IndexBuffer.PushBack(Index + 3);
             //Vertex
-            VertexBuffer[VertexPtr] = new(A, Vector2.Zero, Color);
-            VertexBuffer[VertexPtr + 1] = new(new(C.X, A.Y), Vector2.Zero, Color);
-            VertexBuffer[VertexPtr + 2] = new(C, Vector2.Zero, Color);
-            VertexBuffer[VertexPtr + 3] = new(new(A.X, C.Y), Vector2.Zero, Color);
-            VertexPtr += 4;
+            VertexBuffer.PushBack(new(A, Vector2.Zero, Color));
+            VertexBuffer.PushBack(new(new(C.X, A.Y), Vector2.Zero, Color));
+            VertexBuffer.PushBack(new(C, Vector2.Zero, Color));
+            VertexBuffer.PushBack(new(new(A.X, C.Y), Vector2.Zero, Color));
             VtxCurrentIdx += 4;
-            IndexPtr += 6;
         }
         private void PrimRectUV(Vector2 A, Vector2 C, Vector2 UVA, Vector2 UVC, uint Color)
         {
             uint Index = VtxCurrentIdx;
             //Index
-            IndexBuffer[IndexPtr] = Index;
-            IndexBuffer[IndexPtr + 1] = Index + 1;
-            IndexBuffer[IndexPtr + 2] = Index + 2;
-            IndexBuffer[IndexPtr + 3] = Index;
-            IndexBuffer[IndexPtr + 4] = Index + 2;
-            IndexBuffer[IndexPtr + 5] = Index + 3;
+            IndexBuffer.PushBack(Index);
+            IndexBuffer.PushBack(Index + 1);
+            IndexBuffer.PushBack(Index + 2);
+            IndexBuffer.PushBack(Index);
+            IndexBuffer.PushBack(Index + 2);
+            IndexBuffer.PushBack(Index + 3);
             //Vertex
-            VertexBuffer[VertexPtr] = new(A, UVA, Color);
-            VertexBuffer[VertexPtr + 1] = new(new(C.X, A.Y), new(UVC.X, UVA.Y), Color);
-            VertexBuffer[VertexPtr + 2] = new(C, UVC, Color);
-            VertexBuffer[VertexPtr + 3] = new(new(A.X, C.Y), new(UVA.X, UVC.Y), Color);
-            VertexPtr += 4;
+            VertexBuffer.PushBack(new(A, UVA, Color));
+            VertexBuffer.PushBack(new(new(C.X, A.Y), new(UVC.X, UVA.Y), Color));
+            VertexBuffer.PushBack( new(C, UVC, Color));
+            VertexBuffer.PushBack(  new(new(A.X, C.Y), new(UVA.X, UVC.Y), Color));
             VtxCurrentIdx += 4;
-            IndexPtr += 6;
         }
         private void PrimQuadUV(Vector2 A, Vector2 B, Vector2 C, Vector2 D, Vector2 UVA, Vector2 UVB, Vector2 UVC, Vector2 UVD, uint Color)
         {
             uint Index = VtxCurrentIdx;
             //Index
-            IndexBuffer[IndexPtr] = Index;
-            IndexBuffer[IndexPtr + 1] = Index + 1;
-            IndexBuffer[IndexPtr + 2] = Index + 2;
-            IndexBuffer[IndexPtr + 3] = Index;
-            IndexBuffer[IndexPtr + 4] = Index + 2;
-            IndexBuffer[IndexPtr + 5] = Index + 3;
+            IndexBuffer.PushBack(Index);
+            IndexBuffer.PushBack(Index + 1);
+            IndexBuffer.PushBack(Index + 2);
+            IndexBuffer.PushBack(Index);
+            IndexBuffer.PushBack(Index + 2);
+            IndexBuffer.PushBack(Index + 3);
             //Vertex
-            VertexBuffer[VertexPtr] = new(A, UVA, Color);
-            VertexBuffer[VertexPtr + 1] = new(B, UVB, Color);
-            VertexBuffer[VertexPtr + 2] = new(C, UVC, Color);
-            VertexBuffer[VertexPtr + 3] = new(D, UVD, Color);
-            VertexPtr += 4;
+            VertexBuffer.PushBack(new(A, UVA, Color));
+            VertexBuffer.PushBack(new(B, UVB, Color));
+            VertexBuffer.PushBack(new(C, UVC, Color));
+            VertexBuffer.PushBack(new(D, UVD, Color));
             VtxCurrentIdx += 4;
-            IndexPtr += 6;
         }
         private void PrimWriteVtx(Vector2 Position, Vector2 UV, uint Color)
         {
-            VertexBuffer[VertexPtr] = new Vertex { Position = Position, UV = UV, Color = Color };
-            VertexPtr++;
+            VertexBuffer.PushBack(new Vertex (  Position,  UV, Color ));
             VtxCurrentIdx++;
         }
         private void PrimWriteIdx(uint Index)
         {
-            IndexBuffer[IndexPtr] = Index;
-            IndexPtr++;
+            IndexBuffer.PushBack( Index);
         }
         private void PrimVtx(Vector2 Position, Vector2 UV, uint Color)
         {
-            PrimWriteIdx((uint)VertexBuffer.Count);
+            PrimWriteIdx((uint)VertexBuffer.Size);
             PrimWriteVtx(Position, UV, Color);
         }
         //
@@ -846,13 +846,13 @@ namespace ImmediateUI.immui.drawing
         private int CalcCircleAutoSegmentCount(float Radius)
         {
             int radius_idx = (int)(Radius + 0.999999f);
-            if (radius_idx >= 0 && radius_idx < Data.CircleSegmentCounts.Length)
+            if (radius_idx >= 0 && radius_idx < CircleSegmentCounts.Length)
             {
-                return Data.CircleSegmentCounts[radius_idx];
+                return CircleSegmentCounts[radius_idx];
             }
             else
             {
-                return Immui.CircleAutoSegmentCalc(Radius, Data.CircleSegmentMaxError);
+                return CircleAutoSegmentCalc(Radius, CircleSegmentMaxError);
             }
         }
         public void PushClipRect(Rect ClipRegion, bool IntersectWithCurrentClip = false)
@@ -860,13 +860,12 @@ namespace ImmediateUI.immui.drawing
             if (IntersectWithCurrentClip)
             {
                 Rect Current = CmdHeader.ClipRect;
-                if (ClipRegion.Min.X < Current.Min.X) ClipRegion.Min.X = Current.Min.X;
-                if (ClipRegion.Min.Y < Current.Min.Y) ClipRegion.Min.Y = Current.Min.Y;
-                if (ClipRegion.Max.X > Current.Max.X) ClipRegion.Max.X = Current.Max.X;
-                if (ClipRegion.Max.Y > Current.Max.Y) ClipRegion.Max.Y = Current.Max.Y;
+                if (ClipRegion.Position.X < Current.Position.X) ClipRegion.Position.X = Current.Position.X;
+                if (ClipRegion.Position.Y < Current.Position.Y) ClipRegion.Position.Y = Current.Position.Y;
+                if (ClipRegion.Max.X > Current.Max.X) ClipRegion.Size.X = Current.Size.X;
+                if (ClipRegion.Max.Y > Current.Max.Y) ClipRegion.Size.Y = Current.Size.Y;
             }
-            ClipRegion.Max.X = Math.Max(ClipRegion.Min.X, ClipRegion.Max.X);
-            ClipRegion.Max.Y = Math.Max(ClipRegion.Min.Y, ClipRegion.Max.Y);
+            ClipRegion.Max = Max(ClipRegion.Position, ClipRegion.Max);
             ClipStack.Add(ClipRegion);
             CmdHeader.ClipRect = ClipRegion;
             OnChangedClipRect();
@@ -878,7 +877,7 @@ namespace ImmediateUI.immui.drawing
         public void PopClipRect()
         {
             ClipStack.RemoveAt(ClipStack.Count - 1);
-            CmdHeader.ClipRect = ClipStack.Count == 0 ? new(Vector2.Zero, Immui.GetScreenSize()) : ClipStack[ClipStack.Count - 1];
+            CmdHeader.ClipRect = ClipStack.Count == 0 ? new(Vector2.Zero,Immui.GetScreenSize()) : ClipStack[ClipStack.Count - 1];
             OnChangedClipRect();
         }
         public void PushTextureID(int TextureID)
@@ -901,7 +900,7 @@ namespace ImmediateUI.immui.drawing
             CmdHeader.TextureID = TextureID;
             OnChangedTextureID();
         }
-        Vector2 GetClipRectMin() { Rect cr = ClipStack[^1]; return cr.Min; }
+        Vector2 GetClipRectMin() { Rect cr = ClipStack[^1]; return cr.Position; }
 
         Vector2 GetClipRectMax() { Rect cr = ClipStack[^1]; return cr.Max; }
 
@@ -911,16 +910,14 @@ namespace ImmediateUI.immui.drawing
         internal void ResetForNewFrame()
         {
             Commands.Clear();
-            IndexBuffer.Clear();
-            VertexBuffer.Clear();
-            DrawListFlags = Data.InitialFlags;
+            IndexBuffer.Size = 0;
+            VertexBuffer.Size =0;
+            DrawListFlags = InitialFlags;
             CmdHeader = new();
             VtxCurrentIdx = 0;
-            VertexPtr = 0;
-            IndexPtr = 0;
             ClipStack.Clear();
             TextureStack.Clear();
-            Path.Clear();
+            Path.Size = 0;
             //Splitter.Clear();
             Commands.Add(new ImmuiDrawCommand());
             FringeScale = 1.0f;
@@ -997,8 +994,8 @@ namespace ImmediateUI.immui.drawing
             }
 
             if (AStep <= 0)
-                AStep = Immui.ARCFAST_SAMPLE_MAX / CalcCircleAutoSegmentCount(Radius);
-            AStep = Math.Clamp(AStep, 1, Immui.ARCFAST_TABLE_SIZE / 4);
+                AStep =ARCFAST_SAMPLE_MAX / CalcCircleAutoSegmentCount(Radius);
+            AStep = Math.Clamp(AStep, 1,ARCFAST_TABLE_SIZE / 4);
             int sample_range = Math.Abs(AMaxSample - AMinSample);
             int a_next_step = AStep;
             int samples = sample_range + 1;
@@ -1021,11 +1018,11 @@ namespace ImmediateUI.immui.drawing
             Vector2 out_ptr = Path[Path.Size - samples];
             int Pointer = 0;
             int sample_index = AMinSample;
-            if (sample_index < 0 || sample_index >= Immui.ARCFAST_SAMPLE_MAX)
+            if (sample_index < 0 || sample_index >=ARCFAST_SAMPLE_MAX)
             {
-                sample_index = sample_index % Immui.ARCFAST_SAMPLE_MAX;
+                sample_index = sample_index %ARCFAST_SAMPLE_MAX;
                 if (sample_index < 0)
-                    sample_index += Immui.ARCFAST_SAMPLE_MAX;
+                    sample_index +=ARCFAST_SAMPLE_MAX;
             }
 
             if (AMaxSample >= AMinSample)
@@ -1033,10 +1030,10 @@ namespace ImmediateUI.immui.drawing
                 for (int a = AMinSample; a <= AMaxSample; a += AStep, sample_index += AStep, AStep = a_next_step)
                 {
                     out_ptr = Path[Path.Size - samples + Pointer];
-                    if (sample_index >= Immui.ARCFAST_SAMPLE_MAX)
-                        sample_index -= Immui.ARCFAST_SAMPLE_MAX;
+                    if (sample_index >=ARCFAST_SAMPLE_MAX)
+                        sample_index -=ARCFAST_SAMPLE_MAX;
 
-                    Vector2 s = Data.ArcFastVtx[sample_index];
+                    Vector2 s = ArcFastVtx[sample_index];
                     out_ptr.X = Center.X + s.X * Radius;
                     out_ptr.Y = Center.Y + s.Y * Radius;
                     Path[Path.Size - samples + Pointer] = out_ptr;
@@ -1051,9 +1048,9 @@ namespace ImmediateUI.immui.drawing
                     out_ptr = Path[Path.Size - samples + Pointer];
 
                     if (sample_index < 0)
-                        sample_index += Immui.ARCFAST_SAMPLE_MAX;
+                        sample_index +=ARCFAST_SAMPLE_MAX;
 
-                    Vector2 s = Data.ArcFastVtx[sample_index];
+                    Vector2 s = ArcFastVtx[sample_index];
                     out_ptr.X = Center.X + s.X * Radius;
                     out_ptr.Y = Center.Y + s.Y * Radius;
                     Path[Path.Size - samples + Pointer] = out_ptr;
@@ -1064,11 +1061,11 @@ namespace ImmediateUI.immui.drawing
 
             if (extra_max_sample)
             {
-                int normalized_max_sample = AMaxSample % Immui.ARCFAST_SAMPLE_MAX;
+                int normalized_max_sample = AMaxSample %ARCFAST_SAMPLE_MAX;
                 if (normalized_max_sample < 0)
-                    normalized_max_sample += Immui.ARCFAST_SAMPLE_MAX;
+                    normalized_max_sample +=ARCFAST_SAMPLE_MAX;
 
-                Vector2 s = Data.ArcFastVtx[normalized_max_sample];
+                Vector2 s = ArcFastVtx[normalized_max_sample];
                 out_ptr.X = Center.X + s.X * Radius;
                 out_ptr.Y = Center.Y + s.Y * Radius;
                 Path[Path.Size - samples + Pointer] = out_ptr;
@@ -1095,7 +1092,7 @@ namespace ImmediateUI.immui.drawing
             ImmuiDrawCommand draw_cmd = new();
             draw_cmd.ClipRect = CmdHeader.ClipRect;
             draw_cmd.TextureID = CmdHeader.TextureID;
-            draw_cmd.Offset = IndexBuffer.Count;
+            draw_cmd.Offset = IndexBuffer.Size;
             Commands.Add(draw_cmd);
         }
         private static DrawFlags FixRectCornerFlags(DrawFlags flags)
@@ -1211,6 +1208,39 @@ namespace ImmediateUI.immui.drawing
         private static bool DrawCmdAreSequentialIdxOffset(ImmuiDrawCommand L, ImmuiDrawCommand R)
         {
             return L.Offset + L.Count == R.Offset;
+        }
+        internal static void Normalize(ref float x, ref float y)
+        {
+            float d2 = x * x + y * y;
+            if (d2 > 0.0f)
+            {
+                float inv_len = 1f / MathF.Sqrt(d2);
+                x *= inv_len;
+                y *= inv_len;
+            }
+        }
+
+        internal static void FixNormal(ref float x, ref float y)
+        {
+            float d2 = x * x + y * y;
+            if (d2 > 0.000001f)
+            {
+                float inv_len2 = 1.0f / d2; if (inv_len2 > 100.0f) inv_len2 = 100.0f;
+                x *= inv_len2;
+                y *= inv_len2;
+            }
+        }
+        internal static int CircleAutoSegmentCalc(float Radian, float MaxError)
+        {
+            return (int)Math.Clamp(RoundupToEven((int)Math.Ceiling(MathF.PI / MathF.Acos(1 - Math.Min((MaxError), (Radian)) / (Radian)))), CIRCLE_AUTO_SEGMENT_MIN, CIRCLE_AUTO_SEGMENT_MAX);
+        }
+        internal static float CircleAutoSegmentCalcR(float N, float MaxError)
+        {
+            return ((MaxError) / (1 - MathF.Cos(MathF.PI / Math.Max((float)(N), MathF.PI))));
+        }
+        internal static float RoundupToEven(float V)
+        {
+            return ((((V) + 1) / 2) * 2);
         }
     }
 }

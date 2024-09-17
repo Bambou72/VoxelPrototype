@@ -8,23 +8,30 @@ namespace ImmediateUI.immui
     {
         internal Style Style = new Style()
         {
-            BaseFont = FontLoader.LoadFromMemory(FontData.UncutSans_Regular)
+            BaseFont = FontLoader.LoadFromMemory(FontData.UncutSans_Regular),
+            Colors = new()
+            {
+                { "Text", 0xFFFFFFFF },
+                { "Frame", 0x304567FF },
+                { "WindowHeader", 0x101527FF },
+                { "WindowButton", 0xFF1527FF },
+            }
         };
         internal ulong ActiveID;
         internal ulong HotID;
-        internal ulong LastHotID;
         internal ulong CurrentID;
         internal Vector2i MousePosition;
         internal  Vector2 ScreenSize;
         internal List<ulong> IDStack = new();
-        internal bool[] MouseButtons = new bool[3];
-        internal List<char> InputedChars = new();
-        internal ImmuiDrawListSharedData SharedData = new();
         internal ImmuiDrawList MainDrawList;
         internal DrawData DrawData = new DrawData();
+        internal Window CurrentWindow;
+        internal Dictionary<ulong, Window> Windows =new();
+        internal bool MouseCaptured = false;
         public Context()
         {
-            MainDrawList = new(SharedData);
+            ImmuiDrawList.Init();
+            MainDrawList = new ImmuiDrawList();
         }
     }
 }

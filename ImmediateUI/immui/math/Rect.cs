@@ -1,59 +1,41 @@
 ﻿using OpenTK.Mathematics;
+using System.Drawing;
 namespace ImmediateUI.immui.math
 {
     public struct Rect : IEquatable<Rect>
     {
-        public Vector2 Position;
-        public Vector2 Size;
-        public Vector2 Max 
-        { 
-            get 
-            { 
-                return Position + Size; 
-            }
-            set 
-            { 
-                Size = value - Position; 
-            } 
-        }
-        public Vector2 Center => Position + Size/2;
-        public Rect(Vector2 position, Vector2 size)
+        public int X,Y;
+        public int W,H;
+        public int XW => X + W;
+        public int YH => Y + H;
+        public int CenterX => (X +W)/2 ;
+        public int CenterY => (Y +H)/2 ;
+
+        public Rect(int X,int Y , int W , int H)
         {
-            Position = position;
-            Size = size;
+            this.X = X; this.Y = Y;
+            this.W = W; this.H = H;
         }
-        public bool Contains(Vector2i Point)
+        public bool ContainsPoint(Vector2i Point)
         {
-            if (Point.X < Position.X || Point.X > Max.X || Point.Y < Position.Y || Point.Y > Max.Y)
+            if (Point.X < X || Point.X > XW|| Point.Y < Y || Point.Y > YH)
             {
                 return false;
             }
             return true;
         }
-        public Rect Pad(Rect Pad)
+        public bool ContainsRect(Rect Rect)
         {
-            return new(Position - Pad.Position, Size - Pad.Size);
-        }
-        public Rect UnPad(Rect Pad)
-        {
-            return this.Pad(Pad.Scaled(-1));
-        }
-        public Rect Scaled(float Scale)
-        {
-            this = new(
-                Position * Scale, 
-                Max  * Scale
-            );
-            return this;
-        }
-
-        public bool Equals(Rect other)
-        {
-            if (Position != other.Position || Max != other.Max) return false;
+            if (Rect.X < X || Rect.XW > XW || Rect.Y < Y || Rect.YH > YH)
+            {
+                return false;
+            }
             return true;
         }
-
-        public static Rect operator *(Rect Rect, float Float) => new Rect(Rect.Position * Float, Rect.Size * Float);
-        public static Rect operator *(float Float, Rect Rect) => new Rect(Rect.Position * Float, Rect.Size * Float);
+        public bool Equals(Rect other)
+        {
+            if (X != other.X || Y != other.Y || W != other.W || H != other.H) return false;
+            return true;
+        }
     }
 }

@@ -82,6 +82,7 @@ namespace VoxelPrototype.client
             ModManager.GetInstance().Init();
             //World
             World = new World();
+            GC.Collect(int.MaxValue,GCCollectionMode.Forced);
         }
         public void InitResources()
         {

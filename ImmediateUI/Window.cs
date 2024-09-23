@@ -1,7 +1,6 @@
 ﻿using ImmediateUI.immui;
 using ImmediateUI.immui.math;
 using OpenTK.Graphics.OpenGL4;
-using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using VoxelPrototype.client.rendering;
@@ -10,7 +9,6 @@ namespace ImmediateUI
 {
     public class Window : GameWindow
     {
-        public static Window Instance;
         ImmuiController UIController;
         string TestString = "";
         internal static string Vert = @"#version 330
@@ -53,7 +51,6 @@ void main()
         {
             VSync = VSyncMode.Off;
             Title = "Test UI";
-            Instance = this;
             ClientSize = new(1200, 800);
             Immui.SetContext(new Context());
         }
@@ -70,10 +67,10 @@ void main()
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
-            UIController.Update(Instance);
+            UIController.Update(this);
             Immui.BeginFrame();
-            Immui.BeginWindow("Test");
-            Immui.EndWindow();
+            //Immui.BeginWindow("Test");
+            //Immui.EndWindow();
             if (Immui.Button("Test", new Rect(new(400, 200), new(100,75))))
             {
                 Console.WriteLine("Test is clicked");

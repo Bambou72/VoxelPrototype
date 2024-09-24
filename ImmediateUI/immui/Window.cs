@@ -7,7 +7,7 @@ namespace ImmediateUI.immui
         internal ImmuiDrawList DrawList =new();
         internal string Name;
         internal ulong ID;
-        internal Rect Rect = new(OpenTK.Mathematics.Vector2.Zero,new(200,300));
+        internal Rect Rect = new(0,0,200,300);
 
         public Window()
         {

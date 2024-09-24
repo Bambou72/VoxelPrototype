@@ -29,15 +29,15 @@ namespace ImmediateUI.immui
             }
             if (CurrentContext.HotID == ID)
             {
-                DrawList.AddRectFilled((Vector2i)Rect.Position, (Vector2i)Rect.Max, 0x102030FF);
+                DrawList.AddRectFilled(new(Rect.X,Rect.Y), new(Rect.XW, Rect.YH), 0x102030FF);
             }
             else
             {
-                DrawList.AddRectFilled((Vector2i)Rect.Position, (Vector2i)Rect.Max, 0x051020FF);
+                DrawList.AddRectFilled(new(Rect.X, Rect.Y), new(Rect.XW, Rect.YH), 0x051020FF);
             }
             Vector2 TSize = CalculateTextSize(Style.FontSize, Label);
 
-            DrawList.AddText(Rect.Center - new Vector2(TSize.X, -TSize.Y) / 2, Label, Style.FontSize, Style.Colors["Text"]);
+            DrawList.AddText(new(Rect.CenterX - TSize.X/2,Rect.CenterY + TSize.Y / 2 ), Label, Style.FontSize, Style.Colors["Text"]);
             return result;
         }
         public static void TextInput(string Label, Rect Rect, ref string inputText)
@@ -69,22 +69,23 @@ namespace ImmediateUI.immui
             var DrawList = GetCurrentDrawList();
             var Style = GetCurrentStyle();
             Vector2 TSize = CalculateTextSize(Style.FontSize, Label);
-            float Height = Math.Min(TSize.Y + Style.Padding * 2, Rect.Size.Y);
-            Vector2 Max = new(Rect.Max.X, Rect.Position.Y + Height);
+            float Height = Math.Min(TSize.Y + Style.Padding.Y * 2, Rect.H);
+            Vector2 Max = new(Rect.XW, Rect.Y + Height);
             if (CurrentContext.ActiveID == ID)
             {
-                DrawList.AddRectFilled((Vector2i)Rect.Position, (Vector2i)Max, 0x204060FF, 0);
+                DrawList.AddRectFilled(new(Rect.X, Rect.Y), new(Rect.XW, Rect.YH), 0x204060FF, 0);
             }
             else if (CurrentContext.HotID == ID)
             {
-                DrawList.AddRectFilled((Vector2i)Rect.Position, (Vector2i)Max, 0x102030FF, 0);
+                DrawList.AddRectFilled(new(Rect.X, Rect.Y), new(Rect.XW, Rect.YH), 0x102030FF, 0);
             }
             else
             {
-                DrawList.AddRectFilled((Vector2i)Rect.Position, (Vector2i)Max, 0x051020FF, 0);
+                DrawList.AddRectFilled(new(Rect.X, Rect.Y), new(Rect.XW, Rect.YH), 0x051020FF, 0);
             }
-            DrawList.AddText(new Vector2(Rect.Position.X + Style.Padding, (Rect.Position.Y + Height / 2)) + new Vector2(0, TSize.Y) / 2, inputText, Style.FontSize, Style.Colors["Text"], CpuClip: new Rect(Rect.Position, new Vector2(Rect.Size.X - Style.Padding, Height)));
+            DrawList.AddText(new Vector2(Rect.X + Style.Padding.X, (Rect.Y + Height / 2)) + new Vector2(0, TSize.Y) / 2, inputText, Style.FontSize, Style.Colors["Text"], CpuClip: new Rect(Rect.X,Rect.Y,Rect.W - Style.Padding.Z, (int)Height));
         }
+        /*
         public static void BeginWindow(string Name,Vector2i Position =default,Vector2i Size = default)
         {
             ulong ID = GetID(Name);
@@ -125,6 +126,6 @@ namespace ImmediateUI.immui
         {
             CurrentContext.CurrentWindow = null;
             PopID();
-        }
+        }*/
     }
 }

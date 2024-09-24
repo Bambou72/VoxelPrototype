@@ -1,5 +1,4 @@
 ﻿using OpenTK.Mathematics;
-using System.Drawing;
 namespace ImmediateUI.immui.math
 {
     public struct Rect : IEquatable<Rect>
@@ -31,6 +30,14 @@ namespace ImmediateUI.immui.math
                 return false;
             }
             return true;
+        }
+        public void SetMaxX(int X)
+        {
+            W = X -this.X;
+        }
+        public void SetMaxY(int Y)
+        {
+            H = Y - this.Y;
         }
         public bool Equals(Rect other)
         {

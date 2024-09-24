@@ -116,7 +116,7 @@ namespace ImmediateUI.immui
         }
         public static bool CheckMouse(Rect Rect)
         {
-            if (!CurrentContext.MouseCaptured && Rect.Contains(CurrentContext.MousePosition))
+            if (!CurrentContext.MouseCaptured && Rect.ContainsPoint(CurrentContext.MousePosition))
             {
                 CurrentContext.MouseCaptured = true;
                 return true;

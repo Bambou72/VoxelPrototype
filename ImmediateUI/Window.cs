@@ -71,11 +71,18 @@ void main()
             Immui.BeginFrame();
             //Immui.BeginWindow("Test");
             //Immui.EndWindow();
-            if (Immui.Button("Test", new Rect(new(400, 200), new(100,75))))
+
+
+            Layout LT = new(2, 2, new Rect(100, 100, 400, 400));
+            for(int i = 0;i< 4;i++)
             {
-                Console.WriteLine("Test is clicked");
+                Rect Rect =  LT.GetNext();
+                if (Immui.Button("Test "+ i, Rect))
+                {
+                    Console.WriteLine("Test is clicked");
+                }
+
             }
-            Immui.TextInput("Test2", new Rect(new(400, 300), new(400, 100)),ref TestString);
             //Immui.Demo2DRendering();
             Immui.EndFrame();
             UIController.Render();

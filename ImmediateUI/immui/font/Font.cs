@@ -17,7 +17,7 @@ namespace ImmediateUI.immui.font
             int textBegin = 0;
             float X = MathF.Truncate(Position.X);
             float Y = MathF.Truncate(Position.Y);
-            if(Y > ClipRect.Max.Y)
+            if(Y > ClipRect.YH)
             {
                 return;
             }
@@ -27,9 +27,9 @@ namespace ImmediateUI.immui.font
             float line_height = Height * scale;
             bool word_wrap_enabled = WrapWidth > 0.0f;
             int s = textBegin;
-            if (Y + line_height < ClipRect.Position.Y)
+            if (Y + line_height < ClipRect.Y)
             {
-                while (Y + line_height < ClipRect.Position.Y && s < textEnd)
+                while (Y + line_height < ClipRect.Y && s < textEnd)
                 {
                     int lineEnd = Text.IndexOf('\n', s);
                     if (lineEnd == -1)
@@ -54,7 +54,7 @@ namespace ImmediateUI.immui.font
             {
                 int sEnd = s;
                 float yEnd = Y;
-                while (yEnd < ClipRect.Max.Y && sEnd < textEnd)
+                while (yEnd < ClipRect.YH && sEnd < textEnd)
                 {
                     sEnd = Text.IndexOf('\n', sEnd);
                     if (sEnd == -1) sEnd = textEnd;
@@ -86,7 +86,7 @@ namespace ImmediateUI.immui.font
                     {
                         X = start_x;
                         Y += line_height;
-                        if (Y > ClipRect.Max.Y)
+                        if (Y > ClipRect.YH)
                         {
                             break;
                         }
@@ -101,7 +101,7 @@ namespace ImmediateUI.immui.font
                 {
                     X = start_x;
                     Y += line_height;
-                    if (Y > ClipRect.Max.Y)
+                    if (Y > ClipRect.YH)
                     {
                         break;
                     }
@@ -124,7 +124,7 @@ namespace ImmediateUI.immui.font
                     float x2 = x1 + glyph.Size.X * scale;
                     float y1 = Y - ( glyph.Bearing.Y )*scale;
                     float y2 = y1 + glyph.Size.Y * scale;
-                    if (x1 <= ClipRect.Max.X && x2 >= ClipRect.Position.X)
+                    if (x1 <= ClipRect.XW && x2 >= ClipRect.X)
                     {
                         float u1 = glyph.UV0.X;
                         float v1 = glyph.UV0.Y;
@@ -132,25 +132,25 @@ namespace ImmediateUI.immui.font
                         float v2 = glyph.UV1.Y;
                         if (CpuFineClip)
                         {
-                            if (x1 < ClipRect.Position.X)
+                            if (x1 < ClipRect.X)
                             {
-                                u1 += (1.0f - (x2 - ClipRect.Position.X) / (x2 - x1)) * (u2 - u1);
-                                x1 = ClipRect.Position.X;
+                                u1 += (1.0f - (x2 - ClipRect.X) / (x2 - x1)) * (u2 - u1);
+                                x1 = ClipRect.X;
                             }
-                            if (y1 < ClipRect.Position.Y)
+                            if (y1 < ClipRect.Y)
                             {
-                                v1 += (1.0f - (y2 - ClipRect.Position.Y) / (y2 - y1)) * (v2 - v1);
-                                y1 = ClipRect.Position.Y;
+                                v1 += (1.0f - (y2 - ClipRect.Y) / (y2 - y1)) * (v2 - v1);
+                                y1 = ClipRect.Y;
                             }
-                            if (x2 > ClipRect.Max.X)
+                            if (x2 > ClipRect.XW)
                             {
-                                u2 = u1 + ((ClipRect.Max.X - x1) / (x2 - x1)) * (u2 - u1);
-                                x2 = ClipRect.Max.X;
+                                u2 = u1 + ((ClipRect.XW - x1) / (x2 - x1)) * (u2 - u1);
+                                x2 = ClipRect.XW;
                             }
-                            if (y2 > ClipRect.Max.Y)
+                            if (y2 > ClipRect.YH)
                             {
-                                v2 = v1 + ((ClipRect.Max.Y - y1) / (y2 - y1)) * (v2 - v1);
-                                y2 = ClipRect.Max.Y;
+                                v2 = v1 + ((ClipRect.YH - y1) / (y2 - y1)) * (v2 - v1);
+                                y2 = ClipRect.YH;
                             }
                             if (y1 >= y2)
                             {

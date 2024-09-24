@@ -15,7 +15,9 @@ namespace ImmediateUI.immui
                 { "Frame", 0x304567FF },
                 { "WindowHeader", 0x101527FF },
                 { "WindowButton", 0xFF1527FF },
-            }
+            },
+            Padding = new(10)
+
         };
         internal ulong ActiveID;
         internal ulong HotID;

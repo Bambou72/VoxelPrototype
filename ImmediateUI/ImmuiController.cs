@@ -107,7 +107,7 @@ namespace ImmediateUI
                     GL.ActiveTexture(TextureUnit.Texture0);
                     GL.BindTexture(TextureTarget.Texture2D, pcmd.TextureID);
                     var clip = pcmd.ClipRect;
-                    GL.Scissor((int)clip.Position.X,(int)Immui.GetScreenSize().Y  - (int)clip.Max.Y, (int)(clip.Max.X - clip.Position.X), (int)(clip.Max.Y - clip.Position.Y));
+                    GL.Scissor((int)clip.X,(int)Immui.GetScreenSize().Y  - (int)clip.YH, clip.W , clip.H);
                     GL.DrawElements(BeginMode.Triangles, (int)pcmd.Count, DrawElementsType.UnsignedInt, (int)pcmd.Offset * sizeof(uint));                                
                 }
             }

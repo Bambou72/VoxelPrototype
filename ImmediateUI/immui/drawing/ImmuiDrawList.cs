@@ -260,9 +260,10 @@ namespace ImmediateUI.immui.drawing
             Rect clip_rect = CmdHeader.ClipRect;
             if (!CpuClip.Equals(default))
             {
-                clip_rect. Position.X = Math.Max(clip_rect.Position.X, CpuClip.Position.X);
-                clip_rect.Position.Y = Math.Max(clip_rect.Position.Y, CpuClip.Position.Y);
-                clip_rect.Max  = Min(clip_rect.Max, CpuClip.Max);
+                clip_rect.X = Math.Max(clip_rect.X, CpuClip.X);
+                clip_rect.Y = Math.Max(clip_rect.Y, CpuClip.Y);
+                clip_rect.W = Math.Min(clip_rect.XW, CpuClip.XW) - clip_rect.X;
+                clip_rect.H = Math.Min(clip_rect.YH, CpuClip.YH) - clip_rect.Y;
             }
             CmdHeader.ClipRect = clip_rect;
             PushTextureID(Font.Atlas.GetHandle());
@@ -860,24 +861,25 @@ namespace ImmediateUI.immui.drawing
             if (IntersectWithCurrentClip)
             {
                 Rect Current = CmdHeader.ClipRect;
-                if (ClipRegion.Position.X < Current.Position.X) ClipRegion.Position.X = Current.Position.X;
-                if (ClipRegion.Position.Y < Current.Position.Y) ClipRegion.Position.Y = Current.Position.Y;
-                if (ClipRegion.Max.X > Current.Max.X) ClipRegion.Size.X = Current.Size.X;
-                if (ClipRegion.Max.Y > Current.Max.Y) ClipRegion.Size.Y = Current.Size.Y;
+                if (ClipRegion.X < Current.X) ClipRegion.X = Current.X;
+                if (ClipRegion.Y < Current.Y) ClipRegion.Y = Current.Y;
+                if (ClipRegion.XW > Current.XW) ClipRegion.W = Current.W;
+                if (ClipRegion.YH > Current.YH) ClipRegion.H = Current.H;
             }
-            ClipRegion.Max = Max(ClipRegion.Position, ClipRegion.Max);
+            ClipRegion.SetMaxX(Math.Max(ClipRegion.X, ClipRegion.XW));
+            ClipRegion.SetMaxY(Math.Max(ClipRegion.Y, ClipRegion.YH));
             ClipStack.Add(ClipRegion);
             CmdHeader.ClipRect = ClipRegion;
             OnChangedClipRect();
         }
         public void PushClipRectFullScreen()
         {
-            PushClipRect(new(Vector2.Zero,Immui.GetScreenSize()));
+            PushClipRect(new(0,0,(int)Immui.GetScreenSize().X, (int)Immui.GetScreenSize().Y));
         }
         public void PopClipRect()
         {
             ClipStack.RemoveAt(ClipStack.Count - 1);
-            CmdHeader.ClipRect = ClipStack.Count == 0 ? new(Vector2.Zero,Immui.GetScreenSize()) : ClipStack[ClipStack.Count - 1];
+            CmdHeader.ClipRect = ClipStack.Count == 0 ? new(0,0, (int)Immui.GetScreenSize().X, (int)Immui.GetScreenSize().Y) : ClipStack[ClipStack.Count - 1];
             OnChangedClipRect();
         }
         public void PushTextureID(int TextureID)
@@ -900,9 +902,9 @@ namespace ImmediateUI.immui.drawing
             CmdHeader.TextureID = TextureID;
             OnChangedTextureID();
         }
-        Vector2 GetClipRectMin() { Rect cr = ClipStack[^1]; return cr.Position; }
+        Vector2 GetClipRectMin() { Rect cr = ClipStack[^1]; return new (cr.X,cr.Y); }
 
-        Vector2 GetClipRectMax() { Rect cr = ClipStack[^1]; return cr.Max; }
+        Vector2 GetClipRectMax() { Rect cr = ClipStack[^1]; return new(cr.XW,cr.YH); }
 
         //
         //Helpers

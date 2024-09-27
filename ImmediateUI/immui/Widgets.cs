@@ -11,7 +11,7 @@ namespace ImmediateUI.immui
             if (CheckMouse(Rect))
             {
                 CurrentContext.HotID = ID;
-                if (IO.IsMouseDown(0) && CurrentContext.ActiveID != ID)
+                if (MouseDown(0) && CurrentContext.ActiveID != ID)
                 {
                     CurrentContext.ActiveID = ID;
                 }
@@ -22,7 +22,7 @@ namespace ImmediateUI.immui
             }
             var DrawList = GetCurrentDrawList();
             var Style = GetCurrentStyle();
-            if (CurrentContext.ActiveID == ID && !IO.IsMouseDown(0) && CurrentContext.HotID == ID)
+            if (CurrentContext.ActiveID == ID && !MouseDown(0) && CurrentContext.HotID == ID)
             {
                 result = true;
                 CurrentContext.ActiveID = 0;
@@ -40,6 +40,7 @@ namespace ImmediateUI.immui
             DrawList.AddText(new(Rect.CenterX - TSize.X/2,Rect.CenterY + TSize.Y / 2 ), Label, Style.FontSize, Style.Colors["Text"]);
             return result;
         }
+        /*
         public static void TextInput(string Label, Rect Rect, ref string inputText)
         {
             ulong ID = GetID(Label);

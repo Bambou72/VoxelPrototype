@@ -20,28 +20,8 @@ namespace ImmediateUI
         }
         public void Update(GameWindow GW)
         {
-            var IO = Immui.GetIO();
-            IO.Drag = (Vector2i)GW.MousePosition- IO.MousePos;
-            IO.MousePos = (Vector2i)GW.MousePosition;
-            IO.MouseDown[0] = GW.IsMouseButtonDown(MouseButton.Left);
-            IO.MouseDown[1] = GW.IsMouseButtonDown(MouseButton.Middle);
-            IO.MouseDown[2] = GW.IsMouseButtonDown(MouseButton.Right);
-            foreach (Keys key in Enum.GetValues(typeof(Keys)))
-            {
-                if (key == Keys.Unknown)
-                {
-                    continue;
-                }
-                if (GW.IsKeyDown(key))
-                {
-                    IO.AddKeyEvent((KeyboardKeys)key, true);
-                }
-                else
-                {
-                    IO.AddKeyEvent((KeyboardKeys)key, false);
-                }
-                
-            }
+            Context CurContext = Immui.GetContext();
+            CurContext.MousePosition = (Vector2i)GW.MousePosition;
         }
         public void GenerateGraphicObjects()
         {

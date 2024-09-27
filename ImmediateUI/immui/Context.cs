@@ -29,7 +29,6 @@ namespace ImmediateUI.immui
         internal DrawData DrawData = new DrawData();
         internal Window CurrentWindow;
         internal Dictionary<ulong, Window> Windows =new();
-        internal bool MouseCaptured = false;
         public Context()
         {
             ImmuiDrawList.Init();

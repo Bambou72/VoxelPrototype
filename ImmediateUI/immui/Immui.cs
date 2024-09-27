@@ -1,21 +1,27 @@
 ﻿using ImmediateUI.immui.drawing;
 using ImmediateUI.immui.math;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 namespace ImmediateUI.immui
 {
     public  static partial class Immui
     {
         static Context CurrentContext;
-        static IO IO =new();
+        public static Func<int, bool> MouseDown;
+        public static Func<int, bool> MouseUp;
+        public static Func<int, bool> MousePressed;
+        public static Func<int, bool> KeyDown;
+        public static Func<int, bool> KeyUp;
+        public static Func<int, bool> KeyPressed;
         public static void SetContext(Context Ctx)
         {
             CurrentContext = Ctx;
         }
+        public static Context GetContext()
+        {
+            return CurrentContext;
+        }
         public static void BeginFrame()
         {
-            CurrentContext.MouseCaptured = false;
             CurrentContext.DrawData.CmdList.Clear();
             CurrentContext.MainDrawList.ResetForNewFrame();
             CurrentContext.MainDrawList.PushClipRectFullScreen();
@@ -29,10 +35,7 @@ namespace ImmediateUI.immui
             CurrentContext.HotID = 0;
 
         }
-        public static IO GetIO()
-        {
-            return IO;
-        }
+
         public static void EndFrame()
         {
             CurrentContext.DrawData.CmdList.Add(CurrentContext.MainDrawList);
@@ -40,14 +43,14 @@ namespace ImmediateUI.immui
             {
                 CurrentContext.DrawData.CmdList.Add(Wind.DrawList);
             }
-            IO.InputedChars.Clear();
+            //IO.InputedChars.Clear();
         }
         //
         // Update State 
         //
         public static void OnChar(char ch)
         {
-            IO.InputedChars.Add(ch);
+            //IO.InputedChars.Add(ch);
         }
         public static void OnResize(Vector2 Size)
         {
@@ -116,9 +119,8 @@ namespace ImmediateUI.immui
         }
         public static bool CheckMouse(Rect Rect)
         {
-            if (!CurrentContext.MouseCaptured && Rect.ContainsPoint(CurrentContext.MousePosition))
+            if (Rect.ContainsPoint(CurrentContext.MousePosition))
             {
-                CurrentContext.MouseCaptured = true;
                 return true;
             }
             return false;

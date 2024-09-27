@@ -7,8 +7,8 @@ namespace ImmediateUI.immui.math
         public int W,H;
         public int XW => X + W;
         public int YH => Y + H;
-        public int CenterX => (X +W)/2 ;
-        public int CenterY => (Y +H)/2 ;
+        public int CenterX => X +W/2 ;
+        public int CenterY => Y +H/2 ;
 
         public Rect(int X,int Y , int W , int H)
         {

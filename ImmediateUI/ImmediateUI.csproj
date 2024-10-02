@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Regular.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="UncutSans-Regular.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

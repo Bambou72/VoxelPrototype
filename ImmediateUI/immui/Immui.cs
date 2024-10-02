@@ -1,133 +1,131 @@
-﻿using ImmediateUI.immui.drawing;
-using ImmediateUI.immui.math;
+﻿using ImmediateUI.immui.math;
 using OpenTK.Mathematics;
 namespace ImmediateUI.immui
 {
-    public  static partial class Immui
+    public  static class Immui
     {
-        static Context CurrentContext;
-        public static Func<int, bool> MouseDown;
-        public static Func<int, bool> MouseUp;
-        public static Func<int, bool> MousePressed;
-        public static Func<int, bool> KeyDown;
-        public static Func<int, bool> KeyUp;
-        public static Func<int, bool> KeyPressed;
-        public static void SetContext(Context Ctx)
+        public static bool Button(Context Ctx, string Label, Rect Rect)
         {
-            CurrentContext = Ctx;
-        }
-        public static Context GetContext()
-        {
-            return CurrentContext;
-        }
-        public static void BeginFrame()
-        {
-            CurrentContext.DrawData.CmdList.Clear();
-            CurrentContext.MainDrawList.ResetForNewFrame();
-            CurrentContext.MainDrawList.PushClipRectFullScreen();
-            CurrentContext.MainDrawList.PushTextureID(ImmediateUI.Window.Blank.GetHandle());
-            foreach(var Wind in CurrentContext.Windows.Values)
+            bool result = false;
+            ulong ID = Ctx.GetID(Label);
+            if (Ctx.CheckMouse(Rect))
             {
-                Wind.DrawList.ResetForNewFrame();
-                Wind.DrawList.PushClipRectFullScreen();
-                Wind.DrawList.PushTextureID(ImmediateUI.Window.Blank.GetHandle());
+                Ctx.HotID = ID;
+                if (Ctx.MouseDown(0) && Ctx.ActiveID != ID)
+                {
+                    Ctx.ActiveID = ID;
+                }
             }
-            CurrentContext.HotID = 0;
+            else if (Ctx.ActiveID == ID)
+            {
+                Ctx.ActiveID = 0;
+            }
+            var DrawList = Ctx.GetDrawList();
+            if (Ctx.ActiveID == ID && !Ctx.MouseDown(0) && Ctx.HotID == ID)
+            {
+                result = true;
+                Ctx.ActiveID = 0;
+            }
+            if (Ctx.HotID == ID)
+            {
+                DrawList.AddRect(Rect, 0x509940FF);
+            }
+            else
+            {
+                DrawList.AddRect(Rect, 0x357030FF);
+            }
+            Vector2 TSize = Ctx.CalculateTextSize(20, Label);
 
+            DrawList.AddText(new(Rect.CenterX - TSize.X/2,Rect.CenterY + TSize.Y / 2 ), Label, 20, 0xFFFFFFFF,Ctx.font);
+            return result;
         }
+        /*
+        public static void TextInput(string Label, Rect Rect, ref string inputText)
+        {
+            ulong ID = GetID(Label);
+            if (CheckMouse(Rect))
+            {
+                Ctx.HotID = ID;
 
-        public static void EndFrame()
-        {
-            CurrentContext.DrawData.CmdList.Add(CurrentContext.MainDrawList);
-            foreach (var Wind in CurrentContext.Windows.Values)
-            {
-                CurrentContext.DrawData.CmdList.Add(Wind.DrawList);
+                if (IO.IsMouseDown(0) && Ctx.ActiveID == 0)
+                {
+                    Ctx.ActiveID = ID;
+                }
             }
-            //IO.InputedChars.Clear();
-        }
-        //
-        // Update State 
-        //
-        public static void OnChar(char ch)
-        {
-            //IO.InputedChars.Add(ch);
-        }
-        public static void OnResize(Vector2 Size)
-        {
-            if(CurrentContext != null)
+            if (Ctx.ActiveID == ID)
             {
-                CurrentContext.ScreenSize = Size;
+                if (inputText.Length > 0 && IO.BackspacePressed)
+                {
+                    inputText = inputText.Remove(inputText.Length - 1);
+                }
+                else
+                {
+                    foreach (char ch in IO.InputedChars)
+                    {
+                        inputText += ch;
+                    }
+                }
             }
-        }
-        //
-        //Debug
-        //
-        public static void Demo2DRendering()
-        {
-            
-            CurrentContext.MainDrawList.AddCircleFilled(new(75, 75), 50, 0xFF0000FF);
-            CurrentContext.MainDrawList.AddCircle(new(75, 200), 50, 0xFF14ABFF);
-            CurrentContext.MainDrawList.AddCircle(new(75, 325), 50, 0xFB5F45FF, Thickness: 10);
-            CurrentContext.MainDrawList.AddRectFilled(new(150, 25), new(250, 125), 0x00FF00FF);
-            CurrentContext.MainDrawList.AddRect(new(150, 150), new(250, 250), 0x29FF48FF);
-            CurrentContext.MainDrawList.AddRect(new(150, 275), new(250, 375), 0x103699FF, Thickness: 5);
-            CurrentContext.MainDrawList.AddRectFilled(new(275, 25), new(375, 125), 0x504095FF, 15, DrawFlags.RoundCornersAll);
-            CurrentContext.MainDrawList.AddRectFilled(new(275, 150), new(375, 250), 0x604595FF, 15, DrawFlags.RoundCornersBottomLeft);
-            CurrentContext.MainDrawList.AddRectFilled(new(275, 275), new(375, 375), 0x805095FF, 15, DrawFlags.RoundCornersBottomRight);
-            CurrentContext.MainDrawList.AddRectFilled(new(275, 400), new(375, 500), 0x995595FF, 15, DrawFlags.RoundCornersTopLeft);
-            CurrentContext.MainDrawList.AddRectFilled(new(275, 525), new(375, 625), 0xAA6095FF, 15, DrawFlags.RoundCornersTopRight);
-            CurrentContext.MainDrawList.AddRectFilledMultiColor(new(275, 650), new(375, 750), 0xFF0000FF, 0x00FF00FF, 0x0000FFFF, 0xFF00FFFF);
-            CurrentContext.MainDrawList.AddLine(new(400, 25), new(475, 125), 0x2583F8FF, Thickness: 3);
-            CurrentContext.MainDrawList.AddTriangle(new(500, 25), new(600, 25), new(550, 125), 0xA6E808FF, Thickness: 4);
-            CurrentContext.MainDrawList.AddTriangleFilled(new(500, 250), new(550, 150), new(600, 250), 0xB12580FF);
-            CurrentContext.MainDrawList.AddBezierCurveCubic(new(625, 25), new(625, 125), new(725, 25), new(725, 125), 0x000000FF, 2);
-            CurrentContext.MainDrawList.AddBezierCurveQuadratic(new(750, 25), new(850, 25), new(850, 125), 0x000000FF, 2);
-            CurrentContext.MainDrawList.AddEllipse(new(900, 50), new(50, 25), 0x000000FF);
-            CurrentContext.MainDrawList.AddEllipseFilled(new(1025, 50), new(50, 25), 0x000000FF);
-            CurrentContext.MainDrawList.AddNGon(new(1125, 75), 50, 0xFF0000FF, 5);     
-            CurrentContext.MainDrawList.AddNGon(new(1125, 175), 50, 0xFF0000FF, 6);
-            CurrentContext.MainDrawList.AddText(new(500, 400), data.LoremIpsum.LoremIpsumText, 17, 0x00000FF,WrapWidth: 690);
-        }
-        
-        //
-        //
-        //
-        //TODO : Add support for window
-        public static Vector2 CalculateTextSize(float Size,string Text,int WrapWidth=0, int MaxWidth = -1)
-        {
-            return CurrentContext.Style.BaseFont.CalcTextSize(Size, Text, WrapWidth, MaxWidth);
-        }
-        public static ImmuiDrawList GetCurrentDrawList()
-        {
-            if(CurrentContext.CurrentWindow != null)
+            var DrawList = GetCurrentDrawList();
+            var Style = GetCurrentStyle();
+            Vector2 TSize = CalculateTextSize(Style.FontSize, Label);
+            float Height = Math.Min(TSize.Y + Style.Padding.Y * 2, Rect.H);
+            Vector2 Max = new(Rect.XW, Rect.Y + Height);
+            if (Ctx.ActiveID == ID)
             {
-                return CurrentContext.CurrentWindow.DrawList;
+                DrawList.AddRectFilled(new(Rect.X, Rect.Y), new(Rect.XW, Rect.YH), 0x204060FF, 0);
             }
-            return CurrentContext.MainDrawList;
-        }
-        public static Style GetCurrentStyle()
-        {
-            return CurrentContext.Style;
-        }
-        public static Vector2 GetScreenSize()
-        {
-            return CurrentContext.ScreenSize;
-        }
-        public static DrawData GetDrawData()
-        {
-            return CurrentContext.DrawData;
-        }
-        public static bool CheckMouse(Rect Rect)
-        {
-            if (Rect.ContainsPoint(CurrentContext.MousePosition))
+            else if (Ctx.HotID == ID)
             {
-                return true;
+                DrawList.AddRectFilled(new(Rect.X, Rect.Y), new(Rect.XW, Rect.YH), 0x102030FF, 0);
             }
-            return false;
+            else
+            {
+                DrawList.AddRectFilled(new(Rect.X, Rect.Y), new(Rect.XW, Rect.YH), 0x051020FF, 0);
+            }
+            DrawList.AddText(new Vector2(Rect.X + Style.Padding.X, (Rect.Y + Height / 2)) + new Vector2(0, TSize.Y) / 2, inputText, Style.FontSize, Style.Colors["Text"], CpuClip: new Rect(Rect.X,Rect.Y,Rect.W - Style.Padding.Z, (int)Height));
         }
-        public static string GetLabel(string Str)
+        /*
+        public static void BeginWindow(string Name,Vector2i Position =default,Vector2i Size = default)
         {
-            return Str.Split("##")[0];
+            ulong ID = GetID(Name);
+            PushGeneratedID(ID);
+            Window Wind;
+            if(Ctx.Windows.ContainsKey(ID))
+            {
+                Wind = Ctx.Windows[ID];
+            }else
+            {
+                Wind = new Window() { ID =ID,Name = Name};
+                Ctx.Windows.Add(ID,Wind);
+            }
+            if(Position != default)
+            {
+                Wind.Rect.Position = Position;
+            }
+            Ctx.CurrentWindow = Wind;
+            if(Size != default)
+            {
+                Wind.Rect.Size = Size;
+            }
+            if (CheckMouse(new(Wind.Rect.Position, new Vector2(Wind.Rect.Size.X, 30))))
+            {
+                if (IO.IsMouseDown(MouseButtons.Left))
+                {
+                    Wind.Rect.Position += IO.Drag;
+                }
+                //if(CheckMouse())
+            }
+            var DrawList = GetCurrentDrawList();
+            var Style = GetCurrentStyle();
+            DrawList.AddRectFilled(Wind.Rect.Position, Wind.Rect.Position+new Vector2(Wind.Rect.Size.X, 30), Style.Colors["WindowHeader"]);
+            DrawList.AddRectFilled(Wind.Rect.Position + new Vector2(Wind.Rect.Size.X - 25,5), Wind.Rect.Position+new Vector2(Wind.Rect.Size.X -5, 25) , Style.Colors["WindowButton"]);
+            DrawList.AddRectFilled(Wind.Rect.Position + new Vector2(0, 30), Wind.Rect.Max, Style.Colors["Frame"]);
         }
+        public static void EndWindow()
+        {
+            Ctx.CurrentWindow = null;
+            PopID();
+        }*/
     }
 }

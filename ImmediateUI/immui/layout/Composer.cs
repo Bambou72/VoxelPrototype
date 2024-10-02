@@ -1,21 +1,18 @@
 using ImmediateUI.immui.math;
 using OpenTK.Mathematics;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-
-namespace ImmediateUI.immui
+namespace ImmediateUI.immui.layout
 {
-    struct Layout
+    struct Composer
     {
         Vector2i Cursor;
         Rect Area;
         int CurrentRowHeight = 0;
-        public Layout(Rect area) : this()
+        public Composer(Rect area) : this()
         {
             Area = area;
         }
-        public Rect Next(float Width, float Height)
+        public Rect Next(float Width, float Height,Vector4i Padding = default)
         {
-            var Style = Immui.GetCurrentStyle();
             if (Width <= 1)
             {
                 Width = Area.W * Width;
@@ -26,9 +23,9 @@ namespace ImmediateUI.immui
             }
             if (Cursor.X + Width <= Area.W)
             {
-                Rect Fin = new(Area.X + Cursor.X + Style.Padding.X, Area.Y + Cursor.Y + Style.Padding.X, (int)Width - Style.Padding.X - Style.Padding.Z, (int)Height - Style.Padding.Y - Style.Padding.W);
+                Rect Fin = new(Area.X + Cursor.X + Padding.X, Area.Y + Cursor.Y + Padding.X, (int)Width - Padding.X - Padding.Z, (int)Height - Padding.Y - Padding.W);
                 Cursor.X += (int)Width;
-                CurrentRowHeight =Math.Max(CurrentRowHeight, (int)Height);
+                CurrentRowHeight = Math.Max(CurrentRowHeight, (int)Height);
                 return Fin;
             }
             else
@@ -36,7 +33,7 @@ namespace ImmediateUI.immui
                 Cursor.Y += CurrentRowHeight;
                 CurrentRowHeight = 0;
                 Cursor.X = 0;
-                Rect Fin = new(Area.X + Cursor.X + Style.Padding.X, Area.Y + Cursor.Y + Style.Padding.X, (int)Width - Style.Padding.X - Style.Padding.Z, (int)Height - Style.Padding.Y - Style.Padding.W);
+                Rect Fin = new(Area.X + Cursor.X + Padding.X, Area.Y + Cursor.Y + Padding.X, (int)Width - Padding.X - Padding.Z, (int)Height - Padding.Y - Padding.W);
                 Cursor.X += (int)Width;
                 return Fin;
             }
@@ -47,25 +44,24 @@ namespace ImmediateUI.immui
             {
                 RowHeight = Area.H * RowHeight;
             }
-            var Style = Immui.GetCurrentStyle();
             Cursor.X = 0;
             Cursor.Y += CurrentRowHeight;
             CurrentRowHeight = (int)RowHeight;
         }
-        public Rect NextCollumn(float  ColumnWidth)
+        public Rect NextCollumn(float ColumnWidth, Vector4i Padding = default)
         {
-            var Style = Immui.GetCurrentStyle();
-            if(ColumnWidth <=1)
+            if (ColumnWidth <= 1)
             {
                 ColumnWidth = Area.W * ColumnWidth;
             }
-            if (Cursor.X +  ColumnWidth <= Area.W)
+            if (Cursor.X + ColumnWidth <= Area.W)
             {
-                Rect Fin = new(Area.X + Cursor.X + Style.Padding.X, Area.Y + Cursor.Y + Style.Padding.X, (int)ColumnWidth - Style.Padding.X - Style.Padding.Z, CurrentRowHeight - Style.Padding.Y - Style.Padding.W);
+                Rect Fin = new(Area.X + Cursor.X +Padding.X, Area.Y + Cursor.Y + Padding.X, (int)ColumnWidth - Padding.X - Padding.Z, CurrentRowHeight - Padding.Y - Padding.W);
                 Cursor.X += (int)ColumnWidth;
                 return Fin;
-            
-            }else
+
+            }
+            else
             {
                 return new(-1, -1, -1, -1);
             }

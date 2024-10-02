@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImmediateUI.immui
+namespace ImmediateUI.immui.layout
 {
     public struct Grid
     {
@@ -19,10 +19,9 @@ namespace ImmediateUI.immui
             RowNum = rowNum;
             Area = area;
         }
-        public Rect GetNext()
+        public Rect GetNext(Vector4i Padding = default)
         {
-            var Style = Immui.GetCurrentStyle();
-            Rect Rect = new(Area.X + Style.Padding.X + CurrentCursor.X * (Area.W / CollNum), Area.Y + Style.Padding.Y + CurrentCursor.Y * (Area.H / RowNum), Area.W / CollNum - 2 * Style.Padding.X, Area.H / RowNum - 2 * Style.Padding.X);
+            Rect Rect = new(Area.X + Padding.X + CurrentCursor.X * (Area.W / CollNum), Area.Y + Padding.Y + CurrentCursor.Y * (Area.H / RowNum), Area.W / CollNum - Padding.X -Padding.Z, Area.H / RowNum - Padding.Y - Padding.W) ;
 
 
             if (CurrentCursor.X + 1 < CollNum)

@@ -1,13 +1,13 @@
 ﻿using OpenTK.Mathematics;
 using System.Runtime.InteropServices;
-namespace ImmediateUI.immui.drawing
+namespace ImmediateUI.immui.rendering
 {
-    //[StructLayout(LayoutKind.Sequential)]
-    public   struct Vertex
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Vertex
     {
-        public  Vector2 Position;
-        public  Vector2 UV;
-        public  uint Color;
+        public Vector2 Position;
+        public Vector2 UV;
+        public uint Color;
 
         public Vertex(Vector2 position, Vector2 uV, uint color)
         {

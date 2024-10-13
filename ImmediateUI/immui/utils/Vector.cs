@@ -1,7 +1,5 @@
 ﻿namespace ImmediateUI.immui.utils
 {
-
-
     public class Vector<T>
     {
         public int Size { get; set; }

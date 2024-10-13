@@ -103,7 +103,7 @@ void main()
             UIController.Update(UIContext, this);
 
             UIContext.ResetFrame();
-            Demo.ShowDemo(UIContext,ClientSize, (float)e.Time);
+            Demo.ShowDemo(this,UIContext,ClientSize, (float)e.Time);
             UIController.Render(UIContext);
             SwapBuffers();
         }
@@ -120,7 +120,7 @@ void main()
         }
         protected override void OnTextInput(TextInputEventArgs e)
         {
-            //UIContext.OnChar((char)e.Unicode);
+            UIContext.OnTextInput((char)e.Unicode);
         }
     }
 }

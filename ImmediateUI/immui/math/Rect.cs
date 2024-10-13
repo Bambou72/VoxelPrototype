@@ -3,14 +3,13 @@ namespace ImmediateUI.immui.math
 {
     public struct Rect : IEquatable<Rect>
     {
-        public int X,Y;
-        public int W,H;
-        public int XW => X + W;
-        public int YH => Y + H;
-        public int CenterX => X +W/2 ;
-        public int CenterY => Y +H/2 ;
+        public int  X,Y, W, H;
+        public int XW => (X + W);
+        public int YH => (Y + H);
+        public int CenterX => (X + W / 2);
+        public int CenterY => (Y + H / 2);
 
-        public Rect(int X,int Y , int W , int H)
+        public Rect(int X, int Y, int W, int H)
         {
             this.X = X; this.Y = Y;
             this.W = W; this.H = H;
@@ -37,7 +36,7 @@ namespace ImmediateUI.immui.math
         }
         public void SetMaxY(int Y)
         {
-            H = Y - this.Y;
+            H = (Y - this.Y);
         }
         public bool Equals(Rect other)
         {

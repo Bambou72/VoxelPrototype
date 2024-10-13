@@ -1,6 +1,4 @@
-﻿using ImmediateUI.immui.math;
-using ImmediateUI.immui.rendering;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 using VoxelPrototype.client.rendering.texture;
 namespace ImmediateUI.immui.font
 {

@@ -3,46 +3,116 @@ using ImmediateUI.immui.math;
 using ImmediateUI.immui.rendering;
 using ImmediateUI.immui.utils;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System.Text;
 namespace ImmediateUI.immui
 {
     public class Context
     {
-        public  Func<int, bool> MouseDown;
-        public  Func<int, bool> MouseUp;
-        public  Func<int, bool> MousePressed;
-        public  Func<int, bool> KeyDown;
-        public  Func<int, bool> KeyUp;
-        public  Func<int, bool> KeyPressed;
+        public Func<int, bool> MouseDown;
+        public Func<int, bool> MouseUp;
+        public Func<int, bool> MousePressed;
+        public Func<int, bool> KeyDown;
+        public Func<int, bool> KeyUp;
+        public Func<int, bool> KeyPressed;
         internal Font font = FontLoader.LoadFromFile("Regular.otf");
-        internal ulong ActiveID;
-        internal ulong HotID;
+        private ulong ActiveID;
+        private ulong HotID;
+        private ulong KeyFocusID;
         internal ulong CurrentID;
         internal Vector2i MousePosition;
+        internal Vector2i LastMousePosition;
+        internal Vector2i ScrollDelta;
         internal Vector2 ScreenSize;
+        internal bool Dragging = false;
+        internal bool NotInteractable = false;
+        internal Vector2i DragDistance;
         internal List<ulong> IDStack = new();
-        internal ImmuiDrawList DrawList;
+        private Renderer DrawList;
+        internal char InputedChar = (char)0;
+        internal Stack<Rect> ClipStack = new();
         public Context()
         {
-            DrawList = new ImmuiDrawList();
+            DrawList = new Renderer();
+        }
+        public ulong GetHotID()
+        {
+            return HotID;
+        }
+        public void SetHotID(ulong ID)
+        {
+            HotID = ID;
+        }
+        public ulong GetActiveID()
+        {
+            return ActiveID;
+        }
+        public void SetActiveID(ulong ID)
+        {
+            ActiveID = ID;
+        }
+        public ulong GetKeyFocusID()
+        {
+            return KeyFocusID;
+        }
+        public void SetKeyFocusID(ulong ID)
+        {
+            KeyFocusID = ID;
         }
         public void ResetFrame()
         {
+            if (HotID == 0 && MouseDown(0))
+            {
+                NotInteractable = true;
+            }
+            if (NotInteractable && !MouseDown(0))
+            {
+                NotInteractable = false;
+            }
+            if(!MouseDown(0))
+            {
+                Dragging =false;
+            }else
+            {
+                if(Dragging)
+                {
+                    DragDistance = MousePosition - LastMousePosition;
+
+                }else
+                {
+                    Dragging = true;
+                }
+                LastMousePosition   = MousePosition;
+            }
+            ClipStack.Clear();
+            if ((ActiveID != 0 && ActiveID != KeyFocusID) || KeyPressed((int)Keys.Escape))
+            {
+                KeyFocusID = 0;
+            }
+            if (HotID == 0 && MousePressed(0))
+            {
+                KeyFocusID = 0;
+            }
             DrawList.ResetForNewFrame();
-            DrawList.PushClipRectFullScreen(ScreenSize);
+            DrawList.PushClipRect(new(0, 0, (int)ScreenSize.X, (int)ScreenSize.Y));
             DrawList.PushTextureID(Window.Blank.GetHandle());
             HotID = 0;
 
         }
+
         public void OnResize(Vector2 ScreenSize)
         {
             this.ScreenSize = ScreenSize;
+        }
+        public void OnTextInput(char Char)
+        {
+            this.InputedChar = Char;
         }
         public Vector2 CalculateTextSize(float Size, string Text, int WrapWidth = 0, int MaxWidth = -1)
         {
             return font.CalcTextSize(Size, Text, WrapWidth, MaxWidth);
         }
-        public  ImmuiDrawList GetDrawList()
+        public Renderer GetDrawList()
         {
             return DrawList;
         }
@@ -50,8 +120,34 @@ namespace ImmediateUI.immui
         {
             return ScreenSize;
         }
-
-        public bool CheckMouse(Rect Rect)
+        public (bool ,bool) BaseWiget(Rect Rect, ulong ID)
+        {
+            if (IsHover(Rect))
+            {
+                if (GetHotID() == 0)
+                {
+                    SetHotID(ID);
+                    if (MouseDown(0) && GetActiveID() == 0 && !NotInteractable)
+                    {
+                        SetActiveID(ID);
+                    }
+                }
+            }
+            return (ID== HotID, ActiveID ==ID);
+        }
+        public bool IsHover(Rect Rect)
+        {
+            if (ClipStack.Count > 0)
+            {
+                Rect ClipRect = ClipStack.Peek();
+                if (!MouseInRect(ClipRect))
+                {
+                    return false;
+                }
+            }
+                return MouseInRect(Rect);
+        }
+        private bool MouseInRect(Rect Rect)
         {
             if (Rect.ContainsPoint(MousePosition))
             {
@@ -59,20 +155,20 @@ namespace ImmediateUI.immui
             }
             return false;
         }
-        public  string GetLabel(string Str)
+        public string GetLabel(string Str)
         {
             return Str.Split("##")[0];
         }
-        public  ulong Hash(string Str, ulong Seed = 0)
+        public ulong Hash(string Str, ulong Seed = 0)
         {
             byte[] Data = Encoding.UTF8.GetBytes(Str);
             return xxHash64.ComputeHash(Data, Data.Length, Seed);
         }
-        public  ulong Hash(byte[] Data, ulong Seed = 0)
+        public ulong Hash(byte[] Data, ulong Seed = 0)
         {
             return xxHash64.ComputeHash(Data, Data.Length, Seed);
         }
-        public  ulong GetID(string Str)
+        public ulong GetID(string Str)
         {
             ulong Seed = GetSeed();
             ulong ID = Hash(Str, Seed);
@@ -118,6 +214,13 @@ namespace ImmediateUI.immui
         {
             return CurrentID;
         }
-
+        public void PushClipRect(Rect Rect)
+        {
+            ClipStack.Push(Rect);
+        }
+        public void PopClipRect()
+        {
+            ClipStack.Pop();
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace ImmediateUI
         public void Update(Context Ctx, GameWindow GW)
         {
             Ctx.MousePosition = (Vector2i)GW.MousePosition;
+            Ctx.ScrollDelta = (Vector2i)GW.MouseState.ScrollDelta;
         }
         public void GenerateGraphicObjects()
         {
@@ -75,11 +76,11 @@ namespace ImmediateUI
             GL.BufferSubData(BufferTarget.ElementArrayBuffer, 0, DrawList.IndexBuffer.Size * sizeof(uint), DrawList.IndexBuffer.Data);
             for (int cmd_i = 0; cmd_i < DrawList.Commands.Count; cmd_i++)
             {
-                ImmuiDrawCommand pcmd = DrawList.Commands[cmd_i];
+                Command pcmd = DrawList.Commands[cmd_i];
                 GL.ActiveTexture(TextureUnit.Texture0);
                 GL.BindTexture(TextureTarget.Texture2D, pcmd.TextureID);
                 var clip = pcmd.ClipRect;
-                GL.Scissor((int)clip.X,(int)Ctx.GetScreenSize().Y  - (int)clip.YH, clip.W , clip.H);
+                GL.Scissor((int)clip.X,(int)Ctx.GetScreenSize().Y  - ((int)clip.Y+clip.H), clip.W , clip.H);
                 GL.DrawElements(BeginMode.Triangles, (int)pcmd.Count, DrawElementsType.UnsignedInt, (int)pcmd.Offset * sizeof(uint));                                
             }
             

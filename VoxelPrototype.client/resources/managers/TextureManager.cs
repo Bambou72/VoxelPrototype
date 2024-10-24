@@ -2,7 +2,7 @@
 using VoxelPrototype.client.resources.managers;
 using VoxelPrototype.client.utils.StbImage;
 using VoxelPrototype.client.utils.StbImageSharp;
-using VoxelPrototype.client.Utils;
+using VoxelPrototype.client.utils;
 namespace VoxelPrototype.client.Resources.Managers
 {
     internal class TextureManager : IReloadableResourceManager

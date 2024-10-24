@@ -3,8 +3,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using VoxelPrototype.client.rendering.texture;
 using VoxelPrototype.client.resources.managers;
+using VoxelPrototype.client.utils;
 using VoxelPrototype.client.utils.StbImage;
-using VoxelPrototype.client.Utils;
 using VoxelPrototype.utils;
 namespace VoxelPrototype.client.Resources.Managers
 {

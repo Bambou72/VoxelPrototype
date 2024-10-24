@@ -1,8 +1,6 @@
-﻿using ImmediateUI.immui.math;
+﻿using OpenTK.Mathematics;
 using ImmediateUI.immui;
-using OpenTK.Mathematics;
-using ImmediateUI.immui.layout;
-using System.Runtime.Intrinsics.X86;
+using VoxelPrototype.client.utils.math;
 namespace ImmediateUI
 {
     internal enum DemoPage
@@ -10,6 +8,7 @@ namespace ImmediateUI
         MenuExemple,
         AnimationDemo,
         ScrollPanel,
+        TabBar,
         Widgets
     }
     internal static class Demo
@@ -23,119 +22,184 @@ namespace ImmediateUI
         static DemoPage CurrentPage;
         public static void ShowDemo(Window Wnd, Context Ctx, Vector2i ClientSize, float Time)
         {
-            Composer DemoChoice = new Composer(new(0,0,800,50));
-            Rect rect;
+            Ctx.PushArea(new(0, 0, 800, 100));
+            Ctx.SetStackType(Context.StackType.Horizontal);
             //ExempleMenu button
-            Vector4i Padding1 = new(10);
-            DemoChoice.NextRow(1f);
-            rect = DemoChoice.NextCollumn(0.25f, Padding1);
-            if(Immui.Button(Ctx,"Menu Exemple",rect))
+            if (Ctx.Button( "Menu Exemple"))
             {
                 CurrentPage = DemoPage.MenuExemple;
             }
             //Animation demo
-            rect = DemoChoice.NextCollumn(0.2f, Padding1);
-            if (Immui.Button(Ctx, "Animation", rect))
+            if (Ctx.Button( "Animation"))
             {
                 CurrentPage = DemoPage.AnimationDemo;
             }
             //Textedit demo
-            rect = DemoChoice.NextCollumn(0.2f, Padding1);
-            if (Immui.Button(Ctx, "Widgets", rect))
+            if (Ctx.Button( "Widgets"))
             {
                 CurrentPage = DemoPage.Widgets;
             }
-            rect = DemoChoice.NextCollumn(0.25f, Padding1);
-            if (Immui.Button(Ctx, "ScrollPanel", rect))
+            if (Ctx.Button( "ScrollPanel"))
             {
                 CurrentPage = DemoPage.ScrollPanel;
             }
-            rect = DemoChoice.NextCollumn(0.1f, Padding1);
-            if (Immui.Button(Ctx, "Quit##0", rect))
+            if (Ctx.Button("TabBar"))
             {
-                Wnd.Close();    
+                CurrentPage = DemoPage.TabBar;
             }
+            if (Ctx.Button( "Quit##0"))
+            {
+                Wnd.Close();
+            }
+            Ctx.SetStackType(Context.StackType.Vertical);
+            Ctx.PopArea();
+            
             if (CurrentPage == DemoPage.AnimationDemo)
             {
-                AnimationDemo(Ctx,Time);
-            }else if(CurrentPage == DemoPage.MenuExemple)
+                AnimationDemo(Ctx, Time);
+            }
+            else if (CurrentPage == DemoPage.MenuExemple)
             {
                 MenuExemple(Ctx, ClientSize);
-            }else if(CurrentPage==DemoPage.Widgets)
+            }
+            else if (CurrentPage == DemoPage.Widgets)
             {
-                WidgetsExemple(Ctx,ClientSize);
+                WidgetsExemple(Ctx, ClientSize);
             }
             else if (CurrentPage == DemoPage.ScrollPanel)
             {
                 ScrollPanelExemple(Ctx, ClientSize);
+            }
+            else if (CurrentPage == DemoPage.TabBar)
+            {
+                TabBarExemple(Ctx, ClientSize);
             }
         }
         public static string TextForTest = "fdfdsfsdfds";
         public static int ScrollOffset = 0;
         public static void ScrollPanelExemple(Context Ctx, Vector2i ClientSize)
         {
-            Vector4i Padding1 = new(10);
-            Rect ScrollRecct = Immui.BeginScrollPanel(Ctx, new Rect(ClientSize.X / 2 - ClientSize.X / 6, 200, ClientSize.X / 3, 300), ref ScrollOffset, 400,0x404040FF);
-            Composer LT2 = new(ScrollRecct);
-            Rect CurP;
-            LT2.NextRow(100);
-            CurP = LT2.NextCollumn(1, Padding1);
-            Immui.Button(Ctx, "Singleplayer", CurP);
-            LT2.NextRow(100);
-            CurP = LT2.NextCollumn(1, Padding1);
-            Immui.Button(Ctx, "Multiplayer", CurP);
-            LT2.NextRow(100);
-            CurP = LT2.NextCollumn(1, Padding1);
-            Immui.Button(Ctx, "Mods", CurP);
-            LT2.NextRow(100);
-            CurP = LT2.NextCollumn(1 / 2f, Padding1);
-            Immui.Button(Ctx, "Options", CurP);
-            CurP = LT2.NextCollumn(1 / 2f, Padding1);
-            Immui.Button(Ctx, "Quit", CurP);
-            Immui.EndScrollPanel(Ctx);
+            Ctx.PushArea(new Rect(ClientSize.X / 2 - ClientSize.X / 6, 200, ClientSize.X / 3, 300));
+
+            Ctx.BeginScrollPanel( "TestScrollPanel", ref ScrollOffset, 400, 0x404040FF);
+            Ctx.NextRow(100);
+            Ctx.NextCollumn(1);
+           Ctx.Button("Singleplayer");
+            Ctx.NextRow(100);
+            Ctx.NextCollumn(1);
+           Ctx.Button( "Multiplayer");
+            Ctx.NextRow(100);
+            Ctx.NextCollumn(1);
+           Ctx.Button("Mods");
+
+            Ctx.NextRow(100);
+            Ctx.NextCollumn(0.5f);
+
+           Ctx.Button("Options");
+            Ctx.NextCollumn(0.5f);
+           Ctx.Button("Quit");
+           Ctx.EndScrollPanel();
+            Ctx.PopArea();
+        }
+        public static void TabBarExemple(Context Ctx, Vector2i ClientSize)
+        {
+            Ctx.PushArea(new Rect(ClientSize.X / 2 - ClientSize.X / 4, 200, ClientSize.X / 2, 500));
+            Ctx.BeginTabBar("TestTabBar");
+            if(Ctx.BeginTabItem("Item1"))
+            {
+                Ctx.Button("ButtonItem1");
+                Ctx.SliderFloat("SliderItem1", ref T, -100, 100, 0.5f);
+                Ctx.EndTabItem();
+            }
+            if (Ctx.BeginTabItem("Item2"))
+            {
+                Ctx.Button("ButtonItem2");
+                Ctx.ComboBox("ComboBoxItem2", ref Selected, ComboArray);
+                Ctx.EndTabItem();
+            }
+            if (Ctx.BeginTabItem("Item3"))
+            {
+                Ctx.BeginTabBar("TestTabBar2");
+                if (Ctx.BeginTabItem("Item1"))
+                {
+                    Ctx.Button("ButtonItem1");
+                    Ctx.SliderFloat("SliderItem1", ref T, -100, 100, 0.5f);
+                    Ctx.EndTabItem();
+                }
+                if (Ctx.BeginTabItem("Item2"))
+                {
+                    Ctx.Button("ButtonItem2");
+                    Ctx.ComboBox("ComboBoxItem2", ref Selected, ComboArray);
+                    Ctx.EndTabItem();
+                }
+                Ctx.EndTabBar();
+                Ctx.EndTabItem();
+            }
+            Ctx.EndTabBar();
+            Ctx.PopArea();
         }
         static float T = 0;
-
+        static int Tint = 0;
+        static int Selected = 0;
+        static string[] ComboArray = { "Test1", "Test2", "Test3", "Test4" };
+        static float PercentageValue = 0;
+        static bool Reverse;
+        static int intVal;
         public static void WidgetsExemple(Context Ctx, Vector2i ClientSize)
         {
-            Vector4i Padding1 = new(10);
-            Rect CurP;
-            Composer LT = new(new Rect(ClientSize.X / 2 - ClientSize.X / 6, 200, ClientSize.X / 3, 800));
-            LT.NextRow(50);
-            CurP = LT.NextCollumn(1, Padding1);
-            Immui.TextEdit(Ctx, "TextEdit", ref TextForTest, CurP);
-            LT.NextRow(50);
-            CurP = LT.NextCollumn(1, Padding1);
-            Immui.Slider(Ctx, "Slider", CurP, ref T,-100,100,0.5f);
+            Ctx.PushArea(new Rect(ClientSize.X / 2 - ClientSize.X / 6, 200, ClientSize.X / 3, 800));
+           Ctx.TextEdit( "TextEdit", ref TextForTest,100);
+           Ctx.IntEdit( "IntEdit", ref intVal);
+           Ctx.SliderFloat( "Slider", ref T, -100, 100, 0.5f);
+           Ctx.SliderInt( "SliderInt", ref Tint, 0, 100, 10);
+           Ctx.ComboBox("ComboBox", ref Selected, ComboArray);
+            PercentageValue += (Reverse ? -Ctx.DT : Ctx.DT) * 50;
+            if(PercentageValue < 0)
+            {
+                Reverse = false;
+                PercentageValue = 0;
+            }
+            if( PercentageValue > 100)
+            {
+                Reverse=true;
+                PercentageValue = 100;
+            }
+           Ctx.ProgressBar( "ProgressBar",PercentageValue);
+            Ctx.PopArea();
         }
-        public static void MenuExemple(Context Ctx,Vector2i ClientSize)
+        public static void MenuExemple(Context Ctx, Vector2i ClientSize)
         {
-            Vector4i Padding1 = new(10);
-            Rect CurP;
-            Composer LT = new(new Rect(ClientSize.X / 2 - ClientSize.X / 6, 200, ClientSize.X / 3, 800));
-            LT.NextRow(100);
-            CurP = LT.NextCollumn(1, Padding1);
-            Immui.Button(Ctx, "Singleplayer", CurP);
-            LT.NextRow(100);
-            CurP = LT.NextCollumn(1, Padding1);
-            Immui.Button(Ctx, "Multiplayer", CurP);
-            LT.NextRow(100);
-            CurP = LT.NextCollumn(1, Padding1);
-            Immui.Button(Ctx, "Mods", CurP);
-            LT.NextRow(100);
-            CurP = LT.NextCollumn(1 / 2f, Padding1);
-            Immui.Button(Ctx, "Options", CurP);
-            CurP = LT.NextCollumn(1 / 2f, Padding1);
-            Immui.Button(Ctx, "Quit", CurP);
+            Ctx.PushArea(new Rect(ClientSize.X / 2 - ClientSize.X / 6, 200, ClientSize.X / 3, 800));
+            Ctx.NextRow(100);
+            Ctx.NextCollumn(1);
+           Ctx.Button( "Singleplayer");
+            Ctx.NextRow(100);
+            Ctx.NextCollumn(1);
+           Ctx.Button( "Multiplayer");
+            Ctx.NextRow(100);
+            Ctx.NextCollumn(1);
+           Ctx.Button( "Mods");
+
+            Ctx.NextRow(100);
+            Ctx.NextCollumn(0.5f);
+
+           Ctx.Button( "Options");
+            Ctx.NextCollumn(0.5f);
+           Ctx.Button( "Quit");
+
+            Ctx.PopArea();
         }
-        public static void AnimationDemo(Context Ctx,float Time)
+        public static void AnimationDemo(Context Ctx, float Time)
         {
-            Rect CurP = new(10,60,180,80);
-            if (Immui.Button(Ctx, "Open", CurP))
+            Ctx.PushArea(new(10, 60, 180, 80));
+            Ctx.NextRow(1);
+            Ctx.NextCollumn(1);
+            if (Ctx.Button("Open"))
             {
                 UpdateShow = true;
                 CloseShow = InterpolateFactor > 0;
             }
+            Ctx.PopArea();
             if (UpdateShow)
             {
                 if (CloseShow)
@@ -153,7 +217,7 @@ namespace ImmediateUI
                     if (InterpolateFactor >= 1.0)
                     {
                         InterpolateFactor = 1.0f;
-                        UpdateShow = false; 
+                        UpdateShow = false;
                     }
                 }
             }
@@ -161,17 +225,20 @@ namespace ImmediateUI
             int HideX = -450;
             int ShowX = 0;
             int CurrentX = (int)(HideX + InterpolateFactor * (ShowX - HideX));
-            Rect CurP2;
-            Vector4i Padding1 = new(10);
-            Composer LT2 = new(new Rect(CurrentX, 150, 400, 600));
-            CurP2 = LT2.Next(0.5f, 0.5f, Padding1);
-            Immui.Button(Ctx, "Test1", CurP2);
-            CurP2 = LT2.Next(0.5f, 0.25f, Padding1);
-            Immui.Button(Ctx, "Test2", CurP2);
-            CurP2 = LT2.Next(0.25f, 0.5f, Padding1);
-            Immui.Button(Ctx, "Test3", CurP2);
-            CurP2 = LT2.Next(0.75f, 0.5f, Padding1);
-            Immui.Button(Ctx, "Test4", CurP2);
+            Ctx.PushArea(new Rect(CurrentX, 150, 400, 600));
+            Ctx.Next(new Vector2(0.5f, 0.5f));
+           Ctx.Button( "Test1");
+            Ctx.Next(new Vector2(0.5f, 0.25f));
+
+           Ctx.Button( "Test2");
+            Ctx.Next(new Vector2(0.25f, 0.5f));
+
+           Ctx.Button( "Test3");
+            Ctx.Next(new Vector2(0.75f, 0.5f));
+
+           Ctx.Button( "Test4");
+            Ctx.PopArea();
+
         }
     }
 }

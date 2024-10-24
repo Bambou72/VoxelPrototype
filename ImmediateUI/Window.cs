@@ -1,10 +1,8 @@
 ﻿using ImmediateUI.immui;
-using ImmediateUI.immui.math;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using System.Numerics;
 using VoxelPrototype.client.rendering;
 using VoxelPrototype.client.rendering.texture;
 namespace ImmediateUI
@@ -14,7 +12,7 @@ namespace ImmediateUI
         ImmuiController UIController;
         string TestString = "";
         internal static string Vert = @"#version 330
-layout(location = 0) in vec2 Pos;
+layout(location = 0) in vec3 Pos;
 layout(location = 1) in vec2 TexCoords;
 layout(location = 2) in uint Colors;
 uniform mat4 projection;
@@ -28,7 +26,7 @@ vec4 intToColor(uint color) {
     return vec4(r, g, b, a);
 }
 void main(){
-	gl_Position = vec4(Pos,0, 1.0) * projection;
+	gl_Position = vec4(Pos, 1.0) * projection;
 	TextureCoords = TexCoords;
 	Color = intToColor(Colors);
 }";
@@ -46,8 +44,6 @@ void main()
     }
 }";
         internal static Shader UiShader = new(Vert, Frag, true);
-        static byte[] BlankData = [255, 255, 255, 255];
-        public static Texture Blank = TextureLoader.LoadFromDataByte(BlankData, 1, 1);
         public Context UIContext;
         public Window(GameWindowSettings GS, NativeWindowSettings NS) : base(GS, NS)
         {
@@ -63,7 +59,7 @@ void main()
             UIContext.KeyPressed = KeyPressed;
         }
 
-        public bool  MouseDown(int Code)
+        public bool MouseDown(int Code)
         {
             return MouseState.IsButtonDown((MouseButton)Code);
         }
@@ -91,19 +87,20 @@ void main()
         {
             UIController = new();
             GL.ClearColor(0.24f, 0.58f, 0.91f, 1);
+            GL.Enable(EnableCap.DepthTest);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            Title = ClientSize.X +":"+ClientSize.Y + ":FPS:" + (1) / e.Time;
+            Title = ClientSize.X + ":" + ClientSize.Y + ":FPS:" + 1 / e.Time;
         }
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
             UIController.Update(UIContext, this);
 
-            UIContext.ResetFrame();
-            Demo.ShowDemo(this,UIContext,ClientSize, (float)e.Time);
+            UIContext.ResetFrame((float)e.Time);
+            Demo.ShowDemo(this, UIContext, ClientSize, (float)e.Time);
             UIController.Render(UIContext);
             SwapBuffers();
         }
@@ -113,7 +110,7 @@ void main()
         }
         protected override void OnResize(ResizeEventArgs e)
         {
-            if(UIContext != null)
+            if (UIContext != null)
             {
                 UIContext.OnResize(e.Size);
             }

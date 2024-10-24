@@ -1,6 +1,6 @@
 ﻿using VoxelPrototype.client.utils.StbImage;
 
-namespace VoxelPrototype.client.Utils
+namespace VoxelPrototype.client.utils
 {
     public static class ImageSaver
     {

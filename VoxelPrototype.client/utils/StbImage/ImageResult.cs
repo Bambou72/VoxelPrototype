@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using VoxelPrototype.client.utils.StbImage.Hebron.Runtime;
+using VoxelPrototype.client.utils.Hebron;
 
 namespace VoxelPrototype.client.utils.StbImage
 {

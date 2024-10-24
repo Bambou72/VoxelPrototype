@@ -1,22 +1,23 @@
 ﻿using OpenTK.Mathematics;
-namespace ImmediateUI.immui.math
+using System.Diagnostics.CodeAnalysis;
+namespace VoxelPrototype.client.utils.math
 {
-    public struct Rect : IEquatable<Rect>
+    public struct Rect : IEquatable<Rect> 
     {
-        public int  X,Y, W, H;
-        public int XW => (X + W);
-        public int YH => (Y + H);
-        public int CenterX => (X + W / 2);
-        public int CenterY => (Y + H / 2);
+        public int X, Y, W, H;
+        public int XW => X + W;
+        public int YH => Y + H;
+        public int CenterX => X + W / 2;
+        public int CenterY => Y + H / 2;
 
         public Rect(int X, int Y, int W, int H)
         {
             this.X = X; this.Y = Y;
             this.W = W; this.H = H;
         }
-        public bool ContainsPoint(Vector2i Point)
+        public bool ContainsPoint(Vector2 Point)
         {
-            if (Point.X < X || Point.X > XW|| Point.Y < Y || Point.Y > YH)
+            if (Point.X < X || Point.X > XW || Point.Y < Y || Point.Y > YH)
             {
                 return false;
             }
@@ -32,11 +33,11 @@ namespace ImmediateUI.immui.math
         }
         public void SetMaxX(int X)
         {
-            W = X -this.X;
+            W = X - this.X;
         }
         public void SetMaxY(int Y)
         {
-            H = (Y - this.Y);
+            H = Y - this.Y;
         }
         public bool Equals(Rect other)
         {

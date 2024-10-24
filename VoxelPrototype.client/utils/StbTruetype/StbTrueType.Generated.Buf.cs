@@ -2,7 +2,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace VoxelPrototype.client.utils.StbTruetype
+namespace VoxelPrototype.client.utils.StbTrueType
 {
 	unsafe partial class StbTrueType
 	{

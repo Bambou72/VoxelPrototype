@@ -20,6 +20,7 @@ namespace ModelEditor.ModelEditor
         static string SaveNameModel = "";
         static bool showAboutModal = false;
         static bool showAboutModalForFix = false;
+        static int TestInt = 0;
         internal static void Render()
         {
             ImGui.DockSpaceOverViewport(0,ImGui.GetMainViewport());
@@ -50,6 +51,21 @@ namespace ModelEditor.ModelEditor
                     ImGui.EndMenu();
                 }
                 ImGui.EndMainMenuBar();
+            }
+            if(ImGui.BeginTabBar("Test"))
+            {
+                if(ImGui.BeginTabItem("Item1"))
+                {
+                    ImGui.InputInt("Test",ref TestInt) ;
+                    ImGui.EndTabItem();
+                }
+                if (ImGui.BeginTabItem("Item2"))
+                {
+                    ImGui.Button("sfdsfsd2");
+                    ImGui.EndTabItem();
+
+                }
+                ImGui.EndTabBar();
             }
             ImGui.BeginViewportSideBar("test", ImGui.GetMainViewport(),ImGuiDir.Down,25,ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoSavedSettings);
             ImGui.BeginMenuBar();

@@ -9,16 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FreeTypeSharp" Version="3.0.0" />
-    <PackageReference Include="OpenTK" Version="4.8.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\VoxelPrototype.client\VoxelPrototype.client.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Regular.otf">
+    <None Update="Roboto-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="UncutSans-Regular.otf">
